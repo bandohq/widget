@@ -1,4 +1,4 @@
-// import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from "@tanstack/react-query";
 import type { PropsWithChildren } from "react";
 import { Fragment } from "react";
 import { MemoryRouter, useInRouterContext } from "react-router-dom";
@@ -14,6 +14,7 @@ import {
 // import { StoreProvider } from './stores/StoreProvider.js';
 // import { URLSearchParamsBuilder } from './stores/form/URLSearchParamsBuilder.js';
 import type { WidgetConfigProps } from "./types/widget.js";
+import { queryClient } from "./config/queryClient";
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -21,11 +22,13 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   // formRef,
 }) => {
   return (
-    <WidgetProvider config={config}>
-      <WalletProvider>
-        <AppRouter>{children}</AppRouter>
-      </WalletProvider>
-    </WidgetProvider>
+    <QueryClientProvider client={queryClient}>
+      <WidgetProvider config={config}>
+        <WalletProvider>
+          <AppRouter>{children}</AppRouter>
+        </WalletProvider>
+      </WidgetProvider>
+    </QueryClientProvider>
   );
 };
 
