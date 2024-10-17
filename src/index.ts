@@ -1,0 +1,1 @@
+export { useWallets, walletComparator } from './hooks/useWallets';
