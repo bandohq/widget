@@ -6,12 +6,22 @@ import { defaultCoinbaseConfig } from '../config/coinbase';
 import { defaultMetaMaskConfig } from '../config/metaMask';
 import { defaultWalletConnectConfig } from '../config/walletConnect';
 import { WalletReadyState } from '@solana/wallet-adapter-base';
-import { WidgetChains, WidgetWalletConfig } from '../types/widget';
+import { WidgetWalletConfig } from '../types/widget';
+import { useMediaQuery } from '@mui/material';
+import { ChainTypeCustom } from '../providers/WidgetProvider/types';
 
-export const useWallets = (walletConfig?: WidgetWalletConfig, chains: WidgetChains) => {
+/**
+ * Custom hook to filter and sort wallets based on the provided configuration and chain types.
+ * 
+ * @param walletConfig The wallet configuration object containing MetaMask, WalletConnect, and Coinbase configurations.
+ * @param chains An array of CustomChainType values to filter the wallets based on chain types.
+ * @returns An array of sorted and filtered wallets based on the provided configuration and chain types.
+ */
+export const useWallets = (walletConfig?: WidgetWalletConfig, chains?: ChainTypeCustom[]) => {
   const account = useWagmiAccount();
   const { connectors } = useConnect();
   const { wallets: solanaWallets } = useWallet();
+  const isDesktopView = useMediaQuery('(min-width:600px)');
 
   const wallets = useMemo(() => {
     const evmConnectors = [
@@ -20,15 +30,42 @@ export const useWallets = (walletConfig?: WidgetWalletConfig, chains: WidgetChai
       createCoinbaseConnector(walletConfig?.coinbase ?? defaultCoinbaseConfig),
     ];
 
-    const evmInstalled = evmConnectors.filter(
-      (connector) => connector.id && account.connector?.id !== connector.id,
-    );
-    const svmInstalled = solanaWallets?.filter(
-      (connector) => connector.adapter.readyState === WalletReadyState.Installed && !connector.adapter.connected,
-    );
+    // filter installed wallets based on chain type
+    const evmInstalled = chains?.includes(ChainTypeCustom.EVM)
+      ? evmConnectors.filter(
+          (connector) => connector.id && account.connector?.id !== connector.id,
+        )
+      : [];
+    
+    const evmNotDetected = chains?.includes(ChainTypeCustom.EVM)
+      ? evmConnectors.filter((connector) => !connector.id)
+      : [];
 
-    return [...evmInstalled, ...svmInstalled].sort(walletComparator);
-  }, [account.connector?.id, connectors, solanaWallets, walletConfig]);
+    const svmInstalled = chains?.includes(ChainTypeCustom.SVM)
+      ? solanaWallets?.filter(
+          (connector) =>
+            connector.adapter.readyState === WalletReadyState.Installed &&
+            !connector.adapter.connected,
+        )
+      : [];
+    
+    const svmNotDetected = chains?.includes(ChainTypeCustom.SVM)
+      ? solanaWallets?.filter(
+          (connector) =>
+            connector.adapter.readyState !== WalletReadyState.Installed,
+        )
+      : [];
+
+    const installedWallets = [...evmInstalled, ...svmInstalled].sort(walletComparator);
+
+    // Add wallets not detected when not in desktop view
+    if (isDesktopView) {
+      const notDetectedWallets = [...evmNotDetected, ...svmNotDetected].sort(walletComparator);
+      installedWallets.push(...notDetectedWallets);
+    }
+
+    return installedWallets;
+  }, [account.connector?.id, chains, connectors, isDesktopView, solanaWallets, walletConfig]);
 
   return wallets;
 };
