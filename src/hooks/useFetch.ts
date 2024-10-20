@@ -36,7 +36,6 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
     ...queryOptions,
   });
 
-// Use mutation with the mutation function and options
 const mutation = useMutation<T, Error, void>({
   mutationKey: [url],
   mutationFn: () => fetchData<T>(url, fetchOptions),
