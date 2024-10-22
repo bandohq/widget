@@ -3,7 +3,7 @@ import {
   createDefaultWagmiConfig,
   useSyncWagmiConfig,
 } from "@lifi/wallet-management";
-import { useRef, type FC, type PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren, useRef } from "react";
 import { WagmiProvider } from "wagmi";
 import { defaultCoinbaseConfig } from "../../config/coinbase";
 import { defaultMetaMaskConfig } from "../../config/metaMask";

@@ -1,19 +1,26 @@
-// import { ChainType } from "@lifi/sdk";
-import { type FC, type PropsWithChildren } from "react";
-// import { WagmiContext } from "wagmi";
-// import { useWidgetConfig } from "../WidgetProvider/WidgetProvider.js";
-import { EVMBaseProvider } from "./EVMBaseProvider.js";
-//import { EVMExternalContext } from "./EVMExternalContext.js";
+import { type FC, type PropsWithChildren, useContext } from "react";
+import { WagmiContext } from "wagmi";
+import { isItemAllowed } from "../../utils/item";
+import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
+import { EVMBaseProvider } from "./EVMBaseProvider";
+import { EVMExternalContext } from "./EVMExternalContext";
+import { ChainTypeCustom } from "../WidgetProvider/types";
 
-// export function useInWagmiContext(): boolean {
-//   const { chains } = useWidgetConfig();
-//   const context = useContext(WagmiContext);
+export const useInWagmiContext = (): boolean => {
+  const { chains } = useWidgetConfig();
+  const context = useContext(WagmiContext);
 
-//   return Boolean(context) && isItemAllowed(ChainType.EVM, chains?.types);
-// }
+  return Boolean(context) && isItemAllowed(ChainTypeCustom.EVM, chains?.types);
+};
 
 export const EVMProvider: FC<PropsWithChildren> = ({ children }) => {
-  // const inWagmiContext = useInWagmiContext();
+  const inWagmiContext = useInWagmiContext();
 
-  return <EVMBaseProvider>{children}</EVMBaseProvider>;
+  return inWagmiContext ? (
+    <EVMExternalContext.Provider value={inWagmiContext}>
+      {children}
+    </EVMExternalContext.Provider>
+  ) : (
+    <EVMBaseProvider>{children}</EVMBaseProvider>
+  );
 };
