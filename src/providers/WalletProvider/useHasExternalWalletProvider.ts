@@ -1,31 +1,36 @@
 import { useContext, useMemo } from 'react';
 import { EVMExternalContext } from './EVMExternalContext';
 import { SVMExternalContext } from './SVMExternalContext';
+import { UTXOExternalContext } from './UTXOExternalContext';
 import { ChainTypeCustom } from '../WidgetProvider/types';
 
 interface ExternalWalletProvider {
   hasExternalProvider: boolean;
-  providers: ChainTypeCustom[]; 
+  availableChainTypes: ChainTypeCustom[]; 
 }
 
 export function useHasExternalWalletProvider(): ExternalWalletProvider {
-  const hasExternalEVMContext = useContext(EVMExternalContext);
-  const hasExternalSVMContext = useContext(SVMExternalContext);
+  const hasExternalEVMContext = useContext(EVMExternalContext)
+  const hasExternalSVMContext = useContext(SVMExternalContext)
+  const hasExternalUTXOContext = useContext(UTXOExternalContext)
 
-  // create an array of providers based on the context values 
   const providers = useMemo(() => {
-    const providersList: ChainTypeCustom[] = [];
+    const providers: ChainTypeCustom[] = []
     if (hasExternalEVMContext) {
-      providersList.push(ChainTypeCustom.EVM);
+      providers.push(ChainTypeCustom.EVM)
     }
     if (hasExternalSVMContext) {
-      providersList.push(ChainTypeCustom.SVM);
+      providers.push(ChainTypeCustom.SVM)
     }
-    return providersList;
-  }, [hasExternalEVMContext, hasExternalSVMContext]);
+    if (hasExternalUTXOContext) {
+      providers.push(ChainTypeCustom.UTXO)
+    }
+    return providers
+  }, [hasExternalEVMContext, hasExternalSVMContext, hasExternalUTXOContext])
 
   return {
-    hasExternalProvider: hasExternalEVMContext || hasExternalSVMContext,
-    providers, 
-  };
+    hasExternalProvider:
+      hasExternalEVMContext || hasExternalSVMContext || hasExternalUTXOContext,
+      availableChainTypes: providers,
+  }
 }
