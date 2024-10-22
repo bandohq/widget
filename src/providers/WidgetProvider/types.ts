@@ -13,4 +13,5 @@ export interface WidgetProviderProps {
 export enum ChainTypeCustom {
   EVM = 'EVM',
   SVM = 'SVM',
+  UTXO = 'UTXO',
 }

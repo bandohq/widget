@@ -1,64 +1,120 @@
-// Reduced version for export-only usage
+// Importaciones necesarias (eliminamos las del SDK de LiFi)
 import type {
-    ChainType,
-    ContractCall,
-    RouteExtended,
-    RouteOptions,
-    SDKConfig,
-    StaticToken,
-    Token,
-} from '@lifi/sdk';
-import type {
-    Components,
+    // Components,
     PaletteMode,
     PaletteOptions,
-    Theme,
-} from '@mui/material';
-import type { TypographyOptions } from '@mui/material/styles/createTypography.js';
-import type {
+    // Theme,
+  } from '@mui/material'
+  import type { TypographyOptions } from '@mui/material/styles/createTypography.js'
+  import type {
+    CSSProperties,
+    FC,
+    // MutableRefObject,
+    ReactNode,
+    RefObject,
+  } from 'react'
+  import type {
     CoinbaseWalletParameters,
     MetaMaskParameters,
     WalletConnectParameters,
-} from '@wagmi/connectors';
-  import type { CSSProperties, FC, MutableRefObject, RefObject } from 'react';
+  } from 'wagmi/connectors'
+//   import type {
+//     LanguageKey,
+//     LanguageResources,
+//   } from '../providers/I18nProvider/types.js'
+//   import type { DefaultFieldValues } from '../stores/form/types.js'
   
-// Basic types
-export type WidgetVariant = 'compact' | 'wide' | 'drawer';
-export type WidgetSubvariant = 'default' | 'split' | 'custom' | 'refuel';
-export type SplitSubvariant = 'bridge' | 'swap';
-export type CustomSubvariant = 'checkout' | 'deposit';
-export interface SubvariantOptions {
-    split?: SplitSubvariant;
-    custom?: CustomSubvariant;
-}
+  // mocked lifi structures
   
-// Appearance and theme configurations
-export type Appearance = PaletteMode | 'auto';
-export type WidgetThemeComponents = Pick<
-  Components<Theme>,
-    'MuiAppBar' | 'MuiAvatar' | 'MuiButton' | 'MuiCard' | 'MuiIconButton' | 'MuiInput' | 'MuiTabs'
->;
-
+  export enum ChainType {
+    EVM = 'EVM',
+    SVM = 'SVM',
+    UTXO = 'UTXO',
+  }
   
-export type WidgetTheme = {
-    palette?: Pick<PaletteOptions, 'background' | 'grey' | 'primary' | 'secondary' | 'text'>;
-    typography?: TypographyOptions;
-    components?: WidgetThemeComponents;
-    container?: CSSProperties;
-    header?: CSSProperties;
-    playground?: CSSProperties;
-};
+  export interface ContractCall {
+    target: string;
+    callData: string;
+    value?: number;
+  }
   
-// Enums for UI configuration
-export enum DisabledUI {
+  export interface RouteExtended {
+    id: string;
+    steps: any[];
+  }
+  
+  export interface RouteOptions {
+    slippage?: number;
+    timeout?: number;
+  }
+  
+  export interface SDKConfig {
+    apiKey?: string;
+    disableVersionCheck?: boolean;
+    integrator?: string;
+    widgetVersion?: string;
+  }
+  
+  export interface StaticToken {
+    address: string;
+    symbol: string;
+    decimals: number;
+    chainId: number;
+  }
+  
+  export interface Token extends StaticToken {
+    name?: string;
+    logoURI?: string;
+  }
+  
+  export type WidgetVariant = 'compact' | 'wide' | 'drawer'
+  export type WidgetSubvariant = 'default' | 'split' | 'custom' | 'refuel'
+  export type SplitSubvariant = 'bridge' | 'swap'
+  export type CustomSubvariant = 'checkout' | 'deposit'
+  export interface SubvariantOptions {
+    split?: SplitSubvariant
+    custom?: CustomSubvariant
+  }
+  
+  export type Appearance = PaletteMode | 'auto'
+  export interface NavigationProps {
+    edge?: boolean
+  }
+  
+//   export type WidgetThemeComponents = Pick<
+//     Components<Theme>,
+//     | 'MuiAppBar'
+//     | 'MuiAvatar'
+//     | 'MuiButton'
+//     | 'MuiCard'
+//     | 'MuiIconButton'
+//     | 'MuiInputCard'
+//     | 'MuiTabs'
+//   >
+  
+  export type WidgetTheme = {
+    palette?: Pick<
+      PaletteOptions,
+      'background' | 'grey' | 'primary' | 'secondary' | 'text'
+    >
+    // shape?: Partial<Shape>
+    typography?: TypographyOptions
+    // components?: WidgetThemeComponents
+    container?: CSSProperties
+    header?: CSSProperties
+    playground?: CSSProperties
+    navigation?: NavigationProps
+  }
+  
+  export enum DisabledUI {
     FromAmount = 'fromAmount',
     FromToken = 'fromToken',
     ToAddress = 'toAddress',
     ToToken = 'toToken',
-}
-export type DisabledUIType = `${DisabledUI}`;
-
-export enum HiddenUI {
+  }
+  export type DisabledUIType = `${DisabledUI}`
+  
+  export enum HiddenUI {
     Appearance = 'appearance',
     DrawerCloseButton = 'drawerCloseButton',
     History = 'history',
@@ -68,98 +124,163 @@ export enum HiddenUI {
     ToToken = 'toToken',
     WalletMenu = 'walletMenu',
     IntegratorStepDetails = 'integratorStepDetails',
-}
-export type HiddenUIType = `${HiddenUI}`;
-
-export enum RequiredUI {
+  }
+  export type HiddenUIType = `${HiddenUI}`
+  
+  export enum RequiredUI {
     ToAddress = 'toAddress',
-}
-export type RequiredUIType = `${RequiredUI}`;
+  }
+  export type RequiredUIType = `${RequiredUI}`
+  
+  export interface WidgetWalletConfig {
+    onConnect?(): void
+    walletConnect?: WalletConnectParameters
+    coinbase?: CoinbaseWalletParameters
+    metaMask?: MetaMaskParameters
+  }
 
-// Wallet and SDK configuration types
-export interface WidgetWalletConfig {
-    onConnect?(): void;
-    walletConnect?: WalletConnectParameters;
-    coinbase?: CoinbaseWalletParameters;
-    metaMask?: MetaMaskParameters;
-}
   
-export interface WidgetSDKConfig extends Omit<SDKConfig, 'apiKey' | 'disableVersionCheck' | 'integrator' | 'routeOptions' | 'widgetVersion'> {
-    routeOptions?: Omit<RouteOptions, 'bridges' | 'exchanges'>;
-}
+  export interface WidgetContractTool {
+    name: string
+    logoURI: string
+  }
   
-// Fee calculation configuration
-export interface WidgetFeeConfig {
-    name?: string;
-    logoURI?: string;
-    fee?: number;
-    calculateFee?(params: any): Promise<number | undefined>;
-    _vcComponent: FC<{ route: RouteExtended }>;
-}
+  export interface CalculateFeeParams {
+    fromChainId: number
+    toChainId: number
+    fromTokenAddress: string
+    toTokenAddress: string
+    fromAddress?: string
+    toAddress?: string
+    fromAmount: bigint
+    slippage: number
+  }
   
-// Widget chains, tokens, and address types
-export interface ToAddress {
-    name?: string;
-    address: string;
-    chainType: ChainType;
-    logoURI?: string;
-}
+  export interface WidgetFeeConfig {
+    name?: string
+    logoURI?: string
+    fee?: number
+    calculateFee?(params: CalculateFeeParams): Promise<number | undefined>
+    _vcComponent: FC<{ route: RouteExtended }>
+  }
   
-export type WidgetChains = {
-    from?: any;
-    to?: any;
-    types?: any;
-} & any;
+  export interface ToAddress {
+    name?: string
+    address: string
+    chainType: ChainType
+    logoURI?: string
+  }
   
-export type WidgetTokens = {
-    featured?: StaticToken[];
-    include?: Token[];
-    popular?: StaticToken[];
-} & any;
+  export interface AllowDeny<T> {
+    allow?: T[]
+    deny?: T[]
+  }
   
-export type WidgetConfig = {
-    fromChain?: number;
-    toChain?: number;
-    fromToken?: string;
-    toToken?: string;
-    toAddress?: ToAddress;
-    formUpdateKey?: string;
-    contractCalls?: ContractCall[];
-    integrator: string;
-    apiKey?: string;
-    fee?: number;
-    feeConfig?: WidgetFeeConfig;
-    variant?: WidgetVariant;
-    subvariant?: WidgetSubvariant;
-    appearance?: Appearance;
-    theme?: WidgetTheme;
-    disabledUI?: DisabledUIType[];
-    hiddenUI?: HiddenUIType[];
-    requiredUI?: RequiredUIType[];
-    walletConfig?: WidgetWalletConfig;
-    sdkConfig?: WidgetSDKConfig;
-    chains?: WidgetChains;
-    tokens?: WidgetTokens;
-};
+  export type WidgetChains = {
+    from?: AllowDeny<number>
+    to?: AllowDeny<number>
+    types?: AllowDeny<ChainType>
+  } & AllowDeny<number>
   
-export interface WidgetConfigProps {
-    config: WidgetConfig;
-}
+  export type WidgetTokens = {
+    featured?: StaticToken[]
+    include?: Token[]
+    popular?: StaticToken[]
+  } & AllowDeny<Token>
   
-export type FormFieldOptions = { setUrlSearchParam: boolean };
-export type FieldValues = { fromAmount?: number | string; toAmount?: number | string; toAddress?: ToAddress | string; };
-export type FieldNames = keyof FieldValues;
-export type SetFieldValueFunction = <K extends FieldNames>(key: K, value: FieldValues[K], options?: FormFieldOptions) => void;
-
-export type FormState = { setFieldValue: SetFieldValueFunction };
-export type FormRef = MutableRefObject<FormState | null>;
-export interface FormRefProps { formRef?: FormRef; }
-export interface WidgetConfigPartialProps { config?: Partial<WidgetConfig>; }
-export interface WidgetDrawerProps extends WidgetConfigPartialProps {
-    elementRef?: RefObject<HTMLDivElement>;
-    open?: boolean;
-    onClose?(): void;
-}
+//   export type WidgetLanguages = {
+//     default?: LanguageKey
+//   } & AllowDeny<LanguageKey>
   
-export type WidgetProps = WidgetDrawerProps & WidgetConfig & WidgetConfigPartialProps & FormRefProps;
+  export interface WidgetConfig {
+    fromChain?: number
+    toChain?: number
+    fromToken?: string
+    toToken?: string
+    toAddress?: ToAddress
+    toAddresses?: ToAddress[]
+    fromAmount?: number | string
+    toAmount?: number | string
+    formUpdateKey?: string
+    contractCalls?: ContractCall[]
+    contractComponent?: ReactNode
+    contractSecondaryComponent?: ReactNode
+    contractCompactComponent?: ReactNode
+    contractTool?: WidgetContractTool
+    integrator: string
+    apiKey?: string
+    fee?: number
+    feeConfig?: WidgetFeeConfig
+    referrer?: string
+    // routePriority?: Order
+    slippage?: number
+    variant?: WidgetVariant
+    subvariant?: WidgetSubvariant
+    subvariantOptions?: SubvariantOptions
+    appearance?: Appearance
+    theme?: WidgetTheme
+    disabledUI?: DisabledUIType[]
+    hiddenUI?: HiddenUIType[]
+    requiredUI?: RequiredUIType[]
+    useRecommendedRoute?: boolean
+    walletConfig?: WidgetWalletConfig
+    buildUrl?: boolean
+    keyPrefix?: string
+    bridges?: AllowDeny<string>
+    exchanges?: AllowDeny<string>
+    chains?: WidgetChains
+    tokens?: WidgetTokens
+    // languages?: WidgetLanguages
+    // languageResources?: LanguageResources
+    explorerUrls?: Record<number, string[]> &
+      Partial<Record<'internal', string[]>>
+  }
+  
+  export interface FormFieldOptions {
+    setUrlSearchParam: boolean
+  }
+  
+//   export interface FieldValues
+//     extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount' | 'toAddress'> {
+//     fromAmount?: number | string
+//     toAmount?: number | string
+//     toAddress?: ToAddress | string
+//   }
+  
+//   export type FieldNames = keyof FieldValues
+  
+//   export type SetFieldValueFunction = <K extends FieldNames>(
+//     key: K,
+//     value: FieldValues[K],
+//     options?: FormFieldOptions
+//   ) => void
+  
+//   export type FormState = {
+//     setFieldValue: SetFieldValueFunction
+//   }
+  
+//   export type FormRef = MutableRefObject<FormState | null>
+  
+//   export interface FormRefProps {
+//     formRef?: FormRef
+//   }
+  
+//   export interface WidgetConfigProps extends FormRefProps {
+//     config: WidgetConfig
+//   }
+  
+  export interface WidgetConfigPartialProps {
+    config?: Partial<WidgetConfig>
+  }
+  
+  export type WidgetProps = WidgetDrawerProps &
+    WidgetConfig &
+    WidgetConfigPartialProps 
+    // FormRefProps
+  
+  export interface WidgetDrawerProps extends WidgetConfigPartialProps {
+    elementRef?: RefObject<HTMLDivElement>
+    open?: boolean
+    onClose?(): void
+  }
   
