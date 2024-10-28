@@ -1,9 +1,9 @@
-// Importaciones necesarias (eliminamos las del SDK de LiFi)
 import type {
-    // Components,
+    Components,
     PaletteMode,
     PaletteOptions,
-    // Theme,
+    Shape,
+    Theme,
   } from '@mui/material'
   import type { TypographyOptions } from '@mui/material/styles/createTypography.js'
   import type {
@@ -67,7 +67,7 @@ import type {
     logoURI?: string;
   }
   
-  export type WidgetVariant = 'compact' | 'wide' | 'drawer'
+  export type WidgetVariant = 'compact' | 'drawer'
   export type WidgetSubvariant = 'default' | 'split' | 'custom' | 'refuel'
   export type SplitSubvariant = 'bridge' | 'swap'
   export type CustomSubvariant = 'checkout' | 'deposit'
@@ -81,25 +81,25 @@ import type {
     edge?: boolean
   }
   
-//   export type WidgetThemeComponents = Pick<
-//     Components<Theme>,
-//     | 'MuiAppBar'
-//     | 'MuiAvatar'
-//     | 'MuiButton'
-//     | 'MuiCard'
-//     | 'MuiIconButton'
-//     | 'MuiInputCard'
-//     | 'MuiTabs'
-//   >
+  export type WidgetThemeComponents = Pick<
+    Components<Theme>,
+    | 'MuiAppBar'
+    | 'MuiAvatar'
+    | 'MuiButton'
+    | 'MuiCard'
+    | 'MuiIconButton'
+    | 'MuiInput'
+    | 'MuiTabs'
+  >
   
   export type WidgetTheme = {
     palette?: Pick<
       PaletteOptions,
       'background' | 'grey' | 'primary' | 'secondary' | 'text'
     >
-    // shape?: Partial<Shape>
+    shape?: Partial<Shape>
     typography?: TypographyOptions
-    // components?: WidgetThemeComponents
+    components?: WidgetThemeComponents
     container?: CSSProperties
     header?: CSSProperties
     playground?: CSSProperties
