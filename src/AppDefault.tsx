@@ -1,5 +1,5 @@
-// 'use client'
-// import { AppRoutes } from './AppRoutes.js'
+"use client";
+import { AppRoutes } from "./AppRoutes";
 // import {
 //   AppContainer,
 //   AppExpandedContainer,
@@ -12,22 +12,8 @@
 // import { useWidgetConfig } from './providers/WidgetProvider/WidgetProvider.js'
 // import { ElementId, createElementId } from './utils/elements.js'
 
-// export const AppDefault = () => {
-//   const { elementId } = useWidgetConfig()
-//   const wideVariant = useWideVariant()
+export const AppDefault = () => {
+  //   const { elementId } = useWidgetConfig();
 
-//   return (
-//     <AppExpandedContainer
-//       id={createElementId(ElementId.AppExpandedContainer, elementId)}
-//     >
-//       <AppContainer>
-//         <Header />
-//         <FlexContainer disableGutters>
-//           <AppRoutes />
-//         </FlexContainer>
-//         <Initializer />
-//       </AppContainer>
-//       {wideVariant ? <RoutesExpanded /> : null}
-//     </AppExpandedContainer>
-//   )
-// }
+  return <AppRoutes />;
+};
