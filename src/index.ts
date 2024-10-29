@@ -1,3 +1,3 @@
-export { App as BandoWidget } from './App.js'
+export { App as BandoWidget } from './App'
 export { useWallets, walletComparator } from './hooks/useWallets';
 export * from './config/versions.js'
