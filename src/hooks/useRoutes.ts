@@ -1,7 +1,7 @@
 // New useRoutes for UI-only usage
 export const useRoutes = () => {
     const routes = [] // Empty array representing no available routes
-    const setReviewableRoute = () => {} // Empty function to satisfy hook signature
+    const setReviewableRoute = (route:any) => {} // Empty function to satisfy hook signature
   
     return {
       routes,
