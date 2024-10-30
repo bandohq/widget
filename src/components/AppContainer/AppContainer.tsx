@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
-import { useHeaderHeight } from "../../stores/header/useHeaderStore.js";
+import { useHeaderHeight } from "../../stores/header/useHeaderStore";
 // import type { WidgetVariant } from "../../types/widget.js";
 import { ElementId, createElementId } from "../../utils/elements.js";
 import {
