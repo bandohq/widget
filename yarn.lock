@@ -138,7 +138,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.25.9"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.19.4", "@babel/runtime@^7.21.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.25.0", "@babel/runtime@^7.25.7", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.19.4", "@babel/runtime@^7.21.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.25.0", "@babel/runtime@^7.25.7", "@babel/runtime@^7.26.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
   version "7.26.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.26.0.tgz#8600c2f595f277c60815256418b85356a65173c1"
   integrity sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==
@@ -175,16 +175,6 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@bigmi/client@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@bigmi/client/-/client-0.0.2.tgz#ef89b194c32b411fea2f9bc9943708f45254b3bc"
-  integrity sha512-KIjHT15Xtf6fi6ZgKsQ2XDjJiQ5wEZ56JeafEb13Y4gDW33Qa8lSBpjOFuKedr7X8LeDgGZF9bDpjqIhIY1CEA==
-  dependencies:
-    "@bigmi/core" "^0.0.2"
-    "@wagmi/core" "^2.13.8"
-    viem "^2.21.25"
-    wagmi "^2.12.16"
-
 "@bigmi/client@^0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@bigmi/client/-/client-0.0.4.tgz#eba777ceb1fed8a5482c0267cf9cf3c812a48ece"
@@ -194,18 +184,6 @@
     "@wagmi/core" "^2.14.1"
     viem "^2.21.35"
     wagmi "^2.12.25"
-
-"@bigmi/core@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@bigmi/core/-/core-0.0.2.tgz#9cc1e38e1be8f513ec75b7ed0be54347b87213d8"
-  integrity sha512-fsQA+3O4cQ0A7fhhA3f3VSivXv3s+aVZNjPRXQHnVdxTfgzZJqpl5xv47Ywz27ze+xKliJIO42vMt1D3yWJ72g==
-  dependencies:
-    "@noble/curves" "^1.6.0"
-    "@noble/hashes" "^1.5.0"
-    bech32 "^2.0.0"
-    bitcoinjs-lib "^7.0.0-rc.0"
-    bs58 "^6.0.0"
-    viem "^2.21.25"
 
 "@bigmi/core@^0.0.4":
   version "0.0.4"
@@ -217,17 +195,6 @@
     bitcoinjs-lib "^7.0.0-rc.0"
     bs58 "^6.0.0"
     viem "^2.21.35"
-
-"@bigmi/react@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@bigmi/react/-/react-0.0.2.tgz#c50c2162b7d8ab057646cecb63d3d8f2903d376e"
-  integrity sha512-j0Pa1Cp+B3ohJxrOW6y2hucq+PW/sz7FfJQTBT9rlmCCxW1f2M4TywWx5tzjeWmE0AKfRv7I94OKIIWBJiIMGw==
-  dependencies:
-    "@bigmi/client" "^0.0.2"
-    "@bigmi/core" "^0.0.2"
-    use-sync-external-store "^1.2.2"
-    viem "^2.21.25"
-    wagmi "^2.12.16"
 
 "@bigmi/react@^0.0.4":
   version "0.0.4"
@@ -649,13 +616,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@lifi/sdk@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@lifi/sdk/-/sdk-3.4.0.tgz#f06b5827d0609afe799d307cf68b5d15ff94cf30"
-  integrity sha512-4fUEIVw580B0QVbUC83gkqCGAfM6OZkZ/kTQEy63UhY/uj0Prljz6Pms0WFkLnqG/vT6DolOYs87ydwS1e9JvA==
+"@lifi/sdk@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@lifi/sdk/-/sdk-3.4.1.tgz#f85d7378426556abbb0957398e2dd31eff77de3f"
+  integrity sha512-8jctwg+EYj4AFhfLCQbkz9TUwE+8AZtWxfCTSgzl2FBWwgPBgnK4l0OWZ7HejZSt5BXtxtytk2JAphhHtvtCag==
   dependencies:
     "@bigmi/core" "^0.0.4"
-    "@lifi/types" "^16.1.0"
+    "@lifi/types" "^16.1.1"
     "@noble/curves" "^1.6.0"
     "@noble/hashes" "^1.5.0"
     "@solana/wallet-adapter-base" "^0.9.23"
@@ -663,24 +630,24 @@
     bech32 "^2.0.0"
     bitcoinjs-lib "^7.0.0-rc.0"
     bs58 "^6.0.0"
-    viem "^2.21.35"
+    viem "^2.21.37"
 
-"@lifi/types@^16.1.0":
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/@lifi/types/-/types-16.1.1.tgz#81ef45efd4751f6a4201c9bc9e3ce9cd78390801"
-  integrity sha512-NwfFTwTpuOKfc06HTKcdsw38b3Biu43jug4VHMAU2ITe+7C3Y1iY4egnvkclf+zClk9/xUI9rYbvzlq13uvnXQ==
+"@lifi/types@^16.1.1":
+  version "16.1.2"
+  resolved "https://registry.yarnpkg.com/@lifi/types/-/types-16.1.2.tgz#77909dc48905066da710a5ad9c0246a2575a40fa"
+  integrity sha512-HusAhazRbsj54DzPrpn/y5HoEOTKrE/gKuRwAHhKfgUF0CFqltRF+6mRmcdpUvnXniOqWMhFDlXglXkia9uOpw==
 
-"@lifi/wallet-management@^3.3.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@lifi/wallet-management/-/wallet-management-3.4.0.tgz#464851c81384fd16b17ec210bde920b2bad27761"
-  integrity sha512-xqTKnPZov+QpD7l70WIKYSPXmptERXizRMChpdc7raF6mfH4SAvYW2IRPIkXtj4XG+01KZQuRkAJPURgrlPPoA==
+"@lifi/wallet-management@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@lifi/wallet-management/-/wallet-management-3.4.2.tgz#3e2b307ff58e920174b71a4b23dfe04b88093e24"
+  integrity sha512-kntzprzByw4YbQTvdSE20Kasm41WcdZnQR9/fIRzipy7bNPvOQAUL9f4cY09cKQiQlB0x3DrspeKox3ikHblkA==
   dependencies:
     "@bigmi/client" "^0.0.4"
     "@bigmi/core" "^0.0.4"
     "@bigmi/react" "^0.0.4"
     "@emotion/react" "^11.13.3"
     "@emotion/styled" "^11.13.0"
-    "@lifi/sdk" "^3.4.0"
+    "@lifi/sdk" "^3.4.1"
     "@mui/icons-material" "^5.16.7"
     "@mui/lab" "^5.0.0-alpha.173"
     "@mui/material" "^5.16.7"
@@ -694,7 +661,7 @@
     react "^18.3.1"
     react-i18next "^15.1.0"
     use-sync-external-store "^1.2.2"
-    viem "^2.21.35"
+    viem "^2.21.37"
     wagmi "^2.12.25"
     zustand "^4.5.5"
 
@@ -1080,6 +1047,15 @@
     "@mui/utils" "^6.1.5"
     prop-types "^15.8.1"
 
+"@mui/private-theming@^6.1.6":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-6.1.6.tgz#9966bf2eca3d626cddd6e173752f46d344c7d7d1"
+  integrity sha512-ioAiFckaD/fJSnTrUMWgjl9HYBWt7ixCh7zZw7gDZ+Tae7NuprNV6QJK95EidDT7K0GetR2rU3kAeIR61Myttw==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@mui/utils" "^6.1.6"
+    prop-types "^15.8.1"
+
 "@mui/styled-engine@^5.16.6":
   version "5.16.6"
   resolved "https://registry.yarnpkg.com/@mui/styled-engine/-/styled-engine-5.16.6.tgz#60110c106dd482dfdb7e2aa94fd6490a0a3f8852"
@@ -1096,6 +1072,18 @@
   integrity sha512-tiyWzMkHeWlOoE6AqomWvYvdml8Nv5k5T+LDwOiwHEawx8P9Lyja6ZwWPU6xljwPXYYPT2KBp1XvMly7dsK46A==
   dependencies:
     "@babel/runtime" "^7.25.7"
+    "@emotion/cache" "^11.13.1"
+    "@emotion/serialize" "^1.3.2"
+    "@emotion/sheet" "^1.4.0"
+    csstype "^3.1.3"
+    prop-types "^15.8.1"
+
+"@mui/styled-engine@^6.1.6":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@mui/styled-engine/-/styled-engine-6.1.6.tgz#61996621a0297aac16061e1739a738a899613fd6"
+  integrity sha512-I+yS1cSuSvHnZDBO7e7VHxTWpj+R7XlSZvTC4lS/OIbUNJOMMSd3UDP6V2sfwzAdmdDNBi7NGCRv2SZ6O9hGDA==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
     "@emotion/cache" "^11.13.1"
     "@emotion/serialize" "^1.3.2"
     "@emotion/sheet" "^1.4.0"
@@ -1130,10 +1118,29 @@
     csstype "^3.1.3"
     prop-types "^15.8.1"
 
+"@mui/system@^6.1.6":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@mui/system/-/system-6.1.6.tgz#d335d6952092f3c758c8b78c2d993aa13ef58175"
+  integrity sha512-qOf1VUE9wK8syiB0BBCp82oNBAVPYdj4Trh+G1s+L+ImYiKlubWhhqlnvWt3xqMevR+D2h1CXzA1vhX2FvA+VQ==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@mui/private-theming" "^6.1.6"
+    "@mui/styled-engine" "^6.1.6"
+    "@mui/types" "^7.2.19"
+    "@mui/utils" "^6.1.6"
+    clsx "^2.1.1"
+    csstype "^3.1.3"
+    prop-types "^15.8.1"
+
 "@mui/types@^7.2.14", "@mui/types@^7.2.15", "@mui/types@^7.2.18":
   version "7.2.18"
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.2.18.tgz#4b6385ed2f7828ef344113cdc339d6fdf8e4bc23"
   integrity sha512-uvK9dWeyCJl/3ocVnTOS6nlji/Knj8/tVqVX03UVTpdmTJYu/s4jtDd9Kvv0nRGE0CUSNW1UYAci7PYypjealg==
+
+"@mui/types@^7.2.19":
+  version "7.2.19"
+  resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.2.19.tgz#c941954dd24393fdce5f07830d44440cf4ab6c80"
+  integrity sha512-6XpZEM/Q3epK9RN8ENoXuygnqUQxE+siN/6rGRi2iwJPgBUR25mphYQ9ZI87plGh58YoZ5pp40bFvKYOCDJ3tA==
 
 "@mui/utils@^5.15.14", "@mui/utils@^5.16.5", "@mui/utils@^5.16.6":
   version "5.16.6"
@@ -1154,6 +1161,18 @@
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/types" "^7.2.18"
+    "@types/prop-types" "^15.7.13"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    react-is "^18.3.1"
+
+"@mui/utils@^6.1.6":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-6.1.6.tgz#4b9fd34da3a1dd4700fe506a20ca7da3933ba48e"
+  integrity sha512-sBS6D9mJECtELASLM+18WUcXF6RH3zNxBRFeyCRg8wad6NbyNrdxLuwK+Ikvc38sTZwBzAz691HmSofLqHd9sQ==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@mui/types" "^7.2.19"
     "@types/prop-types" "^15.7.13"
     clsx "^2.1.1"
     prop-types "^15.8.1"
@@ -2011,7 +2030,7 @@
     "@walletconnect/ethereum-provider" "2.17.0"
     cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
 
-"@wagmi/core@2.14.1", "@wagmi/core@^2.13.8", "@wagmi/core@^2.14.1":
+"@wagmi/core@2.14.1", "@wagmi/core@^2.14.1":
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-2.14.1.tgz#e6adb8a350cfd7be4ea9c5581768f951c60127de"
   integrity sha512-Vl7VK5XdKxPfnYlp3E7U7AJSweBdfh+cd953hgAU2H+uNrekS9Nmt89l1b6WkwkYyqvccRDjsCtlcKRwvPtNAQ==
@@ -5089,10 +5108,25 @@ varuint-bitcoin@^2.0.0:
   dependencies:
     uint8array-tools "^0.0.8"
 
-viem@^2.1.1, viem@^2.21.25, viem@^2.21.35:
+viem@^2.1.1, viem@^2.21.35:
   version "2.21.37"
   resolved "https://registry.yarnpkg.com/viem/-/viem-2.21.37.tgz#4d67bee8749321b0fd142c54df2021d5774403b1"
   integrity sha512-JupwyttT4aJNnP9+kD7E8jorMS5VmgpC3hm3rl5zXsO8WNBTsP3JJqZUSg4AG6s2lTrmmpzS/qpmXMZu5gJw5Q==
+  dependencies:
+    "@adraffy/ens-normalize" "1.11.0"
+    "@noble/curves" "1.6.0"
+    "@noble/hashes" "1.5.0"
+    "@scure/bip32" "1.5.0"
+    "@scure/bip39" "1.4.0"
+    abitype "1.0.6"
+    isows "1.0.6"
+    webauthn-p256 "0.0.10"
+    ws "8.18.0"
+
+viem@^2.21.37:
+  version "2.21.40"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-2.21.40.tgz#d73a515e3eaf2a7ec2394d1de3d8409bf4bd2e21"
+  integrity sha512-no/mE3l7B0mdUTtvO7z/cTLENttQ/M7+ombqFGXJqsQrxv9wrYsTIGpS3za+FA5a447hY+x9D8Wxny84q1zAaA==
   dependencies:
     "@adraffy/ens-normalize" "1.11.0"
     "@noble/curves" "1.6.0"
@@ -5120,7 +5154,7 @@ void-elements@3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
-wagmi@^2.12.16, wagmi@^2.12.25:
+wagmi@^2.12.25:
   version "2.12.25"
   resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-2.12.25.tgz#0e4f23a96e021143f202c250ec0af3a5ea0cca08"
   integrity sha512-RdQCDbTv1+b7fWCAoLEYX0loymqLnhmNrMZq1gfPEs6cOhEHYOQeZtJWnyaXOD5+3xIFw+xoA0xDNvAHVbtbKw==
