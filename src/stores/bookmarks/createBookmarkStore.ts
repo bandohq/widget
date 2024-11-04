@@ -20,8 +20,7 @@ export const createBookmarksStore = ({
         selectedBookmark: toAddress,
         bookmarks: [],
         recentWallets: [],
-        getBookmark: (address) =>
-          get().bookmarks.find((bookmark) => bookmark.address === address),
+        getBookmark: (address) => get().bookmarks.find((bookmark) => bookmark.address === address),
         addBookmark: (bookmark) => {
           set((state) => ({
             bookmarks: [bookmark, ...state.bookmarks],
@@ -76,6 +75,6 @@ export const createBookmarksStore = ({
           }
         },
       }
-    ) as StateCreator<BookmarkState, [], [], BookmarkState>,
+    ) as unknown as StateCreator<BookmarkState, [], [], BookmarkState>,
     Object.is
   )
