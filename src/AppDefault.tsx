@@ -5,7 +5,7 @@ import {
   FlexContainer,
 } from "./components/AppContainer/AppContainer.styles";
 import { AppContainer } from "./components/AppContainer/AppContainer";
-// import { Header } from './components/Header/Header.js'
+import { Header } from "./components/Header/Header.js";
 // import { Initializer } from './components/Initializer.js'
 // import { RoutesExpanded } from './components/Routes/RoutesExpanded.js'
 // import { useWideVariant } from './hooks/useWideVariant.js'
@@ -20,7 +20,7 @@ export const AppDefault = () => {
       id={createElementId(ElementId.AppExpandedContainer, elementId)}
     >
       <AppContainer>
-        {/* <Header /> */}
+        <Header />
         <FlexContainer disableGutters>
           <AppRoutes />
         </FlexContainer>
