@@ -1,6 +1,6 @@
 import { shallow } from 'zustand/shallow'
 import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js'
-import { useSettingsActions } from '../stores/settings/useSettingsActions.js'
+import { useSettingsActions } from '../stores/settings/useSettingsActions'
 import {
   defaultConfigurableSettings,
   useSettingsStore,
