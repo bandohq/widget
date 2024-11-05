@@ -6,8 +6,8 @@ import { PageContainer } from "../../components/PageContainer";
 import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
 import { useHeader } from "../../hooks/useHeader";
-import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
-import { HiddenUI } from "../../types/widget.js";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
+import { HiddenUI } from "../../types/widget";
 import { ReviewButton } from "./ReviewButton";
 
 export const MainPage: React.FC = () => {
@@ -15,7 +15,7 @@ export const MainPage: React.FC = () => {
   const custom = subvariant === "custom";
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
 
-  const title = "Widget title";
+  const title = "Spend";
   useHeader(title);
 
   return (

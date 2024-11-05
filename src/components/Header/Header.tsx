@@ -2,11 +2,11 @@ import type { FC, PropsWithChildren } from "react";
 import { useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useDefaultElementId } from "../../hooks/useDefaultElementId";
-import { useSetHeaderHeight } from "../../stores/header/useHeaderStore.js";
-import { ElementId, createElementId } from "../../utils/elements.js";
-import { stickyHeaderRoutes } from "../../utils/navigationRoutes.js";
-import { Container } from "./Header.style.js";
-import { NavigationHeader } from "./NavigationHeader.js";
+import { useSetHeaderHeight } from "../../stores/header/useHeaderStore";
+import { ElementId, createElementId } from "../../utils/elements";
+import { stickyHeaderRoutes } from "../../utils/navigationRoutes";
+import { Container } from "./Header.style";
+import { NavigationHeader } from "./NavigationHeader";
 import { WalletHeader } from "./WalletHeader";
 
 export const HeaderContainer: FC<PropsWithChildren> = ({ children }) => {
