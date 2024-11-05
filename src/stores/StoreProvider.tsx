@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "react";
 import type { WidgetConfigProps } from "../types/widget.js";
 import { BookmarkStoreProvider } from "./bookmarks/BookmarkStore";
-// import { ChainOrderStoreProvider } from "./chains/ChainOrderStore.js";
 import { FormStoreProvider } from "./form/FormStore";
 import { HeaderStoreProvider } from "./header/useHeaderStore.js";
 import { RouteExecutionStoreProvider } from "./routes/RouteExecutionStore.js";
