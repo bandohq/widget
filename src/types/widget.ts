@@ -190,12 +190,9 @@ import type {
   
   export interface WidgetConfig {
     fromChain?: number
-    toChain?: number
     fromToken?: string
-    toToken?: string
-    toAddress?: ToAddress
-    toAddresses?: ToAddress[]
-    fromAmount?: number | string
+    productId?: string
+    country?: string
     toAmount?: number | string
     formUpdateKey?: string
   
