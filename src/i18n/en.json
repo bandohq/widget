@@ -70,6 +70,7 @@
     "sendToWallet": "Send to wallet",
     "settings": "Settings",
     "swap": "Swap",
+    "title": "Spend",
     "to": "Exchange to",
     "transactionDetails": "Transaction details",
     "transactionHistory": "Transaction history",

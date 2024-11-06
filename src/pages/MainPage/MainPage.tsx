@@ -9,14 +9,15 @@ import { useHeader } from "../../hooks/useHeader";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { HiddenUI } from "../../types/widget";
 import { ReviewButton } from "./ReviewButton";
+import { useTranslation } from "react-i18next";
 
 export const MainPage: React.FC = () => {
   const { subvariant, contractComponent, hiddenUI } = useWidgetConfig();
+  const { t } = useTranslation();
   const custom = subvariant === "custom";
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
 
-  const title = "Spend";
-  useHeader(title);
+  useHeader(t("header.title"));
 
   return (
     <PageContainer>

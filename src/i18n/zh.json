@@ -70,6 +70,7 @@
     "sendToWallet": "发送到该钱包",
     "settings": "设置",
     "swap": "兑换",
+    "title": "花费",
     "to": "兑换为",
     "transactionDetails": "交易详情",
     "transactionHistory": "交易记录",

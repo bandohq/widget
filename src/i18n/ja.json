@@ -70,6 +70,7 @@
     "sendToWallet": "ウォレットに送金する",
     "settings": "設定",
     "swap": "スワップ",
+    "title": "消費する",
     "to": "スワップ先",
     "transactionDetails": "トランザクション詳細",
     "transactionHistory": "トランザクション履歴",
