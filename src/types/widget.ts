@@ -18,10 +18,10 @@ import type {
     MetaMaskParameters,
     WalletConnectParameters,
   } from 'wagmi/connectors'
-  // import type {
-  //   LanguageKey,
-  //   LanguageResources,
-  // } from '../providers/I18nProvider/types.js'
+  import type {
+    LanguageKey,
+    LanguageResources,
+  } from '../providers/I18nProvider/types.js'
   import type { DefaultFieldValues } from '../stores/form/types'
   
   // mocked lifi structures
@@ -187,6 +187,10 @@ import type {
     include?: Token[]
     popular?: StaticToken[]
   } & AllowDeny<Token>
+
+  export type WidgetLanguages = {
+    default?: LanguageKey
+  } & AllowDeny<LanguageKey>
   
   export interface WidgetConfig {
     fromChain?: number
@@ -234,8 +238,8 @@ import type {
     exchanges?: AllowDeny<string>
     chains?: WidgetChains
     tokens?: WidgetTokens
-    // languages?: WidgetLanguages
-    // languageResources?: LanguageResources
+    languages?: WidgetLanguages
+    languageResources?: LanguageResources
     explorerUrls?: Record<number, string[]> &
       Partial<Record<'internal', string[]>>
   }
