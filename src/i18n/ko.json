@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "테마",
-    "enabledBridges": "브릿지",
-    "enabledExchanges": "교환",
-    "gasPrice": {
-      "fast": "빠르게",
-      "normal": "표준",
-      "slow": "느리게",
-      "title": "가스 가격"
-    },
-    "routePriority": "우선 경로",
-    "slippage": "",
     "custom": "사용자 정의",
     "resetSettings": ""
   },

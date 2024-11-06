@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "",
-    "enabledBridges": "",
-    "enabledExchanges": "",
-    "gasPrice": {
-      "fast": "",
-      "normal": "",
-      "slow": "",
-      "title": ""
-    },
-    "routePriority": "",
-    "slippage": "",
     "custom": "",
     "resetSettings": ""
   },

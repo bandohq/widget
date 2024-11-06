@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Giao diện",
-    "enabledBridges": "Cầu nối",
-    "enabledExchanges": "Sàn giao dịch",
-    "gasPrice": {
-      "fast": "Nhanh",
-      "normal": "Bình thường",
-      "slow": "Chậm",
-      "title": "Giá gas"
-    },
-    "routePriority": "Tuyền đường ưu tiên",
-    "slippage": "",
     "custom": "Tuỳ chỉnh",
     "resetSettings": "Bạn đang sử dụng cài đặt tùy chỉnh có thể ảnh hưởng đến số lượng hoặc cách sắp xếp các tuyến đường có sẵn."
   },

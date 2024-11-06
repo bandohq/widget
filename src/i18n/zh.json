@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "主题",
-    "enabledBridges": "跨链桥",
-    "enabledExchanges": "交易所",
-    "gasPrice": {
-      "fast": "快速",
-      "normal": "正常",
-      "slow": "缓慢",
-      "title": "燃气费"
-    },
-    "routePriority": "路由优先级",
-    "slippage": "",
     "custom": "自定义",
     "resetSettings": "您正在使用自定义设置来过滤可用路由。"
   },

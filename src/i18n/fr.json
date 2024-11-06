@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Thème",
-    "enabledBridges": "Ponts",
-    "enabledExchanges": "Échanges",
-    "gasPrice": {
-      "fast": "Rapide",
-      "normal": "Normal",
-      "slow": "Lent",
-      "title": "Prix du gaz"
-    },
-    "routePriority": "Priorité de l'itinéraire",
-    "slippage": "",
     "custom": "Personnalisé",
     "resetSettings": "Vous utilisez des paramètres personnalisés pouvant affecter le nombre ou le tri des routes disponibles."
   },

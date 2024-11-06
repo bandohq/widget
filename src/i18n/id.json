@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "enabledBridges": "Bridge",
-    "enabledExchanges": "Bursa",
-    "gasPrice": {
-      "fast": "Cepat",
-      "normal": "Normal",
-      "slow": "Lambat",
-      "title": "Harga gas"
-    },
-    "routePriority": "Prioritas rute",
-    "slippage": "Slip maksimum",
     "custom": "Kustom",
     "resetSettings": "Anda menggunakan pengaturan khusus yang dapat memengaruhi jumlah atau pengurutan rute yang tersedia."
   },

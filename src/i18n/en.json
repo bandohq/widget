@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Theme",
-    "enabledBridges": "Bridges",
-    "enabledExchanges": "Exchanges",
-    "gasPrice": {
-      "fast": "Fast",
-      "normal": "Normal",
-      "slow": "Slow",
-      "title": "Gas price"
-    },
-    "routePriority": "Route priority",
-    "slippage": "Max. slippage",
     "custom": "Custom",
     "resetSettings": "You're using custom settings that can affect the number or sorting of available routes."
   },

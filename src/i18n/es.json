@@ -33,7 +33,7 @@
     "exchange": "Intercambio",
     "getGas": "Obtener gas",
     "learnMore": "Aprender más",
-    "light": "Luz",
+    "light": "Claro",
     "max": "máximo",
     "ok": "Ok",
     "options": "Opciones",
@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "enabledBridges": "Puentes",
-    "enabledExchanges": "Plataformas de intercambio",
-    "gasPrice": {
-      "fast": "Rápido",
-      "normal": "Normal",
-      "slow": "Lento",
-      "title": "Precio de gas"
-    },
-    "routePriority": "Prioridad de ruta",
-    "slippage": "Máx. deslizamiento",
     "custom": "Personalizado",
     "resetSettings": "Estás usando ajustes personalizados que pueden afectar el número o la ordenación de rutas disponibles."
   },

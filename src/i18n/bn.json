@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "",
-    "enabledBridges": "",
-    "enabledExchanges": "",
-    "gasPrice": {
-      "fast": "দ্রুত",
-      "normal": "স্বাভাবিক",
-      "slow": "ধীরে",
-      "title": "গ্যাসের দাম"
-    },
-    "routePriority": "রুট অগ্রাধিকার",
-    "slippage": "",
     "custom": "",
     "resetSettings": ""
   },

@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "",
-    "enabledBridges": "",
-    "enabledExchanges": "",
-    "gasPrice": {
-      "fast": "Veloce",
-      "normal": "Normale",
-      "slow": "Lento",
-      "title": "Prezzo gas"
-    },
-    "routePriority": "Priorità di route",
-    "slippage": "",
     "custom": "",
     "resetSettings": ""
   },

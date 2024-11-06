@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "テーマ",
-    "enabledBridges": "ブリッジ",
-    "enabledExchanges": "スワップ",
-    "gasPrice": {
-      "fast": "高速",
-      "normal": "通常",
-      "slow": "低速",
-      "title": "ガス価格"
-    },
-    "routePriority": "ルート優先度",
-    "slippage": "",
     "custom": "カスタム設定",
     "resetSettings": "利用可能なルートの数とソートに影響する可能性があるカスタム設定を使用しています。"
   },

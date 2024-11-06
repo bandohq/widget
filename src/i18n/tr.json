@@ -287,16 +287,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "enabledBridges": "Köprüler",
-    "enabledExchanges": "Borsalar",
-    "gasPrice": {
-      "fast": "Hızlı",
-      "normal": "Standard",
-      "slow": "Yavaş",
-      "title": "Gaz ücreti"
-    },
-    "routePriority": "Rota önceliği",
-    "slippage": "Maksimum kayma oranı",
     "custom": "Özel",
     "resetSettings": "Kullanılabilir rotaların sayısını etkileyebilecek özel bir ayar kullanıyorsunuz."
   },
