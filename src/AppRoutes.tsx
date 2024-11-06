@@ -9,7 +9,7 @@ import { MainPage } from "./pages/MainPage/MainPage.js";
 // import { SelectEnabledToolsPage } from "./pages/SelectEnabledToolsPage.js";
 // import { SelectTokenPage } from "./pages/SelectTokenPage/SelectTokenPage.js";
 // import { SendToConfiguredWalletPage } from "./pages/SendToWallet/SendToConfiguredWalletPage.js";
-// import { SettingsPage } from "./pages/SettingsPage/SettingsPage.js";
+import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 // import { TransactionDetailsPage } from "./pages/TransactionDetailsPage/TransactionDetailsPage.js";
 // import { TransactionHistoryPage } from "./pages/TransactionHistoryPage/TransactionHistoryPage.js";
 // import { TransactionPage } from "./pages/TransactionPage/TransactionPage.js"
@@ -20,10 +20,10 @@ const routes: RouteObject[] = [
     path: "/",
     element: <MainPage />,
   },
-  // {
-  //   path: navigationRoutes.settings,
-  //   element: <SettingsPage />,
-  // },
+  {
+    path: navigationRoutes.settings,
+    element: <SettingsPage />,
+  },
   // {
   //   path: `${navigationRoutes.settings}/${navigationRoutes.bridges}`,
   //   element: <SelectEnabledToolsPage type="Bridges" />,
