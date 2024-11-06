@@ -1,0 +1,315 @@
+{
+  "language": {
+    "name": "English",
+    "title": "Language"
+  },
+  "format": {
+    "currency": "{{value, currencyExt(currency: USD)}}",
+    "number": "{{value, number(maximumFractionDigits: 9)}}",
+    "percent": "{{value, percent(maximumFractionDigits: 2)}}"
+  },
+  "button": {
+    "auto": "Auto",
+    "bookmark": "Bookmark",
+    "bookmarks": "Bookmarks",
+    "bridge": "Bridge",
+    "bridgeReview": "Review bridge",
+    "buy": "Buy",
+    "cancel": "Cancel",
+    "checkoutReview": "Review purchase",
+    "close": "Close",
+    "confirm": "Confirm",
+    "connectAnotherWallet": "Connect another wallet",
+    "connectWallet": "Connect wallet",
+    "contactSupport": "Contact support",
+    "continue": "Continue",
+    "copyAddress": "Copy address",
+    "dark": "Dark",
+    "delete": "Delete",
+    "deposit": "Deposit",
+    "depositReview": "Review deposit",
+    "disconnect": "Disconnect",
+    "done": "Done",
+    "exchange": "Exchange",
+    "getGas": "Get gas",
+    "learnMore": "Learn more",
+    "light": "Light",
+    "max": "max",
+    "ok": "Ok",
+    "options": "Options",
+    "removeTransaction": "Remove transaction",
+    "reset": "Reset",
+    "resetSettings": "Reset settings",
+    "seeDetails": "See details",
+    "showAll": "Show all",
+    "startBridging": "Start bridging",
+    "startSwapping": "Start swapping",
+    "swap": "Swap",
+    "swapReview": "Review swap",
+    "tryAgain": "Try again",
+    "viewCoverage": "View coverage",
+    "viewOnExplorer": "View on explorer"
+  },
+  "header": {
+    "activeTransactions": "Active transactions",
+    "bookmarkedWallets": "Bookmarked wallets",
+    "bridge": "Bridge",
+    "checkout": "Checkout",
+    "checkoutDetails": "Checkout details",
+    "deposit": "Deposit",
+    "depositDetails": "Deposit details",
+    "exchange": "Exchange",
+    "from": "Exchange from",
+    "gas": "Gas",
+    "payWith": "Pay with",
+    "receive": "Receive",
+    "recentWallets": "Recent wallets",
+    "selectChain": "Select chain",
+    "selectWallet": "Select your wallet",
+    "send": "Send",
+    "sendToWallet": "Send to wallet",
+    "settings": "Settings",
+    "swap": "Swap",
+    "to": "Exchange to",
+    "transactionDetails": "Transaction details",
+    "transactionHistory": "Transaction history",
+    "walletConnected": "Wallet connected",
+    "youGet": "You get",
+    "youPay": "You pay"
+  },
+  "info": {
+    "message": {
+      "autoRefuel": "You're low on {{chainName}} gas. By continuing, you'll get enough gas to complete the transaction.",
+      "emptyActiveTransactions": "Transactions in progress will appear here. Once completed, find them in transaction history.",
+      "emptyTokenList": "We couldn't find tokens on {{chainName}} chain or you don't have any. Please search by contract address if your token doesn't appear or choose another chain.",
+      "emptyChainList": "We couldn't find any chains that match your search",
+      "emptyBridgesList": "We couldn't find any bridges that match your search",
+      "emptyExchangesList": "We couldn't find any exchanges that match your search",
+      "emptyTransactionHistory": "Transaction history is only stored locally and will be deleted if you clear your browser data.",
+      "fundsToExchange": "Funds sent to an exchange may be lost",
+      "toAddressIsRequired": "Please provide the destination wallet address to which the funds will be transferred.",
+      "routeNotFound": "Reasons for that could be: low liquidity, amount selected is too low, gas costs are too high or there are no routes for the selected combination."
+    },
+    "title": {
+      "autoRefuel": "Get {{chainName}} gas",
+      "emptyActiveTransactions": "No active transactions",
+      "emptyTransactionHistory": "No recent transactions",
+      "routeNotFound": "No routes available"
+    }
+  },
+  "success": {
+    "message": {
+      "exchangePartiallySuccessful": "We've tried to complete the transaction, but {{tool}} couldn't proceed due to either slippage settings or lack of liquidity for the {{tokenSymbol}} token.",
+      "exchangeSuccessful": "There are now {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} in {{walletAddress}} wallet on {{chainName}} chain.",
+      "checkoutSuccessful": "You now own {{assetName}} in {{walletAddress}} wallet on {{chainName}} chain."
+    },
+    "title": {
+      "bridgePartiallySuccessful": "Bridge partially successful",
+      "bridgeSuccessful": "Bridge successful",
+      "depositSuccessful": "Deposit successful",
+      "checkoutSuccessful": "Purchase successful",
+      "refundIssued": "Refund issued",
+      "swapPartiallySuccessful": "Swap partially successful",
+      "swapSuccessful": "Swap successful"
+    }
+  },
+  "warning": {
+    "message": {
+      "deleteActiveTransactions": "Active transactions are only stored locally and can't be recovered if you delete them.",
+      "deleteTransactionHistory": "Transaction history is only stored locally and can't be recovered if you delete it.",
+      "highValueLoss": "The value of the received tokens is significantly lower than the exchanged tokens and transaction cost.",
+      "insufficientFunds": "You don't have enough funds to complete the transaction.",
+      "insufficientGas": "You don't have enough gas to complete the transaction. You need to add at least:",
+      "rateChanged": "The exchange rate has changed. By continuing the transaction, you'll accept the new rate.",
+      "resetSettings": "This will reset your route priority, slippage, gas price, enabled bridges and exchanges.",
+      "slippageOutsideRecommendedLimits": "High slippage tolerance may result in unfavorable trade caused by front-running."
+    },
+    "title": {
+      "deleteActiveTransactions": "Delete all active transactions?",
+      "deleteTransaction": "Delete this transaction?",
+      "deleteTransactionHistory": "Delete transaction history?",
+      "highValueLoss": "High value loss",
+      "insufficientGas": "Insufficient gas",
+      "rateChanged": "Rate changed",
+      "resetSettings": "Reset settings?"
+    }
+  },
+  "error": {
+    "message": {
+      "allowanceRequired": "Transfer amount for {{tokenSymbol}} exceeds your current allowance. Please increase your allowance and try again.",
+      "insufficientFunds": "You don't have enough gas to cover the cost of the transaction.",
+      "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} on {{chainName}} remain in your wallet.",
+      "signatureRejected": "Your signature is required to complete the transaction. {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} on {{chainName}} remain in your wallet.",
+      "slippageThreshold": "The slippage is larger than the defined threshold. Please request a new quote.",
+      "transactionCanceled": "Transaction was canceled.",
+      "transactionConflict": "Transaction couldn't be processed because it's conflicting with another pending transaction using the same funds. Please wait for the pending transaction to be confirmed or check your transaction history before trying again.",
+      "transactionExpired": "The block height has exceeded the maximum allowed limit or blockhash is no longer recent enough.",
+      "transactionFailed": "Please check the block explorer for more information.",
+      "transactionNotSent": "Transaction was not sent.",
+      "transactionSimulationFailed": "The transaction could not be executed in simulation.",
+      "unknown": "Please try again or contact support.",
+      "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution."
+    },
+    "title": {
+      "allowanceRequired": "Insufficient allowance",
+      "balanceIsTooLow": "The balance is too low",
+      "bookmarkAlreadyExists": "Wallet is already bookmarked as {{name}}",
+      "bookmarkNameRequired": "Bookmark name is required",
+      "chainSwitch": "Chain switch required",
+      "exchangeRateUpdateCanceled": "Exchange rate update canceled",
+      "gasLimitIsTooLow": "The gas limit is too low",
+      "insufficientFunds": "Insufficient funds",
+      "signatureRejected": "Signature required",
+      "slippageNotMet": "Slippage conditions not met",
+      "transactionCanceled": "Transaction canceled",
+      "transactionConflict": "Transaction conflict",
+      "transactionExpired": "Transaction expired",
+      "transactionFailed": "Transaction failed",
+      "transactionSimulationFailed": "Transaction simulation failed",
+      "transactionUnderpriced": "Transaction is underpriced",
+      "transactionUnprepared": "Unable to prepare transaction",
+      "unknown": "Something went wrong",
+      "walletAddressInvalid": "Wallet address or domain name is invalid",
+      "walletAddressInvalid_chain": "Wallet address or domain name is invalid for selected destination chain {{chainName}}",
+      "walletAddressRequired": "Wallet address is required.",
+      "walletChainTypeInvalid": "Wallet address doesn't match the selected destination chain {{chainName}}",
+      "walletMismatch": "Wallet address mismatch"
+    }
+  },
+  "tooltip": {
+    "deselectAll": "Deselect all",
+    "estimatedTime": "Estimated time to complete the swap or bridge transaction, excluding chain switching and token approval.",
+    "feeCollection": "The fee is applied to selected token pairs and ensures the best experience with {{tool}}.",
+    "minReceived": "The estimated minimum amount may change until the swapping/bridging transaction is signed. For 2-step transfers, this applies until the second step transaction is signed.",
+    "notFound": {
+      "text": "We couldn't find this page.",
+      "title": "404"
+    },
+    "numberOfSteps": "Each exchange step can contain 1-2 transactions that require a signature.",
+    "priceImpact": "The estimated value difference between the source and destination tokens.",
+    "progressToNextUpdate": "Quotes will update in {{value}} seconds. <0/> Click here to update now.",
+    "selectAll": "Select all",
+    "settingsModified": "Settings (modified)",
+    "slippage": "The maximum percentage difference between the expected price, and the actual price at which a transfer is executed. This value can be changed in settings."
+  },
+  "main": {
+    "allTokens": "All tokens",
+    "bridgeStepDetails": "Bridge from {{from}} to {{to}} via {{tool}}",
+    "checkoutStepDetails": "Purchase via {{tool}}",
+    "currentAmount": "Current amount",
+    "depositStepDetails": "Deposit via {{tool}}",
+    "featuredTokens": "Featured tokens",
+    "fees": {
+      "defaultIntegrator": "Integrator fee",
+      "estimated": "estimated costs",
+      "integrator": "{{tool}} fee",
+      "network": "Network cost",
+      "paid": "paid costs",
+      "provider": "Provider fee"
+    },
+    "from": "From",
+    "inProgress": "in progress",
+    "maxSlippage": "Max. slippage",
+    "minReceived": "Min. received",
+    "myTokens": "My tokens",
+    "onChain": "on {{chainName}}",
+    "ownedBy": "Owned by",
+    "popularTokens": "Popular tokens",
+    "priceImpact": "Price impact",
+    "process": {
+      "bridge": {
+        "actionRequired": "Please sign the transaction",
+        "done": "Bridge transaction confirmed",
+        "pending": "Waiting for bridge transaction",
+        "started": "Preparing bridge transaction"
+      },
+      "checkout": {
+        "done": "Purchase completed"
+      },
+      "deposit": {
+        "done": "Deposit completed"
+      },
+      "receivingChain": {
+        "done": "Bridge completed",
+        "partial": "Bridge partially completed",
+        "pending": "Waiting for destination chain",
+        "refunded": "Bridge transaction refunded"
+      },
+      "swap": {
+        "actionRequired": "Please sign the transaction",
+        "done": "Swap completed",
+        "pending": "Waiting for swap transaction",
+        "started": "Preparing swap transaction"
+      },
+      "switchChain": {
+        "actionRequired": "Chain switch required",
+        "done": "Chain switched successfully"
+      },
+      "tokenAllowance": {
+        "done": "Token allowance approved",
+        "pending": "Waiting for token allowance",
+        "started": "Setting token allowance"
+      }
+    },
+    "quotedAmount": "Quoted amount",
+    "rateChange": "Rate change",
+    "receiving": "Receiving",
+    "refuelStepDetails": "Get gas via {{tool}}",
+    "selectChain": "Select chain",
+    "selectChainAndToken": "Select chain and token",
+    "selectToken": "Select token",
+    "sendToAddress": "Send to {{address}}",
+    "sendToWallet": "Send to a different wallet",
+    "sending": "Sending",
+    "sentToAddress": "Sent to {{address}}",
+    "stepBridge": "Bridge",
+    "stepBridgeAndBuy": "Bridge and buy",
+    "stepBridgeAndDeposit": "Bridge and deposit",
+    "stepDetails": "{{tool}} via LI.FI",
+    "stepSwap": "Swap",
+    "stepSwapAndBridge": "Swap and bridge",
+    "stepSwapAndBuy": "Swap and buy",
+    "stepSwapAndDeposit": "Swap and deposit",
+    "transferId": "Transfer ID",
+    "swapStepDetails": "Swap on {{chain}} via {{tool}}",
+    "tags": {
+      "cheapest": "Best Return",
+      "fastest": "Fastest"
+    },
+    "to": "To",
+    "tokenOnChain": "{{tokenSymbol}} on {{chainName}}",
+    "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} on {{chainName}}",
+    "tokenSearch": "Search by token name or address",
+    "valueLoss": "Value loss",
+    "searchChains": "Search by chain name",
+    "searchBridges": "Search by bridge name",
+    "searchExchanges": "Search by exchange name"
+  },
+  "settings": {
+    "theme": "Theme",
+    "enabledBridges": "Bridges",
+    "enabledExchanges": "Exchanges",
+    "gasPrice": {
+      "fast": "Fast",
+      "normal": "Normal",
+      "slow": "Slow",
+      "title": "Gas price"
+    },
+    "routePriority": "Route priority",
+    "slippage": "Max. slippage",
+    "custom": "Custom",
+    "resetSettings": "You're using custom settings that can affect the number or sorting of available routes."
+  },
+  "sendToWallet": {
+    "addBookmark": "Add bookmark",
+    "bookmarkWallet": "Bookmark wallet",
+    "confirmWalletAddress": "Confirm wallet address",
+    "connectedWallets": "Connected wallets",
+    "enterAddress_long": "Enter address or wallet domain",
+    "enterAddress_short": "Enter wallet address",
+    "enterName": "Enter name",
+    "noBookmarkedWallets": "No bookmarked wallets",
+    "noConnectedWallets": "No connected wallets",
+    "noRecentWallets": "No recent wallets"
+  }
+}

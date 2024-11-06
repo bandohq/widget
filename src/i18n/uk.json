@@ -1,0 +1,315 @@
+{
+  "language": {
+    "name": "Українська",
+    "title": "Мова"
+  },
+  "format": {
+    "currency": "{{value, currencyExt(currency: USD)}}",
+    "number": "{{value, number(maximumFractionDigits: 9)}}",
+    "percent": "{{value, percent(maximumFractionDigits: 2)}}"
+  },
+  "button": {
+    "auto": "Авто",
+    "bookmark": "Додати в закладки",
+    "bookmarks": "Закладки",
+    "bridge": "Бридж",
+    "bridgeReview": "Переглянути бридж",
+    "buy": "Придбати",
+    "cancel": "Скасувати",
+    "checkoutReview": "Перегляд покупки",
+    "close": "Закрити",
+    "confirm": "Підтвердити",
+    "connectAnotherWallet": "Під'єднати інший гаманець",
+    "connectWallet": "Під'єднати гаманець",
+    "contactSupport": "Служба підтримки",
+    "continue": "Продовжити",
+    "copyAddress": "Скопіювати адресу",
+    "dark": "Темна",
+    "delete": "Видалити",
+    "deposit": "Депозит",
+    "depositReview": "Огляд депозиту",
+    "disconnect": "Від'єднатись",
+    "done": "Готово",
+    "exchange": "Обмін",
+    "getGas": "Отримати газ",
+    "learnMore": "Докладніше",
+    "light": "Світла",
+    "max": "макс",
+    "ok": "Ок",
+    "options": "Опції",
+    "removeTransaction": "Видалити транзакцію",
+    "reset": "Скинути",
+    "resetSettings": "Скинути налаштування",
+    "seeDetails": "Детальніше",
+    "showAll": "Показати всі",
+    "startBridging": "Почати бридж",
+    "startSwapping": "Почати своп",
+    "swap": "Своп",
+    "swapReview": "Переглянути своп",
+    "tryAgain": "Спробувати ще раз",
+    "viewCoverage": "Переглянути покриття",
+    "viewOnExplorer": "Переглянути в оглядачі"
+  },
+  "header": {
+    "activeTransactions": "Активні транзакції",
+    "bookmarkedWallets": "Закладки гаманців",
+    "bridge": "Бридж",
+    "checkout": "Розрахунок",
+    "checkoutDetails": "Деталі платежу",
+    "deposit": "Депозит",
+    "depositDetails": "Деталі депозиту",
+    "exchange": "Обмін",
+    "from": "Своп з",
+    "gas": "Газ",
+    "payWith": "Сплатити за допомогою",
+    "receive": "Отримаєте",
+    "recentWallets": "Останні гаманці",
+    "selectChain": "Виберіть чейн",
+    "selectWallet": "Виберіть свій гаманець",
+    "send": "Відправляєте",
+    "sendToWallet": "Відправити на гаманець",
+    "settings": "Налаштування",
+    "swap": "Своп",
+    "to": "Своп на",
+    "transactionDetails": "Деталі транзакції",
+    "transactionHistory": "Історія транзакцій",
+    "walletConnected": "Гаманець підʼєднано",
+    "youGet": "Ви отримаєте",
+    "youPay": "Ви платите"
+  },
+  "info": {
+    "message": {
+      "autoRefuel": "У вас замало {{chainName}} газу. Продовжуючи, ви отримаєте достатньо газу, щоб завершити обмін.",
+      "emptyActiveTransactions": "Тут показуються незавершені транзакції. Після завершення ви можете знайти їх в історії транзакцій.",
+      "emptyTokenList": "Нам не вдалося знайти токени на {{chainName}}, або у вас їх немає. Будь ласка, спробуйте пошук за адресою контракту або виберіть інший чейн.",
+      "emptyChainList": "Ми не змогли знайти жодного чейна, що відповідає вашому запиту",
+      "emptyBridgesList": "Ми не змогли знайти жодного моста, що відповідає вашому запиту",
+      "emptyExchangesList": "Ми не змогли знайти жодного обмінника, що відповідає вашому запиту",
+      "emptyTransactionHistory": "Історія транзакцій зберігається лише локально та буде видалена, якщо ви очистите дані браузера.",
+      "fundsToExchange": "Кошти, відправлені на біржі, можуть бути втрачені",
+      "toAddressIsRequired": "Будь ласка, надайте адресу цільового гаманця, на яку будуть перераховані кошти.",
+      "routeNotFound": "Причинами цього можуть бути: низька ліквідність, вибрана надто низька сума, занадто високі витрати на газ або відсутність маршрутів для вибраної комбінації."
+    },
+    "title": {
+      "autoRefuel": "Отримати {{chainName}} газ",
+      "emptyActiveTransactions": "Немає активних транзакцій",
+      "emptyTransactionHistory": "Немає останніх транзакцій",
+      "routeNotFound": "Немає доступних маршрутів"
+    }
+  },
+  "success": {
+    "message": {
+      "exchangePartiallySuccessful": "Ми намагалися завершити транзакцію, але {{tool}} не зміг продовжити через налаштування прослизання або відсутність ліквідності для {{tokenSymbol}} токена.",
+      "exchangeSuccessful": "Зараз є {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} у гаманці {{walletAddress}} на чейні {{chainName}}.",
+      "checkoutSuccessful": "Тепер ви маєте {{assetName}} в гаманці {{walletAddress}} на {{chainName}} чейні."
+    },
+    "title": {
+      "bridgePartiallySuccessful": "Бридж частково успішний",
+      "bridgeSuccessful": "Бридж успішний",
+      "depositSuccessful": "Деопзит успішний",
+      "checkoutSuccessful": "Покупка успішна",
+      "refundIssued": "Здійснено повернення коштів",
+      "swapPartiallySuccessful": "Своп частково успішний",
+      "swapSuccessful": "Своп успішний"
+    }
+  },
+  "warning": {
+    "message": {
+      "deleteActiveTransactions": "Активні транзакції зберігаються лише локально й не можуть бути відновлені, якщо ви їх видалите.",
+      "deleteTransactionHistory": "Історія транзакцій зберігається лише локально й не може бути відновлена, якщо ви їх видалите.",
+      "highValueLoss": "Вартість отриманих токенів значно нижча, ніж обмінені токени та вартість транзакції.",
+      "insufficientFunds": "У вас недостатньо коштів для здійснення свопу.",
+      "insufficientGas": "Для завершення свопа у вас недостатньо газу. Вам необхідно додати хоча б:",
+      "rateChanged": "Курс обміну змінився. Продовжуючи своп, ви приймете новий курс.",
+      "resetSettings": "Це скине пріоритет вашого маршруту, прослизання, ціну газу, увімкнені бриджі та обмінники.",
+      "slippageOutsideRecommendedLimits": "Високий допуск до прослизання може призвести до несприятливої торгівлі через фронт-біг."
+    },
+    "title": {
+      "deleteActiveTransactions": "Видалити всі активні транзакції?",
+      "deleteTransaction": "Видалити цю транзакцію?",
+      "deleteTransactionHistory": "Видалити історію транзакцій?",
+      "highValueLoss": "Висока втрата вартості",
+      "insufficientGas": "Недостатня кількість газу",
+      "rateChanged": "Курс змінився",
+      "resetSettings": "Скинути налаштування?"
+    }
+  },
+  "error": {
+    "message": {
+      "allowanceRequired": "Сума переказу для {{tokenSymbol}} перевищує поточну межу. Збільшіть доступну кількість у гаманці та спробуйте ще раз.",
+      "insufficientFunds": "Не вистачає газу для покриття вартості транзакції.",
+      "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} на {{chainName}} все ще знаходяться у вашому гаманці.",
+      "signatureRejected": "Для завершення транзакції потрібен ваш підпис. {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} на {{chainName}} залишаються у вашому гаманці.",
+      "slippageThreshold": "Прослизання перевищує визначений поріг. Будь ласка, зробіть запит на новий маршрут, щоб отримати нову пропозицію.",
+      "transactionCanceled": "Транзакцію скасовано.",
+      "transactionConflict": "Неможливо обробити транзакцію, оскільки вона конфліктує з іншою очікуваною транзакцією за допомогою тих же коштів. Дочекайтеся підтвердження транзакції або перевірте історію транзакцій, перш ніж спробувати ще раз.",
+      "transactionExpired": "Висота блоку перевищила максимально дозволену межу або хеш блоку вже не достатньо свіжий.",
+      "transactionFailed": "Будь ласка, перевірте провідник блоків для отримання додаткової інформації.",
+      "transactionNotSent": "Транзакція не була надіслана.",
+      "transactionSimulationFailed": "Не вдалося виконати транзакцію при симуляції.",
+      "unknown": "Будь ласка, спробуйте ще раз або зверніться до служби підтримки.",
+      "walletChangedDuringExecution": "Адреса гаманця, що запитувала котирування, не збігається з адресою гаманця, який намагається підписати транзакцію. Будь ласка, переконайтеся, що одна й та сама адреса гаманця використовується протягом усього виконання транзакції."
+    },
+    "title": {
+      "allowanceRequired": "Недостатня дозволена кількість",
+      "balanceIsTooLow": "Баланс занадто низький",
+      "bookmarkAlreadyExists": "Гаманець вже в закладках як {{name}}",
+      "bookmarkNameRequired": "Ім'я закладки є обов'язковим",
+      "chainSwitch": "Потрібно переключити чейн.",
+      "exchangeRateUpdateCanceled": "Оновлення обмінного курсу скасовано",
+      "gasLimitIsTooLow": "Занадто низький ліміт газу",
+      "insufficientFunds": "Недостатньо коштів",
+      "signatureRejected": "Підпис обов'язковий",
+      "slippageNotMet": "Не виконані умови прослизання",
+      "transactionCanceled": "Транзакцію скасовано",
+      "transactionConflict": "Конфлікт між транзакціями",
+      "transactionExpired": "Транзакція прострочена",
+      "transactionFailed": "Транзакція не вдалася.",
+      "transactionSimulationFailed": "Збій симуляції транзакції",
+      "transactionUnderpriced": "Транзакція є заниженою.",
+      "transactionUnprepared": "Не вдалося підготувати транзакцію.",
+      "unknown": "Щось пішло не так.",
+      "walletAddressInvalid": "Адреса гаманця або доменне ім'я є недійсним",
+      "walletAddressInvalid_chain": "Адреса гаманця не відповідає обраному чейну призначення - {{chainName}}",
+      "walletAddressRequired": "Необхідно вказати адресу гаманця.",
+      "walletChainTypeInvalid": "Адреса гаманця не відповідає обраному чейну призначення - {{chainName}}",
+      "walletMismatch": "Невідповідність адреси гаманця"
+    }
+  },
+  "tooltip": {
+    "deselectAll": "Скасувати вибір",
+    "estimatedTime": "Розрахунковий час для завершення своп або брідж транзакції, за винятком перемикання чейнів та затвердження токену.",
+    "feeCollection": "Комісія застосовується до вибраних токенів та забезпечує найкращий досвід роботи з {{tool}}.",
+    "minReceived": "Орієнтовна мінімальна сума може змінитися до тих пір, поки своп/брідж транзакція не буде підписана. Для 2-крокових переказів це стосується підписання транзакції другого кроку.",
+    "notFound": {
+      "text": "Ми не змогли знайти цю сторінку.",
+      "title": "404"
+    },
+    "numberOfSteps": "Кількість кроків обміну. Кожен крок може містити 1-2 транзакції, які потребують підпису.",
+    "priceImpact": "Орієнтовна різниця вартості між джерельними та цільовими токенами.",
+    "progressToNextUpdate": "Зображені дані автоматично оновляться через {{value}} секунд. Натисніть тут, щоб оновити вручну.",
+    "selectAll": "Вибрати все",
+    "settingsModified": "Налаштування (змінено)",
+    "slippage": "Максимальна процентна різниця між очікуваною ціною і фактичною ціною з якою виконується трансфер. Ця величина може бути змінена в налаштуваннях."
+  },
+  "main": {
+    "allTokens": "Всі токени",
+    "bridgeStepDetails": "Бридж з {{from}} до {{to}} через {{tool}}",
+    "checkoutStepDetails": "Купівля через {{tool}}",
+    "currentAmount": "Поточна сума",
+    "depositStepDetails": "Поповнення через {{tool}}",
+    "featuredTokens": "Рекомендовані токени",
+    "fees": {
+      "defaultIntegrator": "Комісія інтегратора",
+      "estimated": "орієнтовна вартість",
+      "integrator": "Комісія {{tool}}",
+      "network": "Витрати мережі",
+      "paid": "оплачені витрати",
+      "provider": "Комісія провайдера"
+    },
+    "from": "З",
+    "inProgress": "в процесі",
+    "maxSlippage": "Макс. прослизання",
+    "minReceived": "Мін. отримано",
+    "myTokens": "Мої токени",
+    "onChain": "на {{chainName}}",
+    "ownedBy": "Власник",
+    "popularTokens": "Популярні токени",
+    "priceImpact": "Вплив на ціну",
+    "process": {
+      "bridge": {
+        "actionRequired": "Будь ласка, підпишіть транзакцію",
+        "done": "Бридж транзакцію схвалено",
+        "pending": "Очікування бридж транзакції",
+        "started": "Підготовка бридж транзакції"
+      },
+      "checkout": {
+        "done": "Покупку завершено"
+      },
+      "deposit": {
+        "done": "Поповнення завершено"
+      },
+      "receivingChain": {
+        "done": "Бридж завершено",
+        "partial": "Бридж частково завершено",
+        "pending": "В очікуванні чейна що приймає",
+        "refunded": "Бридж транзакція відшкодована"
+      },
+      "swap": {
+        "actionRequired": "Будь ласка, підпишіть транзакцію",
+        "done": "Своп завершено",
+        "pending": "Очікування своп транзакції",
+        "started": "Підготовка своп транзакції"
+      },
+      "switchChain": {
+        "actionRequired": "Потрібно перемикнути чейн",
+        "done": "Чейн успішно перемикнувся"
+      },
+      "tokenAllowance": {
+        "done": "Токени схвалено",
+        "pending": "Очікування схвалення токенів",
+        "started": "Схвалення токенів"
+      }
+    },
+    "quotedAmount": "Запропонована сума",
+    "rateChange": "Зміна курсу",
+    "receiving": "Отримання",
+    "refuelStepDetails": "Отримати газ через {{tool}}",
+    "selectChain": "Виберіть чейн",
+    "selectChainAndToken": "Виберіть чейн і токен",
+    "selectToken": "Виберіть токен",
+    "sendToAddress": "Відправити на {{address}}",
+    "sendToWallet": "Надіслати на інший гаманець",
+    "sending": "Відправлення",
+    "sentToAddress": "Відправлено на {{address}}",
+    "stepBridge": "Бридж",
+    "stepBridgeAndBuy": "Бридж та покупка",
+    "stepBridgeAndDeposit": "Брідж та депозит",
+    "stepDetails": "{{tool}} через LI.FI",
+    "stepSwap": "Своп",
+    "stepSwapAndBridge": "Своп та бридж",
+    "stepSwapAndBuy": "Своп та покупка",
+    "stepSwapAndDeposit": "Своп та депозит",
+    "transferId": "Ідентифікатор переказу",
+    "swapStepDetails": "Своп на {{chain}} через {{tool}}",
+    "tags": {
+      "cheapest": "Найкращий курс",
+      "fastest": "Найшвидший"
+    },
+    "to": "До",
+    "tokenOnChain": "{{tokenSymbol}} на {{chainName}}",
+    "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} на {{chainName}}",
+    "tokenSearch": "Шукати за ім'ям або адресою",
+    "valueLoss": "Втрата вартості",
+    "searchChains": "Пошук за назвою чейна",
+    "searchBridges": "Пошук за назвою моста",
+    "searchExchanges": "Пошук за назвою обмінника"
+  },
+  "settings": {
+    "theme": "Тема",
+    "enabledBridges": "Бриджі",
+    "enabledExchanges": "Обмінники",
+    "gasPrice": {
+      "fast": "Швидко",
+      "normal": "Нормально",
+      "slow": "Повільно",
+      "title": "Ціна на газ"
+    },
+    "routePriority": "Пріоритет",
+    "slippage": "Макс. прослизання",
+    "custom": "Власне",
+    "resetSettings": "Ви використовуєте налаштування які можуть вплинути на кількість або сортування доступних маршрутів."
+  },
+  "sendToWallet": {
+    "addBookmark": "Додати до закладок",
+    "bookmarkWallet": "Додати в закладки",
+    "confirmWalletAddress": "Підтвердження адреси гаманця",
+    "connectedWallets": "Підключені гаманці",
+    "enterAddress_long": "Введіть адресу або домен гаманця",
+    "enterAddress_short": "Введіть адресу гаманця",
+    "enterName": "Введіть ім'я",
+    "noBookmarkedWallets": "Немає гаманців в закладках",
+    "noConnectedWallets": "Немає підключених гаманців",
+    "noRecentWallets": "Немає недавніх гаманців"
+  }
+}
