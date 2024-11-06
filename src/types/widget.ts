@@ -1,15 +1,15 @@
-// Importaciones necesarias (eliminamos las del SDK de LiFi)
 import type {
-    // Components,
+    Components,
     PaletteMode,
     PaletteOptions,
-    // Theme,
+    Shape,
+    Theme,
   } from '@mui/material'
   import type { TypographyOptions } from '@mui/material/styles/createTypography.js'
   import type {
     CSSProperties,
     FC,
-    // MutableRefObject,
+    MutableRefObject,
     ReactNode,
     RefObject,
   } from 'react'
@@ -18,11 +18,11 @@ import type {
     MetaMaskParameters,
     WalletConnectParameters,
   } from 'wagmi/connectors'
-//   import type {
-//     LanguageKey,
-//     LanguageResources,
-//   } from '../providers/I18nProvider/types.js'
-//   import type { DefaultFieldValues } from '../stores/form/types.js'
+  import type {
+    LanguageKey,
+    LanguageResources,
+  } from '../providers/I18nProvider/types.js'
+  import type { DefaultFieldValues } from '../stores/form/types'
   
   // mocked lifi structures
   
@@ -67,7 +67,7 @@ import type {
     logoURI?: string;
   }
   
-  export type WidgetVariant = 'compact' | 'wide' | 'drawer'
+  export type WidgetVariant = 'compact' | 'drawer'
   export type WidgetSubvariant = 'default' | 'split' | 'custom' | 'refuel'
   export type SplitSubvariant = 'bridge' | 'swap'
   export type CustomSubvariant = 'checkout' | 'deposit'
@@ -81,25 +81,25 @@ import type {
     edge?: boolean
   }
   
-//   export type WidgetThemeComponents = Pick<
-//     Components<Theme>,
-//     | 'MuiAppBar'
-//     | 'MuiAvatar'
-//     | 'MuiButton'
-//     | 'MuiCard'
-//     | 'MuiIconButton'
-//     | 'MuiInputCard'
-//     | 'MuiTabs'
-//   >
+  export type WidgetThemeComponents = Pick<
+    Components<Theme>,
+    | 'MuiAppBar'
+    | 'MuiAvatar'
+    | 'MuiButton'
+    | 'MuiCard'
+    | 'MuiIconButton'
+    | 'MuiInput'
+    | 'MuiTabs'
+  >
   
   export type WidgetTheme = {
     palette?: Pick<
       PaletteOptions,
       'background' | 'grey' | 'primary' | 'secondary' | 'text'
     >
-    // shape?: Partial<Shape>
+    shape?: Partial<Shape>
     typography?: TypographyOptions
-    // components?: WidgetThemeComponents
+    components?: WidgetThemeComponents
     container?: CSSProperties
     header?: CSSProperties
     playground?: CSSProperties
@@ -187,21 +187,19 @@ import type {
     include?: Token[]
     popular?: StaticToken[]
   } & AllowDeny<Token>
-  
-//   export type WidgetLanguages = {
-//     default?: LanguageKey
-//   } & AllowDeny<LanguageKey>
+
+  export type WidgetLanguages = {
+    default?: LanguageKey
+  } & AllowDeny<LanguageKey>
   
   export interface WidgetConfig {
     fromChain?: number
-    toChain?: number
     fromToken?: string
-    toToken?: string
-    toAddress?: ToAddress
-    toAddresses?: ToAddress[]
-    fromAmount?: number | string
+    productId?: string
+    country?: string
     toAmount?: number | string
     formUpdateKey?: string
+  
     contractCalls?: ContractCall[]
     contractComponent?: ReactNode
     contractSecondaryComponent?: ReactNode
@@ -209,29 +207,39 @@ import type {
     contractTool?: WidgetContractTool
     integrator: string
     apiKey?: string
+    /**
+     * @deprecated Use `feeConfig` instead.
+     */
     fee?: number
     feeConfig?: WidgetFeeConfig
     referrer?: string
+  
     // routePriority?: Order
     slippage?: number
+  
     variant?: WidgetVariant
     subvariant?: WidgetSubvariant
     subvariantOptions?: SubvariantOptions
+  
     appearance?: Appearance
     theme?: WidgetTheme
+  
     disabledUI?: DisabledUIType[]
     hiddenUI?: HiddenUIType[]
     requiredUI?: RequiredUIType[]
     useRecommendedRoute?: boolean
+  
     walletConfig?: WidgetWalletConfig
+  
     buildUrl?: boolean
     keyPrefix?: string
+  
     bridges?: AllowDeny<string>
     exchanges?: AllowDeny<string>
     chains?: WidgetChains
     tokens?: WidgetTokens
-    // languages?: WidgetLanguages
-    // languageResources?: LanguageResources
+    languages?: WidgetLanguages
+    languageResources?: LanguageResources
     explorerUrls?: Record<number, string[]> &
       Partial<Record<'internal', string[]>>
   }
@@ -240,47 +248,49 @@ import type {
     setUrlSearchParam: boolean
   }
   
-//   export interface FieldValues
-//     extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount' | 'toAddress'> {
-//     fromAmount?: number | string
-//     toAmount?: number | string
-//     toAddress?: ToAddress | string
-//   }
+  export interface FieldValues
+    extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount' | 'toAddress'> {
+    fromAmount?: number | string
+    toAmount?: number | string
+    toAddress?: ToAddress | string
+  }
   
-//   export type FieldNames = keyof FieldValues
+  export type FieldNames = keyof FieldValues
   
-//   export type SetFieldValueFunction = <K extends FieldNames>(
-//     key: K,
-//     value: FieldValues[K],
-//     options?: FormFieldOptions
-//   ) => void
+  export type SetFieldValueFunction = <K extends FieldNames>(
+    key: K,
+    value: FieldValues[K],
+    options?: FormFieldOptions
+  ) => void
   
-//   export type FormState = {
-//     setFieldValue: SetFieldValueFunction
-//   }
+  export type FormState = {
+    setFieldValue: SetFieldValueFunction
+  }
   
-//   export type FormRef = MutableRefObject<FormState | null>
+  export type FormRef = MutableRefObject<FormState | null>
   
-//   export interface FormRefProps {
-//     formRef?: FormRef
-//   }
+  export interface FormRefProps {
+    formRef?: FormRef
+  }
   
-//   export interface WidgetConfigProps extends FormRefProps {
-//     config: WidgetConfig
-//   }
+  export interface WidgetConfigProps extends FormRefProps {
+    config: WidgetConfig
+  }
   
   export interface WidgetConfigPartialProps {
     config?: Partial<WidgetConfig>
   }
-  
+
   export type WidgetProps = WidgetDrawerProps &
-    WidgetConfig &
-    WidgetConfigPartialProps 
-    // FormRefProps
-  
+  WidgetConfig &
+  WidgetConfigPartialProps &
+  FormRefProps
+
   export interface WidgetDrawerProps extends WidgetConfigPartialProps {
     elementRef?: RefObject<HTMLDivElement>
     open?: boolean
+    /**
+     * Make sure to make the onClose callback stable (e.g. using useCallback) to avoid causing re-renders of the entire widget
+     */
     onClose?(): void
   }
-  

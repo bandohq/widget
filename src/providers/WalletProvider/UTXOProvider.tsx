@@ -1,17 +1,15 @@
 import { BigmiContext } from "@bigmi/react";
-import { ChainTypeCustom } from "../WidgetProvider/types";
 import { type FC, type PropsWithChildren, useContext } from "react";
-import { isItemAllowed } from "../../utils/item";
-import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
-import { UTXOBaseProvider } from "./UTXOBaseProvider";
-import { UTXOExternalContext } from "./UTXOExternalContext";
+import { isItemAllowed } from "../../utils/item.js";
+import { UTXOBaseProvider } from "./UTXOBaseProvider.js";
+import { UTXOExternalContext } from "./UTXOExternalContext.js";
+import { ChainTypeCustom } from "../WidgetProvider/types.js";
 
-export const useInBigmiContext = (): boolean => {
-  const { chains } = useWidgetConfig();
+export function useInBigmiContext(): boolean {
   const context = useContext(BigmiContext);
 
-  return Boolean(context) && isItemAllowed(ChainTypeCustom.UTXO, chains?.types);
-};
+  return Boolean(context) && isItemAllowed(ChainTypeCustom.UTXO);
+}
 
 export const UTXOProvider: FC<PropsWithChildren> = ({ children }) => {
   const inBigmiContext = useInBigmiContext();
