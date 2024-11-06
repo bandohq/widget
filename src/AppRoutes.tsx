@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
 import { NotFound } from "./components/NotFound";
 // import { ActiveTransactionsPage } from "./pages/ActiveTransactionsPage/ActiveTransactionsPage.js";
-// import { LanguagesPage } from "./pages/LanguagesPage.js";
+import { LanguagesPage } from "./pages/LanguagesPage";
 import { MainPage } from "./pages/MainPage/MainPage.js";
 // import { RoutesPage } from "./pages/RoutesPage/RoutesPage.js";
 // import { SelectChainPage } from "./pages/SelectChainPage/SelectChainPage.js";
@@ -32,10 +32,10 @@ const routes: RouteObject[] = [
   //   path: `${navigationRoutes.settings}/${navigationRoutes.exchanges}`,
   //   element: <SelectEnabledToolsPage type="Exchanges" />,
   // },
-  // {
-  //   path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
-  //   element: <LanguagesPage />,
-  // },
+  {
+    path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
+    element: <LanguagesPage />,
+  },
   // {
   //   path: navigationRoutes.fromToken,
   //   element: <SelectTokenPage formType="from" />,
