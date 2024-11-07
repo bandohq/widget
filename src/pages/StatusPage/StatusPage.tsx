@@ -5,10 +5,11 @@ import { HiddenUI } from "../../types/widget";
 import { ErrorView } from "./ErrorView";
 import { PendingView } from "./PendingView";
 import { StatusPageContainer } from "./StatusPage.style";
+import { SuccessView } from "./SuccessView";
 
 export const StatusPage = () => {
   const { hiddenUI } = useWidgetConfig();
-  const status = "failed";
+  const status: "pending" | "success" | "failed" = "success";
 
   const renderStatusView = () => {
     switch (status) {
@@ -17,7 +18,7 @@ export const StatusPage = () => {
       case "failed":
         return <ErrorView />;
       case "success":
-        return null;
+        return <SuccessView />;
       default:
         return null;
     }

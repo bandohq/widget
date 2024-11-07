@@ -8,6 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 
+interface IconWrapperProps extends BoxProps {
+  bgColor?: string;
+}
+
+interface TypographyProps extends BoxProps {
+  fontSize?: string;
+}
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -28,23 +36,23 @@ export const StatusPageContainer = styled(Box)(() => ({
   alignItems: "center",
 }));
 
-export const StatusTitle = styled(Typography)(() => ({
-  fontSize: "32px",
-  fontWeight: 500,
-  textAlign: "center",
-  margin: "10px 0",
-}));
+export const StatusTitle = styled(Typography)<TypographyProps>(
+  ({ fontSize }) => ({
+    fontSize: fontSize || "32px",
+    fontWeight: 500,
+    textAlign: "center",
+    margin: "10px 0",
+  })
+);
 
-export const StatusSubtitle = styled(Typography)(() => ({
-  fontSize: "24px",
-  fontWeight: 200,
-  textAlign: "center",
-  margin: "0",
-}));
-
-interface IconWrapperProps extends BoxProps {
-  bgColor?: string;
-}
+export const StatusSubtitle = styled(Typography)<TypographyProps>(
+  ({ fontSize }) => ({
+    fontSize: fontSize || "24px",
+    fontWeight: 200,
+    textAlign: "center",
+    margin: "0",
+  })
+);
 
 export const IconWrapper = styled(Box)<IconWrapperProps>(({ bgColor }) => ({
   display: "flex",
@@ -69,4 +77,19 @@ export const CustomAccordion = styled(Accordion)(({ theme }) => ({
 export const CustomAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
   width: "70%",
   margin: "0 auto",
+}));
+
+export const ProductBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  height: "100%",
+  width: "100%",
+  margin: "20px 0",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "10px",
+  borderRadius: "10px",
+  border: "1px solid",
+  borderColor: theme.palette.grey[300],
 }));
