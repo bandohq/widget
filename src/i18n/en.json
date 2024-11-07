@@ -13,6 +13,8 @@
     "bookmark": "Bookmark",
     "bookmarks": "Bookmarks",
     "bridge": "Bridge",
+    "backToOrder": "Back to your order",
+    "discover": "Discover more",
     "bridgeReview": "Review bridge",
     "buy": "Buy",
     "cancel": "Cancel",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "We've tried to complete the transaction, but {{tool}} couldn't proceed due to either slippage settings or lack of liquidity for the {{tokenSymbol}} token.",
-      "exchangeSuccessful": "There are now {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} in {{walletAddress}} wallet on {{chainName}} chain.",
-      "checkoutSuccessful": "You now own {{assetName}} in {{walletAddress}} wallet on {{chainName}} chain."
+      "mailNotification": "A confirmation email has been sent."
     },
     "title": {
-      "bridgePartiallySuccessful": "Bridge partially successful",
-      "bridgeSuccessful": "Bridge successful",
-      "depositSuccessful": "Deposit successful",
-      "checkoutSuccessful": "Purchase successful",
-      "refundIssued": "Refund issued",
-      "swapPartiallySuccessful": "Swap partially successful",
-      "swapSuccessful": "Swap successful"
+      "orderCompleted": "Order Completed",
+      "thanks": "Thank you for your purchase.",
+      "orderDetails": "Order details"
+    }
+  },
+  "pending": {
+    "title": {
+      "procesing": "Processing your order",
+      "wait": "Please wait, this may take a few minutes."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "Wallet address or domain name is invalid for selected destination chain {{chainName}}",
       "walletAddressRequired": "Wallet address is required.",
       "walletChainTypeInvalid": "Wallet address doesn't match the selected destination chain {{chainName}}",
-      "walletMismatch": "Wallet address mismatch"
+      "walletMismatch": "Wallet address mismatch",
+      "orderFailed": "Oh... There was a problem",
+      "retry": "Please, try again later."
     }
   },
   "tooltip": {

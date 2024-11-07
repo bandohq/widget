@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "স্বয়ংক্রিয়",
+    "backToOrder": "আপনার অর্ডারে ফিরে যান",
+    "discover": "আরও আবিষ্কার করুন",
     "bookmark": "",
     "bookmarks": "",
     "bridge": "",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "",
-      "checkoutSuccessful": ""
+      "mailNotification": "একটি নিশ্চিতকরণ ইমেইল পাঠানো হয়েছে।"
     },
     "title": {
-      "bridgePartiallySuccessful": "",
-      "bridgeSuccessful": "",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "রিফান্ড জারি করা হয়েছে",
-      "swapPartiallySuccessful": "সোওয়াপ আংশিকভাবে সফল",
-      "swapSuccessful": "সোওয়াপ সফল"
+      "orderCompleted": "অর্ডার সম্পন্ন হয়েছে",
+      "thanks": "আপনার ক্রয়ের জন্য ধন্যবাদ।",
+      "orderDetails": "অর্ডারের বিস্তারিত"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "আপনার অর্ডার প্রসেস হচ্ছে",
+      "wait": "এর জন্য কয়েক মিনিট সময় লাগতে পারে।"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "",
       "walletAddressRequired": "ওয়ালেট ঠিকানা প্রয়োজন।",
       "walletChainTypeInvalid": "",
-      "walletMismatch": ""
+      "walletMismatch": "",
+      "orderFailed": "ওহ... একটি সমস্যা হয়েছে",
+      "retry": "অনুগ্রহ করে পরে আবার চেষ্টা করুন।"
     }
   },
   "tooltip": {

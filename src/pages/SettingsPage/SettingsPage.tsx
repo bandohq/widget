@@ -6,10 +6,21 @@ import { ResetSettingsButton } from "./ResetSettingsButton";
 import { SettingsList } from "./SettingsCard/SettingCard.style";
 import { SettingsCardAccordion } from "./SettingsCard/SettingsAccordian";
 import { ThemeSettings } from "./ThemeSettings";
+import { CardButton } from "../../components/Card/CardButton";
+import { useNavigate } from "react-router-dom";
+import { navigationRoutes } from "../../utils/navigationRoutes";
+import { Language } from "@mui/icons-material";
+import { CardValue } from "../../components/Card/CardButton.style";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
   useHeader(t("header.settings"));
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/${navigationRoutes.status}`);
+  };
 
   return (
     <PageContainer bottomGutters>
@@ -17,6 +28,13 @@ export const SettingsPage = () => {
         <SettingsCardAccordion>
           <ThemeSettings />
           <LanguageSetting />
+          <CardButton
+            onClick={handleClick}
+            icon={<Language />}
+            title={"Status"}
+          >
+            <CardValue>page</CardValue>
+          </CardButton>
         </SettingsCardAccordion>
       </SettingsList>
       <ResetSettingsButton />

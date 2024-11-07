@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Otomatis",
+    "backToOrder": "Kembali ke pesanan Anda",
+    "discover": "Temukan lebih banyak",
     "bookmark": "Bookmark",
     "bookmarks": "Penanda",
     "bridge": "Bridge",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "Kami sudah mencoba menyelesaikan transaksi, tapi {{tool}} tidak dapat melanjutkan karena pengaturan slippage atau kurangnya likuiditas untuk token {{tokenSymbol}}.",
-      "exchangeSuccessful": "Sekarang ada {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} di dompet {{walletAddress}} pada jaringan {{chainName}}.",
-      "checkoutSuccessful": ""
+      "mailNotification": "Email konfirmasi telah dikirim."
     },
     "title": {
-      "bridgePartiallySuccessful": "Bridge sebagian berhasil",
-      "bridgeSuccessful": "Bridge berhasil",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "Pengembalian dana diterbitkan",
-      "swapPartiallySuccessful": "Swap sebagian berhasil",
-      "swapSuccessful": "Swap berhasil"
+      "orderCompleted": "Pesanan selesai",
+      "thank": "Terima kasih atas pembelian Anda.",
+      "orderDetails": "Detail pesanan"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "आपका ऑर्डर संसाधित हो रहा है",
+      "wait": "इसमें कुछ मिनट लग सकते हैं।"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "Alamat dompet atau nama domain tidak valid untuk jaringan tujuan yang dipilih {{chainName}}",
       "walletAddressRequired": "Alamat dompet diperlukan.",
       "walletChainTypeInvalid": "Alamat dompet tidak cocok dengan jaringan tujuan yang dipilih {{chainName}}",
-      "walletMismatch": "Alamat dompet tidak cocok"
+      "walletMismatch": "Alamat dompet tidak cocok",
+      "orderFailed": "Oh... Terjadi masalah",
+      "retry": "Silakan coba lagi nanti."
     }
   },
   "tooltip": {

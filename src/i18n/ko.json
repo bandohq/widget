@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "자동",
+    "backToOrder": "주문으로 돌아가기",
+    "discover": "더 알아보기",
     "bookmark": "",
     "bookmarks": "",
     "bridge": "브릿지",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "{{walletAddress}} 지갑의 {{chainName}} 체인에 {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}}이(가) 있습니다.",
-      "checkoutSuccessful": ""
+      "mailNotification": "확인 이메일이 발송되었습니다."
     },
     "title": {
-      "bridgePartiallySuccessful": "부분 스왑 성공",
-      "bridgeSuccessful": "브릿지 성공",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "환불되었습니다",
-      "swapPartiallySuccessful": "부분 스왑 성공",
-      "swapSuccessful": "스왑 성공"
+      "orderCompleted": "주문 완료",
+      "thanks": "구매해 주셔서 감사합니다.",
+      "orderDetails": "주문 세부 정보"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "주문을 처리 중입니다",
+      "wait": "몇 분 정도 걸릴 수 있습니다."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "",
       "walletAddressRequired": "지갑 주소가 필요합니다.",
       "walletChainTypeInvalid": "",
-      "walletMismatch": ""
+      "walletMismatch": "",
+      "orderFailed": "오... 문제가 발생했습니다",
+      "retry": "나중에 다시 시도해 주세요."
     }
   },
   "tooltip": {

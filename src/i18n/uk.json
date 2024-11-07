@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Авто",
+    "backToOrder": "Повернутися до вашого замовлення",
+    "discover": "Відкрити більше",
     "bookmark": "Додати в закладки",
     "bookmarks": "Закладки",
     "bridge": "Бридж",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "Ми намагалися завершити транзакцію, але {{tool}} не зміг продовжити через налаштування прослизання або відсутність ліквідності для {{tokenSymbol}} токена.",
-      "exchangeSuccessful": "Зараз є {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} у гаманці {{walletAddress}} на чейні {{chainName}}.",
-      "checkoutSuccessful": "Тепер ви маєте {{assetName}} в гаманці {{walletAddress}} на {{chainName}} чейні."
+      "mailNotification": "Лист із підтвердженням було надіслано."
     },
     "title": {
-      "bridgePartiallySuccessful": "Бридж частково успішний",
-      "bridgeSuccessful": "Бридж успішний",
-      "depositSuccessful": "Деопзит успішний",
-      "checkoutSuccessful": "Покупка успішна",
-      "refundIssued": "Здійснено повернення коштів",
-      "swapPartiallySuccessful": "Своп частково успішний",
-      "swapSuccessful": "Своп успішний"
+      "orderCompleted": "Замовлення завершено",
+      "thanks": "Дякуємо за вашу покупку.",
+      "orderDetails": "Деталі замовлення"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Обробка вашого замовлення",
+      "wait": "Це може зайняти кілька хвилин."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "Адреса гаманця не відповідає обраному чейну призначення - {{chainName}}",
       "walletAddressRequired": "Необхідно вказати адресу гаманця.",
       "walletChainTypeInvalid": "Адреса гаманця не відповідає обраному чейну призначення - {{chainName}}",
-      "walletMismatch": "Невідповідність адреси гаманця"
+      "walletMismatch": "Невідповідність адреси гаманця",
+      "orderFailed": "Ой... Виникла проблема",
+      "retry": "Будь ласка, спробуйте ще раз пізніше."
     }
   },
   "tooltip": {

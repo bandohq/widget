@@ -22,6 +22,11 @@ import type { WidgetTheme } from '../types/widget.js'
 import { palette, paletteDark, paletteLight } from './palettes.js'
 import type {} from './types.js'
 import { getStyleOverrides } from './utils.js'
+import '@fontsource/kanit';
+import '@fontsource/kanit/200.css'; // weight 200
+import '@fontsource/kanit/300.css'; // weight 300
+import '@fontsource/kanit/500.css'; // weight 500
+import '@fontsource/kanit/700.css'; // weight 700
 
 const shape: Shape = {
   borderRadius: 12,
@@ -71,7 +76,7 @@ export const createTheme = (
       ...widgetTheme.navigation,
     },
     typography: {
-      fontFamily: 'Inter var, Inter, sans-serif',
+      fontFamily: 'Kanit, Arial, sans-serif',
       ...widgetTheme.typography,
     },
     palette: {

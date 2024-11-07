@@ -14,6 +14,7 @@ import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 // import { TransactionHistoryPage } from "./pages/TransactionHistoryPage/TransactionHistoryPage.js";
 // import { TransactionPage } from "./pages/TransactionPage/TransactionPage.js"
 import { navigationRoutes } from "./utils/navigationRoutes";
+import { StatusPage } from "./pages/StatusPage/StatusPage";
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +24,10 @@ const routes: RouteObject[] = [
   {
     path: navigationRoutes.settings,
     element: <SettingsPage />,
+  },
+  {
+    path: navigationRoutes.status,
+    element: <StatusPage />,
   },
   // {
   //   path: `${navigationRoutes.settings}/${navigationRoutes.bridges}`,

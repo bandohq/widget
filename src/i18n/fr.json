@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Auto",
+    "backToOrder": "Retour à votre commande",
+    "discover": "Découvrir plus",
     "bookmark": "Favori",
     "bookmarks": "Favoris",
     "bridge": "Bridge",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "Il y a maintenant {{amount, number(maximumFractionDigits: 4)}} {{tokenSymbol}} dans le portefeuille {{walletAddress}} sur la chaîne {{chainName}}.",
-      "checkoutSuccessful": ""
+      "mailNotification": "Un e-mail de confirmation a été envoyé."
     },
     "title": {
-      "bridgePartiallySuccessful": "Pont partiellement réussi",
-      "bridgeSuccessful": "Pont réussi",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "Remboursement émis",
-      "swapPartiallySuccessful": "Échange partiellement réussi",
-      "swapSuccessful": "Échange réussi"
+      "orderCompleted": "Commande terminée",
+      "thank": "Merci pour votre achat.",
+      "orderDetails": "Détails de la commande"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Traitement de votre commande",
+      "wait": "Cela peut prendre quelques minutes."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "L'adresse du portefeuille ou le nom de domaine est invalide pour la chaîne de destination sélectionnée {{chainName}}",
       "walletAddressRequired": "L'adresse du portefeuille est nécessaire.",
       "walletChainTypeInvalid": "L'adresse du portefeuille ne correspond pas à la chaîne de destination sélectionnée - {{chainName}}",
-      "walletMismatch": "Incompatibilité de l'adresse du portefeuille"
+      "walletMismatch": "Incompatibilité de l'adresse du portefeuille",
+      "orderFailed": "Oh... Un problème est survenu",
+      "retry": "Veuillez réessayer plus tard."
     }
   },
   "tooltip": {

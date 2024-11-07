@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Tự động",
+    "backToOrder": "Quay lại đơn hàng của bạn",
+    "discover": "Khám phá thêm",
     "bookmark": "Đánh dấu",
     "bookmarks": "Dấu trang",
     "bridge": "Cầu",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "Hiện tại {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} trong ví {{walletAddress}} tại {{chainName}} chain.",
-      "checkoutSuccessful": ""
+      "mailNotification": "Email xác nhận đã được gửi."
     },
     "title": {
-      "bridgePartiallySuccessful": "Swap thành công một phần",
-      "bridgeSuccessful": "Bridge thành công",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "Đã Refund",
-      "swapPartiallySuccessful": "Swap thành công một phần",
-      "swapSuccessful": "Swap thành công"
+      "orderCompleted": "Đơn hàng hoàn tất",
+      "thanks": "Cảm ơn bạn đã mua hàng.",
+      "orderDetails": "Chi tiết đơn hàng"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Đang xử lý đơn hàng của bạn",
+      "wait": "Điều này có thể mất vài phút."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "Địa chỉ ví hoặc tên miền không hợp lệ đối với chuỗi đích đã chọn {{chainName}}",
       "walletAddressRequired": "Yêu cầu địa chỉ ví.",
       "walletChainTypeInvalid": "Địa chỉ ví không khớp với chuỗi đích đã chọn {{chainName}}",
-      "walletMismatch": "Địa chỉ ví không khớp"
+      "walletMismatch": "Địa chỉ ví không khớp",
+      "orderFailed": "Oh... Đã xảy ra sự cố",
+      "retry": "Vui lòng thử lại sau."
     }
   },
   "tooltip": {
