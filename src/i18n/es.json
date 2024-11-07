@@ -10,6 +10,7 @@
   },
   "button": {
     "auto": "Auto",
+    "backToOrder": "Volver al pedido",
     "bookmark": "Favorito",
     "bookmarks": "Favoritos",
     "bridge": "Puente",
@@ -29,6 +30,7 @@
     "deposit": "",
     "depositReview": "",
     "disconnect": "Desconectar",
+    "discover": "Descubrir más",
     "done": "Hecho",
     "exchange": "Intercambio",
     "getGas": "Obtener gas",
@@ -100,19 +102,20 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "Hemos intentado completar la transacción, pero {{tool}} no pudo proceder debido a la configuración del deslizamiento o a la falta de liquidez del token {{tokenSymbol}}.",
-      "exchangeSuccessful": "Ahora hay {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} en la billetera {{walletAddress}} en la cadena {{chainName}}.",
-      "checkoutSuccessful": ""
+      "mailNotification": "Hemos enviado un correo de confirmación a tu email."
     },
     "title": {
-      "bridgePartiallySuccessful": "Puente parcialmente exitoso",
-      "bridgeSuccessful": "Puente exitoso",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "Reembolso emitido",
-      "swapPartiallySuccessful": "Swap parcialmente exitoso",
-      "swapSuccessful": "Intercambio exitoso"
+      "orderCompleted": "Orden completada",
+      "thanks": "Gracias por la compra.",
+      "orderDetails": "Detalles de la orden"
     }
+  },
+  "pending": {
+    "title": {
+      "procesing": "Procesando tu orden",
+      "wait": "Este proceso tomará algunos minutos."
+    }
+    
   },
   "warning": {
     "message": {
@@ -174,7 +177,9 @@
       "walletAddressInvalid_chain": "La dirección de la billetera o nombre de dominio no es válida para la cadena de destino seleccionada {{chainName}}",
       "walletAddressRequired": "Dirección de billetera es requerida.",
       "walletChainTypeInvalid": "La dirección de la billetera no coincide con la cadena de destino seleccionada {{chainName}}",
-      "walletMismatch": "La dirección de la billetera no coincide"
+      "walletMismatch": "La dirección de la billetera no coincide",
+      "orderFailed": "Oh... Hubo un problema",
+      "retry": "Por favor inténtalo de nuevo"
     }
   },
   "tooltip": {

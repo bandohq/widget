@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Otomatik",
+    "backToOrder": "Siparişinize geri dönün",
+    "discover": "Daha fazlasını keşfedin",
     "bookmark": "Yer İşareti",
     "bookmarks": "Yer işaretleri",
     "bridge": "Gönder",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "İşlemi tamamlamaya çalıştık, ancak {{tool}}, slipaj ayarları veya {{tokenSymbol}} tokeninin likidite eksikliği nedeniyle devam edemedi.",
-      "exchangeSuccessful": "Şu anda {{chainName}} ağındaki {{walletAddress}} adresinde {{amount, number(maximumFractionDigits: 9)}} adet {{tokenSymbol}} bulunmaktadır.",
-      "checkoutSuccessful": "Şu anda {{chainName}} ağı {{walletAddress}} adresinde {{assetName}} bulunmaktadır."
+      "mailNotification": "Bir onay e-postası gönderildi."
     },
     "title": {
-      "bridgePartiallySuccessful": "Köprü işlemi kısmen başarılı",
-      "bridgeSuccessful": "İşlem başarılı",
-      "depositSuccessful": "Yatırma başarılı",
-      "checkoutSuccessful": "Satın alma başarılı",
-      "refundIssued": "Geri ödeme yapıldı",
-      "swapPartiallySuccessful": "Takas işlemi kısmen başarılı",
-      "swapSuccessful": "Takas başarılı"
+      "orderCompleted": "Sipariş tamamlandı",
+      "thanks": "Satın aldığınız için teşekkür ederiz.",
+      "orderDetails": "Sipariş detayları"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Siparişiniz işleniyor",
+      "wait": "Bu birkaç dakika sürebilir."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "Cüzdan adresi ya da domain adı {{chainName}} hedef ağında geçerli değil",
       "walletAddressRequired": "Cüzdan adresi gereklidir.",
       "walletChainTypeInvalid": "Cüzdan adresi ile {{chainName}} hedef ağ eşleşmiyor",
-      "walletMismatch": "Cüzdan adresi uyuşmazlığı"
+      "walletMismatch": "Cüzdan adresi uyuşmazlığı",
+      "orderFailed": "Oh... Bir sorun oluştu",
+      "retry": "Lütfen daha sonra tekrar deneyin."
     }
   },
   "tooltip": {

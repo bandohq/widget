@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "OSに同期",
+    "backToOrder": "注文に戻る",
+    "discover": "さらに発見する",
     "bookmark": "ブックマーク",
     "bookmarks": "ブックマーク",
     "bridge": "ブリッジ",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "現在、ウォレット {{walletAddress}} に {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} （{{chainName}} チェーン）あります",
-      "checkoutSuccessful": ""
+      "mailNotification": "確認メールが送信されました。"
     },
     "title": {
-      "bridgePartiallySuccessful": "ブリッジは部分的に成功しました",
-      "bridgeSuccessful": "ブリッジ成功",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "払い戻しが発行されました",
-      "swapPartiallySuccessful": "スワップは部分的に成功しました",
-      "swapSuccessful": "スワップ成功"
+      "orderCompleted": "注文完了",
+      "thank": "ご購入ありがとうございます。",
+      "orderDetails": "注文の詳細"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "注文を処理しています",
+      "wait": "数分かかる場合があります。"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "選択された宛先チェーン {{chainName}} のウォレットアドレスまたはドメイン名が無効です",
       "walletAddressRequired": "ウォレットアドレスは必須項目です。",
       "walletChainTypeInvalid": "選択された宛先チェーン {{chainName}} のウォレットアドレスが一致しません",
-      "walletMismatch": "ウォレットアドレスが一致しません"
+      "walletMismatch": "ウォレットアドレスが一致しません",
+      "orderFailed": "おっと…問題が発生しました",
+      "retry": "後でもう一度お試しください。"
     }
   },
   "tooltip": {

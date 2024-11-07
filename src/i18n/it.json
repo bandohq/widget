@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Auto",
+    "backToOrder": "Torna al tuo ordine",
+    "discover": "Scopri di più",
     "bookmark": "",
     "bookmarks": "",
     "bridge": "Bridge",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "Sono presenti ora {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} nel portafoglio {{walletAddress}} sulla chain {{chainName}}.",
-      "checkoutSuccessful": ""
+      "mailNotification": "Una email di conferma è stata inviata."
     },
     "title": {
-      "bridgePartiallySuccessful": "Bridge parzialmente completato con successo",
-      "bridgeSuccessful": "Bridge avvenuto con successo",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "Rimborso inviato",
-      "swapPartiallySuccessful": "Scambio parzialmente completato con successo",
-      "swapSuccessful": "Scambio completato con successo"
+      "orderCompleted": "Ordine completato",
+      "thank": "Grazie per il tuo acquisto.",
+      "orderDetails": "Dettagli dell'ordine"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Elaborazione del tuo ordine",
+      "wait": "Questo potrebbe richiedere alcuni minuti."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "",
       "walletAddressRequired": "L'indirizzo è un campo obbligatorio.",
       "walletChainTypeInvalid": "",
-      "walletMismatch": ""
+      "walletMismatch": "",
+      "orderFailed": "Oh... Si è verificato un problema",
+      "retry": "Per favore, riprova più tardi."
     }
   },
   "tooltip": {

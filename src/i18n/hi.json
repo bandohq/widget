@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "स्वतः",
+    "backToOrder": "अपने ऑर्डर पर वापस जाएं",
+    "discover": "और अधिक खोजें",
     "bookmark": "",
     "bookmarks": "",
     "bridge": "",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "",
-      "checkoutSuccessful": ""
+      "mailNotification": "एक पुष्टि ईमेल भेजा गया है।"
     },
     "title": {
-      "bridgePartiallySuccessful": "",
-      "bridgeSuccessful": "",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "",
-      "swapPartiallySuccessful": "",
-      "swapSuccessful": ""
+      "orderCompleted": "ऑर्डर पूरा हुआ",
+      "thank": "आपकी खरीदारी के लिए धन्यवाद।",
+      "orderDetails": "ऑर्डर विवरण"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "आपका ऑर्डर संसाधित हो रहा है",
+      "wait": "इसमें कुछ मिनट लग सकते हैं।"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "",
       "walletAddressRequired": "",
       "walletChainTypeInvalid": "",
-      "walletMismatch": ""
+      "walletMismatch": "",
+      "orderFailed": "ओह... एक समस्या हुई है",
+      "retry": "कृपया बाद में पुनः प्रयास करें।"
     }
   },
   "tooltip": {

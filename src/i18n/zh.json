@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "自动",
+    "backToOrder": "返回您的订单",
+    "discover": "发现更多",
     "bookmark": "收藏",
     "bookmarks": "收藏夹",
     "bridge": "跨链",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "{{walletAddress}} 钱包在 {{chainName}} 链上收到 {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}}",
-      "checkoutSuccessful": ""
+      "mailNotification": "确认邮件已发送。"
     },
     "title": {
-      "bridgePartiallySuccessful": "跨链部分成功",
-      "bridgeSuccessful": "跨链成功",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "退款已受理",
-      "swapPartiallySuccessful": "兑换部分完成",
-      "swapSuccessful": "兑换成功"
+      "orderCompleted": "订单已完成",
+      "thanks": "感谢您的购买。",
+      "orderDetails": "订单详情"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "正在处理您的订单",
+      "wait": "这可能需要几分钟。"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "钱包地址或者域名在所选中的 {{chainName}} 链无效",
       "walletAddressRequired": "请输入钱包地址。",
       "walletChainTypeInvalid": "钱包地址与所选中目标的 {{chainName}} 链不匹配",
-      "walletMismatch": ""
+      "walletMismatch": "",
+      "orderFailed": "哦... 出现了问题",
+      "retry": "请稍后再试。"
     }
   },
   "tooltip": {

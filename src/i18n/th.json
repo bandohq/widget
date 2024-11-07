@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "อัตโนมัติ",
+    "backToOrder": "กลับไปที่คำสั่งซื้อของคุณ",
+    "discover": "ค้นพบเพิ่มเติม",
     "bookmark": "บุ๊คมาร์ก",
     "bookmarks": "บุ๊กมาร์ก",
     "bridge": "บริดจ์",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "",
-      "exchangeSuccessful": "ตอนนี้มี {{amount, number(maximumFractionDigits: 9)}}{{tokenSymbol}} ใน {{walletAddress}} กระเป๋าบน {{chainName}} เชน.",
-      "checkoutSuccessful": ""
+      "mailNotification": "อีเมลยืนยันได้ถูกส่งแล้ว"
     },
     "title": {
-      "bridgePartiallySuccessful": "แลกเปลี่ยนสำเร็จบางส่วน",
-      "bridgeSuccessful": "บริดจ์สำเร็จ",
-      "depositSuccessful": "",
-      "checkoutSuccessful": "",
-      "refundIssued": "คืนเงินแล้ว",
-      "swapPartiallySuccessful": "แลกเปลี่ยนสำเร็จบางส่วน",
-      "swapSuccessful": "แลกเปลี่ยนสำเร็จ"
+      "orderCompleted": "คำสั่งซื้อเสร็จสมบูรณ์",
+      "thanks": "ขอบคุณสำหรับการสั่งซื้อของคุณ",
+      "orderDetails": "รายละเอียดคำสั่งซื้อ"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "กำลังดำเนินการคำสั่งซื้อของคุณ",
+      "wait": "กระบวนการนี้อาจใช้เวลาสองสามนาที"
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "ที่อยู่กระเป๋าเงินหรือชื่อโดเมนไม่ถูกต้องสำหรับเครือข่ายปลายทางที่เลือก {{chainName}}",
       "walletAddressRequired": "กรุณากรอกที่อยู่กระเป๋าเงิน.",
       "walletChainTypeInvalid": "ที่อยู่กระเป๋าเงินหรือชื่อโดเมนไม่ถูกต้องสำหรับเครือข่ายปลายทางที่เลือก {{chainName}}",
-      "walletMismatch": "ที่อยู่ของกระเป๋าเงินไม่ตรงกัน"
+      "walletMismatch": "ที่อยู่ของกระเป๋าเงินไม่ตรงกัน",
+      "orderFailed": "โอ้... เกิดปัญหาขึ้น",
+      "retry": "โปรดลองอีกครั้งในภายหลัง"
     }
   },
   "tooltip": {

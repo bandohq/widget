@@ -10,6 +10,8 @@
   },
   "button": {
     "auto": "Automático",
+    "backToOrder": "Voltar ao seu pedido",
+    "discover": "Descubra mais",
     "bookmark": "Favorito",
     "bookmarks": "Favoritos",
     "bridge": "Ponte",
@@ -100,18 +102,18 @@
   },
   "success": {
     "message": {
-      "exchangePartiallySuccessful": "Tentamos completar a transação, mas {{tool}} não conseguimos prosseguir devido a configurações de diferença no valor ou falta de liquidez para o token {{tokenSymbol}}.",
-      "exchangeSuccessful": "Agora há {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} na carteira {{walletAddress}} na rede {{chainName}}.",
-      "checkoutSuccessful": "Agora você possui {{assetName}} na carteira {{walletAddress}} na cadeia {{chainName}}."
+      "mailNotification": "Um e-mail de confirmação foi enviado."
     },
     "title": {
-      "bridgePartiallySuccessful": "Ponte parcialmente concluída",
-      "bridgeSuccessful": "Ponte bem sucedida",
-      "depositSuccessful": "Depósito realizado com sucesso",
-      "checkoutSuccessful": "Compra efetuada com sucesso",
-      "refundIssued": "Reembolso emitido",
-      "swapPartiallySuccessful": "Conversão parcialmente bem sucedida",
-      "swapSuccessful": "Conversão bem sucedida"
+      "orderCompleted": "Pedido concluído",
+      "thanks": "Obrigado pela sua compra.",
+      "orderDetails": "Detalhes do pedido"
+    }
+  },
+  "pending": {
+    "title": {
+      "processing": "Processando seu pedido",
+      "wait": "Isso pode levar alguns minutos."
     }
   },
   "warning": {
@@ -174,7 +176,9 @@
       "walletAddressInvalid_chain": "O endereço da carteira ou o nome de domínio é inválido para a rede de destino selecionada {{chainName}}",
       "walletAddressRequired": "Endereço da carteira é necessário.",
       "walletChainTypeInvalid": "O endereço da carteira não corresponde à rede de destino selecionada - {{chainName}}",
-      "walletMismatch": "Incompatibilidade de endereço da carteira"
+      "walletMismatch": "Incompatibilidade de endereço da carteira",
+      "orderFailed": "Oh... Ocorreu um problema",
+      "retry": "Por favor, tente novamente mais tarde."
     }
   },
   "tooltip": {
