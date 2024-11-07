@@ -75,7 +75,6 @@ export const CustomAccordion = styled(Accordion)(({ theme }) => ({
 }));
 
 export const CustomAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
-  width: "70%",
   margin: "0 auto",
 }));
 
