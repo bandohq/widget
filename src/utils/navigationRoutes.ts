@@ -1,6 +1,7 @@
 export const navigationRoutes = {
     home: '/',
     activeTransactions: 'active-transactions',
+    status: 'status',
     bridges: 'bridges',
     exchanges: 'exchanges',
     fromChain: 'from-chain',
