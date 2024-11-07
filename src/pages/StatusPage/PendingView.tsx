@@ -1,10 +1,17 @@
-import { CircularProgress } from "@mui/material";
-import { StatusSubtitle, StatusTitle } from "./StatusPage.style";
+import { palette } from "../../themes/palettes";
+import {
+  AnimatedCircularProgress,
+  StatusSubtitle,
+  StatusTitle,
+} from "./StatusPage.style";
+import { SpinnerGap } from "@phosphor-icons/react";
 
 export const PendingView = () => {
   return (
     <>
-      <CircularProgress color="primary" size={50} />
+      <AnimatedCircularProgress>
+        <SpinnerGap size={50} color={palette.primary.main} />
+      </AnimatedCircularProgress>
       <StatusTitle style={{ margin: "10px 0" }}>
         Processing your order
       </StatusTitle>

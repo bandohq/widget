@@ -3,9 +3,24 @@ import {
   AccordionSummary,
   Box,
   BoxProps,
+  keyframes,
   styled,
   Typography,
 } from "@mui/material";
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const AnimatedCircularProgress = styled(Box)(() => ({
+  display: "inline-block",
+  animation: `${rotate} 2s linear infinite`,
+}));
 
 export const StatusPageContainer = styled(Box)(() => ({
   display: "flex",
@@ -31,18 +46,16 @@ interface IconWrapperProps extends BoxProps {
   bgColor?: string;
 }
 
-export const IconWrapper = styled(Box)<IconWrapperProps>(
-  ({ theme, bgColor }) => ({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: "20px",
-    borderRadius: "100%",
-    width: "70px",
-    height: "70px",
-    backgroundColor: bgColor || theme.palette.background.default,
-  })
-);
+export const IconWrapper = styled(Box)<IconWrapperProps>(({ bgColor }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: "20px",
+  borderRadius: "100%",
+  width: "70px",
+  height: "70px",
+  backgroundColor: bgColor || "transparent",
+}));
 
 export const CustomAccordion = styled(Accordion)(({ theme }) => ({
   border: "none",
