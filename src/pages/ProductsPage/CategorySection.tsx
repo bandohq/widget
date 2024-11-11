@@ -6,7 +6,10 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 export const CategorySection = ({ category }) => {
   return (
     <div>
-      <Typography variant="h4" sx={{ fontSize: "21px", fontWeight: 200 }}>
+      <Typography
+        variant="h4"
+        sx={{ fontSize: "21px", fontWeight: 200, marginBottom: 2 }}
+      >
         {category.name}
       </Typography>
       <ProductsGrid>

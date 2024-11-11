@@ -2,10 +2,11 @@ import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useFetch } from "../../hooks/useFetch";
 import { CategorySection } from "./CategorySection";
+import { Skeleton } from "@mui/material";
 
 export const ProductsPage = () => {
   const { error, isPending } = useFetch({
-    url: "https://api.example.com/products",
+    url: "/products",
   });
 
   const categories = [
@@ -27,9 +28,18 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
-      {categories.map((category) => (
-        <CategorySection key={category.id} category={category} />
-      ))}
+      {isPending
+        ? Array.from(new Array(5)).map((_, index) => (
+            <Skeleton
+              key={index}
+              variant="rectangular"
+              width="100%"
+              height="100px"
+            />
+          ))
+        : categories.map((category) => (
+            <CategorySection key={category.id} category={category} />
+          ))}
     </PageContainer>
   );
 };
