@@ -1,6 +1,7 @@
 import { useQuery, useMutation, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 
-// Type for hook configuration options
+import { BANDO_API_URL } from '../config/constants';
+
 type FetchOptions<T> = {
   url: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -32,7 +33,7 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
      // Return useQuery for GET requests
      const query = useQuery<T>({
       queryKey: [url], 
-      queryFn: () => fetchData<T>(url, fetchOptions),
+      queryFn: () => fetchData<T>(`${BANDO_API_URL}${url}`, fetchOptions),
       enabled: method === 'GET',  
       ...queryOptions,
     });
@@ -43,7 +44,7 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
     // Return useMutation for POST, PUT, and DELETE requests
     const mutation = useMutation<T, Error, unknown, unknown>({
       mutationKey: [url],
-      mutationFn: () => fetchData<T>(url, fetchOptions),
+      mutationFn: () => fetchData<T>(`${BANDO_API_URL}${url}`, fetchOptions),
       ...mutationOptions,
     });
     return {
