@@ -1,11 +1,12 @@
 import type { SxProps, Theme } from "@mui/material";
-import { Badge, Skeleton } from "@mui/material";
+import { Avatar, Badge, Skeleton } from "@mui/material";
 import {
   AvatarDefault,
   AvatarDefaultBadge,
   AvatarSkeletonMaskedContainer,
 } from "./Avatar.style";
 import { SmallAvatarSkeleton } from "./SmallAvatar";
+import { getInitials } from "../../utils/getInitials";
 
 export const AvatarBadgedDefault: React.FC<{
   sx?: SxProps<Theme>;
@@ -19,6 +20,29 @@ export const AvatarBadgedDefault: React.FC<{
     >
       <AvatarDefault />
     </Badge>
+  );
+};
+
+export const ImageAvatar: React.FC<{
+  src?: string;
+  name?: string;
+  sx?: SxProps<Theme>;
+}> = ({ src, sx, name }) => {
+  return src ? (
+    <img
+      src={src}
+      alt={name}
+      style={{
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        objectFit: "cover",
+      }}
+    />
+  ) : (
+    <Avatar sx={sx} variant="rounded">
+      {getInitials(name)}
+    </Avatar>
   );
 };
 
