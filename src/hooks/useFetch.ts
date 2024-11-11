@@ -28,19 +28,26 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
     body: data ? JSON.stringify(data) : undefined,
   };
 
-  // GET requests using useQuery
-  const query = useQuery<T>({
-    queryKey: [url], 
-    queryFn: () => fetchData<T>(url, fetchOptions),
-    enabled: method === 'GET',  
-    ...queryOptions,
-  });
-
-const mutation = useMutation<T, Error, void>({
-  mutationKey: [url],
-  mutationFn: () => fetchData<T>(url, fetchOptions),
-  ...mutationOptions,
-});
-
-  return method === 'GET' ? query : mutation;
+  if (method === 'GET') {
+     // Return useQuery for GET requests
+     const query = useQuery<T>({
+      queryKey: [url], 
+      queryFn: () => fetchData<T>(url, fetchOptions),
+      enabled: method === 'GET',  
+      ...queryOptions,
+    });
+    return {
+      ...query, // Expose states like isLoading, isError, etc.
+    };
+  } else {
+    // Return useMutation for POST, PUT, and DELETE requests
+    const mutation = useMutation<T, Error, unknown, unknown>({
+      mutationKey: [url],
+      mutationFn: () => fetchData<T>(url, fetchOptions),
+      ...mutationOptions,
+    });
+    return {
+      ...mutation, // Expose states like isLoading, isError, etc.
+    };
+  }
 }
