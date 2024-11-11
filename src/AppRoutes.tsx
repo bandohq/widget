@@ -15,10 +15,15 @@ import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 // import { TransactionPage } from "./pages/TransactionPage/TransactionPage.js"
 import { navigationRoutes } from "./utils/navigationRoutes";
 import { StatusPage } from "./pages/StatusPage/StatusPage";
+import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
 
 const routes: RouteObject[] = [
   {
     path: "/",
+    element: <ProductsPage />,
+  },
+  {
+    path: navigationRoutes.buyForm,
     element: <MainPage />,
   },
   {
