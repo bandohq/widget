@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { List, ListItemIcon } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
@@ -9,16 +9,16 @@ import { useFetch } from "../hooks/useFetch";
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
   const {
-    data: countries,
+    data: countriesResponse,
     error,
     isPending,
   } = useFetch({
-    url: "/country",
+    url: "countries",
   });
 
   useHeader(t("header.title"));
 
-  if (isPending || error || countries.length < 1) {
+  if (isPending || error) {
     return null;
   }
 
@@ -34,14 +34,20 @@ export const CountryPage: React.FC = () => {
           paddingBottom: 1.5,
         }}
       >
-        {countries.map((country) => (
-          <SettingsListItemButton
-            key={country}
-            onClick={() => setCountriesWithCode()}
-          >
-            <ListItemText primary={t("language.name")} />
-          </SettingsListItemButton>
-        ))}
+        {!isPending &&
+          countriesResponse?.data?.results.map((country) => (
+            <SettingsListItemButton
+              key={country}
+              onClick={() => setCountriesWithCode()}
+            >
+              <ListItemIcon>
+                <img src={country.flag_url} alt={country.name} width={30} />
+              </ListItemIcon>
+              <ListItemText
+                primary={`${country.name} - ${country.iso_alpha2}`}
+              />
+            </SettingsListItemButton>
+          ))}
       </List>
     </PageContainer>
   );
