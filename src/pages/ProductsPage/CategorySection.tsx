@@ -2,8 +2,19 @@
 import { Typography } from "@mui/material";
 import { ProductsGrid } from "./ProductPage.style";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
+import { useProduct } from "../../providers/ProductProvider/ProductProvider";
+import { useNavigate } from "react-router-dom";
 
 export const CategorySection = ({ category }) => {
+  const { setSelectedProduct } = useProduct();
+  const navigate = useNavigate();
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+
+    navigate(`/`);
+  };
+
   return (
     <div>
       <Typography
@@ -14,7 +25,7 @@ export const CategorySection = ({ category }) => {
       </Typography>
       <ProductsGrid>
         {category.products.map((product) => (
-          <div key={product.id}>
+          <div key={product.id} onClick={() => handleProductClick(product)}>
             {!product.img_url && (
               <ImageAvatar
                 name={product.name}
