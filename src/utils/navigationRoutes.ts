@@ -6,6 +6,7 @@ export const navigationRoutes = {
     fromChain: 'from-chain',
     fromToken: 'from-token',
     languages: 'languages',
+    countries: 'countries',
     routes: 'routes',
     settings: 'settings',
     transactionDetails: 'transaction-details',

@@ -16,6 +16,7 @@ import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 import { navigationRoutes } from "./utils/navigationRoutes";
 import { StatusPage } from "./pages/StatusPage/StatusPage";
 import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
+import { CountryPage } from "./pages/CountryPage";
 
 const routes: RouteObject[] = [
   {
@@ -45,6 +46,10 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,
+  },
+  {
+    path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
+    element: <CountryPage />,
   },
   // {
   //   path: navigationRoutes.fromToken,

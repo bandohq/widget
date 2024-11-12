@@ -120,8 +120,7 @@ import type {
     History = 'history',
     Language = 'language',
     PoweredBy = 'poweredBy',
-    ToAddress = 'toAddress',
-    ToToken = 'toToken',
+    countries = 'countries',
     WalletMenu = 'walletMenu',
     IntegratorStepDetails = 'integratorStepDetails',
   }
