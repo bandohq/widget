@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { Language } from "@mui/icons-material";
 import { CardValue } from "../../components/Card/CardButton.style";
+import { CountriesSetting } from "./CountriesSetting";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ export const SettingsPage = () => {
         <SettingsCardAccordion>
           <ThemeSettings />
           <LanguageSetting />
+          <CountriesSetting />
           <CardButton
             onClick={handleClick}
             icon={<Language />}
