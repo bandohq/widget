@@ -1,14 +1,19 @@
 import { useQuery, useMutation, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
-
 import { BANDO_API_URL } from '../config/constants';
 
 type FetchOptions<T> = {
   url: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
   data?: unknown;
+  queryParams?: Record<string, string | number>; 
   queryOptions?: UseQueryOptions<T>;       
   mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>; 
 };
+
+function buildQueryString(queryParams: Record<string, string | number> = {}) {
+  const query = new URLSearchParams(queryParams as Record<string, string>);
+  return query.toString() ? `?${query.toString()}` : '';
+}
 
 async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
@@ -18,9 +23,7 @@ async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   return response.json();
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mutationOptions }: FetchOptions<T>) {
-  // Setting options for `fetch`
+export function useFetch<T = any>({ url, method = 'GET', data, queryParams, queryOptions, mutationOptions }: FetchOptions<T>) {
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -29,26 +32,23 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
     body: data ? JSON.stringify(data) : undefined,
   };
 
+  const queryString = buildQueryString(queryParams);
+  const fullUrl = `${BANDO_API_URL}${url}${queryString}`;
+
   if (method === 'GET') {
-     // Return useQuery for GET requests
-     const query = useQuery<T>({
-      queryKey: [url], 
-      queryFn: () => fetchData<T>(`${BANDO_API_URL}${url}`, fetchOptions),
+    const query = useQuery<T>({
+      queryKey: [url, queryParams],
+      queryFn: () => fetchData<T>(fullUrl, fetchOptions),
       enabled: method === 'GET',  
       ...queryOptions,
     });
-    return {
-      ...query, // Expose states like isLoading, isError, etc.
-    };
+    return { ...query };
   } else {
-    // Return useMutation for POST, PUT, and DELETE requests
     const mutation = useMutation<T, Error, unknown, unknown>({
       mutationKey: [url],
-      mutationFn: () => fetchData<T>(`${BANDO_API_URL}${url}`, fetchOptions),
+      mutationFn: () => fetchData<T>(fullUrl, fetchOptions),
       ...mutationOptions,
     });
-    return {
-      ...mutation, // Expose states like isLoading, isError, etc.
-    };
+    return { ...mutation };
   }
 }
