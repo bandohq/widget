@@ -1,13 +1,21 @@
-import { List, ListItemIcon } from "@mui/material";
+import { List, ListItemIcon, IconButton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
 import { SettingsListItemButton } from "../components/SettingsListItemButton";
 import { useHeader } from "../hooks/useHeader";
 import { useFetch } from "../hooks/useFetch";
+import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
+import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
+  const { removeCountry } = useCountryContext();
+  const [markedCountries, setMarkedCountries] = useState<Set<string>>(
+    new Set()
+  );
+
   const {
     data: countriesResponse,
     error,
@@ -16,13 +24,23 @@ export const CountryPage: React.FC = () => {
     url: "countries",
   });
 
-  useHeader(t("header.title"));
+  useHeader(t("language.title"));
+
+  const toggleMarkCountry = (isoCode: string) => {
+    setMarkedCountries((prev) => {
+      const updated = new Set(prev);
+      if (updated.has(isoCode)) {
+        updated.delete(isoCode);
+      } else {
+        updated.add(isoCode);
+      }
+      return updated;
+    });
+  };
 
   if (isPending || error) {
     return null;
   }
-
-  const setCountriesWithCode = () => {};
 
   return (
     <PageContainer disableGutters>
@@ -37,8 +55,11 @@ export const CountryPage: React.FC = () => {
         {!isPending &&
           countriesResponse?.data?.results.map((country) => (
             <SettingsListItemButton
-              key={country}
-              onClick={() => setCountriesWithCode()}
+              key={country.iso_alpha2}
+              onClick={() => {
+                removeCountry(country.iso_alpha2);
+                toggleMarkCountry(country.iso_alpha2);
+              }}
             >
               <ListItemIcon>
                 <img src={country.flag_url} alt={country.name} width={30} />
@@ -46,6 +67,17 @@ export const CountryPage: React.FC = () => {
               <ListItemText
                 primary={`${country.name} - ${country.iso_alpha2}`}
               />
+              {markedCountries.has(country.iso_alpha2) && (
+                <IconButton
+                  edge="end"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleMarkCountry(country.iso_alpha2);
+                  }}
+                >
+                  <CloseIcon color="error" />
+                </IconButton>
+              )}
             </SettingsListItemButton>
           ))}
       </List>
