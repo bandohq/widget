@@ -2,7 +2,7 @@
 import { Typography } from "@mui/material";
 import { ProductsGrid } from "./ProductPage.style";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
-import { useProduct } from "../../providers/ProductProvider/ProductProvider";
+import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 
 export const CategorySection = ({ category }) => {
