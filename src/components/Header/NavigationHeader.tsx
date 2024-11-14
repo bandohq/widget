@@ -31,14 +31,16 @@ export const NavigationHeader: React.FC = () => {
   const path = cleanedPathname.substring(cleanedPathname.lastIndexOf("/") + 1);
   const hasPath = navigationRoutesValues.includes(path);
 
+  const basePath = cleanedPathname.split("/")[1];
+  const isBackButtonVisible =
+    backButtonRoutes.includes(basePath) || path.startsWith("products/");
+
   const splitSubvariant = subvariant === "split" && !hasPath;
 
   return (
     <>
       <HeaderAppBar elevation={0}>
-        {backButtonRoutes.includes(path) ? (
-          <BackButton onClick={navigateBack} />
-        ) : null}
+        {isBackButtonVisible ? <BackButton onClick={navigateBack} /> : null}
         {splitSubvariant ? (
           <Box flex={1}>
             <SplitWalletMenuButton />
