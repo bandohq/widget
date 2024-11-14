@@ -17,6 +17,7 @@ import { navigationRoutes } from "./utils/navigationRoutes";
 import { StatusPage } from "./pages/StatusPage/StatusPage";
 import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
 import { CountryPage } from "./pages/CountryPage";
+import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 
 const routes: RouteObject[] = [
   {
@@ -43,6 +44,10 @@ const routes: RouteObject[] = [
   //   path: `${navigationRoutes.settings}/${navigationRoutes.exchanges}`,
   //   element: <SelectEnabledToolsPage type="Exchanges" />,
   // },
+  {
+    path: `${navigationRoutes.products}/:categoryName`,
+    element: <CategoryPage />,
+  },
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,

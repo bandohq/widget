@@ -7,6 +7,7 @@ export const navigationRoutes = {
     fromToken: 'from-token',
     languages: 'languages',
     countries: 'countries',
+    products: 'products',
     routes: 'routes',
     settings: 'settings',
     transactionDetails: 'transaction-details',
@@ -38,6 +39,7 @@ export const navigationRoutes = {
   export const backButtonRoutes = [
     navigationRoutes.activeTransactions,
     navigationRoutes.languages,
+    navigationRoutes.products,
     navigationRoutes.fromChain,
     navigationRoutes.fromToken,
     navigationRoutes.routes,
