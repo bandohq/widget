@@ -78,7 +78,8 @@
     "transactionHistory": "Historial de transacciones",
     "walletConnected": "Billetera conectada",
     "youGet": "Usted obtiene",
-    "youPay": "Tú pagas"
+    "youPay": "Tú pagas",
+    "products": "Productos"
   },
   "info": {
     "message": {
@@ -289,7 +290,8 @@
     "valueLoss": "Valor perdido",
     "searchChains": "",
     "searchBridges": "",
-    "searchExchanges": ""
+    "searchExchanges": "",
+    "searchProducts": "Buscar por marca"
   },
   "settings": {
     "theme": "Tema",

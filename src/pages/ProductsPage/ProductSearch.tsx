@@ -1,4 +1,4 @@
-import { MenuItem } from "@mui/material";
+import { MenuItem, Tooltip } from "@mui/material";
 import {
   CountrySelect,
   InputContainer,
@@ -8,9 +8,11 @@ import {
 } from "./ProductPage.style";
 import SearchIcon from "@mui/icons-material/Search";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
+import { useTranslation } from "react-i18next";
 
-export const ProductSearch = ({}) => {
+export const ProductSearch = ({ onSearchChange }) => {
   const { country, countries, selectCountry } = useCountryContext();
+  const { t } = useTranslation();
 
   if (!countries.length) {
     return null;
@@ -19,7 +21,10 @@ export const ProductSearch = ({}) => {
   return (
     <SearchContainer>
       <InputContainer>
-        <StyledInputBase placeholder="Search for anything" />
+        <StyledInputBase
+          placeholder={t("search.placeholder")}
+          onChange={(e) => onSearchChange(e.target.value)}
+        />
         <StyledIconButton>
           <SearchIcon />
         </StyledIconButton>
@@ -32,7 +37,9 @@ export const ProductSearch = ({}) => {
       >
         {countries.map((country) => (
           <MenuItem key={country.iso_alpha2} value={country.iso_alpha2}>
-            <img src={country.flag_url} alt={country.name} width={20} />
+            <Tooltip title={country.name}>
+              <img src={country.flag_url} alt={country.name} width={20} />
+            </Tooltip>
           </MenuItem>
         ))}
       </CountrySelect>
