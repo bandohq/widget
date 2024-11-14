@@ -3,10 +3,11 @@ import { useHeader } from "../../hooks/useHeader";
 import { useFetch } from "../../hooks/useFetch";
 import { CategorySection } from "./CategorySection";
 import { Skeleton } from "@mui/material";
+import { ProductSearch } from "./ProductSearch";
 
 export const ProductsPage = () => {
   const { error, isPending } = useFetch({
-    url: "/products",
+    url: "products",
   });
 
   const categories = [
@@ -28,6 +29,7 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
+      <ProductSearch />
       {isPending
         ? Array.from(new Array(5)).map((_, index) => (
             <Skeleton
