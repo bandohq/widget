@@ -8,6 +8,7 @@ export const CountriesProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [country, setCountry] = useState<Country | null>(null);
   const { data: countriesResponse } = useFetch({
     url: "countries",
   });
@@ -15,8 +16,21 @@ export const CountriesProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     if (countriesResponse?.data?.results) {
       setCountries(countriesResponse.data.results);
+      //TODO: add default selected country from widgetConfig
+      // Set default selected country to Mexico
+      const defaultCountry = countriesResponse.data.results.find(
+        (country: Country) => country.iso_alpha2 === "MX"
+      );
+      setCountry(defaultCountry || null);
     }
   }, [countriesResponse]);
+
+  const selectCountry = (isoCode: string) => {
+    const country = countries.find((c) => c.iso_alpha2 === isoCode);
+    if (country) {
+      setCountry(country);
+    }
+  };
 
   const removeCountry = (isoCode: string) => {
     setCountries((prev) =>
@@ -25,7 +39,9 @@ export const CountriesProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <CountryContext.Provider value={{ countries, removeCountry }}>
+    <CountryContext.Provider
+      value={{ countries, country, selectCountry, removeCountry }}
+    >
       {children}
     </CountryContext.Provider>
   );

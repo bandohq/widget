@@ -6,5 +6,7 @@ export type Country = {
   
 export   type CountryContextType = {
     countries: Country[];
+    country: Country;
+    selectCountry: (isoCode: string) => void;
     removeCountry: (isoCode: string) => void;
 };
