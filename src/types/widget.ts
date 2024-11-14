@@ -196,6 +196,7 @@ import type {
     fromToken?: string
     productId?: string
     country?: string
+    blockedCountries?: string[]
     toAmount?: number | string
     formUpdateKey?: string
   

@@ -21,7 +21,10 @@ export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           : undefined
       }
     >
-      <CountriesProvider>
+      <CountriesProvider
+        blockedCountries={config.blockedCountries}
+        configCountry={config.country}
+      >
         <ProductProvider>
           <HeaderStoreProvider namePrefix={config?.keyPrefix}>
             <BookmarkStoreProvider namePrefix={config?.keyPrefix}>

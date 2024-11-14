@@ -4,9 +4,11 @@ import { useFetch } from "../../hooks/useFetch";
 
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
-export const CountriesProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CountriesProvider: React.FC<{
+  children: React.ReactNode;
+  blockedCountries?: string[];
+  configCountry?: string;
+}> = ({ children, blockedCountries, configCountry }) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [country, setCountry] = useState<Country | null>(null);
   const { data: countriesResponse } = useFetch({
@@ -15,12 +17,21 @@ export const CountriesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (countriesResponse?.data?.results) {
-      setCountries(countriesResponse.data.results);
-      //TODO: add default selected country from widgetConfig
-      // Set default selected country to Mexico
-      const defaultCountry = countriesResponse.data.results.find(
-        (country: Country) => country.iso_alpha2 === "MX"
+      setCountries(
+        blockedCountries
+          ? countriesResponse.data.results.filter(
+              (country: Country) =>
+                !blockedCountries.includes(country.iso_alpha2)
+            )
+          : countriesResponse.data.results
       );
+      const defaultCountry = configCountry
+        ? countriesResponse.data.results.find(
+            (country: Country) => country.iso_alpha2 === configCountry
+          )
+        : countriesResponse.data.results.find(
+            (country: Country) => country.iso_alpha2 === "MX"
+          );
       setCountry(defaultCountry || null);
     }
   }, [countriesResponse]);
