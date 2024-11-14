@@ -4,11 +4,18 @@ import { useFetch } from "../../hooks/useFetch";
 import { CategorySection } from "./CategorySection";
 import { Skeleton } from "@mui/material";
 import { ProductSearch } from "./ProductSearch";
+import { useTranslation } from "react-i18next";
+import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
+import { HiddenUI } from "../../types/widget";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 export const ProductsPage = () => {
+  const { hiddenUI } = useWidgetConfig();
   const { error, isPending } = useFetch({
     url: "products",
   });
+  const { t } = useTranslation();
+  const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
 
   const categories = [
     {
@@ -25,7 +32,7 @@ export const ProductsPage = () => {
     },
   ];
 
-  useHeader("Products");
+  useHeader(t("header.products"));
 
   return (
     <PageContainer>
@@ -42,6 +49,7 @@ export const ProductsPage = () => {
         : categories.map((category) => (
             <CategorySection key={category.id} category={category} />
           ))}
+      {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
   );
 };
