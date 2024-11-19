@@ -78,6 +78,10 @@
     "youGet": "Sie erhalten",
     "youPay": ""
   },
+  "countries": {
+    "title": "Länder",
+    "deleted": "Gelöschte Länder"
+  },
   "info": {
     "message": {
       "autoRefuel": "Sie haben nicht genug Gas auf {{chainName}}. Wenn Sie fortfahren, erhalten Sie zusätzlich genug Gas um den Swap abzuschließen.",

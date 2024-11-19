@@ -80,6 +80,10 @@
     "youGet": "Anda mendapatkan",
     "youPay": "Anda membayar"
   },
+  "countries": {
+    "title": "Negara",
+    "deleted": "Negara yang dihapus"
+  },
   "info": {
     "message": {
       "autoRefuel": "Gas anda hampir habis {{chainName}}. Dengan melanjutkan, anda akan mendapatkan cukup gas untuk menyelesaikan penukaran.",

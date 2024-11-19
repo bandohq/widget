@@ -80,6 +80,10 @@
     "youGet": "Bạn nhận",
     "youPay": ""
   },
+  "countries": {
+    "title": "Các quốc gia",
+    "deleted": "Các quốc gia đã xóa"
+  },
   "info": {
     "message": {
       "autoRefuel": "Gas trên {{chainName}} chain của bạn đang thấp. Để tiếp tục, bạn nên có thêm gas để hoàn thành việc swap.",

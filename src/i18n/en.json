@@ -81,6 +81,10 @@
     "youPay": "You pay",
     "products": "Products"
   },
+  "countries": {
+    "title": "Countries",
+    "deleted": "Deleted countries"
+  },
   "info": {
     "message": {
       "autoRefuel": "You're low on {{chainName}} gas. By continuing, you'll get enough gas to complete the transaction.",

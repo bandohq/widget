@@ -80,6 +80,10 @@
     "youGet": "スワップルート確認",
     "youPay": ""
   },
+  "countries": {
+    "title": "国",
+    "deleted": "削除された国"
+  },
   "info": {
     "message": {
       "autoRefuel": "{{chainName}} のガスが不足していますが、続行することでトランザクションを完了するのに十分なガスが補填されます。",

@@ -80,6 +80,10 @@
     "youGet": "",
     "youPay": ""
   },
+  "countries": {
+    "title": "देश",
+    "deleted": "हटाए गए देश"
+  },
   "info": {
     "message": {
       "autoRefuel": "",

@@ -80,6 +80,10 @@
     "youGet": "您获得",
     "youPay": ""
   },
+  "countries": {
+    "title": "国家",
+    "deleted": "已删除的国家"
+  },
   "info": {
     "message": {
       "autoRefuel": "您在 {{chainName}} 链上的燃气费很低。如果启用该选项，您将获得足够的燃气费完成此次兑换。",

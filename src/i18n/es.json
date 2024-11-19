@@ -81,6 +81,10 @@
     "youPay": "Tú pagas",
     "products": "Productos"
   },
+  "countries": {
+    "title": "Paises",
+    "deleted": "Paises eliminados"
+  },
   "info": {
     "message": {
       "autoRefuel": "Tienes poco gas en {{chainName}}. Al continuar, obtendrás suficiente gas para completar la transacción.",

@@ -80,6 +80,10 @@
     "youGet": "Alacağınız",
     "youPay": "Ödediğiniz"
   },
+  "countries": {
+    "title": "Ülkeler",
+    "deleted": "Silinen ülkeler"
+  },
   "info": {
     "message": {
       "autoRefuel": "{{chainName}} ağında gaz yetersiz. Devam ederek, işlem için gereken miktarda gaz alacaksınız.",

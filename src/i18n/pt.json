@@ -80,6 +80,10 @@
     "youGet": "Você recebe",
     "youPay": "Você paga"
   },
+  "countries": {
+    "title": "Países",
+    "deleted": "Países apagados"
+  },
   "info": {
     "message": {
       "autoRefuel": "Você está com pouco gás na rede {{chainName}}. Ao continuar, você obterá gás suficiente para completar a conversão.",
