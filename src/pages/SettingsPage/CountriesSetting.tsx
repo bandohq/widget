@@ -24,9 +24,7 @@ export const CountriesSetting: React.FC = () => {
     <CardButton
       onClick={handleClick}
       icon={<Public />}
-      title={t("countries.title")}
-    >
-      <CardValue>{t("countries.title")}</CardValue>
-    </CardButton>
+      title={t("countries.deleted")}
+    ></CardButton>
   );
 };
