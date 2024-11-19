@@ -1,4 +1,4 @@
-import { List, ListItemIcon, IconButton } from "@mui/material";
+import { List, ListItemIcon, IconButton, Avatar } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
@@ -8,10 +8,12 @@ import { useFetch } from "../hooks/useFetch";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import { SearchBar } from "../components/SearchInput/SearchInput";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
   const { removeCountry } = useCountryContext();
+  const [searchQuery, setSearchQuery] = useState("");
   const [markedCountries, setMarkedCountries] = useState<Set<string>>(
     new Set()
   );
@@ -24,7 +26,7 @@ export const CountryPage: React.FC = () => {
     url: "countries",
   });
 
-  useHeader(t("language.title"));
+  useHeader(t("countries.title"));
 
   const toggleMarkCountry = (isoCode: string) => {
     setMarkedCountries((prev) => {
@@ -38,12 +40,17 @@ export const CountryPage: React.FC = () => {
     });
   };
 
+  const filteredCountries = countriesResponse?.data?.results.filter((country) =>
+    country.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (isPending || error) {
     return null;
   }
 
   return (
     <PageContainer disableGutters>
+      <SearchBar onSearch={setSearchQuery} />
       <List
         sx={{
           paddingTop: 0,
@@ -53,7 +60,7 @@ export const CountryPage: React.FC = () => {
         }}
       >
         {!isPending &&
-          countriesResponse?.data?.results.map((country) => (
+          filteredCountries.map((country) => (
             <SettingsListItemButton
               key={country.iso_alpha2}
               onClick={() => {
@@ -62,7 +69,11 @@ export const CountryPage: React.FC = () => {
               }}
             >
               <ListItemIcon>
-                <img src={country.flag_url} alt={country.name} width={30} />
+                <Avatar
+                  src={country.flag_url}
+                  alt={country.name}
+                  sx={{ objectFit: "cover" }}
+                />
               </ListItemIcon>
               <ListItemText
                 primary={`${country.name} - ${country.iso_alpha2}`}
