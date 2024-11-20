@@ -22,7 +22,7 @@ export const ProductSearch = ({ onSearchChange }) => {
     <SearchContainer>
       <InputContainer>
         <StyledInputBase
-          placeholder={t("search.placeholder")}
+          placeholder={t("main.searchProducts")}
           onChange={(e) => onSearchChange(e.target.value)}
         />
         <StyledIconButton>
@@ -34,11 +34,22 @@ export const ProductSearch = ({ onSearchChange }) => {
         onChange={(e) => selectCountry(e.target.value as string)}
         displayEmpty
         inputProps={{ "aria-label": "Country" }}
+        renderValue={() => (
+          <img src={country?.flag_url} alt={country?.name} width={20} />
+        )}
       >
         {countries.map((country) => (
           <MenuItem key={country.iso_alpha2} value={country.iso_alpha2}>
-            <Tooltip title={country.name}>
-              <img src={country.flag_url} alt={country.name} width={20} />
+            <Tooltip title={country.iso_alpha2}>
+              <>
+                <img
+                  src={country.flag_url}
+                  alt={country.name}
+                  width={20}
+                  style={{ marginRight: 5 }}
+                />
+                {country.name}
+              </>
             </Tooltip>
           </MenuItem>
         ))}
