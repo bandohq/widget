@@ -120,8 +120,7 @@ import type {
     History = 'history',
     Language = 'language',
     PoweredBy = 'poweredBy',
-    ToAddress = 'toAddress',
-    ToToken = 'toToken',
+    countries = 'countries',
     WalletMenu = 'walletMenu',
     IntegratorStepDetails = 'integratorStepDetails',
   }
@@ -197,6 +196,7 @@ import type {
     fromToken?: string
     productId?: string
     country?: string
+    blockedCountries?: string[]
     toAmount?: number | string
     formUpdateKey?: string
   

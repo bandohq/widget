@@ -5,6 +5,8 @@ import { FormStoreProvider } from "./form/FormStore";
 import { HeaderStoreProvider } from "./header/useHeaderStore.js";
 import { RouteExecutionStoreProvider } from "./routes/RouteExecutionStore.js";
 import { SplitSubvariantStoreProvider } from "./settings/useSplitSubvariantStore.js";
+import { ProductProvider } from "./ProductProvider/ProductProvider.js";
+import { CountriesProvider } from "./CountriesProvider/CountriesProvider.js";
 
 export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -19,15 +21,22 @@ export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           : undefined
       }
     >
-      <HeaderStoreProvider namePrefix={config?.keyPrefix}>
-        <BookmarkStoreProvider namePrefix={config?.keyPrefix}>
-          <FormStoreProvider formRef={formRef}>
-            <RouteExecutionStoreProvider namePrefix={config?.keyPrefix}>
-              {children}
-            </RouteExecutionStoreProvider>
-          </FormStoreProvider>
-        </BookmarkStoreProvider>
-      </HeaderStoreProvider>
+      <CountriesProvider
+        blockedCountries={config.blockedCountries}
+        configCountry={config.country}
+      >
+        <ProductProvider>
+          <HeaderStoreProvider namePrefix={config?.keyPrefix}>
+            <BookmarkStoreProvider namePrefix={config?.keyPrefix}>
+              <FormStoreProvider formRef={formRef}>
+                <RouteExecutionStoreProvider namePrefix={config?.keyPrefix}>
+                  {children}
+                </RouteExecutionStoreProvider>
+              </FormStoreProvider>
+            </BookmarkStoreProvider>
+          </HeaderStoreProvider>
+        </ProductProvider>
+      </CountriesProvider>
     </SplitSubvariantStoreProvider>
   );
 };

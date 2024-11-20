@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { Language } from "@mui/icons-material";
 import { CardValue } from "../../components/Card/CardButton.style";
+import { CountriesSetting } from "./CountriesSetting";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
@@ -22,16 +23,28 @@ export const SettingsPage = () => {
     navigate(`/${navigationRoutes.status}`);
   };
 
+  const handleTopupClick = () => {
+    navigate(`/products/topup`);
+  };
+
   return (
     <PageContainer bottomGutters>
       <SettingsList>
         <SettingsCardAccordion>
           <ThemeSettings />
           <LanguageSetting />
+          <CountriesSetting />
           <CardButton
             onClick={handleClick}
             icon={<Language />}
             title={"Status"}
+          >
+            <CardValue>page</CardValue>
+          </CardButton>
+          <CardButton
+            onClick={handleTopupClick}
+            icon={<Language />}
+            title={"topup"}
           >
             <CardValue>page</CardValue>
           </CardButton>

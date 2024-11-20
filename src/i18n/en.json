@@ -78,7 +78,12 @@
     "transactionHistory": "Transaction history",
     "walletConnected": "Wallet connected",
     "youGet": "You get",
-    "youPay": "You pay"
+    "youPay": "You pay",
+    "products": "Products"
+  },
+  "countries": {
+    "title": "Countries",
+    "deleted": "Deleted countries"
   },
   "info": {
     "message": {
@@ -288,7 +293,8 @@
     "valueLoss": "Value loss",
     "searchChains": "Search by chain name",
     "searchBridges": "Search by bridge name",
-    "searchExchanges": "Search by exchange name"
+    "searchExchanges": "Search by exchange name",
+    "searchProducts": "Search by product brand"
   },
   "settings": {
     "theme": "Theme",

@@ -1,13 +1,26 @@
-import { useQuery, useMutation, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  UseMutationOptions,
+  UseQueryOptions,
+  QueryObserverResult,
+  UseMutationResult,
+} from '@tanstack/react-query';
+import { BANDO_API_URL } from '../config/constants';
 
-// Type for hook configuration options
 type FetchOptions<T> = {
   url: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
   data?: unknown;
-  queryOptions?: UseQueryOptions<T>;       
-  mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>; 
+  queryParams?: Record<string, string | number>;
+  queryOptions?: UseQueryOptions<T, Error>;
+  mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>;
 };
+
+function buildQueryString(queryParams: Record<string, string | number> = {}) {
+  const query = new URLSearchParams(queryParams as Record<string, string>);
+  return query.toString() ? `?${query.toString()}` : '';
+}
 
 async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
@@ -17,9 +30,14 @@ async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   return response.json();
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mutationOptions }: FetchOptions<T>) {
-  // Setting options for `fetch`
+export function useFetch<T = any>({
+  url,
+  method = 'GET',
+  data,
+  queryParams,
+  queryOptions,
+  mutationOptions,
+}: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -28,19 +46,21 @@ export function useFetch<T = any>({ url, method = 'GET', data, queryOptions, mut
     body: data ? JSON.stringify(data) : undefined,
   };
 
-  // GET requests using useQuery
-  const query = useQuery<T>({
-    queryKey: [url], 
-    queryFn: () => fetchData<T>(url, fetchOptions),
-    enabled: method === 'GET',  
-    ...queryOptions,
-  });
+  const queryString = buildQueryString(queryParams);
+  const fullUrl = `${BANDO_API_URL}${url}${queryString}`;
 
-const mutation = useMutation<T, Error, void>({
-  mutationKey: [url],
-  mutationFn: () => fetchData<T>(url, fetchOptions),
-  ...mutationOptions,
-});
-
-  return method === 'GET' ? query : mutation;
+  if (method === 'GET') {
+    return useQuery<T>({
+      queryKey: [url, queryParams],
+      queryFn: () => fetchData<T>(fullUrl, fetchOptions),
+      enabled: method === 'GET',
+      ...queryOptions,
+    });
+  } else {
+    return useMutation<T, Error, unknown, unknown>({
+      mutationKey: [url],
+      mutationFn: () => fetchData<T>(fullUrl, fetchOptions),
+      ...mutationOptions,
+    });
+  }
 }

@@ -80,6 +80,10 @@
     "youGet": "Ricevi",
     "youPay": ""
   },
+  "countries": {
+    "title": "Paesi",
+    "deleted": "Paesi eliminati"
+  },
   "info": {
     "message": {
       "autoRefuel": "Livello basso di gas su {{chainName}}. Continuando avrai abbastanza gas per completare lo scambio.",

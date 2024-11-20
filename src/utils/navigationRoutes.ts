@@ -2,11 +2,12 @@ export const navigationRoutes = {
     home: '/',
     activeTransactions: 'active-transactions',
     status: 'status',
-    bridges: 'bridges',
-    exchanges: 'exchanges',
+    buyForm: 'buy-form',
     fromChain: 'from-chain',
     fromToken: 'from-token',
     languages: 'languages',
+    countries: 'countries',
+    products: 'products',
     routes: 'routes',
     settings: 'settings',
     transactionDetails: 'transaction-details',
@@ -22,8 +23,6 @@ export const navigationRoutes = {
   
   export const stickyHeaderRoutes = [
     navigationRoutes.activeTransactions,
-    navigationRoutes.bridges,
-    navigationRoutes.exchanges,
     navigationRoutes.fromChain,
     navigationRoutes.home,
     navigationRoutes.routes,
@@ -39,9 +38,8 @@ export const navigationRoutes = {
   
   export const backButtonRoutes = [
     navigationRoutes.activeTransactions,
-    navigationRoutes.bridges,
-    navigationRoutes.exchanges,
     navigationRoutes.languages,
+    navigationRoutes.products,
     navigationRoutes.fromChain,
     navigationRoutes.fromToken,
     navigationRoutes.routes,

@@ -15,10 +15,17 @@ import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 // import { TransactionPage } from "./pages/TransactionPage/TransactionPage.js"
 import { navigationRoutes } from "./utils/navigationRoutes";
 import { StatusPage } from "./pages/StatusPage/StatusPage";
+import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
+import { CountryPage } from "./pages/CountryPage";
+import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 
 const routes: RouteObject[] = [
   {
     path: "/",
+    element: <ProductsPage />,
+  },
+  {
+    path: navigationRoutes.buyForm,
     element: <MainPage />,
   },
   {
@@ -38,8 +45,16 @@ const routes: RouteObject[] = [
   //   element: <SelectEnabledToolsPage type="Exchanges" />,
   // },
   {
+    path: `${navigationRoutes.products}/:categoryName`,
+    element: <CategoryPage />,
+  },
+  {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,
+  },
+  {
+    path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
+    element: <CountryPage />,
   },
   // {
   //   path: navigationRoutes.fromToken,
