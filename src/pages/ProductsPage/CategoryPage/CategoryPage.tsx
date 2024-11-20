@@ -1,11 +1,19 @@
 import { useParams } from "react-router-dom";
-import { Button, CircularProgress } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  List,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import { ProductsGrid } from "../ProductPage.style";
 import { ImageAvatar } from "../../../components/Avatar/Avatar";
 import { ProductSearch } from "../ProductSearch";
 import { useHeader } from "../../../hooks/useHeader";
 import { PageContainer } from "../../../components/PageContainer";
 import { useCategoryProducts } from "./useCategoryProducts";
+import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
 
 export const CategoryPage = () => {
   const { categoryName } = useParams();
@@ -24,20 +32,32 @@ export const CategoryPage = () => {
   return (
     <PageContainer>
       <ProductSearch onSearchChange={debouncedSearch} />
-      <ProductsGrid>
+      <List
+        sx={{
+          paddingTop: 0,
+          paddingBottom: 1.5,
+        }}
+      >
         {allProducts.map((product, index) => {
           const isLast = index === allProducts.length - 1;
           return (
-            <div ref={isLast ? lastProductRef : null} key={product.id}>
-              <ImageAvatar
-                name={product.brand}
-                src={product.img_url}
-                sx={{ width: "100%", height: "100%" }}
-              />
-            </div>
+            <SettingsListItemButton
+              key={product.id}
+              onClick={() => {}}
+              ref={isLast ? lastProductRef : null}
+            >
+              <ListItemIcon>
+                <ImageAvatar
+                  name={product.brand}
+                  src={product.img_url}
+                  sx={{ width: "100%", height: "100%" }}
+                />
+              </ListItemIcon>
+              <ListItemText primary={product.brand} />
+            </SettingsListItemButton>
           );
         })}
-      </ProductsGrid>
+      </List>
 
       {currentPage < totalPages && !isPending && (
         <Button

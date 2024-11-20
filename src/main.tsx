@@ -22,7 +22,6 @@ createRoot(document.getElementById("root")!).render(
               borderRadius: "16px",
             },
           },
-          buildUrl: true,
           country: "US",
         }}
       />
