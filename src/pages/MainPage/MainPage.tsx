@@ -10,6 +10,7 @@ import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { HiddenUI } from "../../types/widget";
 import { ReviewButton } from "./ReviewButton";
 import { useTranslation } from "react-i18next";
+import { SelectProductButton } from "../../components/SelectProductButton/SelectProductButton";
 
 export const MainPage: React.FC = () => {
   const { subvariant, contractComponent, hiddenUI } = useWidgetConfig();
@@ -27,6 +28,7 @@ export const MainPage: React.FC = () => {
           {contractComponent}
         </ContractComponent>
       ) : null}
+      <SelectProductButton formType="from" compact />
       <SelectChainAndToken mb={2} />
       {!custom ? (
         <AmountInput formType="from" sx={{ marginBottom: 2 }} />
