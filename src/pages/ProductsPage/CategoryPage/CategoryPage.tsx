@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -14,9 +14,11 @@ import { useHeader } from "../../../hooks/useHeader";
 import { PageContainer } from "../../../components/PageContainer";
 import { useCategoryProducts } from "./useCategoryProducts";
 import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
+import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 
 export const CategoryPage = () => {
   const { categoryName } = useParams();
+  const navigate = useNavigate();
   const {
     allProducts,
     isPending,
@@ -26,6 +28,13 @@ export const CategoryPage = () => {
     setPage,
     debouncedSearch,
   } = useCategoryProducts(categoryName);
+  const { updateProduct } = useProduct();
+
+  const handleSelectProduct = (product) => {
+    updateProduct(product);
+
+    navigate(`/`);
+  };
 
   useHeader(categoryName);
 
@@ -43,7 +52,7 @@ export const CategoryPage = () => {
           return (
             <SettingsListItemButton
               key={product.id}
-              onClick={() => {}}
+              onClick={() => handleSelectProduct(product)}
               ref={isLast ? lastProductRef : null}
             >
               <ListItemIcon>
