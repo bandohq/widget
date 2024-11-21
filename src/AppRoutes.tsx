@@ -22,11 +22,11 @@ import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <ProductsPage />,
+    element: <MainPage />,
   },
   {
-    path: navigationRoutes.buyForm,
-    element: <MainPage />,
+    path: navigationRoutes.products,
+    element: <ProductsPage />,
   },
   {
     path: navigationRoutes.settings,
