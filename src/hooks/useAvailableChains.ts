@@ -1,28 +1,51 @@
-import { useCallback } from 'react'
-import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types'
+import { useCallback } from 'react';
+import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js';
+import { useFetch } from './useFetch';
+import { isItemAllowed } from '../utils/item.js';
+import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types.js';
 
-// Minimal type for GetChainById function to align with UI-only requirements
 export type GetChainById = (
   chainId?: number,
   chains?: ExtendedChain[]
-) => ExtendedChain | undefined
+) => ExtendedChain | undefined;
+
+const supportedChainTypes = [ChainType.EVM, ChainType.SVM, ChainType.UTXO] 
 
 export const useAvailableChains = (chainTypes?: ChainType[]) => {
-  // Empty data and minimal placeholders for UI rendering
-  const data = [] // Empty array representing no available chains
-  const isLoading = false // Placeholder for loading state
+  const { chains } = useWidgetConfig();
 
-  // Empty getChainById function to satisfy the hook’s signature
+  const { data, isPending } = useFetch<ExtendedChain[]>({
+    url: '/chains/available',
+    method: 'GET',
+    queryParams: {
+      chainTypes: JSON.stringify(
+        chainTypes ||
+          supportedChainTypes.filter((chainType) =>
+            isItemAllowed(chainType, chains?.types)
+          )
+      ),
+    },
+    queryOptions: {
+      queryKey: ['available-chains'],
+      refetchInterval: 300_000,
+      staleTime: 300_000,
+    },
+  });
+
   const getChainById: GetChainById = useCallback(
     (chainId?: number, chains: ExtendedChain[] | undefined = data) => {
-      return undefined // Always returns undefined for a UI-only mock
+      if (!chainId) {
+        return undefined;
+      }
+      const chain = chains?.find((chain) => chain.id === chainId);
+      return chain;
     },
     [data]
-  )
+  );
 
   return {
     chains: data,
     getChainById,
-    isLoading,
-  }
-}
+    isPending,
+  };
+};
