@@ -9,9 +9,3 @@ export type WidgetContextProps = WidgetConfig & {
 export interface WidgetProviderProps {
   config?: WidgetConfig;
 }
-
-export enum ChainTypeCustom {
-  EVM = 'EVM',
-  SVM = 'SVM',
-  UTXO = 'UTXO',
-}

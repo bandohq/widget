@@ -1,57 +1,5 @@
 import { useCallback } from 'react'
-
-export enum ChainType {
-    EVM = 'EVM',
-    // Solana virtual machine
-    SVM = 'SVM',
-    // Unspent transaction output (e.g. Bitcoin)
-    UTXO = 'UTXO',
-  }
-  
-  export interface _Chain {
-    key: any
-    chainType: ChainType
-    name: string
-    coin: any
-    id: number
-    mainnet: boolean
-    logoURI?: string
-    // faucetUrls is DEPRECATED - will be removed in the next breaking release
-    faucetUrls?: string[]
-  }
-
-  export interface BaseToken {
-    chainId: any
-    address: string
-  }
-
-  export interface StaticToken extends BaseToken {
-    symbol: string
-    decimals: number
-    name: string
-    coinKey?: any
-    logoURI?: string
-  }
-
-  interface Token extends StaticToken {
-    priceUSD: string
-  }
-
-export interface EVMChain extends _Chain {
-    // tokenlistUrl is DEPRECATED - will be removed in the next breaking release
-    tokenlistUrl?: string
-    metamask: any
-    multicallAddress?: string
-  }
-
-export type Chain = EVMChain
-
-interface ExtendedChain extends Chain {
-    nativeToken: Token
-    diamondAddress: string
-    permit2?: string
-    permit2Proxy?: string
-  }
+import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types'
 
 // Minimal type for GetChainById function to align with UI-only requirements
 export type GetChainById = (

@@ -2,11 +2,11 @@ import { useContext, useMemo } from 'react';
 import { EVMExternalContext } from './EVMExternalContext';
 import { SVMExternalContext } from './SVMExternalContext';
 import { UTXOExternalContext } from './UTXOExternalContext';
-import { ChainTypeCustom } from '../WidgetProvider/types';
+import { ChainType } from '../../pages/SelectChainPage/types';
 
 interface ExternalWalletProvider {
   hasExternalProvider: boolean;
-  availableChainTypes: ChainTypeCustom[]; 
+  availableChainTypes: ChainType[]; 
 }
 
 export function useHasExternalWalletProvider(): ExternalWalletProvider {
@@ -15,15 +15,15 @@ export function useHasExternalWalletProvider(): ExternalWalletProvider {
   const hasExternalUTXOContext = useContext(UTXOExternalContext)
 
   const providers = useMemo(() => {
-    const providers: ChainTypeCustom[] = []
+    const providers: ChainType[] = []
     if (hasExternalEVMContext) {
-      providers.push(ChainTypeCustom.EVM)
+      providers.push(ChainType.EVM)
     }
     if (hasExternalSVMContext) {
-      providers.push(ChainTypeCustom.SVM)
+      providers.push(ChainType.SVM)
     }
     if (hasExternalUTXOContext) {
-      providers.push(ChainTypeCustom.UTXO)
+      providers.push(ChainType.UTXO)
     }
     return providers
   }, [hasExternalEVMContext, hasExternalSVMContext, hasExternalUTXOContext])

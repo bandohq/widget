@@ -3,7 +3,6 @@ import { Badge } from "@mui/material";
 import { AvatarBadgedSkeleton } from "./Avatar.js";
 import { AvatarDefaultBadge, AvatarMasked } from "./Avatar.style.js";
 import { SmallAvatar } from "./SmallAvatar.js";
-import { Chain } from "../../hooks/useAvailableChains.js";
 
 export interface BaseToken {
   chainId: any;

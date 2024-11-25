@@ -8,7 +8,7 @@ import { defaultWalletConnectConfig } from '../config/walletConnect';
 import { WalletReadyState } from '@solana/wallet-adapter-base';
 import { WidgetWalletConfig } from '../types/widget';
 import { useMediaQuery } from '@mui/material';
-import { ChainTypeCustom } from '../providers/WidgetProvider/types';
+import { ChainType } from '../pages/SelectChainPage/types';
 
 /**
  * Custom hook to filter and sort wallets based on the provided configuration and chain types.
@@ -17,7 +17,7 @@ import { ChainTypeCustom } from '../providers/WidgetProvider/types';
  * @param chains An array of CustomChainType values to filter the wallets based on chain types.
  * @returns An array of sorted and filtered wallets based on the provided configuration and chain types.
  */
-export const useWallets = (walletConfig?: WidgetWalletConfig, chains?: ChainTypeCustom[]) => {
+export const useWallets = (walletConfig?: WidgetWalletConfig, chains?: ChainType[]) => {
   const account = useWagmiAccount();
   const { connectors } = useConnect();
   const { wallets: solanaWallets } = useWallet();
@@ -31,17 +31,17 @@ export const useWallets = (walletConfig?: WidgetWalletConfig, chains?: ChainType
     ];
 
     // filter installed wallets based on chain type
-    const evmInstalled = chains?.includes(ChainTypeCustom.EVM)
+    const evmInstalled = chains?.includes(ChainType.EVM)
       ? evmConnectors.filter(
           (connector) => connector.id && account.connector?.id !== connector.id,
         )
       : [];
     
-    const evmNotDetected = chains?.includes(ChainTypeCustom.EVM)
+    const evmNotDetected = chains?.includes(ChainType.EVM)
       ? evmConnectors.filter((connector) => !connector.id)
       : [];
 
-    const svmInstalled = chains?.includes(ChainTypeCustom.SVM)
+    const svmInstalled = chains?.includes(ChainType.SVM)
       ? solanaWallets?.filter(
           (connector) =>
             connector.adapter.readyState === WalletReadyState.Installed &&
@@ -49,7 +49,7 @@ export const useWallets = (walletConfig?: WidgetWalletConfig, chains?: ChainType
         )
       : [];
     
-    const svmNotDetected = chains?.includes(ChainTypeCustom.SVM)
+    const svmNotDetected = chains?.includes(ChainType.SVM)
       ? solanaWallets?.filter(
           (connector) =>
             connector.adapter.readyState !== WalletReadyState.Installed,

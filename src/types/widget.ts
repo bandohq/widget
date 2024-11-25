@@ -23,14 +23,8 @@ import type {
     LanguageResources,
   } from '../providers/I18nProvider/types.js'
   import type { DefaultFieldValues } from '../stores/form/types'
+import { ChainType } from '../pages/SelectChainPage/types.js'
   
-  // mocked lifi structures
-  
-  export enum ChainType {
-    EVM = 'EVM',
-    SVM = 'SVM',
-    UTXO = 'UTXO',
-  }
   
   export interface ContractCall {
     target: string;
@@ -214,7 +208,6 @@ import type {
     feeConfig?: WidgetFeeConfig
     referrer?: string
   
-    // routePriority?: Order
     slippage?: number
   
     variant?: WidgetVariant
