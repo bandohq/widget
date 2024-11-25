@@ -5,9 +5,9 @@ import { NotFound } from "./components/NotFound";
 import { LanguagesPage } from "./pages/LanguagesPage";
 import { MainPage } from "./pages/MainPage/MainPage.js";
 // import { RoutesPage } from "./pages/RoutesPage/RoutesPage.js";
-// import { SelectChainPage } from "./pages/SelectChainPage/SelectChainPage.js";
+import { SelectChainPage } from "./pages/SelectChainPage/SelectChainPage.js";
 // import { SelectEnabledToolsPage } from "./pages/SelectEnabledToolsPage.js";
-// import { SelectTokenPage } from "./pages/SelectTokenPage/SelectTokenPage.js";
+import { SelectTokenPage } from "./pages/SelectTokenPage/SelectTokenPage.js";
 // import { SendToConfiguredWalletPage } from "./pages/SendToWallet/SendToConfiguredWalletPage.js";
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 // import { TransactionDetailsPage } from "./pages/TransactionDetailsPage/TransactionDetailsPage.js";
@@ -56,14 +56,14 @@ const routes: RouteObject[] = [
     path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
     element: <CountryPage />,
   },
-  // {
-  //   path: navigationRoutes.fromToken,
-  //   element: <SelectTokenPage formType="from" />,
-  // },
-  // {
-  //   path: `${navigationRoutes.fromToken}?/${navigationRoutes.fromChain}`,
-  //   element: <SelectChainPage formType="from" />,
-  // },
+  {
+    path: navigationRoutes.fromToken,
+    element: <SelectTokenPage formType="from" />,
+  },
+  {
+    path: `${navigationRoutes.fromToken}?/${navigationRoutes.fromChain}`,
+    element: <SelectChainPage formType="from" />,
+  },
   // {
   //   path: navigationRoutes.routes,
   //   element: <RoutesPage />,
