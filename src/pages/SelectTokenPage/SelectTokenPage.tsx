@@ -24,8 +24,6 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
     headerRef,
   });
 
-  const swapOnly = useSwapOnly();
-
   const { subvariant } = useWidgetConfig();
   const { t } = useTranslation();
   const title =
@@ -37,13 +35,11 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
 
   useHeader(title);
 
-  const hideChainSelect = swapOnly;
-
   return (
     <FullPageContainer disableGutters>
       <Box pb={2} px={3} ref={headerRef}>
-        {!hideChainSelect ? <ChainSelect formType={formType} /> : null}
-        <Box mt={!hideChainSelect ? 2 : 0}>
+        <ChainSelect formType={formType} />
+        <Box mt={2}>
           <SearchTokenInput />
         </Box>
       </Box>
