@@ -2,7 +2,7 @@ import type { ExtendedChain } from '@lifi/sdk'
 import type { Account } from '@lifi/wallet-management'
 import type { MouseEventHandler, MutableRefObject } from 'react'
 import type { FormType } from '../../stores/form/types.js'
-import type { TokenAmount } from '../../types/token.js'
+import { TokenAmount } from '../../pages/SelectTokenPage/types.js'
 
 export interface TokenListProps {
   parentRef: MutableRefObject<HTMLElement | null>
