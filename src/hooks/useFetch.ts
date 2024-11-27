@@ -15,6 +15,7 @@ type FetchOptions<T> = {
   queryParams?: Record<string, string | number>;
   queryOptions?: UseQueryOptions<T, Error>;
   mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>;
+  useFullUrl?: boolean;
 };
 
 function buildQueryString(queryParams: Record<string, string | number> = {}) {
@@ -22,7 +23,7 @@ function buildQueryString(queryParams: Record<string, string | number> = {}) {
   return query.toString() ? `?${query.toString()}` : '';
 }
 
-async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
+async function fetchData<T>(url: string , options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
@@ -37,6 +38,7 @@ export function useFetch<T = any>({
   queryParams,
   queryOptions,
   mutationOptions,
+  useFullUrl,
 }: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
   const fetchOptions: RequestInit = {
     method,
@@ -47,7 +49,7 @@ export function useFetch<T = any>({
   };
 
   const queryString = buildQueryString(queryParams);
-  const fullUrl = `${BANDO_API_URL}${url}${queryString}`;
+  const fullUrl = !useFullUrl ? `${url}${queryString}` : `${BANDO_API_URL}${url}${queryString}`;
 
   if (method === 'GET') {
     return useQuery<T>({

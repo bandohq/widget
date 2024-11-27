@@ -15,15 +15,10 @@ export const useAvailableChains = (chainTypes?: ChainType[]) => {
   const { chains } = useWidgetConfig();
 
   const { data, isPending } = useFetch<ExtendedChain[]>({
-    url: '/chains/available',
+    url: 'https://alpha.bando.cool/api/v1/ramps/token/sol/?all=true&direction=OFF',
+    useFullUrl: false,
     method: 'GET',
     queryParams: {
-      chainTypes: JSON.stringify(
-        chainTypes ||
-          supportedChainTypes.filter((chainType) =>
-            isItemAllowed(chainType, chains?.types)
-          )
-      ),
     },
     queryOptions: {
       queryKey: ['available-chains'],
