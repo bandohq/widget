@@ -5,7 +5,7 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 
-export const CategorySection = ({ category }) => {
+export const CategorySection = ({ key, category }) => {
   const { setSelectedProduct } = useProduct();
   const navigate = useNavigate();
 
@@ -24,12 +24,13 @@ export const CategorySection = ({ category }) => {
         {category.name}
       </Typography>
       <ProductsGrid>
-        {category.products.map((product) => (
-          <div key={product.id} onClick={() => handleProductClick(product)}>
-            {!product.img_url && (
+        { category.productType }
+        {category.brands.map((brand) => (
+          <div key={brand.brandName} onClick={() => handleProductClick(brand)}>
+            {!brand.imageUrl && (
               <ImageAvatar
-                name={product.name}
-                src={product.img_url}
+                name={brand.brandName}
+                src={brand.imageUrl}
                 sx={{ width: "100%", height: "100%" }}
               />
             )}

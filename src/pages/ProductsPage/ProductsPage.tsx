@@ -11,8 +11,8 @@ import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 export const ProductsPage = () => {
   const { hiddenUI } = useWidgetConfig();
-  const { error, isPending } = useFetch({
-    url: "products",
+  const { error, isPending, data } = useFetch({
+    url: "products/grouped/",
   });
   const { t } = useTranslation();
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
@@ -31,12 +31,12 @@ export const ProductsPage = () => {
       ],
     },
   ];
-
-  useHeader(t("header.products"));
-
+  console.log(data);
+  useHeader(t("header.spend"));
   return (
     <PageContainer>
       <ProductSearch />
+      
       {isPending
         ? Array.from(new Array(5)).map((_, index) => (
             <Skeleton
@@ -46,8 +46,8 @@ export const ProductsPage = () => {
               height="100px"
             />
           ))
-        : categories.map((category) => (
-            <CategorySection key={category.id} category={category} />
+        : data?.products?.map((category) => (
+            <CategorySection key={category.productType} category={category} />
           ))}
       {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
