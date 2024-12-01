@@ -10,10 +10,15 @@ import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { HiddenUI } from "../../types/widget";
 import { ReviewButton } from "./ReviewButton";
 import { useTranslation } from "react-i18next";
+import { ProductsPage } from "../ProductsPage/ProductsPage";
+import { useNavigate } from 'react-router-dom';
+import { Button } from "@mui/material";
+import { useBackButton } from "../../providers/BackButtonContext";
 
 export const MainPage: React.FC = () => {
   const { subvariant, contractComponent, hiddenUI } = useWidgetConfig();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const custom = subvariant === "custom";
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
 
@@ -27,13 +32,7 @@ export const MainPage: React.FC = () => {
           {contractComponent}
         </ContractComponent>
       ) : null}
-      <SelectChainAndToken mb={2} />
-      {!custom ? (
-        <AmountInput formType="from" sx={{ marginBottom: 2 }} />
-      ) : null}
-      <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
-        <ReviewButton />
-      </Box>
+      <ProductsPage />
       {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
   );

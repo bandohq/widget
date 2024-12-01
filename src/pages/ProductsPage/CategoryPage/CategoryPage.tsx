@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -7,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { ProductsGrid } from "../ProductPage.style";
 import { ImageAvatar } from "../../../components/Avatar/Avatar";
 import { ProductSearch } from "../ProductSearch";
 import { useHeader } from "../../../hooks/useHeader";
@@ -16,7 +16,8 @@ import { useCategoryProducts } from "./useCategoryProducts";
 import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
 
 export const CategoryPage = () => {
-  const { categoryName } = useParams();
+  const { category } = useParams();
+
   const {
     allProducts,
     isPending,
@@ -25,10 +26,9 @@ export const CategoryPage = () => {
     lastProductRef,
     setPage,
     debouncedSearch,
-  } = useCategoryProducts(categoryName);
-
-  useHeader(categoryName);
-
+  } = useCategoryProducts(category);
+  useHeader(category);
+  console.log(allProducts);
   return (
     <PageContainer>
       <ProductSearch onSearchChange={debouncedSearch} />

@@ -1,12 +1,18 @@
 import { Box, IconButton, InputBase, Select, styled } from "@mui/material";
 
-export const ProductsGrid = styled(Box)(({ theme }) => ({
-  display: "grid",
+export const BrandsContainer = styled(Box)(({ theme }) => ({
+  display: "block",
   gridTemplateColumns: "repeat(5, 1fr)",
   gridAutoRows: "minmax(60px, auto)",
   gap: 5,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
+}));
+
+export const BrandsGrid = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 export const SearchContainer = styled("div")(() => ({

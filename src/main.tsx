@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
       }}
     >
       <App
-        integrator="bando"
+        integrator="bando" // TODO: CONFIGURE THIS
         config={{
           theme: {
             container: {

@@ -22,7 +22,7 @@ import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <ProductsPage />,
+    element: <MainPage />,
   },
   {
     path: navigationRoutes.buyForm,
@@ -45,7 +45,11 @@ const routes: RouteObject[] = [
   //   element: <SelectEnabledToolsPage type="Exchanges" />,
   // },
   {
-    path: `${navigationRoutes.products}/:categoryName`,
+    path: `${navigationRoutes.products}`,
+    element: <ProductsPage />,
+  },
+  {
+    path: `${navigationRoutes.products}/:category`,
     element: <CategoryPage />,
   },
   {
