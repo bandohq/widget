@@ -1,18 +1,25 @@
 // src/components/CategorySection.js
-import { Typography } from "@mui/material";
-import { ProductsGrid } from "./ProductPage.style";
+import React, { useState } from "react";
+import { Typography, Link } from "@mui/material";
+import { BrandsContainer, BrandsGrid } from "./ProductPage.style";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
+import { CategoryPage } from "./CategoryPage/CategoryPage";
 
-export const CategorySection = ({ key, category }) => {
+export const CategorySection = ({ category, onMoreClick }) => {
   const { setSelectedProduct } = useProduct();
   const navigate = useNavigate();
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
-
     navigate(`/`);
+  };
+
+  const handleMoreClick = () => {
+    if (onMoreClick) {
+      onMoreClick(category);
+    }
   };
 
   return (
@@ -23,10 +30,23 @@ export const CategorySection = ({ key, category }) => {
       >
         {category.name}
       </Typography>
-      <ProductsGrid>
-        { category.productType }
+      <div style={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+        <div>{category.productType}</div>
+        <Link
+          component="button"
+          variant="body2"
+          onClick={handleMoreClick}
+          sx={{ marginLeft: 1 }}
+        >
+          more
+        </Link>
+      </div>
+      <BrandsContainer>
         {category.brands.map((brand) => (
-          <div key={brand.brandName} onClick={() => handleProductClick(brand)}>
+          <BrandsGrid
+            key={brand.brandName}
+            onClick={() => handleProductClick(brand)}
+          >
             {!brand.imageUrl && (
               <ImageAvatar
                 name={brand.brandName}
@@ -34,9 +54,9 @@ export const CategorySection = ({ key, category }) => {
                 sx={{ width: "100%", height: "100%" }}
               />
             )}
-          </div>
+          </BrandsGrid>
         ))}
-      </ProductsGrid>
+      </BrandsContainer>
     </div>
   );
 };

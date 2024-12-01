@@ -7,7 +7,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { ProductsGrid } from "../ProductPage.style";
 import { ImageAvatar } from "../../../components/Avatar/Avatar";
 import { ProductSearch } from "../ProductSearch";
 import { useHeader } from "../../../hooks/useHeader";
@@ -15,8 +14,7 @@ import { PageContainer } from "../../../components/PageContainer";
 import { useCategoryProducts } from "./useCategoryProducts";
 import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
 
-export const CategoryPage = () => {
-  const { categoryName } = useParams();
+export const CategoryPage = ({ category, onBack }) => {
   const {
     allProducts,
     isPending,
@@ -25,12 +23,15 @@ export const CategoryPage = () => {
     lastProductRef,
     setPage,
     debouncedSearch,
-  } = useCategoryProducts(categoryName);
+  } = useCategoryProducts(category.productType);
 
-  useHeader(categoryName);
+  useHeader(category.productType);
 
   return (
     <PageContainer>
+      <Button variant="contained" onClick={onBack} sx={{ marginBottom: 2 }}>
+        Back
+      </Button>
       <ProductSearch onSearchChange={debouncedSearch} />
       <List
         sx={{

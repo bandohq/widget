@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useFetch } from "../../hooks/useFetch";
@@ -8,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
 import { HiddenUI } from "../../types/widget";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
+import { CategoryPage } from "./CategoryPage/CategoryPage";
 
 export const ProductsPage = () => {
   const { hiddenUI } = useWidgetConfig();
@@ -16,27 +18,30 @@ export const ProductsPage = () => {
   });
   const { t } = useTranslation();
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const categories = [
-    {
-      id: 1,
-      name: "Electronics",
-      products: [
-        { id: 1, name: "Laptop", img_url: null },
-        { id: 2, name: "PCerda", img_url: null },
-        { id: 1, name: "mouse", img_url: null },
-        { id: 1, name: "amazon Card", img_url: null },
-        { id: 1, name: "Steam Card", img_url: null },
-        { id: 1, name: "", img_url: null },
-      ],
-    },
-  ];
-  console.log(data);
   useHeader(t("header.spend"));
+
+  const handleMoreClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleBack = () => {
+    setSelectedCategory(null);
+  };
+
+  if (selectedCategory) {
+    return (
+      <PageContainer>
+        <CategoryPage category={selectedCategory} onBack={handleBack} />
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       <ProductSearch />
-      
+
       {isPending
         ? Array.from(new Array(5)).map((_, index) => (
             <Skeleton
@@ -47,7 +52,11 @@ export const ProductsPage = () => {
             />
           ))
         : data?.products?.map((category) => (
-            <CategorySection key={category.productType} category={category} />
+            <CategorySection
+              key={category.productType}
+              category={category}
+              onMoreClick={handleMoreClick}
+            />
           ))}
       {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
