@@ -9,35 +9,28 @@ export const useCategoryProducts = (categoryName: string) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { country } = useCountryContext();
 
-  const { data, error, isPending } = useFetch<any[]>({
-    url: "products",
-    queryParams: {
-      type: categoryName,
-      pageNumber: page,
-      pageSize: 100,
-      country: country.iso_alpha2,
-      brand: searchQuery,
+  const { data, error, isPending } = useFetch<any[]>(
+    {
+      url: "products",
+      queryParams: {
+        type: categoryName,
+        pageNumber: page,
+        pageSize: 100,
+        country: country.iso_alpha2,
+        brand: searchQuery,
+      },
     },
-  });
+  );
 
   const { products, currentPage, totalPages } = data || {};
 
   useEffect(() => {
-    if (products) {
-      setAllProducts((prev) => {
-        const existingIds = new Set(prev.map((product) => product.id));
-        const newProducts = products.filter(
-          (product) => !existingIds.has(product.id)
-        );
-        return [...prev, ...newProducts];
-      });
-    }
-  }, [products]);
-
-  useEffect(() => {
-    setAllProducts([]);
+    setAllProducts([]); // Clear the products array
     setPage(1);
-  }, [country, searchQuery]);
+    if (data && data.products !== undefined) {
+      setAllProducts(data.products);
+    }
+  }, [data, country, searchQuery, categoryName]);
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastProductRef = useRef<HTMLDivElement | null>(null);

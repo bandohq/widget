@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -14,7 +15,9 @@ import { PageContainer } from "../../../components/PageContainer";
 import { useCategoryProducts } from "./useCategoryProducts";
 import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
 
-export const CategoryPage = ({ category, onBack }) => {
+export const CategoryPage = () => {
+  const { category } = useParams();
+
   const {
     allProducts,
     isPending,
@@ -23,15 +26,11 @@ export const CategoryPage = ({ category, onBack }) => {
     lastProductRef,
     setPage,
     debouncedSearch,
-  } = useCategoryProducts(category.productType);
-
-  useHeader(category.productType);
-
+  } = useCategoryProducts(category);
+  useHeader(category);
+  console.log(allProducts);
   return (
     <PageContainer>
-      <Button variant="contained" onClick={onBack} sx={{ marginBottom: 2 }}>
-        Back
-      </Button>
       <ProductSearch onSearchChange={debouncedSearch} />
       <List
         sx={{
