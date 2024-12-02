@@ -8,7 +8,6 @@ import { TokenList } from "../../components/TokenList/TokenList.js";
 import { useHeader } from "../../hooks/useHeader.js";
 import { useNavigateBack } from "../../hooks/useNavigateBack.js";
 import { useScrollableOverflowHidden } from "../../hooks/useScrollableContainer.js";
-import { useSwapOnly } from "../../hooks/useSwapOnly.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { SearchTokenInput } from "./SearchTokenInput.js";
