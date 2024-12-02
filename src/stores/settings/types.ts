@@ -1,4 +1,3 @@
-import type { Order } from '@lifi/sdk';
 import type { PropsWithChildren } from 'react';
 import type { StoreApi } from 'zustand';
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional';
@@ -22,7 +21,6 @@ export interface SettingsProps {
   appearance: Appearance;
   gasPrice?: string;
   language?: string;
-  routePriority?: Order;
   enabledAutoRefuel: boolean;
   slippage?: string;
   disabledBridges: string[];

@@ -1,6 +1,7 @@
+import { ChainType } from "../pages/SelectChainPage/types";
+
 // Mocked Enums and Types (to replace dependencies)
 export type ChainId = number; // Simulates ChainId
-export type ChainType = 'EVM' | 'SVM'; // Simulates ChainType
 export type Process = unknown; // Generic type, non-functional
 export type Route = unknown; // Generic type, non-functional
 export type DefaultValues = Record<string, unknown>; // Simulates DefaultValues

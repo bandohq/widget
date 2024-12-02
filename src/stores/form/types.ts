@@ -4,10 +4,13 @@ import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
 export interface DefaultFieldValues {
   fromChain?: number
   fromToken?: string
+  toChain?: number
+  toToken?: string
+  toAddress?: string
+  fromAmount: string
+  toAmount: string
   productId?: string
   country?: string
-  toAddress?: string
-  toAmount?: string | number
 }
 
 export interface DefaultValues extends DefaultFieldValues {
