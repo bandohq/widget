@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import type { FC } from "react";
 import { useChain } from "../../hooks/useChain.js";
 import { useDebouncedWatch } from "../../hooks/useDebouncedWatch";
-import { useTokenBalances } from "../../hooks/useTokenBalances.js";
 import { useTokenSearch } from "../../hooks/useTokenSearch";
 import { FormKeyHelper } from "../../stores/form/types.js";
 import { useFieldValues } from "../../stores/form/useFieldValues.js";
@@ -13,6 +12,7 @@ import type { TokenListProps } from "./types.js";
 import { useTokenSelect } from "./useTokenSelect.js";
 import { filteredTokensComparator } from "./utils.js";
 import { TokenAmount } from "../../pages/SelectTokenPage/types.js";
+import { useTokens } from "../../hooks/useTokens.js";
 
 export const TokenList: FC<TokenListProps> = ({
   formType,
@@ -28,22 +28,15 @@ export const TokenList: FC<TokenListProps> = ({
 
   const { chain: selectedChain, isLoading: isSelectedChainLoading } =
     useChain(selectedChainId);
+
   const { account } = useAccount({
-    chainType: selectedChain?.chainType,
+    chainType: selectedChain?.network_type,
   });
 
-  const {
-    tokens: chainTokens,
-    tokensWithBalance,
-    isLoading: isTokensLoading,
-    isBalanceLoading,
-    featuredTokens,
-    popularTokens,
-  } = useTokenBalances(selectedChainId);
+  const { data: chainTokens, isPending: isTokensLoading } =
+    useTokens(selectedChain);
 
-  let filteredTokens = (tokensWithBalance ??
-    chainTokens ??
-    []) as TokenAmount[];
+  let filteredTokens = (chainTokens ?? []) as TokenAmount[];
   const normalizedSearchFilter = tokenSearchFilter?.replaceAll("$", "");
   const searchFilter = normalizedSearchFilter?.toUpperCase() ?? "";
 
@@ -79,9 +72,7 @@ export const TokenList: FC<TokenListProps> = ({
     : filteredTokens;
 
   const handleTokenClick = useTokenSelect(formType, onClick);
-  const showCategories =
-    Boolean(featuredTokens?.length || popularTokens?.length) &&
-    !tokenSearchFilter;
+  const showCategories = !tokenSearchFilter;
 
   return (
     <Box ref={parentRef} style={{ height, overflow: "auto" }}>
@@ -95,10 +86,11 @@ export const TokenList: FC<TokenListProps> = ({
         chainId={selectedChainId}
         chain={selectedChain}
         isLoading={isLoading}
-        isBalanceLoading={isBalanceLoading}
         showCategories={showCategories}
+        isBalanceLoading
         onClick={handleTokenClick}
       />
+      //{" "}
     </Box>
   );
 };

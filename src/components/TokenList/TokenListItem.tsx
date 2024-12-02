@@ -13,11 +13,10 @@ import type { MouseEventHandler } from "react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { formatUnits } from "viem";
-import { useExplorer } from "../../hooks/useExplorer.js";
 import { formatTokenAmount, formatTokenPrice } from "../../utils/format.js";
 import { shortenAddress } from "../../utils/wallet.js";
 import { ListItemButton } from "../ListItem/ListItemButton.js";
-import { IconButton, ListItem } from "./TokenList.style.js";
+import { ListItem } from "./TokenList.style.js";
 import type { TokenListItemButtonProps, TokenListItemProps } from "./types.js";
 import { ChainType } from "../../pages/SelectChainPage/types.js";
 
@@ -64,7 +63,6 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
   isBalanceLoading,
 }) => {
   const { t } = useTranslation();
-  const { getAddressLink } = useExplorer();
 
   const tokenPrice = token.amount
     ? formatTokenPrice(
@@ -77,7 +75,7 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
   const [showAddress, setShowAddress] = useState(false);
 
   const tokenAddress =
-    chain?.chainType === ChainType.UTXO ? accountAddress : token.address;
+    chain?.network_type === ChainType.UTXO ? accountAddress : token.address;
 
   const onMouseEnter = () => {
     timeoutId.current = setTimeout(() => {
@@ -102,7 +100,7 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
       dense
     >
       <ListItemAvatar>
-        <Avatar src={token.logoURI} alt={token.symbol}>
+        <Avatar src={token.logo_url} alt={token.symbol}>
           {token.symbol?.[0]}
         </Avatar>
       </ListItemAvatar>
@@ -138,16 +136,6 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
                 <Box display="flex" alignItems="center" pt={0.125}>
                   {shortenAddress(tokenAddress)}
                 </Box>
-                <IconButton
-                  size="small"
-                  LinkComponent={Link}
-                  href={getAddressLink(tokenAddress!, chain)}
-                  target="_blank"
-                  rel="nofollow noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <OpenInNewRounded />
-                </IconButton>
               </Box>
             </Slide>
           </Box>
