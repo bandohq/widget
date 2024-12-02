@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js';
 import { useFetch } from './useFetch';
-import { isItemAllowed } from '../utils/item.js';
 import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types.js';
+import { BANDO_API_URL_V2 } from '../config/constants.js';
 
 export type GetChainById = (
   chainId?: number,
@@ -11,11 +11,17 @@ export type GetChainById = (
 
 const supportedChainTypes = [ChainType.EVM, ChainType.SVM, ChainType.UTXO] 
 
+interface AvailableChainsResponse {
+  data: {
+    data: ExtendedChain[];
+  };
+}
+
 export const useAvailableChains = (chainTypes?: ChainType[]) => {
   const { chains } = useWidgetConfig();
 
-  const { data, isPending } = useFetch<ExtendedChain[]>({
-    url: 'https://alpha.bando.cool/api/v1/ramps/token/sol/?all=true&direction=OFF',
+  const { data: response, isPending } = useFetch<AvailableChainsResponse[]>({
+    url: `${BANDO_API_URL_V2}ramps/network/?direction=ON`,
     useFullUrl: false,
     method: 'GET',
     queryParams: {
@@ -27,13 +33,16 @@ export const useAvailableChains = (chainTypes?: ChainType[]) => {
     },
   });
 
+  const data = response?.data || [];
+
   const getChainById: GetChainById = useCallback(
     (chainId?: number, chains: ExtendedChain[] | undefined = data) => {
       if (!chainId) {
         return undefined;
       }
-      const chain = chains?.find((chain) => chain.id === chainId);
-      return chain;
+
+      const chain = chains?.find((chain) => chain.chain_id === chainId);
+      return (chains.length > 0) && chain ? chain : chains[0];
     },
     [data]
   );
