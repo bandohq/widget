@@ -9,7 +9,7 @@ import { Avatar, Badge } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useChain } from "../../hooks/useChain";
-import { useHasExternalWalletProvider } from "../../providers/WalletProvider/useHasExternalWalletProvider";
+import { useExternalWalletProvider } from "../../providers/WalletProvider/useExternalWalletProvider";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { useFieldValues } from "../../stores/form/useFieldValues";
 import { HiddenUI } from "../../types/widget";
@@ -27,8 +27,8 @@ import { WalletMenuContainer } from "./WalletMenu.style.js";
 
 export const WalletHeader: React.FC = () => {
   const { subvariant, hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider &&
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
+  return !useExternalWalletProvidersOnly &&
     subvariant !== "split" &&
     !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
     <HeaderAppBar elevation={0} sx={{ justifyContent: "flex-end" }}>
@@ -39,8 +39,9 @@ export const WalletHeader: React.FC = () => {
 
 export const SplitWalletMenuButton: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider && !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
+  return !useExternalWalletProvidersOnly &&
+    !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
     <WalletMenuButton />
   ) : null;
 };
