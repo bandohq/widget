@@ -19,31 +19,10 @@ import { AmountInputEndAdornment } from "./AmountInputEndAdornment";
 import { AmountInputStartAdornment } from "./AmountInputStartAdornment";
 import { PriceFormHelperText } from "./PriceFormHelperText";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
+import { useFieldValues } from "../../stores/form/useFieldValues.js";
+import { useFieldController } from "../../stores/form/useFieldController.js";
+import { useToken } from "../../hooks/useToken.js";
 
-// useToken: replace with actual token-fetching logic
-const useToken = (chainId?: number, tokenAddress?: string) => ({
-  token:
-    chainId && tokenAddress
-      ? {
-          logoURI: "",
-          symbol: "MCK",
-          decimals: 18,
-          name: "MockToken",
-          chainId,
-          address: tokenAddress,
-        }
-      : undefined,
-});
-
-// useFieldValues: replace with actual field values logic
-const useFieldValues = (...args: any[]) => [1, "0xMockAddress"]; // Mocked chain ID and token address
-
-// useFieldController: replace with actual form control logic
-const useFieldController = ({ name }: { name: string }) => ({
-  onChange: (value: string) => {},
-  onBlur: () => {},
-  value: "",
-});
 export const AmountInput: React.FC<FormTypeProps & CardProps> = ({
   formType,
   ...props
