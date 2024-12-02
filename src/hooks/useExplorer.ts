@@ -5,7 +5,7 @@ import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js'
 const sanitiseBaseUrl = (baseUrl: string) => baseUrl.trim().replace(/\/+$/, '')
 
 export type Chain = {
-  id: number
+  chain_id: number
   metamask: {
     blockExplorerUrls: string[]
   }
@@ -27,8 +27,8 @@ export const useExplorer = () => {
   const { getChainById } = useAvailableChains()
 
   const getBaseUrl = (chain: Chain) => {
-    const baseUrl = explorerUrls?.[chain.id]
-      ? explorerUrls[chain.id][0]
+    const baseUrl = explorerUrls?.[chain.chain_id]
+      ? explorerUrls[chain.chain_id][0]
       : chain.metamask.blockExplorerUrls[0]
 
     return sanitiseBaseUrl(baseUrl)

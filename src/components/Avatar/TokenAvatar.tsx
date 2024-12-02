@@ -14,7 +14,7 @@ export interface StaticToken extends BaseToken {
   decimals: number;
   name: string;
   coinKey?: any;
-  logoURI?: string;
+  logo_url?: string;
 }
 
 // Mocked hooks replacing SDK-based hooks

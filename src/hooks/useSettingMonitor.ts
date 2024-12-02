@@ -11,14 +11,12 @@ export const useSettingMonitor = () => {
   const [
     disabledBridges,
     disabledExchanges,
-    routePriority,
     slippage,
     gasPrice,
   ] = useSettingsStore(
     (state) => [
       state.disabledBridges,
       state.disabledExchanges,
-      state.routePriority,
       state.slippage,
       state.gasPrice,
     ],
@@ -35,9 +33,6 @@ export const useSettingMonitor = () => {
   const isSlippageOutsideRecommendedLimits =
     isSlippageChanged && Number(slippage) > 1
 
-  const isRoutePriorityChanged = config.routePriority
-    ? routePriority !== config.routePriority
-    : routePriority !== defaultConfigurableSettings.routePriority
 
   const isGasPriceChanged = gasPrice !== defaultConfigurableSettings.gasPrice
 
@@ -48,7 +43,6 @@ export const useSettingMonitor = () => {
     isBridgesChanged ||
     isExchangesChanged ||
     isSlippageChanged ||
-    isRoutePriorityChanged ||
     isGasPriceChanged
 
   const isRouteSettingsWithWarnings = isSlippageOutsideRecommendedLimits
@@ -69,7 +63,6 @@ export const useSettingMonitor = () => {
     isExchangesChanged,
     isSlippageChanged,
     isSlippageOutsideRecommendedLimits,
-    isRoutePriorityChanged,
     isGasPriceChanged,
     isCustomRouteSettings,
     isRouteSettingsWithWarnings,
