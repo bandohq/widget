@@ -30,17 +30,17 @@ export const ProductSearch = ({ onSearchChange }) => {
         </StyledIconButton>
       </InputContainer>
       <CountrySelect
-        value={country.iso_alpha2}
+        value={country?.iso_alpha2}
         onChange={(e) => selectCountry(e.target.value as string)}
         displayEmpty
         inputProps={{ "aria-label": "Country" }}
         renderValue={() => (
-          <img src={country?.flag_url} alt={country?.name} width={20} />
+          <img src={country?.flag_url} alt={country?.iso_alpha2} width={20} />
         )}
       >
         {countries.map((country) => (
           <MenuItem key={country.iso_alpha2} value={country.iso_alpha2}>
-            <Tooltip title={country.iso_alpha2}>
+            <Tooltip title={country.name}>
               <>
                 <img
                   src={country.flag_url}

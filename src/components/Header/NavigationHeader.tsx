@@ -1,4 +1,3 @@
-import { useAccount } from "@lifi/wallet-management";
 import { Box, Typography } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useNavigateBack } from "../../hooks/useNavigateBack";
@@ -15,13 +14,11 @@ import { CloseDrawerButton } from "./CloseDrawerButton";
 import { HeaderAppBar, HeaderControlsContainer } from "./Header.style";
 import { NavigationTabs } from "./NavigationTabs";
 import { SettingsButton } from "./SettingsButton";
-import { TransactionHistoryButton } from "./TransactionHistoryButton";
 import { SplitWalletMenuButton } from "./WalletHeader";
 
 export const NavigationHeader: React.FC = () => {
   const { subvariant, hiddenUI, variant } = useWidgetConfig();
   const { navigateBack } = useNavigateBack();
-  const { account } = useAccount();
   const { element, title } = useHeaderStore((state) => state);
   const { pathname } = useLocation();
 
@@ -61,10 +58,6 @@ export const NavigationHeader: React.FC = () => {
             path={navigationRoutes.home}
             element={
               <HeaderControlsContainer>
-                {account.isConnected &&
-                !hiddenUI?.includes(HiddenUI.History) ? (
-                  <TransactionHistoryButton />
-                ) : null}
                 <SettingsButton />
                 {variant === "drawer" &&
                 !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (

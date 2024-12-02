@@ -38,7 +38,7 @@ export function useFetch<T = any>({
   queryParams,
   queryOptions,
   mutationOptions,
-  useFullUrl,
+  useFullUrl = true,
 }: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
   const fetchOptions: RequestInit = {
     method,
