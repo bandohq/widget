@@ -7,6 +7,7 @@ import { RouteExecutionStoreProvider } from "./routes/RouteExecutionStore.js";
 import { SplitSubvariantStoreProvider } from "./settings/useSplitSubvariantStore.js";
 import { ProductProvider } from "./ProductProvider/ProductProvider.js";
 import { CountriesProvider } from "./CountriesProvider/CountriesProvider.js";
+import { ChainOrderStoreProvider } from "./chains/ChainOrderStore.js";
 
 export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -29,9 +30,11 @@ export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           <HeaderStoreProvider namePrefix={config?.keyPrefix}>
             <BookmarkStoreProvider namePrefix={config?.keyPrefix}>
               <FormStoreProvider formRef={formRef}>
-                <RouteExecutionStoreProvider namePrefix={config?.keyPrefix}>
-                  {children}
-                </RouteExecutionStoreProvider>
+                <ChainOrderStoreProvider namePrefix={config?.keyPrefix}>
+                  <RouteExecutionStoreProvider namePrefix={config?.keyPrefix}>
+                    {children}
+                  </RouteExecutionStoreProvider>
+                </ChainOrderStoreProvider>
               </FormStoreProvider>
             </BookmarkStoreProvider>
           </HeaderStoreProvider>
