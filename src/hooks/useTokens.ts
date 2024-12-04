@@ -18,7 +18,6 @@ export const useTokens = (chain: Chain) => {
             direction: 'OFF',
         },
     });
-
     return {
         ...response,
         isPending,

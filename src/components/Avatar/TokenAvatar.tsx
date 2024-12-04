@@ -3,6 +3,7 @@ import { Badge } from "@mui/material";
 import { AvatarBadgedSkeleton } from "./Avatar.js";
 import { AvatarDefaultBadge, AvatarMasked } from "./Avatar.style.js";
 import { SmallAvatar } from "./SmallAvatar.js";
+import { Chain } from "../../pages/SelectChainPage/types.js";
 
 export interface BaseToken {
   chainId: any;
@@ -53,7 +54,7 @@ export const TokenAvatar: React.FC<{
   isLoading?: boolean;
   sx?: SxProps<Theme>;
 }> = ({ token, chain, isLoading, sx }) => {
-  if (!chain || !token?.logoURI) {
+  if (!chain || !token?.logo_url) {
     return <TokenAvatarFallback token={token} isLoading={isLoading} sx={sx} />;
   }
   return (

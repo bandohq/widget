@@ -7,7 +7,6 @@ import { FormKeyHelper } from '../../stores/form/types.js'
 import { useFieldActions } from '../../stores/form/useFieldActions.js'
 import { useFieldController } from '../../stores/form/useFieldController'
 import { WidgetEvent } from '../../types/events.js'
-import type { DisabledUI } from '../../types/widget.js'
 
 export type UseTokenSelectArgs = {
   formType: FormType
@@ -33,41 +32,6 @@ export const useTokenSelect = (formType: FormType, onClick?: () => void) => {
         isDirty: true,
         isTouched: true,
       })
-      const amountKey = FormKeyHelper.getAmountKey(formType)
-      if (!disabledUI?.includes(amountKey as DisabledUI)) {
-        setFieldValue(amountKey, '')
-      }
-      const oppositeFormType = formType === 'from' ? 'to' : 'from'
-      const [selectedOppositeTokenAddress, selectedOppositeChainId] =
-        getFieldValues(
-          FormKeyHelper.getTokenKey(oppositeFormType),
-          FormKeyHelper.getChainKey(oppositeFormType)
-        )
-      // TODO: remove when we enable same chain/token transfers
-      if (
-        selectedOppositeTokenAddress === tokenAddress &&
-        selectedOppositeChainId === selectedChainId &&
-        subvariant !== 'custom'
-      ) {
-        setFieldValue(FormKeyHelper.getTokenKey(oppositeFormType), '', {
-          isDirty: true,
-          isTouched: true,
-        })
-      }
-
-      // If no opposite token is selected, synchronize the opposite chain to match the currently selected chain
-      const { setChain } = chainOrderStore.getState()
-      if (!selectedOppositeTokenAddress && selectedChainId) {
-        setFieldValue(
-          FormKeyHelper.getChainKey(oppositeFormType),
-          selectedChainId,
-          {
-            isDirty: true,
-            isTouched: true,
-          }
-        )
-        setChain(selectedChainId, oppositeFormType)
-      }
 
       const eventToEmit =
         formType === 'from'
@@ -75,6 +39,7 @@ export const useTokenSelect = (formType: FormType, onClick?: () => void) => {
           : WidgetEvent.DestinationChainTokenSelected
 
       if (selectedChainId) {
+        console.log({ selectedChainId, tokenAddress }, 'eventToEmit')
         emitter.emit(eventToEmit, {
           chainId: selectedChainId,
           tokenAddress,
