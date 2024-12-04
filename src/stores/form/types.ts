@@ -11,6 +11,7 @@ export interface DefaultFieldValues {
   toAmount: string
   productId?: string
   country?: string
+  quote_display?: string
 }
 
 export interface DefaultValues extends DefaultFieldValues {

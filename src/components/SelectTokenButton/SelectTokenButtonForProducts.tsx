@@ -8,7 +8,7 @@ import type { FormTypeProps } from "../../stores/form/types.js";
 import { FormKeyHelper } from "../../stores/form/types.js";
 import { useFieldValues } from "../../stores/form/useFieldValues.js";
 import { navigationRoutes } from "../../utils/navigationRoutes.js";
-import { AvatarBadgedSkeleton } from "../Avatar/Avatar";
+import { AvatarBadgedDefault, AvatarBadgedSkeleton } from "../Avatar/Avatar";
 import { TokenAvatar } from "../Avatar/TokenAvatar";
 import { CardTitle } from "../Card/CardTitle";
 import {
@@ -17,6 +17,8 @@ import {
   SelectTokenCardHeader,
 } from "./SelectTokenButton.style.js";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
+import { useFetch } from "../../hooks/useFetch.js";
+import { useEffect } from "react";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -34,7 +36,30 @@ export const SelectTokenButtonForProducts: React.FC<
     tokenKey
   );
   const { chain, isLoading: isChainLoading } = useChain(chainId);
-  const { token, isLoading: isTokenLoading } = useToken(chainId, tokenAddress);
+  const { token, isLoading: isTokenLoading } = useToken(chain, tokenAddress);
+  const {
+    data: quote,
+    isPending,
+    mutate,
+  } = useFetch({
+    url: "quotes",
+    method: "POST",
+    data: {
+      sku: product?.sku,
+      fiat_currency: product?.price?.fiatCurrency,
+      digital_asset: token?.symbol || null,
+    },
+    queryOptions: {
+      queryKey: ["quote", product?.sku, product?.fiatCurrency, token?.symbol],
+    },
+  });
+
+  useEffect(() => {
+    if (!!(product?.sku && product?.price?.fiatCurrency && token?.symbol)) {
+      //Triggering fetch for new product/token combination
+      mutate();
+    }
+  }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
   const handleClick = () => {
     navigate(formType === "from" && navigationRoutes.fromToken);
@@ -54,25 +79,47 @@ export const SelectTokenButtonForProducts: React.FC<
       : t(`main.${formType}`);
 
   return (
-    <SelectTokenCard component="button" onClick={onClick}>
+    <SelectTokenCard component="button" onClick={product && onClick}>
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
-        {!product ? (
+        {!token && !product && !isChainLoading ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedSkeleton />}
             title="0"
             subheader="0 USD"
             compact={compact}
           />
+        ) : product && !token ? (
+          <SelectTokenCardHeader
+            avatar={<AvatarBadgedDefault />}
+            title={defaultPlaceholder}
+            subheader={`${parseFloat(product.price?.fiatValue).toFixed(2)} ${
+              product.price?.fiatCurrency
+            }`}
+            compact={compact}
+          />
         ) : (
           <SelectTokenCardHeader
-            avatar={<TokenAvatar token={product.token} chain={product.chain} />}
-            title={`${parseFloat(product.price.stableCoinValue).toFixed(2)} ${
-              product.price.stableCoinCurrency
-            }`}
-            subheader={`${parseFloat(product.price.fiatValue).toFixed(2)} ${
-              product.price.fiatCurrency
-            }`}
+            avatar={
+              isSelected ? (
+                <TokenAvatar token={token} chain={chain} />
+              ) : (
+                <AvatarBadgedDefault />
+              )
+            }
+            title={`${quote?.digital_asset_amount} ${quote?.digital_asset}`}
+            titleTypographyProps={{
+              title: isSelected ? token.symbol : "holiwis",
+            }}
+            subheader={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
+            subheaderTypographyProps={
+              isSelected
+                ? {
+                    title: chain.name,
+                  }
+                : undefined
+            }
+            selected={isSelected}
             compact={compact}
           />
         )}

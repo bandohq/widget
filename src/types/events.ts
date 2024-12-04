@@ -19,7 +19,7 @@ export enum WidgetEvent {
   ContactSupport = 'contactSupport',
   SourceChainTokenSelected = 'sourceChainTokenSelected',
   DestinationChainTokenSelected = 'destinationChainTokenSelected',
-  SendToWalletToggled = 'sendToWalletToggled',
+  QuoteFetched = 'quoteFetched',
   /**
    * @deprecated Use `PageEntered` event instead.
    */
@@ -42,7 +42,6 @@ export type WidgetEvents = {
   contactSupport: ContactSupport;
   sourceChainTokenSelected: ChainTokenSelected;
   destinationChainTokenSelected: ChainTokenSelected;
-  sendToWalletToggled: boolean;
   formFieldChanged: FormFieldChanged;
   reviewTransactionPageEntered?: Route;
   walletConnected: WalletConnected;
