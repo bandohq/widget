@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -7,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { ProductsGrid } from "../ProductPage.style";
 import { ImageAvatar } from "../../../components/Avatar/Avatar";
 import { ProductSearch } from "../ProductSearch";
 import { useHeader } from "../../../hooks/useHeader";
@@ -32,7 +32,6 @@ export const CategoryPage = () => {
 
   const handleSelectProduct = (product) => {
     updateProduct(product);
-
     navigate(`/`);
   };
 

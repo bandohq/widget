@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useFetch } from "../../hooks/useFetch";
@@ -5,38 +6,66 @@ import { CategorySection } from "./CategorySection";
 import { Skeleton } from "@mui/material";
 import { ProductSearch } from "./ProductSearch";
 import { useTranslation } from "react-i18next";
-import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
-import { HiddenUI } from "../../types/widget";
-import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
+import { CategoryPage } from "./CategoryPage/CategoryPage";
+import { useNavigate } from "react-router-dom";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 
 export const ProductsPage = () => {
-  const { hiddenUI } = useWidgetConfig();
-  const { error, isPending } = useFetch({
-    url: "products",
+  const navigate = useNavigate();
+  const { error, isPending, data } = useFetch({
+    url: "products/grouped/",
   });
   const { t } = useTranslation();
-  const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);
+  useHeader(t("header.spend"));
 
-  const categories = [
-    {
-      id: 1,
-      name: "Electronics",
-      products: [
-        { id: 1, name: "Laptop", img_url: null },
-        { id: 2, name: "PCerda", img_url: null },
-        { id: 1, name: "mouse", img_url: null },
-        { id: 1, name: "amazon Card", img_url: null },
-        { id: 1, name: "Steam Card", img_url: null },
-        { id: 1, name: "", img_url: null },
-      ],
-    },
-  ];
+  useEffect(() => {
+    console.log(data);
+    setFilteredData(data);
+  }, [data]);
 
-  useHeader(t("header.products"));
+  const handleMoreClick = (category) => {
+    setSelectedCategory(category);
+    navigate(`${navigationRoutes.products}/${category.productType}`);
+  };
+
+  const handleSearchChange = (query) => {  
+    // Use original data for searching
+    const fData = data?.products
+      ?.map((category) => {
+        // Filter brands within each category
+        const matchingBrands = category.brands.filter((item) =>
+          item.brandSlug.toLowerCase().includes(query.toLowerCase())
+        );
+  
+        // Return the category with the filtered brands
+        return {
+          ...category,
+          brands: matchingBrands,
+        };
+      })
+      // Filter out categories with no matching brands
+      ?.filter((category) => category.brands.length > 0);
+    setSearchQuery(query);
+  
+    // Update filteredData with the new filtered products
+    setFilteredData({ products: fData });
+  };
+
+  if (selectedCategory) {
+    return (
+      <PageContainer>
+        <CategoryPage />
+      </PageContainer>
+    );
+  }
 
   return (
     <PageContainer>
-      <ProductSearch />
+      <ProductSearch onSearchChange={handleSearchChange} />
+
       {isPending
         ? Array.from(new Array(5)).map((_, index) => (
             <Skeleton
@@ -46,10 +75,13 @@ export const ProductsPage = () => {
               height="100px"
             />
           ))
-        : categories.map((category) => (
-            <CategorySection key={category.id} category={category} />
+        : filteredData?.products?.map((category) => (
+            <CategorySection
+              key={category.productType}
+              category={category}
+              onMoreClick={handleMoreClick}
+            />
           ))}
-      {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
   );
 };
