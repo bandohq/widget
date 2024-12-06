@@ -175,6 +175,11 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@bandohq/contract-abis@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bandohq/contract-abis/-/contract-abis-1.0.2.tgz#ed5217f136ce9c3c35524ccbabc948f316c29273"
+  integrity sha512-TiAMNhPKjf0l2UZbMUza9n/cM4y0oce2M6PFT0TnFPiKtcKd5w72aUAwqvtAjCKsRJfmR6J59ul5g+ZU5yRF5g==
+
 "@bigmi/client@^0.0.4":
   version "0.0.4"
   resolved "https://registry.npmjs.org/@bigmi/client/-/client-0.0.4.tgz"
