@@ -25,7 +25,7 @@ const routes: RouteObject[] = [
     element: <SettingsPage />,
   },
   {
-    path: navigationRoutes.status,
+    path: `${navigationRoutes.status}/:transactionId`,
     element: <StatusPage />,
   },
   {
