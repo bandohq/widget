@@ -17,7 +17,7 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
   const { openWalletMenu } = useWalletMenu();
   const [fromChainId] = useFieldValues("fromChain");
   const { chain } = useChain(fromChainId);
-  const { account } = useAccount({ chainType: chain?.chainType });
+  const { account } = useAccount({ chainType: chain?.network_type });
 
   const handleClick = async () => {
     if (account.isConnected) {

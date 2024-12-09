@@ -37,7 +37,6 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
   return (
     <FullPageContainer disableGutters>
       <Box pb={2} px={3} ref={headerRef}>
-        <ChainSelect formType={formType} />
         <Box mt={2}>
           <SearchTokenInput />
         </Box>

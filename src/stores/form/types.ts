@@ -12,6 +12,7 @@ export interface DefaultFieldValues {
   fromAmount: string
   toAmount: string
   productId?: string
+  phone: string
   country?: string
   quote_display?: string
 }
