@@ -61,6 +61,11 @@ export const CountriesProvider: React.FC<{
     }
   };
 
+  const getCountry = (isoCode: string) => {
+    const country = countries.find((c) => c.iso_alpha2 === isoCode);
+    return country || null;
+  };
+
   const removeCountry = (isoCode: string) => {
     setCountries((prev) =>
       prev.filter((country) => country.iso_alpha2 !== isoCode)
@@ -74,7 +79,7 @@ export const CountriesProvider: React.FC<{
         country,
         selectCountry,
         removeCountry,
-        isCountryPending: isPending 
+        isCountryPending: isPending,
       }}
     >
       {children}
