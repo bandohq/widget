@@ -16,6 +16,7 @@ type FetchOptions<T> = {
   queryOptions?: UseQueryOptions<T, Error>;
   mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>;
   useFullUrl?: boolean;
+  enabled?: boolean;
 };
 
 function buildQueryString(queryParams: Record<string, string | number> = {}) {
@@ -39,6 +40,7 @@ export function useFetch<T = any>({
   queryOptions,
   mutationOptions,
   useFullUrl = true,
+  enabled = true,
 }: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
   const fetchOptions: RequestInit = {
     method,
@@ -55,7 +57,7 @@ export function useFetch<T = any>({
     return useQuery<T>({
       queryKey: [url, queryParams],
       queryFn: () => fetchData<T>(fullUrl, fetchOptions),
-      enabled: method === 'GET',
+      enabled: method === 'GET' && enabled,
       ...queryOptions,
     });
   } else {

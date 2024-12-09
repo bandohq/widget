@@ -5,7 +5,6 @@ import {
   defaultConfigurableSettings,
   useSettingsStore,
 } from '../stores/settings/useSettingsStore'
-import { useTools } from './useTools'
 
 export const useSettingMonitor = () => {
   const [
@@ -22,9 +21,8 @@ export const useSettingMonitor = () => {
     ],
     shallow
   )
-  const { tools } = useTools()
   const config = useWidgetConfig()
-  const { setDefaultSettings, resetSettings } = useSettingsActions()
+  const { setDefaultSettings } = useSettingsActions()
 
   const isSlippageChanged = config.slippage
     ? Number(slippage) !== config.slippage * 100
@@ -48,14 +46,7 @@ export const useSettingMonitor = () => {
   const isRouteSettingsWithWarnings = isSlippageOutsideRecommendedLimits
 
   const reset = () => {
-    if (tools) {
-      resetSettings(
-        tools.bridges.map((tool) => tool.key),
-        tools.exchanges.map((tool) => tool.key)
-      )
-
       setDefaultSettings(config)
-    }
   }
 
   return {
