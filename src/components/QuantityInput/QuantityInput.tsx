@@ -13,7 +13,7 @@ import {
 } from "./Quantity.style.js";
 import { useFieldController } from "../../stores/form/useFieldController.js";
 
-export const QuantityInputBase: React.FC<
+export const QuantityInput: React.FC<
   CardProps & {
     disabled?: boolean;
     marginTop?: string | number;

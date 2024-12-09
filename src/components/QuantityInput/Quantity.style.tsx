@@ -7,6 +7,7 @@ export const InputCard = styled(Card, {
   name: "MuiInputCard",
   slot: "root",
 })(({ theme }) => ({
+  marginTop: "10px",
   "&:hover": {
     backgroundColor:
       theme.palette.mode === "light"
