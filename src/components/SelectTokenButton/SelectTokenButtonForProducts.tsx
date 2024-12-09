@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useChain } from "../../hooks/useChain.js";
-import { useSwapOnly } from "../../hooks/useSwapOnly";
 import { useToken } from "../../hooks/useToken";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import type { FormTypeProps } from "../../stores/form/types.js";
@@ -9,7 +8,6 @@ import { FormKeyHelper } from "../../stores/form/types.js";
 import { useFieldValues } from "../../stores/form/useFieldValues.js";
 import { navigationRoutes } from "../../utils/navigationRoutes.js";
 import { AvatarBadgedDefault, AvatarBadgedSkeleton } from "../Avatar/Avatar";
-import { TokenAvatar } from "../Avatar/TokenAvatar";
 import { CardTitle } from "../Card/CardTitle";
 import {
   CardContent,
@@ -19,6 +17,8 @@ import {
 import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
 import { useFetch } from "../../hooks/useFetch.js";
 import { useEffect } from "react";
+import { useAccount } from "@lifi/wallet-management";
+import { Avatar } from "@mui/material";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -27,22 +27,20 @@ export const SelectTokenButtonForProducts: React.FC<
 > = ({ formType, compact }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { disabledUI, subvariant } = useWidgetConfig();
+  const { disabledUI } = useWidgetConfig();
   const { product } = useProduct();
-  const swapOnly = useSwapOnly();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [chainId, tokenAddress] = useFieldValues(
     FormKeyHelper.getChainKey(formType),
     tokenKey
   );
-  const { chain, isLoading: isChainLoading } = useChain(chainId);
-  const { token, isLoading: isTokenLoading } = useToken(chain, tokenAddress);
-  const {
-    data: quote,
-    isPending,
-    mutate,
-  } = useFetch({
-    url: "quotes",
+  const { chain } = useChain(chainId);
+  const { token } = useToken(chain, tokenAddress);
+  const { account } = useAccount({
+    chainType: chain?.network_type,
+  });
+  const { data: quote, mutate } = useFetch({
+    url: "quotes/",
     method: "POST",
     data: {
       sku: product?.sku,
@@ -62,27 +60,22 @@ export const SelectTokenButtonForProducts: React.FC<
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
   const handleClick = () => {
-    navigate(formType === "from" && navigationRoutes.fromToken);
+    navigate(navigationRoutes.fromToken);
   };
 
   const isSelected = !!(chain && token);
   const onClick = !disabledUI?.includes(tokenKey) ? handleClick : undefined;
-  const defaultPlaceholder =
-    formType === "to" && subvariant === "refuel"
-      ? t("main.selectChain")
-      : formType === "to" && swapOnly
-      ? t("main.selectToken")
-      : t("main.selectChainAndToken");
-  const cardTitle: string =
-    formType === "from" && subvariant === "custom"
-      ? t("header.payWith")
-      : t(`main.${formType}`);
+  const defaultPlaceholder = t("main.selectChainAndToken");
+  const cardTitle: string = t(`main.${formType}`);
 
   return (
-    <SelectTokenCard component="button" onClick={product && onClick}>
+    <SelectTokenCard
+      component="button"
+      onClick={account?.isConnected && product ? onClick : undefined}
+    >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
-        {!token && !product && !isChainLoading ? (
+        {!token && !product ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedSkeleton />}
             title="0"
@@ -102,14 +95,16 @@ export const SelectTokenButtonForProducts: React.FC<
           <SelectTokenCardHeader
             avatar={
               isSelected ? (
-                <TokenAvatar token={token} chain={chain} />
+                <Avatar src={token.image_url} alt={token.symbol}>
+                  {token.symbol?.[0]}
+                </Avatar>
               ) : (
                 <AvatarBadgedDefault />
               )
             }
             title={`${quote?.digital_asset_amount} ${quote?.digital_asset}`}
             titleTypographyProps={{
-              title: isSelected ? token.symbol : "holiwis",
+              title: token.symbol,
             }}
             subheader={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
             subheaderTypographyProps={
