@@ -1,10 +1,14 @@
-import { Input } from "../../components/ReferenceInput/Input";
+import { Input } from "../../components/ReferenceInput/ReferenceInput";
 import { Typography } from "@mui/material";
 import { palette } from "../../themes/palettes";
 
 interface DetailSectionProps {
   productType: string;
-  referenceType: string;
+  referenceType: {
+    name: "email" | "phone";
+    regexp: RegExp;
+    valueType: "string" | "number";
+  };
 }
 export const DetailSection: React.FC<DetailSectionProps> = ({
   productType,
@@ -15,7 +19,7 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
       <Typography variant="subtitle1" style={{ color: palette.grey[400] }}>
         Details
       </Typography>
-      <Input formType="to" referenceType={referenceType} />
+      <Input formType="to" referenceType={referenceType[0]} />
       <Typography variant="subtitle2" style={{ color: palette.grey[400] }}>
         Is where you will recibe your {productType}.
       </Typography>

@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { ContractComponent } from "../../components/ContractComponent/ContractComponent";
 import { PageContainer } from "../../components/PageContainer";
 import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
@@ -11,9 +10,10 @@ import { useTranslation } from "react-i18next";
 import { ProductsPage } from "../ProductsPage/ProductsPage";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { ContractComponent } from "../../components/ContractComponent/ContractComponent";
 
 export const MainPage: React.FC = () => {
-  const { subvariant, contractComponent, hiddenUI } = useWidgetConfig();
+  const { hiddenUI } = useWidgetConfig();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const custom = subvariant === "custom";
