@@ -12,6 +12,7 @@ import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useCategoryProducts } from "../../hooks/useCategoryProducts";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
+import { BrandsContainer } from "./ProductPage.style";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -36,14 +37,25 @@ export const ProductsPage = () => {
       <ProductSearch onSearchChange={setSearchQuery} />
 
       {isLoading
-        ? Array.from(new Array(5)).map((_, index) => (
-            <Skeleton
+        ? Array.from(new Array(2)).map((_, index) => (
+            <>
+              <Skeleton
               key={index}
               variant="rectangular"
-              width="100%"
-              height="50px"
-              sx={{ marginBottom: 1 }}
-            />
+              width="20%"
+              height="20px"
+              sx={{ marginBottom: 1, mt: 2 }} />
+              <BrandsContainer>
+                {Array.from(new Array(10)).map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    variant="rectangular"
+                    width="100%"
+                    height="100%"
+                    sx={{ marginBottom: 1, borderRadius: '5px' }} />
+                ))}
+              </BrandsContainer>
+            </>
           ))
         : filteredData?.map((category) => (
             <CategorySection

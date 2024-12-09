@@ -28,7 +28,11 @@ export const CategoryPage = () => {
       return;
     }
     const cat = products.filter((product) => product.productType === category);
-    setOnlyBrands(cat[0]);
+    if(cat.length === 0) {
+      navigate(`/`);
+    } else {
+      setOnlyBrands(cat[0]);
+    }
   }, [products, category, isLoading]);
 
   const parentRef = useRef(null);

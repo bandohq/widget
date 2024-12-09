@@ -4,7 +4,7 @@ export const BrandsContainer = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(5, 1fr)",
   gridAutoRows: "minmax(60px, auto)",
-  gap: 5,
+  gap: 10,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
 }));
