@@ -4,6 +4,7 @@ import { AvatarBadgedSkeleton } from "./Avatar.js";
 import { AvatarDefaultBadge, AvatarMasked } from "./Avatar.style.js";
 import { SmallAvatar } from "./SmallAvatar.js";
 import { Chain } from "../../pages/SelectChainPage/types.js";
+import { useToken } from "../../hooks/useToken.js";
 
 export interface BaseToken {
   chainId: any;
@@ -15,38 +16,8 @@ export interface StaticToken extends BaseToken {
   decimals: number;
   name: string;
   coinKey?: any;
-  logo_url?: string;
+  image_url?: string;
 }
-
-// Mocked hooks replacing SDK-based hooks
-const useChain = (chainId?: number) => ({
-  chain: chainId
-    ? {
-        logoURI: "",
-        name: "MockChain",
-        metamask: null,
-        key: "mockKey",
-        chainType: "EVM",
-        coin: "MCK",
-        id: chainId,
-        mainnet: true, // Added property to match EVMChain type
-      }
-    : undefined,
-});
-
-const useToken = (chainId?: number, address?: string) => ({
-  token: address
-    ? {
-        logoURI: "",
-        symbol: "MCK",
-        decimals: 18,
-        name: "MockToken",
-        chainId: chainId ?? 1,
-        address: address,
-      }
-    : undefined,
-  isLoading: false,
-});
 
 export const TokenAvatar: React.FC<{
   token?: StaticToken;
@@ -54,7 +25,7 @@ export const TokenAvatar: React.FC<{
   isLoading?: boolean;
   sx?: SxProps<Theme>;
 }> = ({ token, chain, isLoading, sx }) => {
-  if (!chain || !token?.logo_url) {
+  if (!chain || !token?.image_url) {
     return <TokenAvatarFallback token={token} isLoading={isLoading} sx={sx} />;
   }
   return (
@@ -72,7 +43,6 @@ export const TokenAvatarFallback: React.FC<{
   isLoading?: boolean;
   sx?: SxProps<Theme>;
 }> = ({ token, isLoading, sx }) => {
-  const { chain } = useChain(token?.chainId);
   const { token: chainToken, isLoading: isLoadingToken } = useToken(
     token?.chainId,
     token?.address
@@ -109,7 +79,7 @@ export const TokenAvatarBase: React.FC<{
       }
       sx={sx}
     >
-      <AvatarMasked src={token?.logoURI} alt={token?.symbol}>
+      <AvatarMasked src={token?.image_url} alt={token?.symbol}>
         {token?.symbol?.[0]}
       </AvatarMasked>
     </Badge>

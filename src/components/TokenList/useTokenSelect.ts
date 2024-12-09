@@ -39,7 +39,6 @@ export const useTokenSelect = (formType: FormType, onClick?: () => void) => {
           : WidgetEvent.DestinationChainTokenSelected
 
       if (selectedChainId) {
-        console.log({ selectedChainId, tokenAddress }, 'eventToEmit')
         emitter.emit(eventToEmit, {
           chainId: selectedChainId,
           tokenAddress,

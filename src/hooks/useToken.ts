@@ -24,7 +24,6 @@ export const useToken = (chain?: Chain, tokenAddress?: string) => {
     const token = tokens?.find(
       (token) => token.address === tokenAddress
     )
-    console.log(token )
     return token
   }, [chain?.chain_id, tokenAddress, tokens])
 

@@ -15,7 +15,7 @@ export interface StaticToken extends BaseToken {
   decimals: number
   name: string
   coinKey?: CoinKey
-  logo_url?: string
+  image_url?: string
 }
 
 export interface Token extends StaticToken {
