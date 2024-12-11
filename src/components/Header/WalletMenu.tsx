@@ -5,7 +5,6 @@ import {
 } from "@lifi/wallet-management";
 import {
   ContentCopyRounded,
-  OpenInNewRounded,
   PowerSettingsNewRounded,
 } from "@mui/icons-material";
 import {
