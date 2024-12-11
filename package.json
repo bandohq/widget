@@ -27,6 +27,7 @@
     "@tanstack/react-query": "^5.59.13",
     "@tanstack/react-virtual": "^3.10.9",
     "add": "^2.0.6",
+    "ethers": "^6.13.4",
     "i18next": "^23.16.2",
     "lodash": "^4.17.21",
     "microdiff": "^1.4.0",

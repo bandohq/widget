@@ -61,7 +61,7 @@ export interface Chain {
   id: number;           // Unique ID for the chain
   chain_id: number;
   mainnet: boolean;
-  logoURI?: string;
+  rpc_url: string;
   logo_url?: string;
 }
 
