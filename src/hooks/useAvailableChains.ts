@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js';
 import { useFetch } from './useFetch';
 import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types.js';
 import { BANDO_API_URL_V2 } from '../config/constants.js';
@@ -9,8 +8,6 @@ export type GetChainById = (
   chains?: ExtendedChain[]
 ) => ExtendedChain | undefined;
 
-const supportedChainTypes = [ChainType.EVM, ChainType.SVM, ChainType.UTXO] 
-
 interface AvailableChainsResponse {
   data: {
     data: ExtendedChain[];
@@ -18,7 +15,6 @@ interface AvailableChainsResponse {
 }
 
 export const useAvailableChains = (chainTypes?: ChainType[]) => {
-  const { chains } = useWidgetConfig();
 
   const { data: response, isPending } = useFetch<AvailableChainsResponse[]>({
     url: `${BANDO_API_URL_V2}ramps/network/?direction=ON`,
