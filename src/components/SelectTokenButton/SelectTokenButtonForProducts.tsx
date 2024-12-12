@@ -18,7 +18,8 @@ import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
 import { useFetch } from "../../hooks/useFetch.js";
 import { useEffect } from "react";
 import { useAccount } from "@lifi/wallet-management";
-import { Avatar } from "@mui/material";
+import { Avatar, Skeleton } from "@mui/material";
+import { CaretDown } from "@phosphor-icons/react";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -30,16 +31,21 @@ export const SelectTokenButtonForProducts: React.FC<
   const { disabledUI } = useWidgetConfig();
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
-  const [chainId, tokenAddress] = useFieldValues(
+  const [chainId, tokenAddress, quantity] = useFieldValues(
     FormKeyHelper.getChainKey(formType),
-    tokenKey
+    tokenKey,
+    "quantity"
   );
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({
     chainType: chain?.network_type,
   });
-  const { data: quote, mutate } = useFetch({
+  const {
+    data,
+    mutate,
+    isPending: quotePending,
+  } = useFetch({
     url: "quotes/",
     method: "POST",
     data: {
@@ -51,6 +57,8 @@ export const SelectTokenButtonForProducts: React.FC<
       queryKey: ["quote", product?.sku, product?.fiatCurrency, token?.symbol],
     },
   });
+
+  const { data: quote } = data || {};
 
   useEffect(() => {
     if (!!(product?.sku && product?.price?.fiatCurrency && token?.symbol)) {
@@ -91,22 +99,57 @@ export const SelectTokenButtonForProducts: React.FC<
             }`}
             compact={compact}
           />
+        ) : product && token && quotePending ? (
+          <SelectTokenCardHeader
+            avatar={
+              <>
+                <Avatar src={token.image_url} alt={token.symbol}>
+                  {token.symbol?.[0]}
+                </Avatar>
+                <CaretDown
+                  size={"25px"}
+                  style={{ margin: "auto", paddingLeft: 5 }}
+                />
+              </>
+            }
+            title={<Skeleton width={100} />}
+            titleTypographyProps={{
+              title: token.symbol,
+            }}
+            subheader={<Skeleton width={80} />}
+            subheaderTypographyProps={
+              isSelected
+                ? {
+                    title: chain.name,
+                  }
+                : undefined
+            }
+            selected={isSelected}
+            compact={compact}
+          />
         ) : (
           <SelectTokenCardHeader
             avatar={
               isSelected ? (
-                <Avatar src={token.image_url} alt={token.symbol}>
-                  {token.symbol?.[0]}
-                </Avatar>
+                <>
+                  <Avatar src={token.image_url} alt={token.symbol}>
+                    {token.symbol?.[0]}
+                  </Avatar>
+                  <CaretDown />
+                </>
               ) : (
                 <AvatarBadgedDefault />
               )
             }
-            title={`${quote?.digital_asset_amount} ${quote?.digital_asset}`}
+            title={`${quote?.digital_asset_amount * quantity} ${
+              quote?.digital_asset
+            }`}
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
+            subheader={`${quote?.fiat_amount * quantity} ${
+              quote?.fiat_currency
+            }`}
             subheaderTypographyProps={
               isSelected
                 ? {
