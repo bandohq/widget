@@ -54,15 +54,12 @@ export const CardContent = styled(MuiCardContent, {
     ({ theme, selected, compact }) => ({
       padding: theme.spacing(2),
       [`.${cardHeaderClasses.title}`]: {
-        color: selected
-          ? theme.palette.text.primary
-          : theme.palette.text.secondary,
+        color: theme.palette.text.primary,
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
-        textAlign: 'right',
         width: compact ? 96 : 256,
-        fontSize: compact && !selected ? 16 : 18,
+        fontSize: compact && !selected ? 16 : '30px',
         fontWeight: selected ? 600 : 500,
         [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
           width: compact ? 96 : 224,
@@ -72,8 +69,8 @@ export const CardContent = styled(MuiCardContent, {
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
-        textAlign: 'right',
         width: compact ? 96 : 256,
+        fontSize: compact && !selected ? 12 : 16,
         [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
           width: compact ? 96 : 224,
         },

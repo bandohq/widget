@@ -52,7 +52,7 @@ export const SelectProductButton: React.FC<
               )
             }
             title={product.brand}
-            subheader={product.shortNotes}
+            subheader={`${product?.productType} in ${product?.country}`}
             compact={compact}
           />
         )}
