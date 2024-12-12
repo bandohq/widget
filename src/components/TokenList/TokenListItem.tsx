@@ -1,8 +1,6 @@
-import { OpenInNewRounded } from "@mui/icons-material";
 import {
   Avatar,
   Box,
-  Link,
   ListItemAvatar,
   ListItemText,
   Skeleton,

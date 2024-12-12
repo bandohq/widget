@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useFetch } from './useFetch';
 import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types.js';
-import { BANDO_API_URL_V2 } from '../config/constants.js';
 
 export type GetChainById = (
   chainId?: number,
@@ -17,8 +16,7 @@ interface AvailableChainsResponse {
 export const useAvailableChains = (chainTypes?: ChainType[]) => {
 
   const { data: response, isPending } = useFetch<AvailableChainsResponse[]>({
-    url: `${BANDO_API_URL_V2}ramps/network/?direction=ON`,
-    useFullUrl: false,
+    url: `networks/`,
     method: 'GET',
     queryParams: {
     },

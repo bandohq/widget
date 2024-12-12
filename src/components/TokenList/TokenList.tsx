@@ -13,6 +13,7 @@ import { useTokenSelect } from "./useTokenSelect.js";
 import { filteredTokensComparator } from "./utils.js";
 import { TokenAmount } from "../../pages/SelectTokenPage/types.js";
 import { useTokens } from "../../hooks/useTokens.js";
+import { useTokenBalances } from "../../hooks/useTokenBalances.js";
 
 export const TokenList: FC<TokenListProps> = ({
   formType,
@@ -32,6 +33,10 @@ export const TokenList: FC<TokenListProps> = ({
   const { account } = useAccount({
     chainType: selectedChain?.network_type,
   });
+  const {} = useTokenBalances(
+    account?.address ?? "",
+    selectedChain ?? undefined
+  );
 
   const { data: chainTokens, isPending: isTokensLoading } =
     useTokens(selectedChain);
