@@ -18,7 +18,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
       setError(null);
 
       try {
-        // Validar el rpc_url
+        // Validate RPC URL
         const rpcUrl = chain.rpc_url;
         if (!rpcUrl || rpcUrl === "TBD") {
           console.error("Invalid RPC URL:", rpcUrl);
