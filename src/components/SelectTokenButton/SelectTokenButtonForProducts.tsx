@@ -135,7 +135,10 @@ export const SelectTokenButtonForProducts: React.FC<
                   <Avatar src={token.image_url} alt={token.symbol}>
                     {token.symbol?.[0]}
                   </Avatar>
-                  <CaretDown />
+                  <CaretDown
+                    size={"25px"}
+                    style={{ margin: "auto", paddingLeft: 5 }}
+                  />
                 </>
               ) : (
                 <AvatarBadgedDefault />
