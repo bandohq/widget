@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")!).render(
               borderRadius: "16px",
             },
           },
-          country: "US",
+          country: "MX",
         }}
       />
     </div>
