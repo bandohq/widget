@@ -9,4 +9,5 @@ export   type CountryContextType = {
     country: Country;
     selectCountry: (isoCode: string) => void;
     removeCountry: (isoCode: string) => void;
+    isCountryPending: boolean;
 };

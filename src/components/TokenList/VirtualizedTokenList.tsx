@@ -71,34 +71,13 @@ export const VirtualizedTokenList: FC<VirtualizedTokenListProps> = ({
         const currentToken = tokens[item.index];
         const previousToken: TokenAmount | undefined = tokens[item.index - 1];
 
-        // const isFirstFeaturedToken = currentToken.featured && item.index === 0;
-
-        // const isTransitionFromFeaturedTokens =
-        //   previousToken?.featured && !currentToken.featured;
-
         const isTransitionFromMyTokens =
           previousToken?.amount && !currentToken.amount;
-
-        // const isTransitionToMyTokens =
-        //   isTransitionFromFeaturedTokens && currentToken.amount;
-
-        // const isTransitionToPopularTokens =
-        //   (isTransitionFromFeaturedTokens || isTransitionFromMyTokens) &&
-        //   currentToken.popular;
 
         const shouldShowAllTokensCategory = isTransitionFromMyTokens;
 
         const startAdornmentLabel = showCategories
           ? (() => {
-              // if (isFirstFeaturedToken) {
-              //   return t("main.featuredTokens");
-              // }
-              // if (isTransitionToMyTokens) {
-              //   return t("main.myTokens");
-              // }
-              // if (isTransitionToPopularTokens) {
-              //   return t("main.popularTokens");
-              // }
               if (shouldShowAllTokensCategory) {
                 return t("main.allTokens");
               }
