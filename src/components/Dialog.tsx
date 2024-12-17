@@ -1,7 +1,8 @@
 import type { DialogProps, PaperProps, Theme } from "@mui/material";
-import { Dialog as MuiDialog } from "@mui/material";
-import type { PropsWithChildren } from "react";
+import { Dialog as MuiDialog, Slide } from "@mui/material";
+import { forwardRef, type PropsWithChildren } from "react";
 import { useGetScrollableContainer } from "../hooks/useScrollableContainer";
+import { TransitionProps } from "@mui/material/transitions";
 
 export const modalProps = {
   sx: {
@@ -30,6 +31,15 @@ export const slotProps = {
   },
 };
 
+const Transition = forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<unknown>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export const Dialog: React.FC<PropsWithChildren<DialogProps>> = ({
   children,
   open,
@@ -39,8 +49,10 @@ export const Dialog: React.FC<PropsWithChildren<DialogProps>> = ({
   return (
     <MuiDialog
       container={getContainer}
+      fullScreen
       open={open}
       onClose={onClose}
+      TransitionComponent={Transition}
       sx={modalProps.sx}
       PaperProps={paperProps}
       slotProps={slotProps}
