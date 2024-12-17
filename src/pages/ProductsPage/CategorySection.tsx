@@ -1,19 +1,30 @@
-// src/components/CategorySection.js
-import React, { useState } from "react";
 import { Typography, Link } from "@mui/material";
 import { BrandsContainer, BrandsGrid } from "./ProductPage.style";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
-import { CategoryPage } from "./CategoryPage/CategoryPage";
+import { useState } from "react";
+import { Dialog } from "../../components/Dialog";
+import { DialogList } from "../../components/DialogList/DialogList";
+import { VariantItem } from "../../components/DialogList/VariantItem";
+import { convertSlugToTitle } from "../../utils/slugToTitle";
 
 export const CategorySection = ({ category, onMoreClick }) => {
-  const { setSelectedProduct } = useProduct();
+  const { updateProduct, updateBrand } = useProduct();
   const navigate = useNavigate();
 
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    navigate(`/`);
+  const [open, setOpen] = useState(false);
+  const [selectedBrand, setSelectedBrand] = useState(null);
+
+  const handleBrandClick = (brand) => {
+    updateBrand(brand);
+    if (brand.variants.length > 1) {
+      setSelectedBrand(brand);
+      setOpen(true);
+    } else {
+      updateProduct(brand.variants[0]);
+      navigate(`/`);
+    }
   };
 
   const handleMoreClick = () => {
@@ -24,14 +35,10 @@ export const CategorySection = ({ category, onMoreClick }) => {
 
   return (
     <div>
-      <Typography
-        variant="h4"
-        sx={{ fontSize: "21px", fontWeight: 200, marginBottom: 2 }}
-      >
-        {category.name}
-      </Typography>
       <div style={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
-        <div>{category.productType}</div>
+        <Typography variant="h4" sx={{ fontSize: "21px", fontWeight: 200 }}>
+          {category.productType && convertSlugToTitle(category?.productType)}
+        </Typography>
         <Link
           component="button"
           variant="body2"
@@ -45,18 +52,31 @@ export const CategorySection = ({ category, onMoreClick }) => {
         {category.brands.map((brand) => (
           <BrandsGrid
             key={brand.brandName}
-            onClick={() => handleProductClick(brand)}
+            onClick={() => handleBrandClick(brand)}
           >
-            {!brand.imageUrl && (
-              <ImageAvatar
-                name={brand.brandName}
-                src={brand.imageUrl}
-                sx={{ width: "100%", height: "100%" }}
-              />
-            )}
+            <ImageAvatar
+              name={brand.brandName}
+              src={brand.imageUrl}
+              sx={{ width: "100%", height: "100%" }}
+            />
           </BrandsGrid>
         ))}
       </BrandsContainer>
+
+      {/* Variants Dialog */}
+      {selectedBrand && (
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <DialogList
+            items={selectedBrand?.variants || []}
+            onClose={() => setOpen(false)}
+            title={selectedBrand?.brandName || ""}
+            image={selectedBrand?.imageUrl || ""}
+            renderItem={(item) => (
+              <VariantItem item={item} onClose={() => setOpen(false)} />
+            )}
+          />
+        </Dialog>
+      )}
     </div>
   );
 };

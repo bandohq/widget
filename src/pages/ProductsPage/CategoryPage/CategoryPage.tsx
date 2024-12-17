@@ -5,9 +5,9 @@ import {
   ListItemIcon,
   ListItemText,
   Skeleton,
-  ListItem
+  ListItem,
 } from "@mui/material";
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { ImageAvatar } from "../../../components/Avatar/Avatar";
 import { ProductSearch } from "../ProductSearch";
 import { useHeader } from "../../../hooks/useHeader";
@@ -15,20 +15,25 @@ import { PageContainer } from "../../../components/PageContainer";
 import { SettingsListItemButton } from "../../../components/SettingsListItemButton";
 import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 import { useCatalogContext } from "../../../providers/CatalogProvider/CatalogProvider";
+import { Dialog } from "../../../components/Dialog";
+import { DialogList } from "../../../components/DialogList/DialogList";
+import { VariantItem } from "../../../components/DialogList/VariantItem";
 
 export const CategoryPage = () => {
   const [onlyBrands, setOnlyBrands] = useState({ brands: [] });
+  const [open, setOpen] = useState(false);
   const { category } = useParams();
   const navigate = useNavigate();
   const { products, isLoading, setSearchQuery } = useCatalogContext();
+  const { updateProduct, brand, updateBrand } = useProduct();
 
-  //Filter data by category
+  // Filter data by category
   useEffect(() => {
-    if(!isLoading && products.length === 0) {
+    if (!isLoading && products.length === 0) {
       return;
     }
     const cat = products.filter((product) => product.productType === category);
-    if(cat.length === 0) {
+    if (cat.length === 0) {
       navigate(`/`);
     } else {
       setOnlyBrands(cat[0]);
@@ -40,24 +45,27 @@ export const CategoryPage = () => {
   const rowVirtualizer = useVirtualizer({
     count: onlyBrands.brands.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 60,
+    estimateSize: () => 30,
     overscan: 5,
   });
 
-  const { updateProduct } = useProduct();
-
-  const handleSelectProduct = (product) => {
-    updateProduct(product);
-    navigate(`/`);
+  const handleSelectBrand = (brand) => {
+    updateBrand(brand);
+    if (brand.variants.length > 1) {
+      setOpen(true);
+    } else {
+      updateProduct(brand.variants[0]);
+      navigate(`/`);
+    }
   };
 
   useHeader(category);
 
   return (
     <PageContainer>
-      { !isLoading && onlyBrands.brands.length > 0 && (
+      {!isLoading && onlyBrands.brands.length > 0 && (
         <div>
-          <ProductSearch onSearchChange={setSearchQuery} />
+          <ProductSearch onSearchChange={setSearchQuery} products={[]} />
           <div ref={parentRef}>
             <List
               sx={{
@@ -73,20 +81,20 @@ export const CategoryPage = () => {
                     style={{
                       top: 0,
                       left: 0,
-                      width: '100%',
+                      width: "100%",
                       height: `${virtualRow.size}px`,
                       transform: `translateY(${virtualRow.start}px)`,
                     }}
                   >
                     <SettingsListItemButton
                       key={product.brandSlug}
-                      onClick={() => handleSelectProduct(product)}
+                      onClick={() => handleSelectBrand(product)}
                     >
                       <ListItemIcon>
                         <ImageAvatar
                           name={product.brandName}
                           src={product.imageUrl}
-                          sx={{ width: "60px", height: "60px" }}
+                          sx={{ width: "45px", height: "45px" }}
                         />
                       </ListItemIcon>
                       <ListItemText primary={product.brandSlug} />
@@ -101,7 +109,6 @@ export const CategoryPage = () => {
       {isLoading && (
         <div>
           <ProductSearch onSearchChange={setSearchQuery} />
-          {/* Skeleton Loader */}
           <List>
             {Array.from({ length: 8 }).map((_, index) => (
               <ListItem key={index} alignItems="flex-start">
@@ -110,12 +117,27 @@ export const CategoryPage = () => {
                 </ListItemIcon>
                 <ListItemText
                   primary={<Skeleton variant="text" width="80%" height={20} />}
-                  secondary={<Skeleton variant="text" width="60%" height={20} />}
+                  secondary={
+                    <Skeleton variant="text" width="60%" height={20} />
+                  }
                 />
               </ListItem>
             ))}
           </List>
         </div>
+      )}
+      {brand && (
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <DialogList
+            items={brand?.variants || []}
+            onClose={() => setOpen(false)}
+            title={brand?.brandName || ""}
+            image={brand?.imageUrl || ""}
+            renderItem={(item) => (
+              <VariantItem item={item} onClose={() => setOpen(false)} />
+            )}
+          />
+        </Dialog>
       )}
     </PageContainer>
   );
