@@ -2,6 +2,7 @@ import { AppBar, IconButton, List, Toolbar, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import CloseIcon from "@mui/icons-material/Close";
+import { ImageAvatar } from "../Avatar/Avatar";
 
 interface DialogListProps {
   onClose: () => void;
@@ -57,13 +58,14 @@ export const DialogList: React.FC<DialogListProps> = ({
         >
           {title}
         </Typography>
-        <img
+        <ImageAvatar
+          name={title}
           src={image}
-          alt={title}
-          style={{
-            height: "auto",
+          sx={{
             maxWidth: "150px",
-            objectFit: "cover",
+            width: "100%",
+            height: "auto",
+            minHeight: "100px",
           }}
         />
       </div>
