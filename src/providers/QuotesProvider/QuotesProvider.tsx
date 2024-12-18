@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import { useAccount } from "@lifi/wallet-management";
 
 interface QuoteData {
   digital_asset_amount: number;
@@ -25,6 +26,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [quote, setQuote] = useState<QuoteData | null>(null);
   const [isPending, setIsPending] = useState(false);
+  const { account } = useAccount();
 
   const {
     data,
@@ -54,6 +56,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiat_currency: fiatCurrency,
       digital_asset: digitalAsset,
+      chain_id: account?.chainId,
     });
   };
 

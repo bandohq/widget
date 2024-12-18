@@ -10,12 +10,14 @@ import { createWalletClient, custom } from "viem";
 import { mainnet } from "viem/chains";
 import { Buffer } from "buffer";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
+import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 
 export const useTransactionFlow = (product) => {
   const [transactionId, setTransactionId] = useState(null);
   const navigate = useNavigate();
   const { openWalletMenu } = useWalletMenu();
   const tokenKey = FormKeyHelper.getTokenKey("from");
+  const { quote } = useQuotes();
   const [chainId, tokenAddress, quantity, reference] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     tokenKey,
@@ -85,9 +87,9 @@ export const useTransactionFlow = (product) => {
       transaction_intent: {
         sku: product?.sku,
         chain: chain?.key,
-        token: token?.symbol,
+        token: quote?.digital_asset,
         quantity,
-        amount: parseFloat(product?.price?.fiatValue) * quantity,
+        amount: quote?.digital_asset_amount * quantity,
         wallet: account?.address,
       },
     },

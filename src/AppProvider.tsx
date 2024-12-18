@@ -28,13 +28,13 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
         <I18nProvider>
           <ThemeProvider>
             <WalletProvider>
-              <QuotesProvider>
-                <StoreProvider config={config} formRef={formRef}>
-                  <CatalogProvider>
+              <StoreProvider config={config} formRef={formRef}>
+                <CatalogProvider>
+                  <QuotesProvider>
                     <AppRouter>{children}</AppRouter>
-                  </CatalogProvider>
-                </StoreProvider>
-              </QuotesProvider>
+                  </QuotesProvider>
+                </CatalogProvider>
+              </StoreProvider>
             </WalletProvider>
           </ThemeProvider>
         </I18nProvider>
