@@ -8,6 +8,7 @@ export const navigationRoutes = {
     languages: 'languages',
     countries: 'countries',
     products: 'products',
+    form: 'form',
     routes: 'routes',
     settings: 'settings',
     transactionDetails: 'transaction-details',

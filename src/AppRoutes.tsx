@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
 import { NotFound } from "./components/NotFound";
 import { LanguagesPage } from "./pages/LanguagesPage";
-import { MainPage } from "./pages/MainPage/MainPage.js";
+import { FormPage } from "./pages/FormPage/FormPage.js";
 import { SelectTokenPage } from "./pages/SelectTokenPage/SelectTokenPage.js";
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 import { navigationRoutes } from "./utils/navigationRoutes";
@@ -14,11 +14,11 @@ import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <MainPage />,
+    element: <ProductsPage />,
   },
   {
-    path: navigationRoutes.products,
-    element: <ProductsPage />,
+    path: navigationRoutes.form,
+    element: <FormPage />,
   },
   {
     path: navigationRoutes.settings,
