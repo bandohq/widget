@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import type { FC } from "react";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { ChainSelect } from "../../components/ChainSelect/ChainSelect.js";
 import { FullPageContainer } from "../../components/FullPageContainer.js";
 import { TokenList } from "../../components/TokenList/TokenList.js";
 import { useHeader } from "../../hooks/useHeader.js";

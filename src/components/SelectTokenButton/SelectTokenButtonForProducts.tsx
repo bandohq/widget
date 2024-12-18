@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useChain } from "../../hooks/useChain.js";
 import { useToken } from "../../hooks/useToken";
-import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { FormKeyHelper } from "../../stores/form/types.js";
 import { useFieldValues } from "../../stores/form/useFieldValues.js";
@@ -28,7 +27,6 @@ export const SelectTokenButtonForProducts: React.FC<
 > = ({ formType, compact }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { disabledUI } = useWidgetConfig();
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [chainId, tokenAddress, quantity] = useFieldValues(
@@ -72,14 +70,13 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const onClick = !disabledUI?.includes(tokenKey) ? handleClick : undefined;
   const defaultPlaceholder = t("main.selectChainAndToken");
   const cardTitle: string = t(`main.${formType}`);
 
   return (
     <SelectTokenCard
       component="button"
-      onClick={account?.isConnected && product ? onClick : undefined}
+      onClick={account?.isConnected && product ? handleClick : undefined}
     >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
