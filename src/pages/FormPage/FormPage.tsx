@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { ContractComponent } from "../../components/ContractComponent/ContractComponent";
 
-export const MainPage: React.FC = () => {
+export const FormPage: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
   const { t } = useTranslation();
   const navigate = useNavigate();
