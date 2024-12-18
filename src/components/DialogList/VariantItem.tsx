@@ -12,7 +12,7 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
   const handleSelectProduct = () => {
     updateProduct(item);
     onClose();
-    navigate(`/`);
+    navigate(`/form`);
   };
 
   return (

@@ -23,7 +23,7 @@ export const CategorySection = ({ category, onMoreClick }) => {
       setOpen(true);
     } else {
       updateProduct(brand.variants[0]);
-      navigate(`/`);
+      navigate(`/form`);
     }
   };
 

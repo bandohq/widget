@@ -24,7 +24,7 @@ export const SelectProductButton: React.FC<
   const { product } = useProduct();
 
   const handleClick = () => {
-    navigate(navigationRoutes.products);
+    navigate(navigationRoutes.home);
   };
 
   const cardTitle: string = "You spend";
