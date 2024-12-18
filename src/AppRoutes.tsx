@@ -25,12 +25,12 @@ const routes: RouteObject[] = [
     element: <SettingsPage />,
   },
   {
-    path: `${navigationRoutes.status}/:transactionId`,
-    element: <StatusPage />,
+    path: navigationRoutes.fromToken,
+    element: <SelectTokenPage formType="from" />,
   },
   {
-    path: `${navigationRoutes.products}`,
-    element: <ProductsPage />,
+    path: `${navigationRoutes.status}/:transactionId`,
+    element: <StatusPage />,
   },
   {
     path: `${navigationRoutes.products}/:category`,
@@ -43,10 +43,6 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
     element: <CountryPage />,
-  },
-  {
-    path: navigationRoutes.fromToken,
-    element: <SelectTokenPage formType="from" />,
   },
   {
     path: "*",
