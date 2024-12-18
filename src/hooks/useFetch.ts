@@ -63,7 +63,14 @@ export function useFetch<T = any>({
   } else {
     return useMutation<T, Error, unknown, unknown>({
       mutationKey: [url],
-      mutationFn: () => fetchData<T>(fullUrl, fetchOptions),
+      mutationFn: (mutationData) => {
+        const dynamicOptions: RequestInit = {
+          ...fetchOptions,
+          body: mutationData ? JSON.stringify(mutationData) : undefined,
+        };
+        return fetchData<T>(fullUrl, dynamicOptions);
+      },
+      
       ...mutationOptions,
     });
   }

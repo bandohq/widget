@@ -14,11 +14,11 @@ import {
   SelectTokenCardHeader,
 } from "./SelectTokenButton.style.js";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
-import { useFetch } from "../../hooks/useFetch.js";
 import { useEffect } from "react";
 import { useAccount } from "@lifi/wallet-management";
 import { Avatar, Skeleton } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -28,6 +28,8 @@ export const SelectTokenButtonForProducts: React.FC<
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { product } = useProduct();
+  const { quote, isPending: quotePending, fetchQuote } = useQuotes();
+
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [chainId, tokenAddress, quantity] = useFieldValues(
     FormKeyHelper.getChainKey(formType),
@@ -39,29 +41,10 @@ export const SelectTokenButtonForProducts: React.FC<
   const { account } = useAccount({
     chainType: chain?.network_type,
   });
-  const {
-    data,
-    mutate,
-    isPending: quotePending,
-  } = useFetch({
-    url: "quotes/",
-    method: "POST",
-    data: {
-      sku: product?.sku,
-      fiat_currency: product?.price?.fiatCurrency,
-      digital_asset: token?.symbol || null,
-    },
-    queryOptions: {
-      queryKey: ["quote", product?.sku, product?.fiatCurrency, token?.symbol],
-    },
-  });
-
-  const { data: quote } = data || {};
 
   useEffect(() => {
-    if (!!(product?.sku && product?.price?.fiatCurrency && token?.symbol)) {
-      //Triggering fetch for new product/token combination
-      mutate();
+    if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
+      fetchQuote(product.sku, product.price.fiatCurrency, token.symbol);
     }
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
