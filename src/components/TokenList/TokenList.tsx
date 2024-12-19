@@ -33,7 +33,7 @@ export const TokenList: FC<TokenListProps> = ({
   const { account } = useAccount({
     chainType: selectedChain?.network_type,
   });
-  const {} = useTokenBalances(
+  const { balances } = useTokenBalances(
     account?.address ?? "",
     selectedChain ?? undefined
   );
@@ -86,7 +86,7 @@ export const TokenList: FC<TokenListProps> = ({
       ) : null}
       <VirtualizedTokenList
         account={account}
-        tokens={tokens}
+        tokens={balances}
         scrollElementRef={parentRef}
         chainId={selectedChainId}
         chain={selectedChain}
@@ -95,7 +95,6 @@ export const TokenList: FC<TokenListProps> = ({
         isBalanceLoading
         onClick={handleTokenClick}
       />
-      //{" "}
     </Box>
   );
 };

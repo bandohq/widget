@@ -23,6 +23,7 @@ export interface Token extends StaticToken {
 }
 
 export interface TokenAmount extends Token {
+  balance?: bigint
   amount?: bigint
   blockNumber?: bigint
 }

@@ -33,6 +33,7 @@ export const TokenListItem: React.FC<TokenListItemProps> = ({
     e.stopPropagation();
     onClick?.(token.address, chain?.id);
   };
+
   return (
     <ListItem
       style={{
@@ -103,7 +104,7 @@ export const TokenListItemButton: React.FC<TokenListItemButtonProps> = ({
         </Avatar>
       </ListItemAvatar>
       <ListItemText
-        primary={token.symbol}
+        primary={`${token.balance} ${token.symbol}`}
         secondaryTypographyProps={{
           component: "div",
         }}

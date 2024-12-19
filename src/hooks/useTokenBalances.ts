@@ -25,8 +25,8 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
           setError("Invalid RPC URL");
           return;
         }
-
         const provider = new ethers.JsonRpcProvider(rpcUrl);
+
 
         // Promises to get token balances
         const balancePromises = tokens.map(async (token: any) => {
@@ -39,8 +39,9 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
 
           const tokenContract = new ethers.Contract(address, ["function balanceOf(address) view returns (uint256)"], provider);
 
-          // Consultar balance del token
+          // Get token balance
           const balanceRaw = await tokenContract.balanceOf(accountAddress);
+
           const balance = ethers.formatUnits(balanceRaw, decimals);
 
           return {

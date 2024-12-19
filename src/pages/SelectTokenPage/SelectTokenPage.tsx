@@ -11,6 +11,7 @@ import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.j
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { SearchTokenInput } from "./SearchTokenInput.js";
 import { useTokenListHeight } from "./useTokenListHeight.js";
+import { palette } from "../../themes/palettes.js";
 
 export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
   useScrollableOverflowHidden();
@@ -47,6 +48,14 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
           onClick={navigateBack}
           formType={formType}
         />
+      </Box>
+      <Box
+        ml={"auto"}
+        p={2}
+        textAlign="center"
+        sx={{ bgcolor: palette.primary.medium, width: "90%", fontSize: "11px" }}
+      >
+        Change the network on your wallet to see the balance on that chain
       </Box>
     </FullPageContainer>
   );
