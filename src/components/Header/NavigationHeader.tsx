@@ -29,8 +29,7 @@ export const NavigationHeader: React.FC = () => {
   const hasPath = navigationRoutesValues.includes(path);
 
   const basePath = cleanedPathname.split("/")[1];
-  const isBackButtonVisible =
-    backButtonRoutes.includes(basePath) || path.startsWith("products/");
+  const isBackButtonVisible = backButtonRoutes.includes(`/${basePath}`);
 
   const splitSubvariant = subvariant === "split" && !hasPath;
 

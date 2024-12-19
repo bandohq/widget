@@ -39,7 +39,7 @@ export const navigationRoutes = {
   export const backButtonRoutes = [
     navigationRoutes.activeTransactions,
     navigationRoutes.languages,
-    navigationRoutes.products,
+    navigationRoutes.form,
     navigationRoutes.fromToken,
     navigationRoutes.routes,
     navigationRoutes.settings,
