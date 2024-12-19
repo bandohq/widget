@@ -20,7 +20,14 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     if (!isLoading && products) {
-      setFilteredData(products);
+      const reducedProducts = products.map((category) => {
+        return {
+          ...category,
+          brands: [...category.brands.slice(0, 10)],
+        };
+      });
+
+      setFilteredData(reducedProducts);
     }
   }, [products, isLoading]);
 
