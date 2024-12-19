@@ -7,7 +7,6 @@ import { TokenList } from "../../components/TokenList/TokenList.js";
 import { useHeader } from "../../hooks/useHeader.js";
 import { useNavigateBack } from "../../hooks/useNavigateBack.js";
 import { useScrollableOverflowHidden } from "../../hooks/useScrollableContainer.js";
-import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { SearchTokenInput } from "./SearchTokenInput.js";
 import { useTokenListHeight } from "./useTokenListHeight.js";
@@ -23,16 +22,9 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
     headerRef,
   });
 
-  const { subvariant } = useWidgetConfig();
   const { t } = useTranslation();
-  const title =
-    formType === "from"
-      ? subvariant === "custom"
-        ? t("header.payWith")
-        : t("header.from")
-      : t("header.to");
 
-  useHeader(title);
+  useHeader(t("header.tokens"));
 
   return (
     <FullPageContainer disableGutters>
