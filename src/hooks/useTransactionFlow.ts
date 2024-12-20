@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
 import { useAccount, useWalletMenu, type Account } from "@lifi/wallet-management";
 import { FormKeyHelper } from "../stores/form/types";
 import { useFieldValues } from "../stores/form/useFieldValues";
 import { useChain } from "./useChain";
-import { useToken } from "./useToken";
 import { useFetch } from "./useFetch";
 import { useNavigate } from "react-router-dom";
-import { createWalletClient, custom } from "viem";
-import { mainnet } from "viem/chains";
-import { Buffer } from "buffer";
+import { useWriteContract } from 'wagmi'
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 
 export const useTransactionFlow = (product) => {
-  const [transactionId, setTransactionId] = useState(null);
   const navigate = useNavigate();
   const { openWalletMenu } = useWalletMenu();
   const tokenKey = FormKeyHelper.getTokenKey("from");
@@ -26,57 +22,25 @@ export const useTransactionFlow = (product) => {
   );
   const { country} = useCountryContext();
   const { chain } = useChain(chainId);
-  const { token } = useToken(chain, tokenAddress);
+  const { writeContract } = useWriteContract()
 
   const { account } = useAccount({
     chainType: chain?.network_type,
   });
 
-  const signTransactionMessage = async ({ txId, account, openWalletMenu, to, value, chainId }: {to: `0x${string}`, value: bigint, chainId: number, txId?: string, account: Account, openWalletMenu: () => void}) => {
-    try {
-      if (account.chainType !== 'EVM') {
-        throw new Error('Only EVM accounts are supported for signing in this flow.');
-      }
-  
-      const connector = account.connector;
-      if (!connector) {
-        throw new Error('Connector is not available for the EVM account.');
-      }
-  
-      const provider = await connector.getProvider();
-  
-      const walletClient = createWalletClient({
-        chain: mainnet,
-        transport: custom(provider),
-      });
+ const signTransactionEvent = async () => {
+  writeContract({ 
+    abi: JSON.parse(BandoRouter),
+    address: '0x6b175474e89094c44da98b954eedeac495271d0f',
+    functionName: 'requestERC20Service (0xe2f6ad25)',
+    chain: chain,
+    args: [
+      product?.
+    ]
+ })
 
-      const request = await walletClient.prepareTransactionRequest({
-        to,
-        value,
-        chainId,
-        data: txId ? `0x${Buffer.from(txId).toString('hex')}` : undefined,
-      });
   
-      const transaction = {
-        to,
-        value:value,
-        chainId,
-        data: txId ? `0x${Buffer.from(txId).toString('hex')}` : undefined,
-      };
-  
-      const signature = await walletClient.signTransaction({
-        transaction,
-        account: account.address as `0x${string}`,
-        chain: chainId,
-      });
-  
-      console.log("Generated signature:", signature);
-      return signature;
-    } catch (error) {
-      console.error("Error signing the transaction:", error);
-      openWalletMenu();
-      throw error;
-    }
+    return null;
   };
 
   const { mutate, isPending } = useFetch({
@@ -97,17 +61,8 @@ export const useTransactionFlow = (product) => {
       onSuccess: async (data) => {
         const txId = data.transaction_intents?.transaction_id;
         if (txId) {
-          setTransactionId(txId);
-
           try {
-            const signature = await signTransactionMessage({
-              txId,
-              account,
-              openWalletMenu,
-              to: "0xRecipientAddress",
-              value: product?.price?.stableCoinValue,
-              chainId: chain?.chain_id,
-            });
+            const signature = await signTransactionEvent();
 
             navigate(`/status/${txId}`, {
               state: { signature },
@@ -126,9 +81,8 @@ export const useTransactionFlow = (product) => {
   });
 
   const handleTransaction =async () => {
-    mutate();
-
-    // console.log("Generated signature:", signature);
+    // mutate();
+    await signTransactionEvent();
   };
 
   return {
@@ -136,3 +90,5 @@ export const useTransactionFlow = (product) => {
     isPending,
   };
 };
+
+
