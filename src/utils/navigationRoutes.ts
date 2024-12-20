@@ -1,6 +1,5 @@
 export const navigationRoutes = {
   home: '/',
-  activeTransactions: '/active-transactions',
   status: '/status',
   buyForm: '/buy-form',
   fromToken: '/from-token', 
@@ -23,7 +22,6 @@ export const navigationRoutes = {
   export const navigationRoutesValues = Object.values(navigationRoutes)
   
   export const stickyHeaderRoutes = [
-    navigationRoutes.activeTransactions,
     navigationRoutes.home,
     navigationRoutes.routes,
     navigationRoutes.settings,
@@ -37,7 +35,6 @@ export const navigationRoutes = {
   ]
   
   export const backButtonRoutes = [
-    navigationRoutes.activeTransactions,
     navigationRoutes.languages,
     navigationRoutes.form,
     navigationRoutes.fromToken,

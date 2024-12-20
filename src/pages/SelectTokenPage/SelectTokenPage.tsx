@@ -47,7 +47,7 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
         textAlign="center"
         sx={{ bgcolor: palette.primary.medium, width: "90%", fontSize: "11px" }}
       >
-        Change the network on your wallet to see the balance on that chain
+        {t("info.message.emptyTokenList")}
       </Box>
     </FullPageContainer>
   );
