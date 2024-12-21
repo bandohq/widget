@@ -17,6 +17,7 @@ import {
   SelectTokenCard,
   SelectTokenCardHeader,
 } from "./SelectTokenButton.style.js";
+import { CaretDown } from "@phosphor-icons/react";
 
 export const SelectTokenButton: React.FC<
   FormTypeProps & {
@@ -28,12 +29,13 @@ export const SelectTokenButton: React.FC<
   const { disabledUI, subvariant } = useWidgetConfig();
   const swapOnly = useSwapOnly();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
-  const [chainId, tokenAddress] = useFieldValues(
+  const [chainId, tokenAddress, quantity] = useFieldValues(
     FormKeyHelper.getChainKey(formType),
-    tokenKey
+    tokenKey,
+    "quantity"
   );
   const { chain, isLoading: isChainLoading } = useChain(chainId);
-  const { token, isLoading: isTokenLoading } = useToken(chainId, tokenAddress);
+  const { token, isLoading: isTokenLoading } = useToken(chain, tokenAddress);
 
   const handleClick = () => {
     navigate(formType === "from" && navigationRoutes.fromToken);
@@ -66,7 +68,10 @@ export const SelectTokenButton: React.FC<
           <SelectTokenCardHeader
             avatar={
               isSelected ? (
-                <TokenAvatar token={token} chain={chain} />
+                <>
+                  <TokenAvatar token={token} chain={chain} />
+                  <CaretDown />
+                </>
               ) : (
                 <AvatarBadgedDefault />
               )

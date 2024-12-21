@@ -13,7 +13,7 @@ export const CountriesProvider: React.FC<{
   const [countries, setCountries] = useState<Country[]>([]);
   const [country, setCountry] = useState<Country | null>(null);
   const { buildUrl } = useWidgetConfig();
-  const { data: countriesResponse } = useFetch({
+  const { data: countriesResponse, isPending } = useFetch({
     url: "countries",
   });
 
@@ -41,7 +41,7 @@ export const CountriesProvider: React.FC<{
           ? availableCountries.find(
               (country) => country.iso_alpha2 === configCountry
             )
-          : availableCountries.find((country) => country.iso_alpha2 === "MX");
+          : availableCountries.find((country) => country.iso_alpha2 === "US");
 
       setCountry(defaultCountry || null);
     }
@@ -61,6 +61,11 @@ export const CountriesProvider: React.FC<{
     }
   };
 
+  const getCountry = (isoCode: string) => {
+    const country = countries.find((c) => c.iso_alpha2 === isoCode);
+    return country || null;
+  };
+
   const removeCountry = (isoCode: string) => {
     setCountries((prev) =>
       prev.filter((country) => country.iso_alpha2 !== isoCode)
@@ -69,7 +74,13 @@ export const CountriesProvider: React.FC<{
 
   return (
     <CountryContext.Provider
-      value={{ countries, country, selectCountry, removeCountry }}
+      value={{
+        countries,
+        country,
+        selectCountry,
+        removeCountry,
+        isCountryPending: isPending,
+      }}
     >
       {children}
     </CountryContext.Provider>

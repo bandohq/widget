@@ -9,7 +9,7 @@ import { useFieldActions } from "./useFieldActions.js";
 export const FormUpdater: React.FC<{
   reactiveFormValues: Partial<DefaultValues>;
 }> = ({ reactiveFormValues }) => {
-  const { fromChain, toChain, toAddress } = useWidgetConfig();
+  const { fromChain } = useWidgetConfig();
   const { account } = useAccount();
   const { setSelectedBookmark } = useBookmarkActions();
   const { isTouched, resetField, setFieldValue, setUserAndDefaultValues } =
@@ -28,15 +28,10 @@ export const FormUpdater: React.FC<{
         setFieldValue("fromAmount", "");
       }
     }
-    if (!toChain && !isTouched("toChain") && !isTouched("toToken")) {
-      resetField("toChain", { defaultValue: account.chainId });
-      setFieldValue("toToken", "");
-    }
   }, [
     account.chainId,
     account.isConnected,
     fromChain,
-    toChain,
     isTouched,
     resetField,
     setFieldValue,
@@ -45,13 +40,11 @@ export const FormUpdater: React.FC<{
   // Makes widget config options reactive to changes
   // should update userValues when defaultValues updates
   useEffect(() => {
-    setSelectedBookmark(toAddress);
     setUserAndDefaultValues(
       accountForChainId(reactiveFormValues, account.chainId)
     );
   }, [
     account.chainId,
-    toAddress,
     reactiveFormValues,
     setUserAndDefaultValues,
     setSelectedBookmark,

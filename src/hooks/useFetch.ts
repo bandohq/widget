@@ -15,6 +15,8 @@ type FetchOptions<T> = {
   queryParams?: Record<string, string | number>;
   queryOptions?: UseQueryOptions<T, Error>;
   mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>;
+  useFullUrl?: boolean;
+  enabled?: boolean;
 };
 
 function buildQueryString(queryParams: Record<string, string | number> = {}) {
@@ -22,7 +24,7 @@ function buildQueryString(queryParams: Record<string, string | number> = {}) {
   return query.toString() ? `?${query.toString()}` : '';
 }
 
-async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
+async function fetchData<T>(url: string , options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
@@ -37,6 +39,8 @@ export function useFetch<T = any>({
   queryParams,
   queryOptions,
   mutationOptions,
+  useFullUrl = true,
+  enabled = true,
 }: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
   const fetchOptions: RequestInit = {
     method,
@@ -47,19 +51,26 @@ export function useFetch<T = any>({
   };
 
   const queryString = buildQueryString(queryParams);
-  const fullUrl = `${BANDO_API_URL}${url}${queryString}`;
+  const fullUrl = !useFullUrl ? `${url}${queryString}` : `${BANDO_API_URL}${url}${queryString}`;
 
   if (method === 'GET') {
     return useQuery<T>({
       queryKey: [url, queryParams],
       queryFn: () => fetchData<T>(fullUrl, fetchOptions),
-      enabled: method === 'GET',
+      enabled: method === 'GET' && enabled,
       ...queryOptions,
     });
   } else {
     return useMutation<T, Error, unknown, unknown>({
       mutationKey: [url],
-      mutationFn: () => fetchData<T>(fullUrl, fetchOptions),
+      mutationFn: (mutationData) => {
+        const dynamicOptions: RequestInit = {
+          ...fetchOptions,
+          body: mutationData ? JSON.stringify(mutationData) : undefined,
+        };
+        return fetchData<T>(fullUrl, dynamicOptions);
+      },
+      
       ...mutationOptions,
     });
   }

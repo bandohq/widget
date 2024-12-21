@@ -2,6 +2,7 @@ export type Country = {
     name: string;
     iso_alpha2: string;
     flag_url: string;
+    calling_code: string;
 };
   
 export   type CountryContextType = {
@@ -9,4 +10,5 @@ export   type CountryContextType = {
     country: Country;
     selectCountry: (isoCode: string) => void;
     removeCountry: (isoCode: string) => void;
+    isCountryPending: boolean;
 };

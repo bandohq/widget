@@ -23,14 +23,8 @@ import type {
     LanguageResources,
   } from '../providers/I18nProvider/types.js'
   import type { DefaultFieldValues } from '../stores/form/types'
+import { ChainType } from '../pages/SelectChainPage/types.js'
   
-  // mocked lifi structures
-  
-  export enum ChainType {
-    EVM = 'EVM',
-    SVM = 'SVM',
-    UTXO = 'UTXO',
-  }
   
   export interface ContractCall {
     target: string;
@@ -136,6 +130,15 @@ import type {
     walletConnect?: WalletConnectParameters
     coinbase?: CoinbaseWalletParameters
     metaMask?: MetaMaskParameters
+    /**
+     * Determines whether the widget should provide partial wallet management functionality.
+     *
+     * In partial mode, external wallet management will be used for "opt-out" providers,
+     * while the internal management is applied for any remaining providers that do not opt out.
+     * This allows a flexible balance between the integrator’s custom wallet menu and the widget’s native wallet menu.
+     * @default false
+     */
+    usePartialWalletManagement?: boolean
   }
 
   
@@ -214,7 +217,6 @@ import type {
     feeConfig?: WidgetFeeConfig
     referrer?: string
   
-    // routePriority?: Order
     slippage?: number
   
     variant?: WidgetVariant

@@ -14,6 +14,8 @@ import { StoreProvider } from "./stores/StoreProvider";
 import { URLSearchParamsBuilder } from "./stores/form/URLSearchParamsBuilder";
 import type { WidgetConfigProps } from "./types/widget";
 import { I18nProvider } from "./providers/I18nProvider/I18nProvider";
+import { CatalogProvider } from "./providers/CatalogProvider/CatalogProvider";
+import { QuotesProvider } from "./providers/QuotesProvider/QuotesProvider";
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -27,7 +29,11 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           <ThemeProvider>
             <WalletProvider>
               <StoreProvider config={config} formRef={formRef}>
-                <AppRouter>{children}</AppRouter>
+                <CatalogProvider>
+                  <QuotesProvider>
+                    <AppRouter>{children}</AppRouter>
+                  </QuotesProvider>
+                </CatalogProvider>
               </StoreProvider>
             </WalletProvider>
           </ThemeProvider>

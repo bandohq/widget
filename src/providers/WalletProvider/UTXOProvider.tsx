@@ -3,12 +3,12 @@ import { type FC, type PropsWithChildren, useContext } from "react";
 import { isItemAllowed } from "../../utils/item.js";
 import { UTXOBaseProvider } from "./UTXOBaseProvider.js";
 import { UTXOExternalContext } from "./UTXOExternalContext.js";
-import { ChainTypeCustom } from "../WidgetProvider/types.js";
+import { ChainType } from "../../pages/SelectChainPage/types.js";
 
 export function useInBigmiContext(): boolean {
   const context = useContext(BigmiContext);
 
-  return Boolean(context) && isItemAllowed(ChainTypeCustom.UTXO);
+  return Boolean(context) && isItemAllowed(ChainType.UTXO);
 }
 
 export const UTXOProvider: FC<PropsWithChildren> = ({ children }) => {

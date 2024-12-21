@@ -11,6 +11,9 @@ import type {
 
 export const formDefaultValues: DefaultValues = {
   fromAmount: '',
+  quantity: 1,
+  phone: '',
+  reference: '',
   toAmount: '',
   tokenSearchFilter: '',
 }

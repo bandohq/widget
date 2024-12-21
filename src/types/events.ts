@@ -1,6 +1,7 @@
+import { ChainType } from "../pages/SelectChainPage/types";
+
 // Mocked Enums and Types (to replace dependencies)
 export type ChainId = number; // Simulates ChainId
-export type ChainType = 'EVM' | 'SVM'; // Simulates ChainType
 export type Process = unknown; // Generic type, non-functional
 export type Route = unknown; // Generic type, non-functional
 export type DefaultValues = Record<string, unknown>; // Simulates DefaultValues
@@ -18,7 +19,7 @@ export enum WidgetEvent {
   ContactSupport = 'contactSupport',
   SourceChainTokenSelected = 'sourceChainTokenSelected',
   DestinationChainTokenSelected = 'destinationChainTokenSelected',
-  SendToWalletToggled = 'sendToWalletToggled',
+  QuoteFetched = 'quoteFetched',
   /**
    * @deprecated Use `PageEntered` event instead.
    */
@@ -41,7 +42,6 @@ export type WidgetEvents = {
   contactSupport: ContactSupport;
   sourceChainTokenSelected: ChainTokenSelected;
   destinationChainTokenSelected: ChainTokenSelected;
-  sendToWalletToggled: boolean;
   formFieldChanged: FormFieldChanged;
   reviewTransactionPageEntered?: Route;
   walletConnected: WalletConnected;

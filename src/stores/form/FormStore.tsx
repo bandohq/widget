@@ -2,7 +2,6 @@ import type { PropsWithChildren } from "react";
 import { useMemo, useRef } from "react";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import type { FormRef, ToAddress } from "../../types/widget";
-import { HiddenUI } from "../../types/widget";
 import { FormStoreContext } from "./FormStoreContext";
 import { FormUpdater } from "./FormUpdater";
 import { createFormStore, formDefaultValues } from "./createFormStore";
@@ -41,25 +40,13 @@ export const FormStoreProvider: React.FC<FormStoreProviderProps> = ({
 }) => {
   const widgetConfig = useWidgetConfig();
 
-  const {
-    fromChain,
-    fromToken,
-    toChain,
-    toToken,
-    fromAmount,
-    toAmount,
-    toAddress,
-    hiddenUI,
-    formUpdateKey,
-  } = widgetConfig;
+  const { fromChain, fromToken, toChain, toAmount, formUpdateKey } =
+    widgetConfig;
 
   const storeRef = useRef<FormStoreStore>();
 
-  const hiddenToAddress = hiddenUI?.includes(HiddenUI.ToAddress);
-
   const configHasFromChain = Object.hasOwn(widgetConfig, "fromChain");
   const configHasFromToken = Object.hasOwn(widgetConfig, "fromToken");
-  const configHasFromAmount = Object.hasOwn(widgetConfig, "fromAmount");
   const configHasToAmount = Object.hasOwn(widgetConfig, "toAmount");
   const configHasToAddress = Object.hasOwn(widgetConfig, "toAddress");
   const configHasToChain = Object.hasOwn(widgetConfig, "toChain");
@@ -73,14 +60,6 @@ export const FormStoreProvider: React.FC<FormStoreProviderProps> = ({
     () => ({
       ...(configHasFromChain ? { fromChain } : undefined),
       ...(configHasFromToken ? { fromToken } : undefined),
-      ...(configHasFromAmount
-        ? {
-            fromAmount:
-              (typeof fromAmount === "number"
-                ? fromAmount?.toPrecision()
-                : fromAmount) || formDefaultValues.fromAmount,
-          }
-        : undefined),
       ...(configHasToAmount
         ? {
             toAmount:
@@ -89,30 +68,16 @@ export const FormStoreProvider: React.FC<FormStoreProviderProps> = ({
                 : toAmount) || formDefaultValues.toAmount,
           }
         : undefined),
-      ...(configHasToChain ? { toChain } : undefined),
-      ...(configHasToToken ? { toToken } : undefined),
-      ...(configHasToAddress
-        ? {
-            toAddress: hiddenToAddress
-              ? formDefaultValues.toAddress
-              : toAddress?.address || formDefaultValues.toAddress,
-          }
-        : undefined),
     }),
     [
-      fromAmount,
       toAmount,
       fromChain,
       fromToken,
-      hiddenToAddress,
-      toAddress,
       toChain,
-      toToken,
       // formUpdateKey should be a randomly assigned unique key. It can be used to force updates for the form field values
       formUpdateKey,
       configHasFromChain,
       configHasFromToken,
-      configHasFromAmount,
       configHasToAmount,
       configHasToAddress,
       configHasToChain,
@@ -122,13 +87,7 @@ export const FormStoreProvider: React.FC<FormStoreProviderProps> = ({
 
   if (!storeRef.current) {
     storeRef.current = createFormStore(
-      initialiseDefaultValues(
-        reactiveFormValues,
-        fromAmount,
-        toAmount,
-        toAddress,
-        hiddenToAddress
-      )
+      initialiseDefaultValues(reactiveFormValues, toAmount)
     );
   }
 

@@ -1,29 +1,27 @@
 export const navigationRoutes = {
-    home: '/',
-    activeTransactions: 'active-transactions',
-    status: 'status',
-    buyForm: 'buy-form',
-    fromChain: 'from-chain',
-    fromToken: 'from-token',
-    languages: 'languages',
-    countries: 'countries',
-    products: 'products',
-    routes: 'routes',
-    settings: 'settings',
-    transactionDetails: 'transaction-details',
-    transactionExecution: 'transaction-execution',
-    transactionHistory: 'transaction-history',
-    bookmarks: 'bookmarks',
-    recentWallets: 'recent-wallets',
-    connectedWallets: 'connected-wallets',
-    configuredWallets: 'configured-wallets',
-  }
+  home: '/',
+  status: '/status',
+  buyForm: '/buy-form',
+  fromToken: '/from-token', 
+  languages: '/languages',
+  countries: '/countries',
+  products: '/products',
+  form: '/form',
+  routes: '/routes',
+  settings: '/settings',
+  transactionDetails: '/transaction-details',
+  transactionExecution: '/transaction-execution',
+  transactionHistory: '/transaction-history',
+  bookmarks: '/bookmarks',
+  recentWallets: '/recent-wallets',
+  connectedWallets: '/connected-wallets',
+  configuredWallets: '/configured-wallets',
+};
+
   
   export const navigationRoutesValues = Object.values(navigationRoutes)
   
   export const stickyHeaderRoutes = [
-    navigationRoutes.activeTransactions,
-    navigationRoutes.fromChain,
     navigationRoutes.home,
     navigationRoutes.routes,
     navigationRoutes.settings,
@@ -37,10 +35,8 @@ export const navigationRoutes = {
   ]
   
   export const backButtonRoutes = [
-    navigationRoutes.activeTransactions,
     navigationRoutes.languages,
-    navigationRoutes.products,
-    navigationRoutes.fromChain,
+    navigationRoutes.form,
     navigationRoutes.fromToken,
     navigationRoutes.routes,
     navigationRoutes.settings,

@@ -1,0 +1,110 @@
+import { Avatar, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import type { FormTypeProps } from "../../stores/form/types.js";
+import { navigationRoutes } from "../../utils/navigationRoutes.js";
+import { useProduct } from "../../stores/ProductProvider/ProductProvider";
+import { AvatarBadgedDefault } from "../Avatar/Avatar";
+import { CardTitle } from "../Card/CardTitle";
+import {
+  CardContent,
+  SelectProductCard,
+  SelectProductCardHeader,
+} from "./SelectProductButton.style.js";
+import { Dialog } from "../Dialog.js";
+import { DialogList } from "../DialogList/DialogList.js";
+import { VariantItem } from "../DialogList/VariantItem.js";
+import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
+import { palette } from "../../themes/palettes.js";
+
+export const SelectProductButton: React.FC<
+  FormTypeProps & { compact: boolean }
+> = ({ formType, compact }) => {
+  const [open, setOpen] = useState(false);
+  const { product, brand: selectedBrand, updateProduct } = useProduct();
+  const navigate = useNavigate();
+
+  const handleButtonClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setOpen(true);
+  };
+
+  const handleDialogClose = () => setOpen(false);
+
+  const handleVariantSelect = (item: any) => {
+    updateProduct(item);
+    setOpen(false);
+    navigate(navigationRoutes.home);
+  };
+
+  const renderAvatar = () =>
+    product ? (
+      <Avatar alt={product.name} src={product.imageUrl} />
+    ) : (
+      <AvatarBadgedDefault />
+    );
+
+  const renderActionButton = () => (
+    <Button
+      size="small"
+      onClick={handleButtonClick}
+      sx={{
+        fontSize: "12px",
+        color: palette.primary.main,
+        fontWeight: 400,
+      }}
+    >
+      {`${parseFloat(product?.price?.fiatValue).toFixed(2)} ${
+        product?.price?.fiatCurrency
+      }`}
+      <CaretDown size="18px" style={{ margin: "auto", paddingLeft: 5 }} />
+    </Button>
+  );
+
+  return (
+    <>
+      <SelectProductCard onClick={() => navigate(navigationRoutes.home)}>
+        <CardContent formType={formType} compact={compact}>
+          <CardTitle>You spend</CardTitle>
+          <SelectProductCardHeader
+            avatar={
+              product ? (
+                renderAvatar()
+              ) : (
+                <Avatar>
+                  <ShoppingCart size={24} weight="bold" />
+                </Avatar>
+              )
+            }
+            action={product && renderActionButton()}
+            title={product?.brand || "Select product"}
+            subheader={
+              product
+                ? `${product.productType} in ${product.country}`
+                : undefined
+            }
+            compact={compact}
+          />
+        </CardContent>
+      </SelectProductCard>
+
+      {selectedBrand && (
+        <Dialog open={open} onClose={handleDialogClose}>
+          <DialogList
+            items={selectedBrand.variants || []}
+            onClose={handleDialogClose}
+            title={selectedBrand.brandName || ""}
+            image={selectedBrand.imageUrl || ""}
+            renderItem={(item) => (
+              <VariantItem
+                item={item}
+                onClose={() => handleVariantSelect(item)}
+              />
+            )}
+          />
+        </Dialog>
+      )}
+    </>
+  );
+};

@@ -4,16 +4,15 @@ import {
   useAccount,
   useWalletMenu,
 } from "@lifi/wallet-management";
-import { ExpandMore, Wallet } from "@mui/icons-material";
+import { Wallet } from "@mui/icons-material";
 import { Avatar, Badge } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useChain } from "../../hooks/useChain";
-import { useHasExternalWalletProvider } from "../../providers/WalletProvider/useHasExternalWalletProvider";
+import { useExternalWalletProvider } from "../../providers/WalletProvider/useExternalWalletProvider";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { useFieldValues } from "../../stores/form/useFieldValues";
 import { HiddenUI } from "../../types/widget";
-import { shortenAddress } from "../../utils/wallet";
 import { SmallAvatar } from "../Avatar/SmallAvatar";
 import { CloseDrawerButton } from "./CloseDrawerButton";
 import {
@@ -22,13 +21,13 @@ import {
   WalletAvatar,
   WalletButton,
 } from "./Header.style.js";
-import { WalletMenu } from "./WalletMenu.js";
-import { WalletMenuContainer } from "./WalletMenu.style.js";
+import { WalletMenuContainer } from "./WalletMenu.style";
+import { WalletMenu } from "./WalletMenu";
 
 export const WalletHeader: React.FC = () => {
   const { subvariant, hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider &&
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
+  return !useExternalWalletProvidersOnly &&
     subvariant !== "split" &&
     !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
     <HeaderAppBar elevation={0} sx={{ justifyContent: "flex-end" }}>
@@ -39,8 +38,9 @@ export const WalletHeader: React.FC = () => {
 
 export const SplitWalletMenuButton: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
-  const { hasExternalProvider } = useHasExternalWalletProvider();
-  return !hasExternalProvider && !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
+  return !useExternalWalletProvidersOnly &&
+    !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
     <WalletMenuButton />
   ) : null;
 };
@@ -54,7 +54,9 @@ export const WalletMenuButton: React.FC = () => {
 
   const activeAccount =
     (fromChain
-      ? accounts.find((account) => account.chainType === fromChain.chainType)
+      ? accounts.find(
+          (account) => account.chainType === fromChain?.network_type
+        )
       : undefined) || account;
 
   if (variant === "drawer") {
@@ -93,9 +95,6 @@ const ConnectButton = () => {
   return (
     <WalletButton
       subvariant={subvariant}
-      endIcon={
-        variant !== "drawer" && subvariant !== "split" ? <Wallet /> : undefined
-      }
       startIcon={
         variant === "drawer" || subvariant === "split" ? (
           <Wallet sx={{ marginLeft: -0.25 }} />
@@ -112,7 +111,6 @@ const ConnectedButton = ({ account }: { account: Account }) => {
   const { subvariant } = useWidgetConfig();
   const { chain } = useChain(account.chainId);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const walletAddress = shortenAddress(account.address);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -126,7 +124,6 @@ const ConnectedButton = ({ account }: { account: Account }) => {
     <>
       <WalletButton
         subvariant={subvariant}
-        endIcon={<ExpandMore />}
         startIcon={
           chain?.logoURI ? (
             <Badge
@@ -160,9 +157,7 @@ const ConnectedButton = ({ account }: { account: Account }) => {
           )
         }
         onClick={handleClick}
-      >
-        {walletAddress}
-      </WalletButton>
+      />
       <WalletMenuContainer
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

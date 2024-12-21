@@ -5,7 +5,6 @@ import {
 } from "@lifi/wallet-management";
 import {
   ContentCopyRounded,
-  OpenInNewRounded,
   PowerSettingsNewRounded,
 } from "@mui/icons-material";
 import {
@@ -18,7 +17,6 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useAvailableChains } from "../../hooks/useAvailableChains";
-import { useExplorer } from "../../hooks/useExplorer";
 import { shortenAddress } from "../../utils/wallet";
 import { AvatarMasked } from "../Avatar/Avatar.style";
 import { SmallAvatar } from "../Avatar/SmallAvatar";
@@ -33,7 +31,6 @@ export const WalletMenu = ({ onClose }: { onClose: () => void }) => {
     openWalletMenu();
     onClose();
   };
-  const { getAddressLink } = useExplorer();
 
   return (
     <>
@@ -83,19 +80,6 @@ export const WalletMenu = ({ onClose }: { onClose: () => void }) => {
               <Box ml={2}>
                 <IconButton size="medium" onClick={handleCopyAddress}>
                   <ContentCopyRounded />
-                </IconButton>
-                <IconButton
-                  size="medium"
-                  component="a"
-                  onClick={onClose}
-                  href={
-                    account.address
-                      ? getAddressLink(account.address, chain)
-                      : undefined
-                  }
-                  target="_blank"
-                >
-                  <OpenInNewRounded />
                 </IconButton>
                 <DisconnectIconButton account={account} />
               </Box>

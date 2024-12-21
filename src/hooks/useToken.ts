@@ -1,4 +1,6 @@
 import { useMemo } from 'react'
+import { useTokens } from './useTokens'
+import { Chain } from '../pages/SelectChainPage/types'
 
 // useTokenSearch: replace with actual search implementation for tokens
 const useTokenSearch = (chainId?: number, tokenAddress?: string, enabled?: boolean) => ({
@@ -15,39 +17,22 @@ const useTokenSearch = (chainId?: number, tokenAddress?: string, enabled?: boole
   isLoading: false,
 })
 
-// useTokens: replace with actual token fetching implementation
-const useTokens = (chainId?: number) => ({
-  tokens: chainId
-    ? [
-        {
-          logoURI: '',
-          symbol: 'MCK',
-          decimals: 18,
-          name: 'MockToken',
-          chainId,
-          address: '0xMockAddress',
-        },
-      ]
-    : [],
-  isLoading: false,
-})
-
-export const useToken = (chainId?: number, tokenAddress?: string) => {
-  const { tokens, isLoading } = useTokens(chainId)
+export const useToken = (chain?: Chain, tokenAddress?: string) => {
+  const { data: tokens, isPending: isLoading } = useTokens(chain)
 
   const token = useMemo(() => {
     const token = tokens?.find(
-      (token) => token.address === tokenAddress && token.chainId === chainId
+      (token) => token.address === tokenAddress
     )
     return token
-  }, [chainId, tokenAddress, tokens])
+  }, [chain?.chain_id, tokenAddress, tokens])
 
   const tokenSearchEnabled = !isLoading && !token
   const { token: searchedToken, isLoading: isSearchedTokenLoading } =
-    useTokenSearch(chainId, tokenAddress, tokenSearchEnabled)
+    useTokenSearch(chain?.chain_id, tokenAddress, tokenSearchEnabled)
 
   return {
-    token: token ?? searchedToken,
+    token,
     isLoading: isLoading || (tokenSearchEnabled && isSearchedTokenLoading),
   }
 }

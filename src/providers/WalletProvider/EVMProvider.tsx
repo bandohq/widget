@@ -4,13 +4,13 @@ import { isItemAllowed } from "../../utils/item";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { EVMBaseProvider } from "./EVMBaseProvider";
 import { EVMExternalContext } from "./EVMExternalContext";
-import { ChainTypeCustom } from "../WidgetProvider/types";
+import { ChainType } from "../../pages/SelectChainPage/types";
 
 export const useInWagmiContext = (): boolean => {
   const { chains } = useWidgetConfig();
   const context = useContext(WagmiContext);
 
-  return Boolean(context) && isItemAllowed(ChainTypeCustom.EVM, chains?.types);
+  return Boolean(context) && isItemAllowed(ChainType.EVM, chains?.types);
 };
 
 export const EVMProvider: FC<PropsWithChildren> = ({ children }) => {

@@ -23,10 +23,6 @@ export const SettingsPage = () => {
     navigate(`/${navigationRoutes.status}`);
   };
 
-  const handleTopupClick = () => {
-    navigate(`/products/topup`);
-  };
-
   return (
     <PageContainer bottomGutters>
       <SettingsList>
@@ -38,13 +34,6 @@ export const SettingsPage = () => {
             onClick={handleClick}
             icon={<Language />}
             title={"Status"}
-          >
-            <CardValue>page</CardValue>
-          </CardButton>
-          <CardButton
-            onClick={handleTopupClick}
-            icon={<Language />}
-            title={"topup"}
           >
             <CardValue>page</CardValue>
           </CardButton>
