@@ -5,12 +5,15 @@ import { useChain } from "./useChain";
 import { useFetch } from "./useFetch";
 import { useNavigate } from "react-router-dom";
 import { useWriteContract } from 'wagmi'
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
+import { useProduct } from "../stores/ProductProvider/ProductProvider";
+import BandoRouterV1 from "@bandohq/contract-abis/abis/BandoRouterV1.json"
+import { Adress } from "../pages/SelectChainPage/types";
 
-export const useTransactionFlow = (product) => {
+export const useTransactionFlow = () => {
   const navigate = useNavigate();
+  const { product } = useProduct();
   const { openWalletMenu } = useWalletMenu();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
@@ -28,20 +31,43 @@ export const useTransactionFlow = (product) => {
     chainType: chain?.network_type,
   });
 
- const signTransactionEvent = async () => {
-  writeContract({ 
-    abi: JSON.parse(BandoRouter),
-    address: '0x6b175474e89094c44da98b954eedeac495271d0f',
-    functionName: 'requestERC20Service (0xe2f6ad25)',
-    chain: chain,
-    args: [
-      product?.
-    ]
- })
-
+  const signTransactionEvent = async () => {
+    try {
+      const requestERC20ServiceABI = BandoRouterV1.abi.find(
+        (item) => item.name === "requestERC20Service"
+      );
   
-    return null;
+      const serviceID = 1;
+      const requestPayload = {
+        payer: account?.address,
+        fiatAmount: 1000, 
+        serviceRef: "service123",
+        token: tokenAddress,
+        tokenAmount: quantity,
+      };
+  
+      console.log("Preparing transaction with payload:", {
+        serviceID,
+        request: requestPayload,
+      });
+  
+      const transaction = writeContract({
+        address: chain?.protocol_contracts?.ERC20TokenRegistry,
+        abi: [requestERC20ServiceABI],
+        functionName: "requestERC20Service",
+        args: [serviceID, requestPayload],
+        chain: undefined,
+        account: account?.address as Adress
+      });
+  
+      console.log("Transaction initiated:", transaction);
+      //TODO: redirect to the status page
+      return null;
+    } catch (error) {
+      console.error("Error in signTransactionEvent:", error);
+    }
   };
+  
 
   const { mutate, isPending } = useFetch({
     url: "references/",
@@ -82,6 +108,7 @@ export const useTransactionFlow = (product) => {
 
   const handleTransaction =async () => {
     // mutate();
+    console.log("handleTransaction");
     await signTransactionEvent();
   };
 
