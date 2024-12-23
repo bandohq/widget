@@ -11,7 +11,6 @@ import { SelectProductButton } from "../../components/SelectProductButton/Select
 import { QuantityInput } from "../../components/QuantityInput/QuantityInput";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { DetailSection } from "./DetailSection";
-import { PhoneInput } from "../../components/PhoneInput/PhoneInput";
 
 export const FormPage: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
@@ -25,8 +24,6 @@ export const FormPage: React.FC = () => {
     <PageContainer>
       <SelectProductButton formType="from" compact />
       {product?.productType === "giftCard" && <QuantityInput />}
-
-      {product?.productType === "esim" && <PhoneInput formType="from" />}
 
       <SelectChainAndToken mb={2} />
 

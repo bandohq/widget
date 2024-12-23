@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import type { CardProps } from "@mui/material";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { fitInputText } from "../../utils/input.js";
 import { CardTitle } from "../Card/CardTitle.js";
@@ -8,11 +10,13 @@ import {
   FormControl,
   InputCard,
   StyledInput,
+  StyledPhoneInput,
   maxInputFontSize,
   minInputFontSize,
 } from "./ReferenceInput.style.js";
 import { useFieldController } from "../../stores/form/useFieldController.js";
 import { Typography } from "@mui/material";
+import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider.js";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
@@ -31,6 +35,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
 }) => {
   const ref = useRef<HTMLInputElement>(null);
   const { onChange, onBlur, value } = useFieldController({ name: "reference" });
+  const { country } = useCountryContext();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -77,19 +82,32 @@ export const Input: React.FC<ReferenceInputProps> = ({
         <CardTitle>Your {title}</CardTitle>
         <FormContainer>
           <FormControl fullWidth>
-            <StyledInput
-              inputRef={ref}
-              size="small"
-              type={referenceType.name === "phone" ? "number" : "text"}
-              autoComplete="off"
-              placeholder={`Enter your ${title}`}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={value}
-              name={"reference"}
-              disabled={disabled}
-              required
-            />
+            {referenceType.name === "phone" ? (
+              <StyledPhoneInput>
+                <PhoneInput
+                  international
+                  countryCallingCodeEditable={false}
+                  placeholder="Enter phone number"
+                  defaultCountry={country?.iso_alpha2}
+                  value={value}
+                  onChange={onChange}
+                />
+              </StyledPhoneInput>
+            ) : (
+              <StyledInput
+                inputRef={ref}
+                size="small"
+                type={"text"}
+                autoComplete="off"
+                placeholder={`Enter your ${title}`}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={value}
+                name={"reference"}
+                disabled={disabled}
+                required
+              />
+            )}
           </FormControl>
         </FormContainer>
       </InputCard>
