@@ -24,6 +24,7 @@ export const ProductsPage = () => {
         return {
           ...category,
           brands: [...category.brands.slice(0, 10)],
+          showMore: category.brands.length > 10,
         };
       });
 
