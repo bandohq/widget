@@ -63,6 +63,7 @@ export interface Chain {
   mainnet: boolean;
   rpc_url: string;
   logo_url?: string;
+  is_testnet: boolean;
   protocol_contracts?: ProtocolContracts;
 }
 
@@ -78,19 +79,19 @@ export interface ChainWithSpecialContracts extends Chain {
 
 export interface ExtendedChain extends ChainWithNativeToken, ChainWithSpecialContracts {}
 
-interface ProtocolContracts {
-  BandoRouter: Adress;
-  BandoFulfillable: Adress;
-  BandoRouterProxy: Adress;
-  ERC20TokenRegistry: Adress;
-  FulfillableRegistry: Adress;
-  BandoERC20Fulfillable: Adress;
-  BandoFulfillableProxy: Adress;
-  BandoFulfillmentManager: Adress;
-  ERC20TokenRegistryProxy: Adress;
-  FulfillableRegistryProxy: Adress;
-  BandoERC20FulfillableProxy: Adress;
-  BandoFulfillmentManagerProxy: Adress;
+export interface ProtocolContracts {
+  BandoRouter?: Adress;
+  BandoFulfillable?: Adress;
+  BandoRouterProxy?: Adress;
+  ERC20TokenRegistry?: Adress;
+  FulfillableRegistry?: Adress;
+  BandoERC20Fulfillable?: Adress;
+  BandoFulfillableProxy?: Adress;
+  BandoFulfillmentManager?: Adress;
+  ERC20TokenRegistryProxy?: Adress;
+  FulfillableRegistryProxy?: Adress;
+  BandoERC20FulfillableProxy?: Adress;
+  BandoFulfillmentManagerProxy?: Adress;
 }
 
 export type Adress = `0x${string}`
