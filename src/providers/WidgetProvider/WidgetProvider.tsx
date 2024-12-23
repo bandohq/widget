@@ -1,5 +1,4 @@
 import { createContext, useContext, useId, useMemo } from "react";
-import { setDefaultSettings } from "../../stores/settings/useSettingStore";
 import type { WidgetContextProps, WidgetProviderProps } from "./types";
 
 const initialContext: WidgetContextProps = {
@@ -28,9 +27,6 @@ export const WidgetProvider: React.FC<
         ...widgetConfig,
         elementId,
       } as WidgetContextProps;
-
-      // Set default settings for widget settings store
-      setDefaultSettings(value);
 
       return value;
     } catch (e) {
