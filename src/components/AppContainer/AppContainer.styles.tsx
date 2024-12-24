@@ -47,6 +47,7 @@ export const RelativeContainer = styled(Box, {
     flex: 1,
     zIndex: 0,
     ...container,
+    minHeight: variant === "drawer" ? "100%" : "480px",
     maxHeight:
       variant === "drawer"
         ? "none"
