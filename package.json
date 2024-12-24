@@ -28,6 +28,7 @@
     "@tanstack/react-virtual": "^3.10.9",
     "add": "^2.0.6",
     "ethers": "^6.13.4",
+    "fuse.js": "^7.0.0",
     "i18next": "^23.16.2",
     "lodash": "^4.17.21",
     "microdiff": "^1.4.0",
@@ -35,6 +36,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.0",
+    "react-phone-number-input": "^3.4.10",
     "react-router-dom": "^6.27.0",
     "wagmi": "^2.12.25",
     "zustand": "^5.0.0-rc.2"

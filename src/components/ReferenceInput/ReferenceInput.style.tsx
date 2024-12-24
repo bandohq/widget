@@ -68,3 +68,18 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
     WebkitTextFillColor: "unset",
   },
 }));
+
+export const StyledPhoneInput = styled("div")(({ theme }) => ({
+  "& .PhoneInput": {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(1),
+    fontSize: 24,
+    fontWeight: 200,
+    fontFamily: "Kanit, Arial, sans-serif",
+  },
+  "& .PhoneInputInput": {
+    all: "unset",
+    width: "100%",
+  },
+}));

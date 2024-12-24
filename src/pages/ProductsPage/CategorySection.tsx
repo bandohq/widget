@@ -39,14 +39,16 @@ export const CategorySection = ({ category, onMoreClick }) => {
         <Typography variant="h4" sx={{ fontSize: "21px", fontWeight: 200 }}>
           {category.productType && convertSlugToTitle(category?.productType)}
         </Typography>
-        <Link
-          component="button"
-          variant="body2"
-          onClick={handleMoreClick}
-          sx={{ marginLeft: 1 }}
-        >
-          more
-        </Link>
+        {category?.showMore && (
+          <Link
+            component="button"
+            variant="body2"
+            onClick={handleMoreClick}
+            sx={{ marginLeft: 1 }}
+          >
+            more
+          </Link>
+        )}
       </div>
       <BrandsContainer>
         {category.brands.map((brand) => (
