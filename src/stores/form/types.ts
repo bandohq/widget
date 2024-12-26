@@ -1,11 +1,12 @@
 import type { StoreApi } from 'zustand'
 import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional'
+import { ReferenceType } from '../../providers/CatalogProvider/types'
 
 export interface DefaultFieldValues {
   fromChain?: number
   fromToken?: string
   quantity?: number
-  reference?: string
+  reference?: ReferenceType[]
   toChain?: number
   toToken?: string
   toAddress?: string

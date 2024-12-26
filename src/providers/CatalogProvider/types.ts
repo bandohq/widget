@@ -52,5 +52,5 @@ export interface Price {
 export interface ReferenceType {
     name: string
     valueType: string
-    regex: any
+    regex?: any
 }

@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import type { FormFieldNames } from './types.js'
 import { useFieldActions } from './useFieldActions.js'
 import { useFieldValues } from './useFieldValues.js'
+import { ReferenceType } from '../../providers/CatalogProvider/types.js'
 
 interface UseFieldControllerProps {
   name: FormFieldNames
@@ -12,7 +13,7 @@ export const useFieldController = ({ name }: UseFieldControllerProps) => {
   const { setFieldValue, setAsTouched } = useFieldActions()
 
   const onChange = useCallback(
-    (newValue: string | number | undefined) => {
+    (newValue: string | number | Array<ReferenceType[] |undefined) => {
       setFieldValue(name, newValue, { isDirty: true, isTouched: true })
     },
     [name, setFieldValue]

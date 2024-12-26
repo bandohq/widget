@@ -13,7 +13,7 @@ export const formDefaultValues: DefaultValues = {
   fromAmount: '',
   quantity: 1,
   phone: '',
-  reference: '',
+  reference: [],
   toAmount: '',
   tokenSearchFilter: '',
 }
