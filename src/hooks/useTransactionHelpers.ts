@@ -10,6 +10,8 @@ export const useTransactionHelpers = () => {
   const { writeContract } = useWriteContract();
   const [allowance, setAllowance] = useState<BigInt>(BigInt(0)); // Reactivity for allowance
   const [allowanceFetched, setAllowanceFetched] = useState<boolean>(false);
+  const [isReferenceValid, setIsReferenceValid] = useState<boolean | null>(null); // Reactivity for isReferenceValid
+  const [referenceFetched, setReferenceFetched] = useState<boolean>(false);
 
   const useCheckAllowance = (spenderAddress, tokenAddress, account, chain) => {
     const ERC20AllowanceABI = [
@@ -81,27 +83,29 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const validateReference = async (chain, serviceID, referenceCode) => {
-    try {
-      const FulfillableRegistryABI = FulfillableRegistry.abi.find(
-        (item) => item.name === "isRefValid"
-      );
 
-      const { data: isRefValid } = useReadContract({
-        address: chain?.protocol_contracts?.FulfillableRegistry,
-        abi: [FulfillableRegistryABI],
-        functionName: "isRefValid",
-        args: [serviceID, referenceCode],
-        chainId: chain.id,
-      });
+  const useValidateReference = (chain, serviceID, referenceCode) => {
+    const FulfillableRegistryABI = FulfillableRegistry.abi.find(
+      (item) => item.name === "isRefValid"
+    );
 
-      if (!isRefValid) throw new Error("Invalid reference code");
+    const { data, isError, isLoading } = useReadContract({
+      address: chain?.protocol_contracts?.FulfillableRegistry,
+      abi: [FulfillableRegistryABI],
+      functionName: "isRefValid",
+      args: [serviceID, referenceCode],
+      chainId: chain.id,
+    });
 
-      return true;
-    } catch (error) {
-      console.error("Reference validation failed:", error);
-      throw error;
-    }
+    useEffect(() => {
+      if (!isLoading && !isError && data !== undefined) {
+        setIsReferenceValid(data as boolean);
+        setReferenceFetched(true);
+      } else if (isError) {
+        setIsReferenceValid(false); // Marca como inválido si ocurre un error
+        setReferenceFetched(true);
+      }
+    }, [data, isError, isLoading]);
   };
 
   const handleServiceRequest = async ({
@@ -115,7 +119,7 @@ export const useTransactionHelpers = () => {
     reference,
   }) => {
     try {
-      const serviceID = product?.evmServiceID;
+      const serviceID = product?.evmServiceId;
       const nativeToken = nativeTokenCatalog.find(
         (item) => item.key === chain?.key
       );
@@ -124,7 +128,7 @@ export const useTransactionHelpers = () => {
       );
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
-      await validateReference(chain, serviceID, reference);
+      useValidateReference(chain, serviceID, reference);
 
       if (tokenKey === nativeToken?.key) {
         const requestServiceABI = BandoRouter.abi.find(
