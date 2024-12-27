@@ -116,7 +116,6 @@ export const useTransactionHelpers = () => {
     quote,
     product,
     quantity,
-    reference,
   }) => {
     try {
       const serviceID = product?.evmServiceId;
@@ -128,7 +127,7 @@ export const useTransactionHelpers = () => {
       );
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
-      useValidateReference(chain, serviceID, reference);
+      useValidateReference(chain, serviceID, txId);
 
       if (tokenKey === nativeToken?.key) {
         const requestServiceABI = BandoRouter.abi.find(
@@ -138,7 +137,7 @@ export const useTransactionHelpers = () => {
         const payload = {
           payer: account?.address,
           fiatAmount: 1000,
-          serviceRef: reference,
+          serviceRef: txId,
           token: tokenKey,
           tokenAmount: (
             quote?.digital_asset_amount *
