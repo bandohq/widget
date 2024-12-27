@@ -3,7 +3,6 @@ import { useAccount } from "@lifi/wallet-management";
 import { FormKeyHelper } from "../stores/form/types";
 import { useFieldValues } from "../stores/form/useFieldValues";
 import { useChain } from "./useChain";
-import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
@@ -20,7 +19,6 @@ export const useTransactionFlow = () => {
     "quantity",
     "reference"
   );
-  const { country } = useCountryContext();
   const { chain } = useChain(chainId);
   const { account } = useAccount({ chainType: chain?.network_type });
   const {  handleServiceRequest } = useTransactionHelpers();
@@ -29,10 +27,7 @@ export const useTransactionFlow = () => {
     url: "references/",
     method: "POST",
     data: {
-      reference:
-        product?.referenceType[0]?.name === "phone"
-          ? `${country?.calling_code}${reference}`
-          : reference,
+      reference_required_fields: reference,
       transaction_intent: {
         sku: product?.sku,
         chain: chain?.key,
@@ -55,7 +50,6 @@ export const useTransactionFlow = () => {
               quote,
               product,
               quantity,
-              reference,
             });
 
             navigate(`/status/${txId}`, { state: { signature } });
