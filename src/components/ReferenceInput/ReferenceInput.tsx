@@ -17,18 +17,17 @@ import {
 import { useFieldController } from "../../stores/form/useFieldController.js";
 import { Typography } from "@mui/material";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider.js";
+import { ReferenceType } from "../../providers/CatalogProvider/types.js";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
-  referenceType: {
-    name: "email" | "phone";
-    regexp?: RegExp; // El regex puede ser undefined
-    valueType: "string" | "number";
-  };
+  index: number;
+  referenceType: ReferenceType;
 }
 
 export const Input: React.FC<ReferenceInputProps> = ({
   formType,
+  index,
   disabled,
   referenceType,
   ...props
@@ -39,32 +38,36 @@ export const Input: React.FC<ReferenceInputProps> = ({
 
   const [error, setError] = useState<string | null>(null);
 
+  const currentValue =
+    Array.isArray(value) && value[index]?.value ? value[index].value : "";
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { value } = event.target;
+    const newValue = event.target.value;
 
-    if (referenceType.regexp && !referenceType.regexp.test(value)) {
+    if (referenceType.regex && !referenceType.regex.test(newValue)) {
       setError(`Invalid ${referenceType.name} format.`);
     } else {
       setError(null);
     }
 
-    onChange(value);
+    const updatedReferences = Array.isArray(value) ? [...value] : [];
+    updatedReferences[index] = { ...referenceType, value: newValue };
+    onChange(updatedReferences);
   };
 
-  const handleBlur = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { value } = event.target;
-
-    if (value && referenceType.regexp && !referenceType.regexp.test(value)) {
+  const handleBlur = () => {
+    if (
+      currentValue &&
+      referenceType.regex &&
+      !referenceType.regex.test(currentValue)
+    ) {
       setError(`Invalid ${referenceType.name} format.`);
     } else {
       setError(null);
     }
 
-    onChange(value);
     onBlur();
   };
 
@@ -72,7 +75,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
     if (ref.current) {
       fitInputText(maxInputFontSize, minInputFontSize, ref.current);
     }
-  }, [value]);
+  }, [currentValue]);
 
   const title = referenceType.name;
 
@@ -89,21 +92,30 @@ export const Input: React.FC<ReferenceInputProps> = ({
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   defaultCountry={country?.iso_alpha2}
-                  value={value}
-                  onChange={onChange}
+                  value={currentValue}
+                  onChange={(newPhoneValue) => {
+                    const updatedReferences = Array.isArray(value)
+                      ? [...value]
+                      : [];
+                    updatedReferences[index] = {
+                      ...referenceType,
+                      value: newPhoneValue || "",
+                    };
+                    onChange(updatedReferences);
+                  }}
                 />
               </StyledPhoneInput>
             ) : (
               <StyledInput
                 inputRef={ref}
                 size="small"
-                type={"text"}
+                type="text"
                 autoComplete="off"
                 placeholder={`Enter your ${title}`}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={value}
-                name={"reference"}
+                value={currentValue}
+                name={`reference-${index}`}
                 disabled={disabled}
                 required
               />
