@@ -13,7 +13,7 @@ export const useFieldController = ({ name }: UseFieldControllerProps) => {
   const { setFieldValue, setAsTouched } = useFieldActions()
 
   const onChange = useCallback(
-    (newValue: string | number | Array<ReferenceType[] |undefined) => {
+    (newValue: string | number | Array<ReferenceType[]> |undefined) => {
       setFieldValue(name, newValue, { isDirty: true, isTouched: true })
     },
     [name, setFieldValue]
