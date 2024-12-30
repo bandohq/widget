@@ -102,7 +102,7 @@ export const useTransactionHelpers = () => {
         setIsReferenceValid(data as boolean);
         setReferenceFetched(true);
       } else if (isError) {
-        setIsReferenceValid(false); // Marca como inválido si ocurre un error
+        setIsReferenceValid(false);
         setReferenceFetched(true);
       }
     }, [data, isError, isLoading]);
