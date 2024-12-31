@@ -1,10 +1,7 @@
-// Simplified export-only version
-
 import type { StateCreator } from "zustand";
 import type { WidgetConfig } from "../../types/widget.js";
 import type { SettingsProps, SettingsState } from "./types.js";
 
-// Valores por defecto simplificados
 export const defaultSlippage = "0.5";
 
 export const defaultConfigurableSettings: Pick<
