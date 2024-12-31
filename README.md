@@ -9,9 +9,11 @@ Check the complete documentation here:
 
 ## Key Features
 
-- **Wallet Compatibility**: Support for any wallet compatible with EVM, SVM, and UTXO.
-- **Custom Configuration**: Customize the widget settings to fit your specific use cases.
-- **Bando Fulfillment Protocol (BFP)**: Utilizes the BFP to efficiently manage operations.
+- **All-in-One Solution**: Support for all ecosystems, chains, bridges, exchanges, and solvers supported by Bando.
+- **Wallet Management**: Includes UI for managing wallets (EVM, Solana, and Bitcoin) with the option to use your own wallet solution.
+- **Flexible Styling**: Customizable themes and styles to seamlessly integrate with your app's design.
+- **Multi-Language Support**: Complete UI translations to cater to a global audience.
+- **Broad Compatibility**: Tested with popular frameworks including React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite, and CRA.
 
 ---
 
@@ -24,8 +26,10 @@ Prerequisites:
 
 ### Step 1: Install Dependencies
 
+Install the Bando Widget using npm:
+
 ```bash
-npm install @bandohq/widget @bigmi/react @bigmi/core viem
+npm install @bandohq/widget
 ```
 
 ---
@@ -37,19 +41,22 @@ Create a configuration file for your widget:
 ### Configuration Example
 
 ```javascript
-import { BandoWidget } from "@bandohq/widget";
+import { BandoWidget, WidgetConfig } from "@bandohq/widget";
 
-const widgetConfig = {
-  fromChain: "ethereum",
-  fromToken: "ETH",
-  country: "US",
+const widgetConfig: WidgetConfig = {
+  theme: {
+    container: {
+      border: "1px solid rgb(234, 234, 234)",
+      borderRadius: "16px",
+    },
+  },
 };
 
-function App() {
-  return <BandoWidget config={widgetConfig} />;
-}
-
-export default App;
+export const WidgetPage = () => {
+  return (
+    <BandoWidget integrator="Your dApp/company name" config={widgetConfig} />
+  );
+};
 ```
 
 ---
@@ -62,7 +69,7 @@ export default App;
 import { BandoWidget } from "@bandohq/widget";
 
 function App() {
-  return <BandoWidget />;
+  return <BandoWidget integrator="Your dApp/company name" />;
 }
 ```
 
@@ -71,7 +78,16 @@ function App() {
 You can pass configuration properties and other adjustments:
 
 ```javascript
-<BandoWidget fromChain="solana" fromToken="SOL" />
+<BandoWidget
+  fromChain="solana"
+  fromToken="SOL"
+  theme={{
+    container: {
+      border: "2px solid #000",
+      borderRadius: "8px",
+    },
+  }}
+/>
 ```
 
 ---
@@ -81,6 +97,22 @@ You can pass configuration properties and other adjustments:
 - React
 - Bigmi (for configuration management and integration)
 - Viem (for on-chain interactions)
+
+---
+
+## Getting Started
+
+- [Install the Bando Widget](https://docs.bando.cool/widget/install)
+- [Configure the Widget](https://docs.bando.cool/widget/configure)
+- [Localization](https://docs.bando.cool/widget/localization)
+- [Customize Styles](https://docs.bando.cool/widget/customization)
+- [Wallet Management](https://docs.bando.cool/widget/wallet-management)
+
+Guides:
+
+- [Next.js Guide](https://docs.bando.cool/widget/framework-integration/next)
+- [Vue Guide](https://docs.bando.cool/widget/framework-integration/vue)
+- [Svelte Guide](https://docs.bando.cool/widget/framework-integration/svelte)
 
 ---
 
