@@ -4,104 +4,65 @@
     "title": "Lingua"
   },
   "format": {
-    "currency": "",
+    "currency": "{{value, currencyExt(currency: USD)}}",
     "number": "{{value, number(maximumFractionDigits: 9)}}",
-    "percent": ""
+    "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
   "button": {
-    "auto": "Auto",
     "backToOrder": "Torna al tuo ordine",
     "discover": "Scopri di più",
-    "bookmark": "",
-    "bookmarks": "",
-    "bridge": "Bridge",
-    "bridgeReview": "",
-    "buy": "Acquista",
     "cancel": "Annulla",
-    "checkoutReview": "",
-    "close": "",
-    "confirm": "",
-    "connectAnotherWallet": "",
+    "close": "Chiudi",
+    "connectAnotherWallet": "Collega un altro portafoglio",
     "connectWallet": "Collega il portafoglio",
     "contactSupport": "Contatta l'assistenza",
-    "continue": "Continua",
     "copyAddress": "Copia indirizzo",
     "dark": "Scuro",
-    "delete": "Elimina",
-    "deposit": "",
-    "depositReview": "",
     "disconnect": "Disconnetti",
     "done": "Fatto",
-    "exchange": "Scambia",
-    "getGas": "Ottieni gas",
-    "learnMore": "Ulteriori informazioni",
     "light": "Chiaro",
     "max": "massimo",
     "ok": "Ok",
-    "options": "",
-    "removeTransaction": "Rimuovi transazione",
+    "options": "Opzioni",
     "reset": "Ripristina",
     "resetSettings": "Ripristina impostazioni",
     "seeDetails": "Vedi dettagli",
     "showAll": "Mostra tutto",
-    "startBridging": "Inizia il bridge",
-    "startSwapping": "Avvia lo scambio",
-    "swap": "Scambio",
-    "swapReview": "",
     "tryAgain": "Riprova",
     "viewCoverage": "Vedi copertura",
     "viewOnExplorer": "Visualizza sull'Explorer"
   },
   "header": {
-    "activeTransactions": "Transazioni attive",
-    "bookmarkedWallets": "",
-    "bridge": "Bridge",
     "checkout": "Checkout",
-    "checkoutDetails": "",
-    "deposit": "",
-    "depositDetails": "",
-    "exchange": "Exchange",
-    "from": "Scambia da",
+    "checkoutDetails": "Dettagli checkout",
     "gas": "Gas",
     "payWith": "Paga con",
-    "receive": "",
-    "recentWallets": "",
     "selectChain": "Seleziona la chain",
     "selectWallet": "Seleziona il tuo portafoglio",
-    "send": "",
-    "sendToWallet": "",
+    "send": "Invia",
     "settings": "Impostazioni",
-    "swap": "Scambio",
-    "title": "Spendere",
-    "to": "Scambia a",
-    "transactionDetails": "Dettagli transazione",
-    "transactionHistory": "Storico Transazioni",
-    "walletConnected": "Portafoglio collegato",
+    "title": "Spendi",
     "youGet": "Ricevi",
-    "youPay": ""
+    "youPay": "Paghi",
+    "tokens": "Token",
+    "products": "Prodotti",
+    "spend": "Spendi"
   },
   "countries": {
     "title": "Paesi",
     "deleted": "Paesi eliminati"
   },
   "info": {
+    "detailMessage": "Qui riceverai il tuo {{productType}}.",
     "message": {
       "autoRefuel": "Livello basso di gas su {{chainName}}. Continuando avrai abbastanza gas per completare lo scambio.",
       "emptyActiveTransactions": "Le transazioni in corso appariranno qui. Una volta completate, potrai trovarle nella cronologia delle transazioni.",
       "emptyTokenList": "Non siamo riusciti a trovare token sulla chain {{chainName}} o non ne hai. Riprova o scegli un'altra chain.",
-      "emptyChainList": "",
-      "emptyBridgesList": "",
-      "emptyExchangesList": "",
-      "emptyTransactionHistory": "La cronologia delle transazioni è memorizzata solo localmente e verrà eliminata se si cancellano i dati del browser.",
-      "fundsToExchange": "",
-      "toAddressIsRequired": "",
-      "routeNotFound": "Le ragioni potrebbero essere: bassa liquidità, la quantità selezionata è troppo bassa, i costi del gas sono troppo elevati o non ci sono routes per la combinazione selezionata."
+      "fundsToExchange": "I fondi inviati a un exchange potrebbero andare persi.",
+      "routeNotFound": "Le ragioni potrebbero essere: bassa liquidità, la quantità selezionata è troppo bassa, i costi del gas sono troppo elevati o non ci sono route per la combinazione selezionata."
     },
     "title": {
-      "autoRefuel": "",
-      "emptyActiveTransactions": "Nessuna transazione attiva",
-      "emptyTransactionHistory": "Nessuna transazione recente",
-      "routeNotFound": "Nessuna rotta disponibile"
+      "autoRefuel": "Ottieni gas su {{chainName}}"
     }
   },
   "success": {
@@ -110,34 +71,23 @@
     },
     "title": {
       "orderCompleted": "Ordine completato",
-      "thank": "Grazie per il tuo acquisto.",
+      "thanks": "Grazie per il tuo acquisto.",
       "orderDetails": "Dettagli dell'ordine"
     }
   },
   "pending": {
     "title": {
-      "processing": "Elaborazione del tuo ordine",
+      "procesing": "Elaborazione del tuo ordine",
       "wait": "Questo potrebbe richiedere alcuni minuti."
     }
   },
   "warning": {
     "message": {
-      "deleteActiveTransactions": "Gli scambi attivi vengono memorizzati solo localmente e non possono essere recuperati se vengono cancellati.",
-      "deleteTransactionHistory": "La cronologia delle transazioni è memorizzata solo localmente e non può essere recuperata se la elimini.",
-      "highValueLoss": "Il valore dei token ricevuti è significativamente inferiore ai token scambiati più il costo della transazione.",
-      "insufficientFunds": "Non hai abbastanza fondi per completare lo scambio.",
-      "insufficientGas": "Non hai abbastanza gas per completare lo scambio. Devi aggiungere almeno:",
-      "rateChanged": "Il tasso di scambio è cambiato. Se procedi, confermi di accettare il nuovo tasso.",
-      "resetSettings": "Questo porterà al ripristino della priorità di route, slittamento di prezzo, prezzo del gas, bridge abilitati ed exchanges.",
-      "slippageOutsideRecommendedLimits": ""
+      "insufficientFunds": "Non hai abbastanza fondi per completare la transazione.",
+      "insufficientGas": "Non hai abbastanza gas per completare la transazione. Devi aggiungere almeno:"
     },
     "title": {
-      "deleteActiveTransactions": "Eliminare tutte le transazioni attive?",
-      "deleteTransaction": "Eliminare questa transazione?",
-      "deleteTransactionHistory": "Eliminare la cronologia transazioni?",
-      "highValueLoss": "Perdita di valore elevato",
       "insufficientGas": "Gas insufficiente",
-      "rateChanged": "Tasso cambiato",
       "resetSettings": "Ripristinare le impostazioni?"
     }
   },
@@ -145,170 +95,49 @@
     "message": {
       "allowanceRequired": "L'importo di {{tokenSymbol}} supera la tua quota massima permessa. Aumenta la quota e riprova.",
       "insufficientFunds": "Non hai abbastanza gas per coprire il costo della transazione.",
-      "remainInYourWallet": "",
-      "signatureRejected": "",
+      "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} su {{chainName}} rimangono nel tuo portafoglio.",
+      "signatureRejected": "La tua firma è necessaria per completare la transazione. {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} su {{chainName}} rimangono nel tuo portafoglio.",
       "slippageThreshold": "Lo slittamento di prezzo è più alto della soglia definita. Si prega di richiedere una nuova route per ottenere una quota aggiornata.",
-      "transactionCanceled": "",
-      "transactionConflict": "",
-      "transactionExpired": "",
       "transactionFailed": "Per ulteriori informazioni, consultare il block explorer.",
-      "transactionNotSent": "",
-      "transactionSimulationFailed": "",
+      "transactionNotSent": "La transazione non è stata inviata.",
+      "transactionSimulationFailed": "La transazione non può essere eseguita nella simulazione.",
       "unknown": "Riprova o contatta il nostro supporto.",
-      "walletChangedDuringExecution": ""
+      "walletChangedDuringExecution": "L'indirizzo del portafoglio che ha richiesto la quota non corrisponde all'indirizzo del portafoglio che tenta di firmare la transazione. Assicurati di utilizzare lo stesso portafoglio per tutta la durata della transazione."
     },
     "title": {
       "allowanceRequired": "Quota massima insufficiente",
-      "balanceIsTooLow": "Il saldo è troppo basso",
-      "bookmarkAlreadyExists": "",
-      "bookmarkNameRequired": "",
-      "chainSwitch": "È necessario cambiare la chain",
-      "exchangeRateUpdateCanceled": "",
-      "gasLimitIsTooLow": "Limite di gas troppo basso",
-      "insufficientFunds": "Fondi insufficienti",
-      "signatureRejected": "",
-      "slippageNotMet": "Condizioni di slittamento di prezzo non rispettate",
-      "transactionCanceled": "Transazione cancellata",
-      "transactionConflict": "",
-      "transactionExpired": "",
-      "transactionFailed": "Transazione fallita",
-      "transactionSimulationFailed": "",
-      "transactionUnderpriced": "L'operazione è sottostimata",
-      "transactionUnprepared": "Impossibile preparare la transazione",
-      "unknown": "Qualcosa è andato storto",
-      "walletAddressInvalid": "",
-      "walletAddressInvalid_chain": "",
-      "walletAddressRequired": "L'indirizzo è un campo obbligatorio.",
-      "walletChainTypeInvalid": "",
-      "walletMismatch": "",
-      "orderFailed": "Oh... Si è verificato un problema",
-      "retry": "Per favore, riprova più tardi."
+      "transactionFailed": "Transazione fallita."
     }
   },
   "tooltip": {
-    "deselectAll": "",
-    "estimatedTime": "",
-    "feeCollection": "",
-    "minReceived": "",
     "notFound": {
       "text": "Non siamo riusciti a trovare questa pagina.",
       "title": "404"
     },
-    "numberOfSteps": "",
-    "priceImpact": "",
-    "progressToNextUpdate": "I dati visualizzati si aggiorneranno automaticamente dopo {{value}} secondi. Fai click qui per aggiornare manualmente.",
-    "selectAll": "",
-    "settingsModified": "Impostazioni (modificate)",
-    "slippage": ""
+    "settingsModified": "Impostazioni (modificate)"
   },
   "main": {
-    "allTokens": "",
-    "bridgeStepDetails": "",
-    "checkoutStepDetails": "",
-    "currentAmount": "Quantità corrente",
-    "depositStepDetails": "",
-    "featuredTokens": "Token in evidenza",
-    "fees": {
-      "defaultIntegrator": "",
-      "estimated": "",
-      "integrator": "",
-      "network": "",
-      "paid": "",
-      "provider": ""
-    },
+    "allTokens": "Tutti i token",
     "from": "Da",
     "inProgress": "in corso",
-    "maxSlippage": "",
-    "minReceived": "",
-    "myTokens": "",
+    "maxSlippage": "Slittamento massimo",
+    "minReceived": "Ricevuto minimo",
+    "myTokens": "I miei token",
     "onChain": "su {{chainName}}",
     "ownedBy": "Di proprietà di",
-    "popularTokens": "",
-    "priceImpact": "",
-    "process": {
-      "bridge": {
-        "actionRequired": "",
-        "done": "",
-        "pending": "",
-        "started": ""
-      },
-      "checkout": {
-        "done": ""
-      },
-      "deposit": {
-        "done": ""
-      },
-      "receivingChain": {
-        "done": "Bridge completato",
-        "partial": "Bridge parzialmente completato",
-        "pending": "In attesa della chain di destinazione",
-        "refunded": "Transazione di bridge rimborsata"
-      },
-      "swap": {
-        "actionRequired": "Si prega di firmare la transazione",
-        "done": "Scambio completato",
-        "pending": "In attesa della transazione di scambio",
-        "started": "Preparazione dello scambio"
-      },
-      "switchChain": {
-        "actionRequired": "È necessario cambiare la chain",
-        "done": "La chain è stata cambiata con successo"
-      },
-      "tokenAllowance": {
-        "done": "Indennità del token approvata",
-        "pending": "In attesa dell'indennità del token",
-        "started": "Applicazione dell'indennità di token"
-      }
-    },
     "quotedAmount": "Totale quotato",
-    "rateChange": "Tasso di scambio",
+    "rateChange": "Cambio tasso",
     "receiving": "In ricezione",
-    "refuelStepDetails": "Ottieni gas tramite {{tool}}",
     "selectChain": "Seleziona la chain",
-    "selectChainAndToken": "Selezionare la chain ed il token",
+    "selectChainAndToken": "Seleziona la chain e il token",
     "selectToken": "Seleziona un token",
-    "sendToAddress": "Invia a {{address}}",
-    "sendToWallet": "Invia ad un altro portafoglio",
     "sending": "Invio in corso",
-    "sentToAddress": "Inviati a {{address}}",
-    "stepBridge": "Bridge",
-    "stepBridgeAndBuy": "Trasferisci e acquista",
-    "stepBridgeAndDeposit": "",
-    "stepDetails": "{{tool}} tramite LI.FI",
-    "stepSwap": "Scambio",
-    "stepSwapAndBridge": "Scambia e bridge",
-    "stepSwapAndBuy": "Scambia e acquista",
-    "stepSwapAndDeposit": "",
-    "transferId": "",
-    "swapStepDetails": "Scambio su {{chain}} tramite {{tool}}.",
-    "tags": {
-      "cheapest": "",
-      "fastest": ""
-    },
-    "to": "A",
-    "tokenOnChain": "{{tokenSymbol}} su {{chainName}}",
-    "tokenOnChainAmount": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} su {{chainName}}",
-    "tokenSearch": "Cerca per nome token o indirizzo",
-    "valueLoss": "Perdita di valore",
-    "searchChains": "",
-    "searchBridges": "",
-    "searchExchanges": ""
+    "tokenSearch": "Cerca per nome o indirizzo del token",
+    "searchProducts": "Cerca per marca di prodotto"
   },
   "settings": {
-    "theme": "",
-    "custom": "",
-    "resetSettings": ""
-  },
-  "sendToWallet": {
-    "addBookmark": "",
-    "bookmarkWallet": "",
-    "confirmWalletAddress": "",
-    "connectedWallets": "",
-    "enterAddress_long": "",
-    "enterAddress_short": "",
-    "enterName": "",
-    "noBookmarkedWallets": "",
-    "noConnectedWallets": "",
-    "noRecentWallets": ""
+    "theme": "Tema",
+    "custom": "Personalizzato",
+    "resetSettings": "Stai utilizzando impostazioni personalizzate che possono influire sul numero o sull'ordinamento dei percorsi disponibili."
   }
 }
