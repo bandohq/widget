@@ -23,8 +23,6 @@ export const ProductList: React.FC<ProductListProps> = ({
   const [dropdownOpen] = useState(isDropdown);
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
 
-  console.log("brands", brands);
-
   const parentRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
