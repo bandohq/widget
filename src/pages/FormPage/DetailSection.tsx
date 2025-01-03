@@ -2,6 +2,7 @@ import { Input } from "../../components/ReferenceInput/ReferenceInput";
 import { Typography } from "@mui/material";
 import { palette } from "../../themes/palettes";
 import { ReferenceType } from "../../providers/CatalogProvider/types";
+import { useTranslation } from "react-i18next";
 
 interface DetailSectionProps {
   productType: string;
@@ -11,6 +12,7 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
   productType,
   referenceType,
 }) => {
+  const { t } = useTranslation();
   return (
     <div style={{ marginBottom: "15px" }}>
       <Typography variant="subtitle1" style={{ color: palette.grey[400] }}>
@@ -26,7 +28,7 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
         />
       ))}
       <Typography variant="subtitle2" style={{ color: palette.grey[400] }}>
-        Is where you will recibe your {productType}.
+        {t("info.detailMessage", { productType })}
       </Typography>
     </div>
   );

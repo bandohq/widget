@@ -23,7 +23,7 @@ export const FormPage: React.FC = () => {
   return (
     <PageContainer>
       <SelectProductButton formType="from" compact />
-      {product?.productType === "giftCard" && <QuantityInput />}
+      {product?.productType === "gift_card" && <QuantityInput />}
 
       <SelectChainAndToken mb={2} />
 
