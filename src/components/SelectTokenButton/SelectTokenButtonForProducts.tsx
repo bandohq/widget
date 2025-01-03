@@ -126,9 +126,9 @@ export const SelectTokenButtonForProducts: React.FC<
                 <AvatarBadgedDefault />
               )
             }
-            title={`${quote?.digital_asset_amount * quantity} ${
-              quote?.digital_asset
-            }`}
+            title={`${(quote?.digital_asset_amount * quantity).toFixed(
+              token.decimals
+            )} ${quote?.digital_asset}`}
             titleTypographyProps={{
               title: token.symbol,
             }}
