@@ -132,7 +132,7 @@ export const SelectTokenButtonForProducts: React.FC<
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={`${quote?.fiat_amount * quantity} ${
+            subheader={`${(quote?.fiat_amount * quantity).toFixed(2)} ${
               quote?.fiat_currency
             }`}
             subheaderTypographyProps={

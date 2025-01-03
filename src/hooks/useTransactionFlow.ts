@@ -42,7 +42,7 @@ export const useTransactionFlow = () => {
 
             console.log("Transaction Signature:", signature);
 
-            // navigate(`/status/${txId}`, { state: { signature } });
+            navigate(`/status/${txId}`, { state: { signature } });
             console.log("Transaction ID:", txId);
           } catch (error) {
             console.error("Error handling the transaction signature:", error);
