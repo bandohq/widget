@@ -34,8 +34,6 @@ export const ProductSearch = ({
     return null;
   }
 
-  console.log(filteredBrands);
-
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchKey(event.target.value);
     fuzzySearchBrands(event.target.value, productType);

@@ -15,7 +15,6 @@ export const useTransactionFlow = () => {
   const { quote } = useQuotes();
   const [chainId, quantity, reference] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
-    tokenKey,
     "quantity",
     "reference"
   );
@@ -26,17 +25,6 @@ export const useTransactionFlow = () => {
   const { mutate, isPending } = useFetch({
     url: "references/",
     method: "POST",
-    data: {
-      reference_required_fields: reference,
-      transaction_intent: {
-        sku: product?.sku,
-        chain: chain?.key,
-        token: quote?.digital_asset, // Token address
-        quantity,
-        amount: quote?.digital_asset_amount * parseInt(quantity),
-        wallet: account?.address,
-      },
-    },
     mutationOptions: {
       onSuccess: async (data) => {
         const txId = data.transaction_intents?.transaction_id;
@@ -52,6 +40,8 @@ export const useTransactionFlow = () => {
               quantity,
             });
 
+            console.log("Transaction Signature:", signature);
+
             navigate(`/status/${txId}`, { state: { signature } });
             console.log("Transaction ID:", txId);
           } catch (error) {
@@ -66,7 +56,17 @@ export const useTransactionFlow = () => {
   });
 
   const handleTransaction = async () => {
-    mutate();
+    mutate({
+      reference_required_fields: reference,
+      transaction_intent: {
+        sku: product?.sku,
+        chain: chain?.key,
+        token: quote?.digital_asset, // Token address
+        quantity,
+        amount: quote?.digital_asset_amount * quantity,
+        wallet: account?.address,
+      },
+    });
   };
 
   return {

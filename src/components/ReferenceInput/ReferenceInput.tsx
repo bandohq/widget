@@ -53,7 +53,10 @@ export const Input: React.FC<ReferenceInputProps> = ({
     }
 
     const updatedReferences = Array.isArray(value) ? [...value] : [];
-    updatedReferences[index] = { ...referenceType, value: newValue };
+    updatedReferences[index] = {
+      key: referenceType.name,
+      value: newValue,
+    };
     onChange(updatedReferences);
   };
 

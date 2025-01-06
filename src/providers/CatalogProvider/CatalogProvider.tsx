@@ -49,7 +49,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (!searchTerm.trim() && productType) {
       // if the search term is empty, show all brands for the selected category
-      console.log("entró");
       setFilteredBrands(allBrands);
       return;
     }
