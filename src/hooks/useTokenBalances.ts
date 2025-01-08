@@ -1,70 +1,83 @@
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
 import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
+import { useReadContracts } from "wagmi";
+
+export const wagmiContractAbi = {
+  abi: [
+    {
+      type: 'function',
+      name: 'balanceOf',
+      stateMutability: 'view',
+      inputs: [{ name: 'account', type: 'address' }],
+      outputs: [{ type: 'uint256' }],
+    },
+    {
+      type: 'function',
+      name: 'totalSupply',
+      stateMutability: 'view',
+      inputs: [],
+      outputs: [{ name: 'supply', type: 'uint256' }],
+    },
+  ],
+} as const;
 
 export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) => {
-  const [balances, setBalances] = useState([]);
+  const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [tokensContracts, setTokensContracts] = useState<any[]>([]);
 
   const { data: tokens, isPending: tokensLoading } = useTokens(chain);
 
   useEffect(() => {
-    const fetchBalances = async () => {
-      if (!tokens || !chain || !accountAddress) return;
+    if (tokens) {
+      const contracts = tokens.map((token) => ({
+        address: token?.address,
+        ...wagmiContractAbi,
+        functionName: 'balanceOf',
+        args: [accountAddress as `0x${string}`],
+        chainId: chain.id,
+      }));
+      setTokensContracts(contracts);
+    }
+  }, [tokens, accountAddress, chain]);
 
-      setLoading(true);
-      setError(null);
+  // Execute multicall
+  const { data, isError, isLoading, error: readError } = useReadContracts({
+    contracts: tokensContracts,
+  });
 
-      try {
-        // Validate RPC URL
-        const rpcUrl = chain.rpc_url;
-        if (!rpcUrl || rpcUrl === "TBD") {
-          console.error("Invalid RPC URL:", rpcUrl);
-          setError("Invalid RPC URL");
-          return;
-        }
-        const provider = new ethers.JsonRpcProvider(rpcUrl);
+  console.log("data", data);
 
+  // Process the results and update the balances
+  useEffect(() => {
+    if (isError) {
+      setError(readError?.message || "Error reading token balances");
+      setBalances([]);
+    } else if (data && tokens) {
+      const formattedBalances = data.map((balanceRaw, index) => {
+        const token = tokens[index]; 
+        const decimals = token?.decimals || 18;
+        const formattedBalance = Number(balanceRaw) / 10 ** decimals;
 
-        // Promises to get token balances
-        const balancePromises = tokens.map(async (token: any) => {
-          const { address, decimals } = token;
+        return {
+          key: token.key,
+          address: token.address,
+          balance: formattedBalance,
+          symbol: token.symbol,
+        };
+      });
 
-          if (!address) {
-            console.warn(`Token ${token.name} does not have an address.`);
-            return null;
-          }
+      const nonZeroBalances = formattedBalances.filter((token) => token.balance > 0);
 
-          const tokenContract = new ethers.Contract(address, ["function balanceOf(address) view returns (uint256)"], provider);
+      setBalances(nonZeroBalances);
+    }
 
-          // Get token balance
-          const balanceRaw = await tokenContract.balanceOf(accountAddress);
+    console.log("balances", balances);
 
-          const balance = ethers.formatUnits(balanceRaw, decimals);
+    setLoading(isLoading || tokensLoading);
+  }, [data, isError, readError, isLoading, tokens, tokensLoading]);
 
-          return {
-            ...token,
-            balance: parseFloat(balance),
-          };
-        });
-
-        // Only return non-zero balances
-        const allBalances = await Promise.all(balancePromises);
-        const nonZeroBalances = allBalances.filter((token) => token && token.balance > 0);
-
-        setBalances(nonZeroBalances);
-      } catch (err) {
-        console.error("Error getting balances:", err);
-        setError(err.message || "Unknown error");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBalances();
-  }, [tokens, chain, accountAddress]);
-
-  return { balances, loading: loading || tokensLoading, error };
+  return { balances, loading, error };
 };
