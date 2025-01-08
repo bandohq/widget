@@ -59,7 +59,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
       const formattedBalances = data.map((balanceRaw, index) => {
         const token = tokens[index]; 
         const decimals = token?.decimals || 18;
-        const formattedBalance = Number(balanceRaw) / 10 ** decimals;
+        const formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
 
         return {
           key: token.key,
