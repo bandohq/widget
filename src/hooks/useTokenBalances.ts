@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
+import { multicall } from "@wagmi/core";
 import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
+import { createDynamicConfig } from "../utils/configWagmi";
+import { wagmiContractAbi } from "../utils/abis";
 
 export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) => {
-  const [balances, setBalances] = useState([]);
+  const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,59 +14,56 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
 
   useEffect(() => {
     const fetchBalances = async () => {
-      if (!tokens || !chain || !accountAddress) return;
+      if (!tokens || tokensLoading || !chain || !accountAddress) return;
 
       setLoading(true);
       setError(null);
 
       try {
-        // Validate RPC URL
-        const rpcUrl = chain.rpc_url;
-        if (!rpcUrl || rpcUrl === "TBD") {
-          console.error("Invalid RPC URL:", rpcUrl);
-          setError("Invalid RPC URL");
-          return;
-        }
-        const provider = new ethers.JsonRpcProvider(rpcUrl);
+        // Create dynamic config for the current chain
+        const config = createDynamicConfig(chain);
 
+        // Build contracts for multicall
+        const contracts = tokens.map((token) => ({
+          address: token.address,
+          abi: wagmiContractAbi.abi,
+          functionName: "balanceOf",
+          args: [accountAddress as `0x${string}`],
+          chainId: chain.id,
+        }));
 
-        // Promises to get token balances
-        const balancePromises = tokens.map(async (token: any) => {
-          const { address, decimals } = token;
+        // Execute multicall
+        const data = await multicall(config, { contracts });
 
-          if (!address) {
-            console.warn(`Token ${token.name} does not have an address.`);
-            return null;
-          }
-
-          const tokenContract = new ethers.Contract(address, ["function balanceOf(address) view returns (uint256)"], provider);
-
-          // Get token balance
-          const balanceRaw = await tokenContract.balanceOf(accountAddress);
-
-          const balance = ethers.formatUnits(balanceRaw, decimals);
+        // Format and filter balances
+        const formattedBalances = data.map((balanceRaw, index) => {
+          const token = tokens[index];
+          const decimals = token?.decimals || 18;
+          const formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
 
           return {
-            ...token,
-            balance: parseFloat(balance),
+            key: token.key,
+            image_url: token.image_url,
+            address: token.address,
+            balance: formattedBalance,
+            symbol: token.symbol,
           };
         });
 
-        // Only return non-zero balances
-        const allBalances = await Promise.all(balancePromises);
-        const nonZeroBalances = allBalances.filter((token) => token && token.balance > 0);
+        const nonZeroBalances = formattedBalances.filter((token) => token.balance > 0);
 
         setBalances(nonZeroBalances);
       } catch (err) {
-        console.error("Error getting balances:", err);
-        setError(err.message || "Unknown error");
+        console.error("Error fetching balances:", err);
+        setError("Error fetching token balances");
+        setBalances([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchBalances();
-  }, [tokens, chain, accountAddress]);
+  }, [tokens, tokensLoading, accountAddress, chain]);
 
-  return { balances, loading: loading || tokensLoading, error };
+  return { balances, loading, error };
 };

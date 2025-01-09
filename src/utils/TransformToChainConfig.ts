@@ -1,7 +1,7 @@
 import { ExtendedChain, ProtocolContracts } from "../pages/SelectChainPage/types";
 import { NativeTokenCatalog } from "./nativeTokenCatalog";
 
-interface Chain {
+export interface Chain {
     id: number;
     name: string;
     network: string;
@@ -14,6 +14,12 @@ interface Chain {
         default: { http: string[] };
         public: { http: string[] };
     };
+    contracts: {
+        multicall3: {
+            address: `0x${string}`;
+            blockCreated?: number;
+        };
+    }
     blockExplorers?: {
         default: { name: string; url: string };
     };
@@ -35,6 +41,11 @@ export function transformToChainConfig(chain: ExtendedChain, nativeToken: Native
             default: { http: [chain.rpc_url] },
             public: { http: [chain.rpc_url] },
         },
+        contracts: {
+            multicall3: {
+              address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+            },
+          },
         testnet: chain.is_testnet,
         protocolContracts: chain.protocol_contracts,
     };
