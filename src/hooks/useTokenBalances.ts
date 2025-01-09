@@ -1,83 +1,69 @@
 import { useEffect, useState } from "react";
+import { multicall } from "@wagmi/core";
 import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
-import { useReadContracts } from "wagmi";
-
-export const wagmiContractAbi = {
-  abi: [
-    {
-      type: 'function',
-      name: 'balanceOf',
-      stateMutability: 'view',
-      inputs: [{ name: 'account', type: 'address' }],
-      outputs: [{ type: 'uint256' }],
-    },
-    {
-      type: 'function',
-      name: 'totalSupply',
-      stateMutability: 'view',
-      inputs: [],
-      outputs: [{ name: 'supply', type: 'uint256' }],
-    },
-  ],
-} as const;
+import { createDynamicConfig } from "../utils/configWagmi";
+import { wagmiContractAbi } from "../utils/abis";
 
 export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) => {
   const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [tokensContracts, setTokensContracts] = useState<any[]>([]);
 
   const { data: tokens, isPending: tokensLoading } = useTokens(chain);
 
   useEffect(() => {
-    if (tokens) {
-      const contracts = tokens.map((token) => ({
-        address: token?.address,
-        ...wagmiContractAbi,
-        functionName: 'balanceOf',
-        args: [accountAddress as `0x${string}`],
-        chainId: chain.id,
-      }));
-      setTokensContracts(contracts);
-    }
-  }, [tokens, accountAddress, chain]);
+    const fetchBalances = async () => {
+      if (!tokens || tokensLoading || !chain || !accountAddress) return;
 
-  // Execute multicall
-  const { data, isError, isLoading, error: readError } = useReadContracts({
-    contracts: tokensContracts,
-  });
+      setLoading(true);
+      setError(null);
 
-  console.log("data", data);
+      try {
+        // Create dynamic config for the current chain
+        const config = createDynamicConfig(chain);
 
-  // Process the results and update the balances
-  useEffect(() => {
-    if (isError) {
-      setError(readError?.message || "Error reading token balances");
-      setBalances([]);
-    } else if (data && tokens) {
-      const formattedBalances = data.map((balanceRaw, index) => {
-        const token = tokens[index]; 
-        const decimals = token?.decimals || 18;
-        const formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
-
-        return {
-          key: token.key,
+        // Build contracts for multicall
+        const contracts = tokens.map((token) => ({
           address: token.address,
-          balance: formattedBalance,
-          symbol: token.symbol,
-        };
-      });
+          abi: wagmiContractAbi.abi,
+          functionName: "balanceOf",
+          args: [accountAddress as `0x${string}`],
+          chainId: chain.id,
+        }));
 
-      const nonZeroBalances = formattedBalances.filter((token) => token.balance > 0);
+        // Execute multicall
+        const data = await multicall(config, { contracts });
 
-      setBalances(nonZeroBalances);
-    }
+        // Format and filter balances
+        const formattedBalances = data.map((balanceRaw, index) => {
+          const token = tokens[index];
+          const decimals = token?.decimals || 18;
+          const formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
 
-    console.log("balances", balances);
+          return {
+            key: token.key,
+            image_url: token.image_url,
+            address: token.address,
+            balance: formattedBalance,
+            symbol: token.symbol,
+          };
+        });
 
-    setLoading(isLoading || tokensLoading);
-  }, [data, isError, readError, isLoading, tokens, tokensLoading]);
+        const nonZeroBalances = formattedBalances.filter((token) => token.balance > 0);
+
+        setBalances(nonZeroBalances);
+      } catch (err) {
+        console.error("Error fetching balances:", err);
+        setError("Error fetching token balances");
+        setBalances([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBalances();
+  }, [tokens, tokensLoading, accountAddress, chain]);
 
   return { balances, loading, error };
 };
