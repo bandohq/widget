@@ -7,6 +7,7 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
+import { createDynamicConfig } from "../utils/configWagmi";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -20,14 +21,15 @@ export const useTransactionFlow = () => {
   );
   const { chain } = useChain(chainId);
   const { account } = useAccount({ chainType: chain?.network_type });
-  const {  handleServiceRequest } = useTransactionHelpers();
+  const { handleServiceRequest } = useTransactionHelpers();
+  const config = createDynamicConfig(chain);
 
   const { mutate, isPending } = useFetch({
     url: "references/",
     method: "POST",
     mutationOptions: {
-      onSuccess: async (data) => {
-        const txId = data.transaction_intents?.transaction_id;
+      onSuccess: async ({ data }) => {
+        const txId = data.transaction_intent?.validated_reference_id;
         if (txId) {
           try {
             const signature = await handleServiceRequest({
@@ -38,11 +40,12 @@ export const useTransactionFlow = () => {
               quote,
               product,
               quantity,
+              config
             });
 
             console.log("Transaction Signature:", signature);
 
-            navigate(`/status/${txId}`, { state: { signature } });
+            // navigate(`/status/${txId}`, { state: { signature } });
             console.log("Transaction ID:", txId);
           } catch (error) {
             console.error("Error handling the transaction signature:", error);
@@ -57,6 +60,7 @@ export const useTransactionFlow = () => {
 
   const handleTransaction = async () => {
     mutate({
+      reference: reference[0]?.value,
       reference_required_fields: reference,
       transaction_intent: {
         sku: product?.sku,
@@ -74,3 +78,4 @@ export const useTransactionFlow = () => {
     isPending,
   };
 };
+

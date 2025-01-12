@@ -1,72 +1,25 @@
-import { useState, useEffect } from "react";
 import { defineChain } from "viem";
-import { useWriteContract, useReadContract } from "wagmi";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
-import FulfillableRegistry from "@bandohq/contract-abis/abis/FulfillableRegistryV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
+import { writeContract } from '@wagmi/core'
+import {  ERC20ApproveABI } from "../utils/abis";
+import { validateReference } from "../utils/validateReference";
+import { checkAllowance } from "../utils/checkAllowance";
+
 
 export const useTransactionHelpers = () => {
-  const { writeContract } = useWriteContract();
-  const [allowance, setAllowance] = useState<BigInt>(BigInt(0)); // Reactivity for allowance
-  const [allowanceFetched, setAllowanceFetched] = useState<boolean>(false);
-  const [isReferenceValid, setIsReferenceValid] = useState<boolean | null>(null); // Reactivity for isReferenceValid
-  const [referenceFetched, setReferenceFetched] = useState<boolean>(false);
-
-  const useCheckAllowance = (spenderAddress, tokenAddress, account, chain) => {
-    const ERC20AllowanceABI = [
-      {
-        constant: true,
-        inputs: [
-          { name: "owner", type: "address" },
-          { name: "spender", type: "address" },
-        ],
-        name: "allowance",
-        outputs: [{ name: "", type: "uint256" }],
-        type: "function",
-      },
-    ];
-
-    const { data, isError, isLoading } = useReadContract({
-      address: tokenAddress,
-      abi: ERC20AllowanceABI,
-      functionName: "allowance",
-      args: [account?.address, spenderAddress],
-      chainId: chain.id,
-    });
-
-    useEffect(() => {
-      if (!isLoading && !isError && data) {
-        setAllowance(BigInt(data as string));
-        setAllowanceFetched(true);
-      } else if (isError) {
-        setAllowanceFetched(true);
-      }
-    }, [data, isError, isLoading]);
-  };
 
   const approveERC20 = async (
     spenderAddress,
     amount,
     tokenAddress,
     account,
-    chain
+    chain,
+    config
   ) => {
     try {
-      const ERC20ApproveABI = [
-        {
-          constant: false,
-          inputs: [
-            { name: "spender", type: "address" },
-            { name: "value", type: "uint256" },
-          ],
-          name: "approve",
-          outputs: [{ name: "", type: "bool" }],
-          type: "function",
-        },
-      ];
-
-      await writeContract({
+      await writeContract(config,{
         address: tokenAddress,
         abi: ERC20ApproveABI,
         functionName: "approve",
@@ -82,32 +35,6 @@ export const useTransactionHelpers = () => {
       return false;
     }
   };
-
-
-  const useValidateReference = (chain, serviceID, referenceCode) => {
-    const FulfillableRegistryABI = FulfillableRegistry.abi.find(
-      (item) => item.name === "isRefValid"
-    );
-
-    const { data, isError, isLoading } = useReadContract({
-      address: chain?.protocol_contracts?.FulfillableRegistry,
-      abi: [FulfillableRegistryABI],
-      functionName: "isRefValid",
-      args: [serviceID, referenceCode],
-      chainId: chain.id,
-    });
-
-    useEffect(() => {
-      if (!isLoading && !isError && data !== undefined) {
-        setIsReferenceValid(data as boolean);
-        setReferenceFetched(true);
-      } else if (isError) {
-        setIsReferenceValid(false);
-        setReferenceFetched(true);
-      }
-    }, [data, isError, isLoading]);
-  };
-
   const handleServiceRequest = async ({
     txId,
     chain,
@@ -116,6 +43,7 @@ export const useTransactionHelpers = () => {
     quote,
     product,
     quantity,
+    config
   }) => {
     try {
       const serviceID = product?.evmServiceId;
@@ -127,7 +55,17 @@ export const useTransactionHelpers = () => {
       );
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
-      useValidateReference(chain, serviceID, txId);
+      const isReferenceValid = await validateReference(
+        chain,
+        serviceID,
+        txId,
+        config
+      );
+  
+      if (!isReferenceValid) {
+        console.error("Invalid reference code");
+        return;
+      }
 
       if (tokenKey === nativeToken?.key) {
         const requestServiceABI = BandoRouter.abi.find(
@@ -145,7 +83,7 @@ export const useTransactionHelpers = () => {
           ).toFixed(0),
         };
 
-        await writeContract({
+        await writeContract(config,{
           address: chain?.protocol_contracts?.ERC20TokenRegistry,
           abi: [requestServiceABI],
           functionName: "requestService",
@@ -154,25 +92,22 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
-        useCheckAllowance(
+        const allowance = await checkAllowance(
           chain?.protocol_contracts?.ERC20TokenRegistry,
           tokenKey,
           account,
-          chain
+          chain,
+          config
         );
-
-        if (!allowanceFetched) {
-          console.log("Fetching allowance...");
-          return;
-        }
-
-        if (BigInt(allowance as bigint) < requiredAmount) {
+  
+        if (allowance < requiredAmount) {
           await approveERC20(
             chain?.protocol_contracts?.ERC20TokenRegistry,
             requiredAmount,
             tokenKey,
             account,
-            chain
+            chain,
+            config
           );
         }
 
@@ -183,18 +118,18 @@ export const useTransactionHelpers = () => {
         const payload = {
           payer: account?.address,
           fiatAmount: quote?.fiat_amount,
-          serviceRef: reference,
+          serviceRef: product?.reference,
           token: tokenKey,
           tokenAmount: quote?.digital_asset_amount * quantity,
         };
 
-        await writeContract({
+        await writeContract(config,{
           address: chain?.protocol_contracts?.ERC20TokenRegistry,
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],
           chain: formattedChain,
-          account: account?.address,
+          account: account?.address,      
         });
       }
 
