@@ -14,10 +14,11 @@ export const useTransactionFlow = () => {
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const [chainId, quantity, reference] = useFieldValues(
+  const [chainId, quantity, reference, tokenAddress] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     "quantity",
-    "reference"
+    "reference",
+    tokenKey
   );
   const { chain } = useChain(chainId);
   const { account } = useAccount({ chainType: chain?.network_type });
@@ -29,7 +30,7 @@ export const useTransactionFlow = () => {
     method: "POST",
     mutationOptions: {
       onSuccess: async ({ data }) => {
-        const txId = data.transaction_intent?.validated_reference_id;
+        const txId = data.validation_id;
         if (txId) {
           try {
             const signature = await handleServiceRequest({
@@ -37,6 +38,7 @@ export const useTransactionFlow = () => {
               chain,
               account,
               tokenKey,
+              tokenAddress,
               quote,
               product,
               quantity,

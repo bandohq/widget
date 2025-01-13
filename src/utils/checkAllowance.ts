@@ -8,13 +8,21 @@ export const checkAllowance = async (
   chain,
   config
 ) => {
-  const allowance = await readContract(config,{
-    address: tokenAddress,
-    abi: ERC20AllowanceABI,
-    functionName: "allowance",
-    args: [account?.address, spenderAddress],
-    chainId: chain?.id,
-  });
+    console.log({
+        address: tokenAddress,
+        abi: ERC20AllowanceABI,
+        functionName: "allowance",
+        args: [account?.address, spenderAddress],
+        chainId: chain?.chain_id,
+      })
+    console.log("config", config)
+    const allowance = await readContract(config,{
+        address: tokenAddress,
+        abi: ERC20AllowanceABI,
+        functionName: "allowance",
+        args: [account?.address, spenderAddress],
+        chainId: chain?.chain_id,
+    });
 
   return BigInt(allowance.toString());
 };

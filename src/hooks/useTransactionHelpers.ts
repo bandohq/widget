@@ -43,7 +43,8 @@ export const useTransactionHelpers = () => {
     quote,
     product,
     quantity,
-    config
+    config,
+    tokenAddress
   }) => {
     try {
       const serviceID = product?.evmServiceId;
@@ -94,7 +95,7 @@ export const useTransactionHelpers = () => {
       } else {
         const allowance = await checkAllowance(
           chain?.protocol_contracts?.ERC20TokenRegistry,
-          tokenKey,
+          tokenAddress,
           account,
           chain,
           config

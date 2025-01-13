@@ -7,14 +7,12 @@ export const validateReference = async (chain, serviceID, referenceCode, config)
   );
 
   const isValid = await readContract(config, {
-    address: chain?.protocol_contracts?.FulfillableRegistry,
+    address: chain?.protocol_contracts?.FulfillableRegistryProxy,
     abi: [FulfillableRegistryABI],
     functionName: "isRefValid",
-    args: [serviceID, referenceCode],
+    args: [serviceID, referenceCode ],
     chainId: chain?.id,
-  });
-
-  console.log("isValid", isValid);
+  }) as boolean;
 
   return isValid;
 };
