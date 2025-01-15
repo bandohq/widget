@@ -7,24 +7,23 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
-import { createDynamicConfig } from "../utils/configWagmi";
+import { useToken } from "./useToken";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const [chainId, quantity, reference, tokenAddress] = useFieldValues(
+  const [chainId, tokenAddress, quantity, reference] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
+    tokenKey,
     "quantity",
     "reference",
-    tokenKey
   );
   const { chain } = useChain(chainId);
+  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.network_type });
   const { handleServiceRequest } = useTransactionHelpers();
-  const config = createDynamicConfig(chain);
-
   const { mutate, isPending } = useFetch({
     url: "references/",
     method: "POST",
@@ -37,18 +36,15 @@ export const useTransactionFlow = () => {
               txId,
               chain,
               account,
-              tokenKey,
-              tokenAddress,
               quote,
               product,
               quantity,
-              config
+              token,
             });
 
             console.log("Transaction Signature:", signature);
 
             // navigate(`/status/${txId}`, { state: { signature } });
-            console.log("Transaction ID:", txId);
           } catch (error) {
             console.error("Error handling the transaction signature:", error);
           }

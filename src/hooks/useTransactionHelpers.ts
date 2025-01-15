@@ -6,9 +6,11 @@ import { writeContract } from '@wagmi/core'
 import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { checkAllowance } from "../utils/checkAllowance";
+import { useConfig } from "wagmi";
 
 
 export const useTransactionHelpers = () => {
+  const config = useConfig();
 
   const approveERC20 = async (
     spenderAddress,
@@ -39,12 +41,10 @@ export const useTransactionHelpers = () => {
     txId,
     chain,
     account,
-    tokenKey,
     quote,
     product,
     quantity,
-    config,
-    tokenAddress
+    token
   }) => {
     try {
       const serviceID = product?.evmServiceId;
@@ -52,7 +52,7 @@ export const useTransactionHelpers = () => {
         (item) => item.key === chain?.key
       );
       const requiredAmount = BigInt(
-        (quote?.digital_asset_amount * quantity).toFixed(0)
+        ((quote?.digital_asset_amount * Math.pow(10, token?.decimals)) * quantity).toFixed(0)
       );
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
@@ -68,7 +68,7 @@ export const useTransactionHelpers = () => {
         return;
       }
 
-      if (tokenKey === nativeToken?.key) {
+      if (token.key === nativeToken?.key) {
         const requestServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestService"
         );
@@ -77,11 +77,8 @@ export const useTransactionHelpers = () => {
           payer: account?.address,
           fiatAmount: 1000,
           serviceRef: txId,
-          token: tokenKey,
-          tokenAmount: (
-            quote?.digital_asset_amount *
-            Math.pow(10, nativeToken.native_token.decimals)
-          ).toFixed(0),
+          token: token.address,
+          tokenAmount: requiredAmount,
         };
 
         await writeContract(config,{
@@ -95,7 +92,7 @@ export const useTransactionHelpers = () => {
       } else {
         const allowance = await checkAllowance(
           chain?.protocol_contracts?.ERC20TokenRegistry,
-          tokenAddress,
+          token.address,
           account,
           chain,
           config
@@ -105,7 +102,7 @@ export const useTransactionHelpers = () => {
           await approveERC20(
             chain?.protocol_contracts?.ERC20TokenRegistry,
             requiredAmount,
-            tokenKey,
+            token.address,
             account,
             chain,
             config
@@ -116,12 +113,20 @@ export const useTransactionHelpers = () => {
           (item) => item.name === "requestERC20Service"
         );
 
+        console.log("payload", {
+          payer: account?.address,
+          fiatAmount: quote?.fiat_amount,
+          serviceRef: txId,
+          token: token.address,
+          tokenAmount: requiredAmount,
+        });
+
         const payload = {
           payer: account?.address,
           fiatAmount: quote?.fiat_amount,
-          serviceRef: product?.reference,
-          token: tokenKey,
-          tokenAmount: quote?.digital_asset_amount * quantity,
+          serviceRef: txId,
+          token: token.address,
+          tokenAmount: requiredAmount,
         };
 
         await writeContract(config,{
