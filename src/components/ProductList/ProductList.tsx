@@ -28,7 +28,7 @@ export const ProductList: React.FC<ProductListProps> = ({
   const rowVirtualizer = useVirtualizer({
     count: brands.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 30,
+    estimateSize: () => 56,
     overscan: 5,
   });
 
@@ -47,19 +47,19 @@ export const ProductList: React.FC<ProductListProps> = ({
         <div
           ref={parentRef}
           style={{
-            maxHeight: isDropdown ? "450px" : "auto",
-            minHeight: "100px",
+            height: "550px",
             overflow: "auto",
           }}
         >
           <List
             sx={{
-              paddingTop: 0,
-              paddingBottom: 1.5,
+              width: '100%',
               backgroundColor: "inherit",
               border: "none",
               borderRadius: "0",
               boxShadow: "none",
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              position: "relative",
             }}
           >
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -73,6 +73,7 @@ export const ProductList: React.FC<ProductListProps> = ({
                     width: "100%",
                     height: `${virtualRow.size}px`,
                     transform: `translateY(${virtualRow.start}px)`,
+                    position: "absolute",
                   }}
                 >
                   <SettingsListItemButton
