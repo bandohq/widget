@@ -11,7 +11,7 @@ export const validateReference = async (chain, serviceID, referenceCode, config)
     abi: [FulfillableRegistryABI],
     functionName: "isRefValid",
     args: [serviceID, referenceCode ],
-    chainId: chain?.id,
+    chainId: chain?.chain_id,
   }) as boolean;
 
   return isValid;
