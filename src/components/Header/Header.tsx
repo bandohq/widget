@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useDefaultElementId } from "../../hooks/useDefaultElementId";
 import { useSetHeaderHeight } from "../../stores/header/useHeaderStore";
@@ -8,12 +8,15 @@ import { stickyHeaderRoutes } from "../../utils/navigationRoutes";
 import { Container } from "./Header.style";
 import { NavigationHeader } from "./NavigationHeader";
 import { WalletHeader } from "./WalletHeader";
+import { Alert } from "../Alert/Alert";
+import { useNotificationContext } from "../../providers/AlertProvider/AlertProvider";
 
 export const HeaderContainer: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation();
   const elementId = useDefaultElementId();
   const headerRef = useRef<HTMLDivElement>(null);
   const { setHeaderHeight } = useSetHeaderHeight();
+  const { showNotification } = useNotificationContext();
 
   useLayoutEffect(() => {
     const handleHeaderResize = () => {
@@ -38,6 +41,12 @@ export const HeaderContainer: FC<PropsWithChildren> = ({ children }) => {
     };
   }, [setHeaderHeight]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      showNotification("success", "Success message");
+    }, 2000);
+  }, [showNotification]);
+
   return (
     <Container
       id={createElementId(ElementId.Header, elementId)}
@@ -53,6 +62,7 @@ export const Header: FC = () => {
   return (
     <HeaderContainer>
       <WalletHeader />
+      <Alert />
       <NavigationHeader />
     </HeaderContainer>
   );
