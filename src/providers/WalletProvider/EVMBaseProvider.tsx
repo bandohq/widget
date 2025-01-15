@@ -3,16 +3,42 @@ import {
   createDefaultWagmiConfig,
   useSyncWagmiConfig,
 } from "@lifi/wallet-management";
-import { type FC, type PropsWithChildren, useRef } from "react";
+import {
+  type FC,
+  type PropsWithChildren,
+  useLayoutEffect,
+  useState,
+  useRef,
+} from "react";
 import { WagmiProvider } from "wagmi";
 import { defaultCoinbaseConfig } from "../../config/coinbase";
 import { defaultMetaMaskConfig } from "../../config/metaMask";
 import { defaultWalletConnectConfig } from "../../config/walletConnect";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
+import { useChains } from "../../hooks/useChains";
+import { transformToChainConfig } from "../../utils/TransformToChainConfig";
+import nativeTokenCatalog, {
+  NativeTokenCatalog,
+} from "../../utils/nativeTokenCatalog";
 
 export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { chains } = useChains();
   const { walletConfig } = useWidgetConfig();
+  const [availableChains, setAvailableChains] = useState<NativeTokenCatalog[]>(
+    []
+  );
   const wagmi = useRef<DefaultWagmiConfigResult>();
+
+  useLayoutEffect(() => {
+    const customChains = chains?.map((chain) => {
+      const nativeToken = nativeTokenCatalog.find(
+        (item) => item.key === chain?.key
+      );
+      return transformToChainConfig(chain, nativeToken);
+    });
+
+    setAvailableChains(customChains);
+  }, []);
 
   if (!wagmi.current) {
     wagmi.current = createDefaultWagmiConfig({
@@ -26,7 +52,11 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   }
 
-  useSyncWagmiConfig(wagmi.current.config, wagmi.current.connectors);
+  useSyncWagmiConfig(
+    wagmi.current.config,
+    wagmi.current.connectors,
+    availableChains
+  );
 
   return (
     <WagmiProvider config={wagmi.current.config} reconnectOnMount={false}>
