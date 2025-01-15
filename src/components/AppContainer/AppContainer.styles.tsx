@@ -95,5 +95,6 @@ export const CssBaselineContainer = styled(ScopedCssBaseline, {
 export const FlexContainer = styled(Container)({
   display: "flex",
   flexDirection: "column",
+  overflow: "hidden",
   flex: 1,
 });

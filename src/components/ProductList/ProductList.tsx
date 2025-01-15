@@ -29,7 +29,7 @@ export const ProductList: React.FC<ProductListProps> = ({
     count: brands.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 56,
-    overscan: 3,
+    overscan: 5,
   });
 
   const handleSelectBrand = (brand: Brand) => {
