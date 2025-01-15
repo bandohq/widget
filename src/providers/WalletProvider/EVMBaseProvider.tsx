@@ -6,9 +6,9 @@ import {
 import {
   type FC,
   type PropsWithChildren,
-  useLayoutEffect,
   useState,
   useRef,
+  useEffect,
 } from "react";
 import { WagmiProvider } from "wagmi";
 import { defaultCoinbaseConfig } from "../../config/coinbase";
@@ -29,7 +29,7 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   );
   const wagmi = useRef<DefaultWagmiConfigResult>();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const customChains = chains?.map((chain) => {
       const nativeToken = nativeTokenCatalog.find(
         (item) => item.key === chain?.key
@@ -38,7 +38,7 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
     });
 
     setAvailableChains(customChains);
-  }, []);
+  }, [chains]);
 
   if (!wagmi.current) {
     wagmi.current = createDefaultWagmiConfig({

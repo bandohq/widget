@@ -82,7 +82,7 @@ export const useTransactionHelpers = () => {
         };
 
         await writeContract(config,{
-          address: chain?.protocol_contracts?.ERC20TokenRegistry,
+          address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
           args: [serviceID, payload],
@@ -91,7 +91,7 @@ export const useTransactionHelpers = () => {
         });
       } else {
         const allowance = await checkAllowance(
-          chain?.protocol_contracts?.ERC20TokenRegistry,
+          chain?.protocol_contracts?.BandoRouterProxy,
           token.address,
           account,
           chain,
@@ -100,7 +100,7 @@ export const useTransactionHelpers = () => {
   
         if (allowance < requiredAmount) {
           await approveERC20(
-            chain?.protocol_contracts?.ERC20TokenRegistry,
+            chain?.protocol_contracts?.BandoRouterProxy,
             requiredAmount,
             token.address,
             account,
@@ -112,6 +112,8 @@ export const useTransactionHelpers = () => {
         const requestERC20ServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestERC20Service"
         );
+
+        console.log("requestERC20ServiceABI", requestERC20ServiceABI);
 
         console.log("payload", {
           payer: account?.address,
@@ -130,11 +132,11 @@ export const useTransactionHelpers = () => {
         };
 
         await writeContract(config,{
-          address: chain?.protocol_contracts?.ERC20TokenRegistry,
+          address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],
-          chain: formattedChain,
+          chain: chain.chain_id,
           account: account?.address,      
         });
       }
