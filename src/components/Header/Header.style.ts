@@ -13,6 +13,7 @@ import { avatarMask12 } from '../Avatar/utils.js'
 export const HeaderAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: 'transparent',
   color: theme.palette.text.primary,
+  padding: theme.spacing(1.5, 3, 1.5, 3),
   flexDirection: 'row',
   alignItems: 'center',
   position: 'relative',
@@ -30,7 +31,6 @@ export const Container = styled(Box, {
     top: 0,
     zIndex: 1200,
     gap: theme.spacing(0.5),
-    padding: theme.spacing(1.5, 3, 1.5, 3),
     overflow: 'auto',
     ...theme.header,
     ...(theme.header?.position === 'fixed'

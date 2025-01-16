@@ -8,6 +8,7 @@ import { stickyHeaderRoutes } from "../../utils/navigationRoutes";
 import { Container } from "./Header.style";
 import { NavigationHeader } from "./NavigationHeader";
 import { WalletHeader } from "./WalletHeader";
+import { Alert } from "../Alert/Alert";
 
 export const HeaderContainer: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation();
@@ -53,6 +54,7 @@ export const Header: FC = () => {
   return (
     <HeaderContainer>
       <WalletHeader />
+      <Alert />
       <NavigationHeader />
     </HeaderContainer>
   );
