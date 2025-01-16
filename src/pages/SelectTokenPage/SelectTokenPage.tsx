@@ -42,10 +42,10 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
         />
       </Box>
       <Box
-        ml={"auto"}
+        mt={"auto"}
         p={2}
         textAlign="center"
-        sx={{ bgcolor: palette.primary.medium, width: "90%", fontSize: "11px" }}
+        sx={{ bgcolor: palette.grey[200], fontSize: "11px" }}
       >
         {t("info.message.emptyTokenList")}
       </Box>
