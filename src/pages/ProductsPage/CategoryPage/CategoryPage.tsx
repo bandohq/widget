@@ -30,7 +30,7 @@ export const CategoryPage = () => {
 
   const handleSelectVariant = (variant) => {
     updateProduct(variant);
-    navigate(`/`);
+    navigate(`/form`);
   };
 
   useHeader(category);
