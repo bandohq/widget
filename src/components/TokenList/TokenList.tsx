@@ -33,7 +33,7 @@ export const TokenList: FC<TokenListProps> = ({
   const { account } = useAccount({
     chainType: selectedChain?.network_type,
   });
-  const { balances } = useTokenBalances(
+  const { balances, isLoading } = useTokenBalances(
     account?.address ?? "",
     selectedChain ?? undefined
   );
@@ -64,11 +64,6 @@ export const TokenList: FC<TokenListProps> = ({
 
   const { token: searchedToken, isPending: isSearchedTokenLoading } =
     useTokenSearch(selectedChainId, normalizedSearchFilter, tokenSearchEnabled);
-
-  const isLoading =
-    isTokensLoading ||
-    isSelectedChainLoading ||
-    (tokenSearchEnabled && isSearchedTokenLoading);
 
   const tokens = filteredTokens.length
     ? filteredTokens

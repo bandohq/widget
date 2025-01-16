@@ -47,6 +47,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
             address: token.address,
             balance: formattedBalance,
             symbol: token.symbol,
+            name: token.name,
           };
         });
 
@@ -65,5 +66,5 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
     fetchBalances();
   }, [tokens, tokensLoading, accountAddress, chain]);
 
-  return { balances, loading, error };
+  return { balances, isLoading:loading, error };
 };
