@@ -44,18 +44,11 @@ export const ProductList: React.FC<ProductListProps> = ({
   return (
     <>
       <Collapse in={dropdownOpen}>
-        <div
-          ref={parentRef}
-          style={{
-            height: "550px",
-            overflow: "auto",
-          }}
-        >
+        <div ref={parentRef}>
           <List
             sx={{
-              width: '100%',
+              width: "100%",
               backgroundColor: "inherit",
-              border: "none",
               borderRadius: "0",
               boxShadow: "none",
               height: `${rowVirtualizer.getTotalSize()}px`,
