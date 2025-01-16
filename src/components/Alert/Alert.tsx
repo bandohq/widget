@@ -24,6 +24,7 @@ export const Alert = () => {
           bgcolor: palette[notification?.type]?.main || "transparent",
           width: "100%",
           p: 2,
+          borderRadius: "0 0 25px 25px",
         }}
       >
         <Typography
