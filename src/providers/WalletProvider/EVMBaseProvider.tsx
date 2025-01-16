@@ -22,7 +22,7 @@ import nativeTokenCatalog, {
 } from "../../utils/nativeTokenCatalog";
 
 export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { chains } = useChains();
+  const { chains, isLoading } = useChains();
   const { walletConfig } = useWidgetConfig();
   const [availableChains, setAvailableChains] = useState<NativeTokenCatalog[]>(
     []
@@ -30,15 +30,16 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const wagmi = useRef<DefaultWagmiConfigResult>();
 
   useEffect(() => {
-    const customChains = chains?.map((chain) => {
-      const nativeToken = nativeTokenCatalog.find(
-        (item) => item.key === chain?.key
-      );
-      return transformToChainConfig(chain, nativeToken);
-    });
-
-    setAvailableChains(customChains);
-  }, [chains]);
+    if (!isLoading) {
+      const customChains = chains?.map((chain) => {
+        const nativeToken = nativeTokenCatalog.find(
+          (item) => item.key === chain?.key
+        );
+        return transformToChainConfig(chain, nativeToken);
+      });
+      setAvailableChains(customChains);
+    }
+  }, [chains, isLoading]);
 
   if (!wagmi.current) {
     wagmi.current = createDefaultWagmiConfig({
