@@ -18,6 +18,7 @@ import { useFieldController } from "../../stores/form/useFieldController.js";
 import { Typography } from "@mui/material";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider.js";
 import { ReferenceType } from "../../providers/CatalogProvider/types.js";
+import { getReferenceTitleByKey } from "../../utils/getReferenceTitleByKey.js";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
@@ -85,7 +86,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
   return (
     <>
       <InputCard {...props} className={error ? "error" : ""}>
-        <CardTitle>Your {title}</CardTitle>
+        <CardTitle>Your {getReferenceTitleByKey(title)}</CardTitle>
         <FormContainer>
           <FormControl fullWidth>
             {referenceType.name === "phone" ? (
@@ -114,7 +115,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
                 size="small"
                 type="text"
                 autoComplete="off"
-                placeholder={`Enter your ${title}`}
+                placeholder={`Enter your ${getReferenceTitleByKey(title)}`}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={currentValue}
