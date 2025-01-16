@@ -43,7 +43,6 @@ export const RelativeContainer = styled(Box, {
     minWidth: theme.breakpoints.values.xs,
     maxWidth: theme.breakpoints.values.sm,
     background: theme.palette.background.default,
-    overflow: "auto",
     flex: 1,
     zIndex: 0,
     ...container,
@@ -95,6 +94,5 @@ export const CssBaselineContainer = styled(ScopedCssBaseline, {
 export const FlexContainer = styled(Container)({
   display: "flex",
   flexDirection: "column",
-  overflow: "hidden",
   flex: 1,
 });

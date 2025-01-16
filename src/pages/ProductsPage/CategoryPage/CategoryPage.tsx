@@ -38,7 +38,13 @@ export const CategoryPage = () => {
   return (
     <PageContainer>
       {!isLoading && (
-        <div>
+        <div
+          style={{
+            height: "550px",
+            overflow: "auto",
+            paddingBottom: "10px",
+          }}
+        >
           <ProductSearch productType={category} />
           <ProductList
             brands={filteredBrands}
