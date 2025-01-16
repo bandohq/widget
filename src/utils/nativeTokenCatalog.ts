@@ -33,6 +33,14 @@ const nativeTokenCatalog: NativeTokenCatalog[] = [
         },
     },
     {
+        key: "abs",
+        native_token: {
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+        },
+    },
+    {
         key: "eth",
         native_token: {
             name: "Ether",
