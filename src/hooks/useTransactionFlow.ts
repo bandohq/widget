@@ -8,6 +8,7 @@ import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
 import { useToken } from "./useToken";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export const useTransactionFlow = () => {
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.network_type });
   const { handleServiceRequest } = useTransactionHelpers();
+  const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
     url: "references/",
     method: "POST",
@@ -46,6 +48,7 @@ export const useTransactionFlow = () => {
 
             // navigate(`/status/${txId}`, { state: { signature } });
           } catch (error) {
+            showNotification("error", "Error handling the transaction signature");
             console.error("Error handling the transaction signature:", error);
           }
         }

@@ -7,10 +7,12 @@ import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { checkAllowance } from "../utils/checkAllowance";
 import { useConfig } from "wagmi";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
+  const {showNotification} = useNotificationContext();
 
   const approveERC20 = async (
     spenderAddress,
@@ -33,6 +35,7 @@ export const useTransactionHelpers = () => {
       console.log(`Approved ${amount} tokens for ${spenderAddress}`);
       return true;
     } catch (error) {
+      showNotification("error", "Error on approving tokens, try later");
       console.error("Error on approving tokens:", error);
       return false;
     }
@@ -64,6 +67,7 @@ export const useTransactionHelpers = () => {
       );
   
       if (!isReferenceValid) {
+        showNotification("error", "Invalid reference code");
         console.error("Invalid reference code");
         return;
       }
@@ -143,6 +147,7 @@ export const useTransactionHelpers = () => {
 
       console.log("Transaction completed successfully");
     } catch (error) {
+      showNotification("error", "Error in handleServiceRequest");
       console.error("Error in handleServiceRequest:", error);
       throw error;
     }
