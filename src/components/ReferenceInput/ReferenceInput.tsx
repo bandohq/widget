@@ -83,7 +83,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
   return (
     <>
       <InputCard {...props} className={error ? "error" : ""}>
-        <CardTitle>Your {title}</CardTitle>
+        <CardTitle>Your {getReferenceTitleByKey(title)}</CardTitle>
         <FormContainer>
           <FormControl fullWidth>
             {referenceType.name === "phone" ? (
