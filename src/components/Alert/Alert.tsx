@@ -1,5 +1,5 @@
 import { Box, Collapse, Typography } from "@mui/material";
-import { useNotificationContext } from "../../providers/AlertProvider/AlertProvider";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { palette } from "../../themes/palettes";
 import { useEffect, useState } from "react";
 

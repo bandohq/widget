@@ -16,7 +16,7 @@ import type { WidgetConfigProps } from "./types/widget";
 import { I18nProvider } from "./providers/I18nProvider/I18nProvider";
 import { CatalogProvider } from "./providers/CatalogProvider/CatalogProvider";
 import { QuotesProvider } from "./providers/QuotesProvider/QuotesProvider";
-import { NotificationProvider } from "./providers/AlertProvider/AlertProvider";
+import { NotificationProvider } from "./providers/AlertProvider/NotificationProvider";
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
