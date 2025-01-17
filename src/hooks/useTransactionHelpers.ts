@@ -146,6 +146,7 @@ export const useTransactionHelpers = () => {
       }
 
       console.log("Transaction completed successfully");
+      
     } catch (error) {
       showNotification("error", "Error in handleServiceRequest");
       console.error("Error in handleServiceRequest:", error);
