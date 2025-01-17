@@ -69,6 +69,8 @@ export const CountriesProvider: React.FC<{
     ]);
   };
 
+  useEffect(() => {}, [filteredCountries]);
+
   return (
     <CountryContext.Provider
       value={{

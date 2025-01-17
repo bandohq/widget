@@ -6,17 +6,13 @@ import { SettingsListItemButton } from "../components/SettingsListItemButton";
 import { useHeader } from "../hooks/useHeader";
 import { useFetch } from "../hooks/useFetch";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SearchBar } from "../components/SearchInput/SearchInput";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
-  const { removeCountry, filteredCountries: deactivatedCountries } =
-    useCountryContext();
+  const { removeCountry, filteredCountries: deactivated } = useCountryContext();
   const [searchQuery, setSearchQuery] = useState("");
-  const [markedCountries, setMarkedCountries] = useState<Set<string>>(
-    new Set()
-  );
 
   const {
     data: countriesResponse,
@@ -28,23 +24,11 @@ export const CountryPage: React.FC = () => {
 
   useHeader(t("countries.title"));
 
-  useEffect(() => {}, [countriesResponse, deactivatedCountries]);
-
-  const toggleMarkCountry = (isoCode: string) => {
-    setMarkedCountries((prev) => {
-      const updated = new Set(prev);
-      if (updated.has(isoCode)) {
-        updated.delete(isoCode);
-      } else {
-        updated.add(isoCode);
-      }
-      return updated;
-    });
-  };
-
-  const filteredCountries = countriesResponse?.data?.results.filter((country) =>
-    country.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredCountries = countriesResponse?.data?.results
+    .filter((country) =>
+      deactivated.every((c) => c.iso_alpha2 !== country.iso_alpha2)
+    )
+    .unshift(...deactivated);
 
   if (isPending || error) {
     return null;
@@ -67,7 +51,6 @@ export const CountryPage: React.FC = () => {
               key={country.iso_alpha2}
               onClick={() => {
                 removeCountry(country.iso_alpha2);
-                toggleMarkCountry(country.iso_alpha2);
               }}
             >
               <ListItemIcon>
@@ -80,14 +63,14 @@ export const CountryPage: React.FC = () => {
               <ListItemText
                 primary={`${country.name} - ${country.iso_alpha2}`}
               />
-              {markedCountries.has(country.iso_alpha2) && (
+              {/* {markedCountries.has(country.iso_alpha2) && (
                 <Chip
                   color="error"
                   label="EXCLUDED"
                   variant="outlined"
                   size="small"
                 />
-              )}
+              )} */}
             </SettingsListItemButton>
           ))}
       </List>
