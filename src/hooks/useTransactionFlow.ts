@@ -7,44 +7,46 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
+import { useToken } from "./useToken";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const [chainId, quantity, reference] = useFieldValues(
+  const [chainId, tokenAddress, quantity, reference] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
+    tokenKey,
     "quantity",
-    "reference"
+    "reference",
   );
   const { chain } = useChain(chainId);
+  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.network_type });
-  const {  handleServiceRequest } = useTransactionHelpers();
-
+  const { handleServiceRequest } = useTransactionHelpers();
+  const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
     url: "references/",
     method: "POST",
     mutationOptions: {
-      onSuccess: async (data) => {
-        const txId = data.transaction_intents?.transaction_id;
+      onSuccess: async ({ data }) => {
+        const txId = data.validation_id;
         if (txId) {
           try {
             const signature = await handleServiceRequest({
               txId,
               chain,
               account,
-              tokenKey,
               quote,
               product,
               quantity,
+              token,
             });
 
-            console.log("Transaction Signature:", signature);
-
             navigate(`/status/${txId}`, { state: { signature } });
-            console.log("Transaction ID:", txId);
           } catch (error) {
+            showNotification("error", "Error handling the transaction signature");
             console.error("Error handling the transaction signature:", error);
           }
         }
@@ -57,6 +59,7 @@ export const useTransactionFlow = () => {
 
   const handleTransaction = async () => {
     mutate({
+      reference: reference[0]?.value,
       reference_required_fields: reference,
       transaction_intent: {
         sku: product?.sku,
@@ -74,3 +77,4 @@ export const useTransactionFlow = () => {
     isPending,
   };
 };
+

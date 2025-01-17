@@ -1,72 +1,29 @@
-import { useState, useEffect } from "react";
 import { defineChain } from "viem";
-import { useWriteContract, useReadContract } from "wagmi";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
-import FulfillableRegistry from "@bandohq/contract-abis/abis/FulfillableRegistryV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
+import { writeContract } from '@wagmi/core'
+import {  ERC20ApproveABI } from "../utils/abis";
+import { validateReference } from "../utils/validateReference";
+import { checkAllowance } from "../utils/checkAllowance";
+import { useConfig } from "wagmi";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+
 
 export const useTransactionHelpers = () => {
-  const { writeContract } = useWriteContract();
-  const [allowance, setAllowance] = useState<BigInt>(BigInt(0)); // Reactivity for allowance
-  const [allowanceFetched, setAllowanceFetched] = useState<boolean>(false);
-  const [isReferenceValid, setIsReferenceValid] = useState<boolean | null>(null); // Reactivity for isReferenceValid
-  const [referenceFetched, setReferenceFetched] = useState<boolean>(false);
-
-  const useCheckAllowance = (spenderAddress, tokenAddress, account, chain) => {
-    const ERC20AllowanceABI = [
-      {
-        constant: true,
-        inputs: [
-          { name: "owner", type: "address" },
-          { name: "spender", type: "address" },
-        ],
-        name: "allowance",
-        outputs: [{ name: "", type: "uint256" }],
-        type: "function",
-      },
-    ];
-
-    const { data, isError, isLoading } = useReadContract({
-      address: tokenAddress,
-      abi: ERC20AllowanceABI,
-      functionName: "allowance",
-      args: [account?.address, spenderAddress],
-      chainId: chain.id,
-    });
-
-    useEffect(() => {
-      if (!isLoading && !isError && data) {
-        setAllowance(BigInt(data as string));
-        setAllowanceFetched(true);
-      } else if (isError) {
-        setAllowanceFetched(true);
-      }
-    }, [data, isError, isLoading]);
-  };
+  const config = useConfig();
+  const {showNotification} = useNotificationContext();
 
   const approveERC20 = async (
     spenderAddress,
     amount,
     tokenAddress,
     account,
-    chain
+    chain,
+    config
   ) => {
     try {
-      const ERC20ApproveABI = [
-        {
-          constant: false,
-          inputs: [
-            { name: "spender", type: "address" },
-            { name: "value", type: "uint256" },
-          ],
-          name: "approve",
-          outputs: [{ name: "", type: "bool" }],
-          type: "function",
-        },
-      ];
-
-      await writeContract({
+      await writeContract(config,{
         address: tokenAddress,
         abi: ERC20ApproveABI,
         functionName: "approve",
@@ -78,44 +35,19 @@ export const useTransactionHelpers = () => {
       console.log(`Approved ${amount} tokens for ${spenderAddress}`);
       return true;
     } catch (error) {
+      showNotification("error", "Error on approving tokens, try later");
       console.error("Error on approving tokens:", error);
       return false;
     }
   };
-
-
-  const useValidateReference = (chain, serviceID, referenceCode) => {
-    const FulfillableRegistryABI = FulfillableRegistry.abi.find(
-      (item) => item.name === "isRefValid"
-    );
-
-    const { data, isError, isLoading } = useReadContract({
-      address: chain?.protocol_contracts?.FulfillableRegistry,
-      abi: [FulfillableRegistryABI],
-      functionName: "isRefValid",
-      args: [serviceID, referenceCode],
-      chainId: chain.id,
-    });
-
-    useEffect(() => {
-      if (!isLoading && !isError && data !== undefined) {
-        setIsReferenceValid(data as boolean);
-        setReferenceFetched(true);
-      } else if (isError) {
-        setIsReferenceValid(false);
-        setReferenceFetched(true);
-      }
-    }, [data, isError, isLoading]);
-  };
-
   const handleServiceRequest = async ({
     txId,
     chain,
     account,
-    tokenKey,
     quote,
     product,
     quantity,
+    token
   }) => {
     try {
       const serviceID = product?.evmServiceId;
@@ -123,13 +55,24 @@ export const useTransactionHelpers = () => {
         (item) => item.key === chain?.key
       );
       const requiredAmount = BigInt(
-        (quote?.digital_asset_amount * quantity).toFixed(0)
+        ((quote?.digital_asset_amount * Math.pow(10, token?.decimals)) * quantity).toFixed(0)
       );
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
-      useValidateReference(chain, serviceID, txId);
+      const isReferenceValid = await validateReference(
+        chain,
+        serviceID,
+        txId,
+        config
+      );
+  
+      if (!isReferenceValid) {
+        showNotification("error", "Invalid reference code");
+        console.error("Invalid reference code");
+        return;
+      }
 
-      if (tokenKey === nativeToken?.key) {
+      if (token.key === nativeToken?.key) {
         const requestServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestService"
         );
@@ -138,15 +81,12 @@ export const useTransactionHelpers = () => {
           payer: account?.address,
           fiatAmount: 1000,
           serviceRef: txId,
-          token: tokenKey,
-          tokenAmount: (
-            quote?.digital_asset_amount *
-            Math.pow(10, nativeToken.native_token.decimals)
-          ).toFixed(0),
+          token: token.address,
+          tokenAmount: requiredAmount,
         };
 
-        await writeContract({
-          address: chain?.protocol_contracts?.ERC20TokenRegistry,
+        await writeContract(config,{
+          address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
           args: [serviceID, payload],
@@ -154,25 +94,22 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
-        useCheckAllowance(
-          chain?.protocol_contracts?.ERC20TokenRegistry,
-          tokenKey,
+        const allowance = await checkAllowance(
+          chain?.protocol_contracts?.BandoRouterProxy,
+          token.address,
           account,
-          chain
+          chain,
+          config
         );
-
-        if (!allowanceFetched) {
-          console.log("Fetching allowance...");
-          return;
-        }
-
-        if (BigInt(allowance as bigint) < requiredAmount) {
+  
+        if (allowance < requiredAmount) {
           await approveERC20(
-            chain?.protocol_contracts?.ERC20TokenRegistry,
+            chain?.protocol_contracts?.BandoRouterProxy,
             requiredAmount,
-            tokenKey,
+            token.address,
             account,
-            chain
+            chain,
+            config
           );
         }
 
@@ -180,26 +117,38 @@ export const useTransactionHelpers = () => {
           (item) => item.name === "requestERC20Service"
         );
 
+        console.log("requestERC20ServiceABI", requestERC20ServiceABI);
+
+        console.log("payload", {
+          payer: account?.address,
+          fiatAmount: quote?.fiat_amount,
+          serviceRef: txId,
+          token: token.address,
+          tokenAmount: requiredAmount,
+        });
+
         const payload = {
           payer: account?.address,
           fiatAmount: quote?.fiat_amount,
-          serviceRef: reference,
-          token: tokenKey,
-          tokenAmount: quote?.digital_asset_amount * quantity,
+          serviceRef: txId,
+          token: token.address,
+          tokenAmount: requiredAmount,
         };
 
-        await writeContract({
-          address: chain?.protocol_contracts?.ERC20TokenRegistry,
+        await writeContract(config,{
+          address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],
-          chain: formattedChain,
-          account: account?.address,
+          chain: chain.chain_id,
+          account: account?.address,      
         });
       }
 
       console.log("Transaction completed successfully");
+      
     } catch (error) {
+      showNotification("error", "Error in handleServiceRequest");
       console.error("Error in handleServiceRequest:", error);
       throw error;
     }

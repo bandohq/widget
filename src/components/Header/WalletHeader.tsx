@@ -4,7 +4,7 @@ import {
   useAccount,
   useWalletMenu,
 } from "@lifi/wallet-management";
-import { Wallet } from "@mui/icons-material";
+import { ExpandMore, Wallet } from "@mui/icons-material";
 import { Avatar, Badge } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,6 +23,7 @@ import {
 } from "./Header.style.js";
 import { WalletMenuContainer } from "./WalletMenu.style";
 import { WalletMenu } from "./WalletMenu";
+import { shortenAddress } from "../../utils/wallet";
 
 export const WalletHeader: React.FC = () => {
   const { subvariant, hiddenUI } = useWidgetConfig();
@@ -111,6 +112,7 @@ const ConnectedButton = ({ account }: { account: Account }) => {
   const { subvariant } = useWidgetConfig();
   const { chain } = useChain(account.chainId);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const walletAddress = shortenAddress(account.address);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -124,14 +126,15 @@ const ConnectedButton = ({ account }: { account: Account }) => {
     <>
       <WalletButton
         subvariant={subvariant}
+        endIcon={<ExpandMore />}
         startIcon={
-          chain?.logoURI ? (
+          chain?.logo_url ? (
             <Badge
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               badgeContent={
                 <SmallAvatar
-                  src={chain?.logoURI}
+                  src={chain?.logo_url}
                   alt={chain?.name}
                   sx={{ width: 12, height: 12 }}
                 >
@@ -157,7 +160,9 @@ const ConnectedButton = ({ account }: { account: Account }) => {
           )
         }
         onClick={handleClick}
-      />
+      >
+        {walletAddress}
+      </WalletButton>
       <WalletMenuContainer
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
