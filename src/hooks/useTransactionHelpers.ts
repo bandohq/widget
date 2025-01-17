@@ -31,7 +31,6 @@ export const useTransactionHelpers = () => {
         account: account?.address,
       });
 
-      console.log(`Approved ${amount} tokens for ${spenderAddress}`);
       return true;
     } catch (error) {
       showNotification("error", "Error on approving tokens, try later");
@@ -39,6 +38,7 @@ export const useTransactionHelpers = () => {
       return false;
     }
   };
+
   const handleServiceRequest = async ({
     txId,
     chain,
@@ -67,7 +67,6 @@ export const useTransactionHelpers = () => {
   
       if (!isReferenceValid) {
         showNotification("error", "Invalid reference code");
-        console.error("Invalid reference code");
         return;
       }
 
