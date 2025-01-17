@@ -15,11 +15,12 @@ export const useTransactionFlow = () => {
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const [chainId, tokenAddress, quantity, reference] = useFieldValues(
+  const [chainId, tokenAddress, quantity, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     tokenKey,
     "quantity",
     "reference",
+    "requiredFields"
   );
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
@@ -59,8 +60,8 @@ export const useTransactionFlow = () => {
 
   const handleTransaction = async () => {
     mutate({
-      reference: reference[0]?.value,
-      reference_required_fields: reference,
+      reference: reference,
+      required_fields: requiredFields,
       transaction_intent: {
         sku: product?.sku,
         chain: chain?.key,

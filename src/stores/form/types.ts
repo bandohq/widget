@@ -6,7 +6,8 @@ export interface DefaultFieldValues {
   fromChain?: number
   fromToken?: string
   quantity?: number
-  reference?: ReferenceType[]
+  reference?: string
+  requiredFields?: ReferenceType[]
   toChain?: number
   toToken?: string
   toAddress?: string

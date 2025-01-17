@@ -31,6 +31,7 @@ export const FormPage: React.FC = () => {
         <DetailSection
           productType={product?.productType}
           referenceType={product?.referenceType}
+          requiredFields={product?.requiredFields}
         />
       )}
 

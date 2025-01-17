@@ -22,8 +22,9 @@ import { getReferenceTitleByKey } from "../../utils/getReferenceTitleByKey.js";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
-  index: number;
+  index?: number;
   referenceType: ReferenceType;
+  isRequired?: boolean;
 }
 
 export const Input: React.FC<ReferenceInputProps> = ({
@@ -31,10 +32,13 @@ export const Input: React.FC<ReferenceInputProps> = ({
   index,
   disabled,
   referenceType,
+  isRequired,
   ...props
 }) => {
   const ref = useRef<HTMLInputElement>(null);
-  const { onChange, onBlur, value } = useFieldController({ name: "reference" });
+  const { onChange, onBlur, value } = useFieldController({
+    name: isRequired ? "requiredFields" : "reference",
+  });
   const { country } = useCountryContext();
 
   const [error, setError] = useState<string | null>(null);
@@ -53,12 +57,16 @@ export const Input: React.FC<ReferenceInputProps> = ({
       setError(null);
     }
 
-    const updatedReferences = Array.isArray(value) ? [...value] : [];
-    updatedReferences[index] = {
-      key: referenceType.name,
-      value: newValue,
-    };
-    onChange(updatedReferences);
+    if (isRequired) {
+      const updatedReferences = Array.isArray(value) ? [...value] : [];
+      updatedReferences[index] = {
+        key: referenceType.name,
+        value: newValue,
+      };
+      onChange(updatedReferences);
+    } else {
+      onChange(newValue);
+    }
   };
 
   const handleBlur = () => {
@@ -118,7 +126,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
                 placeholder={`Enter your ${getReferenceTitleByKey(title)}`}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={currentValue}
+                value={isRequired ? currentValue : value}
                 name={`reference-${index}`}
                 disabled={disabled}
                 required
