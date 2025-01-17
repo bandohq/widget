@@ -5,7 +5,6 @@ import nativeTokenCatalog from "../utils/nativeTokenCatalog";
 import { writeContract } from '@wagmi/core'
 import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
-import { checkAllowance } from "../utils/checkAllowance";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
@@ -94,38 +93,18 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
-        const allowance = await checkAllowance(
+        await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
+          requiredAmount,
           token.address,
           account,
           chain,
           config
         );
-  
-        if (allowance < requiredAmount) {
-          await approveERC20(
-            chain?.protocol_contracts?.BandoRouterProxy,
-            requiredAmount,
-            token.address,
-            account,
-            chain,
-            config
-          );
-        }
-
+        
         const requestERC20ServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestERC20Service"
         );
-
-        console.log("requestERC20ServiceABI", requestERC20ServiceABI);
-
-        console.log("payload", {
-          payer: account?.address,
-          fiatAmount: quote?.fiat_amount,
-          serviceRef: txId,
-          token: token.address,
-          tokenAmount: requiredAmount,
-        });
 
         const payload = {
           payer: account?.address,
@@ -144,8 +123,6 @@ export const useTransactionHelpers = () => {
           account: account?.address,      
         });
       }
-
-      console.log("Transaction completed successfully");
       
     } catch (error) {
       showNotification("error", "Error in handleServiceRequest");
