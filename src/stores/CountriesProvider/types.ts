@@ -8,6 +8,7 @@ export type Country = {
 export   type CountryContextType = {
     countries: Country[];
     country: Country;
+    filteredCountries: Country[];
     selectCountry: (isoCode: string) => void;
     removeCountry: (isoCode: string) => void;
     isCountryPending: boolean;

@@ -1,4 +1,4 @@
-import { List, ListItemIcon, IconButton, Avatar } from "@mui/material";
+import { List, ListItemIcon, IconButton, Avatar, Chip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
@@ -6,13 +6,13 @@ import { SettingsListItemButton } from "../components/SettingsListItemButton";
 import { useHeader } from "../hooks/useHeader";
 import { useFetch } from "../hooks/useFetch";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
-import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchBar } from "../components/SearchInput/SearchInput";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
-  const { removeCountry } = useCountryContext();
+  const { removeCountry, filteredCountries: deactivatedCountries } =
+    useCountryContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [markedCountries, setMarkedCountries] = useState<Set<string>>(
     new Set()
@@ -27,6 +27,8 @@ export const CountryPage: React.FC = () => {
   });
 
   useHeader(t("countries.title"));
+
+  useEffect(() => {}, [countriesResponse, deactivatedCountries]);
 
   const toggleMarkCountry = (isoCode: string) => {
     setMarkedCountries((prev) => {
@@ -79,15 +81,12 @@ export const CountryPage: React.FC = () => {
                 primary={`${country.name} - ${country.iso_alpha2}`}
               />
               {markedCountries.has(country.iso_alpha2) && (
-                <IconButton
-                  edge="end"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleMarkCountry(country.iso_alpha2);
-                  }}
-                >
-                  <CloseIcon color="error" />
-                </IconButton>
+                <Chip
+                  color="error"
+                  label="EXCLUDED"
+                  variant="outlined"
+                  size="small"
+                />
               )}
             </SettingsListItemButton>
           ))}
