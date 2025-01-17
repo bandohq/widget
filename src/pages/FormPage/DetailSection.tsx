@@ -15,6 +15,7 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
   requiredFields = [],
 }) => {
   const { t } = useTranslation();
+
   return (
     <div style={{ marginBottom: "15px" }}>
       <Typography variant="subtitle1" style={{ color: palette.grey[400] }}>
