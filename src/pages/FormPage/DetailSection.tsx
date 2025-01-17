@@ -6,11 +6,13 @@ import { useTranslation } from "react-i18next";
 
 interface DetailSectionProps {
   productType: string;
-  referenceType: ReferenceType[];
+  referenceType: ReferenceType;
+  requiredFields?: ReferenceType[];
 }
 export const DetailSection: React.FC<DetailSectionProps> = ({
   productType,
   referenceType,
+  requiredFields = [],
 }) => {
   const { t } = useTranslation();
   return (
@@ -18,18 +20,24 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
       <Typography variant="subtitle1" style={{ color: palette.grey[400] }}>
         Details
       </Typography>
-      {referenceType.map((item, index) => (
+      <Input
+        formType="from"
+        referenceType={referenceType}
+        style={{ marginBottom: "15px" }}
+      />
+      <Typography variant="subtitle2" style={{ color: palette.grey[400] }}>
+        {t("info.detailMessage", { productType })}
+      </Typography>
+      {requiredFields.map((item, index) => (
         <Input
           key={index}
           index={index}
           formType="from"
           referenceType={item}
           style={{ marginBottom: "15px" }}
+          isRequired
         />
       ))}
-      <Typography variant="subtitle2" style={{ color: palette.grey[400] }}>
-        {t("info.detailMessage", { productType })}
-      </Typography>
     </div>
   );
 };
