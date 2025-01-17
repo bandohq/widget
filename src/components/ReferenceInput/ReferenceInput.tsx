@@ -104,16 +104,20 @@ export const Input: React.FC<ReferenceInputProps> = ({
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   defaultCountry={country?.iso_alpha2}
-                  value={currentValue}
-                  onChange={(newPhoneValue) => {
-                    const updatedReferences = Array.isArray(value)
-                      ? [...value]
-                      : [];
-                    updatedReferences[index] = {
-                      ...referenceType,
-                      value: newPhoneValue || "",
-                    };
-                    onChange(updatedReferences);
+                  value={isRequired ? currentValue : value}
+                  onChange={(newPhone) => {
+                    if (isRequired) {
+                      const updatedReferences = Array.isArray(value)
+                        ? [...value]
+                        : [];
+                      updatedReferences[index] = {
+                        key: referenceType.name,
+                        value: newPhone,
+                      };
+                      onChange(updatedReferences);
+                    } else {
+                      onChange(newPhone);
+                    }
                   }}
                 />
               </StyledPhoneInput>
