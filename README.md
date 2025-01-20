@@ -9,7 +9,7 @@ Check the complete documentation here:
 
 ## Key Features
 
-- **All-in-One Solution**: Support for all ecosystems, chains, bridges, exchanges, and solvers supported by Bando.
+- **All-in-One Solution**: Support for all ecosystems, chains and solvers supported by Bando.
 - **Wallet Management**: Includes UI for managing wallets (EVM, Solana, and Bitcoin) with the option to use your own wallet solution.
 - **Flexible Styling**: Customizable themes and styles to seamlessly integrate with your app's design.
 - **Multi-Language Support**: Complete UI translations to cater to a global audience.
