@@ -8,9 +8,6 @@ export interface DefaultFieldValues {
   quantity?: number
   reference?: string
   requiredFields?: ReferenceType[]
-  toChain?: number
-  toToken?: string
-  toAddress?: string
   fromAmount: string
   toAmount: string
   productId?: string
@@ -102,17 +99,17 @@ export interface SetOptions {
   isTouched?: boolean
 }
 
-export type FormType = 'from' | 'to'
+export type FormType = 'from' 
 
 export interface FormTypeProps {
   formType: FormType
 }
 
 export const FormKeyHelper = {
-  getChainKey: (formType: FormType): 'fromChain' | 'toChain' =>
+  getChainKey: (formType: FormType): 'fromChain' =>
     `${formType}Chain`,
-  getTokenKey: (formType: FormType): 'fromToken' | 'toToken' =>
+  getTokenKey: (formType: FormType): 'fromToken' =>
     `${formType}Token`,
-  getAmountKey: (formType: FormType): 'fromAmount' | 'toAmount' =>
+  getAmountKey: (formType: FormType): 'fromAmount' =>
     `${formType}Amount`,
 }
