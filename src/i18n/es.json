@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Cambia la red en tu billetera para ver el balance en esa cadena.",
       "emptyActiveTransactions": "Las transacciones en progreso aparecerán aquí. Una vez completadas, encuéntralas en el historial de transacciones.",
-      "emptyTokenList": "Cambia la red en tu billetera para ver el balance en esa cadena.",
-      "fundsToExchange": "Los fondos enviados a un exchange pueden perderse.",
-      "routeNotFound": "Las razones pueden ser: baja liquidez, cantidad seleccionada demasiado baja, costos de gas muy altos o no hay rutas para la combinación seleccionada."
+      "emptyTokenList": "Cambia la red en tu billetera para ver el balance en esa cadena."
     },
     "title": {
       "autoRefuel": "Obtener gas {{chainName}}"
@@ -160,7 +158,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizado",
-    "resetSettings": "Estás usando ajustes personalizados que pueden afectar el número o el orden de las rutas disponibles."
+    "custom": "Personalizado"
   }
 }

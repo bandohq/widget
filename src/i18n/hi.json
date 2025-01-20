@@ -77,9 +77,7 @@
     "message": {
       "autoRefuel": "आपके पास {{chainName}} पर पर्याप्त गैस नहीं है।",
       "emptyActiveTransactions": "सक्रिय लेन-देन यहाँ दिखेंगे।",
-      "emptyTokenList": "हमने {{chainName}} पर कोई टोकन नहीं पाया।",
-      "fundsToExchange": "एक्सचेंज को भेजी गई धनराशि खो सकती है।",
-      "routeNotFound": "कोई उपयुक्त रूट नहीं मिला।"
+      "emptyTokenList": "हमने {{chainName}} पर कोई टोकन नहीं पाया।"
     },
     "title": {
       "autoRefuel": "{{chainName}} गैस प्राप्त करें।"
@@ -155,7 +153,6 @@
   },
   "settings": {
     "theme": "थीम",
-    "custom": "कस्टम",
-    "resetSettings": "आप कस्टम सेटिंग्स का उपयोग कर रहे हैं।"
+    "custom": "कस्टम"
   }
 }

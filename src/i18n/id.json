@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Gas anda hampir habis di {{chainName}}. Dengan melanjutkan, anda akan mendapatkan cukup gas untuk menyelesaikan penukaran.",
       "emptyActiveTransactions": "Transaksi yang sedang berlangsung akan muncul di sini. Setelah selesai, temukan di riwayat transaksi.",
-      "emptyTokenList": "Kami tidak dapat menemukan token di jaringan {{chainName}} atau Anda tidak memilikinya. Silakan cari berdasarkan alamat kontrak jika token Anda tidak muncul atau pilih jaringan lain.",
-      "fundsToExchange": "Dana yang dikirim ke exchange mungkin akan hilang",
-      "routeNotFound": "Alasannya mungkin: likuiditas rendah, jumlah yang dipilih terlalu rendah, biaya gas terlalu tinggi, atau tidak ada rute untuk kombinasi yang dipilih."
+      "emptyTokenList": "Kami tidak dapat menemukan token di jaringan {{chainName}} atau Anda tidak memilikinya. Silakan cari berdasarkan alamat kontrak jika token Anda tidak muncul atau pilih jaringan lain."
     },
     "title": {
       "autoRefuel": "Dapatkan gas di {{chainName}}"
@@ -137,7 +135,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Kustom",
-    "resetSettings": "Anda menggunakan pengaturan khusus yang dapat memengaruhi jumlah atau pengurutan rute yang tersedia."
+    "custom": "Kustom"
   }
 }

@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Você está com pouco gás na rede {{chainName}}.",
       "emptyActiveTransactions": "As transações em andamento aparecerão aqui.",
-      "emptyTokenList": "Não conseguimos encontrar tokens na rede {{chainName}}.",
-      "fundsToExchange": "Os fundos enviados para uma exchange podem ser perdidos.",
-      "routeNotFound": "Razões possíveis: baixa liquidez ou custos elevados."
+      "emptyTokenList": "Não conseguimos encontrar tokens na rede {{chainName}}."
     },
     "title": {
       "autoRefuel": "Obtenha gás {{chainName}}"
@@ -135,7 +133,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizado",
-    "resetSettings": "Você está usando configurações personalizadas que podem afetar o número ou a classificação das rotas disponíveis."
+    "custom": "Personalizado"
   }
 }
