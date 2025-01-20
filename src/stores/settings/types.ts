@@ -14,48 +14,23 @@ export type ValuesSetter<S> = <K extends keyof S>(
 
 export type ValueGetter<S> = <K extends keyof S>(key: K) => S[K]
 
-export const SettingsToolTypes = ['Bridges', 'Exchanges'] as const;
-export type SettingsToolType = (typeof SettingsToolTypes)[number];
-
 export interface SettingsProps {
   appearance: Appearance;
   gasPrice?: string;
   language?: string;
-  enabledAutoRefuel: boolean;
   slippage?: string;
-  disabledBridges: string[];
-  enabledBridges: string[];
-  _enabledBridges: Record<string, boolean>;
-  disabledExchanges: string[];
-  enabledExchanges: string[];
-  _enabledExchanges: Record<string, boolean>;
 }
 
 export interface SettingsActions {
   setValue: ValueSetter<SettingsProps>
   getValue: ValueGetter<SettingsProps>
   getSettings: () => SettingsProps
-  initializeTools(
-    toolType: SettingsToolType,
-    tools: string[],
-    reset?: boolean
-  ): void
-  setToolValue(toolType: SettingsToolType, tool: string, value: boolean): void
-  toggleToolKeys(toolType: SettingsToolType, toolKeys: string[]): void
-  reset(bridges: string[], exchanges: string[]): void
 }
 
 export interface SettingsState extends SettingsProps {
   setValue: ValueSetter<SettingsProps>;
   setValues: ValuesSetter<SettingsProps>;
-  initializeTools(
-    toolType: SettingsToolType,
-    tools: string[],
-    reset?: boolean,
-  ): void;
-  setToolValue(toolType: SettingsToolType, tool: string, value: boolean): void;
-  toggleToolKeys(toolType: SettingsToolType, toolKeys: string[]): void;
-  reset(bridges: string[], exchanges: string[]): void;
+  reset(): void;
 }
 
 export interface SendToWalletState {
