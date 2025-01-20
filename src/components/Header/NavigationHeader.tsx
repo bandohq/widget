@@ -12,7 +12,6 @@ import {
 import { BackButton } from "./BackButton";
 import { CloseDrawerButton } from "./CloseDrawerButton";
 import { HeaderAppBar, HeaderControlsContainer } from "./Header.style";
-import { NavigationTabs } from "./NavigationTabs";
 import { SettingsButton } from "./SettingsButton";
 import { SplitWalletMenuButton } from "./WalletHeader";
 
@@ -69,7 +68,6 @@ export const NavigationHeader: React.FC = () => {
           <Route path="*" element={element || <Box width={28} height={40} />} />
         </Routes>
       </HeaderAppBar>
-      {splitSubvariant ? <NavigationTabs /> : null}
     </>
   );
 };
