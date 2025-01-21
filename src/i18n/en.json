@@ -50,7 +50,8 @@
   },
   "countries": {
     "title": "Countries",
-    "deleted": "Deleted countries"
+    "deleted": "Deleted countries",
+    "excluded": "EXCLUDED"
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",
