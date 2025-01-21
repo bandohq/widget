@@ -17,7 +17,7 @@ const CatalogContext = createContext<CatalogContextType | undefined>(undefined);
 export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { country, isCountryPending } = useCountryContext();
+  const { selectedCountry: country, isCountryPending } = useCountryContext();
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredBrands, setFilteredBrands] = useState<Brand[]>([]);
 
