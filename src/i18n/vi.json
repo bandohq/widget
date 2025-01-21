@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Gas trên {{chainName}} đang thấp. Tiếp tục để thêm gas và hoàn tất giao dịch.",
       "emptyActiveTransactions": "Các giao dịch đang xử lý sẽ hiển thị ở đây. Sau khi hoàn tất, kiểm tra tại lịch sử giao dịch.",
-      "emptyTokenList": "Không tìm thấy mã thông báo trên {{chainName}} hoặc ví của bạn không có số dư.",
-      "fundsToExchange": "Quỹ chuyển đến sàn giao dịch có thể bị mất.",
-      "routeNotFound": "Lý do có thể là tính thanh khoản thấp, số tiền quá nhỏ hoặc không có lộ trình cho giao dịch."
+      "emptyTokenList": "Không tìm thấy mã thông báo trên {{chainName}} hoặc ví của bạn không có số dư."
     },
     "title": {
       "autoRefuel": "Nạp gas {{chainName}}"
@@ -131,7 +129,6 @@
   },
   "settings": {
     "theme": "Giao diện",
-    "custom": "Tùy chỉnh",
-    "resetSettings": "Cài đặt hiện tại có thể ảnh hưởng đến số lượng hoặc cách sắp xếp tuyến đường."
+    "custom": "Tùy chỉnh"
   }
 }

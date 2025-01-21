@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Change the network on your wallet to see the balance on that chain",
       "emptyActiveTransactions": "Transactions in progress will appear here. Once completed, find them in transaction history.",
-      "emptyTokenList": "Change the network on your wallet to see the balance on that chain",
-      "fundsToExchange": "Funds sent to an exchange may be lost",
-      "routeNotFound": "Reasons for that could be: low liquidity, amount selected is too low, gas costs are too high or there are no routes for the selected combination."
+      "emptyTokenList": "Change the network on your wallet to see the balance on that chain"
     },
     "title": {
       "autoRefuel": "Get {{chainName}} gas"
@@ -110,7 +108,6 @@
       "bookmarkAlreadyExists": "Wallet is already bookmarked as {{name}}",
       "bookmarkNameRequired": "Bookmark name is required",
       "chainSwitch": "Chain switch required",
-      "exchangeRateUpdateCanceled": "Exchange rate update canceled",
       "gasLimitIsTooLow": "The gas limit is too low",
       "insufficientFunds": "Insufficient funds",
       "signatureRejected": "Signature required",
@@ -160,7 +157,6 @@
   },
   "settings": {
     "theme": "Theme",
-    "custom": "Custom",
-    "resetSettings": "You're using custom settings that can affect the number or sorting of available routes."
+    "custom": "Custom"
   }
 }

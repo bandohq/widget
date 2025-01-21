@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Ändern Sie das Netzwerk Ihrer Wallet, um den Kontostand auf dieser Chain zu sehen.",
       "emptyActiveTransactions": "Transaktionen in Bearbeitung werden hier angezeigt.",
-      "emptyTokenList": "Wechseln Sie das Netzwerk Ihrer Wallet, um den Kontostand auf dieser Chain zu sehen.",
-      "fundsToExchange": "An eine Exchange gesendete Mittel könnten verloren gehen.",
-      "routeNotFound": "Gründe könnten sein: niedrige Liquidität, zu niedriger Betrag oder hohe Gasgebühren."
+      "emptyTokenList": "Wechseln Sie das Netzwerk Ihrer Wallet, um den Kontostand auf dieser Chain zu sehen."
     },
     "title": {
       "autoRefuel": "Gas auf {{chainName}} erhalten"
@@ -135,7 +133,6 @@
   },
   "settings": {
     "theme": "Thema",
-    "custom": "Benutzerdefiniert",
-    "resetSettings": "Sie verwenden benutzerdefinierte Einstellungen, die die Anzahl oder Reihenfolge der verfügbaren Routen beeinflussen können."
+    "custom": "Benutzerdefiniert"
   }
 }

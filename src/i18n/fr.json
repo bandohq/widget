@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Vous avez peu de gaz sur {{chainName}}. En continuant, vous aurez assez de gaz pour compléter l'échange.",
       "emptyActiveTransactions": "Les transactions en cours apparaîtront ici. Une fois terminées, retrouvez-les dans l'historique des transactions.",
-      "emptyTokenList": "Nous n'avons pas pu trouver de jetons sur la chaîne {{chainName}} ou vous n'en avez pas. Veuillez rechercher par adresse de contrat si votre jeton n'apparaît pas ou choisissez une autre chaîne.",
-      "fundsToExchange": "Les fonds envoyés à un échange peuvent être perdus",
-      "routeNotFound": "Raisons possibles : faible liquidité, le montant sélectionné est trop faible, les coûts de gaz sont trop élevés ou il n'y a pas de routes pour la combinaison sélectionnée."
+      "emptyTokenList": "Nous n'avons pas pu trouver de jetons sur la chaîne {{chainName}} ou vous n'en avez pas. Veuillez rechercher par adresse de contrat si votre jeton n'apparaît pas ou choisissez une autre chaîne."
     },
     "title": {
       "autoRefuel": "Obtenez du gaz {{chainName}}"
@@ -136,7 +134,6 @@
   },
   "settings": {
     "theme": "Thème",
-    "custom": "Personnalisé",
-    "resetSettings": "Vous utilisez des paramètres personnalisés pouvant affecter le nombre ou le tri des routes disponibles."
+    "custom": "Personnalisé"
   }
 }

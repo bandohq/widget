@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "您的 {{chainName}} 链燃气费不足。启用该选项以继续并获得所需燃气费。",
       "emptyActiveTransactions": "正在进行的交易会显示在这里。完成后，您可以在交易历史中找到它们。",
-      "emptyTokenList": "我们未能找到 {{chainName}} 链上的代币，或者您的钱包中没有余额。",
-      "fundsToExchange": "发送到交易所的资金可能会丢失。",
-      "routeNotFound": "可能原因：流动性不足、数量过少、燃气费过高或当前未找到可用的交易路径。"
+      "emptyTokenList": "我们未能找到 {{chainName}} 链上的代币，或者您的钱包中没有余额。"
     },
     "title": {
       "autoRefuel": "获取 {{chainName}} 燃气费"
@@ -131,7 +129,6 @@
   },
   "settings": {
     "theme": "主题",
-    "custom": "自定义",
-    "resetSettings": "您正在使用的自定义设置可能会影响路由数量或顺序。"
+    "custom": "自定义"
   }
 }

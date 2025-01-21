@@ -2,44 +2,23 @@ import { Settings } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useNavigateBack } from "../../hooks/useNavigateBack.js";
-import { useSettingMonitor } from "../../hooks/useSettingMonitor";
 import { navigationRoutes } from "../../utils/navigationRoutes.js";
-import {
-  SettingsIconBadge,
-  SettingsIconButton,
-} from "./SettingsButton.style.js";
+import { SettingsIconButton } from "./SettingsButton.style.js";
 
 export const SettingsButton = () => {
   const { t } = useTranslation();
   const { navigate } = useNavigateBack();
 
-  const { isCustomRouteSettings, isRouteSettingsWithWarnings } =
-    useSettingMonitor();
-
-  const variant = isRouteSettingsWithWarnings
-    ? "warning"
-    : isCustomRouteSettings
-    ? "info"
-    : undefined;
-
-  const tooltipMessage = variant
-    ? t("tooltip.settingsModified")
-    : t("header.settings");
+  const tooltipMessage = t("header.settings");
 
   return (
     <Tooltip title={tooltipMessage}>
       <SettingsIconButton
         size="medium"
         onClick={() => navigate(navigationRoutes.settings)}
-        variant={variant}
+        variant={"info"}
       >
-        {variant ? (
-          <SettingsIconBadge variant="dot" color={variant}>
-            <Settings />
-          </SettingsIconBadge>
-        ) : (
-          <Settings />
-        )}
+        <Settings />
       </SettingsIconButton>
     </Tooltip>
   );

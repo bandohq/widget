@@ -57,9 +57,7 @@
     "message": {
       "autoRefuel": "Livello basso di gas su {{chainName}}. Continuando avrai abbastanza gas per completare lo scambio.",
       "emptyActiveTransactions": "Le transazioni in corso appariranno qui. Una volta completate, potrai trovarle nella cronologia delle transazioni.",
-      "emptyTokenList": "Non siamo riusciti a trovare token sulla chain {{chainName}} o non ne hai. Riprova o scegli un'altra chain.",
-      "fundsToExchange": "I fondi inviati a un exchange potrebbero andare persi.",
-      "routeNotFound": "Le ragioni potrebbero essere: bassa liquidità, la quantità selezionata è troppo bassa, i costi del gas sono troppo elevati o non ci sono route per la combinazione selezionata."
+      "emptyTokenList": "Non siamo riusciti a trovare token sulla chain {{chainName}} o non ne hai. Riprova o scegli un'altra chain."
     },
     "title": {
       "autoRefuel": "Ottieni gas su {{chainName}}"
@@ -137,7 +135,6 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizzato",
-    "resetSettings": "Stai utilizzando impostazioni personalizzate che possono influire sul numero o sull'ordinamento dei percorsi disponibili."
+    "custom": "Personalizzato"
   }
 }

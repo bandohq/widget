@@ -63,10 +63,8 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
   
   export type WidgetVariant = 'compact' | 'drawer'
   export type WidgetSubvariant = 'default' | 'split' | 'custom' | 'refuel'
-  export type SplitSubvariant = 'bridge' | 'swap'
   export type CustomSubvariant = 'checkout' | 'deposit'
   export interface SubvariantOptions {
-    split?: SplitSubvariant
     custom?: CustomSubvariant
   }
   
@@ -103,8 +101,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
   export enum DisabledUI {
     FromAmount = 'fromAmount',
     FromToken = 'fromToken',
-    ToAddress = 'toAddress',
-    ToToken = 'toToken',
   }
   export type DisabledUIType = `${DisabledUI}`
   
@@ -119,11 +115,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
     IntegratorStepDetails = 'integratorStepDetails',
   }
   export type HiddenUIType = `${HiddenUI}`
-  
-  export enum RequiredUI {
-    ToAddress = 'toAddress',
-  }
-  export type RequiredUIType = `${RequiredUI}`
   
   export interface WidgetWalletConfig {
     onConnect?(): void
@@ -228,7 +219,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
   
     disabledUI?: DisabledUIType[]
     hiddenUI?: HiddenUIType[]
-    requiredUI?: RequiredUIType[]
     useRecommendedRoute?: boolean
   
     walletConfig?: WidgetWalletConfig
@@ -236,8 +226,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
     buildUrl?: boolean
     keyPrefix?: string
   
-    bridges?: AllowDeny<string>
-    exchanges?: AllowDeny<string>
     chains?: WidgetChains
     tokens?: WidgetTokens
     languages?: WidgetLanguages
@@ -251,10 +239,8 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
   }
   
   export interface FieldValues
-    extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount' | 'toAddress'> {
+    extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount'> {
     fromAmount?: number | string
-    toAmount?: number | string
-    toAddress?: ToAddress | string
   }
   
   export type FieldNames = keyof FieldValues
