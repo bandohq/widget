@@ -50,15 +50,13 @@ export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: "#6b7280",
 }));
 
-export const CountrySelect = styled(Select)(({ theme }) => ({
+export const StyledCountryDiv = styled("div")(({ theme }) => ({
   height: "100%",
   border: "1px solid #e2e8f0",
-  "& .MuiSelect-select": {
-    display: "flex",
-    alignItems: "center",
-    paddingRight: theme.spacing(2),
-  },
-  "& .MuiOutlinedInput-notchedOutline": {
-    border: "none",
-  },
+  borderRadius: "10px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: theme.spacing(2),
+  cursor: "pointer",
 }));
