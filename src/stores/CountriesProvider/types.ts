@@ -6,9 +6,10 @@ export type Country = {
 };
   
 export   type CountryContextType = {
-    countries: Country[];
-    country: Country;
-    filteredCountries: Country[];
+    selectedCountry: Country | null;
+    availableCountries: Country[];
+    blockedCountries: Country[];
+    restoreCountry: (isoCode: string) => void;
     selectCountry: (isoCode: string) => void;
     removeCountry: (isoCode: string) => void;
     isCountryPending: boolean;
