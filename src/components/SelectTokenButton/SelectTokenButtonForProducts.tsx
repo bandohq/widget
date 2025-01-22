@@ -75,7 +75,7 @@ export const SelectTokenButtonForProducts: React.FC<
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
             title={defaultPlaceholder}
-            subheader={`${parseFloat(product.price?.fiatValue).toFixed(2)} ${
+            subheader={`${parseFloat(product.price?.fiatValue)} ${
               product.price?.fiatCurrency
             }`}
             compact={compact}
@@ -125,15 +125,11 @@ export const SelectTokenButtonForProducts: React.FC<
                 <AvatarBadgedDefault />
               )
             }
-            title={`${(quote?.digital_asset_amount).toFixed(token.decimals)} ${
-              quote?.digital_asset
-            }`}
+            title={`${quote?.digital_asset_amount} ${quote?.digital_asset}`}
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={`${(quote?.fiat_amount).toFixed(2)} ${
-              quote?.fiat_currency
-            }`}
+            subheader={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
             subheaderTypographyProps={
               isSelected
                 ? {
