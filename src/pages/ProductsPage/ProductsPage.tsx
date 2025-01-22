@@ -46,7 +46,7 @@ export const ProductsPage = () => {
 
   const handleSelectVariant = (variant) => {
     updateProduct(variant);
-    navigate(`/`);
+    navigate(`/form`);
   };
 
   return (
@@ -59,44 +59,45 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading
-        ? Array.from(new Array(2)).map((_, index) => (
-            <Box key={index} sx={{ marginBottom: 4 }}>
-              <Skeleton
-                variant="rectangular"
-                width="20%"
-                height="20px"
-                sx={{ marginBottom: 1, mt: 2 }}
-              />
-              <BrandsContainer>
-                {Array.from(new Array(10)).map((_, index) => (
-                  <Skeleton
-                    key={index}
-                    variant="rectangular"
-                    width="100%"
-                    height="100%"
-                    sx={{ marginBottom: 1, borderRadius: "5px" }}
-                  />
-                ))}
-              </BrandsContainer>
-            </Box>
-          ))
-        : 
-          <div style={{overflow: "hidden"}}>
-            {filteredData?.map((category) => (
-              <Box
-                key={category.productType}
-                sx={{
-                  marginBottom: "30px",
-                }}
-              >
-                <CategorySection
-                  category={category}
-                  onMoreClick={() => handleMoreClick(category)}
+      {isLoading ? (
+        Array.from(new Array(2)).map((_, index) => (
+          <Box key={index} sx={{ marginBottom: 4 }}>
+            <Skeleton
+              variant="rectangular"
+              width="20%"
+              height="20px"
+              sx={{ marginBottom: 1, mt: 2 }}
+            />
+            <BrandsContainer>
+              {Array.from(new Array(10)).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  variant="rectangular"
+                  width="100%"
+                  height="100%"
+                  sx={{ marginBottom: 1, borderRadius: "5px" }}
                 />
-              </Box>
-            ))}
-          </div>}
+              ))}
+            </BrandsContainer>
+          </Box>
+        ))
+      ) : (
+        <div style={{ overflow: "hidden" }}>
+          {filteredData?.map((category) => (
+            <Box
+              key={category.productType}
+              sx={{
+                marginBottom: "30px",
+              }}
+            >
+              <CategorySection
+                category={category}
+                onMoreClick={() => handleMoreClick(category)}
+              />
+            </Box>
+          ))}
+        </div>
+      )}
     </PageContainer>
   );
 };
