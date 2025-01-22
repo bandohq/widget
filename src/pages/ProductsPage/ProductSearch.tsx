@@ -1,8 +1,9 @@
-import { MenuItem, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
-  CountrySelect,
   InputContainer,
   SearchContainer,
+  StyledCountryDiv,
   StyledIconButton,
   StyledInputBase,
 } from "./ProductPage.style";
@@ -11,12 +12,8 @@ import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvi
 import { useTranslation } from "react-i18next";
 import { ChangeEvent, useState } from "react";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
-
-interface Country {
-  iso_alpha2: string;
-  name: string;
-  flag_url: string;
-}
+import { navigationRoutes } from "../../utils/navigationRoutes";
+import { CaretDown } from "@phosphor-icons/react";
 
 interface ProductSearchProps {
   productType?: string;
@@ -25,14 +22,12 @@ interface ProductSearchProps {
 export const ProductSearch = ({
   productType,
 }: ProductSearchProps): JSX.Element | null => {
-  const {
-    selectedCountry: country,
-    availableCountries: countries,
-    selectCountry,
-  } = useCountryContext();
-  const { fuzzySearchBrands, filteredBrands } = useCatalogContext();
+  const { selectedCountry: country, availableCountries: countries } =
+    useCountryContext();
+  const { fuzzySearchBrands } = useCatalogContext();
   const { t } = useTranslation();
-  const [searchKey, setSearchKey] = useState("");
+  const [, setSearchKey] = useState("");
+  const navigate = useNavigate();
 
   if (!countries.length) {
     return null;
@@ -43,11 +38,13 @@ export const ProductSearch = ({
     fuzzySearchBrands(event.target.value, productType);
   };
 
-  const handleCountryChange = (
-    event: ChangeEvent<{ value: unknown }>
-  ): void => {
-    selectCountry(event.target.value as string);
-    fuzzySearchBrands(searchKey, productType);
+  const handleCountryRedirect = (): void => {
+    const countryQuery = country?.iso_alpha2
+      ? `?country=${country.iso_alpha2}&productPage=true`
+      : "?productPage=true";
+    navigate(
+      `${navigationRoutes.settings}/${navigationRoutes.countries}${countryQuery}`
+    );
   };
 
   return (
@@ -63,38 +60,20 @@ export const ProductSearch = ({
             <SearchIcon />
           </StyledIconButton>
         </InputContainer>
-        <CountrySelect
-          value={country?.iso_alpha2 || ""}
-          onChange={(event) =>
-            handleCountryChange(event as ChangeEvent<{ value: unknown }>)
-          }
-          displayEmpty
-          inputProps={{ "aria-label": "Country" }}
-          renderValue={() =>
-            country?.flag_url ? (
-              <img src={country.flag_url} alt={country.iso_alpha2} width={20} />
-            ) : null
-          }
-        >
-          {countries.map((countryItem: Country) => (
-            <MenuItem
-              key={countryItem.iso_alpha2}
-              value={countryItem.iso_alpha2}
-            >
-              <Tooltip title={countryItem.name}>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={countryItem.flag_url}
-                    alt={countryItem.name}
-                    width={20}
-                    style={{ marginRight: 5 }}
-                  />
-                  {countryItem.name}
-                </div>
-              </Tooltip>
-            </MenuItem>
-          ))}
-        </CountrySelect>
+        <StyledCountryDiv onClick={handleCountryRedirect}>
+          {country?.flag_url && (
+            <Tooltip title={country.name}>
+              <img
+                src={country.flag_url}
+                alt={country.iso_alpha2}
+                width={20}
+                style={{ marginRight: 8 }}
+              />
+            </Tooltip>
+          )}
+          <span>{country?.name || t("countries.selectCountry")} </span>
+          <CaretDown size="18px" style={{ paddingLeft: 5 }} />
+        </StyledCountryDiv>
       </SearchContainer>
     </>
   );
