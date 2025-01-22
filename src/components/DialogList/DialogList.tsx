@@ -1,4 +1,4 @@
-import { AppBar, IconButton, List, Toolbar, Typography } from "@mui/material";
+import { IconButton, List, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import CloseIcon from "@mui/icons-material/Close";
