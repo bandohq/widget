@@ -44,7 +44,7 @@ export const SelectTokenButtonForProducts: React.FC<
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
-      fetchQuote(product.sku, product.price.fiatCurrency, token.symbol);
+      fetchQuote(product.sku, product.price.fiatCurrency, token.address);
     }
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
