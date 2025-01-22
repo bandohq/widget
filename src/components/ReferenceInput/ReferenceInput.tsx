@@ -39,7 +39,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
   const { onChange, onBlur, value } = useFieldController({
     name: isRequired ? "requiredFields" : "reference",
   });
-  const { country } = useCountryContext();
+  const { selectedCountry: country } = useCountryContext();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -100,7 +100,6 @@ export const Input: React.FC<ReferenceInputProps> = ({
             {referenceType.name === "phone" ? (
               <StyledPhoneInput>
                 <PhoneInput
-                  international
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   defaultCountry={country?.iso_alpha2}
