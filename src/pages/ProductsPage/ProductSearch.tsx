@@ -25,7 +25,11 @@ interface ProductSearchProps {
 export const ProductSearch = ({
   productType,
 }: ProductSearchProps): JSX.Element | null => {
-  const { country, countries, selectCountry } = useCountryContext();
+  const {
+    selectedCountry: country,
+    availableCountries: countries,
+    selectCountry,
+  } = useCountryContext();
   const { fuzzySearchBrands, filteredBrands } = useCatalogContext();
   const { t } = useTranslation();
   const [searchKey, setSearchKey] = useState("");

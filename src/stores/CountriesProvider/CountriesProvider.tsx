@@ -7,11 +7,12 @@ const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
 export const CountriesProvider: React.FC<{
   children: React.ReactNode;
-  blockedCountries?: string[];
   configCountry?: string;
-}> = ({ children, blockedCountries, configCountry }) => {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [country, setCountry] = useState<Country | null>(null);
+}> = ({ children, configCountry }) => {
+  const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
+  const [blockedCountries, setBlockedCountries] = useState<Country[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+
   const { buildUrl } = useWidgetConfig();
   const { data: countriesResponse, isPending } = useFetch({
     url: "countries",
@@ -19,18 +20,14 @@ export const CountriesProvider: React.FC<{
 
   useEffect(() => {
     if (countriesResponse?.data?.results) {
-      const availableCountries = blockedCountries
-        ? countriesResponse.data.results.filter(
-            (country: Country) => !blockedCountries.includes(country.iso_alpha2)
-          )
-        : countriesResponse.data.results;
+      const allCountries = countriesResponse.data.results;
 
-      setCountries(availableCountries);
+      setAvailableCountries(allCountries);
 
       const searchParams = new URLSearchParams(window.location.search);
       const urlCountryIso = searchParams.get("country");
 
-      const urlCountry = availableCountries.find(
+      const urlCountry = allCountries.find(
         (country) => country.iso_alpha2 === urlCountryIso
       );
 
@@ -38,19 +35,17 @@ export const CountriesProvider: React.FC<{
         urlCountry && buildUrl
           ? urlCountry
           : configCountry
-          ? availableCountries.find(
-              (country) => country.iso_alpha2 === configCountry
-            )
-          : availableCountries.find((country) => country.iso_alpha2 === "US");
+          ? allCountries.find((country) => country.iso_alpha2 === configCountry)
+          : allCountries.find((country) => country.iso_alpha2 === "US");
 
-      setCountry(defaultCountry || null);
+      setSelectedCountry(defaultCountry || null);
     }
   }, [countriesResponse]);
 
   const selectCountry = (isoCode: string) => {
-    const country = countries.find((c) => c.iso_alpha2 === isoCode);
+    const country = availableCountries.find((c) => c.iso_alpha2 === isoCode);
     if (country) {
-      setCountry(country);
+      setSelectedCountry(country);
 
       // Update URL with selected country
       if (buildUrl) {
@@ -61,24 +56,39 @@ export const CountriesProvider: React.FC<{
     }
   };
 
-  const getCountry = (isoCode: string) => {
-    const country = countries.find((c) => c.iso_alpha2 === isoCode);
-    return country || null;
-  };
-
   const removeCountry = (isoCode: string) => {
-    setCountries((prev) =>
+    setAvailableCountries((prev) =>
       prev.filter((country) => country.iso_alpha2 !== isoCode)
     );
+    const blockedCountry = availableCountries.find(
+      (country) => country.iso_alpha2 === isoCode
+    );
+    if (blockedCountry) {
+      setBlockedCountries((prev) => [...prev, blockedCountry]);
+    }
+  };
+
+  const restoreCountry = (isoCode: string) => {
+    setBlockedCountries((prev) =>
+      prev.filter((country) => country.iso_alpha2 !== isoCode)
+    );
+    const restoredCountry = blockedCountries.find(
+      (country) => country.iso_alpha2 === isoCode
+    );
+    if (restoredCountry) {
+      setAvailableCountries((prev) => [...prev, restoredCountry]);
+    }
   };
 
   return (
     <CountryContext.Provider
       value={{
-        countries,
-        country,
+        availableCountries,
+        blockedCountries,
+        selectedCountry,
         selectCountry,
         removeCountry,
+        restoreCountry,
         isCountryPending: isPending,
       }}
     >
@@ -90,7 +100,9 @@ export const CountriesProvider: React.FC<{
 export const useCountryContext = () => {
   const context = useContext(CountryContext);
   if (!context) {
-    throw new Error("useCountryContext must be used within a CountryProvider");
+    throw new Error(
+      "useCountryContext must be used within a CountriesProvider"
+    );
   }
   return context;
 };
