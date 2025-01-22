@@ -45,7 +45,6 @@ export const useTransactionHelpers = () => {
     account,
     quote,
     product,
-    quantity,
     token
   }) => {
     try {
@@ -53,9 +52,7 @@ export const useTransactionHelpers = () => {
       const nativeToken = nativeTokenCatalog.find(
         (item) => item.key === chain?.key
       );
-      const requiredAmount = BigInt(
-        ((quote?.digital_asset_amount * Math.pow(10, token?.decimals)) * quantity).toFixed(0)
-      );
+
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
       const isReferenceValid = await validateReference(
@@ -80,7 +77,7 @@ export const useTransactionHelpers = () => {
           fiatAmount: 1000,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: requiredAmount,
+          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
         await writeContract(config,{
@@ -92,9 +89,12 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
+
+        console.log("total amount", quote?.total_amount);
+        console.log("token", token?.decimals);
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
-          requiredAmount,
+          quote?.total_amount * (10 ** token?.decimals),
           token.address,
           account,
           chain,
@@ -110,7 +110,7 @@ export const useTransactionHelpers = () => {
           fiatAmount: quote?.fiat_amount,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: requiredAmount,
+          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
         await writeContract(config,{

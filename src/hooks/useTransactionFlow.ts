@@ -15,10 +15,9 @@ export const useTransactionFlow = () => {
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const [chainId, tokenAddress, quantity, reference, requiredFields] = useFieldValues(
+  const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     tokenKey,
-    "quantity",
     "reference",
     "requiredFields"
   );
@@ -41,7 +40,6 @@ export const useTransactionFlow = () => {
               account,
               quote,
               product,
-              quantity,
               token,
             });
 
@@ -66,8 +64,7 @@ export const useTransactionFlow = () => {
         sku: product?.sku,
         chain: chain?.key,
         token: quote?.digital_asset, // Token address
-        quantity,
-        amount: quote?.digital_asset_amount * quantity,
+        amount: quote?.digital_asset_amount,
         wallet: account?.address,
       },
     });

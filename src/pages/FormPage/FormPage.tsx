@@ -8,7 +8,6 @@ import { HiddenUI } from "../../types/widget";
 import { ReviewButton } from "./ReviewButton";
 import { useTranslation } from "react-i18next";
 import { SelectProductButton } from "../../components/SelectProductButton/SelectProductButton";
-import { QuantityInput } from "../../components/QuantityInput/QuantityInput";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { DetailSection } from "./DetailSection";
 
@@ -23,7 +22,6 @@ export const FormPage: React.FC = () => {
   return (
     <PageContainer>
       <SelectProductButton formType="from" compact />
-      {product?.productType === "gift_card" && <QuantityInput />}
 
       <SelectChainAndToken mb={2} />
 

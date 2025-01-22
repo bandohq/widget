@@ -31,10 +31,9 @@ export const SelectTokenButtonForProducts: React.FC<
   const { quote, isPending: quotePending, fetchQuote } = useQuotes();
 
   const tokenKey = FormKeyHelper.getTokenKey(formType);
-  const [chainId, tokenAddress, quantity] = useFieldValues(
+  const [chainId, tokenAddress] = useFieldValues(
     FormKeyHelper.getChainKey(formType),
-    tokenKey,
-    "quantity"
+    tokenKey
   );
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
@@ -76,7 +75,7 @@ export const SelectTokenButtonForProducts: React.FC<
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
             title={defaultPlaceholder}
-            subheader={`${parseFloat(product.price?.fiatValue).toFixed(2)} ${
+            subheader={`${parseFloat(product.price?.fiatValue)} ${
               product.price?.fiatCurrency
             }`}
             compact={compact}
@@ -126,15 +125,11 @@ export const SelectTokenButtonForProducts: React.FC<
                 <AvatarBadgedDefault />
               )
             }
-            title={`${(quote?.digital_asset_amount * quantity).toFixed(
-              token.decimals
-            )} ${quote?.digital_asset}`}
+            title={`${quote?.digital_asset_amount} ${token?.symbol}`}
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={`${(quote?.fiat_amount * quantity).toFixed(2)} ${
-              quote?.fiat_currency
-            }`}
+            subheader={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
             subheaderTypographyProps={
               isSelected
                 ? {
