@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { multicall } from "@wagmi/core";
+import { getBalance, multicall } from "@wagmi/core";
 import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
+import nativeTokenCatalog from "../utils/nativeTokenCatalog";
 
 export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) => {
   const [balances, setBalances] = useState<any[]>([]);
@@ -15,6 +16,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
   useEffect(() => {
     const fetchBalances = async () => {
       if (!tokens || tokensLoading || !chain || !accountAddress) return;
+      const nativeToken = nativeTokenCatalog.find((item) => item.key === chain?.key);
 
       setLoading(true);
       setError(null);
@@ -22,6 +24,10 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
       try {
         // Create dynamic config for the current chain
         const config = createDynamicConfig(chain);
+
+        const nativeTokenBalance = await getBalance(config, {
+          address: accountAddress as `0x${string}`, 
+        })
 
         // Build contracts for multicall
         const contracts = tokens.map((token) => ({
@@ -39,7 +45,14 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
         const formattedBalances = data.map((balanceRaw, index) => {
           const token = tokens[index];
           const decimals = token?.decimals || 18;
-          const formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
+          let formattedBalance: number;
+
+          if (nativeToken?.native_token?.symbol === tokens[index].symbol) {
+            formattedBalance = Number(nativeTokenBalance.value) / 10 ** decimals;
+          } else {
+            formattedBalance = Number(balanceRaw.result) / 10 ** decimals; 
+          }
+          
 
           return {
             key: token.key,
@@ -55,7 +68,6 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
 
         setBalances(nonZeroBalances);
       } catch (err) {
-        console.error("Error fetching balances:", err);
         setError("Error fetching token balances");
         setBalances([]);
       } finally {
