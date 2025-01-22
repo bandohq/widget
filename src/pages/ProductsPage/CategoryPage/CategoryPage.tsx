@@ -21,7 +21,7 @@ export const CategoryPage = () => {
       );
 
       if (categoryProducts.length === 0) {
-        navigate(`/`);
+        navigate(`/form`);
       } else {
         fuzzySearchBrands("", category);
       }
