@@ -77,7 +77,7 @@ export const useTransactionHelpers = () => {
           fiatAmount: 1000,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: quote?.digital_asset_amount,
+          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
         await writeContract(config,{
@@ -89,9 +89,12 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
+
+        console.log("total amount", quote?.total_amount);
+        console.log("token", token?.decimals);
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
-          quote?.total_amount,
+          quote?.total_amount * (10 ** token?.decimals),
           token.address,
           account,
           chain,
@@ -107,7 +110,7 @@ export const useTransactionHelpers = () => {
           fiatAmount: quote?.fiat_amount,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: quote?.digital_asset_amount,
+          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
         await writeContract(config,{
