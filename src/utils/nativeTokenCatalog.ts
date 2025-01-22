@@ -76,7 +76,7 @@ const nativeTokenCatalog: NativeTokenCatalog[] = [
         key: "pol",
         native_token: {
             name: "Polygon Token",
-            symbol: "MATIC",
+            symbol: "POL",
             decimals: 18,
         },
     },
