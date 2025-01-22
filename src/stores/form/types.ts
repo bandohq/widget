@@ -5,7 +5,6 @@ import { ReferenceType } from '../../providers/CatalogProvider/types'
 export interface DefaultFieldValues {
   fromChain?: number
   fromToken?: string
-  quantity?: number
   reference?: string
   requiredFields?: ReferenceType[]
   fromAmount: string
