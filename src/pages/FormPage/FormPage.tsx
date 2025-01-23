@@ -31,7 +31,10 @@ export const FormPage: React.FC = () => {
         />
       )}
       <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
-        <ReviewButton />
+        <ReviewButton
+          referenceType={product?.referenceType}
+          requiredFields={product?.requiredFields}
+        />
       </Box>
     </PageContainer>
   );

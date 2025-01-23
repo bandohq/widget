@@ -100,6 +100,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
             {referenceType.name === "phone" ? (
               <StyledPhoneInput>
                 <PhoneInput
+                  international
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   // @ts-ignore all iso codes are valid
