@@ -89,9 +89,6 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
-
-        console.log("total amount", quote?.total_amount);
-        console.log("token", token?.decimals);
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
           quote?.total_amount * (10 ** token?.decimals),

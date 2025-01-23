@@ -5,6 +5,8 @@ import { useAccount } from "@lifi/wallet-management";
 interface QuoteData {
   digital_asset_amount: number;
   digital_asset: string;
+  total_amount: number;
+  fee_amount: number;
   fiat_amount: number;
   fiat_currency: string;
 }
