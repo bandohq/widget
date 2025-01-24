@@ -80,9 +80,8 @@ export const useTransactionHelpers = () => {
           weiAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
-        console.log("payload", payload);
-
         await writeContract(config,{
+          value: quote?.total_amount * (10 ** token?.decimals),
           address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
