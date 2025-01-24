@@ -77,11 +77,11 @@ export const useTransactionHelpers = () => {
           payer: account?.address,
           fiatAmount: 1000,
           serviceRef: txId,
-          token: token.address,
-          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
+          weiAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
         };
 
         await writeContract(config,{
+          value: quote?.total_amount * (10 ** token?.decimals),
           address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
