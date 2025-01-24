@@ -7,6 +7,7 @@ import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+import { checkAllowance } from "../utils/checkAllowance";
 
 
 export const useTransactionHelpers = () => {
@@ -67,7 +68,7 @@ export const useTransactionHelpers = () => {
         return;
       }
 
-      if (token.key === nativeToken?.key) {
+      if (token.key === nativeToken?.native_token.symbol) {
         const requestServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestService"
         );
@@ -92,6 +93,14 @@ export const useTransactionHelpers = () => {
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
           quote?.total_amount * (10 ** token?.decimals),
+          token.address,
+          account,
+          chain,
+          config
+        );
+
+        await checkAllowance(
+          chain?.protocol_contracts?.BandoRouterProxy,
           token.address,
           account,
           chain,
