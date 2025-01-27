@@ -7,7 +7,7 @@ import { TokenList } from "../../components/TokenList/TokenList.js";
 import { useHeader } from "../../hooks/useHeader.js";
 import { useNavigateBack } from "../../hooks/useNavigateBack.js";
 import { useScrollableOverflowHidden } from "../../hooks/useScrollableContainer.js";
-import type { FormTypeProps } from "../../stores/form/types.js";
+import { type FormTypeProps } from "../../stores/form/types.js";
 import { SearchTokenInput } from "./SearchTokenInput.js";
 import { useTokenListHeight } from "./useTokenListHeight.js";
 import { palette } from "../../themes/palettes.js";

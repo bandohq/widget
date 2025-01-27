@@ -17,6 +17,7 @@ import { ListItemButton } from "../ListItem/ListItemButton.js";
 import { ListItem } from "./TokenList.style.js";
 import type { TokenListItemButtonProps, TokenListItemProps } from "./types.js";
 import { ChainType } from "../../pages/SelectChainPage/types.js";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
 
 export const TokenListItem: React.FC<TokenListItemProps> = ({
   onClick,
@@ -29,8 +30,10 @@ export const TokenListItem: React.FC<TokenListItemProps> = ({
   startAdornment,
   endAdornment,
 }) => {
+  const { handleCurrentBalanceChange } = useQuotes();
   const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
+    handleCurrentBalanceChange(token?.balance);
     onClick?.(token.address, chain?.id);
   };
 

@@ -19,6 +19,7 @@ import { useAccount } from "@lifi/wallet-management";
 import { Avatar, Skeleton } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
+import { Box } from "@mui/material";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -28,7 +29,12 @@ export const SelectTokenButtonForProducts: React.FC<
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { product } = useProduct();
-  const { quote, isPending: quotePending, fetchQuote } = useQuotes();
+  const {
+    quote,
+    isPending: quotePending,
+    fetchQuote,
+    isPurchasePossible,
+  } = useQuotes();
 
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [chainId, tokenAddress] = useFieldValues(
@@ -142,6 +148,19 @@ export const SelectTokenButtonForProducts: React.FC<
           />
         )}
       </CardContent>
+      {quote?.total_amount && !isPurchasePossible && (
+        <Box
+          sx={{
+            color: "red",
+            display: "flex",
+            justifyContent: "center",
+            padding: "5px",
+            textAlign: "right",
+          }}
+        >
+          {t("warning.message.insufficientFunds")}
+        </Box>
+      )}
     </SelectTokenCard>
   );
 };
