@@ -14,6 +14,8 @@ interface QuoteData {
 interface QuotesContextType {
   quote: QuoteData | null;
   isPending: boolean;
+  isPurchasePossible: boolean;
+  handleCurrentBalanceChange: (newBalance: bigint | null) => void;
   fetchQuote: (
     sku: string,
     fiatCurrency: string,
@@ -27,6 +29,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [quote, setQuote] = useState<QuoteData | null>(null);
+  const [currentBalance, setCurrentBalance] = useState<bigint | number>(0);
+  const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const { account } = useAccount();
 
@@ -49,6 +53,16 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [data, fetchPending]);
 
+  useEffect(() => {
+    if (quote && currentBalance >= quote.total_amount) {
+      setIsPurchasePossible(true);
+    }
+  }, [currentBalance, quote]);
+
+  const handleCurrentBalanceChange = (newBalance: bigint | null) => {
+    setCurrentBalance(newBalance || 0);
+  };
+
   const fetchQuote = (
     sku: string,
     fiatCurrency: string,
@@ -63,7 +77,15 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <QuotesContext.Provider value={{ quote, isPending, fetchQuote }}>
+    <QuotesContext.Provider
+      value={{
+        quote,
+        isPending,
+        isPurchasePossible,
+        fetchQuote,
+        handleCurrentBalanceChange,
+      }}
+    >
       {children}
     </QuotesContext.Provider>
   );
