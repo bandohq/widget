@@ -59,10 +59,11 @@ export const DialogList: React.FC<DialogListProps> = ({
           {title}
         </Typography>
         <ImageAvatar
+          hideName
           name={title}
           src={image}
           sx={{
-            maxWidth: "150px",
+            maxWidth: "80px",
             width: "100%",
             height: "auto",
             minHeight: "100px",

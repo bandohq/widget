@@ -75,9 +75,16 @@ export const ProductList: React.FC<ProductListProps> = ({
                   >
                     <ListItemIcon>
                       <ImageAvatar
+                        hideName
                         name={brand.brandName}
                         src={brand.imageUrl}
-                        sx={{ width: "45px", height: "45px" }}
+                        sx={{
+                          width: "45px",
+                          height: "45px",
+                          maxWidthidth: "45px",
+                          maxHeight: "45px",
+                          objectFit: "contain",
+                        }}
                       />
                     </ListItemIcon>
                     <ListItemText primary={brand.brandName} />

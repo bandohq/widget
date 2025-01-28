@@ -1,18 +1,19 @@
-import { Box, IconButton, InputBase, Select, styled } from "@mui/material";
+import { Box, IconButton, InputBase, styled } from "@mui/material";
 
 export const BrandsContainer = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(5, 1fr)",
-  gridAutoRows: "minmax(60px, auto)",
+  gridAutoRows: "minmax(60px, 85px)",
   gap: 10,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
 }));
 
-export const BrandsGrid = styled(Box)(({ theme }) => ({
+export const BrandsGrid = styled(Box)(({}) => ({
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "start",
   cursor: "pointer",
 }));
 

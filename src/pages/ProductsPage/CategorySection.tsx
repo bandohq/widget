@@ -59,7 +59,13 @@ export const CategorySection = ({ category, onMoreClick }) => {
             <ImageAvatar
               name={brand.brandName}
               src={brand.imageUrl}
-              sx={{ width: "100%", height: "100%" }}
+              sx={{
+                maxHeight: "60px",
+                maxWidth: "60px",
+                width: "60px",
+                height: "60px",
+                objectFit: "contain",
+              }}
             />
           </BrandsGrid>
         ))}
