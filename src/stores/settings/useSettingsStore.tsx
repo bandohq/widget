@@ -38,8 +38,8 @@ export const useSettingsStore = createWithEqualityFn<SettingsState>(
       },
     }),
     {
-      name: "li.fi-widget-settings",
-      version: 4,
+      name: "bando-widget-settings",
+      version: 1,
       partialize: (state) => {
         const { ...partializedState } = state;
         return partializedState;

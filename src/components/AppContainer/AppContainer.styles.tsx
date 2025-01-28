@@ -39,6 +39,7 @@ export const RelativeContainer = styled(Box, {
   return {
     position: "relative",
     boxSizing: "content-box",
+    overflow: "hidden",
     width: "100%",
     minWidth: theme.breakpoints.values.xs,
     maxWidth: theme.breakpoints.values.sm,
