@@ -7,6 +7,8 @@ import {
 } from "./Avatar.style";
 import { SmallAvatarSkeleton } from "./SmallAvatar";
 import { getInitials } from "../../utils/getInitials";
+import { width } from "@mui/system";
+import { truncateText } from "../../utils/truncateText";
 
 export const AvatarBadgedDefault: React.FC<{
   sx?: SxProps<Theme>;
@@ -27,22 +29,50 @@ export const ImageAvatar: React.FC<{
   src?: string;
   name?: string;
   sx?: SxProps<Theme>;
-}> = ({ src, sx, name }) => {
+  hideName?: boolean;
+}> = ({ src, sx, name, hideName }) => {
   return src ? (
-    <img
-      src={src}
-      alt={name}
+    <div
       style={{
-        width: "100%",
-        height: "100%",
-        borderRadius: "50%",
-        objectFit: "cover",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
-    />
+    >
+      <img
+        src={src}
+        alt={name}
+        style={{
+          ...sx,
+          borderRadius: "10%",
+          objectFit: "contain",
+        }}
+      />
+      {!hideName && (
+        <div
+          style={{ fontSize: "12px", textAlign: "center", marginTop: "auto" }}
+        >
+          {truncateText(name, 9)}
+        </div>
+      )}
+    </div>
   ) : (
-    <Avatar sx={sx} variant="rounded">
-      {getInitials(name)}
-    </Avatar>
+    <div
+      style={{
+        ...sx,
+        width: "100%",
+        marginRight: !hideName ? 0 : "10px",
+      }}
+    >
+      <Avatar sx={{ width: "100%", height: "100%" }} variant="rounded">
+        {getInitials(name)}
+      </Avatar>
+      {!hideName && (
+        <div style={{ fontSize: "12px", textAlign: "center" }}>
+          {truncateText(name, 9)}
+        </div>
+      )}
+    </div>
   );
 };
 
