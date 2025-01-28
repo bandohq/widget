@@ -1,4 +1,4 @@
-# Bando.cool Widget
+# Bando Spend Widget
 
 The ideal widget to make crypto spendable easily and efficiently.
 
@@ -9,11 +9,11 @@ Check the complete documentation here:
 
 ## Key Features
 
-- **All-in-One Solution**: Support for all ecosystems, chains and tokens, and products supported by Bando.
-- **Wallet Management**: Includes UI for managing wallets (EVM, Solana, and Bitcoin) with the option to use your own wallet solution.
+- **All-in-One Solution**: Support for all ecosystems, chains and tokens, and products supported by Bando (more and more added every week).
+- **Wallet Management**: Includes UI for managing wallets (EVM, solana coming soon) with the option to use your own wallet solution.
 - **Flexible Styling**: Customizable themes and styles to seamlessly integrate with your app's design.
 - **Multi-Language Support**: Complete UI translations to cater to a global audience.
-- **Broad Compatibility**: Tested with popular frameworks including React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite, and CRA.
+- **Broad Compatibility**: Tested with React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite.
 
 ---
 
@@ -79,8 +79,8 @@ You can pass configuration properties and other adjustments:
 
 ```javascript
 <BandoWidget
-  fromChain="solana"
-  fromToken="SOL"
+  fromChain="celo"
+  fromToken="CELO"
   theme={{
     container: {
       border: "2px solid #000",
@@ -95,8 +95,7 @@ You can pass configuration properties and other adjustments:
 ## Technologies Used
 
 - React
-- Bigmi (for configuration management and integration)
-- Viem (for on-chain interactions)
+- Viem and Wagmi (for on-chain interactions)
 
 ---
 
@@ -128,4 +127,4 @@ If you have any questions or suggestions, contact us at **support@bando.cool**.
 
 ---
 
-© 2024 Bando.cool. All rights reserved.
+© 2025 Bando.cool. All rights reserved.
