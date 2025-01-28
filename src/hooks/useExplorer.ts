@@ -1,4 +1,4 @@
-import { lifiExplorerUrl } from '../config/constants.js'
+import { bandoExplorerUrl } from '../config/constants.js'
 import { useAvailableChains } from '../hooks/useAvailableChains.js'
 import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js'
 
@@ -48,23 +48,23 @@ export const useExplorer = () => {
     if (!chain) {
       const baseUrl = explorerUrls?.internal?.[0]
         ? sanitiseBaseUrl(explorerUrls.internal[0])
-        : lifiExplorerUrl
+        : bandoExplorerUrl
       return `${baseUrl}/tx/${txHash}`
     }
     const resolvedChain = resolveChain(chain)
-    return `${resolvedChain ? getBaseUrl(resolvedChain) : lifiExplorerUrl}/tx/${txHash}`
+    return `${resolvedChain ? getBaseUrl(resolvedChain) : bandoExplorerUrl}/tx/${txHash}`
   }
 
   const getAddressLink = (address: string, chain?: Chain | number) => {
     if (!chain) {
       const baseUrl = explorerUrls?.internal?.[0]
         ? sanitiseBaseUrl(explorerUrls.internal[0])
-        : lifiExplorerUrl
+        : bandoExplorerUrl
       return `${baseUrl}/address/${address}`
     }
 
     const resolvedChain = resolveChain(chain)
-    return `${resolvedChain ? getBaseUrl(resolvedChain) : lifiExplorerUrl}/address/${address}`
+    return `${resolvedChain ? getBaseUrl(resolvedChain) : bandoExplorerUrl}/address/${address}`
   }
 
   return {
