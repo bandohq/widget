@@ -8,7 +8,12 @@ const CountryContext = createContext<CountryContextType | undefined>(undefined);
 export const CountriesProvider: React.FC<{
   children: React.ReactNode;
   configCountry?: string;
-}> = ({ children, configCountry }) => {
+  blockedCountries?: string[];
+}> = ({
+  children,
+  configCountry,
+  blockedCountries: initialBlockedCountries,
+}) => {
   const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
   const [blockedCountries, setBlockedCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -41,6 +46,14 @@ export const CountriesProvider: React.FC<{
       setSelectedCountry(defaultCountry || null);
     }
   }, [countriesResponse]);
+
+  useEffect(() => {
+    if (countriesResponse?.data?.results && initialBlockedCountries) {
+      initialBlockedCountries.forEach((isoCode) => {
+        removeCountry(isoCode);
+      });
+    }
+  }, [initialBlockedCountries, countriesResponse]);
 
   const selectCountry = (isoCode: string) => {
     const country = availableCountries.find((c) => c.iso_alpha2 === isoCode);
