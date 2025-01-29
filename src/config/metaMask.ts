@@ -1,5 +1,5 @@
 import type { MetaMaskParameters } from 'wagmi/connectors';
-import Bandologo  from '../assets/Bandologo.svg';
+import { BandoLogo }  from '../assets/BandoLogo.js';
 
 export const defaultMetaMaskConfig: MetaMaskParameters = {
   dappMetadata: {
@@ -8,6 +8,6 @@ export const defaultMetaMaskConfig: MetaMaskParameters = {
       typeof window !== 'undefined'
         ? (window as Window)?.location.href
         : 'https://bando.cool/',
-    base64Icon: Bandologo,
+    base64Icon: BandoLogo,
   },
 };

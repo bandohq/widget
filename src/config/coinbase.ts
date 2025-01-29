@@ -1,7 +1,7 @@
 import type { CoinbaseWalletParameters } from 'wagmi/connectors';
-import Bandologo from '../assets/Bandologo.svg';
+import { BandoLogo } from '../assets/BandoLogo.js';
 
 export const defaultCoinbaseConfig: CoinbaseWalletParameters = {
   appName: 'Bando.cool',
-  appLogoUrl: Bandologo,
+  appLogoUrl: BandoLogo,
 };
