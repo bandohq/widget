@@ -1,5 +1,6 @@
 import { bandoExplorerUrl } from '../config/constants.js'
 import { useAvailableChains } from '../hooks/useAvailableChains.js'
+import { ExtendedChain } from '../pages/SelectChainPage/types.js'
 import { useWidgetConfig } from '../providers/WidgetProvider/WidgetProvider.js'
 
 const sanitiseBaseUrl = (baseUrl: string) => baseUrl.trim().replace(/\/+$/, '')
@@ -26,10 +27,9 @@ export const useExplorer = () => {
   const { explorerUrls } = useWidgetConfig()
   const { getChainById } = useAvailableChains()
 
-  const getBaseUrl = (chain: Chain) => {
+  const getBaseUrl = (chain: ExtendedChain | Chain) => {
     const baseUrl = explorerUrls?.[chain.chain_id]
-      ? explorerUrls[chain.chain_id][0]
-      : chain.metamask.blockExplorerUrls[0]
+      && explorerUrls[chain.chain_id][0]
 
     return sanitiseBaseUrl(baseUrl)
   }

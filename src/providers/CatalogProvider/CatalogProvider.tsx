@@ -26,6 +26,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     isPending,
     error,
   } = useFetch<ProductQueryResult>({
+    method: "GET",
     url: "products/grouped/",
     queryParams: {
       country: !!country ? country?.iso_alpha2 : null,

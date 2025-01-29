@@ -59,9 +59,9 @@ import {
   
   export const CardContent = styled(MuiCardContent, {
     shouldForwardProp: (prop) => prop !== 'formType' && prop !== 'compact',
-  })<{ formType: FormType; compact: boolean }>(({ theme, formType, compact }) => {
+  })<{ formType: FormType; compact: boolean }>(({ theme, compact }) => {
     const cardVariant = theme.components?.MuiCard?.defaultProps?.variant
-    const direction = formType === 'to' ? '-8px' : 'calc(100% + 8px)'
+    const direction = 'calc(100% + 8px)'
     const horizontal = compact ? direction : '50%'
     const vertical = compact ? '50%' : direction
     return {

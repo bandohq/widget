@@ -5,12 +5,12 @@ import {
   UseQueryOptions,
   QueryObserverResult,
   UseMutationResult,
-} from '@tanstack/react-query';
-import { BANDO_API_URL } from '../config/constants';
+} from "@tanstack/react-query";
+import { BANDO_API_URL } from "../config/constants";
 
 type FetchOptions<T> = {
   url: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method?: "GET" | "POST" | "PUT" | "DELETE";
   data?: unknown;
   queryParams?: Record<string, string | number>;
   queryOptions?: UseQueryOptions<T, Error>;
@@ -21,10 +21,10 @@ type FetchOptions<T> = {
 
 function buildQueryString(queryParams: Record<string, string | number> = {}) {
   const query = new URLSearchParams(queryParams as Record<string, string>);
-  return query.toString() ? `?${query.toString()}` : '';
+  return query.toString() ? `?${query.toString()}` : "";
 }
 
-async function fetchData<T>(url: string , options: RequestInit): Promise<T> {
+async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
@@ -32,20 +32,31 @@ async function fetchData<T>(url: string , options: RequestInit): Promise<T> {
   return response.json();
 }
 
+/**
+ * Overloads to ensure TypeScript correctly infers the return type based on the method
+ */
+export function useFetch<T = any>(
+  options: FetchOptions<T> & { method: "GET" }
+): QueryObserverResult<T, Error>;
+
+export function useFetch<T = any>(
+  options: FetchOptions<T> & { method: "POST" | "PUT" | "DELETE" }
+): UseMutationResult<T, Error, unknown, unknown>;
+
 export function useFetch<T = any>({
   url,
-  method = 'GET',
+  method = "GET",
   data,
   queryParams,
   queryOptions,
   mutationOptions,
   useFullUrl = true,
   enabled = true,
-}: FetchOptions<T>): QueryObserverResult<T, Error> | UseMutationResult<T, Error, unknown, unknown> {
+}: FetchOptions<T>): any {
   const fetchOptions: RequestInit = {
     method,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : undefined,
   };
@@ -53,11 +64,11 @@ export function useFetch<T = any>({
   const queryString = buildQueryString(queryParams);
   const fullUrl = !useFullUrl ? `${url}${queryString}` : `${BANDO_API_URL}${url}${queryString}`;
 
-  if (method === 'GET') {
+  if (method === "GET") {
     return useQuery<T>({
       queryKey: [url, queryParams],
       queryFn: () => fetchData<T>(fullUrl, fetchOptions),
-      enabled: method === 'GET' && enabled,
+      enabled,
       ...queryOptions,
     });
   } else {
@@ -70,7 +81,6 @@ export function useFetch<T = any>({
         };
         return fetchData<T>(fullUrl, dynamicOptions);
       },
-      
       ...mutationOptions,
     });
   }

@@ -20,6 +20,7 @@ export const CountriesProvider: React.FC<{
 
   const { buildUrl } = useWidgetConfig();
   const { data: countriesResponse, isPending } = useFetch({
+    method: "GET",
     url: "countries",
   });
 

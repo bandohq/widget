@@ -1,21 +1,15 @@
 import { useCallback } from 'react';
 import { useFetch } from './useFetch';
-import { ChainType, ExtendedChain } from '../pages/SelectChainPage/types.js';
+import { ExtendedChain } from '../pages/SelectChainPage/types.js';
 
 export type GetChainById = (
   chainId?: number,
   chains?: ExtendedChain[]
 ) => ExtendedChain | undefined;
 
-interface AvailableChainsResponse {
-  data: {
-    data: ExtendedChain[];
-  };
-}
+export const useAvailableChains = () => {
 
-export const useAvailableChains = (chainTypes?: ChainType[]) => {
-
-  const { data: response, isPending } = useFetch<AvailableChainsResponse[]>({
+  const { data: response, isPending } = useFetch({
     url: `networks/`,
     method: 'GET',
     queryParams: {

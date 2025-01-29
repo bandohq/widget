@@ -1,12 +1,10 @@
 import { useImperativeHandle } from 'react'
 import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider.js'
-import { useBookmarkActions } from '../../stores/bookmarks/useBookmarkActions.js'
 import { formDefaultValues } from '../../stores/form/createFormStore.js'
 import type { FormRef } from '../../types/widget.js'
 import type { FormStoreStore, GenericFormValue } from './types.js'
 
 export const useFormRef = (formStore: FormStoreStore, formRef?: FormRef) => {
-  const { setSelectedBookmark } = useBookmarkActions()
   const { hiddenUI } = useWidgetConfig()
 
   useImperativeHandle(
@@ -36,6 +34,6 @@ export const useFormRef = (formStore: FormStoreStore, formRef?: FormRef) => {
         },
       }
     },
-    [formStore, hiddenUI, setSelectedBookmark]
+    [formStore, hiddenUI]
   )
 }

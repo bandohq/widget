@@ -144,7 +144,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
     fromTokenAddress: string
     toTokenAddress: string
     fromAddress?: string
-    toAddress?: string
     fromAmount: bigint
     slippage: number
   }
@@ -155,13 +154,6 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
     fee?: number
     calculateFee?(params: CalculateFeeParams): Promise<number | undefined>
     _vcComponent: FC<{ route: RouteExtended }>
-  }
-  
-  export interface ToAddress {
-    name?: string
-    address: string
-    chainType: ChainType
-    logoURI?: string
   }
   
   export interface AllowDeny<T> {

@@ -56,6 +56,7 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   useSyncWagmiConfig(
     wagmi.current.config,
     wagmi.current.connectors,
+    // @ts-ignore
     availableChains
   );
 

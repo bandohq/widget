@@ -42,6 +42,7 @@ export const ImageAvatar: React.FC<{
       <img
         src={src}
         alt={name}
+        //@ts-ignore
         style={{
           ...sx,
           borderRadius: "10%",
@@ -58,6 +59,7 @@ export const ImageAvatar: React.FC<{
     </div>
   ) : (
     <div
+      //@ts-ignore
       style={{
         ...sx,
         width: "100%",

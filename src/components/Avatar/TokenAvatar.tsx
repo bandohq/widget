@@ -70,7 +70,7 @@ export const TokenAvatarBase: React.FC<{
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       badgeContent={
         chain ? (
-          <SmallAvatar src={chain.logoURI} alt={chain.name}>
+          <SmallAvatar src={chain.logo_url} alt={chain.name}>
             {chain.name[0]}
           </SmallAvatar>
         ) : (
