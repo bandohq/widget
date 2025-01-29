@@ -1,7 +1,4 @@
-import type { PropsWithChildren } from 'react';
-import type { StoreApi } from 'zustand';
-import type { UseBoundStoreWithEqualityFn } from 'zustand/traditional';
-import type { Appearance, SplitSubvariant } from '../../types/widget.js';
+import type { Appearance } from '../../types/widget.js';
 
 export type ValueSetter<S> = <K extends keyof S>(
   key: K,
@@ -30,7 +27,9 @@ export interface SettingsActions {
 export interface SettingsState extends SettingsProps {
   setValue: ValueSetter<SettingsProps>;
   setValues: ValuesSetter<SettingsProps>;
+  getSettings: () => SettingsProps;
   reset(): void;
+  getValue: ValueGetter<SettingsProps>;
 }
 
 export interface SendToWalletState {
@@ -40,19 +39,3 @@ export interface SendToWalletState {
 export interface SendToWalletStore extends SendToWalletState {
   setSendToWallet(value: boolean): void;
 }
-
-export interface SplitSubvariantState {
-  state?: SplitSubvariant;
-  setState(state: SplitSubvariant): void;
-}
-
-export type SplitSubvariantStore = UseBoundStoreWithEqualityFn<
-  StoreApi<SplitSubvariantState>
->;
-
-export interface SplitSubvariantProps {
-  state?: SplitSubvariant;
-}
-
-export type SplitSubvariantProviderProps =
-  PropsWithChildren<SplitSubvariantProps>;

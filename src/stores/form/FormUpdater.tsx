@@ -1,7 +1,6 @@
 import { useAccount } from "@lifi/wallet-management";
 import { useEffect } from "react";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
-import { useBookmarkActions } from "../../stores/bookmarks/useBookmarkActions.js";
 import { formDefaultValues } from "../../stores/form/createFormStore.js";
 import type { DefaultValues } from "./types.js";
 import { useFieldActions } from "./useFieldActions.js";
@@ -11,7 +10,6 @@ export const FormUpdater: React.FC<{
 }> = ({ reactiveFormValues }) => {
   const { fromChain } = useWidgetConfig();
   const { account } = useAccount();
-  const { setSelectedBookmark } = useBookmarkActions();
   const { isTouched, resetField, setFieldValue, setUserAndDefaultValues } =
     useFieldActions();
 
@@ -43,12 +41,7 @@ export const FormUpdater: React.FC<{
     setUserAndDefaultValues(
       accountForChainId(reactiveFormValues, account.chainId)
     );
-  }, [
-    account.chainId,
-    reactiveFormValues,
-    setUserAndDefaultValues,
-    setSelectedBookmark,
-  ]);
+  }, [account.chainId, reactiveFormValues, setUserAndDefaultValues]);
 
   return null;
 };
@@ -61,7 +54,7 @@ const accountForChainId = (
   for (const key in result) {
     const k = key as keyof DefaultValues;
     if (result[k] === formDefaultValues[k]) {
-      if ((k === "fromChain" || k === "toChain") && chainId) {
+      if (k === "fromChain" && chainId) {
         result[k] = chainId;
       }
     }

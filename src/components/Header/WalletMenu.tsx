@@ -46,12 +46,12 @@ export const WalletMenu = ({ onClose }: { onClose: () => void }) => {
           return (
             <MenuItem key={account.address} disableTouchRipple>
               <Box flex={1} display="flex" alignItems="center">
-                {chain?.logoURI ? (
+                {chain?.logo_url ? (
                   <Badge
                     overlap="circular"
                     anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                     badgeContent={
-                      <SmallAvatar src={chain?.logoURI} alt={chain?.name}>
+                      <SmallAvatar src={chain?.logo_url} alt={chain?.name}>
                         {chain?.name[0]}
                       </SmallAvatar>
                     }

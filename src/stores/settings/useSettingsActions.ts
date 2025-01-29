@@ -60,7 +60,7 @@ export const useSettingsActions = () => {
       const gasPrice = actions.getValue('gasPrice');
 
       const defaultSlippage =
-        (config?.slippage || config?.sdkConfig?.routeOptions?.slippage || 0) * 100;
+        (config?.slippage ||  0) * 100;
 
       defaultConfigurableSettings.slippage = (
         defaultSlippage || defaultConfigurableSettings.slippage

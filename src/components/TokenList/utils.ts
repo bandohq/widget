@@ -14,26 +14,26 @@ export const filteredTokensComparator = (searchFilter: string) => {
     const isExactMatchB = isExactMatch(tokenB)
 
     // Exact match with logo
-    if (isExactMatchB && tokenB.logoURI) {
+    if (isExactMatchB && tokenB.image_url) {
       return 1
     }
-    if (isExactMatchA && tokenA.logoURI) {
+    if (isExactMatchA && tokenA.image_url) {
       return -1
     }
 
     // Any token with a logo (exact match or not)
-    if (tokenB.logoURI && !tokenA.logoURI) {
+    if (tokenB.image_url && !tokenA.image_url) {
       return 1
     }
-    if (tokenA.logoURI && !tokenB.logoURI) {
+    if (tokenA.image_url && !tokenB.image_url) {
       return -1
     }
 
     // Exact match without logo
-    if (isExactMatchB && !tokenB.logoURI) {
+    if (isExactMatchB && !tokenB.image_url) {
       return 1
     }
-    if (isExactMatchA && !tokenA.logoURI) {
+    if (isExactMatchA && !tokenA.image_url) {
       return -1
     }
 

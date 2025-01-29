@@ -51,12 +51,13 @@ export const createChainOrderStore = ({ namePrefix }: PersistStoreProps) =>
               },
             }
           })
+          //@ts-ignore 
           return get().chainOrder[type]
         },
         setChain: (chainId, type) => {
           const state = get()
-          if (state.chainOrder[type].includes(chainId) ||
-            !state.availableChains[type].includes(chainId)) {
+          //@ts-ignore 
+          if (state.chainOrder[type].includes(chainId)) {
             return
           }
           set((state: ChainOrderState) => {
@@ -75,8 +76,9 @@ export const createChainOrderStore = ({ namePrefix }: PersistStoreProps) =>
         },
       }),
       {
-        name: `${namePrefix || 'li.fi'}-widget-chains-order`,
+        name: `${namePrefix || 'bando.cool'}-widget-chains-order`,
         version: 2,
+        //@ts-ignore 
         partialize: (state) => ({ chainOrder: state.chainOrder }),
       }
     ) as unknown as StateCreator<ChainOrderState, [], [], ChainOrderState>,

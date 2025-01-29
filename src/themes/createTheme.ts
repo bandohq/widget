@@ -180,7 +180,7 @@ export const createTheme = (
               ...(!!ownerState.onClick &&
                 !!rootHover && {
                   '&:hover': {
-                    ...rootHover,
+                    ...rootHover as CSSObject,
                   },
                 }),
               ...(!ownerState.onClick && {
@@ -217,6 +217,7 @@ export const createTheme = (
           },
         ],
       },
+      // @ts-ignore
       MuiInputCard: {
         ...widgetTheme.components?.MuiInput,
       },
