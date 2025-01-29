@@ -1,5 +1,5 @@
 import type { MetaMaskParameters } from 'wagmi/connectors';
-import { BandoLogo }  from '../assets/BandoLogo';
+import { BandoLogo }  from '../assets/BandoLogo.js';
 
 export const defaultMetaMaskConfig: MetaMaskParameters = {
   dappMetadata: {
