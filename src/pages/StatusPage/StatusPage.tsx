@@ -14,7 +14,7 @@ export const StatusPage = () => {
   const { transactionId } = useParams();
 
   const { data: transactionData } = useFetch({
-    url: transactionId ? `transaction/${transactionId}/` : "",
+    url: transactionId ? `transactions/${transactionId}/` : "",
     method: "GET",
     queryOptions: {
       queryKey: ["transaction", transactionId],
