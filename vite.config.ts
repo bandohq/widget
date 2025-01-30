@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react(), dts()],
   build: {
     lib: {
-      entry: 'src/index.ts',
-      name: 'MiPaquete',
+      entry: 'src/index.ts', 
+      name: 'BandoWidget',
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format}.js`
+      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
