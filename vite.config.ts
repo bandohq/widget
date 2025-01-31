@@ -12,7 +12,14 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [
+        'react', 
+        'react-dom', 
+        '@solana/wallet-adapter-react', 
+        '@tanstack/react-query', 
+        'wagmi', 
+        '@bigmi/react'
+      ],
       output: {
         globals: {
           react: 'React',
