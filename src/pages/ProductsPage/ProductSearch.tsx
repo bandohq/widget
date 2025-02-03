@@ -71,8 +71,7 @@ export const ProductSearch = ({
               />
             </Tooltip>
           )}
-          <span>{country?.name || t("countries.selectCountry")} </span>
-          <CaretDown size="18px" style={{ paddingLeft: 5 }} />
+          <CaretDown size="18px" style={{ paddingLeft: 5, color: "black" }} />
         </StyledCountryDiv>
       </SearchContainer>
     </>

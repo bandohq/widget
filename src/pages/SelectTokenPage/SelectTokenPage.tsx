@@ -27,7 +27,7 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
   useHeader(t("header.tokens"));
 
   return (
-    <FullPageContainer disableGutters>
+    <FullPageContainer disableGutters isDrawer>
       <Box pb={2} px={3} ref={headerRef}>
         <Box mt={2}>
           <SearchTokenInput />

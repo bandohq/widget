@@ -82,21 +82,24 @@ export const ProductsPage = () => {
           </Box>
         ))
       ) : (
-        <div style={{ overflow: "hidden" }}>
-          {filteredData?.map((category) => (
-            <Box
-              key={category.productType}
-              sx={{
-                marginBottom: "30px",
-              }}
-            >
-              <CategorySection
-                category={category}
-                onMoreClick={() => handleMoreClick(category)}
-              />
-            </Box>
-          ))}
-        </div>
+        filteredBrands.length == 0 &&  (
+          <div style={{ overflow: "hidden" }}>
+            {filteredData?.map((category) => (
+              <Box
+                key={category.productType}
+                sx={{
+                  marginBottom: "30px",
+                  marginTop: "20px",
+                }}
+              >
+                <CategorySection
+                  category={category}
+                  onMoreClick={() => handleMoreClick(category)}
+                />
+              </Box>
+            ))}
+          </div>
+        )
       )}
     </PageContainer>
   );

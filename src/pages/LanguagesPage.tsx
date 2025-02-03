@@ -19,7 +19,7 @@ export const LanguagesPage: React.FC = () => {
   }
 
   return (
-    <PageContainer disableGutters>
+    <PageContainer disableGutters isDrawer>
       <List
         sx={{
           paddingTop: 0,

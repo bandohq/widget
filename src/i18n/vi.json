@@ -129,6 +129,7 @@
   },
   "settings": {
     "theme": "Giao diện",
-    "custom": "Tùy chỉnh"
+    "custom": "Tùy chỉnh",
+    "status": "Trang trạng thái"
   }
 }

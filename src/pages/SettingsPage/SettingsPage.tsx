@@ -32,9 +32,8 @@ export const SettingsPage = () => {
           <CardButton
             onClick={handleClick}
             icon={<Language />}
-            title={"Status"}
+            title={t("settings.status")}
           >
-            <CardValue>page</CardValue>
           </CardButton>
         </SettingsCardAccordion>
       </SettingsList>

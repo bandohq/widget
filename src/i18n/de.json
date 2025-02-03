@@ -133,6 +133,7 @@
   },
   "settings": {
     "theme": "Thema",
-    "custom": "Benutzerdefiniert"
+    "custom": "Benutzerdefiniert",
+    "status": "Statusseite"
   }
 }

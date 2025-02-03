@@ -158,6 +158,7 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizado"
+    "custom": "Personalizado",
+    "status": "Estatus del sitio"
   }
 }

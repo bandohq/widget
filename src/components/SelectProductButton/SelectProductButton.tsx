@@ -16,7 +16,11 @@ import { Dialog } from "../Dialog.js";
 import { DialogList } from "../DialogList/DialogList.js";
 import { VariantItem } from "../DialogList/VariantItem.js";
 import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
-import { palette } from "../../themes/palettes.js";
+import { styled, useTheme } from "@mui/system";
+
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  padding: theme.spacing(1),
+}));
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
@@ -24,6 +28,7 @@ export const SelectProductButton: React.FC<
   const [open, setOpen] = useState(false);
   const { product, brand: selectedBrand, updateProduct } = useProduct();
   const navigate = useNavigate();
+  const { palette } = useTheme();
 
   const handleButtonClick = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -40,7 +45,7 @@ export const SelectProductButton: React.FC<
 
   const renderAvatar = () =>
     product ? (
-      <Avatar alt={product.name} src={product.imageUrl} />
+      <StyledAvatar alt={product.name} src={product.imageUrl} />
     ) : (
       <AvatarBadgedDefault />
     );
@@ -51,8 +56,9 @@ export const SelectProductButton: React.FC<
       onClick={handleButtonClick}
       sx={{
         fontSize: "12px",
-        color: palette.primary.main,
+        color: palette.text.primary,
         fontWeight: 400,
+        backgroundColor: palette.background.default,
       }}
     >
       {`${parseFloat(product?.price?.fiatValue).toFixed(2)} ${

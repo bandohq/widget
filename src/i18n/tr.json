@@ -129,6 +129,7 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Özel"
+    "custom": "Özel",
+    "status": "Durum sayfası"
   }
 }
