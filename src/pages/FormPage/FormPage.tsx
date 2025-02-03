@@ -22,9 +22,7 @@ export const FormPage: React.FC = () => {
   return (
     <PageContainer>
       <SelectProductButton formType="from" compact />
-
       <SelectChainAndToken mb={2} />
-
       {product && (
         <DetailSection
           productType={product?.productType}
@@ -32,11 +30,9 @@ export const FormPage: React.FC = () => {
           requiredFields={product?.requiredFields}
         />
       )}
-
       <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
         <ReviewButton />
       </Box>
-      {showPoweredBy ? <PoweredBy /> : null}
     </PageContainer>
   );
 };

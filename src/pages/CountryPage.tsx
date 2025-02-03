@@ -40,7 +40,7 @@ export const CountryPage: React.FC = () => {
   }
 
   return (
-    <PageContainer disableGutters>
+    <PageContainer disableGutters isDrawer>
       <SearchBar onSearch={setSearchQuery} />
       <List
         sx={{

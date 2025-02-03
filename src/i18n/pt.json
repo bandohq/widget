@@ -133,6 +133,8 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizado"
+    "custom": "Personalizado",
+    "language": "Idioma",
+    "status": "Página de status"
   }
 }

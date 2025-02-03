@@ -158,6 +158,7 @@
   },
   "settings": {
     "theme": "Theme",
-    "custom": "Custom"
+    "custom": "Custom",
+    "status": "Status page"
   }
 }

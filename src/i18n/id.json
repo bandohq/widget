@@ -135,6 +135,7 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Kustom"
+    "custom": "Kustom",
+    "status": "Halaman status"
   }
 }

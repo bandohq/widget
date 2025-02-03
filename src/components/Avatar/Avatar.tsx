@@ -45,8 +45,11 @@ export const ImageAvatar: React.FC<{
         //@ts-ignore
         style={{
           ...sx,
+          padding: "8px",
           borderRadius: "10%",
           objectFit: "contain",
+          //invert images
+          filter: "invert(1)",
         }}
       />
       {!hideName && (

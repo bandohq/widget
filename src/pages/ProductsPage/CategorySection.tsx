@@ -35,7 +35,12 @@ export const CategorySection = ({ category, onMoreClick }) => {
 
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        marginBottom: 2,
+        justifyContent: 'space-between'
+      }}>
         <Typography variant="h4" sx={{ fontSize: "21px", fontWeight: 200 }}>
           {category.productType && convertSlugToTitle(category?.productType)}
         </Typography>

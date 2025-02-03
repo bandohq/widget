@@ -135,6 +135,7 @@
   },
   "settings": {
     "theme": "Tema",
-    "custom": "Personalizzato"
+    "custom": "Personalizzato",
+    "status": "Pagina di status"
   }
 }

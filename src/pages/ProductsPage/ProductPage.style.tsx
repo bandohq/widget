@@ -7,6 +7,9 @@ export const BrandsContainer = styled(Box)(({ theme }) => ({
   gap: 10,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
+  [theme.breakpoints.down("xs")]: {
+    gridTemplateColumns: "repeat(4, 1fr)",
+  },
 }));
 
 export const BrandsGrid = styled(Box)(({}) => ({
@@ -22,7 +25,7 @@ export const SearchContainer = styled("div")(() => ({
   alignItems: "space-between",
   gap: 3,
   overflow: "hidden",
-  backgroundColor: "#fff",
+  backgroundColor: "transparent",
   width: "100%",
   height: "40px",
   margin: "10px 0",
@@ -32,7 +35,7 @@ export const InputContainer = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   overflow: "hidden",
-  backgroundColor: "transparent",
+  backgroundColor: "#fff",
   border: "1px solid #e2e8f0",
   borderRadius: "10px",
   width: "100%",
@@ -49,6 +52,9 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   padding: theme.spacing(1),
   color: "#6b7280",
+  '&:hover': {
+    color: "#6b7280",
+  },
 }));
 
 export const StyledCountryDiv = styled("div")(({ theme }) => ({
@@ -60,4 +66,5 @@ export const StyledCountryDiv = styled("div")(({ theme }) => ({
   alignItems: "center",
   padding: theme.spacing(2),
   cursor: "pointer",
+  backgroundColor: "#fff",
 }));
