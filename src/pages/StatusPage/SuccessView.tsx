@@ -1,21 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { AccordionDetails, Avatar, Button, Typography } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import {
-  CustomAccordion,
-  CustomAccordionSummary,
+  AnimatedCircularProgress,
   IconWrapper,
   ProductBox,
   StatusSubtitle,
   StatusTitle,
 } from "./StatusPage.style";
-import { Check, CaretDown, Barcode } from "@phosphor-icons/react";
+import { Check, Barcode, SpinnerGap } from "@phosphor-icons/react";
 import { palette } from "../../themes/palettes";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
-export const SuccessView = () => {
-  const [product, setProduct] = useState({
+export const SuccessView = ({ status }) => {
+  const [product] = useState({
     img_url: false,
     name: "Product name",
     price: 0,
@@ -50,18 +49,19 @@ export const SuccessView = () => {
         </StatusSubtitle>
       </ProductBox>
 
-      <CustomAccordion>
-        <CustomAccordionSummary
-          expandIcon={<CaretDown />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>{t("success.title.orderDetails")}</Typography>
-        </CustomAccordionSummary>
-        <AccordionDetails>
-          <Typography>Contenido de la sección 1.</Typography>
-        </AccordionDetails>
-      </CustomAccordion>
+      <div
+        style={{
+          marginBottom: "20px",
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+        }}
+      >
+        <AnimatedCircularProgress>
+          <SpinnerGap size={25} color={palette.primary.main} />
+        </AnimatedCircularProgress>
+        <StatusSubtitle fontSize={"14px"}>{status?.status}</StatusSubtitle>
+      </div>
 
       <Button
         variant="contained"

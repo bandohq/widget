@@ -19,7 +19,7 @@ export const SettingsPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${navigationRoutes.status}`);
+    navigate(`${navigationRoutes.status}/8ffa0545-68b7-4e35-81b8-50397d8bc49e`);
   };
 
   return (
@@ -33,8 +33,7 @@ export const SettingsPage = () => {
             onClick={handleClick}
             icon={<Language />}
             title={t("settings.status")}
-          >
-          </CardButton>
+          ></CardButton>
         </SettingsCardAccordion>
       </SettingsList>
     </PageContainer>
