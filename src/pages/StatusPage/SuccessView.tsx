@@ -31,7 +31,9 @@ export const SuccessView = ({ status }) => {
         <Check size={50} />
       </IconWrapper>
       <StatusTitle>{t("success.title.orderCompleted")}</StatusTitle>
-      <StatusSubtitle>{t("success.title.thanks")}</StatusSubtitle>
+      <StatusSubtitle fontSize={"16px"}>
+        {t("success.title.thanks")}
+      </StatusSubtitle>
 
       <ProductBox>
         {!product.img_url ? (
@@ -45,7 +47,10 @@ export const SuccessView = ({ status }) => {
           {product.name} - {"$0.00"}
         </StatusTitle>
         <StatusSubtitle fontSize="18px">
-          {t("success.message.mailNotification")}
+          {t("success.message.notification", {
+            productType: status?.product_type || "item",
+            reference: status?.email || "your reference",
+          })}
         </StatusSubtitle>
       </ProductBox>
 
