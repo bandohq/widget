@@ -66,11 +66,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "একটি নিশ্চিতকরণ ইমেইল পাঠানো হয়েছে।"
+      "notification": "আমরা আপনাকে {{productType}} {{reference}} এ পাঠাব।"
     },
     "title": {
-      "orderCompleted": "অর্ডার সম্পন্ন হয়েছে।",
-      "thanks": "ধন্যবাদ!",
+      "orderCompleted": "আমরা এটিতে কাজ করছি!",
+      "thanks": "পেমেন্ট গৃহীত হয়েছে। আমরা আপনার অর্ডার প্রক্রিয়াকরণ করছি।",
       "orderDetails": "অর্ডার এর বিবরণ"
     }
   },

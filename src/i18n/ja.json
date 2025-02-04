@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "確認メールが送信されました。"
+      "notification": "{{productType}} を {{reference}} に送信します。"
     },
     "title": {
-      "orderCompleted": "注文完了",
-      "thanks": "ご購入ありがとうございます。",
+      "orderCompleted": "対応中です！",
+      "thanks": "お支払いを確認しました。ご注文を処理しています。",
       "orderDetails": "注文の詳細"
     }
   },

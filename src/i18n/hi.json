@@ -85,11 +85,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "एक पुष्टिकरण ईमेल भेजा गया है।"
+      "notification": "हम आपको {{productType}} {{reference}} पर भेजेंगे।"
     },
     "title": {
-      "orderCompleted": "ऑर्डर पूरा हुआ",
-      "thanks": "आपकी खरीदारी के लिए धन्यवाद।",
+      "orderCompleted": "हम इस पर काम कर रहे हैं!",
+      "thanks": "भुगतान प्राप्त हो गया है। हम आपके ऑर्डर को प्रोसेस कर रहे हैं।",
       "orderDetails": "ऑर्डर विवरण"
     }
   },

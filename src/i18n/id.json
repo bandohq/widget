@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Email konfirmasi telah dikirim."
+      "notification": "Kami akan mengirimkan {{productType}} ke {{reference}}."
     },
     "title": {
-      "orderCompleted": "Pesanan selesai",
-      "thanks": "Terima kasih atas pembelian Anda.",
+      "orderCompleted": "Kami sedang mengurusnya!",
+      "thanks": "Pembayaran diterima. Kami sedang memproses pesanan Anda.",
       "orderDetails": "Detail pesanan"
     }
   },

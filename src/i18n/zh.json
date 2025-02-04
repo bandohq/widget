@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "确认邮件已发送。"
+      "notification": "我们会将{{productType}}发送到{{reference}}。"
     },
     "title": {
-      "orderCompleted": "订单已完成",
-      "thanks": "感谢您的购买。",
+      "orderCompleted": "我们正在处理！",
+      "thanks": "付款已收到。我们正在处理您的订单。",
       "orderDetails": "订单详情"
     }
   },

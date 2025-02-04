@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Bir onay e-postası gönderildi."
+      "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
     },
     "title": {
-      "orderCompleted": "Sipariş tamamlandı",
-      "thanks": "Satın aldığınız için teşekkür ederiz.",
+      "orderCompleted": "Hallediyoruz!",
+      "thanks": "Ödeme alındı. Siparişinizi işleme alıyoruz.",
       "orderDetails": "Sipariş detayları"
     }
   },

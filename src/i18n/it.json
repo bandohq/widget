@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Una email di conferma è stata inviata."
+      "notification": "Ti invieremo il {{productType}} a {{reference}}."
     },
     "title": {
-      "orderCompleted": "Ordine completato",
-      "thanks": "Grazie per il tuo acquisto.",
+      "orderCompleted": "Ci stiamo lavorando!",
+      "thanks": "Pagamento ricevuto. Stiamo elaborando il tuo ordine.",
       "orderDetails": "Dettagli dell'ordine"
     }
   },

@@ -65,11 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Лист із підтвердженням було надіслано."
+      "notification": "Ми надішлемо вам {{productType}} на {{reference}}."
     },
     "title": {
-      "orderCompleted": "Замовлення завершено",
-      "thanks": "Дякуємо за вашу покупку.",
+      "orderCompleted": "Ми над цим працюємо!",
+      "thanks":  "Платіж отримано. Ми обробляємо ваше замовлення.",
       "orderDetails": "Деталі замовлення"
     }
   },
