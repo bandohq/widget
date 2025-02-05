@@ -68,8 +68,10 @@
       "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
     },
     "title": {
-      "orderCompleted": "Hallediyoruz!",
-      "thanks": "Ödeme alındı. Siparişinizi işleme alıyoruz.",
+      "orderInProgress": "Hallediyoruz!",
+      "paymentReceived": "Ödeme alındı. Siparişinizi işleme alıyoruz.",
+      "orderCompleted": "Sipariş tamamlandı",
+      "thanks": "Satın aldığınız için teşekkür ederiz.",
       "orderDetails": "Sipariş detayları"
     }
   },

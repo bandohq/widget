@@ -68,8 +68,10 @@
       "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
     },
     "title": {
-      "orderCompleted":  "Chúng tôi đang xử lý!",
-      "thanks": "Thanh toán đã được nhận. Chúng tôi đang xử lý đơn hàng của bạn.",
+      "orderInProgress":  "Chúng tôi đang xử lý!",
+      "paymentReceived": "Thanh toán đã được nhận. Chúng tôi đang xử lý đơn hàng của bạn.",
+      "orderCompleted": "Đơn hàng hoàn tất",
+      "thanks": "Cảm ơn bạn đã mua hàng.",
       "orderDetails": "Chi tiết đơn hàng"
     }
   },

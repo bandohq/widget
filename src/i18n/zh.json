@@ -68,8 +68,10 @@
       "notification": "我们会将{{productType}}发送到{{reference}}。"
     },
     "title": {
-      "orderCompleted": "我们正在处理！",
-      "thanks": "付款已收到。我们正在处理您的订单。",
+      "orderInProgress": "我们正在处理！",
+      "paymentReceived": "付款已收到。我们正在处理您的订单。",
+      "orderCompleted": "订单已完成",
+      "thanks": "感谢您的购买。",
       "orderDetails": "订单详情"
     }
   },

@@ -68,8 +68,10 @@
       "notification": "Nous vous enverrons le {{productType}} à {{reference}}."
     },
     "title": {
-      "orderCompleted": "Nous nous en occupons !",
-      "thanks": "Paiement reçu. Nous traitons votre commande.",
+      "orderInProgress": "Nous nous en occupons !",
+      "paymentReceived": "Paiement reçu. Nous traitons votre commande.",
+      "orderCompleted": "Commande terminée",
+      "thanks": "Merci pour votre achat.",
       "orderDetails": "Détails de la commande"
     }
   },

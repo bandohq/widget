@@ -68,8 +68,10 @@
       "notification": "{{productType}} を {{reference}} に送信します。"
     },
     "title": {
-      "orderCompleted": "対応中です！",
-      "thanks": "お支払いを確認しました。ご注文を処理しています。",
+      "orderInProgress": "対応中です！",
+      "paymentReceived": "お支払いを確認しました。ご注文を処理しています。",
+      "orderCompleted": "注文完了",
+      "thanks": "ご購入ありがとうございます。",
       "orderDetails": "注文の詳細"
     }
   },

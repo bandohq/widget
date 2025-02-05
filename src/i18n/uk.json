@@ -68,8 +68,10 @@
       "notification": "Ми надішлемо вам {{productType}} на {{reference}}."
     },
     "title": {
-      "orderCompleted": "Ми над цим працюємо!",
-      "thanks":  "Платіж отримано. Ми обробляємо ваше замовлення.",
+      "orderInProgress": "Ми над цим працюємо!",
+      "paymentReceived":  "Платіж отримано. Ми обробляємо ваше замовлення.",
+      "orderCompleted": "Замовлення завершено",
+      "thanks": "Дякуємо за вашу покупку.",
       "orderDetails": "Деталі замовлення"
     }
   },

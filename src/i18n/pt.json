@@ -68,8 +68,10 @@
       "notification": "Enviaremos o {{productType}} para {{reference}}."
     },
     "title": {
-      "orderCompleted": "Estamos cuidando disso!",
-      "thanks": "Pagamento recebido. Estamos processando seu pedido.",
+      "orderInProgress": "Estamos cuidando disso!",
+      "paymentReceived": "Pagamento recebido. Estamos processando seu pedido.",
+      "orderCompleted": "Pedido concluído",
+      "thanks": "Obrigado pela sua compra.",
       "orderDetails": "Detalhes do pedido"
     }
   },
