@@ -64,6 +64,7 @@ export const useTransactionFlow = () => {
         sku: product?.sku,
         chain: chain?.key,
         token: quote?.digital_asset, // Token address
+        quantity: 1,
         amount: quote?.digital_asset_amount,
         wallet: account?.address,
       },
