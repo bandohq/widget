@@ -56,7 +56,7 @@ export const SuccessView = ({ status }) => {
         {t(
           status?.status === "SUCCESS"
             ? "success.title.thanks"
-            : "sucess.title.paymentReceived"
+            : "success.title.paymentReceived"
         )}
       </StatusSubtitle>
 
