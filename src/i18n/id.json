@@ -65,9 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Email konfirmasi telah dikirim."
+      "notification": "Kami akan mengirimkan {{productType}} ke {{reference}}."
     },
     "title": {
+      "orderInProgress": "Kami sedang mengurusnya!",
+      "paymentReceived": "Pembayaran diterima. Kami sedang memproses pesanan Anda.",
       "orderCompleted": "Pesanan selesai",
       "thanks": "Terima kasih atas pembelian Anda.",
       "orderDetails": "Detail pesanan"

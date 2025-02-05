@@ -65,9 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Se ha enviado un correo de confirmación."
+      "notification": "Te enviaremos el {{productType}} a {{reference}}."
     },
     "title": {
+      "orderInProgress": "¡Estamos en ello!",
+      "paymentReceived": "Pago recibido. Estamos procesando tu pedido.",
       "orderCompleted": "Orden completada",
       "thanks": "Gracias por tu compra.",
       "orderDetails": "Detalles de la orden"

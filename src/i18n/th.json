@@ -65,9 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "อีเมลยืนยันได้ถูกส่งแล้ว"
+      "notification": "เราจะส่ง {{productType}} ไปยัง {{reference}}"
     },
     "title": {
+      "orderInProgress": "เรากำลังดำเนินการอยู่!",
+      "paymentReceived": "ได้รับการชำระเงินแล้ว เรากำลังดำเนินการตามคำสั่งซื้อของคุณ",
       "orderCompleted": "คำสั่งซื้อเสร็จสมบูรณ์",
       "thanks": "ขอบคุณสำหรับการสั่งซื้อของคุณ",
       "orderDetails": "รายละเอียดคำสั่งซื้อ"

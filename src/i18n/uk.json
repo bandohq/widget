@@ -65,9 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Лист із підтвердженням було надіслано."
+      "notification": "Ми надішлемо вам {{productType}} на {{reference}}."
     },
     "title": {
+      "orderInProgress": "Ми над цим працюємо!",
+      "paymentReceived":  "Платіж отримано. Ми обробляємо ваше замовлення.",
       "orderCompleted": "Замовлення завершено",
       "thanks": "Дякуємо за вашу покупку.",
       "orderDetails": "Деталі замовлення"

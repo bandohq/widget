@@ -65,9 +65,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Email xác nhận đã được gửi."
+      "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
     },
     "title": {
+      "orderInProgress":  "Chúng tôi đang xử lý!",
+      "paymentReceived": "Thanh toán đã được nhận. Chúng tôi đang xử lý đơn hàng của bạn.",
       "orderCompleted": "Đơn hàng hoàn tất",
       "thanks": "Cảm ơn bạn đã mua hàng.",
       "orderDetails": "Chi tiết đơn hàng"
