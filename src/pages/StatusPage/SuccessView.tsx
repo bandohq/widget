@@ -11,16 +11,14 @@ import { Check, Barcode, SpinnerGap } from "@phosphor-icons/react";
 import { palette } from "../../themes/palettes";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { ImageAvatar } from "../../components/Avatar/Avatar";
+import { Box } from "@mui/system";
 
 export const SuccessView = ({ status }) => {
-  const [product] = useState({
-    img_url: false,
-    name: "Product name",
-    price: 0,
-  });
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const isStatusCompleted = status?.status === "COMPLETED";
 
   const gotoHome = () => {
     navigate(navigationRoutes.home);
@@ -32,12 +30,12 @@ export const SuccessView = ({ status }) => {
       </IconWrapper>
       <StatusTitle>
         {t(
-          status?.status === "SUCCESS"
+          isStatusCompleted
             ? "success.title.orderCompleted"
             : "success.title.orderInProgress"
         )}
       </StatusTitle>
-      {status?.status !== "SUCCESS" && (
+      {!isStatusCompleted && (
         <div
           style={{
             marginBottom: "10px",
@@ -54,27 +52,45 @@ export const SuccessView = ({ status }) => {
       )}
       <StatusSubtitle fontSize={"16px"}>
         {t(
-          status?.status === "SUCCESS"
+          isStatusCompleted
             ? "success.title.thanks"
             : "success.title.paymentReceived"
         )}
       </StatusSubtitle>
-
       <ProductBox>
-        {!product.img_url ? (
-          <Avatar alt={product.name} sx={{ bgcolor: palette.primary.main }}>
-            NP
-          </Avatar>
+        {!status?.product?.logo_url ? (
+          <Box
+            sx={{
+              width: "40%",
+              height: "50px",
+            }}
+          >
+            <ImageAvatar
+              hideName
+              name={status?.product?.name || ""}
+              src={status?.product?.logo_url}
+              sx={{
+                width: "50%",
+                height: "45px",
+                maxWidthidth: "45px",
+                maxHeight: "45px",
+                objectFit: "contain",
+                margin: "auto",
+              }}
+            />
+          </Box>
         ) : (
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px">
-          {product.name} - {"$0.00"}
+          {status?.product_type + " " + status?.product?.name}{" "}
+          {isStatusCompleted &&
+            status?.fiat_unit_price + "" + status?.fiat_currency}
         </StatusTitle>
         <StatusSubtitle fontSize="18px">
           {t("success.message.notification", {
             productType: status?.product_type || "item",
-            reference: status?.email || "your reference",
+            reference: status?.given_reference || "your reference",
           })}
         </StatusSubtitle>
       </ProductBox>

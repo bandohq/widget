@@ -13,7 +13,7 @@ export const StatusPage = () => {
     method: "GET",
     queryOptions: {
       queryKey: ["transaction", transactionId],
-      refetchInterval: 200000,
+      refetchInterval: 10000,
     },
   });
 
