@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import type { CardProps } from "@mui/material";
 import "react-phone-number-input/style.css";
+import "./ReferenceInput.style.css";
 import PhoneInput from "react-phone-number-input";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { fitInputText } from "../../utils/input.js";
