@@ -1,4 +1,6 @@
 export function getInitials(inputString: string) {
+    if (!inputString) return '';
+    
     const words = inputString.trim().split(/\s+/);
     
     if (words.length >= 2) {
