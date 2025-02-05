@@ -22,7 +22,7 @@ export const StatusPage = () => {
       case "FAILED":
         return <ErrorView />;
       default:
-        return <SuccessView status={transactionData || "PENDING"} />;
+        return <SuccessView status={transactionData} />;
     }
   };
 

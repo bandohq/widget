@@ -30,9 +30,34 @@ export const SuccessView = ({ status }) => {
       <IconWrapper bgColor={palette.primary.medium}>
         <Check size={50} />
       </IconWrapper>
-      <StatusTitle>{t("success.title.orderCompleted")}</StatusTitle>
+      <StatusTitle>
+        {t(
+          status?.status === "SUCCESS"
+            ? "success.title.orderCompleted"
+            : "success.title.orderInProgress"
+        )}
+      </StatusTitle>
+      {status?.status !== "SUCCESS" && (
+        <div
+          style={{
+            marginBottom: "10px",
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+          }}
+        >
+          <AnimatedCircularProgress>
+            <SpinnerGap size={25} color={palette.primary.main} />
+          </AnimatedCircularProgress>
+          <StatusSubtitle fontSize={"14px"}>{status?.status}</StatusSubtitle>
+        </div>
+      )}
       <StatusSubtitle fontSize={"16px"}>
-        {t("success.title.thanks")}
+        {t(
+          status?.status === "SUCCESS"
+            ? "success.title.thanks"
+            : "sucess.title.paymentReceived"
+        )}
       </StatusSubtitle>
 
       <ProductBox>
@@ -53,20 +78,6 @@ export const SuccessView = ({ status }) => {
           })}
         </StatusSubtitle>
       </ProductBox>
-
-      <div
-        style={{
-          marginBottom: "20px",
-          display: "flex",
-          gap: "10px",
-          alignItems: "center",
-        }}
-      >
-        <AnimatedCircularProgress>
-          <SpinnerGap size={25} color={palette.primary.main} />
-        </AnimatedCircularProgress>
-        <StatusSubtitle fontSize={"14px"}>{status?.status}</StatusSubtitle>
-      </div>
 
       <Button
         variant="contained"
