@@ -51,7 +51,12 @@ export const Input: React.FC<ReferenceInputProps> = ({
   ) => {
     const newValue = event.target.value;
 
-    if (referenceType.regex && !referenceType.regex.test(newValue)) {
+    const regex =
+      typeof referenceType.regex === "string"
+        ? new RegExp(referenceType.regex)
+        : referenceType.regex;
+
+    if (regex && !regex.test(newValue)) {
       setError(`Invalid ${referenceType.name} format.`);
     } else {
       setError(null);
