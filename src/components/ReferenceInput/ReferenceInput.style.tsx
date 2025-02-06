@@ -82,4 +82,7 @@ export const StyledPhoneInput = styled("div")(({ theme }) => ({
     all: "unset",
     width: "100%",
   },
+  "& .PhoneInputCountrySelect": {
+    display: "none",
+  },
 }));

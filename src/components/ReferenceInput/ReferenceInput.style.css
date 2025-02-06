@@ -1,7 +1,0 @@
-.PhoneInput {
-    width: 100%;
-}
-
-.PhoneInputCountrySelect {
-    pointer-events: none; /* disable country change */
-  }
