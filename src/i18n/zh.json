@@ -125,7 +125,11 @@
     "selectToken": "选择代币",
     "sending": "发送中",
     "to": "到",
-    "tokenSearch": "按名称或地址搜索代币"
+    "tokenSearch": "按名称或地址搜索代币",
+    "searchProducts": "按品牌搜索产品",
+    "topup": "话费和流量",
+    "esim": "eSIMs",
+    "gift_card": "预付费代码"
   },
   "settings": {
     "theme": "主题",

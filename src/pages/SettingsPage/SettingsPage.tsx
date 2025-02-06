@@ -5,22 +5,18 @@ import { LanguageSetting } from "./LanguageSetting";
 import { SettingsList } from "./SettingsCard/SettingCard.style";
 import { SettingsCardAccordion } from "./SettingsCard/SettingsAccordian";
 import { ThemeSettings } from "./ThemeSettings";
-import { CardButton } from "../../components/Card/CardButton";
-import { useNavigate } from "react-router-dom";
-import { navigationRoutes } from "../../utils/navigationRoutes";
-import { Language } from "@mui/icons-material";
-import { CardValue } from "../../components/Card/CardButton.style";
 import { CountriesSetting } from "./CountriesSetting";
+import { useAccount } from "@lifi/wallet-management";
+import { useAvailableChains } from "../../hooks/useAvailableChains";
+import { Typography } from "@mui/material";
+import { shortenAddress } from "../../utils/wallet";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
   useHeader(t("header.settings"));
-
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/${navigationRoutes.status}`);
-  };
+  const { account, accounts } = useAccount();
+  const { getChainById } = useAvailableChains();
+  const chain = getChainById(account.chainId);
 
   return (
     <PageContainer bottomGutters>
@@ -29,13 +25,12 @@ export const SettingsPage = () => {
           <ThemeSettings />
           <LanguageSetting />
           <CountriesSetting />
-          <CardButton
-            onClick={handleClick}
-            icon={<Language />}
-            title={t("settings.status")}
-          >
-          </CardButton>
         </SettingsCardAccordion>
+        {account.address && (
+          <Typography sx={{ textAlign: 'right', fontSize: '1px', mt: '20px' }}>
+            Connected To {shortenAddress(account.address)}
+          </Typography>
+        )}
       </SettingsList>
     </PageContainer>
   );

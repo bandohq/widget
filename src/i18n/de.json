@@ -129,7 +129,10 @@
     "selectToken": "Token auswählen",
     "sending": "Wird gesendet",
     "tokenSearch": "Nach Token-Name oder Adresse suchen",
-    "searchProducts": "Nach Produktmarke suchen"
+    "searchProducts": "Nach Produktmarke suchen",
+    "topup": "Airtime & Daten",
+    "esim": "eSIMs",
+    "gift_card": "Prepaid-Codes"
   },
   "settings": {
     "theme": "Thema",

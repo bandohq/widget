@@ -125,7 +125,11 @@
     "selectToken": "Jeton",
     "sending": "Gönderiliyor",
     "to": "Şuna",
-    "tokenSearch": "Jeton adını veya adresini arayın"
+    "tokenSearch": "Jeton adını veya adresini arayın",
+    "searchProducts": "Ürün markasına göre ara",
+    "topup": "Airtime & Veri",
+    "esim": "eSIM",
+    "gift_card": "Ön Ödemeli Kodlar"
   },
   "settings": {
     "theme": "Tema",

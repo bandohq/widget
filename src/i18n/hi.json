@@ -149,7 +149,10 @@
     "selectToken": "टोकन चुनें",
     "sending": "भेजा जा रहा है",
     "tokenSearch": "टोकन नाम या पता खोजें",
-    "searchProducts": "उत्पाद खोजें"
+    "searchProducts": "उत्पाद खोजें",
+    "topup": "एयरटाइम और डेटा",
+    "esim": "ईसिम",
+    "gift_card": "प्रीपेड कोड"
   },
   "settings": {
     "theme": "थीम",

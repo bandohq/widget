@@ -8,10 +8,12 @@ import { Dialog } from "../../components/Dialog";
 import { DialogList } from "../../components/DialogList/DialogList";
 import { VariantItem } from "../../components/DialogList/VariantItem";
 import { convertSlugToTitle } from "../../utils/slugToTitle";
+import { useTranslation } from "react-i18next";
 
 export const CategorySection = ({ category, onMoreClick }) => {
   const { updateProduct, updateBrand } = useProduct();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState(null);
@@ -42,7 +44,7 @@ export const CategorySection = ({ category, onMoreClick }) => {
         justifyContent: 'space-between'
       }}>
         <Typography variant="h4" sx={{ fontSize: "21px", fontWeight: 200 }}>
-          {category.productType && convertSlugToTitle(category?.productType)}
+          {category.productType && t(`main.${category?.productType}`)}
         </Typography>
         {category?.showMore && (
           <Link

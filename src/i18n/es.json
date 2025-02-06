@@ -154,7 +154,10 @@
     "selectToken": "Seleccionar token",
     "sending": "Enviando",
     "tokenSearch": "Buscar por nombre o dirección del token",
-    "searchProducts": "Buscar por marca de producto"
+    "searchProducts": "Buscar por marca de producto",
+    "topup": "Tiempo Aire y Datos",
+    "esim": "eSIMs",
+    "gift_card": "Prepago"
   },
   "settings": {
     "theme": "Tema",
