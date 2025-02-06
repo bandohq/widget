@@ -7,17 +7,13 @@ import { SettingsCardAccordion } from "./SettingsCard/SettingsAccordian";
 import { ThemeSettings } from "./ThemeSettings";
 import { CountriesSetting } from "./CountriesSetting";
 import { useAccount } from "@lifi/wallet-management";
-import { useAvailableChains } from "../../hooks/useAvailableChains";
 import { Typography } from "@mui/material";
 import { shortenAddress } from "../../utils/wallet";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
   useHeader(t("header.settings"));
-  const { account, accounts } = useAccount();
-  const { getChainById } = useAvailableChains();
-  const chain = getChainById(account.chainId);
-
+  const { account } = useAccount();
   return (
     <PageContainer bottomGutters>
       <SettingsList>
