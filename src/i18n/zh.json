@@ -48,6 +48,53 @@
     "products": "商品",
     "spend": "花费"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "挑战答案",
+        "question": "挑战问题"
+      },
+      "date": "日期",
+      "language": "语言代码",
+      "message": "礼品留言"
+    },
+    "recipient": {
+      "address": {
+        "city": "收件人城市",
+        "country": "收件人国家",
+        "postal": "收件人邮政编码",
+        "state": "收件人州/省",
+        "street": "收件人街道地址"
+      },
+      "carrier": "收件人承运商",
+      "country": "收件人国家",
+      "email": "收件人电子邮件",
+      "firstName": "收件人名字",
+      "lastName": "收件人姓氏",
+      "middleName": "收件人中间名",
+      "msisdn": "收件人电话号码"
+    },
+    "sender": {
+      "address": {
+        "city": "发件人城市",
+        "country": "发件人国家",
+        "postal": "发件人邮政编码",
+        "state": "发件人州/省",
+        "street": "发件人街道地址"
+      },
+      "carrier": "发件人承运商",
+      "country": "发件人国家",
+      "email": "发件人电子邮件",
+      "firstName": "发件人名字",
+      "lastName": "发件人姓氏",
+      "middleName": "发件人中间名",
+      "msisdn": "发件人电话号码"
+    },
+    "common": {
+      "your": "您的 {{field}}",
+      "enter_your": "输入您的 {{field}}"
+    }
+  },
   "countries": {
     "title": "国家",
     "deleted": "已删除的国家"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "确认邮件已发送。"
+      "notification": "我们会将{{productType}}发送到{{reference}}。"
     },
     "title": {
+      "orderInProgress": "我们正在处理！",
+      "paymentReceived": "付款已收到。我们正在处理您的订单。",
       "orderCompleted": "订单已完成",
       "thanks": "感谢您的购买。",
       "orderDetails": "订单详情"

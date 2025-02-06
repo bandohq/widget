@@ -48,6 +48,53 @@
     "products": "Produits",
     "spend": "Dépenses"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Réponse au défi",
+        "question": "Question du défi"
+      },
+      "date": "Date",
+      "language": "Code de langue",
+      "message": "Message cadeau"
+    },
+    "recipient": {
+      "address": {
+        "city": "Ville du destinataire",
+        "country": "Pays du destinataire",
+        "postal": "Code postal du destinataire",
+        "state": "État/Province du destinataire",
+        "street": "Adresse du destinataire"
+      },
+      "carrier": "Transporteur du destinataire",
+      "country": "Pays du destinataire",
+      "email": "E-mail du destinataire",
+      "firstName": "Prénom du destinataire",
+      "lastName": "Nom du destinataire",
+      "middleName": "Deuxième prénom du destinataire",
+      "msisdn": "Numéro de téléphone du destinataire"
+    },
+    "sender": {
+      "address": {
+        "city": "Ville de l'expéditeur",
+        "country": "Pays de l'expéditeur",
+        "postal": "Code postal de l'expéditeur",
+        "state": "État/Province de l'expéditeur",
+        "street": "Adresse de l'expéditeur"
+      },
+      "carrier": "Transporteur de l'expéditeur",
+      "country": "Pays de l'expéditeur",
+      "email": "E-mail de l'expéditeur",
+      "firstName": "Prénom de l'expéditeur",
+      "lastName": "Nom de l'expéditeur",
+      "middleName": "Deuxième prénom de l'expéditeur",
+      "msisdn": "Numéro de téléphone de l'expéditeur"
+    },
+    "common": {
+      "your": "Votre {{field}}",
+      "enter_your": "Entrez votre {{field}}"
+    }
+  },
   "countries": {
     "title": "Pays",
     "deleted": "Pays supprimés"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Un e-mail de confirmation a été envoyé."
+      "notification": "Nous vous enverrons le {{productType}} à {{reference}}."
     },
     "title": {
+      "orderInProgress": "Nous nous en occupons !",
+      "paymentReceived": "Paiement reçu. Nous traitons votre commande.",
       "orderCompleted": "Commande terminée",
       "thanks": "Merci pour votre achat.",
       "orderDetails": "Détails de la commande"

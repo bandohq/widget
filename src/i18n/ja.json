@@ -48,6 +48,53 @@
     "products": "製品",
     "spend": "消費する"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "チャレンジの回答",
+        "question": "チャレンジの質問"
+      },
+      "date": "日付",
+      "language": "言語コード",
+      "message": "ギフトメッセージ"
+    },
+    "recipient": {
+      "address": {
+        "city": "受取人の市区町村",
+        "country": "受取人の国",
+        "postal": "受取人の郵便番号",
+        "state": "受取人の都道府県",
+        "street": "受取人の住所"
+      },
+      "carrier": "受取人の配送業者",
+      "country": "受取人の国",
+      "email": "受取人のメールアドレス",
+      "firstName": "受取人の名",
+      "lastName": "受取人の姓",
+      "middleName": "受取人のミドルネーム",
+      "msisdn": "受取人の電話番号"
+    },
+    "sender": {
+      "address": {
+        "city": "送信者の市区町村",
+        "country": "送信者の国",
+        "postal": "送信者の郵便番号",
+        "state": "送信者の都道府県",
+        "street": "送信者の住所"
+      },
+      "carrier": "送信者の配送業者",
+      "country": "送信者の国",
+      "email": "送信者のメールアドレス",
+      "firstName": "送信者の名",
+      "lastName": "送信者の姓",
+      "middleName": "送信者のミドルネーム",
+      "msisdn": "送信者の電話番号"
+    },
+    "common": {
+      "your": "あなたの {{field}}",
+      "enter_your": "{{field}} を入力してください"
+    }
+  },
   "countries": {
     "title": "国",
     "deleted": "削除された国"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "確認メールが送信されました。"
+      "notification": "{{productType}} を {{reference}} に送信します。"
     },
     "title": {
+      "orderInProgress": "対応中です！",
+      "paymentReceived": "お支払いを確認しました。ご注文を処理しています。",
       "orderCompleted": "注文完了",
       "thanks": "ご購入ありがとうございます。",
       "orderDetails": "注文の詳細"

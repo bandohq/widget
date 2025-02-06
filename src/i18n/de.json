@@ -48,6 +48,53 @@
     "products": "Produkte",
     "spend": "Ausgeben"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Antwort auf die Herausforderung",
+        "question": "Herausforderungsfrage"
+      },
+      "date": "Datum",
+      "language": "Sprachcode",
+      "message": "Geschenknachricht"
+    },
+    "recipient": {
+      "address": {
+        "city": "Empfängerstadt",
+        "country": "Empfängerland",
+        "postal": "Empfänger-Postleitzahl",
+        "state": "Empfänger-Bundesland/Provinz",
+        "street": "Empfänger-Straßenadresse"
+      },
+      "carrier": "Empfänger-Transportdienst",
+      "country": "Empfängerland",
+      "email": "Empfänger-E-Mail",
+      "firstName": "Vorname des Empfängers",
+      "lastName": "Nachname des Empfängers",
+      "middleName": "Zweitname des Empfängers",
+      "msisdn": "Telefonnummer des Empfängers"
+    },
+    "sender": {
+      "address": {
+        "city": "Absenderstadt",
+        "country": "Absenderland",
+        "postal": "Absender-Postleitzahl",
+        "state": "Absender-Bundesland/Provinz",
+        "street": "Absender-Straßenadresse"
+      },
+      "carrier": "Absender-Transportdienst",
+      "country": "Absenderland",
+      "email": "Absender-E-Mail",
+      "firstName": "Vorname des Absenders",
+      "lastName": "Nachname des Absenders",
+      "middleName": "Zweitname des Absenders",
+      "msisdn": "Telefonnummer des Absenders"
+    },
+    "common": {
+      "your": "Dein {{field}}",
+      "enter_your": "Gib dein {{field}} ein"
+    }
+  },
   "countries": {
     "title": "Länder",
     "deleted": "Gelöschte Länder"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Eine Bestätigungs-E-Mail wurde gesendet."
+      "notification": "Wir senden Ihnen das {{productType}} an {{reference}}."
     },
     "title": {
+      "orderInProgress": "Wir sind dran!",
+      "paymentReceived": "Zahlung erhalten. Wir bearbeiten Ihre Bestellung.",
       "orderCompleted": "Bestellung abgeschlossen",
       "thanks": "Vielen Dank für Ihren Einkauf.",
       "orderDetails": "Bestelldetails"

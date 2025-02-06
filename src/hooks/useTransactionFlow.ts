@@ -43,7 +43,7 @@ export const useTransactionFlow = () => {
               token,
             });
 
-            navigate(`/status/${txId}`, { state: { signature } });
+            navigate(`/status/${data?.transaction_intent?.id}`, { state: { signature } });
           } catch (error) {
             showNotification("error", "Error handling the transaction signature");
             console.error("Error handling the transaction signature:", error);
@@ -64,6 +64,7 @@ export const useTransactionFlow = () => {
         sku: product?.sku,
         chain: chain?.key,
         token: quote?.digital_asset, // Token address
+        quantity: 1,
         amount: quote?.digital_asset_amount,
         wallet: account?.address,
       },

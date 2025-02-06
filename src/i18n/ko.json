@@ -48,6 +48,53 @@
     "products": "제품",
     "spend": "소비"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "도전 답변",
+        "question": "도전 질문"
+      },
+      "date": "날짜",
+      "language": "언어 코드",
+      "message": "선물 메시지"
+    },
+    "recipient": {
+      "address": {
+        "city": "수령인의 도시",
+        "country": "수령인의 국가",
+        "postal": "수령인의 우편번호",
+        "state": "수령인의 주/도",
+        "street": "수령인의 거리 주소"
+      },
+      "carrier": "수령인의 운송업체",
+      "country": "수령인의 국가",
+      "email": "수령인의 이메일",
+      "firstName": "수령인의 이름",
+      "lastName": "수령인의 성",
+      "middleName": "수령인의 중간 이름",
+      "msisdn": "수령인의 전화번호"
+    },
+    "sender": {
+      "address": {
+        "city": "발신인의 도시",
+        "country": "발신인의 국가",
+        "postal": "발신인의 우편번호",
+        "state": "발신인의 주/도",
+        "street": "발신인의 거리 주소"
+      },
+      "carrier": "발신인의 운송업체",
+      "country": "발신인의 국가",
+      "email": "발신인의 이메일",
+      "firstName": "발신인의 이름",
+      "lastName": "발신인의 성",
+      "middleName": "발신인의 중간 이름",
+      "msisdn": "발신인의 전화번호"
+    },
+    "common": {
+      "your": "당신의 {{field}}",
+      "enter_your": "{{field}}을(를) 입력하세요"
+    }
+  },
   "countries": {
     "title": "국가",
     "deleted": "삭제된 국가"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "확인 이메일이 발송되었습니다."
+      "notification": "{{productType}}을(를) {{reference}}로 보내드립니다."
     },
     "title": {
+      "orderInProgress": "우리가 처리하고 있어요!",
+      "paymentReceived": "결제가 완료되었습니다. 주문을 처리 중입니다.",
       "orderCompleted": "주문 완료",
       "thanks": "구매해 주셔서 감사합니다.",
       "orderDetails": "주문 세부 정보"

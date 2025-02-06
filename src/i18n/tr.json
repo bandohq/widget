@@ -48,6 +48,53 @@
     "products": "Ürünler",
     "spend": "Harca"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Meydan okuma cevabı",
+        "question": "Meydan okuma sorusu"
+      },
+      "date": "Tarih",
+      "language": "Dil kodu",
+      "message": "Hediye mesajı"
+    },
+    "recipient": {
+      "address": {
+        "city": "Alıcının şehri",
+        "country": "Alıcının ülkesi",
+        "postal": "Alıcının posta kodu",
+        "state": "Alıcının eyaleti/ili",
+        "street": "Alıcının sokak adresi"
+      },
+      "carrier": "Alıcının kargo firması",
+      "country": "Alıcının ülkesi",
+      "email": "Alıcının e-postası",
+      "firstName": "Alıcının adı",
+      "lastName": "Alıcının soyadı",
+      "middleName": "Alıcının ikinci adı",
+      "msisdn": "Alıcının telefon numarası"
+    },
+    "sender": {
+      "address": {
+        "city": "Göndericinin şehri",
+        "country": "Göndericinin ülkesi",
+        "postal": "Göndericinin posta kodu",
+        "state": "Göndericinin eyaleti/ili",
+        "street": "Göndericinin sokak adresi"
+      },
+      "carrier": "Göndericinin kargo firması",
+      "country": "Göndericinin ülkesi",
+      "email": "Göndericinin e-postası",
+      "firstName": "Göndericinin adı",
+      "lastName": "Göndericinin soyadı",
+      "middleName": "Göndericinin ikinci adı",
+      "msisdn": "Göndericinin telefon numarası"
+    },
+    "common": {
+      "your": "Senin {{field}}",
+      "enter_your": "{{field}} girin"
+    }
+  },
   "countries": {
     "title": "Ülkeler",
     "deleted": "Silinen ülkeler"
@@ -65,9 +112,11 @@
   },
   "success": {
     "message": {
-      "mailNotification": "Bir onay e-postası gönderildi."
+      "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
     },
     "title": {
+      "orderInProgress": "Hallediyoruz!",
+      "paymentReceived": "Ödeme alındı. Siparişinizi işleme alıyoruz.",
       "orderCompleted": "Sipariş tamamlandı",
       "thanks": "Satın aldığınız için teşekkür ederiz.",
       "orderDetails": "Sipariş detayları"
