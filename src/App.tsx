@@ -3,6 +3,7 @@ import { forwardRef, useMemo } from "react";
 import { AppDefault } from "./AppDefault.js";
 import { AppProvider } from "./AppProvider.js";
 import type { WidgetConfig, WidgetProps } from "./types/widget.js";
+import "react-phone-number-input/style.css";
 
 export const App = forwardRef<unknown, WidgetProps>((props, ref) => {
   const config: WidgetConfig = useMemo(() => {
