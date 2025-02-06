@@ -1,4 +1,4 @@
-import { defineChain } from "viem";
+import { defineChain, parseUnits } from "viem";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
@@ -73,15 +73,18 @@ export const useTransactionHelpers = () => {
           (item) => item.name === "requestService"
         );
 
+        const weiAmount = parseUnits(quote?.digital_asset_amount.toString(), token?.decimals);
+        const value = parseUnits(quote?.total_amount.toString(), token?.decimals);
+
         const payload = {
           payer: account?.address,
-          fiatAmount: 1000,
+          fiatAmount: quote?.fiat_amount,
           serviceRef: txId,
-          weiAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
+          weiAmount
         };
 
         await writeContract(config,{
-          value: quote?.total_amount * (10 ** token?.decimals),
+          value,
           address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
@@ -92,7 +95,7 @@ export const useTransactionHelpers = () => {
       } else {
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
-          quote?.total_amount * (10 ** token?.decimals),
+          parseUnits(quote?.total_amount.toString(), token?.decimals),
           token.address,
           account,
           chain,
@@ -116,7 +119,7 @@ export const useTransactionHelpers = () => {
           fiatAmount: quote?.fiat_amount,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: quote?.digital_asset_amount * (10 ** token?.decimals),
+          tokenAmount: parseUnits(quote?.digital_asset_amount.toString(), token?.decimals),
         };
 
         await writeContract(config,{
