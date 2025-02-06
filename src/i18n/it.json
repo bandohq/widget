@@ -180,7 +180,10 @@
     "selectToken": "Seleziona un token",
     "sending": "Invio in corso",
     "tokenSearch": "Cerca per nome o indirizzo del token",
-    "searchProducts": "Cerca per marca di prodotto"
+    "searchProducts": "Cerca per marca di prodotto",
+    "topup": "Ricarica & Dati",
+    "esim": "eSIM",
+    "gift_card": "Codici Prepagati"
   },
   "settings": {
     "theme": "Tema",

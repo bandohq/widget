@@ -203,7 +203,10 @@
     "selectToken": "Select token",
     "sending": "Sending",
     "tokenSearch": "Search by token name or address",
-    "searchProducts": "Search by product brand"
+    "searchProducts": "Search by product brand",
+    "topup": "Airtime & Data",
+    "esim": "eSIMs",
+    "gift_card": "Prepaid Codes"
   },
   "settings": {
     "theme": "Theme",

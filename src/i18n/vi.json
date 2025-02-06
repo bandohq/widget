@@ -174,7 +174,14 @@
     "selectToken": "Chọn mã thông báo",
     "sending": "Đang gửi",
     "to": "Đến",
-    "tokenSearch": "Tìm kiếm theo tên mã thông báo hoặc địa chỉ"
+    "tokenSearch": "Tìm kiếm theo tên mã thông báo hoặc địa chỉ",
+    "minReceived": "Nhận tối thiểu",
+    "ownedBy": "Sở hữu bởi",
+    "rateChange": "Thay đổi tỷ giá",
+    "searchProducts": "Tìm kiếm theo thương hiệu sản phẩm",
+    "topup": "Nạp tiền & Dữ liệu",
+    "esim": "eSIM",
+    "gift_card": "Mã trả trước"
   },
   "settings": {
     "theme": "Giao diện",

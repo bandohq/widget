@@ -178,7 +178,10 @@
     "selectToken": "Selecione o Token",
     "sending": "Enviando",
     "tokenSearch": "Pesquisar pelo nome do token ou endereço",
-    "searchProducts": "Pesquisar por marca do produto"
+    "searchProducts": "Pesquisar por marca do produto",
+    "topup": "Tempo de antena e dados",
+    "esim": "eSIM",
+    "gift_card": "Códigos pré-pagos"
   },
   "settings": {
     "theme": "Tema",

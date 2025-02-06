@@ -180,7 +180,11 @@
     "selectToken": "トークンを選択",
     "sending": "送信中",
     "tokenSearch": "トークン名またはアドレスで検索",
-    "searchProducts": "製品ブランドで検索"
+    "searchProducts": "製品ブランドで検索",
+    "topup": "エアタイムとデータ",
+    "esim": "eSIM",
+    "gift_card": "プリペイドコード"
+
   },
   "settings": {
     "theme": "テーマ",

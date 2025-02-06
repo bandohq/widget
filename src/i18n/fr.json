@@ -179,7 +179,10 @@
     "selectToken": "Choisissez un jeton",
     "sending": "Envoi",
     "tokenSearch": "Recherche par nom de jeton ou adresse",
-    "searchProducts": "Rechercher par marque de produit"
+    "searchProducts": "Rechercher par marque de produit",
+    "topup": "Temps d'antenne et données",
+    "esim": "eSIMs",
+    "gift_card": "Codes prépayés"
   },
   "settings": {
     "theme": "Thème",

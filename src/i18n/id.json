@@ -180,7 +180,10 @@
     "selectToken": "Pilih token",
     "sending": "Mengirim",
     "tokenSearch": "Cari berdasarkan nama atau alamat token",
-    "searchProducts": "Cari berdasarkan merek produk"
+    "searchProducts": "Cari berdasarkan merek produk",
+    "topup": "Pulsa & Data",
+    "esim": "eSIM",
+    "gift_card": "Kode Prabayar"
   },
   "settings": {
     "theme": "Tema",

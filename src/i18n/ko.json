@@ -180,7 +180,10 @@
     "selectToken": "토큰 선택",
     "sending": "전송 중",
     "tokenSearch": "토큰 이름 또는 주소로 검색",
-    "searchProducts": "제품 브랜드 검색"
+    "searchProducts": "제품 브랜드 검색",
+    "topup": "에어타임 및 데이터",
+    "esim": "eSIM",
+    "gift_card": "선불 코드"
   },
   "settings": {
     "theme": "테마",
