@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import type { CardProps } from "@mui/material";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { fitInputText } from "../../utils/input.js";
 import { CardTitle } from "../Card/CardTitle.js";
@@ -105,7 +105,6 @@ export const Input: React.FC<ReferenceInputProps> = ({
             {referenceType.name === "phone" ? (
               <StyledPhoneInput>
                 <PhoneInput
-                  international
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   // @ts-ignore all iso codes are valid
@@ -121,7 +120,13 @@ export const Input: React.FC<ReferenceInputProps> = ({
                         value: newPhone,
                       };
                       onChange(updatedReferences);
+                      if (!isValidPhoneNumber(newPhone || "")) {
+                        setError(`Invalid ${referenceType.name} format.`);
+                      } else setError(null);
                     } else {
+                      if (!isValidPhoneNumber(newPhone || "")) {
+                        setError(`Invalid ${referenceType.name} format.`);
+                      } else setError(null);
                       onChange(newPhone);
                     }
                   }}

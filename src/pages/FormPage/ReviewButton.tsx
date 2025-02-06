@@ -5,6 +5,8 @@ import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
 import { FormKeyHelper } from "../../stores/form/types";
 import { ReferenceType } from "../../providers/CatalogProvider/types";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -17,6 +19,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { handleTransaction, isPending } = useTransactionFlow();
+  const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
@@ -27,6 +30,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   // Validate reference accordint to type
   const isReferenceValid = (ref: string, type: ReferenceType) => {
     if (!ref) return false;
+
+    if (type.name === "phone" && !isValidPhoneNumber(ref)) return false;
 
     const regex =
       typeof type.regex === "string" ? new RegExp(type.regex) : type.regex;
@@ -50,7 +55,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFields,
       requiredFieldsProps
     );
-    return !referenceValid || !requiredFieldsValid;
+    return !referenceValid || !requiredFieldsValid || !isPurchasePossible;
   }, [tokenAddress, reference, referenceType, requiredFields]);
 
   return (
