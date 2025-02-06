@@ -27,7 +27,11 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   // Validate reference accordint to type
   const isReferenceValid = (ref: string, type: ReferenceType) => {
     if (!ref) return false;
-    if (type.regex && !type.regex.test(ref)) return false;
+
+    const regex =
+      typeof type.regex === "string" ? new RegExp(type.regex) : type.regex;
+
+    if (regex && !regex.test(ref)) return false;
     return true;
   };
 
