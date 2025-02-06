@@ -19,6 +19,7 @@ import { Typography } from "@mui/material";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider.js";
 import { ReferenceType } from "../../providers/CatalogProvider/types.js";
 import { getReferenceTitleByKey } from "../../utils/getReferenceTitleByKey.js";
+import { useTranslation } from "react-i18next";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
@@ -36,6 +37,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
   ...props
 }) => {
   const ref = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
   const { onChange, onBlur, value } = useFieldController({
     name: isRequired ? "requiredFields" : "reference",
   });
@@ -94,7 +96,10 @@ export const Input: React.FC<ReferenceInputProps> = ({
   return (
     <>
       <InputCard {...props} className={error ? "error" : ""}>
-        <CardTitle>Your {getReferenceTitleByKey(title)}</CardTitle>
+        <CardTitle>
+          {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
+        </CardTitle>
+
         <FormContainer>
           <FormControl fullWidth>
             {referenceType.name === "phone" ? (
@@ -124,10 +129,11 @@ export const Input: React.FC<ReferenceInputProps> = ({
             ) : (
               <StyledInput
                 inputRef={ref}
-                size="small"
                 type="text"
                 autoComplete="off"
-                placeholder={`Enter your ${getReferenceTitleByKey(title)}`}
+                placeholder={t("form.common.enter_your", {
+                  field: t(getReferenceTitleByKey(title)),
+                })}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={isRequired ? currentValue : value}

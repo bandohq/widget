@@ -1,36 +1,35 @@
 const keyToTitleMapping: { [key: string]: string } = {
-    "delivery.challenge.answer": "challenge answer",
-    "delivery.challenge.question": "challenge question",
-    "delivery.date": "date",
-    "delivery.language": "language code",
-    "delivery.message": "gift message",
-    "recipient.address.city": "recipient city",
-    "recipient.address.country": "recipient country",
-    "recipient.address.postal": "recipient postal code",
-    "recipient.address.state": "recipient state/province",
-    "recipient.address.street": "recipient street address",
-    "recipient.carrier": "recipient carrier",
-    "recipient.country": "recipient country",
-    "recipient.email": "recipient email",
-    "recipient.firstName": "recipient first name",
-    "recipient.lastName": "recipient last name",
-    "recipient.middleName": "recipient middle name",
-    "recipient.msisdn": "recipient phone number",
-    "sender.address.city": "sender city",
-    "sender.address.country": "sender country",
-    "sender.address.postal": "sender postal code",
-    "sender.address.state": "sender state/province",
-    "sender.address.street": "sender street address",
-    "sender.carrier": "sender carrier",
-    "sender.country": "sender country",
-    "sender.email": "sender email",
-    "sender.firstName": "sender first name",
-    "sender.lastName": "sender last name",
-    "sender.middleName": "sender middle name",
-    "sender.msisdn": "sender phone number",
-  };
-  
-  export const getReferenceTitleByKey = (key: string): string => {
-    return keyToTitleMapping[key] || key;
-  }
-  
+  "delivery.challenge.answer": "form.delivery.challenge.answer",
+  "delivery.challenge.question": "form.delivery.challenge.question",
+  "delivery.date": "form.delivery.date",
+  "delivery.language": "form.delivery.language",
+  "delivery.message": "form.delivery.message",
+  "recipient.address.city": "form.recipient.address.city",
+  "recipient.address.country": "form.recipient.address.country",
+  "recipient.address.postal": "form.recipient.address.postal",
+  "recipient.address.state": "form.recipient.address.state",
+  "recipient.address.street": "form.recipient.address.street",
+  "recipient.carrier": "form.recipient.carrier",
+  "recipient.country": "form.recipient.country",
+  "recipient.email": "form.recipient.email",
+  "recipient.firstName": "form.recipient.firstName",
+  "recipient.lastName": "form.recipient.lastName",
+  "recipient.middleName": "form.recipient.middleName",
+  "recipient.msisdn": "form.recipient.msisdn",
+  "sender.address.city": "form.sender.address.city",
+  "sender.address.country": "form.sender.address.country",
+  "sender.address.postal": "form.sender.address.postal",
+  "sender.address.state": "form.sender.address.state",
+  "sender.address.street": "form.sender.address.street",
+  "sender.carrier": "form.sender.carrier",
+  "sender.country": "form.sender.country",
+  "sender.email": "form.sender.email",
+  "sender.firstName": "form.sender.firstName",
+  "sender.lastName": "form.sender.lastName",
+  "sender.middleName": "form.sender.middleName",
+  "sender.msisdn": "form.sender.msisdn"
+};
+
+export const getReferenceTitleByKey = (key: string): string => {
+  return keyToTitleMapping[key] || `${key}`;
+};
