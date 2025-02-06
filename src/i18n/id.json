@@ -48,6 +48,53 @@
     "products": "Produk",
     "spend": "Pengeluaran"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Jawaban Tantangan",
+        "question": "Pertanyaan Tantangan"
+      },
+      "date": "Tanggal",
+      "language": "Kode Bahasa",
+      "message": "Pesan Hadiah"
+    },
+    "recipient": {
+      "address": {
+        "city": "Kota Penerima",
+        "country": "Negara Penerima",
+        "postal": "Kode Pos Penerima",
+        "state": "Provinsi/Negara Bagian Penerima",
+        "street": "Alamat Jalan Penerima"
+      },
+      "carrier": "Kurir Penerima",
+      "country": "Negara Penerima",
+      "email": "Email Penerima",
+      "firstName": "Nama Depan Penerima",
+      "lastName": "Nama Belakang Penerima",
+      "middleName": "Nama Tengah Penerima",
+      "msisdn": "Nomor Telepon Penerima"
+    },
+    "sender": {
+      "address": {
+        "city": "Kota Pengirim",
+        "country": "Negara Pengirim",
+        "postal": "Kode Pos Pengirim",
+        "state": "Provinsi/Negara Bagian Pengirim",
+        "street": "Alamat Jalan Pengirim"
+      },
+      "carrier": "Kurir Pengirim",
+      "country": "Negara Pengirim",
+      "email": "Email Pengirim",
+      "firstName": "Nama Depan Pengirim",
+      "lastName": "Nama Belakang Pengirim",
+      "middleName": "Nama Tengah Pengirim",
+      "msisdn": "Nomor Telepon Pengirim"
+    },
+    "common": {
+      "your": "Anda {{field}}",
+      "enter_your": "Masukkan {{field}} Anda"
+    }
+  },
   "countries": {
     "title": "Negara",
     "deleted": "Negara yang dihapus"

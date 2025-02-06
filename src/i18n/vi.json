@@ -48,6 +48,53 @@
     "products": "Sản phẩm",
     "spend": "Chi tiêu"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Câu trả lời thử thách",
+        "question": "Câu hỏi thử thách"
+      },
+      "date": "Ngày",
+      "language": "Mã ngôn ngữ",
+      "message": "Tin nhắn quà tặng"
+    },
+    "recipient": {
+      "address": {
+        "city": "Thành phố của người nhận",
+        "country": "Quốc gia của người nhận",
+        "postal": "Mã bưu điện của người nhận",
+        "state": "Tiểu bang/Tỉnh của người nhận",
+        "street": "Địa chỉ đường phố của người nhận"
+      },
+      "carrier": "Nhà vận chuyển của người nhận",
+      "country": "Quốc gia của người nhận",
+      "email": "Email của người nhận",
+      "firstName": "Tên của người nhận",
+      "lastName": "Họ của người nhận",
+      "middleName": "Tên đệm của người nhận",
+      "msisdn": "Số điện thoại của người nhận"
+    },
+    "sender": {
+      "address": {
+        "city": "Thành phố của người gửi",
+        "country": "Quốc gia của người gửi",
+        "postal": "Mã bưu điện của người gửi",
+        "state": "Tiểu bang/Tỉnh của người gửi",
+        "street": "Địa chỉ đường phố của người gửi"
+      },
+      "carrier": "Nhà vận chuyển của người gửi",
+      "country": "Quốc gia của người gửi",
+      "email": "Email của người gửi",
+      "firstName": "Tên của người gửi",
+      "lastName": "Họ của người gửi",
+      "middleName": "Tên đệm của người gửi",
+      "msisdn": "Số điện thoại của người gửi"
+    },
+    "common": {
+      "your": "{{field}} của bạn",
+      "enter_your": "Nhập {{field}} của bạn"
+    }
+  },
   "countries": {
     "title": "Các quốc gia",
     "deleted": "Các quốc gia đã xóa"

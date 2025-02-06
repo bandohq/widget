@@ -48,6 +48,53 @@
     "products": "Productos",
     "spend": "Gastar"
   },
+  "form": {
+    "delivery": {
+      "challenge": {
+        "answer": "Respuesta del desafío",
+        "question": "Pregunta del desafío"
+      },
+      "date": "Fecha",
+      "language": "Código de idioma",
+      "message": "Mensaje de regalo"
+    },
+    "recipient": {
+      "address": {
+        "city": "Ciudad del destinatario",
+        "country": "País del destinatario",
+        "postal": "Código postal del destinatario",
+        "state": "Estado/Provincia del destinatario",
+        "street": "Dirección del destinatario"
+      },
+      "carrier": "Transportista del destinatario",
+      "country": "País del destinatario",
+      "email": "Correo electrónico del destinatario",
+      "firstName": "Nombre del destinatario",
+      "lastName": "Apellido del destinatario",
+      "middleName": "Segundo nombre del destinatario",
+      "msisdn": "Número de teléfono del destinatario"
+    },
+    "sender": {
+      "address": {
+        "city": "Ciudad del remitente",
+        "country": "País del remitente",
+        "postal": "Código postal del remitente",
+        "state": "Estado/Provincia del remitente",
+        "street": "Dirección del remitente"
+      },
+      "carrier": "Transportista del remitente",
+      "country": "País del remitente",
+      "email": "Correo electrónico del remitente",
+      "firstName": "Nombre del remitente",
+      "lastName": "Apellido del remitente",
+      "middleName": "Segundo nombre del remitente",
+      "msisdn": "Número de teléfono del remitente"
+    },
+    "common": {
+      "your": "Tu {{field}}",
+      "enter_your": "Ingresa tu {{field}}"
+    }
+  },
   "countries": {
     "title": "Países",
     "deleted": "Países eliminados"
