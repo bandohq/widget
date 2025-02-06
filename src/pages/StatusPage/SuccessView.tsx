@@ -83,14 +83,15 @@ export const SuccessView = ({ status }) => {
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px">
-          {status?.product_type + " " + status?.product?.name}{" "}
+          {status?.productType + " " + status?.product?.name}
+          {" - "}
           {isStatusCompleted &&
-            status?.fiat_unit_price + "" + status?.fiat_currency}
+            status?.fiatUnitPrice + "" + status?.fiatCurrency}
         </StatusTitle>
         <StatusSubtitle fontSize="18px">
           {t("success.message.notification", {
-            productType: status?.product_type || "item",
-            reference: status?.given_reference || "your reference",
+            productType: status?.productType || "item",
+            reference: status?.givenReference || "your reference",
           })}
         </StatusSubtitle>
       </ProductBox>
