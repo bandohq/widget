@@ -31,12 +31,14 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (!isLoading) {
-      const customChains = chains?.map((chain) => {
-        const nativeToken = nativeTokenCatalog.find(
-          (item) => item.key === chain?.key
-        );
-        return transformToChainConfig(chain, nativeToken);
-      });
+      const customChains = chains
+        ?.filter((chain) => chain.is_active)
+        .map((chain) => {
+          const nativeToken = nativeTokenCatalog.find(
+            (item) => item.key === chain?.key
+          );
+          return transformToChainConfig(chain, nativeToken);
+        });
       setAvailableChains(customChains);
     }
   }, [chains, isLoading]);
