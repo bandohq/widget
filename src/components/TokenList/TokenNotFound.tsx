@@ -6,6 +6,7 @@ import { useFieldValues } from '../../stores/form/useFieldValues.js'
 import { SearchNotFound } from '../Search/SearchNotFound.js'
 import { useWidgetEvents } from '../../hooks/useWidgetEvents.js'
 import { WidgetEvent, NoTokensAvailable } from '../../types/events.js'
+import { useEffect } from 'react'
 
 export const TokenNotFound: React.FC<FormTypeProps> = ({ formType }) => {
   const { t } = useTranslation()
@@ -13,9 +14,11 @@ export const TokenNotFound: React.FC<FormTypeProps> = ({ formType }) => {
   const emitter = useWidgetEvents()
   const { getChainById } = useAvailableChains()
 
-  emitter.emit(WidgetEvent.NoTokensAvailable, {
-    chainId: selectedChainId,
-  } as NoTokensAvailable)
+  useEffect(() => {
+    emitter.emit(WidgetEvent.NoTokensAvailable, {
+      chainId: selectedChainId,
+    } as NoTokensAvailable)
+  }, [emitter, selectedChainId]);
   
   return (
     <SearchNotFound
