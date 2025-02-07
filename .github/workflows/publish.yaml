@@ -34,14 +34,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: npm install
+      - name: Install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
       - name: Build
-        run: npm run build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
       - name: Publish to npm
         run: |
           npm run push${{ contains(github.ref_name, 'alpha') && ':alpha' || contains(github.ref_name, 'beta') && ':beta' || '' }}
