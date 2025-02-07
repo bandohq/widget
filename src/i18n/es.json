@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Tu wallet está conectada a una cadena no disponible",
       "allowanceRequired": "El monto de transferencia para {{tokenSymbol}} excede tu autorización actual. Por favor aumenta tu autorización e inténtalo de nuevo.",
       "insufficientFunds": "No tienes suficiente gas para cubrir el costo de la transacción.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} en {{chainName}} permanecen en tu billetera.",

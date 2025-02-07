@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Wallet ของคุณเชื่อมต่อกับ Chain ที่ไม่พร้อมใช้งาน",
       "allowanceRequired": "โอนด้วยจำนวน {{tokenSymbol}} ตามการอนุญาตของคุณ.ได้โปรดเพิ่มการอนุญาตของคุณอีกครั้ง",
       "insufficientFunds": "คุณมีแก๊สไม่พอสำหรับการธุรกรรมนี้",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}}{{tokenSymbol}} บน {{chainName}}  ยังคงอยู่ในกระเป๋าเงินของคุณ",

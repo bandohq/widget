@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Il tuo Wallet è connesso a una Chain non disponibile",
       "allowanceRequired": "L'importo di {{tokenSymbol}} supera la tua quota massima permessa. Aumenta la quota e riprova.",
       "insufficientFunds": "Non hai abbastanza gas per coprire il costo della transazione.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} su {{chainName}} rimangono nel tuo portafoglio.",
