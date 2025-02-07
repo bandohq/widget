@@ -15,7 +15,8 @@
     "release:alpha": "standard-version --prerelease alpha",
     "release:beta": "standard-version --prerelease beta",
     "push": "npm publish --access public",
-    "push:beta": "npm publish --access public"
+    "push:beta": "npm publish --access public --tag beta",
+    "push:alpha": "npm publish --access public --tag alpha"
   },
   "exports": {
     "import": "./dist/index.mjs",
