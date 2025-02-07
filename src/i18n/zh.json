@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "您的Wallet已连接到不可用的Chain",
       "allowanceRequired": "{{tokenSymbol}} 的交易金额超过了您设置的支出上限。请调整限额后重试。",
       "insufficientFunds": "燃气费不足，无法支付交易费用。",
       "remainInYourWallet": "{{chainName}} 链上的 {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} 仍在您的钱包中。",

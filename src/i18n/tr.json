@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Wallet’iniz kullanılamayan bir Chain’e bağlı",
       "allowanceRequired": "{{tokenSymbol}} için verilen izinden fazla miktarda transfer yapılamaz. Token izinlerini arttırıp tekrar deneyiniz.",
       "insufficientFunds": "Bu işlemi gerçekleştirmek için yeterli gaz bulunmamaktadır.",
       "remainInYourWallet": "{{chainName}} üzerinde {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} cüzdanınızda bulunmaktadır.",

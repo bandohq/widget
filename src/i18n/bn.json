@@ -141,6 +141,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "আপনার Wallet একটি অনুপলব্ধ Chain-এর সাথে সংযুক্ত",
       "allowanceRequired": "{{tokenSymbol}} এর জন্য অনুমোদন বৃদ্ধি প্রয়োজন।",
       "insufficientFunds": "পর্যাপ্ত গ্যাস নেই।",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} {{chainName}} এ রয়েছে।",

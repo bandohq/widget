@@ -4,18 +4,23 @@ import { palette } from "../../themes/palettes";
 import { useEffect, useState } from "react";
 
 export const Alert = () => {
-  const { notification } = useNotificationContext();
+  const { notification, hideNotification } = useNotificationContext();
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     if (notification) {
       setShowNotification(true);
-      const timer = setTimeout(() => {
-        setShowNotification(false);
-      }, 5000);
-      return () => clearTimeout(timer);
+
+      if (!notification.persistent) {
+        const timer = setTimeout(() => {
+          setShowNotification(false);
+          hideNotification();
+        }, 5000);
+
+        return () => clearTimeout(timer);
+      }
     }
-  }, [notification]);
+  }, [notification, hideNotification]);
 
   return (
     <Collapse in={showNotification}>

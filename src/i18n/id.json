@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Wallet Anda terhubung ke Chain yang tidak tersedia",
       "allowanceRequired": "Jumlah transfer untuk {{tokenSymbol}} melebihi jatah Anda saat ini. Tingkatkan jatah Anda dan coba lagi.",
       "insufficientFunds": "Anda tidak memiliki cukup gas untuk menutup biaya transaksi.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} di {{chainName}} tetap ada di dompet Anda.",

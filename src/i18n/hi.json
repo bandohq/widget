@@ -161,6 +161,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "आपकी Wallet एक अनुपलब्ध Chain से जुड़ी है",
       "allowanceRequired": "लेन-देन के लिए अनुमति की आवश्यकता है।",
       "insufficientFunds": "पर्याप्त गैस नहीं है।",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} {{chainName}} में शेष है।",

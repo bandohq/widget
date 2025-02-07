@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Ihre Wallet ist mit einer nicht verfügbaren Chain verbunden",
       "allowanceRequired": "Der Betrag für {{tokenSymbol}} überschreitet Ihre derzeitige Freigabe. Bitte erhöhen Sie Ihre Freigabe und versuchen Sie es erneut.",
       "insufficientFunds": "Sie haben nicht genug Gas, um die Kosten der Transaktion zu decken.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} verbleiben in Ihrer Wallet auf {{chainName}}.",
