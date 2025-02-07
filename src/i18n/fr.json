@@ -141,6 +141,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Votre Wallet est connecté à une Chain indisponible",
       "allowanceRequired": "Le montant du transfert pour {{tokenSymbol}} dépasse votre allocation actuelle. Veuillez augmenter votre allocation et réessayer.",
       "insufficientFunds": "Vous n'avez pas assez de gaz pour couvrir le coût de la transaction.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} sur {{chainName}} restent dans votre portefeuille.",

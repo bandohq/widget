@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Sua Wallet está conectada a uma Chain indisponível",
       "allowanceRequired": "A quantidade excede a permissão atual.",
       "insufficientFunds": "Você não tem gás suficiente.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} permanece na carteira.",

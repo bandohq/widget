@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Wallet của bạn được kết nối với Chain không khả dụng",
       "allowanceRequired": "Chuyển {{tokenSymbol}} vượt quá mức cho phép. Vui lòng tăng giới hạn và thử lại.",
       "insufficientFunds": "Không đủ gas để chi trả chi phí giao dịch.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} tại {{chainName}} vẫn còn trong ví.",
