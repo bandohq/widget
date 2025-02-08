@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
@@ -6,7 +6,12 @@ import { useFieldValues } from "../../stores/form/useFieldValues";
 import { FormKeyHelper } from "../../stores/form/types";
 import { ReferenceType } from "../../providers/CatalogProvider/types";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
-import { isValidPhoneNumber } from "react-phone-number-input";
+import { useChain } from "../../hooks/useChain";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
+import {
+  areRequiredFieldsValid,
+  isReferenceValid,
+} from "../../utils/reviewValidations";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -18,36 +23,19 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   requiredFields: requiredFieldsProps,
 }) => {
   const { t } = useTranslation();
+  const { showNotification, hideNotification } = useNotificationContext();
   const { handleTransaction, isPending } = useTransactionFlow();
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
-  const [tokenAddress, reference, requiredFields] = useFieldValues(
-    tokenKey,
-    "reference",
-    "requiredFields"
-  );
+  const [tokenAddress, reference, requiredFields, selectedChainId] =
+    useFieldValues(
+      tokenKey,
+      "reference",
+      "requiredFields",
+      FormKeyHelper.getChainKey("from")
+    );
 
-  // Validate reference accordint to type
-  const isReferenceValid = (ref: string, type: ReferenceType) => {
-    if (!ref) return false;
-
-    if (type.name === "phone" && !isValidPhoneNumber(ref)) return false;
-
-    const regex =
-      typeof type.regex === "string" ? new RegExp(type.regex) : type.regex;
-
-    if (regex && !regex.test(ref)) return false;
-    return true;
-  };
-
-  const areRequiredFieldsValid = (ref: any, fields: ReferenceType[]) => {
-    if (!ref || !fields || !Array.isArray(fields)) return false;
-
-    return fields.every((field, index) => {
-      const value = Array.isArray(ref) ? ref[index]?.value : ref;
-      return isReferenceValid(value, field);
-    });
-  };
+  const { chain: selectedChain } = useChain(selectedChainId);
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -55,8 +43,21 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFields,
       requiredFieldsProps
     );
-    return !referenceValid || !requiredFieldsValid || !isPurchasePossible;
+    return (
+      !referenceValid ||
+      !requiredFieldsValid ||
+      !isPurchasePossible ||
+      !selectedChain?.is_active
+    );
   }, [tokenAddress, reference, referenceType, requiredFields]);
+
+  useEffect(() => {
+    if (!selectedChain?.is_active) {
+      showNotification("error", t("error.message.unavailableChain"), true);
+    } else {
+      hideNotification();
+    }
+  }, [disabled, t, selectedChain?.is_active]);
 
   return (
     <BaseTransactionButton

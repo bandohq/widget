@@ -64,6 +64,7 @@ export interface Chain {
   rpc_url: string;
   logo_url?: string;
   is_testnet: boolean;
+  is_active: boolean;
   protocol_contracts?: ProtocolContracts;
 }
 

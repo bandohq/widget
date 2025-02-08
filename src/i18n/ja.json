@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "あなたのWalletは利用できないChainに接続されています",
       "allowanceRequired": "{{tokenSymbol}} の送金額が現在の許可量を超えています。許可量を増やしてもう一度お試しください。",
       "insufficientFunds": "トランザクションを完了するのに十分なガスがありません。",
       "remainInYourWallet": "{{chainName}} の {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} がウォレットに残っています。",

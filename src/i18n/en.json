@@ -141,6 +141,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain" : "Your wallet is connected to an unavailable chain",
       "allowanceRequired": "Transfer amount for {{tokenSymbol}} exceeds your current allowance. Please increase your allowance and try again.",
       "insufficientFunds": "You don't have enough gas to cover the cost of the transaction.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} on {{chainName}} remain in your wallet.",

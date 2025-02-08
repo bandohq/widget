@@ -140,6 +140,7 @@
   },
   "error": {
     "message": {
+      "unavailableChain": "Ваша Wallet підключена до недоступної Chain",
       "allowanceRequired": "Сума переказу для {{tokenSymbol}} перевищує поточну межу. Збільшіть доступну кількість у гаманці та спробуйте ще раз.",
       "insufficientFunds": "Не вистачає газу для покриття вартості транзакції.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} на {{chainName}} все ще знаходяться у вашому гаманці.",
