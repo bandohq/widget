@@ -10,15 +10,8 @@ export type NavigationRouteType = string; // Simulates NavigationRouteType
 
 // Keep the enum and events as they were
 export enum WidgetEvent {
-  RouteExecutionStarted = 'routeExecutionStarted',
-  RouteExecutionUpdated = 'routeExecutionUpdated',
-  RouteExecutionCompleted = 'routeExecutionCompleted',
-  RouteExecutionFailed = 'routeExecutionFailed',
-  RouteHighValueLoss = 'routeHighValueLoss',
-  AvailableRoutes = 'availableRoutes',
   ContactSupport = 'contactSupport',
   SourceChainTokenSelected = 'sourceChainTokenSelected',
-  DestinationChainTokenSelected = 'destinationChainTokenSelected',
   QuoteFetched = 'quoteFetched',
   /**
    * @deprecated Use `PageEntered` event instead.
@@ -29,25 +22,22 @@ export enum WidgetEvent {
   PageEntered = 'pageEntered',
   FormFieldChanged = 'formFieldChanged',
   SettingUpdated = 'settingUpdated',
+  NoTokensAvailable = 'noTokensAvailable',
+  InsufficientBalance = 'insufficientBalance',
 }
 
 // Mocking the widget events type
 export type WidgetEvents = {
-  routeExecutionStarted: Route;
-  routeExecutionUpdated: RouteExecutionUpdate;
-  routeExecutionCompleted: Route;
-  routeExecutionFailed: RouteExecutionUpdate;
-  routeHighValueLoss: RouteHighValueLossUpdate;
-  availableRoutes: Route[];
   contactSupport: ContactSupport;
   sourceChainTokenSelected: ChainTokenSelected;
-  destinationChainTokenSelected: ChainTokenSelected;
   formFieldChanged: FormFieldChanged;
   reviewTransactionPageEntered?: Route;
   walletConnected: WalletConnected;
   widgetExpanded: boolean;
   pageEntered: NavigationRouteType;
   settingUpdated: SettingUpdated;
+  noTokensAvailable: NoTokensAvailable;
+  insufficientBalance: InsufficientBalance;
 };
 
 // Mocking the interfaces
@@ -55,20 +45,16 @@ export interface ContactSupport {
   supportId?: string;
 }
 
-export interface RouteHighValueLossUpdate {
-  fromAmountUSD: number;
-  toAmountUSD: number;
-  gasCostUSD?: number;
-  feeCostUSD?: number;
-  valueLoss: number;
-}
-
-export interface RouteExecutionUpdate {
-  route: Route;
-  process: Process;
-}
-
 export interface ChainTokenSelected {
+  chainId: ChainId;
+  tokenAddress: string;
+}
+
+export interface NoTokensAvailable {
+  chainId: ChainId;
+}
+
+export interface InsufficientBalance {
   chainId: ChainId;
   tokenAddress: string;
 }
