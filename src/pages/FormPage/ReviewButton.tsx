@@ -12,6 +12,7 @@ import {
   areRequiredFieldsValid,
   isReferenceValid,
 } from "../../utils/reviewValidations";
+import { useAccount } from "@lifi/wallet-management";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -23,19 +24,18 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   requiredFields: requiredFieldsProps,
 }) => {
   const { t } = useTranslation();
+  const { account } = useAccount();
   const { showNotification, hideNotification } = useNotificationContext();
   const { handleTransaction, isPending } = useTransactionFlow();
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
-  const [tokenAddress, reference, requiredFields, selectedChainId] =
-    useFieldValues(
-      tokenKey,
-      "reference",
-      "requiredFields",
-      FormKeyHelper.getChainKey("from")
-    );
+  const [tokenAddress, reference, requiredFields] = useFieldValues(
+    tokenKey,
+    "reference",
+    "requiredFields"
+  );
 
-  const { chain: selectedChain } = useChain(selectedChainId);
+  const { chain: selectedChain } = useChain(account?.chainId);
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);

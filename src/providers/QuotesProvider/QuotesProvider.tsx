@@ -76,6 +76,10 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
+  useEffect(() => {
+    setQuote(null);
+  }, [account?.chainId]);
+
   return (
     <QuotesContext.Provider
       value={{
