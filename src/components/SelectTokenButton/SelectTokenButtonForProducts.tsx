@@ -41,10 +41,6 @@ export const SelectTokenButtonForProducts: React.FC<
   const { chain } = useChain(account?.chainId);
   const { token } = useToken(chain, tokenAddress);
 
-  console.log("token", token);
-  console.log("quote", quote);
-  console.log("account", account?.chainId);
-
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
       fetchQuote(product.sku, product.price.fiatCurrency, token.address);
@@ -75,16 +71,7 @@ export const SelectTokenButtonForProducts: React.FC<
             subheader="0 USD"
             compact={compact}
           />
-        ) : product && !quote && !token ? (
-          <SelectTokenCardHeader
-            avatar={<AvatarBadgedDefault />}
-            title={defaultPlaceholder}
-            subheader={`${parseFloat(product.price?.fiatValue)} ${
-              product.price?.fiatCurrency
-            }`}
-            compact={compact}
-          />
-        ) : product && token && quotePending ? (
+        ) : product && quotePending ? (
           <SelectTokenCardHeader
             avatar={
               <>
@@ -110,6 +97,15 @@ export const SelectTokenButtonForProducts: React.FC<
                 : undefined
             }
             selected={isSelected}
+            compact={compact}
+          />
+        ) : (product && !quote) || !token ? (
+          <SelectTokenCardHeader
+            avatar={<AvatarBadgedDefault />}
+            title={defaultPlaceholder}
+            subheader={`${parseFloat(product.price?.fiatValue)} ${
+              product.price?.fiatCurrency
+            }`}
             compact={compact}
           />
         ) : (
