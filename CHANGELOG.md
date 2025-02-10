@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13-beta.13](https://github.com/bandohq/widget/compare/v0.1.13-beta.10...v0.1.13-beta.13) (2025-02-10)
+
+
+### Bug Fixes
+
+* Make more flexible products grid [#83](https://github.com/bandohq/widget/issues/83) ([72e319e](https://github.com/bandohq/widget/commit/72e319ef4972f97c4a8eb18c378bd0ef68c20cad))
+
 ### [0.1.13-beta.11](https://github.com/bandohq/widget/compare/v0.1.13-beta.10...v0.1.13-beta.11) (2025-02-10)
 
 
