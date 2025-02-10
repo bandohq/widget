@@ -7,8 +7,11 @@ export const BrandsContainer = styled(Box)(({ theme }) => ({
   gap: 10,
   marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
-  [theme.breakpoints.down("xs")]: {
+  [theme.breakpoints.down("sm")]: {
     gridTemplateColumns: "repeat(4, 1fr)",
+  },
+  [theme.breakpoints.down("xs")]: {
+    gridTemplateColumns: "repeat(3, 1fr)",
   },
 }));
 
