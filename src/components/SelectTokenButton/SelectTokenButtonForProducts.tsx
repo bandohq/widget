@@ -56,10 +56,10 @@ export const SelectTokenButtonForProducts: React.FC<
 
   const renderWarning = () => {
     if (quote?.total_amount && !isPurchasePossible) {
-      emitter.emit(
-        WidgetEvent.InsufficientBalance,
-        { chainId: chainId, tokenAddress: tokenAddress } as InsufficientBalance
-      );
+      emitter.emit(WidgetEvent.InsufficientBalance, {
+        chainId: account?.chainId,
+        tokenAddress: tokenAddress,
+      } as InsufficientBalance);
       return (
         <Box
           sx={{
@@ -74,7 +74,7 @@ export const SelectTokenButtonForProducts: React.FC<
         </Box>
       );
     }
-  }
+  };
 
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
