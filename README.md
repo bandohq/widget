@@ -13,7 +13,7 @@ Check the complete documentation here:
 - **Wallet Management**: Includes UI for managing wallets (EVM, solana coming soon) with the option to use your own wallet solution.
 - **Flexible Styling**: Customizable themes and styles to seamlessly integrate with your app's design.
 - **Multi-Language Support**: Complete UI translations to cater to a global audience.
-- **Broad Compatibility**: Tested with React, Next.js, Vue, Nuxt.js, Svelte, Remix, Gatsby, Vite.
+- **Broad Compatibility**: Tested with React, Next.js, Vite.
 
 ---
 
@@ -22,16 +22,18 @@ Check the complete documentation here:
 Prerequisites:
 
 - Node.js v16+
-- npm
+- @tanstack/react-query
+- wagmi
+- @bigmi/react
+- @solana/wallet-adapter-react
 
 ### Step 1: Install Dependencies
 
-Install the Bando Widget using npm:
+Install the Bando Widget using your favorite package manager eg:
 
 ```bash
-npm install @bandohq/widget
+pnpm add @bandohq/widget wagmi @bigmi/react @solana/wallet-adapter-react @tanstack/react-query
 ```
-
 ---
 
 ## Configuration
@@ -96,6 +98,7 @@ You can pass configuration properties and other adjustments:
 
 - React
 - Viem and Wagmi (for on-chain interactions)
+- Solana support coming soon
 
 ---
 
@@ -110,14 +113,12 @@ You can pass configuration properties and other adjustments:
 Guides:
 
 - [Next.js Guide](https://docs.bando.cool/widget/framework-integration/next)
-- [Vue Guide](https://docs.bando.cool/widget/framework-integration/vue)
-- [Svelte Guide](https://docs.bando.cool/widget/framework-integration/svelte)
 
 ---
 
 ## License
 
-This project is licensed under the **MIT** license.
+This project is licensed under the **Apache 2.0** license.
 
 ---
 
@@ -127,4 +128,7 @@ If you have any questions or suggestions, contact us at **support@bando.cool**.
 
 ---
 
-© 2025 Bando.cool. All rights reserved.
+## Special thanks to @lifinance
+"Great software, likewise, requires a fanatical devotion to beauty. If you look inside good software, you find that parts no one is ever supposed to see are beautiful too." - Paul Graham
+
+The bando widget is built on top of the amazing @lifi/wallet-management package and their on @lifi/widget architecture.

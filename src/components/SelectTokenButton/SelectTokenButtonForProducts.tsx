@@ -8,6 +8,7 @@ import { useFieldValues } from "../../stores/form/useFieldValues.js";
 import { navigationRoutes } from "../../utils/navigationRoutes.js";
 import { AvatarBadgedDefault, AvatarBadgedSkeleton } from "../Avatar/Avatar";
 import { CardTitle } from "../Card/CardTitle";
+import { useWidgetEvents } from "../../hooks/useWidgetEvents.js";
 import {
   CardContent,
   SelectTokenCard,
@@ -20,6 +21,7 @@ import { Avatar, Skeleton } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
 import { Box } from "@mui/material";
+import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -29,6 +31,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { product } = useProduct();
+  const emitter = useWidgetEvents();
   const {
     quote,
     isPending: quotePending,
@@ -50,6 +53,28 @@ export const SelectTokenButtonForProducts: React.FC<
   const handleClick = () => {
     navigate(navigationRoutes.fromToken);
   };
+
+  const renderWarning = () => {
+    if (quote?.total_amount && !isPurchasePossible) {
+      emitter.emit(
+        WidgetEvent.InsufficientBalance,
+        { chainId: chainId, tokenAddress: tokenAddress } as InsufficientBalance
+      );
+      return (
+        <Box
+          sx={{
+            color: "red",
+            display: "flex",
+            justifyContent: "center",
+            padding: "5px",
+            textAlign: "right",
+          }}
+        >
+          {t("warning.message.insufficientFunds")}
+        </Box>
+      );
+    }
+  }
 
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
@@ -142,6 +167,7 @@ export const SelectTokenButtonForProducts: React.FC<
           />
         )}
       </CardContent>
+      {renderWarning()}
       {quote?.total_amount && !isPurchasePossible && (
         <Box
           sx={{

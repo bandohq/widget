@@ -33,10 +33,7 @@ export const useTokenSelect = (formType: FormType, onClick?: () => void) => {
         isTouched: true,
       })
 
-      const eventToEmit =
-        formType === 'from'
-          ? WidgetEvent.SourceChainTokenSelected
-          : WidgetEvent.DestinationChainTokenSelected
+      const eventToEmit = WidgetEvent.SourceChainTokenSelected
 
       if (selectedChainId) {
         emitter.emit(eventToEmit, {
