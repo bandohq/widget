@@ -32,14 +32,21 @@ export const CountriesProvider: React.FC<{
 
       const searchParams = new URLSearchParams(window.location.search);
       const urlCountryIso = searchParams.get("country");
+      const storedCountryIso = localStorage.getItem("selectedCountry");
 
       const urlCountry = allCountries.find(
         (country) => country.iso_alpha2 === urlCountryIso
       );
+      const storedCountry = allCountries.find(
+        (country) => country.iso_alpha2 === storedCountryIso
+      );
 
+      // Priority: URL param > localStorage > config > default US
       const defaultCountry =
-        urlCountry && buildUrl
+        (urlCountry && buildUrl)
           ? urlCountry
+          : storedCountry
+          ? storedCountry
           : configCountry
           ? allCountries.find((country) => country.iso_alpha2 === configCountry)
           : allCountries.find((country) => country.iso_alpha2 === "US");
@@ -60,6 +67,7 @@ export const CountriesProvider: React.FC<{
     const country = availableCountries.find((c) => c.iso_alpha2 === isoCode);
     if (country) {
       setSelectedCountry(country);
+      localStorage.setItem("selectedCountry", isoCode);
 
       // Update URL with selected country
       if (buildUrl) {
