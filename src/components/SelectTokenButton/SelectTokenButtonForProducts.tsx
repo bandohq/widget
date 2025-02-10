@@ -62,10 +62,10 @@ export const SelectTokenButtonForProducts: React.FC<
 
   const renderWarning = () => {
     if (quote?.total_amount && !isPurchasePossible) {
-      emitter.emit(
-        WidgetEvent.InsufficientBalance,
-        { chainId: chainId, tokenAddress: tokenAddress } as InsufficientBalance
-      );
+      emitter.emit(WidgetEvent.InsufficientBalance, {
+        chainId: chainId,
+        tokenAddress: tokenAddress,
+      } as InsufficientBalance);
       return (
         <Box
           sx={{
@@ -80,12 +80,12 @@ export const SelectTokenButtonForProducts: React.FC<
         </Box>
       );
     }
-  }
+  };
 
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
     ? t("button.connectWallet")
-    : product && !token && t("main.selectChainAndToken");
+    : product && !token && t("main.selectToken");
   const cardTitle: string = t(`main.${formType}`);
 
   return (
