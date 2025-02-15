@@ -8,10 +8,12 @@ import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
+import { useSteps } from "../providers/StepsProvider/StepsProvider";
 
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
+  const { updateStep, clearStep } = useSteps();
   const {showNotification} = useNotificationContext();
 
   const approveERC20 = async (
@@ -54,6 +56,8 @@ export const useTransactionHelpers = () => {
         (item) => item.key === chain?.key
       );
 
+      updateStep('form.status.validatingReference', "loading");
+
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
 
       const isReferenceValid = await validateReference(
@@ -83,6 +87,8 @@ export const useTransactionHelpers = () => {
           weiAmount
         };
 
+        updateStep('form.status.signTransaction', "info");
+
         await writeContract(config,{
           value,
           address: chain?.protocol_contracts?.BandoRouterProxy,
@@ -93,6 +99,7 @@ export const useTransactionHelpers = () => {
           account: account?.address,
         });
       } else {
+        updateStep('form.status.aproveTokens', "info");
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
           parseUnits(quote?.total_amount.toString(), token?.decimals),
@@ -101,7 +108,7 @@ export const useTransactionHelpers = () => {
           chain,
           config
         );
-
+        updateStep('form.status.checkAllowance', "loading");
         await checkAllowance(
           chain?.protocol_contracts?.BandoRouterProxy,
           token.address,
@@ -122,6 +129,8 @@ export const useTransactionHelpers = () => {
           tokenAmount: parseUnits(quote?.digital_asset_amount.toString(), token?.decimals),
         };
 
+        updateStep('form.status.signTransaction', "info");
+
         await writeContract(config,{
           address: chain?.protocol_contracts?.BandoRouterProxy,
           abi: [requestERC20ServiceABI],
@@ -131,7 +140,7 @@ export const useTransactionHelpers = () => {
           account: account?.address,      
         });
       }
-      
+      clearStep();
     } catch (error) {
       showNotification("error", "Error in handleServiceRequest");
       console.error("Error in handleServiceRequest:", error);
