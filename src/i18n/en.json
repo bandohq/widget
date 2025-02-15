@@ -49,6 +49,12 @@
     "spend": "Spend"
   },
   "form": {
+    "status": {
+      "validatingReference": "Validating reference",
+      "signTransaction": "Please sign the transaction",
+      "aproveTokens": "Please approve the required tokens",
+      "validateAllowance": "Validating allowance"
+    },
     "delivery": {
       "challenge": {
         "answer": "Challenge Answer",

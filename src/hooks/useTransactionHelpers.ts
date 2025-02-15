@@ -108,7 +108,7 @@ export const useTransactionHelpers = () => {
           chain,
           config
         );
-        updateStep('form.status.checkAllowance', "loading");
+        updateStep('form.status.validateAllowance', "loading");
         await checkAllowance(
           chain?.protocol_contracts?.BandoRouterProxy,
           token.address,
