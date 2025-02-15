@@ -49,6 +49,12 @@
     "spend": "Pengeluaran"
   },
   "form": {
+    "status": {
+      "validatingReference": "Memvalidasi referensi",
+      "signTransaction": "Silakan tandatangani transaksi",
+      "aproveTokens": "Silakan setujui token yang diperlukan",
+      "validateAllowance": "Memvalidasi alokasi"
+    },
     "delivery": {
       "challenge": {
         "answer": "Jawaban Tantangan",

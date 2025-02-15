@@ -49,6 +49,12 @@
     "spend": "Spendi"
   },
   "form": {
+    "status": {
+      "validatingReference": "Convalida riferimento",
+      "signTransaction": "Si prega di firmare la transazione",
+      "aproveTokens": "Si prega di approvare i token richiesti",
+      "validateAllowance": "Convalida dell’assegno"
+    },
     "delivery": {
       "challenge": {
         "answer": "Risposta alla sfida",

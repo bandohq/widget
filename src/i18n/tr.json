@@ -49,6 +49,12 @@
     "spend": "Harca"
   },
   "form": {
+    "status": {
+      "validatingReference": "Referans doğrulanıyor",
+      "signTransaction": "Lütfen işlemi imzalayın",
+      "aproveTokens": "Lütfen gerekli tokenleri onaylayın",
+      "validateAllowance": "İzin doğrulanıyor"
+    },
     "delivery": {
       "challenge": {
         "answer": "Meydan okuma cevabı",

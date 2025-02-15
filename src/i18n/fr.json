@@ -49,6 +49,12 @@
     "spend": "Dépenses"
   },
   "form": {
+    "status": {
+      "validatingReference": "Validation de la référence",
+      "signTransaction": "Veuillez signer la transaction",
+      "aproveTokens": "Veuillez approuver les jetons requis",
+      "validateAllowance": "Validation de l’allocation"
+    },
     "delivery": {
       "challenge": {
         "answer": "Réponse au défi",

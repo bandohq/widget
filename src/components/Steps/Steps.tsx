@@ -16,7 +16,7 @@ const StepIcon = (type: string) => {
 };
 
 export const Steps = () => {
-  const { showSteps, step } = useSteps();
+  const { showSteps, step, updateStep } = useSteps();
   const { t } = useTranslation();
 
   return (

@@ -49,6 +49,12 @@
     "spend": "ব্যয়"
   },
   "form": {
+    "status": {
+      "validatingReference": "রেফারেন্স যাচাই করা হচ্ছে",
+      "signTransaction": "অনুগ্রহ করে লেনদেন স্বাক্ষর করুন",
+      "aproveTokens": "প্রয়োজনীয় টোকেন অনুমোদন করুন",
+      "validateAllowance": "ভাতা যাচাই করা হচ্ছে"
+    },
     "delivery": {
       "challenge": {
         "answer": "চ্যালেঞ্জের উত্তর",

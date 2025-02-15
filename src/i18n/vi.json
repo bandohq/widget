@@ -49,6 +49,12 @@
     "spend": "Chi tiêu"
   },
   "form": {
+    "status": {
+      "validatingReference": "Đang xác thực tham chiếu",
+      "signTransaction": "Vui lòng ký giao dịch",
+      "aproveTokens": "Vui lòng phê duyệt các token cần thiết",
+      "validateAllowance": "Đang xác thực hạn mức"
+    },
     "delivery": {
       "challenge": {
         "answer": "Câu trả lời thử thách",

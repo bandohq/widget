@@ -49,6 +49,12 @@
     "spend": "消費する"
   },
   "form": {
+    "status": {
+      "validatingReference": "参照を検証中",
+      "signTransaction": "取引に署名してください",
+      "aproveTokens": "必要なトークンを承認してください",
+      "validateAllowance": "許容量を検証中"
+    },
     "delivery": {
       "challenge": {
         "answer": "チャレンジの回答",

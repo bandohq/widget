@@ -49,6 +49,12 @@
     "spend": "Gastar"
   },
   "form": {
+    "status": {
+      "validatingReference": "Validando referencia",
+      "signTransaction": "Por favor, firma la transacción",
+      "aproveTokens": "Por favor, aprueba los tokens requeridos",
+      "validateAllowance": "Validando aprobación"
+    },
     "delivery": {
       "challenge": {
         "answer": "Respuesta del desafío",
