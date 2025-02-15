@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { PageContainer } from "../../components/PageContainer";
-import { PoweredBy } from "../../components/PoweredBy/PoweredBy";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
 import { useHeader } from "../../hooks/useHeader";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
@@ -10,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { SelectProductButton } from "../../components/SelectProductButton/SelectProductButton";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { DetailSection } from "./DetailSection";
+import { Steps } from "../../components/Steps/Steps";
 
 export const FormPage: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
@@ -30,6 +30,9 @@ export const FormPage: React.FC = () => {
           requiredFields={product?.requiredFields}
         />
       )}
+
+      <Steps />
+
       <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
         <ReviewButton
           referenceType={product?.referenceType}
