@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box } from "@mui/material";
 import { PageContainer } from "../../components/PageContainer";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
@@ -10,35 +11,42 @@ import { SelectProductButton } from "../../components/SelectProductButton/Select
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { DetailSection } from "./DetailSection";
 import { Steps } from "../../components/Steps/Steps";
+import { useSteps } from "../../providers/StepsProvider/StepsProvider";
 
 export const FormPage: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
   const { t } = useTranslation();
   const { product } = useProduct();
+  const { steps } = useSteps();
   const showPoweredBy = !hiddenUI?.includes(HiddenUI.PoweredBy);
 
   useHeader(t("header.title"));
 
   return (
     <PageContainer>
-      <SelectProductButton formType="from" compact />
-      <SelectChainAndToken mb={2} />
-      {product && (
+      <SelectProductButton
+        formType="from"
+        compact
+        readonly={steps.length > 0}
+      />
+      <SelectChainAndToken mb={2} readonly={Boolean(steps?.length > 0)} />
+      {product && !steps?.length && (
         <DetailSection
           productType={product?.productType}
           referenceType={product?.referenceType}
           requiredFields={product?.requiredFields}
         />
       )}
-
       <Steps />
 
-      <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
-        <ReviewButton
-          referenceType={product?.referenceType}
-          requiredFields={product?.requiredFields}
-        />
-      </Box>
+      {!steps?.length && (
+        <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
+          <ReviewButton
+            referenceType={product?.referenceType}
+            requiredFields={product?.requiredFields}
+          />
+        </Box>
+      )}
     </PageContainer>
   );
 };

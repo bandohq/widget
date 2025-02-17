@@ -102,6 +102,7 @@ export type FormType = 'from'
 
 export interface FormTypeProps {
   formType: FormType
+  readonly?: boolean
 }
 
 export const FormKeyHelper = {
