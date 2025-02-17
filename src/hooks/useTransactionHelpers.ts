@@ -13,7 +13,7 @@ import { useSteps } from "../providers/StepsProvider/StepsProvider";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
-  const { updateStep, clearStep } = useSteps();
+  const { addStep, updateStep, clearStep } = useSteps();
   const {showNotification} = useNotificationContext();
 
   const approveERC20 = async (
@@ -56,9 +56,9 @@ export const useTransactionHelpers = () => {
         (item) => item.key === chain?.key
       );
 
-      updateStep('form.status.validatingReference', "loading");
-
+      
       const formattedChain = defineChain(transformToChainConfig(chain, nativeToken));
+      addStep({message: 'form.status.validatingReference', type:"loading"});
 
       const isReferenceValid = await validateReference(
         chain,
@@ -66,6 +66,7 @@ export const useTransactionHelpers = () => {
         txId,
         config
       );
+      updateStep({message: 'form.status.validatingReferenceCompleted', type:"completed"});
   
       if (!isReferenceValid) {
         showNotification("error", "Invalid reference code");
@@ -87,7 +88,7 @@ export const useTransactionHelpers = () => {
           weiAmount
         };
 
-        updateStep('form.status.signTransaction', "info");
+        addStep({message: 'form.status.signTransaction', type:"info"});
 
         await writeContract(config,{
           value,
@@ -98,8 +99,9 @@ export const useTransactionHelpers = () => {
           chain: formattedChain,
           account: account?.address,
         });
+        updateStep({message: 'form.status.signTransactionCompleted', type:"completed"});
       } else {
-        updateStep('form.status.aproveTokens', "info");
+        addStep({message: 'form.status.aproveTokens', type:"info"});
         await approveERC20(
           chain?.protocol_contracts?.BandoRouterProxy,
           parseUnits(quote?.total_amount.toString(), token?.decimals),
@@ -108,7 +110,7 @@ export const useTransactionHelpers = () => {
           chain,
           config
         );
-        updateStep('form.status.validateAllowance', "loading");
+        updateStep({message:'form.status.validateAllowance', type:"loading"});
         await checkAllowance(
           chain?.protocol_contracts?.BandoRouterProxy,
           token.address,
@@ -116,6 +118,7 @@ export const useTransactionHelpers = () => {
           chain,
           config
         );
+        updateStep({message:'form.status.validateAllowanceCompleted', type:"completed"});
         
         const requestERC20ServiceABI = BandoRouter.abi.find(
           (item) => item.name === "requestERC20Service"
@@ -129,7 +132,7 @@ export const useTransactionHelpers = () => {
           tokenAmount: parseUnits(quote?.digital_asset_amount.toString(), token?.decimals),
         };
 
-        updateStep('form.status.signTransaction', "info");
+        addStep({message: 'form.status.signTransaction', type:"info"});
 
         await writeContract(config,{
           address: chain?.protocol_contracts?.BandoRouterProxy,
@@ -139,9 +142,11 @@ export const useTransactionHelpers = () => {
           chain: chain.chain_id,
           account: account?.address,      
         });
+        updateStep({message: 'form.status.signTransactionCompleted', type:"completed"});
       }
       clearStep();
     } catch (error) {
+      clearStep();
       showNotification("error", "Error in handleServiceRequest");
       console.error("Error in handleServiceRequest:", error);
       throw error;
