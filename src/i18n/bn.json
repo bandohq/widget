@@ -53,7 +53,10 @@
       "validatingReference": "রেফারেন্স যাচাই করা হচ্ছে",
       "signTransaction": "অনুগ্রহ করে লেনদেন স্বাক্ষর করুন",
       "aproveTokens": "প্রয়োজনীয় টোকেন অনুমোদন করুন",
-      "validateAllowance": "ভাতা যাচাই করা হচ্ছে"
+      "validateAllowance": "ভাতা যাচাই করা হচ্ছে",
+      "validatingReferenceCompleted": "রেফারেন্স সফলভাবে যাচাই করা হয়েছে",
+      "signTransactionCompleted": "লেনদেন সফলভাবে স্বাক্ষরিত হয়েছে",
+      "validateAllowanceCompleted": "টোকেন সফলভাবে অনুমোদিত হয়েছে"
     },
     "delivery": {
       "challenge": {

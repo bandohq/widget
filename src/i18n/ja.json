@@ -53,7 +53,10 @@
       "validatingReference": "参照を検証中",
       "signTransaction": "取引に署名してください",
       "aproveTokens": "必要なトークンを承認してください",
-      "validateAllowance": "許容量を検証中"
+      "validateAllowance": "許容量を検証中",
+      "validatingReferenceCompleted": "参照の検証に成功しました",
+      "signTransactionCompleted": "取引の署名が完了しました",
+      "validateAllowanceCompleted": "トークンの承認が完了しました"
     },
     "delivery": {
       "challenge": {

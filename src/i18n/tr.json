@@ -53,7 +53,10 @@
       "validatingReference": "Referans doğrulanıyor",
       "signTransaction": "Lütfen işlemi imzalayın",
       "aproveTokens": "Lütfen gerekli tokenleri onaylayın",
-      "validateAllowance": "İzin doğrulanıyor"
+      "validateAllowance": "İzin doğrulanıyor",
+      "validatingReferenceCompleted": "Referans başarıyla doğrulandı",
+      "signTransactionCompleted": "İşlem başarıyla imzalandı",
+      "validateAllowanceCompleted": "Tokenler başarıyla onaylandı"
     },
     "delivery": {
       "challenge": {

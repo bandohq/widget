@@ -53,7 +53,10 @@
       "validatingReference": "Convalida riferimento",
       "signTransaction": "Si prega di firmare la transazione",
       "aproveTokens": "Si prega di approvare i token richiesti",
-      "validateAllowance": "Convalida dell’assegno"
+      "validateAllowance": "Convalida dell’assegno",
+      "validatingReferenceCompleted": "Riferimento convalidato con successo",
+      "signTransactionCompleted": "Transazione firmata con successo",
+      "validateAllowanceCompleted": "Token approvati con successo"
     },
     "delivery": {
       "challenge": {
