@@ -6,17 +6,17 @@ import {
   ReactNode,
 } from "react";
 
-type StepType = "loading" | "info";
+type StepType = "loading" | "info" | "completed";
 
-type Step = {
+export type Step = {
   message: string;
   type: StepType;
 } | null;
 
 type StepsContextType = {
-  step: Step;
-  showSteps: boolean;
-  updateStep: (message: string, type?: StepType) => void;
+  steps: Step[];
+  addStep: (step: Step) => void;
+  updateStep: (step: Step) => void;
   clearStep: () => void;
 };
 
@@ -27,21 +27,25 @@ interface StepsProviderProps {
 }
 
 export function StepsProvider({ children }: StepsProviderProps) {
-  const [showSteps, setShowSteps] = useState(false);
-  const [step, setStep] = useState<Step>(null);
+  const [steps, setSteps] = useState<Step[]>([]);
 
-  const updateStep = useCallback((message: string, type: StepType) => {
-    setShowSteps(true);
-    setStep({ message, type });
+  const addStep = useCallback((step: Step) => {
+    setSteps((prevSteps) => [...prevSteps, step]);
+  }, []);
+
+  const updateStep = useCallback((step: Step) => {
+    setSteps((prevSteps) => {
+      if (prevSteps.length === 0) return [step];
+      return [...prevSteps.slice(0, -1), step];
+    });
   }, []);
 
   const clearStep = useCallback(() => {
-    setShowSteps(false);
-    setStep(null);
+    setSteps([]);
   }, []);
 
   return (
-    <StepsContext.Provider value={{ step, showSteps, updateStep, clearStep }}>
+    <StepsContext.Provider value={{ steps, addStep, updateStep, clearStep }}>
       {children}
     </StepsContext.Provider>
   );
