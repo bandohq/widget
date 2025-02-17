@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 
 export const Container = styled(Box)(({ theme, bgcolor }) => {
-    const backgroundColor = bgcolor === "info" ? theme.palette.info.light : bgcolor === "loading" ? theme.palette.action.selected : "white"
+    const backgroundColor = bgcolor === "info" ? theme.palette.info.light : bgcolor === "loading" ? theme.palette.action.selected : theme.palette.background.paper
     return {
         display: "flex",
         justifyItems: "center",
