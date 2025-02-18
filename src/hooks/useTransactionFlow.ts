@@ -9,12 +9,14 @@ import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
 import { useToken } from "./useToken";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+import { useSteps } from "../providers/StepsProvider/StepsProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
+  const { clearStep } = useSteps();
   const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     tokenKey,
@@ -42,7 +44,7 @@ export const useTransactionFlow = () => {
               product,
               token,
             });
-
+            clearStep();
             navigate(`/status/${data?.transaction_intent?.id}`, { state: { signature } });
           } catch (error) {
             showNotification("error", "Error handling the transaction signature");
