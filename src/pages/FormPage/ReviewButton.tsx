@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
@@ -13,6 +14,7 @@ import {
   isReferenceValid,
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -23,10 +25,11 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   referenceType,
   requiredFields: requiredFieldsProps,
 }) => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { account } = useAccount();
   const { showNotification, hideNotification } = useNotificationContext();
-  const { handleTransaction, isPending } = useTransactionFlow();
+  const { isPending } = useTransactionFlow();
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const [tokenAddress, reference, requiredFields] = useFieldValues(
@@ -36,6 +39,10 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   );
 
   const { chain: selectedChain } = useChain(account?.chainId);
+
+  const handleClick = () => {
+    navigate(navigationRoutes.formSteps);
+  };
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -63,7 +70,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     <BaseTransactionButton
       disabled={disabled || isPending || !tokenAddress}
       text={t("header.spend")}
-      onClick={handleTransaction}
+      onClick={handleClick}
       loading={isPending}
     />
   );

@@ -17,6 +17,7 @@ import { I18nProvider } from "./providers/I18nProvider/I18nProvider";
 import { CatalogProvider } from "./providers/CatalogProvider/CatalogProvider";
 import { QuotesProvider } from "./providers/QuotesProvider/QuotesProvider";
 import { NotificationProvider } from "./providers/AlertProvider/NotificationProvider";
+import { StepsProvider } from "./providers/StepsProvider/StepsProvider";
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -33,7 +34,9 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
                 <CatalogProvider>
                   <NotificationProvider>
                     <QuotesProvider>
-                      <AppRouter>{children}</AppRouter>
+                      <StepsProvider>
+                        <AppRouter>{children}</AppRouter>
+                      </StepsProvider>
                     </QuotesProvider>
                   </NotificationProvider>
                 </CatalogProvider>

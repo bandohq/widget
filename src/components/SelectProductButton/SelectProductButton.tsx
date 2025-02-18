@@ -1,5 +1,4 @@
 import { Avatar, Button } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { FormTypeProps } from "../../stores/form/types.js";
@@ -24,7 +23,7 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
-> = ({ formType, compact }) => {
+> = ({ formType, compact, readonly }) => {
   const [open, setOpen] = useState(false);
   const { product, brand: selectedBrand, updateProduct } = useProduct();
   const navigate = useNavigate();
@@ -32,6 +31,7 @@ export const SelectProductButton: React.FC<
 
   const handleButtonClick = (event: React.MouseEvent) => {
     event.stopPropagation();
+    if (readonly) return;
     setOpen(true);
   };
 
@@ -53,7 +53,7 @@ export const SelectProductButton: React.FC<
   const renderActionButton = () => (
     <Button
       size="small"
-      onClick={handleButtonClick}
+      onClick={readonly ? undefined : handleButtonClick}
       sx={{
         fontSize: "12px",
         color: palette.text.primary,
@@ -70,7 +70,9 @@ export const SelectProductButton: React.FC<
 
   return (
     <>
-      <SelectProductCard onClick={() => navigate(navigationRoutes.home)}>
+      <SelectProductCard
+        onClick={readonly ? undefined : () => navigate(navigationRoutes.home)}
+      >
         <CardContent formType={formType} compact={compact}>
           <CardTitle>You spend</CardTitle>
           <SelectProductCardHeader

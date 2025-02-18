@@ -49,6 +49,15 @@
     "spend": "Витратити"
   },
   "form": {
+    "status": {
+      "validatingReference": "Перевірка посилання",
+      "signTransaction": "Будь ласка, підпишіть транзакцію",
+      "aproveTokens": "Будь ласка, затвердіть необхідні токени",
+      "validateAllowance": "Перевірка дозволу",
+      "validatingReferenceCompleted": "Референс успішно перевірено",
+      "signTransactionCompleted": "Транзакцію успішно підписано",
+      "validateAllowanceCompleted": "Токени успішно схвалені"
+    },
     "delivery": {
       "challenge": {
         "answer": "Відповідь на виклик",
