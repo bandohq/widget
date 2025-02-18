@@ -1,5 +1,10 @@
-import { Collapse, useTheme } from "@mui/material";
-import { Container } from "./Steps.styles";
+import {
+  Collapse,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  useTheme,
+} from "@mui/material";
 import { CheckCircle, Info, SpinnerGap } from "@phosphor-icons/react";
 import { AnimatedCircularProgress } from "../../pages/StatusPage/StatusPage.style";
 import { useTranslation } from "react-i18next";
@@ -22,9 +27,10 @@ export const Step = ({ step }) => {
 
   return (
     <Collapse in={Boolean(step)}>
-      <Container bgcolor={step?.type}>
-        {StepIcon(step?.type)} {t(step?.message)}
-      </Container>
+      <ListItem>
+        <ListItemAvatar>{StepIcon(step?.type)}</ListItemAvatar>
+        <ListItemText primary={t(step?.message)} />
+      </ListItem>
     </Collapse>
   );
 };
