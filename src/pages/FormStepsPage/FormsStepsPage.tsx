@@ -8,7 +8,6 @@ import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
 import {
   Avatar,
   Card,
-  CardHeader,
   List,
   ListItem,
   ListItemAvatar,
@@ -41,7 +40,6 @@ export const FormsStepsPage = () => {
   return (
     <PageContainer>
       <Card>
-        <CardHeader title="Steps" />
         <List>
           <ListItem>
             <ListItemAvatar>
