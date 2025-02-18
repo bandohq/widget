@@ -6,6 +6,7 @@ export const navigationRoutes = {
   countries: 'countries',
   products: '/products',
   form: '/form',
+  formSteps: '/form-steps',
   routes: '/routes',
   settings: '/settings',
 };
@@ -25,6 +26,7 @@ export const navigationRoutes = {
     navigationRoutes.fromToken,
     navigationRoutes.routes,
     navigationRoutes.settings,
+    navigationRoutes.formSteps
   ]
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes

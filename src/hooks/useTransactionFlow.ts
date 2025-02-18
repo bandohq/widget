@@ -47,6 +47,7 @@ export const useTransactionFlow = () => {
             clearStep();
             navigate(`/status/${data?.transaction_intent?.id}`, { state: { signature } });
           } catch (error) {
+            clearStep();
             showNotification("error", "Error handling the transaction signature");
             console.error("Error handling the transaction signature:", error);
           }
