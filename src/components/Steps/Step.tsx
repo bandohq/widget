@@ -8,6 +8,7 @@ import {
 import { CheckCircle, Info, SpinnerGap } from "@phosphor-icons/react";
 import { AnimatedCircularProgress } from "../../pages/StatusPage/StatusPage.style";
 import { useTranslation } from "react-i18next";
+import { useSteps } from "../../providers/StepsProvider/StepsProvider";
 
 const StepIcon = (type: string) => {
   const theme = useTheme();
@@ -32,5 +33,16 @@ export const Step = ({ step }) => {
         <ListItemText primary={t(step?.message)} />
       </ListItem>
     </Collapse>
+  );
+};
+
+export const Steps = () => {
+  const { steps } = useSteps();
+  return (
+    <>
+      {steps.map((step, index) => (
+        <Step key={index} step={step} />
+      ))}
+    </>
   );
 };

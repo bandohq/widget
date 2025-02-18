@@ -30,13 +30,25 @@ export function StepsProvider({ children }: StepsProviderProps) {
   const [steps, setSteps] = useState<Step[]>([]);
 
   const addStep = useCallback((step: Step) => {
-    setSteps((prevSteps) => [...prevSteps, step]);
+    setSteps((prevSteps) => {
+      if (
+        prevSteps.some(
+          (s) => s?.message === step?.message && s?.type === step?.type
+        )
+      ) {
+        return prevSteps;
+      }
+      return [...prevSteps, step];
+    });
   }, []);
 
   const updateStep = useCallback((step: Step) => {
     setSteps((prevSteps) => {
       if (prevSteps.length === 0) return [step];
-      return [...prevSteps.slice(0, -1), step];
+      if (prevSteps[prevSteps.length - 1]?.message === step?.message) {
+        return prevSteps;
+      }
+      return prevSteps.map((s, i) => (i === prevSteps.length - 1 ? step : s));
     });
   }, []);
 

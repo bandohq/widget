@@ -10,6 +10,7 @@ import { useFetch } from "./useFetch";
 import { useToken } from "./useToken";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
+import { useCallback } from "react";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ export const useTransactionFlow = () => {
     },
   });
 
-  const handleTransaction = async () => {
+  const handleTransaction = useCallback(() => {
     mutate({
       reference: reference,
       required_fields: requiredFields,
@@ -72,7 +73,7 @@ export const useTransactionFlow = () => {
         wallet: account?.address,
       },
     });
-  };
+  }, [mutate, reference, requiredFields, product?.sku, chain?.key, quote?.digital_asset, quote?.digital_asset_amount, account?.address]);
 
   return {
     handleTransaction,

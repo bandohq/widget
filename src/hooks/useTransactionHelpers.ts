@@ -9,6 +9,7 @@ import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
+import { useCallback } from "react";
 
 
 export const useTransactionHelpers = () => {
@@ -42,7 +43,7 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const handleServiceRequest = async ({
+  const handleServiceRequest = useCallback(async ({
     txId,
     chain,
     account,
@@ -66,10 +67,12 @@ export const useTransactionHelpers = () => {
         txId,
         config
       );
+
       updateStep({message: 'form.status.validatingReferenceCompleted', type:"completed"});
   
       if (!isReferenceValid) {
         showNotification("error", "Invalid reference code");
+        clearStep();
         return;
       }
 
@@ -151,7 +154,7 @@ export const useTransactionHelpers = () => {
       console.error("Error in handleServiceRequest:", error);
       throw error;
     }
-  };
+  }, [addStep, updateStep, clearStep, showNotification]);
 
   return {
     approveERC20,

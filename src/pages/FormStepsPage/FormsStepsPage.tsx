@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
-import { useSteps } from "../../providers/StepsProvider/StepsProvider";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
 import {
   Avatar,
@@ -15,13 +14,12 @@ import {
 } from "@mui/material";
 import { ChainAvatar } from "./ChainAvatar";
 import { AvatarBadgedDefault } from "../../components/Avatar/Avatar";
-import { Step } from "../../components/Steps/Step";
+import { Steps } from "../../components/Steps/Step";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 
 export const FormsStepsPage = () => {
   const { t } = useTranslation();
   const { product } = useProduct();
-  const { steps } = useSteps();
   const { quote } = useQuotes();
   const { handleTransaction } = useTransactionFlow();
   useHeader(t("header.title"));
@@ -50,9 +48,7 @@ export const FormsStepsPage = () => {
               secondary={`${quote?.fiat_amount} ${quote?.fiat_currency}`}
             />
           </ListItem>
-          {steps.map((step, index) => (
-            <Step key={index} step={step} />
-          ))}
+          <Steps />
           <ListItem>
             <ListItemAvatar>{renderProductAvatar()}</ListItemAvatar>
             <ListItemText
