@@ -12,10 +12,10 @@ import { useTranslation } from "react-i18next";
 const StepIcon = (type: string) => {
   const theme = useTheme();
   return type === "info" ? (
-    <Info size={32} />
+    <Info size={32} fill={theme.palette.info.light} />
   ) : type === "loading" ? (
     <AnimatedCircularProgress>
-      <SpinnerGap size={25} />
+      <SpinnerGap size={25} fill={theme.palette.primary.main} />
     </AnimatedCircularProgress>
   ) : (
     <CheckCircle size={32} fill={theme.palette.success.light} />
