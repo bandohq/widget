@@ -10,6 +10,7 @@ import { StatusPage } from "./pages/StatusPage/StatusPage";
 import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
 import { CountryPage } from "./pages/CountryPage";
 import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
+import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 
 const routes: RouteObject[] = [
   {
@@ -19,6 +20,10 @@ const routes: RouteObject[] = [
   {
     path: navigationRoutes.form,
     element: <FormPage />,
+  },
+  {
+    path: navigationRoutes.formSteps,
+    element: <FormsStepsPage />,
   },
   {
     path: navigationRoutes.settings,
