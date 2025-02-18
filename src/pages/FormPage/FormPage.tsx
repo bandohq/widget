@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box } from "@mui/material";
 import { PageContainer } from "../../components/PageContainer";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
@@ -10,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import { SelectProductButton } from "../../components/SelectProductButton/SelectProductButton";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { DetailSection } from "./DetailSection";
-import { Steps } from "../../components/Steps/Steps";
 import { useSteps } from "../../providers/StepsProvider/StepsProvider";
 
 export const FormPage: React.FC = () => {
@@ -30,23 +28,20 @@ export const FormPage: React.FC = () => {
         readonly={steps.length > 0}
       />
       <SelectChainAndToken mb={2} readonly={Boolean(steps?.length > 0)} />
-      {product && !steps?.length && (
+      {product && (
         <DetailSection
           productType={product?.productType}
           referenceType={product?.referenceType}
           requiredFields={product?.requiredFields}
         />
       )}
-      <Steps />
 
-      {!steps?.length && (
-        <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
-          <ReviewButton
-            referenceType={product?.referenceType}
-            requiredFields={product?.requiredFields}
-          />
-        </Box>
-      )}
+      <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
+        <ReviewButton
+          referenceType={product?.referenceType}
+          requiredFields={product?.requiredFields}
+        />
+      </Box>
     </PageContainer>
   );
 };
