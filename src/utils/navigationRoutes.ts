@@ -26,7 +26,6 @@ export const navigationRoutes = {
     navigationRoutes.fromToken,
     navigationRoutes.routes,
     navigationRoutes.settings,
-    navigationRoutes.formSteps
   ]
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
