@@ -4,7 +4,7 @@ import { useFieldValues } from "../stores/form/useFieldValues.js";
 import { SelectTokenButtonForProducts } from "./SelectTokenButton/SelectTokenButtonForProducts";
 
 interface Props extends BoxProps {
-  readonly?: boolean;
+  readOnly?: boolean;
 }
 
 export const SelectChainAndToken: React.FC<Props> = (props) => {
@@ -33,7 +33,7 @@ export const SelectChainAndToken: React.FC<Props> = (props) => {
       <SelectTokenButtonForProducts
         formType="from"
         compact={isCompact}
-        readonly={props.readonly}
+        readOnly={props.readOnly}
       />
     </Box>
   );

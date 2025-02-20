@@ -25,9 +25,9 @@ export const FormPage: React.FC = () => {
       <SelectProductButton
         formType="from"
         compact
-        readonly={steps.length > 0}
+        readOnly={steps.length > 0}
       />
-      <SelectChainAndToken mb={2} readonly={Boolean(steps?.length > 0)} />
+      <SelectChainAndToken mb={2} readOnly={Boolean(steps?.length > 0)} />
       {product && (
         <DetailSection
           productType={product?.productType}
