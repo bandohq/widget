@@ -27,7 +27,7 @@ export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
     compact: boolean;
   }
-> = ({ formType, compact, readonly }) => {
+> = ({ formType, compact, readOnly }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { product } = useProduct();
@@ -51,7 +51,7 @@ export const SelectTokenButtonForProducts: React.FC<
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
   const handleClick = () => {
-    if (readonly) return;
+    if (readOnly) return;
     navigate(navigationRoutes.fromToken);
   };
 

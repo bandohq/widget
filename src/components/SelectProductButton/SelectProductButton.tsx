@@ -23,7 +23,7 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
-> = ({ formType, compact, readonly }) => {
+> = ({ formType, compact, readOnly }) => {
   const [open, setOpen] = useState(false);
   const { product, brand: selectedBrand, updateProduct } = useProduct();
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export const SelectProductButton: React.FC<
 
   const handleButtonClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    if (readonly) return;
+    if (readOnly) return;
     setOpen(true);
   };
 
@@ -53,7 +53,7 @@ export const SelectProductButton: React.FC<
   const renderActionButton = () => (
     <Button
       size="small"
-      onClick={readonly ? undefined : handleButtonClick}
+      onClick={readOnly ? undefined : handleButtonClick}
       sx={{
         fontSize: "12px",
         color: palette.text.primary,
@@ -71,7 +71,7 @@ export const SelectProductButton: React.FC<
   return (
     <>
       <SelectProductCard
-        onClick={readonly ? undefined : () => navigate(navigationRoutes.home)}
+        onClick={readOnly ? undefined : () => navigate(navigationRoutes.home)}
       >
         <CardContent formType={formType} compact={compact}>
           <CardTitle>You spend</CardTitle>
