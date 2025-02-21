@@ -31,15 +31,15 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           <ThemeProvider>
             <WalletProvider>
               <StoreProvider config={config} formRef={formRef}>
-                <CatalogProvider>
-                  <NotificationProvider>
-                    <QuotesProvider>
-                      <StepsProvider>
-                        <AppRouter>{children}</AppRouter>
-                      </StepsProvider>
-                    </QuotesProvider>
-                  </NotificationProvider>
-                </CatalogProvider>
+                <AppRouter>
+                  <CatalogProvider>
+                    <NotificationProvider>
+                      <QuotesProvider>
+                        <StepsProvider>{children}</StepsProvider>
+                      </QuotesProvider>
+                    </NotificationProvider>
+                  </CatalogProvider>
+                </AppRouter>
               </StoreProvider>
             </WalletProvider>
           </ThemeProvider>
