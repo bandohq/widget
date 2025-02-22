@@ -80,7 +80,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
     ? t("button.connectWallet")
-    : product && !quote && t("main.selectChainAndToken");
+    : product && !quote && t("main.selectToken");
   const cardTitle: string = t(`main.${formType}`);
 
   return (
