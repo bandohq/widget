@@ -49,6 +49,15 @@
     "spend": "ใช้จ่าย"
   },
   "form": {
+    "status": {
+      "validatingReference": "กำลังตรวจสอบข้อมูลอ้างอิง",
+      "signTransaction": "กรุณาเซ็นชื่อในธุรกรรม",
+      "aproveTokens": "กรุณาอนุมัติโทเค็นที่จำเป็น",
+      "validateAllowance": "กำลังตรวจสอบค่าเผื่อ",
+      "validatingReferenceCompleted": "การอ้างอิงได้รับการตรวจสอบสำเร็จ",
+      "signTransactionCompleted": "ธุรกรรมลงนามเรียบร้อยแล้ว",
+      "validateAllowanceCompleted": "โทเค็นได้รับการอนุมัติเรียบร้อยแล้ว"
+    },
     "delivery": {
       "challenge": {
         "answer": "คำตอบของคำถามท้าทาย",

@@ -6,6 +6,7 @@ export const navigationRoutes = {
   countries: 'countries',
   products: '/products',
   form: '/form',
+  formSteps: '/form-steps',
   routes: '/routes',
   settings: '/settings',
 };

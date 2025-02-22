@@ -49,6 +49,15 @@
     "spend": "花费"
   },
   "form": {
+    "status": {
+      "validatingReference": "正在验证参考",
+      "signTransaction": "请签署交易",
+      "aproveTokens": "请批准所需的代币",
+      "validateAllowance": "正在验证额度",
+      "validatingReferenceCompleted": "引用验证成功",
+      "signTransactionCompleted": "交易签署成功",
+      "validateAllowanceCompleted": "代币批准成功"
+    },
     "delivery": {
       "challenge": {
         "answer": "挑战答案",

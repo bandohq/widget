@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13-beta.17](https://github.com/bandohq/widget/compare/v0.1.13-beta.16...v0.1.13-beta.17) (2025-02-21)
+
+### [0.1.13-beta.16](https://github.com/bandohq/widget/compare/v0.1.13-beta.15...v0.1.13-beta.16) (2025-02-20)
+
+### [0.1.13-beta.15](https://github.com/bandohq/widget/compare/v0.1.13-beta.14...v0.1.13-beta.15) (2025-02-18)
+
+### [0.1.13-beta.14](https://github.com/bandohq/widget/compare/v0.1.13-beta.13...v0.1.13-beta.14) (2025-02-10)
+
+### [0.1.13-beta.13](https://github.com/bandohq/widget/compare/v0.1.13-beta.10...v0.1.13-beta.13) (2025-02-10)
+
+
+### Bug Fixes
+
+* Make more flexible products grid [#83](https://github.com/bandohq/widget/issues/83) ([72e319e](https://github.com/bandohq/widget/commit/72e319ef4972f97c4a8eb18c378bd0ef68c20cad))
+
+### [0.1.13-beta.11](https://github.com/bandohq/widget/compare/v0.1.13-beta.10...v0.1.13-beta.11) (2025-02-10)
+
+
+### Bug Fixes
+
+* Make more flexible products grid [#83](https://github.com/bandohq/widget/issues/83) ([72e319e](https://github.com/bandohq/widget/commit/72e319ef4972f97c4a8eb18c378bd0ef68c20cad))
+
 ### [0.1.13-beta.10](https://github.com/bandohq/widget/compare/v0.1.13-beta.9...v0.1.13-beta.10) (2025-02-08)
 
 ### [0.1.13-beta.9](https://github.com/bandohq/widget/compare/v0.1.13-beta.8...v0.1.13-beta.9) (2025-02-07)

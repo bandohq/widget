@@ -3,7 +3,11 @@ import { Box, useMediaQuery } from "@mui/material";
 import { useFieldValues } from "../stores/form/useFieldValues.js";
 import { SelectTokenButtonForProducts } from "./SelectTokenButton/SelectTokenButtonForProducts";
 
-export const SelectChainAndToken: React.FC<BoxProps> = (props) => {
+interface Props extends BoxProps {
+  readOnly?: boolean;
+}
+
+export const SelectChainAndToken: React.FC<Props> = (props) => {
   const prefersNarrowView = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
@@ -26,7 +30,11 @@ export const SelectChainAndToken: React.FC<BoxProps> = (props) => {
       }}
       {...props}
     >
-      <SelectTokenButtonForProducts formType="from" compact={isCompact} />
+      <SelectTokenButtonForProducts
+        formType="from"
+        compact={isCompact}
+        readOnly={props.readOnly}
+      />
     </Box>
   );
 };

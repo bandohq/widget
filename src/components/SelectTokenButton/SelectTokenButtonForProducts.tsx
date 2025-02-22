@@ -27,7 +27,7 @@ export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
     compact: boolean;
   }
-> = ({ formType, compact }) => {
+> = ({ formType, compact, readOnly }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { product } = useProduct();
@@ -38,17 +38,11 @@ export const SelectTokenButtonForProducts: React.FC<
     fetchQuote,
     isPurchasePossible,
   } = useQuotes();
-
+  const { account } = useAccount();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
-  const [chainId, tokenAddress] = useFieldValues(
-    FormKeyHelper.getChainKey(formType),
-    tokenKey
-  );
-  const { chain } = useChain(chainId);
+  const [tokenAddress] = useFieldValues(tokenKey);
+  const { chain } = useChain(account?.chainId);
   const { token } = useToken(chain, tokenAddress);
-  const { account } = useAccount({
-    chainType: chain?.network_type,
-  });
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
@@ -57,13 +51,14 @@ export const SelectTokenButtonForProducts: React.FC<
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
   const handleClick = () => {
+    if (readOnly) return;
     navigate(navigationRoutes.fromToken);
   };
 
   const renderWarning = () => {
     if (quote?.total_amount && !isPurchasePossible) {
       emitter.emit(WidgetEvent.InsufficientBalance, {
-        chainId: chainId,
+        chainId: account?.chainId,
         tokenAddress: tokenAddress,
       } as InsufficientBalance);
       return (
@@ -85,7 +80,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
     ? t("button.connectWallet")
-    : product && !token && t("main.selectToken");
+    : product && !quote && t("main.selectToken");
   const cardTitle: string = t(`main.${formType}`);
 
   return (
@@ -95,23 +90,14 @@ export const SelectTokenButtonForProducts: React.FC<
     >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
-        {!token && !product ? (
+        {!token && !product && !quote ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedSkeleton />}
             title="0"
             subheader="0 USD"
             compact={compact}
           />
-        ) : product && !token ? (
-          <SelectTokenCardHeader
-            avatar={<AvatarBadgedDefault />}
-            title={defaultPlaceholder}
-            subheader={`${parseFloat(product.price?.fiatValue)} ${
-              product.price?.fiatCurrency
-            }`}
-            compact={compact}
-          />
-        ) : product && token && quotePending ? (
+        ) : product && quotePending ? (
           <SelectTokenCardHeader
             avatar={
               <>
@@ -137,6 +123,15 @@ export const SelectTokenButtonForProducts: React.FC<
                 : undefined
             }
             selected={isSelected}
+            compact={compact}
+          />
+        ) : (product && !quote) || !token ? (
+          <SelectTokenCardHeader
+            avatar={<AvatarBadgedDefault />}
+            title={defaultPlaceholder}
+            subheader={`${parseFloat(product.price?.fiatValue)} ${
+              product.price?.fiatCurrency
+            }`}
             compact={compact}
           />
         ) : (
