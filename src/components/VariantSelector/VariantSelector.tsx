@@ -9,6 +9,7 @@ interface VariantSelectorProps {
     brandName?: string;
     imageUrl?: string;
     variants: Array<{
+      productType: string;
       price: { fiatValue: string };
     }>;
   } | null;
@@ -26,6 +27,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
   return (
     <BottomSheet open={open} onClose={onClose}>
       <DialogList
+        type={selectedBrand?.variants[0].productType}
         items={[...selectedBrand.variants].sort(
           (a, b) =>
             parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)

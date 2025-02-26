@@ -1,13 +1,13 @@
-import { Typography, Divider } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
-import { palette } from "../../themes/palettes";
 
 export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
   item,
   onClose,
 }) => {
   const { updateProduct } = useProduct();
+  const { palette } = useTheme();
   const navigate = useNavigate();
 
   const handleSelectProduct = () => {
@@ -51,11 +51,13 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
       <div
         onClick={handleSelectProduct}
         style={{
-          padding: "8px 10px",
+          padding: "15px 10px",
           display: "flex",
           width: "90%",
           margin: "0 auto",
           borderRadius: "5px",
+          backgroundColor: palette.grey[100],
+          alignItems: "center",
           justifyContent:
             item.productType === "topup" ? "space-between" : "center",
           cursor: "pointer",
@@ -67,7 +69,6 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
         </Typography>
         {item.productType === "topup" && ItemData()}
       </div>
-      <Divider />
     </>
   );
 };
