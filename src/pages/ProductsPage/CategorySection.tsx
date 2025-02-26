@@ -4,11 +4,9 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { DialogList } from "../../components/DialogList/DialogList";
-import { VariantItem } from "../../components/DialogList/VariantItem";
 import { useTranslation } from "react-i18next";
-import { BottomSheet } from "../../components/BottomSheet/BottomSheet";
 import { splitCamelCase } from "../../utils/truncateText";
+import { VariantSelector } from "../../components/VariantSelector/VariantSelector";
 
 export const CategorySection = ({ category, onMoreClick }) => {
   const { updateProduct, updateBrand } = useProduct();
@@ -86,22 +84,12 @@ export const CategorySection = ({ category, onMoreClick }) => {
       </BrandsContainer>
 
       {/* Variants Dialog */}
-      {selectedBrand && (
-        <BottomSheet open={open} onClose={() => setOpen(false)}>
-          <DialogList
-            items={[...selectedBrand.variants].sort(
-              (a, b) =>
-                parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
-            )}
-            onClose={() => setOpen(false)}
-            title={selectedBrand?.brandName || ""}
-            image={selectedBrand?.imageUrl || ""}
-            renderItem={(item) => (
-              <VariantItem item={item} onClose={() => setOpen(false)} />
-            )}
-          />
-        </BottomSheet>
-      )}
+      <VariantSelector
+        open={open}
+        onClose={() => setOpen(false)}
+        selectedBrand={selectedBrand}
+        onVariantSelect={() => setOpen(false)}
+      />
     </div>
   );
 };

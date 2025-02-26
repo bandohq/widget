@@ -11,11 +11,9 @@ import {
   SelectProductCard,
   SelectProductCardHeader,
 } from "./SelectProductButton.style.js";
-import { DialogList } from "../DialogList/DialogList.js";
-import { VariantItem } from "../DialogList/VariantItem.js";
 import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
 import { styled, useTheme } from "@mui/system";
-import { BottomSheet } from "../BottomSheet/BottomSheet.js";
+import { VariantSelector } from "../VariantSelector/VariantSelector.js";
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   padding: theme.spacing(1),
@@ -97,25 +95,12 @@ export const SelectProductButton: React.FC<
         </CardContent>
       </SelectProductCard>
 
-      {selectedBrand && (
-        <BottomSheet open={open} onClose={handleDialogClose}>
-          <DialogList
-            items={[...selectedBrand.variants].sort(
-              (a, b) =>
-                parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
-            )}
-            onClose={handleDialogClose}
-            title={selectedBrand.brandName || ""}
-            image={selectedBrand.imageUrl || ""}
-            renderItem={(item) => (
-              <VariantItem
-                item={item}
-                onClose={() => handleVariantSelect(item)}
-              />
-            )}
-          />
-        </BottomSheet>
-      )}
+      <VariantSelector
+        open={open}
+        onClose={() => setOpen(false)}
+        selectedBrand={selectedBrand}
+        onVariantSelect={(item) => handleVariantSelect(item)}
+      />
     </>
   );
 };
