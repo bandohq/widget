@@ -100,7 +100,10 @@ export const SelectProductButton: React.FC<
       {selectedBrand && (
         <BottomSheet open={open} onClose={handleDialogClose}>
           <DialogList
-            items={selectedBrand.variants || []}
+            items={[...selectedBrand.variants].sort(
+              (a, b) =>
+                parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
+            )}
             onClose={handleDialogClose}
             title={selectedBrand.brandName || ""}
             image={selectedBrand.imageUrl || ""}
