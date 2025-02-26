@@ -12,12 +12,8 @@ import {
   SelectProductCardHeader,
 } from "./SelectProductButton.style.js";
 import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
-import { styled, useTheme } from "@mui/system";
+import { useTheme } from "@mui/system";
 import { VariantSelector } from "../VariantSelector/VariantSelector.js";
-
-const StyledAvatar = styled(Avatar)(({ theme }) => ({
-  padding: theme.spacing(1),
-}));
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
@@ -33,8 +29,6 @@ export const SelectProductButton: React.FC<
     setOpen(true);
   };
 
-  const handleDialogClose = () => setOpen(false);
-
   const handleVariantSelect = (item: any) => {
     updateProduct(item);
     setOpen(false);
@@ -43,7 +37,7 @@ export const SelectProductButton: React.FC<
 
   const renderAvatar = () =>
     product ? (
-      <StyledAvatar alt={product.name} src={product.imageUrl} />
+      <Avatar variant="rounded" alt={product.name} src={product.imageUrl} />
     ) : (
       <AvatarBadgedDefault />
     );
