@@ -54,8 +54,13 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [data, fetchPending]);
 
   useEffect(() => {
-    if (quote && currentBalance >= quote.total_amount) {
+    if (
+      (quote && currentBalance >= quote.total_amount) ||
+      !quote?.total_amount
+    ) {
       setIsPurchasePossible(true);
+    } else {
+      setIsPurchasePossible(false);
     }
   }, [currentBalance, quote]);
 

@@ -15,7 +15,7 @@ import {
   SelectTokenCardHeader,
 } from "./SelectTokenButton.style.js";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAccount } from "@lifi/wallet-management";
 import { Avatar, Skeleton } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
@@ -55,7 +55,7 @@ export const SelectTokenButtonForProducts: React.FC<
     navigate(navigationRoutes.fromToken);
   };
 
-  const renderWarning = () => {
+  const renderWarning = useCallback(() => {
     if (quote?.total_amount && !isPurchasePossible) {
       emitter.emit(WidgetEvent.InsufficientBalance, {
         chainId: account?.chainId,
@@ -75,7 +75,7 @@ export const SelectTokenButtonForProducts: React.FC<
         </Box>
       );
     }
-  };
+  }, [quote?.total_amount, isPurchasePossible, account?.chainId, tokenAddress]);
 
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
