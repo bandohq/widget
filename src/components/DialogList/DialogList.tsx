@@ -6,15 +6,17 @@ import { ImageAvatar } from "../Avatar/Avatar";
 import { splitCamelCase } from "../../utils/truncateText";
 
 interface DialogListProps {
-  onClose: () => void;
+  type: string;
   title: string;
   image: string;
   items: Array<any>;
+  onClose: () => void;
   renderItem: (item: any, index: number) => React.ReactNode;
 }
 
 export const DialogList: React.FC<DialogListProps> = ({
   onClose,
+  type,
   title,
   image,
   items,
@@ -26,7 +28,7 @@ export const DialogList: React.FC<DialogListProps> = ({
     count: items.length,
     overscan: 5,
     getScrollElement: () => scrollElementRef.current,
-    estimateSize: () => 60,
+    estimateSize: () => (type === "topup" ? 100 : 70),
   });
 
   return (
