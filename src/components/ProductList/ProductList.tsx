@@ -4,9 +4,10 @@ import { List, ListItemIcon, ListItemText, Collapse } from "@mui/material";
 import { Brand, Variant } from "../../providers/CatalogProvider/types";
 import { SettingsListItemButton } from "../SettingsListItemButton";
 import { ImageAvatar } from "../Avatar/Avatar";
-import { Dialog } from "../Dialog";
 import { DialogList } from "../DialogList/DialogList";
 import { VariantItem } from "../DialogList/VariantItem";
+import { BottomSheet } from "../BottomSheet/BottomSheet";
+import { splitCamelCase } from "../../utils/truncateText";
 
 interface ProductListProps {
   brands: Brand[];
@@ -87,7 +88,7 @@ export const ProductList: React.FC<ProductListProps> = ({
                         }}
                       />
                     </ListItemIcon>
-                    <ListItemText primary={brand.brandName} />
+                    <ListItemText primary={splitCamelCase(brand.brandName)} />
                   </SettingsListItemButton>
                 </div>
               );
@@ -97,9 +98,12 @@ export const ProductList: React.FC<ProductListProps> = ({
       </Collapse>
 
       {selectedBrand && (
-        <Dialog open={open} onClose={() => setOpen(false)}>
+        <BottomSheet open={open} onClose={() => setOpen(false)}>
           <DialogList
-            items={selectedBrand.variants}
+            items={[...selectedBrand.variants].sort(
+              (a, b) =>
+                parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
+            )}
             onClose={() => setOpen(false)}
             title={selectedBrand.brandName}
             image={selectedBrand.imageUrl}
@@ -113,7 +117,7 @@ export const ProductList: React.FC<ProductListProps> = ({
               />
             )}
           />
-        </Dialog>
+        </BottomSheet>
       )}
     </>
   );

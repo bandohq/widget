@@ -11,11 +11,11 @@ import {
   SelectProductCard,
   SelectProductCardHeader,
 } from "./SelectProductButton.style.js";
-import { Dialog } from "../Dialog.js";
 import { DialogList } from "../DialogList/DialogList.js";
 import { VariantItem } from "../DialogList/VariantItem.js";
 import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
 import { styled, useTheme } from "@mui/system";
+import { BottomSheet } from "../BottomSheet/BottomSheet.js";
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   padding: theme.spacing(1),
@@ -98,7 +98,7 @@ export const SelectProductButton: React.FC<
       </SelectProductCard>
 
       {selectedBrand && (
-        <Dialog open={open} onClose={handleDialogClose}>
+        <BottomSheet open={open} onClose={handleDialogClose}>
           <DialogList
             items={selectedBrand.variants || []}
             onClose={handleDialogClose}
@@ -111,7 +111,7 @@ export const SelectProductButton: React.FC<
               />
             )}
           />
-        </Dialog>
+        </BottomSheet>
       )}
     </>
   );
