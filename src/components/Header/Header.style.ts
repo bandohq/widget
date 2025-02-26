@@ -51,7 +51,7 @@ export const WalletButton = styled(Button, {
   padding: theme.spacing(1, 1.5),
   maxHeight: 40,
   fontSize: '0.875rem',
-  fontWeight: 600,
+  fontWeight: 400,
   borderRadius: theme.shape.borderRadius * 2,
   '&:hover': {
     backgroundColor: getContrastAlphaColor(theme, 0.04),
