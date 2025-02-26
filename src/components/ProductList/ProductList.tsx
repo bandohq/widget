@@ -4,9 +4,8 @@ import { List, ListItemIcon, ListItemText, Collapse } from "@mui/material";
 import { Brand, Variant } from "../../providers/CatalogProvider/types";
 import { SettingsListItemButton } from "../SettingsListItemButton";
 import { ImageAvatar } from "../Avatar/Avatar";
-import { Dialog } from "../Dialog";
-import { DialogList } from "../DialogList/DialogList";
-import { VariantItem } from "../DialogList/VariantItem";
+import { splitCamelCase } from "../../utils/truncateText";
+import { VariantSelector } from "../VariantSelector/VariantSelector";
 
 interface ProductListProps {
   brands: Brand[];
@@ -87,7 +86,7 @@ export const ProductList: React.FC<ProductListProps> = ({
                         }}
                       />
                     </ListItemIcon>
-                    <ListItemText primary={brand.brandName} />
+                    <ListItemText primary={splitCamelCase(brand.brandName)} />
                   </SettingsListItemButton>
                 </div>
               );
@@ -96,25 +95,15 @@ export const ProductList: React.FC<ProductListProps> = ({
         </div>
       </Collapse>
 
-      {selectedBrand && (
-        <Dialog open={open} onClose={() => setOpen(false)}>
-          <DialogList
-            items={selectedBrand.variants}
-            onClose={() => setOpen(false)}
-            title={selectedBrand.brandName}
-            image={selectedBrand.imageUrl}
-            renderItem={(item: Variant) => (
-              <VariantItem
-                item={item}
-                onClose={() => {
-                  setOpen(false);
-                  onSelectVariant(item);
-                }}
-              />
-            )}
-          />
-        </Dialog>
-      )}
+      <VariantSelector
+        open={open}
+        onClose={() => setOpen(false)}
+        selectedBrand={selectedBrand}
+        onVariantSelect={(item) => {
+          setOpen(false);
+          onSelectVariant(item);
+        }}
+      />
     </>
   );
 };

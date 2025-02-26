@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import CloseIcon from "@mui/icons-material/Close";
 import { ImageAvatar } from "../Avatar/Avatar";
+import { splitCamelCase } from "../../utils/truncateText";
 
 interface DialogListProps {
   onClose: () => void;
@@ -56,7 +57,7 @@ export const DialogList: React.FC<DialogListProps> = ({
             marginTop: 2,
           }}
         >
-          {title}
+          {splitCamelCase(title)}
         </Typography>
         <ImageAvatar
           hideName

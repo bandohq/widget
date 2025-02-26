@@ -326,7 +326,7 @@ export const createTheme = (
       MuiListItemText: {
         styleOverrides: {
           primary: ({ theme }) => ({
-            fontWeight: 600,
+            fontWeight: 400,
             fontSize: '1.125rem',
             lineHeight: '1.2778',
             color: theme.palette.text.primary,

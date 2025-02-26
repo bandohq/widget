@@ -6,10 +6,12 @@ import { useHeader } from "../../../hooks/useHeader";
 import { useCatalogContext } from "../../../providers/CatalogProvider/CatalogProvider";
 import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 import { ProductList } from "../../../components/ProductList/ProductList";
+import { useTranslation } from "react-i18next";
 
 export const CategoryPage = () => {
   const { category } = useParams(); // productType
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { products, filteredBrands, fuzzySearchBrands, isLoading } =
     useCatalogContext();
   const { updateProduct } = useProduct();
@@ -33,7 +35,7 @@ export const CategoryPage = () => {
     navigate(`/`);
   };
 
-  useHeader(category);
+  useHeader(t(`main.${category}`));
 
   return (
     <PageContainer>
