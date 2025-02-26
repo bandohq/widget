@@ -31,7 +31,13 @@ export const DialogList: React.FC<DialogListProps> = ({
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "12px 12px 0 0",
+        }}
+      >
         <IconButton
           edge="start"
           color="inherit"
@@ -66,8 +72,8 @@ export const DialogList: React.FC<DialogListProps> = ({
           sx={{
             maxWidth: "80px",
             width: "100%",
-            height: "auto",
-            minHeight: "100px",
+            minHeight: "80px",
+            borderRadius: "12px",
           }}
         />
       </div>
