@@ -35,10 +35,11 @@ export const NavigationHeader: React.FC = () => {
 
   return (
     <>
-      <HeaderAppBar elevation={0}>
-        {isBackButtonVisible ? <BackButton onClick={navigateBack} /> : null}
-        {splitSubvariant ? (
-          <Box flex={1}>
+      {(isBackButtonVisible || !hiddenUI?.includes(HiddenUI.Header)) && (
+        <HeaderAppBar elevation={0}>
+          {isBackButtonVisible ? <BackButton onClick={navigateBack} /> : null}
+          {splitSubvariant ? (
+            <Box flex={1}>
             <SplitWalletMenuButton />
           </Box>
         ) : (
@@ -57,7 +58,7 @@ export const NavigationHeader: React.FC = () => {
             path={navigationRoutes.home}
             element={
               <HeaderControlsContainer>
-                <SettingsButton />
+                {!hiddenUI?.includes(HiddenUI.Header) && <SettingsButton />}
                 {variant === "drawer" &&
                 !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (
                   <CloseDrawerButton header="navigation" />
@@ -66,8 +67,9 @@ export const NavigationHeader: React.FC = () => {
             }
           />
           <Route path="*" element={element || <Box width={28} height={40} />} />
-        </Routes>
-      </HeaderAppBar>
+          </Routes>
+        </HeaderAppBar>
+      )}
     </>
   );
 };

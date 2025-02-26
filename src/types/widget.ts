@@ -113,6 +113,7 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
     countries = 'countries',
     WalletMenu = 'walletMenu',
     IntegratorStepDetails = 'integratorStepDetails',
+    Header = 'header',
   }
   export type HiddenUIType = `${HiddenUI}`
   
