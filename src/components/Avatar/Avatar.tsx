@@ -54,7 +54,7 @@ export const ImageAvatar: React.FC<{
           style={{
             fontSize: "12px",
             textAlign: "center",
-            marginTop: "auto",
+            marginTop: "4px",
           }}
         >
           {truncateText(name, 9)}
