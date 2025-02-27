@@ -58,7 +58,7 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {!status?.product?.logo_url ? (
+        {!status?.product?.logoUrl ? (
           <Box
             sx={{
               width: "40%",
