@@ -59,7 +59,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   }, [tokenAddress, reference, referenceType, requiredFields]);
 
   useEffect(() => {
-    if (!selectedChain?.is_active) {
+    if (account?.isConnected && !selectedChain?.is_active) {
       showNotification("error", t("error.message.unavailableChain"), true);
     } else {
       hideNotification();
