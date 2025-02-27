@@ -58,7 +58,7 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {!status?.product?.logo_url ? (
+        {!status?.product?.logoUrl ? (
           <Box
             sx={{
               width: "40%",
@@ -68,7 +68,7 @@ export const SuccessView = ({ status }) => {
             <ImageAvatar
               hideName
               name={status?.product?.name || ""}
-              src={status?.product?.logo_url}
+              src={status?.product?.logoUrl}
               sx={{
                 width: "50%",
                 height: "45px",
