@@ -158,7 +158,8 @@
       "slippageThreshold": "L'effet de glissement est supérieur au seuil défini. Veuillez demander un nouvel itinéraire pour obtenir un nouveau devis.",
       "transactionFailed": "Veuillez consulter l'explorateur de blocs pour plus d'informations.",
       "unknown": "Veuillez réessayer ou contacter le support.",
-      "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction."
+      "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
+      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard"
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",

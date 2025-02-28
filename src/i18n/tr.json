@@ -156,7 +156,8 @@
       "signatureRejected": "İşlemi tamamlamak için imzanız gerekiyor. {{chainName}} üzerinde {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} cüzdanınızda bulunmaktadır.",
       "slippageThreshold": "Slipaj, tanımlanan eşikten daha büyük. Yeni bir fiyat teklifi almak için lütfen yeni bir rota isteyin.",
       "transactionCanceled": "İşlem iptal edildi.",
-      "unknown": "Lütfen tekrar deneyin veya desteğe başvurun."
+      "unknown": "Lütfen tekrar deneyin veya desteğe başvurun.",
+      "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin"
     },
     "title": {
       "allowanceRequired": "İzin miktarı yetersiz",

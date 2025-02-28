@@ -1,23 +1,23 @@
-import { QueryClientProvider } from "@tanstack/react-query";
-import type { PropsWithChildren } from "react";
-import { Fragment } from "react";
-import { MemoryRouter, useInRouterContext } from "react-router-dom";
-import { PageEntered } from "./components/PageEntered";
-import { queryClient } from "./config/queryClient";
-import { ThemeProvider } from "./providers/ThemeProvider/ThemeProvider";
-import { WalletProvider } from "./providers/WalletProvider/WalletProvider";
+import { QueryClientProvider } from '@tanstack/react-query';
+import type { PropsWithChildren } from 'react';
+import { Fragment } from 'react';
+import { MemoryRouter, useInRouterContext } from 'react-router-dom';
+import { PageEntered } from './components/PageEntered';
+import { queryClient } from './config/queryClient';
+import { ThemeProvider } from './providers/ThemeProvider/ThemeProvider';
+import { WalletProvider } from './providers/WalletProvider/WalletProvider';
 import {
   WidgetProvider,
   useWidgetConfig,
-} from "./providers/WidgetProvider/WidgetProvider";
-import { StoreProvider } from "./stores/StoreProvider";
-import { URLSearchParamsBuilder } from "./stores/form/URLSearchParamsBuilder";
-import type { WidgetConfigProps } from "./types/widget";
-import { I18nProvider } from "./providers/I18nProvider/I18nProvider";
-import { CatalogProvider } from "./providers/CatalogProvider/CatalogProvider";
-import { QuotesProvider } from "./providers/QuotesProvider/QuotesProvider";
-import { NotificationProvider } from "./providers/AlertProvider/NotificationProvider";
-import { StepsProvider } from "./providers/StepsProvider/StepsProvider";
+} from './providers/WidgetProvider/WidgetProvider';
+import { StoreProvider } from './stores/StoreProvider';
+import { URLSearchParamsBuilder } from './stores/form/URLSearchParamsBuilder';
+import type { WidgetConfigProps } from './types/widget';
+import { I18nProvider } from './providers/I18nProvider/I18nProvider';
+import { CatalogProvider } from './providers/CatalogProvider/CatalogProvider';
+import { QuotesProvider } from './providers/QuotesProvider/QuotesProvider';
+import { NotificationProvider } from './providers/AlertProvider/NotificationProvider';
+import { StepsProvider } from './providers/StepsProvider/StepsProvider';
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -29,19 +29,19 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
       <WidgetProvider config={config}>
         <I18nProvider>
           <ThemeProvider>
-            <WalletProvider>
-              <StoreProvider config={config} formRef={formRef}>
-                <AppRouter>
-                  <CatalogProvider>
-                    <NotificationProvider>
+            <NotificationProvider>
+              <WalletProvider>
+                <StoreProvider config={config} formRef={formRef}>
+                  <AppRouter>
+                    <CatalogProvider>
                       <QuotesProvider>
                         <StepsProvider>{children}</StepsProvider>
                       </QuotesProvider>
-                    </NotificationProvider>
-                  </CatalogProvider>
-                </AppRouter>
-              </StoreProvider>
-            </WalletProvider>
+                    </CatalogProvider>
+                  </AppRouter>
+                </StoreProvider>
+              </WalletProvider>
+            </NotificationProvider>
           </ThemeProvider>
         </I18nProvider>
       </WidgetProvider>
