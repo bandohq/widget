@@ -95,7 +95,7 @@ export const useTransactionHelpers = () => {
 
         await writeContract(config,{
           value,
-          address: chain?.ProtocolContracts?.BandoRouterProxy,
+          address: chain?.protocolContracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
           args: [serviceID, payload],
@@ -106,7 +106,7 @@ export const useTransactionHelpers = () => {
       } else {
         addStep({message: 'form.status.aproveTokens', type:"info"});
         await approveERC20(
-          chain?.ProtocolContracts?.BandoRouterProxy,
+          chain?.protocolContracts?.BandoRouterProxy,
           parseUnits(quote?.totalAmount.toString(), token?.decimals),
           token.address,
           account,
@@ -115,7 +115,7 @@ export const useTransactionHelpers = () => {
         );
         updateStep({message:'form.status.validateAllowance', type:"loading"});
         await checkAllowance(
-          chain?.ProtocolContracts?.BandoRouterProxy,
+          chain?.protocolContracts?.BandoRouterProxy,
           token.address,
           account,
           chain,
@@ -138,7 +138,7 @@ export const useTransactionHelpers = () => {
         addStep({message: 'form.status.signTransaction', type:"info"});
 
         await writeContract(config,{
-          address: chain?.ProtocolContracts?.BandoRouterProxy,
+          address: chain?.protocolContracts?.BandoRouterProxy,
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],
