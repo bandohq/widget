@@ -55,17 +55,17 @@ export interface CoinKey {
 
 export interface Chain {
   key: string;          
-  network_type: ChainType; // Type of the chain (EVM, SVM, UTXO)
+  networkType: ChainType; // Type of the chain (EVM, SVM, UTXO)
   name: string;
   coin: CoinKey;        // Information about the native currency
   id: number;           // Unique ID for the chain
-  chain_id: number;
+  chainId: number;
   mainnet: boolean;
-  rpc_url: string;
-  logo_url?: string;
-  is_testnet: boolean;
-  is_active: boolean;
-  protocol_contracts?: ProtocolContracts;
+  rpcUrl: string;
+  logoUrl?: string;
+  isTestnet: boolean;
+  isActive: boolean;
+  protocolContracts?: ProtocolContracts;
 }
 
 export interface ChainWithNativeToken extends Chain {

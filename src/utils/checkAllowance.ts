@@ -21,7 +21,7 @@ export const checkAllowance = async (
         abi: ERC20AllowanceABI,
         functionName: "allowance",
         args: [account?.address, spenderAddress],
-        chainId: chain?.chain_id,
+        chainId: chain?.chainId,
       }) as bigint;
 
       if (allowance > BigInt(0)) {

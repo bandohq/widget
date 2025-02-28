@@ -81,12 +81,12 @@ export const useTransactionHelpers = () => {
           (item) => item.name === "requestService"
         );
 
-        const weiAmount = parseUnits(quote?.digital_asset_amount.toString(), token?.decimals);
-        const value = parseUnits(quote?.total_amount.toString(), token?.decimals);
+        const weiAmount = parseUnits(quote?.digitalAssetAmount.toString(), token?.decimals);
+        const value = parseUnits(quote?.totalAmount.toString(), token?.decimals);
 
         const payload = {
           payer: account?.address,
-          fiatAmount: quote?.fiat_amount,
+          fiatAmount: quote?.fiatAmount,
           serviceRef: txId,
           weiAmount
         };
@@ -95,7 +95,7 @@ export const useTransactionHelpers = () => {
 
         await writeContract(config,{
           value,
-          address: chain?.protocol_contracts?.BandoRouterProxy,
+          address: chain?.ProtocolContracts?.BandoRouterProxy,
           abi: [requestServiceABI],
           functionName: "requestService",
           args: [serviceID, payload],
@@ -106,8 +106,8 @@ export const useTransactionHelpers = () => {
       } else {
         addStep({message: 'form.status.aproveTokens', type:"info"});
         await approveERC20(
-          chain?.protocol_contracts?.BandoRouterProxy,
-          parseUnits(quote?.total_amount.toString(), token?.decimals),
+          chain?.ProtocolContracts?.BandoRouterProxy,
+          parseUnits(quote?.totalAmount.toString(), token?.decimals),
           token.address,
           account,
           chain,
@@ -115,7 +115,7 @@ export const useTransactionHelpers = () => {
         );
         updateStep({message:'form.status.validateAllowance', type:"loading"});
         await checkAllowance(
-          chain?.protocol_contracts?.BandoRouterProxy,
+          chain?.ProtocolContracts?.BandoRouterProxy,
           token.address,
           account,
           chain,
@@ -129,16 +129,16 @@ export const useTransactionHelpers = () => {
 
         const payload = {
           payer: account?.address,
-          fiatAmount: quote?.fiat_amount,
+          fiatAmount: quote?.fiatAmount,
           serviceRef: txId,
           token: token.address,
-          tokenAmount: parseUnits(quote?.digital_asset_amount.toString(), token?.decimals),
+          tokenAmount: parseUnits(quote?.digitalAssetAmount.toString(), token?.decimals),
         };
 
         addStep({message: 'form.status.signTransaction', type:"info"});
 
         await writeContract(config,{
-          address: chain?.protocol_contracts?.BandoRouterProxy,
+          address: chain?.ProtocolContracts?.BandoRouterProxy,
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],

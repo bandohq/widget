@@ -6,7 +6,7 @@ export const useTokens = (chain: Chain) => {
         url:`tokens/${chain?.key}/`,
         method: 'GET',
         queryOptions: {
-            queryKey: ['tokens', chain?.chain_id],
+            queryKey: ['tokens', chain?.chainId],
             refetchInterval: 300_000,
             staleTime: 300_000,
             enabled: !!chain,

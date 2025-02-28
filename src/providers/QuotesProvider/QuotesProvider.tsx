@@ -1,14 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useFetch } from "../../hooks/useFetch";
-import { useAccount } from "@lifi/wallet-management";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useFetch } from '../../hooks/useFetch';
+import { useAccount } from '@lifi/wallet-management';
 
 interface QuoteData {
-  digital_asset_amount: number;
-  digital_asset: string;
-  total_amount: number;
-  fee_amount: number;
-  fiat_amount: number;
-  fiat_currency: string;
+  digitalAssetAmount: number;
+  digitalAsset: string;
+  totalAmount: number;
+  feeAmount: number;
+  fiatAmount: number;
+  fiatCurrency: string;
 }
 
 interface QuotesContextType {
@@ -39,10 +39,10 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     mutate,
     isPending: fetchPending,
   } = useFetch({
-    url: "quotes/",
-    method: "POST",
+    url: 'quotes/',
+    method: 'POST',
     queryOptions: {
-      queryKey: ["quote"],
+      queryKey: ['quote'],
     },
   });
 
@@ -54,10 +54,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [data, fetchPending]);
 
   useEffect(() => {
-    if (
-      (quote && currentBalance >= quote.total_amount) ||
-      !quote?.total_amount
-    ) {
+    if ((quote && currentBalance >= quote.totalAmount) || !quote?.totalAmount) {
       setIsPurchasePossible(true);
     } else {
       setIsPurchasePossible(false);
@@ -75,9 +72,9 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   ) => {
     mutate({
       sku,
-      fiat_currency: fiatCurrency,
-      digital_asset: digitalAsset,
-      chain_id: account?.chainId,
+      fiatCurrency,
+      digitalAsset,
+      chainId: account?.chainId,
     });
   };
 
@@ -103,7 +100,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useQuotes = (): QuotesContextType => {
   const context = useContext(QuotesContext);
   if (!context) {
-    throw new Error("useQuotes must be used within a QuotesProvider");
+    throw new Error('useQuotes must be used within a QuotesProvider');
   }
   return context;
 };
