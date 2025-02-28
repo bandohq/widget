@@ -156,7 +156,8 @@
       "signatureRejected": "交易需要您的签名才能完成。",
       "slippageThreshold": "滑点超过了预设值，请选择其他路径并获取新的价格。",
       "transactionCanceled": "交易已取消。",
-      "unknown": "出现未知错误，请稍后再试或联系客服。"
+      "unknown": "出现未知错误，请稍后再试或联系客服。",
+      "quoteFailed": "获取报价时出错，请稍后再试"
     },
     "title": {
       "allowanceRequired": "支出限额不足",

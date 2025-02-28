@@ -159,7 +159,8 @@
       "transactionNotSent": "La transacción no fue enviada.",
       "transactionSimulationFailed": "La transacción no pudo ejecutarse en simulación.",
       "unknown": "Por favor, inténtalo de nuevo o contacta soporte.",
-      "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución."
+      "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución.",
+      "quoteFailed": "Error al cotizar, intente más tarde"
     },
     "title": {
       "allowanceRequired": "Autorización insuficiente",

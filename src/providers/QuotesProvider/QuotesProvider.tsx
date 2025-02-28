@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { useAccount } from '@lifi/wallet-management';
+import { useProduct } from '../../stores/ProductProvider/ProductProvider';
+import { useNotificationContext } from '../AlertProvider/NotificationProvider';
+import { useTranslation } from 'react-i18next';
 
 interface QuoteData {
   digitalAssetAmount: number;
@@ -28,16 +31,20 @@ const QuotesContext = createContext<QuotesContextType | undefined>(undefined);
 export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { showNotification } = useNotificationContext();
+  const { account } = useAccount();
+  const { product } = useProduct();
+  const { t } = useTranslation();
   const [quote, setQuote] = useState<QuoteData | null>(null);
   const [currentBalance, setCurrentBalance] = useState<bigint | number>(0);
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const { account } = useAccount();
 
   const {
     data,
     mutate,
     isPending: fetchPending,
+    error,
   } = useFetch({
     url: 'quotes/',
     method: 'POST',
@@ -45,6 +52,12 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       queryKey: ['quote'],
     },
   });
+
+  useEffect(() => {
+    if (error) {
+      showNotification('error', t('error.message.quoteFailed'));
+    }
+  }, [error]);
 
   useEffect(() => {
     setIsPending(fetchPending);
@@ -80,7 +93,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     setQuote(null);
-  }, [account?.chainId]);
+  }, [account?.chainId, product?.sku]);
 
   return (
     <QuotesContext.Provider
