@@ -58,7 +58,7 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {!status?.product?.logo_url ? (
+        {!status?.product?.logoUrl ? (
           <Box
             sx={{
               width: "40%",
@@ -68,7 +68,7 @@ export const SuccessView = ({ status }) => {
             <ImageAvatar
               hideName
               name={status?.product?.name || ""}
-              src={status?.product?.logo_url}
+              src={status?.product?.logoUrl}
               sx={{
                 width: "50%",
                 height: "45px",
@@ -83,7 +83,7 @@ export const SuccessView = ({ status }) => {
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px">
-          {status?.productType + " " + status?.product?.name}
+          {t(`main.${status?.productType}`) + " " + status?.product?.name}
           {" - "}
           {isStatusCompleted &&
             status?.fiatUnitPrice + "" + status?.fiatCurrency}
