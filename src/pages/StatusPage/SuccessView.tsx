@@ -67,7 +67,7 @@ export const SuccessView = ({ status }) => {
           >
             <ImageAvatar
               hideName
-              name={status?.product?.name || ''}
+              name={status?.product?.name || ""}
               src={status?.product?.logoUrl}
               sx={{
                 width: '50%',
@@ -83,8 +83,8 @@ export const SuccessView = ({ status }) => {
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px">
-          {t(`main.${status?.productType}`) + ' ' + status?.product?.name}
-          {' - '}
+          {t(`main.${status?.productType}`) + " " + status?.product?.name}
+          {" - "}
           {isStatusCompleted &&
             status?.fiatUnitPrice + '' + status?.fiatCurrency}
         </StatusTitle>
