@@ -11,10 +11,12 @@ import { useToken } from "./useToken";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
+import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
+  const { integrator } = useWidgetConfig();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
   const { clearStep } = useSteps();
@@ -71,6 +73,7 @@ export const useTransactionFlow = () => {
         quantity: 1,
         amount: quote?.digital_asset_amount,
         wallet: account?.address,
+        integrator,
       },
     });
   }, [mutate, reference, requiredFields, product?.sku, chain?.key, quote?.digital_asset, quote?.digital_asset_amount, account?.address]);
