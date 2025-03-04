@@ -23,9 +23,10 @@ export interface _Chain {
   name: string
   coin: any
   chain_id: number
+  chainId: number
   id: number
   mainnet: boolean
-  logo_url: string
+  logoUrl: string
 }
 
 export interface BaseToken {

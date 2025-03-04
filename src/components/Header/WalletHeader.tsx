@@ -56,7 +56,7 @@ export const WalletMenuButton: React.FC = () => {
   const activeAccount =
     (fromChain
       ? accounts.find(
-          (account) => account.chainType === fromChain?.network_type
+          (account) => account.chainType === fromChain?.networkType
         )
       : undefined) || account;
 

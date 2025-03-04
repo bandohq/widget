@@ -16,7 +16,7 @@ export interface StaticToken extends BaseToken {
   decimals: number;
   name: string;
   coinKey?: any;
-  image_url?: string;
+  imageUrl?: string;
 }
 
 export const TokenAvatar: React.FC<{
@@ -25,7 +25,7 @@ export const TokenAvatar: React.FC<{
   isLoading?: boolean;
   sx?: SxProps<Theme>;
 }> = ({ token, chain, isLoading, sx }) => {
-  if (!chain || !token?.image_url) {
+  if (!chain || !token?.imageUrl) {
     return <TokenAvatarFallback token={token} isLoading={isLoading} sx={sx} />;
   }
   return (
@@ -70,7 +70,7 @@ export const TokenAvatarBase: React.FC<{
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       badgeContent={
         chain ? (
-          <SmallAvatar src={chain.logo_url} alt={chain.name}>
+          <SmallAvatar src={chain.logoUrl} alt={chain.name}>
             {chain.name[0]}
           </SmallAvatar>
         ) : (
@@ -79,7 +79,7 @@ export const TokenAvatarBase: React.FC<{
       }
       sx={sx}
     >
-      <AvatarMasked src={token?.image_url} alt={token?.symbol}>
+      <AvatarMasked src={token?.imageUrl} alt={token?.symbol}>
         {token?.symbol?.[0]}
       </AvatarMasked>
     </Badge>

@@ -101,7 +101,7 @@ export const SelectTokenButtonForProducts: React.FC<
           <SelectTokenCardHeader
             avatar={
               <>
-                <Avatar src={token.image_url} alt={token.symbol}>
+                <Avatar src={token.imageUrl} alt={token.symbol}>
                   {token.symbol?.[0]}
                 </Avatar>
                 <CaretDown
@@ -139,7 +139,7 @@ export const SelectTokenButtonForProducts: React.FC<
             avatar={
               isSelected ? (
                 <>
-                  <Avatar src={token.image_url} alt={token.symbol}>
+                  <Avatar src={token.imageUrl} alt={token.symbol}>
                     {token.symbol?.[0]}
                   </Avatar>
                   <CaretDown

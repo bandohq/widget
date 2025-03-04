@@ -25,7 +25,7 @@ export const ChainAvatar = () => {
         </SmallAvatar>
       }
     >
-      <WalletAvatar src={token?.image_url} alt={token?.symbol}>
+      <WalletAvatar src={token?.imageUrl} alt={token?.symbol}>
         {account.connector?.name[0]}
       </WalletAvatar>
     </Badge>

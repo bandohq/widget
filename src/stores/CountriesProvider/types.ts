@@ -1,8 +1,8 @@
 export type Country = {
     name: string;
-    iso_alpha2: string;
-    flag_url: string;
-    calling_code: string;
+    isoAlpha2: string;
+    flagUrl: string;
+    callingCode: string;
 };
   
 export   type CountryContextType = {

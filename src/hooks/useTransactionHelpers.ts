@@ -142,7 +142,7 @@ export const useTransactionHelpers = () => {
           abi: [requestERC20ServiceABI],
           functionName: "requestERC20Service",
           args: [serviceID, payload],
-          chain: chain.chain_id,
+          chain: chain.chainId,
           account: account?.address,      
         });
         updateStep({message: 'form.status.signTransactionCompleted', type:"completed"});

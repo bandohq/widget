@@ -57,7 +57,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
 
           return {
             key: token.key,
-            image_url: token.image_url,
+            imageUrl: token.imageUrl,
             address: token.address,
             balance: formattedBalance,
             symbol: token.symbol,

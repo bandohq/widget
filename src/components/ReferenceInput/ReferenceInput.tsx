@@ -114,7 +114,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
                   countryCallingCodeEditable={false}
                   placeholder="Enter phone number"
                   // @ts-ignore all iso codes are valid
-                  defaultCountry={country?.iso_alpha2}
+                  defaultCountry={country?.isoAlpha2}
                   value={isRequired ? currentValue : value}
                   onChange={(newPhone) => {
                     if (isRequired) {

@@ -54,20 +54,20 @@ export const CountryPage: React.FC = () => {
         {!isProductPage &&
           filteredBlockedCountries.map((country) => (
             <SettingsListItemButton
-              key={country.iso_alpha2}
+              key={country.isoAlpha2}
               onClick={() => {
-                restoreCountry(country.iso_alpha2);
+                restoreCountry(country.isoAlpha2);
               }}
             >
               <ListItemIcon>
                 <Avatar
-                  src={country.flag_url}
+                  src={country.flagUrl}
                   alt={country.name}
                   sx={{ objectFit: "cover" }}
                 />
               </ListItemIcon>
               <ListItemText
-                primary={`${country.name} - ${country.iso_alpha2}`}
+                primary={`${country.name} - ${country.isoAlpha2}`}
               />
               <Chip
                 color="error"
@@ -81,24 +81,24 @@ export const CountryPage: React.FC = () => {
         {/* Available countries */}
         {filteredAvailableCountries.map((country) => (
           <SettingsListItemButton
-            key={country.iso_alpha2}
+            key={country.isoAlpha2}
             onClick={() => {
               if (isProductPage) {
-                selectCountry(country.iso_alpha2);
+                selectCountry(country.isoAlpha2);
                 navigate(-1);
               } else {
-                removeCountry(country.iso_alpha2);
+                removeCountry(country.isoAlpha2);
               }
             }}
           >
             <ListItemIcon>
               <Avatar
-                src={country.flag_url}
+                src={country.flagUrl}
                 alt={country.name}
                 sx={{ objectFit: "cover" }}
               />
             </ListItemIcon>
-            <ListItemText primary={`${country.name} - ${country.iso_alpha2}`} />
+            <ListItemText primary={`${country.name} - ${country.isoAlpha2}`} />
           </SettingsListItemButton>
         ))}
       </List>
