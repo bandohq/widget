@@ -1,37 +1,37 @@
-import type { Account } from "@lifi/wallet-management";
+import type { Account } from '@lifi/wallet-management';
 import {
   getConnectorIcon,
   useAccount,
   useWalletMenu,
-} from "@lifi/wallet-management";
-import { ExpandMore, Wallet } from "@mui/icons-material";
-import { Avatar, Badge } from "@mui/material";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useChain } from "../../hooks/useChain";
-import { useExternalWalletProvider } from "../../providers/WalletProvider/useExternalWalletProvider";
-import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
-import { useFieldValues } from "../../stores/form/useFieldValues";
-import { HiddenUI } from "../../types/widget";
-import { SmallAvatar } from "../Avatar/SmallAvatar";
-import { CloseDrawerButton } from "./CloseDrawerButton";
+} from '@lifi/wallet-management';
+import { ExpandMore, Wallet } from '@mui/icons-material';
+import { Avatar, Badge } from '@mui/material';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useChain } from '../../hooks/useChain';
+import { useExternalWalletProvider } from '../../providers/WalletProvider/useExternalWalletProvider';
+import { useWidgetConfig } from '../../providers/WidgetProvider/WidgetProvider';
+import { useFieldValues } from '../../stores/form/useFieldValues';
+import { HiddenUI } from '../../types/widget';
+import { SmallAvatar } from '../Avatar/SmallAvatar';
+import { CloseDrawerButton } from './CloseDrawerButton';
 import {
   DrawerWalletContainer,
   HeaderAppBar,
   WalletAvatar,
   WalletButton,
-} from "./Header.style.js";
-import { WalletMenuContainer } from "./WalletMenu.style";
-import { WalletMenu } from "./WalletMenu";
-import { shortenAddress } from "../../utils/wallet";
+} from './Header.style.js';
+import { WalletMenuContainer } from './WalletMenu.style';
+import { WalletMenu } from './WalletMenu';
+import { shortenAddress } from '../../utils/wallet';
 
 export const WalletHeader: React.FC = () => {
   const { subvariant, hiddenUI } = useWidgetConfig();
   const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
   return !useExternalWalletProvidersOnly &&
-    subvariant !== "split" &&
+    subvariant !== 'split' &&
     !hiddenUI?.includes(HiddenUI.WalletMenu) ? (
-    <HeaderAppBar elevation={0} sx={{ justifyContent: "flex-end" }}>
+    <HeaderAppBar elevation={0} sx={{ justifyContent: 'flex-end' }}>
       <WalletMenuButton />
     </HeaderAppBar>
   ) : null;
@@ -50,17 +50,17 @@ export const WalletMenuButton: React.FC = () => {
   const { variant, hiddenUI } = useWidgetConfig();
   const { account, accounts } = useAccount();
 
-  const [fromChainId] = useFieldValues("fromChain");
+  const [fromChainId] = useFieldValues('fromChain');
   const { chain: fromChain } = useChain(fromChainId);
 
   const activeAccount =
     (fromChain
       ? accounts.find(
-          (account) => account.chainType === fromChain?.network_type
+          (account) => account.chainType === fromChain?.networkType
         )
       : undefined) || account;
 
-  if (variant === "drawer") {
+  if (variant === 'drawer') {
     return (
       <DrawerWalletContainer>
         {activeAccount.isConnected ? (
@@ -97,13 +97,13 @@ const ConnectButton = () => {
     <WalletButton
       subvariant={subvariant}
       startIcon={
-        variant === "drawer" || subvariant === "split" ? (
+        variant === 'drawer' || subvariant === 'split' ? (
           <Wallet sx={{ marginLeft: -0.25 }} />
         ) : undefined
       }
       onClick={connect}
     >
-      {t("button.connectWallet")}
+      {t('button.connectWallet')}
     </WalletButton>
   );
 };
@@ -128,13 +128,13 @@ const ConnectedButton = ({ account }: { account: Account }) => {
         subvariant={subvariant}
         endIcon={<ExpandMore />}
         startIcon={
-          chain?.logo_url ? (
+          chain?.logoUrl ? (
             <Badge
               overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               badgeContent={
                 <SmallAvatar
-                  src={chain?.logo_url}
+                  src={chain?.logoUrl}
                   alt={chain?.name}
                   sx={{ width: 12, height: 12 }}
                 >

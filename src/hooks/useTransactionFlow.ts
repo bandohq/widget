@@ -28,7 +28,7 @@ export const useTransactionFlow = () => {
   );
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
-  const { account } = useAccount({ chainType: chain?.network_type });
+  const { account } = useAccount({ chainType: chain?.networkType });
   const { handleServiceRequest } = useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
@@ -36,7 +36,7 @@ export const useTransactionFlow = () => {
     method: "POST",
     mutationOptions: {
       onSuccess: async ({ data }) => {
-        const txId = data.validation_id;
+        const txId = data.validationId;
         if (txId) {
           try {
             const signature = await handleServiceRequest({
@@ -48,7 +48,7 @@ export const useTransactionFlow = () => {
               token,
             });
             clearStep();
-            navigate(`/status/${data?.transaction_intent?.id}`, { state: { signature } });
+            navigate(`/status/${data?.transactionIntent?.id}`, { state: { signature } });
           } catch (error) {
             clearStep();
             showNotification("error", "Error handling the transaction signature");
@@ -65,18 +65,18 @@ export const useTransactionFlow = () => {
   const handleTransaction = useCallback(() => {
     mutate({
       reference: reference,
-      required_fields: requiredFields,
-      transaction_intent: {
+      requiredFields,
+      transactionIntent: {
         sku: product?.sku,
         chain: chain?.key,
-        token: quote?.digital_asset, // Token address
+        token: quote?.digitalAsset, // Token address
         quantity: 1,
-        amount: quote?.digital_asset_amount,
+        amount: quote?.digitalAssetAmount,
         wallet: account?.address,
         integrator,
       },
     });
-  }, [mutate, reference, requiredFields, product?.sku, chain?.key, quote?.digital_asset, quote?.digital_asset_amount, account?.address]);
+  }, [mutate, reference, requiredFields, product?.sku, chain?.key, quote?.digitalAsset, quote?.digitalAssetAmount, account?.address]);
 
   return {
     handleTransaction,

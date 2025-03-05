@@ -25,11 +25,11 @@ export const useToken = (chain?: Chain, tokenAddress?: string) => {
       (token) => token.address === tokenAddress
     )
     return token ?? null
-  }, [chain?.chain_id, tokenAddress, tokens])
+  }, [chain?.chainId, tokenAddress, tokens])
 
   const tokenSearchEnabled = !isLoading && !token
   const { token: searchedToken, isLoading: isSearchedTokenLoading } =
-    useTokenSearch(chain?.chain_id, tokenAddress, tokenSearchEnabled)
+    useTokenSearch(chain?.chainId, tokenAddress, tokenSearchEnabled)
 
   return {
     token,

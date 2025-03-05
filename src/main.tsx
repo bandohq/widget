@@ -1,9 +1,7 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
     <div
       style={{
         height: "100%",
@@ -28,5 +26,4 @@ createRoot(document.getElementById("root")!).render(
         }}
       />
     </div>
-  </StrictMode>
 );

@@ -29,7 +29,7 @@ export const useAvailableChains = () => {
         return undefined;
       }
 
-      const chain = chains?.find((chain) => chain.chain_id === chainId);
+      const chain = chains?.find((chain) => chain.chainId === chainId);
       return (chains.length > 0) && chain ? chain : chains[0];
     },
     [data]

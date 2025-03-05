@@ -34,15 +34,15 @@ export const CountriesProvider: React.FC<{
       const urlCountryIso = searchParams.get("country");
 
       const urlCountry = allCountries.find(
-        (country) => country.iso_alpha2 === urlCountryIso
+        (country) => country.isoAlpha2 === urlCountryIso
       );
 
       const defaultCountry =
         urlCountry && buildUrl
           ? urlCountry
           : configCountry
-          ? allCountries.find((country) => country.iso_alpha2 === configCountry)
-          : allCountries.find((country) => country.iso_alpha2 === "US");
+          ? allCountries.find((country) => country.isoAlpha2 === configCountry)
+          : allCountries.find((country) => country.isoAlpha2 === "US");
 
       setSelectedCountry(defaultCountry || null);
     }
@@ -57,7 +57,7 @@ export const CountriesProvider: React.FC<{
   }, [initialBlockedCountries, countriesResponse]);
 
   const selectCountry = (isoCode: string) => {
-    const country = availableCountries.find((c) => c.iso_alpha2 === isoCode);
+    const country = availableCountries.find((c) => c.isoAlpha2 === isoCode);
     if (country) {
       setSelectedCountry(country);
 
@@ -72,10 +72,10 @@ export const CountriesProvider: React.FC<{
 
   const removeCountry = (isoCode: string) => {
     setAvailableCountries((prev) =>
-      prev.filter((country) => country.iso_alpha2 !== isoCode)
+      prev.filter((country) => country.isoAlpha2 !== isoCode)
     );
     const blockedCountry = availableCountries.find(
-      (country) => country.iso_alpha2 === isoCode
+      (country) => country.isoAlpha2 === isoCode
     );
     if (blockedCountry) {
       setBlockedCountries((prev) => [...prev, blockedCountry]);
@@ -84,10 +84,10 @@ export const CountriesProvider: React.FC<{
 
   const restoreCountry = (isoCode: string) => {
     setBlockedCountries((prev) =>
-      prev.filter((country) => country.iso_alpha2 !== isoCode)
+      prev.filter((country) => country.isoAlpha2 !== isoCode)
     );
     const restoredCountry = blockedCountries.find(
-      (country) => country.iso_alpha2 === isoCode
+      (country) => country.isoAlpha2 === isoCode
     );
     if (restoredCountry) {
       setAvailableCountries((prev) => [...prev, restoredCountry]);

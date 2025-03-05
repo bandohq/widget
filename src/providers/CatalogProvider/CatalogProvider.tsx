@@ -36,7 +36,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     method: "GET",
     url: "products/grouped/",
     queryParams: {
-      country: !!country ? country?.iso_alpha2 : null,
+      country: !!country ? country?.isoAlpha2 : null,
     },
     enabled: !!country && !isCountryPending,
   });

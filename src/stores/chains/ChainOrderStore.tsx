@@ -43,7 +43,7 @@ export function ChainOrderStoreProvider({
         const filteredChains =
           chains?.filter((chain) => {
             const passesChainsConfigFilter = configChainIds
-              ? isItemAllowed(chain.id, configChainIds)
+              ? isItemAllowed(chain.chainId, configChainIds)
               : true;
             const passesWalletConfigFilter = isFromKey
               ? !useExternalWalletProvidersOnly ||
@@ -54,7 +54,7 @@ export function ChainOrderStoreProvider({
 
         if (filteredChains.length > 0) {
           const chainOrder = storeRef.current?.getState().initializeChains(
-            filteredChains.map((chain) => chain.id),
+            filteredChains.map((chain) => chain.chainId),
             key
           );
           if (chainOrder) {

@@ -39,8 +39,8 @@ export const ProductSearch = ({
   };
 
   const handleCountryRedirect = (): void => {
-    const countryQuery = country?.iso_alpha2
-      ? `?country=${country.iso_alpha2}&productPage=true`
+    const countryQuery = country?.isoAlpha2
+      ? `?country=${country.isoAlpha2}&productPage=true`
       : "?productPage=true";
     navigate(
       `${navigationRoutes.settings}/${navigationRoutes.countries}${countryQuery}`
@@ -61,11 +61,11 @@ export const ProductSearch = ({
           </StyledIconButton>
         </InputContainer>
         <StyledCountryDiv onClick={handleCountryRedirect}>
-          {country?.flag_url && (
+          {country?.flagUrl && (
             <Tooltip title={country.name}>
               <img
-                src={country.flag_url}
-                alt={country.iso_alpha2}
+                src={country.flagUrl}
+                alt={country.isoAlpha2}
                 width={20}
                 style={{ marginRight: 8 }}
               />

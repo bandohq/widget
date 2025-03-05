@@ -29,7 +29,7 @@ export interface Chain {
 
 export function transformToChainConfig(chain: ExtendedChain, nativeToken: NativeTokenCatalog): Chain {
     return {
-        id: chain.chain_id,
+        id: chain.chainId,
         name: chain.name,
         network: chain.key,
         nativeCurrency: {
@@ -38,15 +38,15 @@ export function transformToChainConfig(chain: ExtendedChain, nativeToken: Native
             decimals: nativeToken.native_token.decimals,
         },
         rpcUrls: {
-            default: { http: [chain.rpc_url] },
-            public: { http: [chain.rpc_url] },
+            default: { http: [chain.rpcUrl] },
+            public: { http: [chain.rpcUrl] },
         },
         contracts: {
             multicall3: {
               address: '0xcA11bde05977b3631167028862bE2a173976CA11',
             },
           },
-        testnet: chain.is_testnet,
-        protocolContracts: chain.protocol_contracts,
+        testnet: chain.isTestnet,
+        protocolContracts: chain.protocolContracts,
     };
 }

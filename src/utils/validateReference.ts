@@ -13,12 +13,13 @@ export const validateReference = async (chain, serviceID, referenceCode, config)
   while (attempt < maxAttempts) {
     try {
       attempt++;
+
       isValid = await readContract(config, {
-        address: chain?.protocol_contracts?.FulfillableRegistryProxy,
+        address: chain?.protocolContracts?.FulfillableRegistryProxy,
         abi: [FulfillableRegistryABI],
         functionName: "isRefValid",
         args: [serviceID, referenceCode],
-        chainId: chain?.id,
+        chainId: chain?.chainId,
       }) as boolean;
 
       if (isValid) {
