@@ -34,7 +34,7 @@ export const TokenListItem: React.FC<TokenListItemProps> = ({
   const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
     handleCurrentBalanceChange(token?.balance);
-    onClick?.(token.address, chain?.id);
+    onClick?.(token.address, chain?.chainId);
   };
 
   return (
