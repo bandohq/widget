@@ -21,7 +21,6 @@ createRoot(document.getElementById("root")!).render(
             },
           },
           blockedCountries: ["AF", "AL"],
-          country: "MX",
           hiddenUI: ['header'],
         }}
       />
