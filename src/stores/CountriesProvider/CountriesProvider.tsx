@@ -37,12 +37,19 @@ export const CountriesProvider: React.FC<{
         (country) => country.isoAlpha2 === urlCountryIso
       );
 
-      const defaultCountry =
-        urlCountry && buildUrl
-          ? urlCountry
-          : configCountry
-          ? allCountries.find((country) => country.isoAlpha2 === configCountry)
-          : allCountries.find((country) => country.isoAlpha2 === "US");
+      const configSelectedCountry = configCountry
+        ? allCountries.find((country) => country.isoAlpha2 === configCountry)
+        : null;
+
+      const isCurrentCountry = allCountries.find((country) => country.isCurrent);
+
+      const defaultCountry = urlCountry && buildUrl
+        ? urlCountry
+        : configSelectedCountry
+        ? configSelectedCountry
+        : isCurrentCountry
+        ? isCurrentCountry
+        : allCountries.find((country) => country.isoAlpha2 === "US");
 
       setSelectedCountry(defaultCountry || null);
     }
