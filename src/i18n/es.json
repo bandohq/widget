@@ -108,6 +108,9 @@
     "title": "Países",
     "deleted": "Países eliminados"
   },
+  "history": {
+    "title": "Historial de transacciones"
+  },
   "info": {
     "detailMessage": "Es donde recibirás tu {{productType}}.",
     "message": {

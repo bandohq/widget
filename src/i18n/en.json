@@ -109,6 +109,9 @@
     "deleted": "Deleted countries",
     "excluded": "EXCLUDED"
   },
+  "history": {
+    "title": "Transactions history"
+  },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",
     "message": {

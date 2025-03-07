@@ -4,10 +4,10 @@ export const navigationRoutes = {
   fromToken: '/from-token', 
   languages: 'languages',
   countries: 'countries',
+  transactionHistory: '/transaction-history',
   products: '/products',
   form: '/form',
   formSteps: '/form-steps',
-  routes: '/routes',
   settings: '/settings',
 };
 
@@ -16,7 +16,6 @@ export const navigationRoutes = {
   
   export const stickyHeaderRoutes = [
     navigationRoutes.home,
-    navigationRoutes.routes,
     navigationRoutes.settings,
   ]
   
@@ -24,8 +23,8 @@ export const navigationRoutes = {
     navigationRoutes.languages,
     navigationRoutes.form,
     navigationRoutes.fromToken,
-    navigationRoutes.routes,
     navigationRoutes.settings,
+    navigationRoutes.transactionHistory
   ]
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
