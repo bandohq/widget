@@ -3,6 +3,9 @@ import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
 import { useFetch } from "../../hooks/useFetch";
+import { TransactionList } from "../../components/TransactionList/TransactionList";
+import { List } from "@mui/material";
+import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 
 export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
@@ -16,12 +19,26 @@ export const TransactionsHistoryPage = () => {
       queryKey: ["transactions", account.address, account.chainId],
       refetchInterval: 10000,
     },
+    queryParams: {
+      chainId: account.chainId
+    }
   })
 
-  console.log({ transactions, isPending, error })
+  if (isPending) {
+    return (
+      <List disablePadding>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <TokenListItemSkeleton key={index} />
+        ))}
+      </List>
+    );
+  }
+
   return (
     <PageContainer bottomGutters>
-      <h1>transactions</h1>
+      {!isPending && (
+        <TransactionList transactions={transactions.transactions} />
+      )}
     </PageContainer>
   );
 };
