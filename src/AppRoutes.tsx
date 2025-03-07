@@ -11,6 +11,7 @@ import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
 import { CountryPage } from "./pages/CountryPage";
 import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
+import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionHistory";
 
 const routes: RouteObject[] = [
   {
@@ -28,6 +29,10 @@ const routes: RouteObject[] = [
   {
     path: navigationRoutes.settings,
     element: <SettingsPage />,
+  },
+  {
+    path: navigationRoutes.transactionHistory,
+    element: <TransactionsHistoryPage />,
   },
   {
     path: navigationRoutes.fromToken,
