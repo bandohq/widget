@@ -20,6 +20,8 @@ export const SuccessView = ({ status }) => {
 
   const isStatusCompleted = status?.status === 'COMPLETED';
 
+  console.log(status);
+
   const gotoHome = () => {
     navigate(navigationRoutes.home);
   };
@@ -31,51 +33,45 @@ export const SuccessView = ({ status }) => {
       <StatusTitle>
         {t(
           isStatusCompleted
-            ? 'success.title.orderCompleted'
-            : 'success.title.orderInProgress'
+            ? "success.title.orderCompleted"
+            : "success.title.orderInProgress"
         )}
       </StatusTitle>
       {!isStatusCompleted && (
         <div
           style={{
-            marginBottom: '10px',
-            display: 'flex',
-            gap: '10px',
-            alignItems: 'center',
+            marginBottom: "10px",
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
           }}
         >
           <AnimatedCircularProgress>
             <SpinnerGap size={25} color={palette.primary.main} />
           </AnimatedCircularProgress>
-          <StatusSubtitle fontSize={'14px'}>{status?.status}</StatusSubtitle>
+          <StatusSubtitle fontSize={"14px"}>{status?.status}</StatusSubtitle>
         </div>
       )}
-      <StatusSubtitle fontSize={'16px'}>
+      <StatusSubtitle fontSize={"16px"}>
         {t(
           isStatusCompleted
-            ? 'success.title.thanks'
-            : 'success.title.paymentReceived'
+            ? "success.title.thanks"
+            : "success.title.paymentReceived"
         )}
       </StatusSubtitle>
       <ProductBox>
-        {!status?.product?.logoUrl ? (
-          <Box
-            sx={{
-              width: '40%',
-              height: '50px',
-            }}
-          >
+        {status?.product?.logoUrl ? (
+          <Box>
             <ImageAvatar
               hideName
               name={status?.product?.name || ""}
               src={status?.product?.logoUrl}
               sx={{
-                width: '50%',
-                height: '45px',
-                maxWidthidth: '45px',
-                maxHeight: '45px',
-                objectFit: 'contain',
-                margin: 'auto',
+                width: "100%",
+                height: "auto",
+                maxHeight: "65px",
+                borderRadius: "10px",
+                objectFit: "contain",
               }}
             />
           </Box>
@@ -86,12 +82,12 @@ export const SuccessView = ({ status }) => {
           {t(`main.${status?.productType}`) + " " + status?.product?.name}
           {" - "}
           {isStatusCompleted &&
-            status?.fiatUnitPrice + '' + status?.fiatCurrency}
+            status?.fiatUnitPrice + "" + status?.fiatCurrency}
         </StatusTitle>
         <StatusSubtitle fontSize="18px">
-          {t('success.message.notification', {
-            productType: status?.productType || 'item',
-            reference: status?.givenReference || 'your reference',
+          {t("success.message.notification", {
+            productType: status?.productType || "item",
+            reference: status?.givenReference || "your reference",
           })}
         </StatusSubtitle>
       </ProductBox>
@@ -99,10 +95,10 @@ export const SuccessView = ({ status }) => {
       <Button
         variant="contained"
         fullWidth
-        style={{ borderRadius: '30px' }}
+        style={{ borderRadius: "30px" }}
         onClick={gotoHome}
       >
-        {t('button.discover')}
+        {t("button.discover")}
       </Button>
     </>
   );
