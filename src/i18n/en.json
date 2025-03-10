@@ -110,7 +110,8 @@
     "excluded": "EXCLUDED"
   },
   "history": {
-    "title": "Transactions history"
+    "title": "Transactions history",
+    "detailTitle": "Transaction detail"
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",
