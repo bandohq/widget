@@ -7,6 +7,21 @@ import { TransactionList } from "../../components/TransactionList/TransactionLis
 import { List } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 
+export type TransactionStatus = "PROCESSING" | "FAILED" | "SUCCESS" | "COMPLETED";
+
+export interface Transaction {
+    id: string;
+    status: TransactionStatus;
+    price: {
+        fiatValue: string;
+        fiatCurrency: string;
+    }
+    productType: string;
+    chainId: number;
+    brandName: string;
+    created: string;
+};
+
 export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
   useHeader(t("history.title"));
