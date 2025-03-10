@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { List, ListItemText, Collapse, Chip } from "@mui/material";
+import { List, ListItemText, Collapse, Chip, Typography } from "@mui/material";
 import { SettingsListItemButton } from "../SettingsListItemButton";
 import { useTheme } from "@mui/system";
 import { Transaction } from "../../pages/TransactionHistory/TransactionHistory";
@@ -11,7 +11,9 @@ interface TransactionListProps {
   transactions: Transaction[];
 }
 
-export const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
+export const TransactionList: React.FC<TransactionListProps> = ({
+  transactions,
+}) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { i18n } = useTranslation();
@@ -96,24 +98,25 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions }
                       height: `${virtualRow.size}px`,
                     }}
                   >
-                    <div
-                      style={{
+                    <Typography
+                      variant="body1"
+                      sx={{
                         margin: "0",
-                        fontSize: "14px",
-                        marginBottom: "4px",
-                        fontWeight: "bold",
+                        marginBottom: "2px",
                       }}
                     >
                       {`${parseFloat(transaction.price.fiatValue).toFixed(2)} ${
                         transaction.price.fiatCurrency
                       }`}
-                    </div>
-                    <div
-                      style={{
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
                         margin: "0",
                         display: "flex",
                         gap: "4px",
                         alignContent: "center",
+                        color: theme.palette.text.secondary,
                       }}
                     >
                       {formatDate(transaction.created)}
@@ -122,7 +125,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions }
                         size="small"
                         label={transaction.status.toLocaleLowerCase()}
                       />
-                    </div>
+                    </Typography>
                   </div>
                 </SettingsListItemButton>
               </div>
