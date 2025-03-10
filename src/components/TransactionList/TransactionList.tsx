@@ -48,7 +48,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const handleClick = (transaction) => {
-    navigate(`/transaction-detail?serviceId=${transaction.serviceId}`);
+    navigate(`/transaction-detail/${transaction.id}`);
   };
 
   return (

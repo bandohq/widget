@@ -36,7 +36,7 @@ const routes: RouteObject[] = [
     element: <TransactionsHistoryPage />,
   },
   {
-    path: navigationRoutes.transactionDetail,
+    path: `${navigationRoutes.transactionDetail}/:transactionId`,
     element: <TransactionsDetailPage />,
   },
   {
