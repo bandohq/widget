@@ -111,7 +111,12 @@
   },
   "history": {
     "title": "Transactions history",
-    "detailTitle": "Transaction detail"
+    "detailTitle": "Transaction detail",
+    "buyDetails": "buy detail",
+    "refundSuccess": "Refund sent successfully",
+    "refundFailed": "Error on refunding tokens, try later",
+    "country": "Country",
+    "sentTo": "Sent to"
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",

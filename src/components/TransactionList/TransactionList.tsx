@@ -23,7 +23,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -100,7 +100,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                 >
                   <ListItemText
                     primary={transaction.brandName}
-                    secondary={"buy detail"}
+                    secondary={t("history.buyDetails")}
                   />
                   <div
                     style={{

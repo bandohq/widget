@@ -108,6 +108,15 @@
     "title": "ประเทศ",
     "deleted": "ประเทศที่ถูกลบ"
   },
+  "history": {
+    "title": "ประวัติธุรกรรม",
+    "detailTitle": "รายละเอียดธุรกรรม",
+    "buyDetails": "รายละเอียดการซื้อ",
+    "refundSuccess": "ส่งเงินคืนสำเร็จ",
+    "refundFailed": "เกิดข้อผิดพลาดในการคืนโทเค็น ลองอีกครั้งในภายหลัง",
+    "country": "ประเทศ",
+    "sentTo": "ส่งถึง"
+  },
   "info": {
     "detailMessage": "คุณจะได้รับ {{productType}} ที่นี่",
     "message": {

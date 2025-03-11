@@ -108,6 +108,15 @@
     "title": "Pays",
     "deleted": "Pays supprimés"
   },
+  "history": {
+    "title": "Historique des transactions",
+    "detailTitle": "Détail de la transaction",
+    "buyDetails": "Détail de l'achat",
+    "refundSuccess": "Remboursement envoyé avec succès",
+    "refundFailed": "Erreur lors du remboursement des jetons, réessayez plus tard",
+    "country": "Pays",
+    "sentTo": "Envoyé à"
+  },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",
     "message": {

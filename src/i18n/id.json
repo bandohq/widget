@@ -105,6 +105,15 @@
     "title": "Negara",
     "deleted": "Negara yang dihapus"
   },
+  "history": {
+    "title": "Riwayat transaksi",
+    "detailTitle": "Detail transaksi",
+    "buyDetails": "Detail pembelian",
+    "refundSuccess": "Pengembalian dana berhasil dikirim",
+    "refundFailed": "Kesalahan saat mengembalikan token, coba lagi nanti",
+    "country": "Negara",
+    "sentTo": "Dikirim ke"
+  },
   "info": {
     "detailMessage": "Di sini Anda akan menerima {{productType}} Anda.",
     "message": {

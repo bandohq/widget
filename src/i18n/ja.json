@@ -108,6 +108,15 @@
     "title": "国",
     "deleted": "削除された国"
   },
+  "history": {
+    "title": "取引履歴",
+    "detailTitle": "取引の詳細",
+    "buyDetails": "購入の詳細",
+    "refundSuccess": "返金が正常に送信されました",
+    "refundFailed": "トークンの返金エラー、後で再試行してください",
+    "country": "国",
+    "sentTo": "送信先"
+  },
   "info": {
     "detailMessage": "ここで{{productType}}を受け取ります。",
     "message": {
@@ -195,7 +204,6 @@
     "topup": "エアタイムとデータ",
     "esim": "eSIM",
     "gift_card": "プリペイドコード"
-
   },
   "settings": {
     "theme": "テーマ",
