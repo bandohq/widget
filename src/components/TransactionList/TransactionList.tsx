@@ -1,18 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { List, ListItemText, Collapse, Chip, Typography } from "@mui/material";
+import { List, ListItemText, Chip, Typography } from "@mui/material";
 import { SettingsListItemButton } from "../SettingsListItemButton";
 import { useTheme } from "@mui/system";
 import { Transaction } from "../../pages/TransactionHistory/TransactionHistory";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { isRefundAvailable } from "../../utils/refunds";
+import { ArrowRight } from "@phosphor-icons/react";
 
 interface TransactionListProps {
   transactions: Transaction[];
+  refunds?: {
+    id: string;
+    amount: BigInt;
+  }[];
 }
 
 export const TransactionList: React.FC<TransactionListProps> = ({
   transactions,
+  refunds = [],
 }) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -27,7 +34,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     overscan: 5,
   });
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat(i18n.language, {
       day: "numeric",
@@ -35,20 +42,29 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     }).format(date);
   };
 
-  const renderChipColor = (status) => {
-    switch (status) {
-      case "COMPLETED":
-      case "SUCCESS":
-        return "success";
-      case "FAILED":
-        return "error";
-      default:
-        return "default";
-    }
+  const renderChipColor = (transactionId: string, status: string) => {
+    return isRefundAvailable(transactionId, refunds)
+      ? "default"
+      : status === "COMPLETED" || status === "SUCCESS"
+      ? "success"
+      : status === "FAILED"
+      ? "error"
+      : "default";
   };
 
-  const handleClick = (transaction) => {
-    navigate(`/transaction-detail?serviceId=${transaction.serviceId}`);
+  const renderChipLabel = (transactionId: string, status: string) => {
+    return isRefundAvailable(transactionId, refunds) ? (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <ArrowRight size={16} />
+        Refund available
+      </div>
+    ) : (
+      status.toLocaleLowerCase()
+    );
+  };
+
+  const handleClick = (transaction: Transaction) => {
+    navigate(`/transaction-detail/${transaction.id}`);
   };
 
   return (
@@ -85,7 +101,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   onClick={() => handleClick(transaction)}
                 >
                   <ListItemText
-                    primary={"transaction.brandName"}
+                    primary={transaction.brandName}
                     secondary={"buy detail"}
                   />
                   <div
@@ -121,9 +137,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     >
                       {formatDate(transaction.created)}
                       <Chip
-                        color={renderChipColor(transaction.status)}
+                        color={renderChipColor(
+                          transaction.id,
+                          transaction.status
+                        )}
                         size="small"
-                        label={transaction.status.toLocaleLowerCase()}
+                        label={renderChipLabel(
+                          transaction.id,
+                          transaction.status
+                        )}
                       />
                     </Typography>
                   </div>
