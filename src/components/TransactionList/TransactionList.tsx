@@ -42,18 +42,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     }).format(date);
   };
 
-  const renderChipColor = (transactionId: string, status: string) => {
-    if (isRefundAvailable(transactionId, refunds)) {
-      return "success";
-    }
-
-    if (status === "COMPLETED" || status === "SUCCESS") {
-      return theme.palette.primary.medium || theme.palette.primary.main;
-    }
-
-    return "default";
-  };
-
   const renderChipLabel = (transactionId: string, status: string) => {
     return isRefundAvailable(transactionId, refunds) ? (
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -147,19 +135,16 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     >
                       {formatDate(transaction.created)}
                       <Chip
-                        color={
+                        color="default"
+                        sx={
                           isRefundAvailable(transaction.id, refunds)
-                            ? "success"
+                            ? {
+                                backgroundColor: theme.palette.primary.main,
+                              }
                             : transaction.status === "COMPLETED" ||
                               transaction.status === "SUCCESS"
-                            ? "default" // Mantenemos 'default' para evitar que MUI lo sobrescriba
-                            : "default"
-                        }
-                        sx={
-                          transaction.status === "COMPLETED" ||
-                          transaction.status === "SUCCESS"
                             ? {
-                                backgroundColor: theme.palette.primary.light, // Tono medio personalizado
+                                backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.getContrastText(
                                   theme.palette.primary.light
                                 ),
