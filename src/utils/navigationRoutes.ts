@@ -1,14 +1,15 @@
 export const navigationRoutes = {
-  home: '/',
-  status: '/status',
-  fromToken: '/from-token', 
-  languages: 'languages',
-  countries: 'countries',
-  transactionHistory: '/transaction-history',
-  products: '/products',
-  form: '/form',
-  formSteps: '/form-steps',
-  settings: '/settings',
+  home: "/",
+  status: "/status",
+  fromToken: "/from-token",
+  languages: "languages",
+  countries: "countries",
+  transactionHistory: "/transaction-history",
+  transactionDetail: "/transaction-detail",
+  products: "/products",
+  form: "/form",
+  formSteps: "/form-steps",
+  settings: "/settings",
 };
 
   
@@ -24,8 +25,9 @@ export const navigationRoutes = {
     navigationRoutes.form,
     navigationRoutes.fromToken,
     navigationRoutes.settings,
-    navigationRoutes.transactionHistory
-  ]
+    navigationRoutes.transactionHistory,
+    navigationRoutes.transactionDetail,
+  ];
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
   
