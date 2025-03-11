@@ -19,13 +19,14 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useChain } from "../../hooks/useChain";
-import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1.json";
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import { useConfig } from "wagmi";
 import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { useToken } from "../../hooks/useToken";
 import { useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
+import { executeRefound } from "../../utils/refunds";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -44,7 +45,7 @@ export const TransactionsDetailPage = () => {
 
   useHeader(t("history.detailTitle"));
 
-  const { data: transactionData } = useFetch({
+  const { data: transactionData, isPending } = useFetch({
     url: transactionId ? `transactions/${transactionId}/` : "",
     method: "GET",
     queryOptions: {
@@ -61,6 +62,8 @@ export const TransactionsDetailPage = () => {
   };
 
   const formatDate = (dateString: string) => {
+    if (!dateString) return "";
+
     const date = new Date(dateString);
     return new Intl.DateTimeFormat(i18n.language, {
       day: "numeric",
@@ -71,24 +74,31 @@ export const TransactionsDetailPage = () => {
 
   const handleRefund = async () => {
     setLoading(true);
-    const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
-      (item) => item.name === "withdrawERC20Refund"
-    );
+
     const nativeToken = nativeTokenCatalog.find(
       (item) => item.key === chain?.key
     );
     const formattedChain = defineChain(
       transformToChainConfig(chain, nativeToken)
     );
+
     if (serviceId && amount) {
       try {
-        await writeContract(config, {
-          address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
-          abi: [FulfillableRegistryABI],
-          functionName: "withdrawERC20Refund",
-          args: [serviceId, transactionData.tokenUsed, account.address],
+        const isNativeToken = nativeToken.key === token.key;
+
+        await executeRefound({
+          config,
           chain: formattedChain,
-          account: account?.address as `0x${string}`,
+          contractAddress: chain?.protocolContracts?.BandoRouterProxy,
+          abiName: isNativeToken ? "withdrawRefund" : "withdrawERC20Refund",
+          abi: BandoRouter.abi,
+          functionName: isNativeToken
+            ? "withdrawRefund"
+            : "withdrawERC20Refund",
+          args: isNativeToken
+            ? [serviceId, account.address]
+            : [serviceId, transactionData.tokenUsed, account.address],
+          accountAddress: account?.address,
         });
 
         setLoading(false);
@@ -100,6 +110,10 @@ export const TransactionsDetailPage = () => {
       }
     }
   };
+
+  if (isPending || !transactionData) {
+    return null;
+  }
 
   return (
     <PageContainer bottomGutters>
@@ -168,8 +182,10 @@ export const TransactionsDetailPage = () => {
       <BottomSheet open={openRefundSheet()}>
         <Paper sx={{ padding: 2 }}>
           <Typography variant="body1" align="center" mb={2}>
-            You have {Number(amount) / Math.pow(10, token.decimals)}
-            {token.symbol} to refound
+            {!amount || !token
+              ? "No refund available"
+              : `You have ${Number(amount) / Math.pow(10, token.decimals)}
+            ${token.symbol} to refund`}
           </Typography>
           <Button
             disabled={loading}
