@@ -23,7 +23,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -112,7 +112,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                 >
                   <ListItemText
                     primary={transaction.brandName}
-                    secondary={"buy detail"}
+                    secondary={t("history.buyDetails")}
                   />
                   <div
                     style={{
@@ -152,14 +152,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                             ? "success"
                             : transaction.status === "COMPLETED" ||
                               transaction.status === "SUCCESS"
-                            ? "default" // Mantenemos 'default' para evitar que MUI lo sobrescriba
+                            ? "default"
                             : "default"
                         }
                         sx={
                           transaction.status === "COMPLETED" ||
                           transaction.status === "SUCCESS"
                             ? {
-                                backgroundColor: theme.palette.primary.light, // Tono medio personalizado
+                                backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.getContrastText(
                                   theme.palette.primary.light
                                 ),
