@@ -42,7 +42,7 @@ export const TransactionsHistoryPage = () => {
   const { account } = useAccount();
   const { chain } = useChain(account.chainId);
   const [refunds, setRefunds] = useState<{ id: string; amount: BigInt }[]>([]);
-  const { searchToken } = useToken(chain);
+  const { searchToken, isLoading: isLoadingToken } = useToken(chain);
 
   const { data: transactions, isPending } = useFetch({
     url: account.address ? `wallets/${account.address}/transactions` : "",
@@ -56,7 +56,7 @@ export const TransactionsHistoryPage = () => {
   });
 
   useEffect(() => {
-    if (transactions && !isPending) {
+    if (transactions && !isPending && !isLoadingToken) {
       const possibleRefunds = transactions.transactions.filter(
         (transaction) => transaction.status === "FAILED"
       );
@@ -104,7 +104,7 @@ export const TransactionsHistoryPage = () => {
 
       Promise.all(refundPromises).then(setRefunds);
     }
-  }, [transactions, isPending, config, chain, account]);
+  }, [transactions, isPending, config, chain, account, isLoadingToken]);
 
   if (isPending) {
     return (

@@ -43,11 +43,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const renderChipColor = (transactionId: string, status: string) => {
-    return isRefundAvailable(transactionId, refunds)
-      ? "success"
-      : status === "COMPLETED" || status === "SUCCESS"
-      ? "primary"
-      : "default";
+    if (isRefundAvailable(transactionId, refunds)) {
+      return "success";
+    }
+
+    if (status === "COMPLETED" || status === "SUCCESS") {
+      return theme.palette.primary.medium || theme.palette.primary.main;
+    }
+
+    return "default";
   };
 
   const renderChipLabel = (transactionId: string, status: string) => {
@@ -143,10 +147,25 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     >
                       {formatDate(transaction.created)}
                       <Chip
-                        color={renderChipColor(
-                          transaction.id,
-                          transaction.status
-                        )}
+                        color={
+                          isRefundAvailable(transaction.id, refunds)
+                            ? "success"
+                            : transaction.status === "COMPLETED" ||
+                              transaction.status === "SUCCESS"
+                            ? "default" // Mantenemos 'default' para evitar que MUI lo sobrescriba
+                            : "default"
+                        }
+                        sx={
+                          transaction.status === "COMPLETED" ||
+                          transaction.status === "SUCCESS"
+                            ? {
+                                backgroundColor: theme.palette.primary.light, // Tono medio personalizado
+                                color: theme.palette.getContrastText(
+                                  theme.palette.primary.light
+                                ),
+                              }
+                            : {}
+                        }
                         size="small"
                         label={renderChipLabel(
                           transaction.id,
