@@ -147,17 +147,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     >
                       {formatDate(transaction.created)}
                       <Chip
-                        color={
+                        color="default"
+                        sx={
                           isRefundAvailable(transaction.id, refunds)
-                            ? "success"
+                            ? {
+                                backgroundColor: theme.palette.primary.main,
+                              }
                             : transaction.status === "COMPLETED" ||
                               transaction.status === "SUCCESS"
-                            ? "default"
-                            : "default"
-                        }
-                        sx={
-                          transaction.status === "COMPLETED" ||
-                          transaction.status === "SUCCESS"
                             ? {
                                 backgroundColor: theme.palette.primary.light,
                                 color: theme.palette.getContrastText(
