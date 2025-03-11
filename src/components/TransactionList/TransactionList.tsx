@@ -42,16 +42,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     }).format(date);
   };
 
-  const renderChipColor = (transactionId: string, status: string) => {
-    return isRefundAvailable(transactionId, refunds)
-      ? "default"
-      : status === "COMPLETED" || status === "SUCCESS"
-      ? "success"
-      : status === "FAILED"
-      ? "error"
-      : "default";
-  };
-
   const renderChipLabel = (transactionId: string, status: string) => {
     return isRefundAvailable(transactionId, refunds) ? (
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -64,6 +54,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const handleClick = (transaction: Transaction) => {
+    const refund = refunds.find((refund) => refund.id === transaction.id);
+    if (refund) {
+      navigate(
+        `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}&amount=${refund.amount}`
+      );
+      return;
+    }
+
     navigate(`/transaction-detail/${transaction.id}`);
   };
 
@@ -137,10 +135,22 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     >
                       {formatDate(transaction.created)}
                       <Chip
-                        color={renderChipColor(
-                          transaction.id,
-                          transaction.status
-                        )}
+                        color="default"
+                        sx={
+                          isRefundAvailable(transaction.id, refunds)
+                            ? {
+                                backgroundColor: theme.palette.primary.main,
+                              }
+                            : transaction.status === "COMPLETED" ||
+                              transaction.status === "SUCCESS"
+                            ? {
+                                backgroundColor: theme.palette.primary.light,
+                                color: theme.palette.getContrastText(
+                                  theme.palette.primary.light
+                                ),
+                              }
+                            : {}
+                        }
                         size="small"
                         label={renderChipLabel(
                           transaction.id,

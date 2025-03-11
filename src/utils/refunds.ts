@@ -1,4 +1,4 @@
-import { readContract } from "@wagmi/core";
+import { readContract, writeContract } from "@wagmi/core";
 import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1.json";
 
 export const fetchRefunds = async (transactions, config, chain, address) => {
@@ -25,6 +25,36 @@ export const fetchRefunds = async (transactions, config, chain, address) => {
   const refundsArray = await Promise.all(refundPromises);
 
   return refundsArray;
+};
+
+export const executeRefund = async ({
+  config,
+  chain,
+  contractAddress,
+  abiName,
+  abi,
+  functionName,
+  args,
+  accountAddress,
+}) => {
+  try {
+    const contractABI = abi.find((item) => item.name === abiName);
+
+    if (!contractABI) {
+      throw new Error(`ABI for function ${abiName} not found`);
+    }
+
+    await writeContract(config, {
+      address: contractAddress,
+      abi: [contractABI],
+      functionName,
+      args,
+      chain,
+      account: accountAddress,
+    });
+  } catch (error) {
+    throw new Error(`Contract write failed: ${error.message}`);
+  }
 };
 
 export const isRefundAvailable = (transactionId, refunds) => {
