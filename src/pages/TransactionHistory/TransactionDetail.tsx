@@ -36,7 +36,7 @@ export const TransactionsDetailPage = () => {
   const [searchParams] = useSearchParams();
   const serviceId = searchParams.get("serviceId");
   const tokenUsed = searchParams.get("tokenUsed");
-  const amount = BigInt(searchParams.get("amount"));
+  const amount = searchParams.get("amount");
   const { transactionId } = useParams();
   const { showNotification } = useNotificationContext();
   const { availableCountries } = useCountryContext();
@@ -179,25 +179,29 @@ export const TransactionsDetailPage = () => {
       </List>
 
       {/* Refound section */}
-      <BottomSheet open={openRefundSheet()}>
-        <Paper sx={{ padding: 2 }}>
-          <Typography variant="body1" align="center" mb={2}>
-            {!amount || !token
-              ? "No refund available"
-              : `You have ${Number(amount) / Math.pow(10, token.decimals)}
+      {amount && Number(BigInt(amount)) > 0 && (
+        <BottomSheet open={openRefundSheet()}>
+          <Paper sx={{ padding: 2 }}>
+            <Typography variant="body1" align="center" mb={2}>
+              {!amount || !token
+                ? "No refund available"
+                : `You have ${
+                    Number(BigInt(amount)) / Math.pow(10, token.decimals)
+                  }
             ${token.symbol} to refund`}
-          </Typography>
-          <Button
-            disabled={loading}
-            variant="contained"
-            color="primary"
-            onClick={handleRefund}
-            sx={{ width: "100%", borderRadius: 2 }}
-          >
-            Refound
-          </Button>
-        </Paper>
-      </BottomSheet>
+            </Typography>
+            <Button
+              disabled={loading}
+              variant="contained"
+              color="primary"
+              onClick={handleRefund}
+              sx={{ width: "100%", borderRadius: 2 }}
+            >
+              Refound
+            </Button>
+          </Paper>
+        </BottomSheet>
+      )}
     </PageContainer>
   );
 };
