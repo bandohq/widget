@@ -24,7 +24,7 @@ import { useConfig } from "wagmi";
 import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { useToken } from "../../hooks/useToken";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { executeRefound } from "../../utils/refunds";
 
@@ -42,6 +42,7 @@ export const TransactionsDetailPage = () => {
   const { availableCountries } = useCountryContext();
   const { token } = useToken(chain, tokenUsed);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useHeader(t("history.detailTitle"));
 
@@ -102,14 +103,22 @@ export const TransactionsDetailPage = () => {
         });
 
         setLoading(false);
+        setOpen(false);
         showNotification("success", "Refund sent successfully");
       } catch (error) {
         setLoading(false);
+        setOpen(false);
         showNotification("error", "Error on refunding tokens, try later");
         console.error("Error on refunding tokens:", error);
       }
     }
   };
+
+  useEffect(() => {
+    if (serviceId && amount) {
+      setOpen(true);
+    }
+  }, [serviceId, amount]);
 
   if (isPending || !transactionData) {
     return null;
@@ -180,7 +189,7 @@ export const TransactionsDetailPage = () => {
 
       {/* Refound section */}
       {amount && Number(BigInt(amount)) > 0 && (
-        <BottomSheet open={openRefundSheet()}>
+        <BottomSheet open={open}>
           <Paper sx={{ padding: 2 }}>
             <Typography variant="body1" align="center" mb={2}>
               {!amount || !token
