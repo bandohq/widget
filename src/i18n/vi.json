@@ -108,6 +108,15 @@
     "title": "Các quốc gia",
     "deleted": "Các quốc gia đã xóa"
   },
+  "history": {
+    "title": "Lịch sử giao dịch",
+    "detailTitle": "Chi tiết giao dịch",
+    "buyDetails": "Chi tiết mua hàng",
+    "refundSuccess": "Hoàn tiền đã được gửi thành công",
+    "refundFailed": "Lỗi khi hoàn tiền token, thử lại sau",
+    "country": "Quốc gia",
+    "sentTo": "Đã gửi tới"
+  },
   "info": {
     "detailMessage": "Nơi bạn sẽ nhận được {{productType}}.",
     "message": {
@@ -124,7 +133,7 @@
       "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
     },
     "title": {
-      "orderInProgress":  "Chúng tôi đang xử lý!",
+      "orderInProgress": "Chúng tôi đang xử lý!",
       "paymentReceived": "Thanh toán đã được nhận. Chúng tôi đang xử lý đơn hàng của bạn.",
       "orderCompleted": "Đơn hàng hoàn tất",
       "thanks": "Cảm ơn bạn đã mua hàng.",

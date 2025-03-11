@@ -104,11 +104,11 @@ export const TransactionsDetailPage = () => {
 
         setLoading(false);
         setOpen(false);
-        showNotification("success", "Refund sent successfully");
+        showNotification("success", t("history.refundSuccess"));
       } catch (error) {
         setLoading(false);
         setOpen(false);
-        showNotification("error", "Error on refunding tokens, try later");
+        showNotification("error", t("history.refundError"));
         console.error("Error on refunding tokens:", error);
       }
     }
@@ -156,7 +156,7 @@ export const TransactionsDetailPage = () => {
       <List>
         <ListItem sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body1" align="left">
-            Date:
+            {t("form.delivery.date")}:
           </Typography>
           <Typography variant="body2" align="right">
             {formatDate(transactionData?.created)}
@@ -165,7 +165,7 @@ export const TransactionsDetailPage = () => {
         <Divider />
         <ListItem sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body1" align="left">
-            Country:
+            {t("history.country")}:
           </Typography>
           <Typography variant="body2" align="right">
             {
@@ -179,7 +179,7 @@ export const TransactionsDetailPage = () => {
         <Divider />
         <ListItem sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="body1" align="left">
-            Sent to:
+            {t("history.sentTo")}:
           </Typography>
           <Typography variant="body2" align="right">
             {transactionData?.givenReference}

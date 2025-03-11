@@ -108,6 +108,15 @@
     "title": "Países",
     "deleted": "Países apagados"
   },
+  "history": {
+    "title": "Histórico de transações",
+    "detailTitle": "Detalhe da transação",
+    "buyDetails": "Detalhe da compra",
+    "refundSuccess": "Reembolso enviado com sucesso",
+    "refundFailed": "Erro ao reembolsar tokens, tente novamente mais tarde",
+    "country": "País",
+    "sentTo": "Enviado para"
+  },
   "info": {
     "detailMessage": "É onde você receberá o seu {{productType}}.",
     "message": {

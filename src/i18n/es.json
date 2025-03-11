@@ -110,7 +110,12 @@
   },
   "history": {
     "title": "Historial de transacciones",
-    "detailTitle": "Detalle de la transacción"
+    "detailTitle": "Detalle de la transacción",
+    "buyDetails": "Detalle de compra",
+    "refundSuccess": "Reembolso enviado con éxito",
+    "refundFailed": "Error al reembolsar los tokens, intente más tarde",
+    "country": "País",
+    "sentTo": "Enviado a"
   },
   "info": {
     "detailMessage": "Es donde recibirás tu {{productType}}.",

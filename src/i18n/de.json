@@ -108,6 +108,15 @@
     "title": "Länder",
     "deleted": "Gelöschte Länder"
   },
+  "history": {
+    "title": "Transaktionsverlauf",
+    "detailTitle": "Transaktionsdetails",
+    "buyDetails": "Kaufdetails",
+    "refundSuccess": "Rückerstattung erfolgreich gesendet",
+    "refundFailed": "Fehler bei der Rückerstattung von Tokens, später erneut versuchen",
+    "country": "Land",
+    "sentTo": "Gesendet an"
+  },
   "info": {
     "detailMessage": "Hier erhalten Sie Ihr {{productType}}.",
     "message": {
