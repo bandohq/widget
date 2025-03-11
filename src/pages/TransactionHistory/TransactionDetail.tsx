@@ -26,7 +26,7 @@ import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { useToken } from "../../hooks/useToken";
 import { useEffect, useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
-import { executeRefound } from "../../utils/refunds";
+import { executeRefund } from "../../utils/refunds";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -87,7 +87,7 @@ export const TransactionsDetailPage = () => {
       try {
         const isNativeToken = nativeToken.key === token.key;
 
-        await executeRefound({
+        await executeRefund({
           config,
           chain: formattedChain,
           contractAddress: chain?.protocolContracts?.BandoRouterProxy,
@@ -187,7 +187,7 @@ export const TransactionsDetailPage = () => {
         </ListItem>
       </List>
 
-      {/* Refound section */}
+      {/* Refund section */}
       {amount && Number(BigInt(amount)) > 0 && (
         <BottomSheet open={open}>
           <Paper sx={{ padding: 2 }}>
@@ -206,7 +206,7 @@ export const TransactionsDetailPage = () => {
               onClick={handleRefund}
               sx={{ width: "100%", borderRadius: 2 }}
             >
-              Refound
+              Refund
             </Button>
           </Paper>
         </BottomSheet>

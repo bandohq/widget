@@ -27,7 +27,7 @@ export const fetchRefunds = async (transactions, config, chain, address) => {
   return refundsArray;
 };
 
-export const executeRefound = async ({
+export const executeRefund = async ({
   config,
   chain,
   contractAddress,
