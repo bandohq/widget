@@ -50,7 +50,7 @@ export const createTheme = (
   const primaryMainColor =
     (widgetTheme.palette?.primary as SimplePaletteColorOptions)?.main ??
     palette.primary.main
-  const primaryLightColor = lighten(primaryMainColor, 0.84)
+  const primaryLightColor = lighten(primaryMainColor, 0.24);
   const primaryDarkColor = darken(primaryMainColor, 0.2)
   const secondaryMainColor =
     (widgetTheme.palette?.secondary as SimplePaletteColorOptions)?.main ??

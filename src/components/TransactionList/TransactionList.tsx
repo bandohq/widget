@@ -44,11 +44,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
   const renderChipColor = (transactionId: string, status: string) => {
     return isRefundAvailable(transactionId, refunds)
-      ? "default"
-      : status === "COMPLETED" || status === "SUCCESS"
       ? "success"
-      : status === "FAILED"
-      ? "error"
+      : status === "COMPLETED" || status === "SUCCESS"
+      ? "primary"
       : "default";
   };
 
