@@ -20,7 +20,7 @@ export const StatusPage = () => {
   const renderStatusView = () => {
     switch (transactionData?.status) {
       case "FAILED":
-        return <ErrorView />;
+        return <ErrorView transaction={transactionData} />;
       default:
         return <SuccessView status={transactionData} />;
     }

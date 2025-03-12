@@ -11,11 +11,18 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 
-export const ErrorView = () => {
+export const ErrorView = ({ transaction }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const gotoHome = () => {
+  console.log(transaction);
+
+  //Todo: send direct to refound page once serviceId comes from transaction detail
+  const goToHistory = () => {
+    navigate(navigationRoutes.transactionHistory);
+  };
+
+  const gotoDiscover = () => {
     navigate(navigationRoutes.home);
   };
   return (
@@ -26,27 +33,34 @@ export const ErrorView = () => {
       <StatusTitle>{t("error.title.orderFailed")}</StatusTitle>
       <StatusSubtitle>{t("error.title.retry")}</StatusSubtitle>
 
-      <CustomAccordion>
-        <CustomAccordionSummary
-          expandIcon={<CaretDown />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>{t("success.title.orderDetails")}</Typography>
-        </CustomAccordionSummary>
-        <AccordionDetails>
-          <Typography>Contenido de la sección 1.</Typography>
-        </AccordionDetails>
-      </CustomAccordion>
-
-      <Button
-        variant="outlined"
-        fullWidth
-        style={{ borderRadius: "30px" }}
-        onClick={gotoHome}
+      <Typography
+        variant="body2"
+        sx={{ textAlign: "center", marginTop: "20px", fontWeight: "200" }}
       >
-        {t("button.backToOrder")}
-      </Button>
+        You can go to your transaction history and ask for a refund
+      </Typography>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginTop: "15px",
+        }}
+      >
+        <Button
+          variant="outlined"
+          style={{ borderRadius: "30px" }}
+          onClick={goToHistory}
+        >
+          {t("history.goToHistory")}
+        </Button>
+        <Button
+          variant="outlined"
+          style={{ borderRadius: "30px" }}
+          onClick={gotoDiscover}
+        >
+          {t("button.discover")}
+        </Button>
+      </div>
     </>
   );
 };

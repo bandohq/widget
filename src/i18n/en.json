@@ -116,7 +116,9 @@
     "refundSuccess": "Refund sent successfully",
     "refundFailed": "Error on refunding tokens, try later",
     "country": "Country",
-    "sentTo": "Sent to"
+    "sentTo": "Sent to",
+    "goToHistory": "Go to history",
+    "instructions": "You can go to your transaction history and ask for a refund"
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",
