@@ -180,10 +180,10 @@
   resolved "https://registry.yarnpkg.com/@bandohq/contract-abis/-/contract-abis-1.0.2.tgz#ed5217f136ce9c3c35524ccbabc948f316c29273"
   integrity sha512-TiAMNhPKjf0l2UZbMUza9n/cM4y0oce2M6PFT0TnFPiKtcKd5w72aUAwqvtAjCKsRJfmR6J59ul5g+ZU5yRF5g==
 
-"@bandohq/widget@0.1.13-beta.32":
-  version "0.1.13-beta.32"
-  resolved "https://registry.yarnpkg.com/@bandohq/widget/-/widget-0.1.13-beta.32.tgz#a49d48697b860503fbf0d4cd8eb7257aaa50bc99"
-  integrity sha512-En0wNK30xSW7B5Qcx5LXZQfoPWn60Ykvmu9mIxB1Xk+RanZYFzWgbT3dGgEunH69Be/9qYR9mNEUmWT4+rTK6Q==
+"@bandohq/widget@^0.1.12":
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/@bandohq/widget/-/widget-0.1.12.tgz#6a0107fa980996f2fd8a55fdbf6f63852b5053d2"
+  integrity sha512-AwTWuISF1ByMPPWmD8O6CzUfOFt1j7ozJkgPTBN8fcaPJu/1xbVker4CAQfO6yBdQ+LIXq7imNyS+a9ESg+AJw==
   dependencies:
     "@bandohq/contract-abis" "^1.0.2"
     "@bigmi/client" "^0.0.4"
@@ -206,7 +206,6 @@
     react-i18next "^15.1.0"
     react-phone-number-input "^3.4.10"
     react-router-dom "^6.27.0"
-    standard-version "^9.5.0"
     vite-plugin-dts "^4.5.0"
     zustand "^5.0.0-rc.2"
 
