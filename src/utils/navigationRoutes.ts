@@ -28,6 +28,8 @@ export const navigationRoutes = {
     navigationRoutes.transactionHistory,
     navigationRoutes.transactionDetail,
   ];
+
+  export const backToHomeRoutes = [navigationRoutes.transactionHistory];
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
   
