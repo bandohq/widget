@@ -115,7 +115,9 @@
     "refundSuccess": "Hoàn tiền đã được gửi thành công",
     "refundFailed": "Lỗi khi hoàn tiền token, thử lại sau",
     "country": "Quốc gia",
-    "sentTo": "Đã gửi tới"
+    "sentTo": "Đã gửi tới",
+    "goToHistory": "Đi tới lịch sử",
+    "instructions": "Bạn có thể đi tới lịch sử giao dịch của mình và yêu cầu hoàn tiền"
   },
   "info": {
     "detailMessage": "Nơi bạn sẽ nhận được {{productType}}.",

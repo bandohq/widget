@@ -112,7 +112,9 @@
     "refundSuccess": "Pengembalian dana berhasil dikirim",
     "refundFailed": "Kesalahan saat mengembalikan token, coba lagi nanti",
     "country": "Negara",
-    "sentTo": "Dikirim ke"
+    "sentTo": "Dikirim ke",
+    "goToHistory": "Pergi ke riwayat",
+    "instructions": "Anda dapat pergi ke riwayat transaksi Anda dan meminta pengembalian dana"
   },
   "info": {
     "detailMessage": "Di sini Anda akan menerima {{productType}} Anda.",

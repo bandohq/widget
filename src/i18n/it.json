@@ -115,7 +115,9 @@
     "refundSuccess": "Rimborso inviato con successo",
     "refundFailed": "Errore nel rimborsare i token, riprova più tardi",
     "country": "Paese",
-    "sentTo": "Inviato a"
+    "sentTo": "Inviato a",
+    "goToHistory": "Vai alla cronologia",
+    "instructions": "Puoi andare alla cronologia delle tue transazioni e richiedere un rimborso"
   },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",

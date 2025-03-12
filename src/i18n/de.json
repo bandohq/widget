@@ -115,7 +115,9 @@
     "refundSuccess": "Rückerstattung erfolgreich gesendet",
     "refundFailed": "Fehler bei der Rückerstattung von Tokens, später erneut versuchen",
     "country": "Land",
-    "sentTo": "Gesendet an"
+    "sentTo": "Gesendet an",
+    "goToHistory": "Zur Historie gehen",
+    "instructions": "Sie können zu Ihrer Transaktionshistorie gehen und eine Rückerstattung anfordern"
   },
   "info": {
     "detailMessage": "Hier erhalten Sie Ihr {{productType}}.",
