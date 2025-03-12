@@ -6,9 +6,10 @@ export const checkAllowance = async (
   tokenAddress,
   account,
   chain,
-  config
+  config,
+  amount
 ) => {
-  const maxAttempts = 5;
+  const maxAttempts = 10;
   const delay = 5000;
   let attempt = 0;
   let allowance = BigInt(0);
@@ -16,15 +17,20 @@ export const checkAllowance = async (
   while (attempt < maxAttempts) {
     try {
       attempt++;
-      allowance = await readContract(config, {
+      allowance = (await readContract(config, {
         address: tokenAddress,
         abi: ERC20AllowanceABI,
         functionName: "allowance",
         args: [account?.address, spenderAddress],
         chainId: chain?.chainId,
-      }) as bigint;
+      })) as bigint;
 
-      if (allowance > BigInt(0)) {
+      console.log(
+        `Allowance check attempt ${attempt}:`,
+        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`
+      );
+
+      if (allowance >= amount) {
         break;
       }
 

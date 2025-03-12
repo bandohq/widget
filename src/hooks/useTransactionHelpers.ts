@@ -119,7 +119,8 @@ export const useTransactionHelpers = () => {
           token.address,
           account,
           chain,
-          config
+          config,
+          parseUnits(quote?.totalAmount.toString(), token?.decimals)
         );
         updateStep({message:'form.status.validateAllowanceCompleted', type:"completed"});
         
