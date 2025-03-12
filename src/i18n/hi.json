@@ -128,6 +128,15 @@
     "title": "देश",
     "deleted": "हटाए गए देश"
   },
+  "history": {
+    "title": "लेन-देन का इतिहास",
+    "detailTitle": "लेन-देन का विवरण",
+    "buyDetails": "खरीद विवरण",
+    "refundSuccess": "रिफंड सफलतापूर्वक भेजा गया",
+    "refundFailed": "टोकन रिफंड करने में त्रुटि, बाद में प्रयास करें",
+    "country": "देश",
+    "sentTo": "भेजा गया"
+  },
   "info": {
     "detailMessage": "यह वह स्थान है जहाँ आपको आपका {{productType}} प्राप्त होगा।",
     "message": {

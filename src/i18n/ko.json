@@ -108,6 +108,15 @@
     "title": "국가",
     "deleted": "삭제된 국가"
   },
+  "history": {
+    "title": "거래 내역",
+    "detailTitle": "거래 상세",
+    "buyDetails": "구매 세부사항",
+    "refundSuccess": "환불이 성공적으로 전송되었습니다",
+    "refundFailed": "토큰 환불 오류, 나중에 다시 시도하세요",
+    "country": "국가",
+    "sentTo": "보낸 사람"
+  },
   "info": {
     "detailMessage": "여기에서 {{productType}}를 받습니다.",
     "message": {

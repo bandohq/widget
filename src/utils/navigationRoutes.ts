@@ -1,14 +1,15 @@
 export const navigationRoutes = {
-  home: '/',
-  status: '/status',
-  fromToken: '/from-token', 
-  languages: 'languages',
-  countries: 'countries',
-  products: '/products',
-  form: '/form',
-  formSteps: '/form-steps',
-  routes: '/routes',
-  settings: '/settings',
+  home: "/",
+  status: "/status",
+  fromToken: "/from-token",
+  languages: "languages",
+  countries: "countries",
+  transactionHistory: "/transaction-history",
+  transactionDetail: "/transaction-detail",
+  products: "/products",
+  form: "/form",
+  formSteps: "/form-steps",
+  settings: "/settings",
 };
 
   
@@ -16,7 +17,6 @@ export const navigationRoutes = {
   
   export const stickyHeaderRoutes = [
     navigationRoutes.home,
-    navigationRoutes.routes,
     navigationRoutes.settings,
   ]
   
@@ -24,9 +24,10 @@ export const navigationRoutes = {
     navigationRoutes.languages,
     navigationRoutes.form,
     navigationRoutes.fromToken,
-    navigationRoutes.routes,
     navigationRoutes.settings,
-  ]
+    navigationRoutes.transactionHistory,
+    navigationRoutes.transactionDetail,
+  ];
   
   export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
   

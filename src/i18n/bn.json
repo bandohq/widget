@@ -108,6 +108,15 @@
     "title": "দেশসমূহ",
     "deleted": "মুছে ফেলা দেশসমূহ"
   },
+  "history": {
+    "title": "লেনদেনের ইতিহাস",
+    "detailTitle": "লেনদেনের বিবরণ",
+    "buyDetails": "ক্রয়ের বিবরণ",
+    "refundSuccess": "ফেরত সফলভাবে পাঠানো হয়েছে",
+    "refundFailed": "টোকেন ফেরত দিতে ত্রুটি, পরে চেষ্টা করুন",
+    "country": "দেশ",
+    "sentTo": "প্রেরিত হয়েছে"
+  },
   "info": {
     "detailMessage": "এটি যেখানে আপনি আপনার {{productType}} পাবেন।",
     "message": {

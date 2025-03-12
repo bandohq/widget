@@ -108,6 +108,15 @@
     "title": "Paesi",
     "deleted": "Paesi eliminati"
   },
+  "history": {
+    "title": "Cronologia delle transazioni",
+    "detailTitle": "Dettaglio della transazione",
+    "buyDetails": "Dettaglio dell'acquisto",
+    "refundSuccess": "Rimborso inviato con successo",
+    "refundFailed": "Errore nel rimborsare i token, riprova più tardi",
+    "country": "Paese",
+    "sentTo": "Inviato a"
+  },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",
     "message": {

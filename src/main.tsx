@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")!).render(
             },
           },
           blockedCountries: ["AF", "AL"],
-          hiddenUI: ['header'],
+          country: "MX",
         }}
       />
     </div>
