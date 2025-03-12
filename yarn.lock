@@ -180,6 +180,36 @@
   resolved "https://registry.yarnpkg.com/@bandohq/contract-abis/-/contract-abis-1.0.2.tgz#ed5217f136ce9c3c35524ccbabc948f316c29273"
   integrity sha512-TiAMNhPKjf0l2UZbMUza9n/cM4y0oce2M6PFT0TnFPiKtcKd5w72aUAwqvtAjCKsRJfmR6J59ul5g+ZU5yRF5g==
 
+"@bandohq/widget@0.1.13-beta.32":
+  version "0.1.13-beta.32"
+  resolved "https://registry.yarnpkg.com/@bandohq/widget/-/widget-0.1.13-beta.32.tgz#a49d48697b860503fbf0d4cd8eb7257aaa50bc99"
+  integrity sha512-En0wNK30xSW7B5Qcx5LXZQfoPWn60Ykvmu9mIxB1Xk+RanZYFzWgbT3dGgEunH69Be/9qYR9mNEUmWT4+rTK6Q==
+  dependencies:
+    "@bandohq/contract-abis" "^1.0.2"
+    "@bigmi/client" "^0.0.4"
+    "@bigmi/core" "^0.0.4"
+    "@fontsource/kanit" "^5.1.0"
+    "@lifi/wallet-management" "^3.4.2"
+    "@metamask/sdk" "^0.30.0"
+    "@mui/material" "^6.1.5"
+    "@mui/system" "^6.1.6"
+    "@phosphor-icons/react" "^2.1.7"
+    "@solana/wallet-adapter-base" "^0.9.23"
+    "@solana/web3.js" "^1.95.3"
+    "@tanstack/react-virtual" "^3.10.9"
+    add "^2.0.6"
+    fuse.js "^7.0.0"
+    i18next "^23.16.2"
+    lodash "^4.17.21"
+    microdiff "^1.4.0"
+    mitt "^3.0.1"
+    react-i18next "^15.1.0"
+    react-phone-number-input "^3.4.10"
+    react-router-dom "^6.27.0"
+    standard-version "^9.5.0"
+    vite-plugin-dts "^4.5.0"
+    zustand "^5.0.0-rc.2"
+
 "@bigmi/client@^0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@bigmi/client/-/client-0.0.4.tgz#eba777ceb1fed8a5482c0267cf9cf3c812a48ece"
