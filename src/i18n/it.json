@@ -116,8 +116,8 @@
     "refundFailed": "Errore nel rimborsare i token, riprova più tardi",
     "country": "Paese",
     "sentTo": "Inviato a",
-    "goToHistory": "Vai alla cronologia",
-    "instructions": "Puoi andare alla cronologia delle tue transazioni e richiedere un rimborso"
+    "availableRefunds": "Rimborsi disponibili",
+    "instructions": "La tua criptovaluta è al sicuro, i rimborsi sono disponibili"
   },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",

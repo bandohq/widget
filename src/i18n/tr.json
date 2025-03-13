@@ -116,8 +116,8 @@
     "refundFailed": "Jeton iade hatası, daha sonra tekrar deneyin",
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
-    "goToHistory": "Geçmişe git",
-    "instructions": "İşlem geçmişinize gidip geri ödeme talep edebilirsiniz"
+    "availableRefunds": "Mevcut iadeler",
+    "instructions": "Kriptonuz güvende, iade mevcuttur"
   },
   "info": {
     "detailMessage": "{{productType}} burada teslim alacaksınız.",

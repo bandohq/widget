@@ -116,8 +116,8 @@
     "refundFailed": "Erreur lors du remboursement des jetons, réessayez plus tard",
     "country": "Pays",
     "sentTo": "Envoyé à",
-    "goToHistory": "Aller à l'historique",
-    "instructions": "Vous pouvez accéder à votre historique de transactions et demander un remboursement"
+    "availableRefunds": "Remboursements disponibles",
+    "instructions": "Votre crypto est en sécurité, des remboursements sont disponibles"
   },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",

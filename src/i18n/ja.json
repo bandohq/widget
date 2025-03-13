@@ -116,8 +116,8 @@
     "refundFailed": "トークンの返金エラー、後で再試行してください",
     "country": "国",
     "sentTo": "送信先",
-    "goToHistory": "履歴に移動",
-    "instructions": "取引履歴にアクセスして、返金をリクエストできます"
+    "availableRefunds": "利用可能な返金",
+    "instructions": "あなたの暗号資産は安全で、返金が利用可能です"
   },
   "info": {
     "detailMessage": "ここで{{productType}}を受け取ります。",

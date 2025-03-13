@@ -116,8 +116,8 @@
     "refundFailed": "Erro ao reembolsar tokens, tente novamente mais tarde",
     "country": "País",
     "sentTo": "Enviado para",
-    "goToHistory": "Ir para o histórico",
-    "instructions": "Você pode ir ao seu histórico de transações e solicitar um reembolso"
+    "availableRefunds": "Reembolsos disponíveis",
+    "instructions": "Sua criptomoeda está segura, reembolsos estão disponíveis"
   },
   "info": {
     "detailMessage": "É onde você receberá o seu {{productType}}.",

@@ -116,8 +116,8 @@
     "refundFailed": "Fehler bei der Rückerstattung von Tokens, später erneut versuchen",
     "country": "Land",
     "sentTo": "Gesendet an",
-    "goToHistory": "Zur Historie gehen",
-    "instructions": "Sie können zu Ihrer Transaktionshistorie gehen und eine Rückerstattung anfordern"
+    "availableRefunds": "Verfügbare Rückerstattungen",
+    "instructions": "Deine Kryptowährung ist sicher, Rückerstattungen sind verfügbar"
   },
   "info": {
     "detailMessage": "Hier erhalten Sie Ihr {{productType}}.",
