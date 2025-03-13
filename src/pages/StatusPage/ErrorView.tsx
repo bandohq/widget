@@ -42,7 +42,7 @@ export const ErrorView = ({ transaction }) => {
       <Button
         fullWidth
         sx={{
-          mt: 2,
+          mt: 5,
           backgroundColor: theme.palette.common.black,
           color: "white",
           "&:hover": {
