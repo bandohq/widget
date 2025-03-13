@@ -1,10 +1,16 @@
-import React, { ChangeEvent, useLayoutEffect, useRef, useState } from 'react';
-import type { CardProps } from '@mui/material';
-import 'react-phone-number-input/style.css';
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
-import type { FormTypeProps } from '../../stores/form/types.js';
-import { fitInputText } from '../../utils/input.js';
-import { CardTitle } from '../Card/CardTitle.js';
+import React, {
+  ChangeEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import type { CardProps } from "@mui/material";
+import "react-phone-number-input/style.css";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import type { FormTypeProps } from "../../stores/form/types.js";
+import { fitInputText } from "../../utils/input.js";
+import { CardTitle } from "../Card/CardTitle.js";
 import {
   FormContainer,
   FormControl,
@@ -13,13 +19,13 @@ import {
   StyledPhoneInput,
   maxInputFontSize,
   minInputFontSize,
-} from './ReferenceInput.style.js';
-import { useFieldController } from '../../stores/form/useFieldController.js';
-import { Typography } from '@mui/material';
-import { useCountryContext } from '../../stores/CountriesProvider/CountriesProvider.js';
-import { ReferenceType } from '../../providers/CatalogProvider/types.js';
-import { getReferenceTitleByKey } from '../../utils/getReferenceTitleByKey.js';
-import { useTranslation } from 'react-i18next';
+} from "./ReferenceInput.style.js";
+import { useFieldController } from "../../stores/form/useFieldController.js";
+import { Typography } from "@mui/material";
+import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider.js";
+import { ReferenceType } from "../../providers/CatalogProvider/types.js";
+import { getReferenceTitleByKey } from "../../utils/getReferenceTitleByKey.js";
+import { useTranslation } from "react-i18next";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
@@ -39,15 +45,17 @@ export const Input: React.FC<ReferenceInputProps> = ({
   const ref = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
   const { onChange, onBlur, value } = useFieldController({
-    name: isRequired ? 'requiredFields' : 'reference',
+    name: isRequired ? "requiredFields" : "reference",
   });
   const { selectedCountry: country } = useCountryContext();
   const [error, setError] = useState<string | null>(null);
-  const phoneRegex =
-    '^(\\+?\\d{1,3}[-.\\s]?)?(\\(?\\d{3}\\)?[-.\\s]?)?\\d{3}[-.\\s]?\\d{4}$';
-
   const currentValue =
-    Array.isArray(value) && value[index]?.value ? value[index].value : '';
+    Array.isArray(value) && value[index]?.value ? value[index].value : "";
+  const [inputValue, setInputValue] = useState<string>(() => {
+    return !isRequired ? "" : currentValue;
+  });
+  const phoneRegex =
+    "^(\\+?\\d{1,3}[-.\\s]?)?(\\(?\\d{3}\\)?[-.\\s]?)?\\d{3}[-.\\s]?\\d{4}$";
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,7 +63,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
     const newValue = event.target.value;
 
     const regex =
-      typeof referenceType.regex === 'string'
+      typeof referenceType.regex === "string"
         ? new RegExp(referenceType.regex)
         : referenceType.regex;
 
@@ -74,6 +82,28 @@ export const Input: React.FC<ReferenceInputProps> = ({
       onChange(updatedReferences);
     } else {
       onChange(newValue);
+    }
+  };
+
+  const handlePhoneChange = (newPhone: string | undefined) => {
+    const finalPhone = newPhone || "";
+    setInputValue(finalPhone);
+
+    if (!isValidPhoneNumber(finalPhone)) {
+      setError(`Invalid ${referenceType.name} format.`);
+    } else {
+      setError(null);
+    }
+
+    if (isRequired) {
+      const updatedReferences = Array.isArray(value) ? [...value] : [];
+      updatedReferences[index] = {
+        key: referenceType.name,
+        value: finalPhone,
+      };
+      onChange(updatedReferences);
+    } else {
+      onChange(finalPhone);
     }
   };
 
@@ -97,13 +127,19 @@ export const Input: React.FC<ReferenceInputProps> = ({
     }
   }, [currentValue]);
 
+  useEffect(() => {
+    if (!isRequired) {
+      onChange("");
+    }
+  }, []);
+
   const title = referenceType.name;
 
   return (
     <>
-      <InputCard {...props} className={error ? 'error' : ''}>
+      <InputCard {...props} className={error ? "error" : ""}>
         <CardTitle>
-          {t('form.common.your', { field: t(getReferenceTitleByKey(title)) })}
+          {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
         </CardTitle>
 
         <FormContainer>
@@ -115,27 +151,8 @@ export const Input: React.FC<ReferenceInputProps> = ({
                   placeholder="Enter phone number"
                   // @ts-ignore all iso codes are valid
                   defaultCountry={country?.isoAlpha2}
-                  value={isRequired ? currentValue : value}
-                  onChange={(newPhone) => {
-                    if (isRequired) {
-                      const updatedReferences = Array.isArray(value)
-                        ? [...value]
-                        : [];
-                      updatedReferences[index] = {
-                        key: referenceType.name,
-                        value: newPhone,
-                      };
-                      onChange(updatedReferences);
-                      if (!isValidPhoneNumber(newPhone || '')) {
-                        setError(`Invalid ${referenceType.name} format.`);
-                      } else setError(null);
-                    } else {
-                      if (!isValidPhoneNumber(newPhone || '')) {
-                        setError(`Invalid ${referenceType.name} format.`);
-                      } else setError(null);
-                      onChange(newPhone);
-                    }
-                  }}
+                  value={inputValue}
+                  onChange={handlePhoneChange}
                 />
               </StyledPhoneInput>
             ) : (
@@ -143,7 +160,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
                 inputRef={ref}
                 type="text"
                 autoComplete="off"
-                placeholder={t('form.common.enter_your', {
+                placeholder={t("form.common.enter_your", {
                   field: t(getReferenceTitleByKey(title)),
                 })}
                 onChange={handleChange}
