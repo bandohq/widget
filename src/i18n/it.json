@@ -116,8 +116,8 @@
     "refundFailed": "Errore nel rimborsare i token, riprova più tardi",
     "country": "Paese",
     "sentTo": "Inviato a",
-    "availableRefunds": "Rimborsi disponibili",
-    "instructions": "La tua criptovaluta è al sicuro, i rimborsi sono disponibili"
+    "availableRefunds": "Ottieni il tuo rimborso",
+    "instructions": "Il tuo denaro è al sicuro, il tuo rimborso è stato autorizzato."
   },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",

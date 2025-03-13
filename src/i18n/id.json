@@ -113,8 +113,8 @@
     "refundFailed": "Kesalahan saat mengembalikan token, coba lagi nanti",
     "country": "Negara",
     "sentTo": "Dikirim ke",
-    "availableRefunds": "Pengembalian dana yang tersedia",
-    "instructions": "Kripto Anda aman, pengembalian dana tersedia"
+    "availableRefunds": "Dapatkan pengembalian dana Anda",
+    "instructions": "Uang Anda aman, pengembalian dana Anda telah disetujui."
   },
   "info": {
     "detailMessage": "Di sini Anda akan menerima {{productType}} Anda.",

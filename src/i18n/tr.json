@@ -116,8 +116,8 @@
     "refundFailed": "Jeton iade hatası, daha sonra tekrar deneyin",
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
-    "availableRefunds": "Mevcut iadeler",
-    "instructions": "Kriptonuz güvende, iade mevcuttur"
+    "availableRefunds": "İadenizi alın",
+    "instructions": "Paranız güvende, iadeniz onaylandı."
   },
   "info": {
     "detailMessage": "{{productType}} burada teslim alacaksınız.",

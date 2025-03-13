@@ -116,8 +116,8 @@
     "refundFailed": "Erreur lors du remboursement des jetons, réessayez plus tard",
     "country": "Pays",
     "sentTo": "Envoyé à",
-    "availableRefunds": "Remboursements disponibles",
-    "instructions": "Votre crypto est en sécurité, des remboursements sont disponibles"
+    "availableRefunds": "Obtenez votre remboursement",
+    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé."
   },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",
