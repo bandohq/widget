@@ -1,4 +1,10 @@
-import { AccordionDetails, Button, Typography } from "@mui/material";
+import {
+  AccordionDetails,
+  Alert,
+  Button,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import {
   CustomAccordion,
   CustomAccordionSummary,
@@ -12,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 
 export const ErrorView = ({ transaction }) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -21,10 +28,6 @@ export const ErrorView = ({ transaction }) => {
   const goToHistory = () => {
     navigate(navigationRoutes.transactionHistory);
   };
-
-  const gotoDiscover = () => {
-    navigate(navigationRoutes.home);
-  };
   return (
     <>
       <IconWrapper bgColor="#FAC985">
@@ -33,34 +36,24 @@ export const ErrorView = ({ transaction }) => {
       <StatusTitle>{t("error.title.orderFailed")}</StatusTitle>
       <StatusSubtitle>{t("error.title.retry")}</StatusSubtitle>
 
-      <Typography
-        variant="body2"
-        sx={{ textAlign: "center", marginTop: "20px", fontWeight: "200" }}
-      >
-        You can go to your transaction history and ask for a refund
-      </Typography>
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          marginTop: "15px",
+      <Alert sx={{ mt: 2 }} severity="info">
+        {t("history.instructions")}
+      </Alert>
+      <Button
+        fullWidth
+        sx={{
+          mt: 2,
+          backgroundColor: theme.palette.common.black,
+          color: "white",
+          "&:hover": {
+            backgroundColor: theme.palette.grey[800],
+          },
         }}
+        style={{ borderRadius: "30px" }}
+        onClick={goToHistory}
       >
-        <Button
-          variant="outlined"
-          style={{ borderRadius: "30px" }}
-          onClick={goToHistory}
-        >
-          {t("history.goToHistory")}
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ borderRadius: "30px" }}
-          onClick={gotoDiscover}
-        >
-          {t("button.discover")}
-        </Button>
-      </div>
+        {t("history.availableRefunds")}
+      </Button>
     </>
   );
 };
