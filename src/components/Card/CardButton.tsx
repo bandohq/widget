@@ -11,14 +11,17 @@ interface SettingCardButtonProps extends SettingCardTitle {
   onClick: MouseEventHandler;
 }
 
-export const CardButton: React.FC<
-  PropsWithChildren<SettingCardButtonProps>
-> = ({ onClick, icon, title, children }) => (
+export const CardButton: React.FC<PropsWithChildren<SettingCardButtonProps>> = ({
+  onClick,
+  icon,
+  title,
+  children,
+}) => (
   <Card>
     <CardRowButton onClick={onClick} disableRipple>
       <CardTitleContainer>
         {icon}
-        <CardValue>{title}</CardValue>
+        <CardValue sx={{ textAlign: "start" }}>{title}</CardValue>
       </CardTitleContainer>
       {children}
     </CardRowButton>

@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useNavigateBack } from "../../hooks/useNavigateBack";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { useHeaderStore } from "../../stores/header/useHeaderStore";
 import { HiddenUI } from "../../types/widget";
 import {
   backButtonRoutes,
+  backToHomeRoutes,
   navigationRoutes,
   navigationRoutesValues,
 } from "../../utils/navigationRoutes";
@@ -18,6 +19,7 @@ import { SplitWalletMenuButton } from "./WalletHeader";
 export const NavigationHeader: React.FC = () => {
   const { subvariant, hiddenUI, variant } = useWidgetConfig();
   const { navigateBack } = useNavigateBack();
+  const navigate = useNavigate();
   const { element, title } = useHeaderStore((state) => state);
   const { pathname } = useLocation();
 
@@ -31,42 +33,55 @@ export const NavigationHeader: React.FC = () => {
   const isBackButtonVisible =
     backButtonRoutes.includes(`/${basePath}`) || basePath === "products";
 
+  const isBackToHome = backToHomeRoutes.includes(`/${basePath}`);
+
   const splitSubvariant = subvariant === "split" && !hasPath;
+
+  const goto = () => {
+    if (isBackToHome) {
+      navigate(navigationRoutes.home);
+    } else {
+      navigateBack();
+    }
+  };
 
   return (
     <>
       {(isBackButtonVisible || !hiddenUI?.includes(HiddenUI.Header)) && (
         <HeaderAppBar elevation={0}>
-          {isBackButtonVisible ? <BackButton onClick={navigateBack} /> : null}
+          {isBackButtonVisible && <BackButton onClick={goto} />}
           {splitSubvariant ? (
             <Box flex={1}>
-            <SplitWalletMenuButton />
-          </Box>
-        ) : (
-          <Typography
-            fontSize={hasPath ? 18 : 24}
-            align={hasPath ? "center" : "left"}
-            fontWeight="700"
-            flex={1}
-            noWrap
-          >
-            {title}
-          </Typography>
-        )}
-        <Routes>
-          <Route
-            path={navigationRoutes.home}
-            element={
-              <HeaderControlsContainer>
-                {!hiddenUI?.includes(HiddenUI.Header) && <SettingsButton />}
-                {variant === "drawer" &&
-                !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (
-                  <CloseDrawerButton header="navigation" />
-                ) : null}
-              </HeaderControlsContainer>
-            }
-          />
-          <Route path="*" element={element || <Box width={28} height={40} />} />
+              <SplitWalletMenuButton />
+            </Box>
+          ) : (
+            <Typography
+              fontSize={hasPath ? 18 : 24}
+              align={hasPath ? "center" : "left"}
+              fontWeight="700"
+              flex={1}
+              noWrap
+            >
+              {title}
+            </Typography>
+          )}
+          <Routes>
+            <Route
+              path={navigationRoutes.home}
+              element={
+                <HeaderControlsContainer>
+                  {!hiddenUI?.includes(HiddenUI.Header) && <SettingsButton />}
+                  {variant === "drawer" &&
+                  !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (
+                    <CloseDrawerButton header="navigation" />
+                  ) : null}
+                </HeaderControlsContainer>
+              }
+            />
+            <Route
+              path="*"
+              element={element || <Box width={28} height={40} />}
+            />
           </Routes>
         </HeaderAppBar>
       )}

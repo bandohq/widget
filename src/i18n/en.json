@@ -116,7 +116,9 @@
     "refundSuccess": "Refund sent successfully",
     "refundFailed": "Error on refunding tokens, try later",
     "country": "Country",
-    "sentTo": "Sent to"
+    "sentTo": "Sent to",
+    "availableRefunds": "Available refunds",
+    "instructions": "Your crypto is safe, you have refunds available"
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",

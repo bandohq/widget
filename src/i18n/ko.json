@@ -115,7 +115,9 @@
     "refundSuccess": "환불이 성공적으로 전송되었습니다",
     "refundFailed": "토큰 환불 오류, 나중에 다시 시도하세요",
     "country": "국가",
-    "sentTo": "보낸 사람"
+    "sentTo": "보낸 사람",
+    "availableRefunds": "환불 받기",
+    "instructions": "귀하의 자금은 안전하며, 환불이 승인되었습니다."
   },
   "info": {
     "detailMessage": "여기에서 {{productType}}를 받습니다.",

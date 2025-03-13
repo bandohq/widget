@@ -115,7 +115,9 @@
     "refundSuccess": "Reembolso enviado con éxito",
     "refundFailed": "Error al reembolsar los tokens, intente más tarde",
     "country": "País",
-    "sentTo": "Enviado a"
+    "sentTo": "Enviado a",
+    "availableRefunds": "Obtén tu reembolso",
+    "instructions": "Tu dinero está seguro, tu reembolso ha sido autorizado."
   },
   "info": {
     "detailMessage": "Es donde recibirás tu {{productType}}.",

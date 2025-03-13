@@ -115,7 +115,9 @@
     "refundSuccess": "退款已成功发送",
     "refundFailed": "退款时出现错误，请稍后再试",
     "country": "国家",
-    "sentTo": "发送至"
+    "sentTo": "发送至",
+    "availableRefunds": "获取您的退款",
+    "instructions": "您的资金是安全的，您的退款已获授权。"
   },
   "info": {
     "detailMessage": "这是您将接收 {{productType}} 的地方。",

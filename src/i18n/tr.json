@@ -115,7 +115,9 @@
     "refundSuccess": "İade başarıyla gönderildi",
     "refundFailed": "Jeton iade hatası, daha sonra tekrar deneyin",
     "country": "Ülke",
-    "sentTo": "Gönderildiği kişi"
+    "sentTo": "Gönderildiği kişi",
+    "availableRefunds": "İadenizi alın",
+    "instructions": "Paranız güvende, iadeniz onaylandı."
   },
   "info": {
     "detailMessage": "{{productType}} burada teslim alacaksınız.",

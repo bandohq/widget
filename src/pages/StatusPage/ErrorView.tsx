@@ -1,4 +1,10 @@
-import { AccordionDetails, Button, Typography } from "@mui/material";
+import {
+  AccordionDetails,
+  Alert,
+  Button,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import {
   CustomAccordion,
   CustomAccordionSummary,
@@ -11,12 +17,16 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 
-export const ErrorView = () => {
+export const ErrorView = ({ transaction }) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const gotoHome = () => {
-    navigate(navigationRoutes.home);
+  console.log(transaction);
+
+  //Todo: send direct to refound page once serviceId comes from transaction detail
+  const goToHistory = () => {
+    navigate(navigationRoutes.transactionHistory);
   };
   return (
     <>
@@ -26,26 +36,23 @@ export const ErrorView = () => {
       <StatusTitle>{t("error.title.orderFailed")}</StatusTitle>
       <StatusSubtitle>{t("error.title.retry")}</StatusSubtitle>
 
-      <CustomAccordion>
-        <CustomAccordionSummary
-          expandIcon={<CaretDown />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>{t("success.title.orderDetails")}</Typography>
-        </CustomAccordionSummary>
-        <AccordionDetails>
-          <Typography>Contenido de la sección 1.</Typography>
-        </AccordionDetails>
-      </CustomAccordion>
-
+      <Alert sx={{ mt: 2 }} severity="info">
+        {t("history.instructions")}
+      </Alert>
       <Button
-        variant="outlined"
         fullWidth
+        sx={{
+          mt: 5,
+          backgroundColor: theme.palette.common.black,
+          color: "white",
+          "&:hover": {
+            backgroundColor: theme.palette.grey[800],
+          },
+        }}
         style={{ borderRadius: "30px" }}
-        onClick={gotoHome}
+        onClick={goToHistory}
       >
-        {t("button.backToOrder")}
+        {t("history.availableRefunds")}
       </Button>
     </>
   );

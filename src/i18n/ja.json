@@ -115,7 +115,9 @@
     "refundSuccess": "返金が正常に送信されました",
     "refundFailed": "トークンの返金エラー、後で再試行してください",
     "country": "国",
-    "sentTo": "送信先"
+    "sentTo": "送信先",
+    "availableRefunds": "返金を受け取る",
+    "instructions": "あなたのお金は安全で、返金が承認されました。"
   },
   "info": {
     "detailMessage": "ここで{{productType}}を受け取ります。",

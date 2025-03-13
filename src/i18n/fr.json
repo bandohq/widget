@@ -115,7 +115,9 @@
     "refundSuccess": "Remboursement envoyé avec succès",
     "refundFailed": "Erreur lors du remboursement des jetons, réessayez plus tard",
     "country": "Pays",
-    "sentTo": "Envoyé à"
+    "sentTo": "Envoyé à",
+    "availableRefunds": "Obtenez votre remboursement",
+    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé."
   },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",
