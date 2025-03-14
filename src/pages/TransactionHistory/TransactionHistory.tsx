@@ -72,31 +72,38 @@ export const TransactionsHistoryPage = () => {
           (item) => item.key === chain?.key
         );
 
-        if (token.key === nativeToken?.key) {
-          const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
-            (item) => item.name === "record"
-          );
-          const txStatus = (await readContract(config, {
-            address: chain?.protocolContracts?.BandoFulfillableProxy,
-            abi: [FulfillableRegistryABI],
-            functionName: "record",
-            args: [transaction.recordId],
-            chainId: chain?.chainId,
-          })) as { status: number };
-          return { id: transaction.id, txStatus: txStatus.status as number };
-        } else {
-          const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
-            (item) => item.name === "record"
-          );
-          const txStatus = (await readContract(config, {
-            address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
-            abi: [FulfillableRegistryABI],
-            functionName: "record",
-            args: [transaction.recordId],
-            chainId: chain?.chainId,
-          })) as { status: number };
-          console.log(txStatus);
-          return { id: transaction.id, txStatus: txStatus.status as number };
+        try {
+          if (token.key === nativeToken?.key) {
+            const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
+              (item) => item.name === "record"
+            );
+            const txStatus = (await readContract(config, {
+              address: chain?.protocolContracts?.BandoFulfillableProxy,
+              abi: [FulfillableRegistryABI],
+              functionName: "record",
+              args: [transaction.recordId],
+              chainId: chain?.chainId,
+            })) as { status: number };
+            return { id: transaction.id, txStatus: txStatus.status as number };
+          } else {
+            const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
+              (item) => item.name === "record"
+            );
+            const txStatus = (await readContract(config, {
+              address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
+              abi: [FulfillableRegistryABI],
+              functionName: "record",
+              args: [transaction.recordId],
+              chainId: chain?.chainId,
+            })) as { status: number };
+            return { id: transaction.id, txStatus: txStatus.status as number };
+          }
+        } catch (error) {
+          console.error(error);
+          return {
+            id: transaction.id,
+            txStatus: -1,
+          };
         }
       });
 
