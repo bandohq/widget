@@ -13,7 +13,7 @@ interface TransactionListProps {
   transactions: Transaction[];
   refunds?: {
     id: string;
-    amount: BigInt;
+    txStatus: number;
   }[];
 }
 
@@ -57,7 +57,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     const refund = refunds.find((refund) => refund.id === transaction.id);
     if (refund) {
       navigate(
-        `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}&amount=${refund.amount}`
+        `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}`
       );
       return;
     }

@@ -9,7 +9,6 @@ import { List } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 import { useConfig } from "wagmi";
 import { useChain } from "../../hooks/useChain";
-import { fetchRefunds } from "../../utils/refunds";
 import { useToken } from "../../hooks/useToken";
 import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1.json";
@@ -41,7 +40,9 @@ export const TransactionsHistoryPage = () => {
   useHeader(t("history.title"));
   const { account } = useAccount();
   const { chain } = useChain(account.chainId);
-  const [refunds, setRefunds] = useState<{ id: string; amount: BigInt }[]>([]);
+  const [refunds, setRefunds] = useState<{ id: string; txStatus: number }[]>(
+    []
+  );
   const { searchToken, isLoading: isLoadingToken } = useToken(chain);
 
   const { data: transactions, isPending } = useFetch({
@@ -73,32 +74,29 @@ export const TransactionsHistoryPage = () => {
 
         if (token.key === nativeToken?.key) {
           const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
-            (item) => item.name === "getRefundsFor"
+            (item) => item.name === "record"
           );
-          const refundAmount = await readContract(config, {
+          const txStatus = (await readContract(config, {
             address: chain?.protocolContracts?.BandoFulfillableProxy,
             abi: [FulfillableRegistryABI],
-            functionName: "getRefundsFor",
-            args: [transaction.serviceId],
+            functionName: "record",
+            args: [transaction.recordId],
             chainId: chain?.chainId,
-          });
-          return { id: transaction.id, amount: refundAmount as BigInt };
+          })) as { status: number };
+          return { id: transaction.id, txStatus: txStatus.status as number };
         } else {
           const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
-            (item) => item.name === "getERC20RefundsFor"
+            (item) => item.name === "record"
           );
-          const refundAmount = await readContract(config, {
+          const txStatus = (await readContract(config, {
             address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
             abi: [FulfillableRegistryABI],
-            functionName: "getERC20RefundsFor",
-            args: [
-              transaction.tokenUsed,
-              account.address,
-              transaction.serviceId,
-            ],
+            functionName: "record",
+            args: [transaction.recordId],
             chainId: chain?.chainId,
-          });
-          return { id: transaction.id, amount: refundAmount as BigInt };
+          })) as { status: number };
+          console.log(txStatus);
+          return { id: transaction.id, txStatus: txStatus.status as number };
         }
       });
 

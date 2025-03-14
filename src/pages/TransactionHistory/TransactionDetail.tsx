@@ -36,7 +36,6 @@ export const TransactionsDetailPage = () => {
   const [searchParams] = useSearchParams();
   const serviceId = searchParams.get("serviceId");
   const tokenUsed = searchParams.get("tokenUsed");
-  const amount = searchParams.get("amount");
   const { transactionId } = useParams();
   const { showNotification } = useNotificationContext();
   const { availableCountries } = useCountryContext();
@@ -53,14 +52,6 @@ export const TransactionsDetailPage = () => {
       queryKey: ["transaction", transactionId],
     },
   });
-
-  const openRefundSheet = () => {
-    if (serviceId && amount) {
-      return true;
-    }
-
-    return false;
-  };
 
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
@@ -83,7 +74,7 @@ export const TransactionsDetailPage = () => {
       transformToChainConfig(chain, nativeToken)
     );
 
-    if (serviceId && amount) {
+    if (serviceId && formattedChain) {
       try {
         const isNativeToken = nativeToken.key === token.key;
 
@@ -96,9 +87,7 @@ export const TransactionsDetailPage = () => {
           functionName: isNativeToken
             ? "withdrawRefund"
             : "withdrawERC20Refund",
-          args: isNativeToken
-            ? [serviceId, account.address]
-            : [serviceId, transactionData.tokenUsed, account.address],
+          args: [serviceId, transactionData?.recordId],
           accountAddress: account?.address,
         });
 
@@ -115,10 +104,10 @@ export const TransactionsDetailPage = () => {
   };
 
   useEffect(() => {
-    if (serviceId && amount) {
+    if (serviceId) {
       setOpen(true);
     }
-  }, [serviceId, amount]);
+  }, [serviceId]);
 
   if (isPending || !transactionData) {
     return null;
@@ -188,15 +177,13 @@ export const TransactionsDetailPage = () => {
       </List>
 
       {/* Refund section */}
-      {amount && Number(BigInt(amount)) > 0 && (
+      {serviceId && transactionData.tokenAmountPaid && (
         <BottomSheet open={open}>
           <Paper sx={{ padding: 2 }}>
             <Typography variant="body1" align="center" mb={2}>
-              {!amount || !token
+              {!serviceId || !token
                 ? "No refund available"
-                : `You have ${
-                    Number(BigInt(amount)) / Math.pow(10, token.decimals)
-                  }
+                : `You have ${transactionData.tokenAmountPaid}
             ${token.symbol} to refund`}
             </Typography>
             <Button
