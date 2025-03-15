@@ -66,7 +66,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount,
+      fiatAmount: quote?.fiatAmount * 100,
       serviceRef: txId,
       weiAmount,
     };
@@ -134,7 +134,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount,
+      fiatAmount: quote?.fiatAmount * 100,
       serviceRef: txId,
       token: token.address,
       tokenAmount: parseUnits(
