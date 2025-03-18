@@ -11,6 +11,8 @@ type StepType = "loading" | "info" | "completed";
 export type Step = {
   message: string;
   type: StepType;
+  description?: string;
+  variables?: any;
 } | null;
 
 type StepsContextType = {

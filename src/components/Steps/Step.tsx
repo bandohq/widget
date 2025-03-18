@@ -25,12 +25,15 @@ const StepIcon = (type: string) => {
 
 export const Step = ({ step }) => {
   const { t } = useTranslation();
-
   return (
     <Collapse in={Boolean(step)}>
       <ListItem>
         <ListItemAvatar>{StepIcon(step?.type)}</ListItemAvatar>
-        <ListItemText primary={t(step?.message)} />
+        <ListItemText
+          // @ts-ignore it returns a string, not an object
+          primary={t(step?.message, { ...step?.variables })}
+          secondary={step?.description && step?.description}
+        />
       </ListItem>
     </Collapse>
   );

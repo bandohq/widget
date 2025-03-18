@@ -97,11 +97,14 @@ export const useTransactionHelpers = () => {
     serviceID,
     token,
   }) => {
-    addStep({ message: "form.status.aproveTokens", type: "info" });
-
     const totalAmount = parseFloat(quote?.totalAmount);
     const roundedAmount = roundUpAmount(totalAmount, 4);
     const amountInUnits = parseUnits(roundedAmount.toString(), token?.decimals);
+    addStep({
+      message: "form.status.aproveTokens",
+      type: "info",
+      variables: { amount: roundedAmount, tokenSymbol: token?.symbol },
+    });
 
     await approveERC20(
       chain?.protocolContracts?.BandoRouterProxy,
@@ -173,7 +176,8 @@ export const useTransactionHelpers = () => {
         );
 
         addStep({
-          message: "form.status.validatingReference",
+          message: "form.status.procesingPurchase",
+          description: "form.status.wait",
           type: "loading",
         });
 
@@ -185,7 +189,7 @@ export const useTransactionHelpers = () => {
         );
 
         updateStep({
-          message: "form.status.validatingReferenceCompleted",
+          message: "form.status.processingPurchaseCompleted",
           type: "completed",
         });
 
