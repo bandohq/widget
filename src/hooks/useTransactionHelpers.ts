@@ -101,7 +101,7 @@ export const useTransactionHelpers = () => {
     const roundedAmount = roundUpAmount(totalAmount, 4);
     const amountInUnits = parseUnits(roundedAmount.toString(), token?.decimals);
     addStep({
-      message: "form.status.aproveTokens",
+      message: "form.status.approveTokens",
       type: "info",
       variables: { amount: roundedAmount, tokenSymbol: token?.symbol },
     });
@@ -176,7 +176,7 @@ export const useTransactionHelpers = () => {
         );
 
         addStep({
-          message: "form.status.procesingOrder",
+          message: "form.status.processingOrder",
           description: "form.status.wait",
           type: "loading",
         });

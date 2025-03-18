@@ -50,12 +50,12 @@
   },
   "form": {
     "status": {
-      "aproveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
+      "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Pesanan berhasil divalidasi",
-      "procesingOrder": "Pesanan Anda sedang diproses",
+      "processingOrder": "Pesanan Anda sedang diproses",
       "wait": "Ini mungkin memerlukan beberapa menit",
       "signTransaction": "Silakan tandatangani transaksi",
-      "validateAllowance": "Memvalidasi alokasi"
+      "validateAllowanceCompleted": "Jumlah disetujui"
     },
     "delivery": {
       "challenge": {

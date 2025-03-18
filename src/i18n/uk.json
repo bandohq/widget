@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "signTransaction": "Будь ласка, підпишіть транзакцію",
-      "aproveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
+      "approveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Замовлення успішно перевірено",
-      "procesingOrder": "Обробка вашого замовлення",
+      "processingOrder": "Обробка вашого замовлення",
       "wait": "Це може зайняти кілька хвилин",
       "validateAllowance": "Перевірка дозволу",
       "signTransactionCompleted": "Транзакцію успішно підписано",
-      "validateAllowanceCompleted": "Токени успішно схвалені"
+      "validateAllowanceCompleted": "Суму схвалено"
     },
     "delivery": {
       "challenge": {

@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "signTransaction": "Veuillez signer la transaction",
-      "aproveTokens": "Veuillez approuver le montant de {{amount}} {{tokenSymbol}}",
+      "approveTokens": "Veuillez approuver le montant de {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Commande validée avec succès",
-      "procesingOrder": "Traitement de votre commande",
+      "processingOrder": "Traitement de votre commande",
       "wait": "Cela peut prendre quelques minutes",
       "validateAllowance": "Validation de l’allocation",
       "signTransactionCompleted": "Transaction signée avec succès",
-      "validateAllowanceCompleted": "Jetons approuvés avec succès"
+      "validateAllowanceCompleted": "Montant approuvé"
     },
     "delivery": {
       "challenge": {

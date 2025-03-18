@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "processingOrderCompleted": "Order validated successfully",
-      "procesingOrder": "Processing your order",
+      "processingOrder": "Processing your order",
       "wait": "It may take a few minutes",
       "signTransaction": "Please sign the transaction",
       "signTransactionCompleted": "Transaction signed successfully",
-      "aproveTokens": "Please approve the amount of {{amount}} {{tokenSymbol}}",
+      "approveTokens": "Please approve the amount of {{amount}} {{tokenSymbol}}",
       "validateAllowance": "Validating allowance",
-      "validateAllowanceCompleted": "Tokens approved successfully"
+      "validateAllowanceCompleted": "Amount approved"
     },
     "delivery": {
       "challenge": {

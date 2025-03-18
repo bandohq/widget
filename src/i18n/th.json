@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "signTransaction": "กรุณาเซ็นชื่อในธุรกรรม",
-      "aproveTokens": "กรุณาอนุมัติจำนวน {{amount}} {{tokenSymbol}}",
+      "approveTokens": "กรุณาอนุมัติจำนวน {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "คำสั่งซื้อได้รับการตรวจสอบเรียบร้อยแล้ว",
-      "procesingOrder": "กำลังดำเนินการตามคำสั่งซื้อของคุณ",
+      "processingOrder": "กำลังดำเนินการตามคำสั่งซื้อของคุณ",
       "wait": "อาจใช้เวลาสองสามนาที",
       "validateAllowance": "กำลังตรวจสอบค่าเผื่อ",
       "signTransactionCompleted": "ธุรกรรมลงนามเรียบร้อยแล้ว",
-      "validateAllowanceCompleted": "โทเค็นได้รับการอนุมัติเรียบร้อยแล้ว"
+      "validateAllowanceCompleted": "จำนวนเงินได้รับการอนุมัติ"
     },
     "delivery": {
       "challenge": {

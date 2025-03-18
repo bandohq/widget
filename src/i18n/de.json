@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "signTransaction": "Bitte unterzeichnen Sie die Transaktion",
-      "aproveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",
+      "approveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Bestellung erfolgreich validiert",
-      "procesingOrder": "Ihre Bestellung wird verarbeitet",
+      "processingOrder": "Ihre Bestellung wird verarbeitet",
       "wait": "Es kann einige Minuten dauern",
       "validateAllowance": "Zulassung wird validiert",
       "signTransactionCompleted": "Transaktion erfolgreich signiert",
-      "validateAllowanceCompleted": "Token erfolgreich genehmigt"
+      "validateAllowanceCompleted": "Betrag genehmigt"
     },
     "delivery": {
       "challenge": {

@@ -51,13 +51,13 @@
   "form": {
     "status": {
       "signTransaction": "Lütfen işlemi imzalayın",
-      "aproveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
+      "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
       "processingOrderCompleted": "Sipariş başarıyla doğrulandı",
-      "procesingOrder": "Siparişiniz işleniyor",
+      "processingOrder": "Siparişiniz işleniyor",
       "wait": "Birkaç dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",
-      "validateAllowanceCompleted": "Tokenler başarıyla onaylandı"
+      "validateAllowanceCompleted": "Tutar onaylandı"
     },
     "delivery": {
       "challenge": {
