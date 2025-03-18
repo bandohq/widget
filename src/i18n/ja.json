@@ -54,7 +54,7 @@
       "approveTokens": "{{amount}} {{tokenSymbol}} の承認をお願いします",
       "processingOrderCompleted": "注文が正常に検証されました",
       "processingOrder": "ご注文を処理中です",
-      "wait": "数分かかる場合があります",
+      "wait": "1分かかる場合があります",
       "validateAllowance": "許容量を検証中",
       "signTransactionCompleted": "取引の署名が完了しました",
       "validateAllowanceCompleted": "金額が承認されました"

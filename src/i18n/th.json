@@ -54,7 +54,7 @@
       "approveTokens": "กรุณาอนุมัติจำนวน {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "คำสั่งซื้อได้รับการตรวจสอบเรียบร้อยแล้ว",
       "processingOrder": "กำลังดำเนินการตามคำสั่งซื้อของคุณ",
-      "wait": "อาจใช้เวลาสองสามนาที",
+      "wait": "อาจใช้เวลาหนึ่งนาที",
       "validateAllowance": "กำลังตรวจสอบค่าเผื่อ",
       "signTransactionCompleted": "ธุรกรรมลงนามเรียบร้อยแล้ว",
       "validateAllowanceCompleted": "จำนวนเงินได้รับการอนุมัติ"

@@ -54,7 +54,7 @@
       "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
       "processingOrderCompleted": "Sipariş başarıyla doğrulandı",
       "processingOrder": "Siparişiniz işleniyor",
-      "wait": "Birkaç dakika sürebilir",
+      "wait": "Bir dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",
       "validateAllowanceCompleted": "Tutar onaylandı"

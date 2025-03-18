@@ -54,7 +54,7 @@
       "approveTokens": "Si prega di approvare l'importo di {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Ordine convalidato con successo",
       "processingOrder": "Elaborazione del tuo ordine",
-      "wait": "Potrebbe richiedere alcuni minuti",
+      "wait": "Potrebbe richiedere un minuto",
       "validateAllowance": "Convalida dell’assegno",
       "signTransactionCompleted": "Transazione firmata con successo",
       "validateAllowanceCompleted": "Importo approvato"

@@ -54,7 +54,7 @@
       "approveTokens": "Por favor, apruebe la cantidad de {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Pedido validado con éxito",
       "processingOrder": "Procesando su pedido",
-      "wait": "Puede tardar unos minutos",
+      "wait": "Puede tardar un minuto",
       "validateAllowance": "Validando aprobación",
       "signTransactionCompleted": "Transacción firmada con éxito",
       "validateAllowanceCompleted": "Cantidad aprobada"

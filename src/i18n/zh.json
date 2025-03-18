@@ -54,7 +54,7 @@
       "approveTokens": "请批准 {{amount}} {{tokenSymbol}} 的金额",
       "processingOrderCompleted": "订单已成功验证",
       "processingOrder": "正在处理您的订单",
-      "wait": "可能需要几分钟",
+      "wait": "可能需要一分钟",
       "validateAllowance": "正在验证额度",
       "signTransactionCompleted": "交易签署成功",
       "validateAllowanceCompleted": "金额已批准"

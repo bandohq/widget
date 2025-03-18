@@ -54,7 +54,7 @@
       "approveTokens": "অনুগ্রহ করে {{amount}} {{tokenSymbol}} পরিমাণ অনুমোদন করুন",
       "processingOrderCompleted": "অর্ডার সফলভাবে যাচাই করা হয়েছে",
       "processingOrder": "আপনার অর্ডার প্রক্রিয়াকরণ করা হচ্ছে",
-      "wait": "এটি কয়েক মিনিট সময় নিতে পারে",
+      "wait": "এটি এক মিনিট সময় নিতে পারে",
       "validateAllowance": "ভাতা যাচাই করা হচ্ছে",
       "signTransactionCompleted": "লেনদেন সফলভাবে স্বাক্ষরিত হয়েছে",
       "validateAllowanceCompleted": "পরিমাণ অনুমোদিত"

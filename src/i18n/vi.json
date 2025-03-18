@@ -54,7 +54,7 @@
       "approveTokens": "Vui lòng phê duyệt số tiền {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Đơn hàng đã được xác thực thành công",
       "processingOrder": "Đang xử lý đơn hàng của bạn",
-      "wait": "Có thể mất vài phút",
+      "wait": "Có thể mất một phút",
       "validateAllowance": "Đang xác thực hạn mức",
       "signTransactionCompleted": "Giao dịch đã được ký thành công",
       "validateAllowanceCompleted": "Số tiền đã được phê duyệt"

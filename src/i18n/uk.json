@@ -54,7 +54,7 @@
       "approveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Замовлення успішно перевірено",
       "processingOrder": "Обробка вашого замовлення",
-      "wait": "Це може зайняти кілька хвилин",
+      "wait": "Це може зайняти хвилину",
       "validateAllowance": "Перевірка дозволу",
       "signTransactionCompleted": "Транзакцію успішно підписано",
       "validateAllowanceCompleted": "Суму схвалено"

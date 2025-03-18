@@ -74,7 +74,7 @@
       "approveTokens": "कृपया {{amount}} {{tokenSymbol}} की राशि अनुमोदित करें",
       "processingOrderCompleted": "ऑर्डर सफलतापूर्वक मान्य किया गया",
       "processingOrder": "आपका ऑर्डर संसाधित किया जा रहा है",
-      "wait": "इसमें कुछ मिनट लग सकते हैं",
+      "wait": "इसमें एक मिनट लग सकता है",
       "validateAllowance": "भत्ता सत्यापित किया जा रहा है",
       "signTransactionCompleted": "लेन-देन सफलतापूर्वक हस्ताक्षरित किया गया",
       "validateAllowanceCompleted": "राशि अनुमोदित"

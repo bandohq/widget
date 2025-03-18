@@ -54,7 +54,7 @@
       "approveTokens": "{{amount}} {{tokenSymbol}} 금액을 승인해 주세요",
       "processingOrderCompleted": "주문이 성공적으로 검증되었습니다",
       "processingOrder": "주문을 처리 중입니다",
-      "wait": "몇 분 정도 걸릴 수 있습니다",
+      "wait": "1분 정도 걸릴 수 있습니다",
       "validateAllowance": "허용량 검증 중",
       "signTransactionCompleted": "거래 서명이 완료되었습니다",
       "validateAllowanceCompleted": "금액 승인됨"

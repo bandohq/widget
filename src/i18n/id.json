@@ -53,7 +53,7 @@
       "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Pesanan berhasil divalidasi",
       "processingOrder": "Pesanan Anda sedang diproses",
-      "wait": "Ini mungkin memerlukan beberapa menit",
+      "wait": "Ini mungkin memerlukan satu menit",
       "signTransaction": "Silakan tandatangani transaksi",
       "validateAllowanceCompleted": "Jumlah disetujui"
     },
