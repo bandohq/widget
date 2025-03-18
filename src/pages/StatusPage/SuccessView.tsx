@@ -58,27 +58,17 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {!status?.product?.logoUrl ? (
-          <Box
+        {status?.product?.logoUrl ? (
+          <ImageAvatar
+            hideName
+            name={status?.product?.name || ""}
+            src={status?.product?.logoUrl}
             sx={{
-              width: "40%",
-              height: "50px",
+              maxHeight: "75px",
+              objectFit: "contain",
+              margin: "auto",
             }}
-          >
-            <ImageAvatar
-              hideName
-              name={status?.product?.name || ""}
-              src={status?.product?.logoUrl}
-              sx={{
-                width: "50%",
-                height: "45px",
-                maxWidthidth: "45px",
-                maxHeight: "45px",
-                objectFit: "contain",
-                margin: "auto",
-              }}
-            />
-          </Box>
+          />
         ) : (
           <Barcode size={50} />
         )}
