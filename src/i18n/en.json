@@ -50,8 +50,8 @@
   },
   "form": {
     "status": {
-      "processingPurchaseCompleted": "Reference validated successfully",
-      "procesingPurchase": "Processing your purchase",
+      "processingOrderCompleted": "Order validated successfully",
+      "procesingOrder": "Processing your order",
       "wait": "It may take a few minutes",
       "signTransaction": "Please sign the transaction",
       "signTransactionCompleted": "Transaction signed successfully",

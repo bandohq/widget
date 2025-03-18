@@ -52,8 +52,8 @@
     "status": {
       "signTransaction": "অনুগ্রহ করে লেনদেন স্বাক্ষর করুন",
       "aproveTokens": "অনুগ্রহ করে {{amount}} {{tokenSymbol}} পরিমাণ অনুমোদন করুন",
-      "processingPurchaseCompleted": "রেফারেন্স সফলভাবে যাচাই করা হয়েছে",
-      "procesingPurchase": "আপনার ক্রয় প্রক্রিয়াকরণ করা হচ্ছে",
+      "processingOrderCompleted": "অর্ডার সফলভাবে যাচাই করা হয়েছে",
+      "procesingOrder": "আপনার অর্ডার প্রক্রিয়াকরণ করা হচ্ছে",
       "wait": "এটি কয়েক মিনিট সময় নিতে পারে",
       "validateAllowance": "ভাতা যাচাই করা হচ্ছে",
       "signTransactionCompleted": "লেনদেন সফলভাবে স্বাক্ষরিত হয়েছে",

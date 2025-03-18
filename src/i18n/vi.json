@@ -52,8 +52,8 @@
     "status": {
       "signTransaction": "Vui lòng ký giao dịch",
       "aproveTokens": "Vui lòng phê duyệt số tiền {{amount}} {{tokenSymbol}}",
-      "processingPurchaseCompleted": "Tham chiếu đã được xác thực thành công",
-      "procesingPurchase": "Đang xử lý giao dịch mua của bạn",
+      "processingOrderCompleted": "Đơn hàng đã được xác thực thành công",
+      "procesingOrder": "Đang xử lý đơn hàng của bạn",
       "wait": "Có thể mất vài phút",
       "validateAllowance": "Đang xác thực hạn mức",
       "signTransactionCompleted": "Giao dịch đã được ký thành công",

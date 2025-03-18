@@ -51,8 +51,8 @@
   "form": {
     "status": {
       "aproveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
-      "processingPurchaseCompleted": "Referensi berhasil divalidasi",
-      "procesingPurchase": "Pembelian Anda sedang diproses",
+      "processingOrderCompleted": "Pesanan berhasil divalidasi",
+      "procesingOrder": "Pesanan Anda sedang diproses",
       "wait": "Ini mungkin memerlukan beberapa menit",
       "signTransaction": "Silakan tandatangani transaksi",
       "validateAllowance": "Memvalidasi alokasi"

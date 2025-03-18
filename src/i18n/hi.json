@@ -72,8 +72,8 @@
     "status": {
       "signTransaction": "कृपया लेन-देन पर हस्ताक्षर करें",
       "aproveTokens": "कृपया {{amount}} {{tokenSymbol}} की राशि अनुमोदित करें",
-      "processingPurchaseCompleted": "संदर्भ सफलतापूर्वक मान्य किया गया",
-      "procesingPurchase": "आपकी खरीदारी संसाधित की जा रही है",
+      "processingOrderCompleted": "ऑर्डर सफलतापूर्वक मान्य किया गया",
+      "procesingOrder": "आपका ऑर्डर संसाधित किया जा रहा है",
       "wait": "इसमें कुछ मिनट लग सकते हैं",
       "validateAllowance": "भत्ता सत्यापित किया जा रहा है",
       "signTransactionCompleted": "लेन-देन सफलतापूर्वक हस्ताक्षरित किया गया",

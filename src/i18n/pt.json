@@ -52,8 +52,8 @@
     "status": {
       "signTransaction": "Por favor, assine a transação",
       "aproveTokens": "Por favor, aprove o valor de {{amount}} {{tokenSymbol}}",
-      "processingPurchaseCompleted": "Referência validada com sucesso",
-      "procesingPurchase": "Processando sua compra",
+      "processingOrderCompleted": "Pedido validado com sucesso",
+      "procesingOrder": "Processando seu pedido",
       "wait": "Isso pode levar alguns minutos",
       "validateAllowance": "Validando aprovação",
       "signTransactionCompleted": "Transação assinada com sucesso",
