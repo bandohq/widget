@@ -176,7 +176,7 @@ export const useTransactionHelpers = () => {
         );
 
         addStep({
-          message: "form.status.procesingPurchase",
+          message: "form.status.processingOrder",
           description: "form.status.wait",
           type: "loading",
         });
@@ -189,7 +189,7 @@ export const useTransactionHelpers = () => {
         );
 
         updateStep({
-          message: "form.status.processingPurchaseCompleted",
+          message: "form.status.processingOrderCompleted",
           type: "completed",
         });
 
