@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "正在验证参考",
       "signTransaction": "请签署交易",
-      "aproveTokens": "请批准所需的代币",
+      "aproveTokens": "请批准 {{amount}} {{tokenSymbol}} 的金额",
+      "processingPurchaseCompleted": "参考已成功验证",
+      "procesingPurchase": "正在处理您的购买",
+      "wait": "可能需要几分钟",
       "validateAllowance": "正在验证额度",
-      "validatingReferenceCompleted": "引用验证成功",
       "signTransactionCompleted": "交易签署成功",
       "validateAllowanceCompleted": "代币批准成功"
     },

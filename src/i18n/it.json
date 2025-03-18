@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Convalida riferimento",
       "signTransaction": "Si prega di firmare la transazione",
-      "aproveTokens": "Si prega di approvare i token richiesti",
+      "aproveTokens": "Si prega di approvare l'importo di {{amount}} {{tokenSymbol}}",
+      "processingPurchaseCompleted": "Riferimento convalidato con successo",
+      "procesingPurchase": "Elaborazione del tuo acquisto",
+      "wait": "Potrebbe richiedere alcuni minuti",
       "validateAllowance": "Convalida dell’assegno",
-      "validatingReferenceCompleted": "Riferimento convalidato con successo",
       "signTransactionCompleted": "Transazione firmata con successo",
       "validateAllowanceCompleted": "Token approvati con successo"
     },

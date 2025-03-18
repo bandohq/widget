@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "กำลังตรวจสอบข้อมูลอ้างอิง",
       "signTransaction": "กรุณาเซ็นชื่อในธุรกรรม",
-      "aproveTokens": "กรุณาอนุมัติโทเค็นที่จำเป็น",
+      "aproveTokens": "กรุณาอนุมัติจำนวน {{amount}} {{tokenSymbol}}",
+      "processingPurchaseCompleted": "ยืนยันการอ้างอิงสำเร็จ",
+      "procesingPurchase": "กำลังดำเนินการซื้อของคุณ",
+      "wait": "อาจใช้เวลาสองสามนาที",
       "validateAllowance": "กำลังตรวจสอบค่าเผื่อ",
-      "validatingReferenceCompleted": "การอ้างอิงได้รับการตรวจสอบสำเร็จ",
       "signTransactionCompleted": "ธุรกรรมลงนามเรียบร้อยแล้ว",
       "validateAllowanceCompleted": "โทเค็นได้รับการอนุมัติเรียบร้อยแล้ว"
     },

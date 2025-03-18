@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "参照を検証中",
       "signTransaction": "取引に署名してください",
-      "aproveTokens": "必要なトークンを承認してください",
+      "aproveTokens": "{{amount}} {{tokenSymbol}} の承認をお願いします",
+      "processingPurchaseCompleted": "参照が正常に検証されました",
+      "procesingPurchase": "購入を処理中です",
+      "wait": "数分かかる場合があります",
       "validateAllowance": "許容量を検証中",
-      "validatingReferenceCompleted": "参照の検証に成功しました",
       "signTransactionCompleted": "取引の署名が完了しました",
       "validateAllowanceCompleted": "トークンの承認が完了しました"
     },

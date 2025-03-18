@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Validando referencia",
       "signTransaction": "Por favor, firma la transacción",
-      "aproveTokens": "Por favor, aprueba los tokens requeridos",
+      "aproveTokens": "Por favor, apruebe la cantidad de {{amount}} {{tokenSymbol}}",
+      "processingPurchaseCompleted": "Referencia validada con éxito",
+      "procesingPurchase": "Procesando su compra",
+      "wait": "Puede tardar unos minutos",
       "validateAllowance": "Validando aprobación",
-      "validatingReferenceCompleted": "Referencia validada con éxito",
       "signTransactionCompleted": "Transacción firmada con éxito",
       "validateAllowanceCompleted": "Tokens aprobados con éxito"
     },

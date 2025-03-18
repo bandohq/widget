@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Перевірка посилання",
       "signTransaction": "Будь ласка, підпишіть транзакцію",
-      "aproveTokens": "Будь ласка, затвердіть необхідні токени",
+      "aproveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
+      "processingPurchaseCompleted": "Посилання успішно перевірено",
+      "procesingPurchase": "Обробка вашої покупки",
+      "wait": "Це може зайняти кілька хвилин",
       "validateAllowance": "Перевірка дозволу",
-      "validatingReferenceCompleted": "Референс успішно перевірено",
       "signTransactionCompleted": "Транзакцію успішно підписано",
       "validateAllowanceCompleted": "Токени успішно схвалені"
     },

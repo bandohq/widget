@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Referans doğrulanıyor",
       "signTransaction": "Lütfen işlemi imzalayın",
-      "aproveTokens": "Lütfen gerekli tokenleri onaylayın",
+      "aproveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
+      "processingPurchaseCompleted": "Referans başarıyla doğrulandı",
+      "procesingPurchase": "Satın alma işleminiz işleniyor",
+      "wait": "Birkaç dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
-      "validatingReferenceCompleted": "Referans başarıyla doğrulandı",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",
       "validateAllowanceCompleted": "Tokenler başarıyla onaylandı"
     },

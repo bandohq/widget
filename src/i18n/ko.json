@@ -50,11 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "참조 검증 중",
       "signTransaction": "거래에 서명해 주세요",
-      "aproveTokens": "필요한 토큰을 승인해 주세요",
+      "aproveTokens": "{{amount}} {{tokenSymbol}} 금액을 승인해 주세요",
+      "processingPurchaseCompleted": "참조가 성공적으로 검증되었습니다",
+      "procesingPurchase": "구매를 처리 중입니다",
+      "wait": "몇 분 정도 걸릴 수 있습니다",
       "validateAllowance": "허용량 검증 중",
-      "validatingReferenceCompleted": "참조가 성공적으로 검증되었습니다",
       "signTransactionCompleted": "거래 서명이 완료되었습니다",
       "validateAllowanceCompleted": "토큰이 성공적으로 승인되었습니다"
     },
