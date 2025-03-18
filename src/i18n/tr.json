@@ -50,13 +50,14 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Referans doğrulanıyor",
       "signTransaction": "Lütfen işlemi imzalayın",
-      "aproveTokens": "Lütfen gerekli tokenleri onaylayın",
+      "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
+      "processingOrderCompleted": "Sipariş başarıyla doğrulandı",
+      "processingOrder": "Siparişiniz işleniyor",
+      "wait": "Bir dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
-      "validatingReferenceCompleted": "Referans başarıyla doğrulandı",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",
-      "validateAllowanceCompleted": "Tokenler başarıyla onaylandı"
+      "validateAllowanceCompleted": "Tutar onaylandı"
     },
     "delivery": {
       "challenge": {

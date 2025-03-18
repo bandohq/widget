@@ -50,10 +50,12 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Memvalidasi referensi",
+      "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Pesanan berhasil divalidasi",
+      "processingOrder": "Pesanan Anda sedang diproses",
+      "wait": "Ini mungkin memerlukan satu menit",
       "signTransaction": "Silakan tandatangani transaksi",
-      "aproveTokens": "Silakan setujui token yang diperlukan",
-      "validateAllowance": "Memvalidasi alokasi"
+      "validateAllowanceCompleted": "Jumlah disetujui"
     },
     "delivery": {
       "challenge": {

@@ -70,13 +70,14 @@
   },
   "form": {
     "status": {
-      "validatingReference": "संदर्भ का सत्यापन किया जा रहा है",
       "signTransaction": "कृपया लेन-देन पर हस्ताक्षर करें",
-      "aproveTokens": "कृपया आवश्यक टोकन को स्वीकृति दें",
+      "approveTokens": "कृपया {{amount}} {{tokenSymbol}} की राशि अनुमोदित करें",
+      "processingOrderCompleted": "ऑर्डर सफलतापूर्वक मान्य किया गया",
+      "processingOrder": "आपका ऑर्डर संसाधित किया जा रहा है",
+      "wait": "इसमें एक मिनट लग सकता है",
       "validateAllowance": "भत्ता सत्यापित किया जा रहा है",
-      "validatingReferenceCompleted": "संदर्भ सफलतापूर्वक सत्यापित किया गया",
       "signTransactionCompleted": "लेन-देन सफलतापूर्वक हस्ताक्षरित किया गया",
-      "validateAllowanceCompleted": "टोकन सफलतापूर्वक अनुमोदित किए गए"
+      "validateAllowanceCompleted": "राशि अनुमोदित"
     },
     "delivery": {
       "challenge": {

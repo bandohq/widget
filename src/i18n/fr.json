@@ -50,13 +50,14 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Validation de la référence",
       "signTransaction": "Veuillez signer la transaction",
-      "aproveTokens": "Veuillez approuver les jetons requis",
+      "approveTokens": "Veuillez approuver le montant de {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Commande validée avec succès",
+      "processingOrder": "Traitement de votre commande",
+      "wait": "Cela peut prendre une minute",
       "validateAllowance": "Validation de l’allocation",
-      "validatingReferenceCompleted": "Référence validée avec succès",
       "signTransactionCompleted": "Transaction signée avec succès",
-      "validateAllowanceCompleted": "Jetons approuvés avec succès"
+      "validateAllowanceCompleted": "Montant approuvé"
     },
     "delivery": {
       "challenge": {

@@ -50,13 +50,14 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Convalida riferimento",
       "signTransaction": "Si prega di firmare la transazione",
-      "aproveTokens": "Si prega di approvare i token richiesti",
+      "approveTokens": "Si prega di approvare l'importo di {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Ordine convalidato con successo",
+      "processingOrder": "Elaborazione del tuo ordine",
+      "wait": "Potrebbe richiedere un minuto",
       "validateAllowance": "Convalida dell’assegno",
-      "validatingReferenceCompleted": "Riferimento convalidato con successo",
       "signTransactionCompleted": "Transazione firmata con successo",
-      "validateAllowanceCompleted": "Token approvati con successo"
+      "validateAllowanceCompleted": "Importo approvato"
     },
     "delivery": {
       "challenge": {

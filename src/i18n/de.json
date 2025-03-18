@@ -50,13 +50,14 @@
   },
   "form": {
     "status": {
-      "validatingReference": "Referenz wird validiert",
       "signTransaction": "Bitte unterzeichnen Sie die Transaktion",
-      "aproveTokens": "Bitte genehmigen Sie die erforderlichen Token",
+      "approveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Bestellung erfolgreich validiert",
+      "processingOrder": "Ihre Bestellung wird verarbeitet",
+      "wait": "Es kann eine Minute dauern",
       "validateAllowance": "Zulassung wird validiert",
-      "validatingReferenceCompleted": "Referenz erfolgreich validiert",
       "signTransactionCompleted": "Transaktion erfolgreich signiert",
-      "validateAllowanceCompleted": "Token erfolgreich genehmigt"
+      "validateAllowanceCompleted": "Betrag genehmigt"
     },
     "delivery": {
       "challenge": {

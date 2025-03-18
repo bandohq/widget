@@ -50,13 +50,14 @@
   },
   "form": {
     "status": {
-      "validatingReferenceCompleted": "Reference validated successfully",
-      "validatingReference": "Validating reference",
+      "processingOrderCompleted": "Order validated successfully",
+      "processingOrder": "Processing your order",
+      "wait": "It may take a minute",
       "signTransaction": "Please sign the transaction",
       "signTransactionCompleted": "Transaction signed successfully",
-      "aproveTokens": "Please approve the required tokens",
+      "approveTokens": "Please approve the amount of {{amount}} {{tokenSymbol}}",
       "validateAllowance": "Validating allowance",
-      "validateAllowanceCompleted": "Tokens approved successfully"
+      "validateAllowanceCompleted": "Amount approved"
     },
     "delivery": {
       "challenge": {
