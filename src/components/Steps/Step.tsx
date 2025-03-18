@@ -32,7 +32,7 @@ export const Step = ({ step }) => {
         <ListItemText
           // @ts-ignore it returns a string, not an object
           primary={t(step?.message, { ...step?.variables })}
-          secondary={step?.description && step?.description}
+          secondary={step?.description && t(step?.description)}
         />
       </ListItem>
     </Collapse>
