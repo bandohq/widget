@@ -118,7 +118,8 @@
     "country": "Land",
     "sentTo": "Gesendet an",
     "availableRefunds": "Fordere deine Rückerstattung an",
-    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt."
+    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt.",
+    "noTransactions": "Hier ist nichts."
   },
   "info": {
     "detailMessage": "Hier erhalten Sie Ihr {{productType}}.",

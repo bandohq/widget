@@ -118,7 +118,8 @@
     "country": "País",
     "sentTo": "Enviado para",
     "availableRefunds": "Receba seu reembolso",
-    "instructions": "Seu dinheiro está seguro, seu reembolso foi autorizado."
+    "instructions": "Seu dinheiro está seguro, seu reembolso foi autorizado.",
+    "noTransactions": "Não há nada aqui."
   },
   "info": {
     "detailMessage": "É onde você receberá o seu {{productType}}.",

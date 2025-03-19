@@ -118,7 +118,8 @@
     "country": "国家",
     "sentTo": "发送至",
     "availableRefunds": "获取您的退款",
-    "instructions": "您的资金是安全的，您的退款已获授权。"
+    "instructions": "您的资金是安全的，您的退款已获授权。",
+    "noTransactions": "这里什么都没有。"
   },
   "info": {
     "detailMessage": "这是您将接收 {{productType}} 的地方。",

@@ -118,7 +118,8 @@
     "country": "Quốc gia",
     "sentTo": "Đã gửi tới",
     "availableRefunds": "Nhận khoản hoàn tiền của bạn",
-    "instructions": "Tiền của bạn an toàn, khoản hoàn tiền của bạn đã được phê duyệt."
+    "instructions": "Tiền của bạn an toàn, khoản hoàn tiền của bạn đã được phê duyệt.",
+    "noTransactions": "Không có gì ở đây."
   },
   "info": {
     "detailMessage": "Nơi bạn sẽ nhận được {{productType}}.",

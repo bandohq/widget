@@ -119,7 +119,8 @@
     "country": "Country",
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
-    "instructions": "Your crypto is safe, you have refunds available"
+    "instructions": "Your crypto is safe, you have refunds available",
+    "noTransactions": "There is nothing here."
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",
