@@ -16,7 +16,7 @@ import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20Fulfi
 import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1.json";
 import { readContract } from "wagmi/actions";
 import { Box } from "@mui/system";
-import { NoTrasactionsFound } from "./NoTrasactionsFound";
+import { NoTransactionsFound } from "./NoTransactionsFound";
 
 export interface Transaction {
   id: string;
@@ -125,7 +125,9 @@ export const TransactionsHistoryPage = () => {
   return (
     <PageContainer>
       <Box>
-        {error && !transactions && !isPending && <NoTrasactionsFound />}
+        {error && !transactions?.transactions?.length && !isPending && (
+          <NoTransactionsFound />
+        )}
         {!isPending && transactions && (
           <TransactionList
             transactions={transactions.transactions}

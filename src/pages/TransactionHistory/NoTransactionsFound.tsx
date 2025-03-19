@@ -5,7 +5,7 @@ import {
   NotFoundMessage,
 } from "../../components/Search/SearchNotFound.style";
 
-export const NoTrasactionsFound = () => {
+export const NoTransactionsFound = () => {
   const { t } = useTranslation();
   return (
     <NotFoundContainer>
