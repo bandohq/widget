@@ -118,7 +118,8 @@
     "country": "Pays",
     "sentTo": "Envoyé à",
     "availableRefunds": "Obtenez votre remboursement",
-    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé."
+    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé.",
+    "noTransactions": "Il n'y a rien ici."
   },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",

@@ -118,7 +118,8 @@
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
     "availableRefunds": "İadenizi alın",
-    "instructions": "Paranız güvende, iadeniz onaylandı."
+    "instructions": "Paranız güvende, iadeniz onaylandı.",
+    "noTransactions": "Burada hiçbir şey yok."
   },
   "info": {
     "detailMessage": "{{productType}} burada teslim alacaksınız.",
