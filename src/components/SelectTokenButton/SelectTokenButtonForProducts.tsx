@@ -61,19 +61,6 @@ export const SelectTokenButtonForProducts: React.FC<
         chainId: account?.chainId,
         tokenAddress: tokenAddress,
       } as InsufficientBalance);
-      return (
-        <Box
-          sx={{
-            color: 'red',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '5px',
-            textAlign: 'right',
-          }}
-        >
-          {t('warning.message.insufficientFunds')}
-        </Box>
-      );
     }
   }, [quote?.totalAmount, isPurchasePossible, account?.chainId, tokenAddress]);
 
