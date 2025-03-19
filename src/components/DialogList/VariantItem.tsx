@@ -1,4 +1,4 @@
-import { Typography, useTheme } from "@mui/material";
+import { alpha, Typography, useTheme } from "@mui/material";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +7,7 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
   onClose,
 }) => {
   const { updateProduct } = useProduct();
-  const { palette } = useTheme();
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handleSelectProduct = () => {
@@ -36,12 +36,8 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
           justifyContent: "space-between",
         }}
       >
-        <Typography style={{ fontSize: "18px", color: palette.grey[400] }}>
-          {data}
-        </Typography>
-        <Typography variant="body1" style={{ color: palette.grey[400] }}>
-          {voice}
-        </Typography>
+        <Typography style={{ fontSize: "18px" }}>{data}</Typography>
+        <Typography variant="body1">{voice}</Typography>
       </div>
     );
   };
@@ -56,7 +52,10 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
           width: "90%",
           margin: "0 auto",
           borderRadius: "5px",
-          backgroundColor: palette.grey[100],
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? alpha(theme.palette.common.black, 0.04)
+              : alpha(theme.palette.common.white, 0.08),
           alignItems: "center",
           justifyContent:
             item.productType === "topup" ? "space-between" : "center",
