@@ -1,6 +1,7 @@
 import { BottomSheet } from "../BottomSheet/BottomSheet.js";
 import { DialogList } from "../DialogList/DialogList.js";
 import { VariantItem } from "../DialogList/VariantItem.js";
+import VariantSlider from "../VariantSlider/VariantSlider.js";
 
 interface VariantSelectorProps {
   open: boolean;
@@ -26,19 +27,30 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
 
   return (
     <BottomSheet open={open} onClose={onClose}>
-      <DialogList
-        type={selectedBrand?.variants[0].productType}
-        items={[...selectedBrand.variants].sort(
-          (a, b) =>
-            parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
-        )}
-        onClose={onClose}
-        title={selectedBrand.brandName || ""}
-        image={selectedBrand.imageUrl || ""}
-        renderItem={(item) => (
-          <VariantItem item={item} onClose={() => onVariantSelect(item)} />
-        )}
-      />
+      {selectedBrand.variants.length > 1 &&
+      selectedBrand.variants[0].productType === "topup" ? (
+        <VariantSlider
+          title={selectedBrand.brandName || ""}
+          variants={[...selectedBrand.variants].sort(
+            (a, b) =>
+              parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
+          )}
+        />
+      ) : (
+        <DialogList
+          type={selectedBrand?.variants[0].productType}
+          items={[...selectedBrand.variants].sort(
+            (a, b) =>
+              parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
+          )}
+          onClose={onClose}
+          title={selectedBrand.brandName || ""}
+          image={selectedBrand.imageUrl || ""}
+          renderItem={(item) => (
+            <VariantItem item={item} onClose={() => onVariantSelect(item)} />
+          )}
+        />
+      )}
     </BottomSheet>
   );
 };
