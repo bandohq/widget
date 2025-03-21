@@ -6,21 +6,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 
-type Variant = {
-  id: string;
-  notes: string;
-  shortNotes: string;
-  price: {
-    fiatValue: string;
-  };
-  imageUrl: string;
-};
-
-type VariantSliderProps = {
-  variants: Variant[];
-  title: string;
-};
-
 export default function VariantSlider({ variants, title }) {
   const [index, setIndex] = React.useState(0);
 
