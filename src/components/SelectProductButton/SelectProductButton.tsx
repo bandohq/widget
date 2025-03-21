@@ -1,25 +1,34 @@
-import { Avatar, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import type { FormTypeProps } from '../../stores/form/types.js';
-import { navigationRoutes } from '../../utils/navigationRoutes.js';
-import { useProduct } from '../../stores/ProductProvider/ProductProvider';
-import { AvatarBadgedDefault } from '../Avatar/Avatar';
-import { CardTitle } from '../Card/CardTitle';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  Button,
+  Divider,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import type { FormTypeProps } from "../../stores/form/types.js";
+import { navigationRoutes } from "../../utils/navigationRoutes.js";
+import { useProduct } from "../../stores/ProductProvider/ProductProvider";
+import { AvatarBadgedDefault } from "../Avatar/Avatar";
+import { CardTitle } from "../Card/CardTitle";
 import {
   CardContent,
   SelectProductCard,
   SelectProductCardHeader,
-} from './SelectProductButton.style.js';
-import { CaretDown, ShoppingCart } from '@phosphor-icons/react';
-import { useTheme } from '@mui/system';
-import { VariantSelector } from '../VariantSelector/VariantSelector.js';
-import { useTranslation } from 'react-i18next';
+} from "./SelectProductButton.style.js";
+import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
+import { useTheme } from "@mui/system";
+import { VariantSelector } from "../VariantSelector/VariantSelector.js";
+import { useTranslation } from "react-i18next";
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
 > = ({ formType, compact, readOnly }) => {
   const [open, setOpen] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
   const { t } = useTranslation();
   const { product, brand: selectedBrand, updateProduct } = useProduct();
   const navigate = useNavigate();
@@ -49,7 +58,7 @@ export const SelectProductButton: React.FC<
       size="small"
       onClick={readOnly ? undefined : handleButtonClick}
       sx={{
-        fontSize: '12px',
+        fontSize: "12px",
         color: palette.text.primary,
         fontWeight: 400,
         backgroundColor: palette.background.default,
@@ -58,16 +67,18 @@ export const SelectProductButton: React.FC<
       {`${parseFloat(product?.price?.fiatValue).toFixed(2)} ${
         product?.price?.fiatCurrency
       }`}
-      <CaretDown size="18px" style={{ margin: 'auto', paddingLeft: 5 }} />
+      <CaretDown size="18px" style={{ margin: "auto", paddingLeft: 5 }} />
     </Button>
   );
 
   return (
     <>
-      <SelectProductCard
-        onClick={readOnly ? undefined : () => navigate(navigationRoutes.home)}
-      >
-        <CardContent formType={formType} compact={compact}>
+      <SelectProductCard>
+        <CardContent
+          formType={formType}
+          compact={compact}
+          onClick={readOnly ? undefined : () => navigate(navigationRoutes.home)}
+        >
           <CardTitle>You spend</CardTitle>
           <SelectProductCardHeader
             avatar={
@@ -80,7 +91,7 @@ export const SelectProductButton: React.FC<
               )
             }
             action={product && renderActionButton()}
-            title={product?.brand || 'Select product'}
+            title={product?.brand || "Select product"}
             subheader={
               product
                 ? `${t(`main.${product?.productType}`)} in ${product.country}`
@@ -89,6 +100,23 @@ export const SelectProductButton: React.FC<
             compact={compact}
           />
         </CardContent>
+        {product && product?.productType === "topup" && product?.notes && (
+          <Accordion
+            sx={{ border: "none", margin: "none" }}
+            expanded={openDetails}
+            onChange={() => setOpenDetails(!openDetails)}
+          >
+            <AccordionSummary
+              sx={{ border: "none", padding: "0px 10px", margin: "0px" }}
+              expandIcon={<CaretDown size="18px" />}
+            >
+              <Typography>Product Details</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="body2">{product?.notes}</Typography>
+            </AccordionDetails>
+          </Accordion>
+        )}
       </SelectProductCard>
 
       <VariantSelector
