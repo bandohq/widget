@@ -27,9 +27,11 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
 
   return (
     <BottomSheet open={open} onClose={onClose}>
-      {selectedBrand.variants.length > 1 &&
-      selectedBrand.variants[0].productType === "topup" ? (
+      {(selectedBrand.variants.length > 1 &&
+        selectedBrand.variants[0].productType === "topup") ||
+      selectedBrand.variants[0].productType === "esim" ? (
         <VariantSlider
+          onClose={onClose}
           title={selectedBrand.brandName || ""}
           variants={[...selectedBrand.variants].sort(
             (a, b) =>
