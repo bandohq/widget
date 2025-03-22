@@ -69,6 +69,17 @@
     "spend": "खर्च"
   },
   "form": {
+    "info": {
+      "buy": "खरीदें",
+      "productDetail": "उत्पाद विवरण",
+      "unlimitedGB": "असीमित GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "असीमित SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "असीमित कॉल्स",
+      "callQuantity": "{{quantity}} मिनट",
+      "duration": "{{duration}} दिन"
+    },
     "status": {
       "signTransaction": "कृपया लेन-देन पर हस्ताक्षर करें",
       "approveTokens": "कृपया {{amount}} {{tokenSymbol}} की राशि अनुमोदित करें",

@@ -10,11 +10,13 @@ import { StyledCard } from "./VariantSlider.styles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function VariantSlider({ variants, title, onClose }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [index, setIndex] = React.useState(0);
   const { updateProduct } = useProduct();
-  const navigate = useNavigate();
 
   const handleChange = (_event: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
@@ -95,34 +97,36 @@ export default function VariantSlider({ variants, title, onClose }) {
         >
           {current?.dataUnlimited ? (
             <Typography variant="body1" color="text.secondary">
-              Unlimited GB
+              {t("form.info.unlimitedGB")}
             </Typography>
           ) : isValidValue(current?.dataGB) ? (
             <Typography variant="body1" color="text.secondary">
-              {current?.dataGB} GB
+              {t("form.info.gbQuantity", { quantity: current?.dataGB })}
             </Typography>
           ) : null}
           {current?.voiceUnlimited ? (
             <Typography variant="body1" color="text.secondary">
-              Unlimited calls
+              {t("form.info.UnlimitedCalls")}
             </Typography>
           ) : isValidValue(current?.voiceMinutes) ? (
             <Typography variant="body1" color="text.secondary">
-              {current?.voiceMinutes} minutes
+              {t("form.info.callQuantity", {
+                quantity: current?.voiceMinutes,
+              })}
             </Typography>
           ) : null}
           {current?.smsUnlimited ? (
             <Typography variant="body1" color="text.secondary">
-              Unlimited SMS
+              {t("form.info.unlimitedSMS")}
             </Typography>
           ) : isValidValue(current?.smsNumber) ? (
             <Typography variant="body1" color="text.secondary">
-              {current?.smsNumber} SMS
+              {t("form.info.smsQuantity", { quantity: current?.smsNumber })}
             </Typography>
           ) : null}
           {isValidValue(current?.durationDays) && (
             <Typography variant="body1" color="text.secondary">
-              {current?.durationDays} days
+              {t("form.info.duration", { duration: current?.durationDays })}
             </Typography>
           )}
         </Box>
@@ -134,7 +138,7 @@ export default function VariantSlider({ variants, title, onClose }) {
           sx={{ mt: 2 }}
           onClick={() => handleSelectVariant(current)}
         >
-          Comprar
+          {t("form.info.buy")}
         </Button>
       </Box>
     </>

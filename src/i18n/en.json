@@ -49,6 +49,17 @@
     "spend": "Spend"
   },
   "form": {
+    "info": {
+      "buy": "Buy",
+      "productDetail": "Product details",
+      "unlimitedGB": "Unlimited GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Unlimited SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "Unlimited calls",
+      "callQuantity": "{{quantity}} minutes",
+      "duration": "{{duration}} days"
+    },
     "status": {
       "processingOrderCompleted": "Order validated successfully",
       "processingOrder": "Processing your order",

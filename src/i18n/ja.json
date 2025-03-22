@@ -49,6 +49,17 @@
     "spend": "消費する"
   },
   "form": {
+    "info": {
+      "buy": "購入",
+      "productDetail": "製品の詳細",
+      "unlimitedGB": "無制限のGB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "無制限のSMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "無制限の通話",
+      "callQuantity": "{{quantity}} 分",
+      "duration": "{{duration}} 日間"
+    },
     "status": {
       "signTransaction": "取引に署名してください",
       "approveTokens": "{{amount}} {{tokenSymbol}} の承認をお願いします",

@@ -110,7 +110,7 @@ export const SelectProductButton: React.FC<
               sx={{ border: "none", padding: "0px 10px", margin: "0px" }}
               expandIcon={<CaretDown size="18px" />}
             >
-              <Typography>Product Details</Typography>
+              <Typography>{t("form.info.productDetail")}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography variant="body2">{product?.notes}</Typography>

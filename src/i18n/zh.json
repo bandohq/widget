@@ -49,6 +49,17 @@
     "spend": "花费"
   },
   "form": {
+    "info": {
+      "buy": "购买",
+      "productDetail": "产品详情",
+      "unlimitedGB": "无限 GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "无限短信",
+      "smsQuantity": "{{quantity}} 条短信",
+      "UnlimitedCalls": "无限通话",
+      "callQuantity": "{{quantity}} 分钟",
+      "duration": "{{duration}} 天"
+    },
     "status": {
       "signTransaction": "请签署交易",
       "approveTokens": "请批准 {{amount}} {{tokenSymbol}} 的金额",

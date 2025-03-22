@@ -49,6 +49,17 @@
     "spend": "소비"
   },
   "form": {
+    "info": {
+      "buy": "구매",
+      "productDetail": "제품 세부정보",
+      "unlimitedGB": "무제한 GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "무제한 SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "무제한 통화",
+      "callQuantity": "{{quantity}} 분",
+      "duration": "{{duration}} 일"
+    },
     "status": {
       "signTransaction": "거래에 서명해 주세요",
       "approveTokens": "{{amount}} {{tokenSymbol}} 금액을 승인해 주세요",

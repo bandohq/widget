@@ -49,6 +49,17 @@
     "spend": "Chi tiêu"
   },
   "form": {
+    "info": {
+      "buy": "Mua",
+      "productDetail": "Chi tiết sản phẩm",
+      "unlimitedGB": "GB không giới hạn",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS không giới hạn",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "Cuộc gọi không giới hạn",
+      "callQuantity": "{{quantity}} phút",
+      "duration": "{{duration}} ngày"
+    },
     "status": {
       "signTransaction": "Vui lòng ký giao dịch",
       "approveTokens": "Vui lòng phê duyệt số tiền {{amount}} {{tokenSymbol}}",
