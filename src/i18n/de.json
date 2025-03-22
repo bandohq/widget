@@ -49,6 +49,17 @@
     "spend": "Ausgeben"
   },
   "form": {
+    "info": {
+      "buy": "Kaufen",
+      "productDetail": "Produktdetails",
+      "unlimitedGB": "Unbegrenzte GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Unbegrenzte SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "Unbegrenzte Anrufe",
+      "callQuantity": "{{quantity}} Minuten",
+      "duration": "{{duration}} Tage"
+    },
     "status": {
       "signTransaction": "Bitte unterzeichnen Sie die Transaktion",
       "approveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",

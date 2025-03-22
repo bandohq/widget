@@ -49,6 +49,17 @@
     "spend": "Harca"
   },
   "form": {
+    "info": {
+      "buy": "Satın Al",
+      "productDetail": "Ürün detayları",
+      "unlimitedGB": "Sınırsız GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Sınırsız SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "UnlimitedCalls": "Sınırsız arama",
+      "callQuantity": "{{quantity}} dakika",
+      "duration": "{{duration}} gün"
+    },
     "status": {
       "signTransaction": "Lütfen işlemi imzalayın",
       "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
