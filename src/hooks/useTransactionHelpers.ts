@@ -10,7 +10,6 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
-import { roundUpAmount } from "../utils/roundUpTotalAmount";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -98,12 +97,15 @@ export const useTransactionHelpers = () => {
     token,
   }) => {
     const totalAmount = parseFloat(quote?.totalAmount);
-    const roundedAmount = roundUpAmount(totalAmount, 4);
-    const amountInUnits = parseUnits(roundedAmount.toString(), token?.decimals);
+    const increaseAmount = totalAmount * 1.01; //Add 1% to the total amount for allowance issue
+    const amountInUnits = parseUnits(
+      increaseAmount.toString(),
+      token?.decimals
+    );
     addStep({
       message: "form.status.approveTokens",
       type: "info",
-      variables: { amount: roundedAmount, tokenSymbol: token?.symbol },
+      variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
     });
 
     await approveERC20(
