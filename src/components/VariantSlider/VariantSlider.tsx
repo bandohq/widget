@@ -47,115 +47,130 @@ export default function VariantSlider({
 
   const current = variants[index];
 
-  return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "12px 12px 0 0",
-        }}
-      >
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={onClose}
-          aria-label="close"
-        >
-          <CloseIcon />
-        </IconButton>
-      </div>
-      <Box sx={{ width: 300, mx: "auto", my: 4 }}>
-        <Typography variant="h6" gutterBottom align="center">
-          {title}
-        </Typography>
+   const renderFeature = (
+     isUnlimited,
+     value,
+     unlimitedTransKey,
+     valueTransKey,
+     valueParam
+   ) => {
+     if (isUnlimited) {
+       return (
+         <Typography variant="body1" color="text.secondary">
+           {t(unlimitedTransKey)}
+         </Typography>
+       );
+     } else if (isValidValue(value)) {
+       return (
+         <Typography variant="body1" color="text.secondary">
+           {t(valueTransKey, { [valueParam]: value })}
+         </Typography>
+       );
+     }
+     return null;
+   };
 
-        <StyledCard sx={{ mb: 3 }}>
-          <CardContent sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <Avatar
-              src={current?.imageUrl}
-              alt="logo"
-              variant="square"
-              sx={{ width: 56, height: 56 }}
-            />
-            <Box>
-              <Typography variant="h6" color="primary">
-                $
-                {!isNaN(parseFloat(current?.price?.fiatValue || "0"))
-                  ? parseFloat(current?.price?.fiatValue || "0").toFixed(2)
-                  : "0.00"}{" "}
-                {current?.price.fiatCurrency}
-              </Typography>
-            </Box>
-          </CardContent>
-        </StyledCard>
+   return (
+     <>
+       <div
+         style={{
+           display: "flex",
+           justifyContent: "flex-end",
+           padding: "12px 12px 0 0",
+         }}
+       >
+         <IconButton
+           edge="start"
+           color="inherit"
+           onClick={onClose}
+           aria-label="close"
+         >
+           <CloseIcon />
+         </IconButton>
+       </div>
+       <Box sx={{ width: 300, mx: "auto", my: 4 }}>
+         <Typography variant="h6" gutterBottom align="center">
+           {title}
+         </Typography>
 
-        <Slider
-          value={index}
-          min={0}
-          step={1}
-          max={variants.length - 1}
-          onChange={handleChange}
-          valueLabelFormat={(i) => variants[i].shortNotes}
-        />
-        <Typography variant="body2" color="text.secondary" align="center">
-          {current?.notes}
-        </Typography>
+         <StyledCard sx={{ mb: 3 }}>
+           <CardContent sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+             <Avatar
+               src={current?.imageUrl}
+               alt="logo"
+               variant="square"
+               sx={{ width: 56, height: 56 }}
+             />
+             <Box>
+               <Typography variant="h6" color="primary">
+                 $
+                 {!isNaN(parseFloat(current?.price?.fiatValue || "0"))
+                   ? parseFloat(current?.price?.fiatValue || "0").toFixed(2)
+                   : "0.00"}{" "}
+                 {current?.price.fiatCurrency}
+               </Typography>
+             </Box>
+           </CardContent>
+         </StyledCard>
 
-        <Box
-          sx={{
-            display: "grid",
-            justifyContent: "center",
-            gridTemplateColumns: "1fr 1fr",
-            mt: 2,
-          }}
-        >
-          {current?.dataUnlimited ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.unlimitedGB")}
-            </Typography>
-          ) : isValidValue(current?.dataGB) ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.gbQuantity", { quantity: current?.dataGB })}
-            </Typography>
-          ) : null}
-          {current?.voiceUnlimited ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.UnlimitedCalls")}
-            </Typography>
-          ) : isValidValue(current?.voiceMinutes) ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.callQuantity", {
-                quantity: current?.voiceMinutes,
-              })}
-            </Typography>
-          ) : null}
-          {current?.smsUnlimited ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.unlimitedSMS")}
-            </Typography>
-          ) : isValidValue(current?.smsNumber) ? (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.smsQuantity", { quantity: current?.smsNumber })}
-            </Typography>
-          ) : null}
-          {isValidValue(current?.durationDays) && (
-            <Typography variant="body1" color="text.secondary">
-              {t("form.info.duration", { duration: current?.durationDays })}
-            </Typography>
-          )}
-        </Box>
+         <Slider
+           value={index}
+           min={0}
+           step={1}
+           max={variants.length - 1}
+           onChange={handleChange}
+           valueLabelFormat={(i) => variants[i].shortNotes}
+         />
+         <Typography variant="body2" color="text.secondary" align="center">
+           {current?.notes}
+         </Typography>
 
-        <Button
-          variant="contained"
-          size="large"
-          fullWidth
-          sx={{ mt: 2 }}
-          onClick={() => handleSelectVariant(current)}
-        >
-          {t("form.info.buy")}
-        </Button>
-      </Box>
-    </>
-  );
+         <Box
+           sx={{
+             display: "grid",
+             justifyContent: "center",
+             gridTemplateColumns: "1fr 1fr",
+             mt: 2,
+           }}
+         >
+           {renderFeature(
+             current?.dataUnlimited,
+             current?.dataGB,
+             "form.info.unlimitedGB",
+             "form.info.gbQuantity",
+             "quantity"
+           )}
+           {renderFeature(
+             current?.voiceUnlimited,
+             current?.voiceMinutes,
+             "form.info.UnlimitedCalls",
+             "form.info.callQuantity",
+             "quantity"
+           )}
+           {renderFeature(
+             current?.smsUnlimited,
+             current?.smsNumber,
+             "form.info.unlimitedSMS",
+             "form.info.smsQuantity",
+             "quantity"
+           )}
+           {isValidValue(current?.durationDays) && (
+             <Typography variant="body1" color="text.secondary">
+               {t("form.info.duration", { duration: current?.durationDays })}
+             </Typography>
+           )}
+         </Box>
+
+         <Button
+           variant="contained"
+           size="large"
+           fullWidth
+           sx={{ mt: 2 }}
+           onClick={() => handleSelectVariant(current)}
+         >
+           {t("form.info.buy")}
+         </Button>
+       </Box>
+     </>
+   );
 }
