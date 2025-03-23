@@ -29,6 +29,8 @@ export default function VariantSlider({
   const [index, setIndex] = React.useState(0);
   const { updateProduct } = useProduct();
 
+  if (!variants || variants.length === 0) return null;
+
   const handleChange = (_event: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       setIndex(newValue);
