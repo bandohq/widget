@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { List, ListItemIcon, ListItemText, Collapse } from "@mui/material";
-import { Brand, Variant } from "../../providers/CatalogProvider/types";
+import { Brand } from "../../providers/CatalogProvider/types";
 import { SettingsListItemButton } from "../SettingsListItemButton";
 import { ImageAvatar } from "../Avatar/Avatar";
 import { splitCamelCase } from "../../utils/truncateText";
 import { VariantSelector } from "../VariantSelector/VariantSelector";
+import { Variant } from "../../stores/ProductProvider/types";
 
 interface ProductListProps {
   brands: Brand[];
@@ -98,7 +99,6 @@ export const ProductList: React.FC<ProductListProps> = ({
       <VariantSelector
         open={open}
         onClose={() => setOpen(false)}
-        // @ts-ignore
         selectedBrand={selectedBrand}
         onVariantSelect={(item) => {
           setOpen(false);
