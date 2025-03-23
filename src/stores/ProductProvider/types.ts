@@ -1,9 +1,9 @@
 // Type for the price information
 export interface Price {
-    fiatCurrency: string;
-    fiatValue: string | number; // Can be string or number depending on usage
-    stableCoinCurrency: string;
-    stableCoinValue: string | number;
+  fiatCurrency: string;
+  fiatValue: string;
+  stableCoinCurrency: string;
+  stableCoinValue: string | number;
 }
 
 // Type for an individual product from the endpoint /api/v1/products/

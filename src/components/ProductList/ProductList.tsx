@@ -98,6 +98,7 @@ export const ProductList: React.FC<ProductListProps> = ({
       <VariantSelector
         open={open}
         onClose={() => setOpen(false)}
+        // @ts-ignore
         selectedBrand={selectedBrand}
         onVariantSelect={(item) => {
           setOpen(false);

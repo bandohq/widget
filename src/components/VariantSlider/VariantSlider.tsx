@@ -11,8 +11,19 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Product } from "../../stores/ProductProvider/types";
 
-export default function VariantSlider({ variants, title, onClose }) {
+interface VariantSliderProps {
+  variants: Product[];
+  title: string;
+  onClose: () => void;
+}
+
+export default function VariantSlider({
+  variants,
+  title,
+  onClose,
+}: VariantSliderProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [index, setIndex] = React.useState(0);
@@ -68,7 +79,10 @@ export default function VariantSlider({ variants, title, onClose }) {
             />
             <Box>
               <Typography variant="h6" color="primary">
-                ${parseFloat(current?.price.fiatValue).toFixed(2)}{" "}
+                $
+                {!isNaN(parseFloat(current?.price?.fiatValue || "0"))
+                  ? parseFloat(current?.price?.fiatValue || "0").toFixed(2)
+                  : "0.00"}{" "}
                 {current?.price.fiatCurrency}
               </Typography>
             </Box>

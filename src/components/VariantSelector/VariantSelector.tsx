@@ -1,3 +1,4 @@
+import { Product } from "../../stores/ProductProvider/types.js";
 import { BottomSheet } from "../BottomSheet/BottomSheet.js";
 import { DialogList } from "../DialogList/DialogList.js";
 import { VariantItem } from "../DialogList/VariantItem.js";
@@ -9,10 +10,7 @@ interface VariantSelectorProps {
   selectedBrand: {
     brandName?: string;
     imageUrl?: string;
-    variants: Array<{
-      productType: string;
-      price: { fiatValue: string };
-    }>;
+    variants: Product[];
   } | null;
   onVariantSelect: (item: any) => void;
 }
