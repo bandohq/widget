@@ -17,13 +17,6 @@ export interface Brand {
   variants: Variant[];
 }
 
-export interface Price {
-  fiatCurrency: string;
-  fiatValue: string;
-  stableCoinCurrency: string;
-  stableCoinValue: string;
-}
-
 export interface ReferenceType {
   name: string;
   valueType: string;

@@ -3,7 +3,7 @@ export interface Price {
   fiatCurrency: string;
   fiatValue: string;
   stableCoinCurrency: string;
-  stableCoinValue: string | number;
+  stableCoinValue: string;
 }
 
 // Type for an individual product from the endpoint /api/v1/products/
