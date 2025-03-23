@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "SMS illimitati",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "Chiamate illimitate",
+      "unlimitedCalls": "Chiamate illimitate",
       "callQuantity": "{{quantity}} minuti",
       "duration": "{{duration}} giorni"
     },

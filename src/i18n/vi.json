@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "SMS không giới hạn",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "Cuộc gọi không giới hạn",
+      "unlimitedCalls": "Cuộc gọi không giới hạn",
       "callQuantity": "{{quantity}} phút",
       "duration": "{{duration}} ngày"
     },

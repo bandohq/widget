@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "무제한 SMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "무제한 통화",
+      "unlimitedCalls": "무제한 통화",
       "callQuantity": "{{quantity}} 분",
       "duration": "{{duration}} 일"
     },

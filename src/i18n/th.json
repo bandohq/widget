@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "SMS ไม่จำกัด",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "โทรไม่จำกัด",
+      "unlimitedCalls": "โทรไม่จำกัด",
       "callQuantity": "{{quantity}} นาที",
       "duration": "{{duration}} วัน"
     },

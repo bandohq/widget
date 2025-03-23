@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "無制限のSMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "無制限の通話",
+      "unlimitedCalls": "無制限の通話",
       "callQuantity": "{{quantity}} 分",
       "duration": "{{duration}} 日間"
     },

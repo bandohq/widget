@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "অসীম SMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "অসীম কল",
+      "unlimitedCalls": "অসীম কল",
       "callQuantity": "{{quantity}} মিনিট",
       "duration": "{{duration}} দিন"
     },

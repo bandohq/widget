@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "Sınırsız SMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "Sınırsız arama",
+      "unlimitedCalls": "Sınırsız arama",
       "callQuantity": "{{quantity}} dakika",
       "duration": "{{duration}} gün"
     },

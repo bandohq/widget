@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "无限短信",
       "smsQuantity": "{{quantity}} 条短信",
-      "UnlimitedCalls": "无限通话",
+      "unlimitedCalls": "无限通话",
       "callQuantity": "{{quantity}} 分钟",
       "duration": "{{duration}} 天"
     },

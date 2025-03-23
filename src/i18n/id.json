@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "SMS tanpa batas",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "Panggilan tanpa batas",
+      "unlimitedCalls": "Panggilan tanpa batas",
       "callQuantity": "{{quantity}} menit",
       "duration": "{{duration}} hari"
     },

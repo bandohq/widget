@@ -143,7 +143,7 @@ export default function VariantSlider({
            {renderFeature(
              current?.voiceUnlimited,
              current?.voiceMinutes,
-             "form.info.UnlimitedCalls",
+             "form.info.unlimitedCalls",
              "form.info.callQuantity",
              "quantity"
            )}

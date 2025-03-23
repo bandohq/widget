@@ -76,7 +76,7 @@
       "gbQuantity": "{{quantity}} GB",
       "unlimitedSMS": "असीमित SMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "असीमित कॉल्स",
+      "unlimitedCalls": "असीमित कॉल्स",
       "callQuantity": "{{quantity}} मिनट",
       "duration": "{{duration}} दिन"
     },

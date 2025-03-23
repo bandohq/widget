@@ -56,7 +56,7 @@
       "gbQuantity": "{{quantity}} ГБ",
       "unlimitedSMS": "Необмежені SMS",
       "smsQuantity": "{{quantity}} SMS",
-      "UnlimitedCalls": "Необмежені дзвінки",
+      "unlimitedCalls": "Необмежені дзвінки",
       "callQuantity": "{{quantity}} хвилин",
       "duration": "{{duration}} днів"
     },
