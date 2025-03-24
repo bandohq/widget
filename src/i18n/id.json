@@ -49,6 +49,17 @@
     "spend": "Pengeluaran"
   },
   "form": {
+    "info": {
+      "buy": "Beli",
+      "productDetail": "Detail produk",
+      "unlimitedGB": "GB tanpa batas",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS tanpa batas",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Panggilan tanpa batas",
+      "callQuantity": "{{quantity}} menit",
+      "duration": "{{duration}} hari"
+    },
     "status": {
       "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
       "processingOrderCompleted": "Pesanan berhasil divalidasi",

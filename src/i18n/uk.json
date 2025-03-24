@@ -49,6 +49,17 @@
     "spend": "Витратити"
   },
   "form": {
+    "info": {
+      "buy": "Купити",
+      "productDetail": "Деталі продукту",
+      "unlimitedGB": "Необмежені ГБ",
+      "gbQuantity": "{{quantity}} ГБ",
+      "unlimitedSMS": "Необмежені SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Необмежені дзвінки",
+      "callQuantity": "{{quantity}} хвилин",
+      "duration": "{{duration}} днів"
+    },
     "status": {
       "signTransaction": "Будь ласка, підпишіть транзакцію",
       "approveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",

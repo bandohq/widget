@@ -49,6 +49,17 @@
     "spend": "ใช้จ่าย"
   },
   "form": {
+    "info": {
+      "buy": "ซื้อ",
+      "productDetail": "รายละเอียดสินค้า",
+      "unlimitedGB": "GB ไม่จำกัด",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS ไม่จำกัด",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "โทรไม่จำกัด",
+      "callQuantity": "{{quantity}} นาที",
+      "duration": "{{duration}} วัน"
+    },
     "status": {
       "signTransaction": "กรุณาเซ็นชื่อในธุรกรรม",
       "approveTokens": "กรุณาอนุมัติจำนวน {{amount}} {{tokenSymbol}}",

@@ -49,6 +49,17 @@
     "spend": "ব্যয়"
   },
   "form": {
+    "info": {
+      "buy": "কিনুন",
+      "productDetail": "পণ্যের বিবরণ",
+      "unlimitedGB": "অসীম GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "অসীম SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "অসীম কল",
+      "callQuantity": "{{quantity}} মিনিট",
+      "duration": "{{duration}} দিন"
+    },
     "status": {
       "signTransaction": "অনুগ্রহ করে লেনদেন স্বাক্ষর করুন",
       "approveTokens": "অনুগ্রহ করে {{amount}} {{tokenSymbol}} পরিমাণ অনুমোদন করুন",

@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
-import { Product } from "./types";
+import { Variant } from "./types";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 const ProductContext = createContext(null);
 
 export const ProductProvider = ({ children }) => {
   const { buildUrl } = useWidgetConfig();
-  const [product, setProduct] = useState<Product>(null);
+  const [product, setProduct] = useState<Variant>(null);
   const [brand, setBrand] = useState(null);
 
   const updateUrlProduct = (variantId: string | null) => {

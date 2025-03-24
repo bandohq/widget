@@ -49,6 +49,17 @@
     "spend": "Gastar"
   },
   "form": {
+    "info": {
+      "buy": "Comprar",
+      "productDetail": "Detalhes do produto",
+      "unlimitedGB": "GB ilimitados",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS ilimitados",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Chamadas ilimitadas",
+      "callQuantity": "{{quantity}} minutos",
+      "duration": "{{duration}} dias"
+    },
     "status": {
       "signTransaction": "Por favor, assine a transação",
       "approveTokens": "Por favor, aprove o valor de {{amount}} {{tokenSymbol}}",
