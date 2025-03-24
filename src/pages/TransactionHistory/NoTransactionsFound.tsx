@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import {
   NotFoundContainer,
-  NotFoundIconContainer,
   NotFoundMessage,
 } from "../../components/Search/SearchNotFound.style";
+import { NotFound } from "../../assets/NotFound";
 
 export const NoTransactionsFound = () => {
   const { t } = useTranslation();
   return (
     <NotFoundContainer>
       <img
-        src="/travolta.png"
+        src={NotFound}
         alt="no transactions"
         style={{ width: "50%", margin: "0 auto" }}
       />

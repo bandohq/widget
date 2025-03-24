@@ -2,11 +2,12 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useFetch } from "../../hooks/useFetch";
 import Fuse from "fuse.js";
-import { Product, ProductQueryResult, Brand, Variant } from "./types";
+import { Product, ProductQueryResult, Brand } from "./types";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
+import { Variant } from "../../stores/ProductProvider/types";
 
 interface CatalogContextType {
   products: Product[];
