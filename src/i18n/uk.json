@@ -49,14 +49,26 @@
     "spend": "Витратити"
   },
   "form": {
+    "info": {
+      "buy": "Купити",
+      "productDetail": "Деталі продукту",
+      "unlimitedGB": "Необмежені ГБ",
+      "gbQuantity": "{{quantity}} ГБ",
+      "unlimitedSMS": "Необмежені SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Необмежені дзвінки",
+      "callQuantity": "{{quantity}} хвилин",
+      "duration": "{{duration}} днів"
+    },
     "status": {
-      "validatingReference": "Перевірка посилання",
       "signTransaction": "Будь ласка, підпишіть транзакцію",
-      "aproveTokens": "Будь ласка, затвердіть необхідні токени",
+      "approveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Замовлення успішно перевірено",
+      "processingOrder": "Обробка вашого замовлення",
+      "wait": "Це може зайняти хвилину",
       "validateAllowance": "Перевірка дозволу",
-      "validatingReferenceCompleted": "Референс успішно перевірено",
       "signTransactionCompleted": "Транзакцію успішно підписано",
-      "validateAllowanceCompleted": "Токени успішно схвалені"
+      "validateAllowanceCompleted": "Суму схвалено"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "Країна",
     "sentTo": "Відправлено до",
     "availableRefunds": "Отримайте свій відшкодування",
-    "instructions": "Ваші гроші в безпеці, ваше відшкодування було схвалено."
+    "instructions": "Ваші гроші в безпеці, ваше відшкодування було схвалено.",
+    "noTransactions": "Тут нічого немає."
   },
   "info": {
     "detailMessage": "{{productType}} буде доставлено сюди.",

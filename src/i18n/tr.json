@@ -49,14 +49,26 @@
     "spend": "Harca"
   },
   "form": {
+    "info": {
+      "buy": "Satın Al",
+      "productDetail": "Ürün detayları",
+      "unlimitedGB": "Sınırsız GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Sınırsız SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Sınırsız arama",
+      "callQuantity": "{{quantity}} dakika",
+      "duration": "{{duration}} gün"
+    },
     "status": {
-      "validatingReference": "Referans doğrulanıyor",
       "signTransaction": "Lütfen işlemi imzalayın",
-      "aproveTokens": "Lütfen gerekli tokenleri onaylayın",
+      "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
+      "processingOrderCompleted": "Sipariş başarıyla doğrulandı",
+      "processingOrder": "Siparişiniz işleniyor",
+      "wait": "Bir dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
-      "validatingReferenceCompleted": "Referans başarıyla doğrulandı",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",
-      "validateAllowanceCompleted": "Tokenler başarıyla onaylandı"
+      "validateAllowanceCompleted": "Tutar onaylandı"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
     "availableRefunds": "İadenizi alın",
-    "instructions": "Paranız güvende, iadeniz onaylandı."
+    "instructions": "Paranız güvende, iadeniz onaylandı.",
+    "noTransactions": "Burada hiçbir şey yok."
   },
   "info": {
     "detailMessage": "{{productType}} burada teslim alacaksınız.",

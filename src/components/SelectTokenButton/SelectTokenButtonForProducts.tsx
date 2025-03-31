@@ -55,33 +55,24 @@ export const SelectTokenButtonForProducts: React.FC<
     navigate(navigationRoutes.fromToken);
   };
 
-  const renderWarning = useCallback(() => {
+  const renderWarning = () => {
     if (quote?.totalAmount && !isPurchasePossible) {
       emitter.emit(WidgetEvent.InsufficientBalance, {
         chainId: account?.chainId,
         tokenAddress: tokenAddress,
       } as InsufficientBalance);
-      return (
-        <Box
-          sx={{
-            color: 'red',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '5px',
-            textAlign: 'right',
-          }}
-        >
-          {t('warning.message.insufficientFunds')}
-        </Box>
-      );
     }
-  }, [quote?.totalAmount, isPurchasePossible, account?.chainId, tokenAddress]);
+  };
 
   const isSelected = !!(chain && token);
   const defaultPlaceholder = !account.isConnected
-    ? t('button.connectWallet')
-    : product && !quote && t('main.selectToken');
+    ? t("button.connectWallet")
+    : product && !quote && t("main.selectToken");
   const cardTitle: string = t(`main.${formType}`);
+
+  useEffect(() => {
+    renderWarning();
+  }, [quote?.totalAmount, isPurchasePossible, account?.chainId, tokenAddress]);
 
   return (
     <SelectTokenCard
@@ -105,8 +96,8 @@ export const SelectTokenButtonForProducts: React.FC<
                   {token.symbol?.[0]}
                 </Avatar>
                 <CaretDown
-                  size={'25px'}
-                  style={{ margin: 'auto', paddingLeft: 5 }}
+                  size={"25px"}
+                  style={{ margin: "auto", paddingLeft: 5 }}
                 />
               </>
             }
@@ -143,8 +134,8 @@ export const SelectTokenButtonForProducts: React.FC<
                     {token.symbol?.[0]}
                   </Avatar>
                   <CaretDown
-                    size={'25px'}
-                    style={{ margin: 'auto', paddingLeft: 5 }}
+                    size={"25px"}
+                    style={{ margin: "auto", paddingLeft: 5 }}
                   />
                 </>
               ) : (
@@ -168,18 +159,17 @@ export const SelectTokenButtonForProducts: React.FC<
           />
         )}
       </CardContent>
-      {renderWarning()}
       {quote?.totalAmount && !isPurchasePossible && (
         <Box
           sx={{
-            color: 'red',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '5px',
-            textAlign: 'right',
+            color: "red",
+            display: "flex",
+            justifyContent: "center",
+            padding: "5px",
+            textAlign: "right",
           }}
         >
-          {t('warning.message.insufficientFunds')}
+          {t("warning.message.insufficientFunds")}
         </Box>
       )}
     </SelectTokenCard>

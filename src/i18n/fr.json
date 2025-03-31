@@ -49,14 +49,26 @@
     "spend": "Dépenses"
   },
   "form": {
+    "info": {
+      "buy": "Acheter",
+      "productDetail": "Détails du produit",
+      "unlimitedGB": "GB illimités",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS illimités",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Appels illimités",
+      "callQuantity": "{{quantity}} minutes",
+      "duration": "{{duration}} jours"
+    },
     "status": {
-      "validatingReference": "Validation de la référence",
       "signTransaction": "Veuillez signer la transaction",
-      "aproveTokens": "Veuillez approuver les jetons requis",
+      "approveTokens": "Veuillez approuver le montant de {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Commande validée avec succès",
+      "processingOrder": "Traitement de votre commande",
+      "wait": "Cela peut prendre une minute",
       "validateAllowance": "Validation de l’allocation",
-      "validatingReferenceCompleted": "Référence validée avec succès",
       "signTransactionCompleted": "Transaction signée avec succès",
-      "validateAllowanceCompleted": "Jetons approuvés avec succès"
+      "validateAllowanceCompleted": "Montant approuvé"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "Pays",
     "sentTo": "Envoyé à",
     "availableRefunds": "Obtenez votre remboursement",
-    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé."
+    "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé.",
+    "noTransactions": "Il n'y a rien ici."
   },
   "info": {
     "detailMessage": "C'est là que vous recevrez votre {{productType}}.",

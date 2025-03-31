@@ -49,14 +49,26 @@
     "spend": "Ausgeben"
   },
   "form": {
+    "info": {
+      "buy": "Kaufen",
+      "productDetail": "Produktdetails",
+      "unlimitedGB": "Unbegrenzte GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Unbegrenzte SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Unbegrenzte Anrufe",
+      "callQuantity": "{{quantity}} Minuten",
+      "duration": "{{duration}} Tage"
+    },
     "status": {
-      "validatingReference": "Referenz wird validiert",
       "signTransaction": "Bitte unterzeichnen Sie die Transaktion",
-      "aproveTokens": "Bitte genehmigen Sie die erforderlichen Token",
+      "approveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Bestellung erfolgreich validiert",
+      "processingOrder": "Ihre Bestellung wird verarbeitet",
+      "wait": "Es kann eine Minute dauern",
       "validateAllowance": "Zulassung wird validiert",
-      "validatingReferenceCompleted": "Referenz erfolgreich validiert",
       "signTransactionCompleted": "Transaktion erfolgreich signiert",
-      "validateAllowanceCompleted": "Token erfolgreich genehmigt"
+      "validateAllowanceCompleted": "Betrag genehmigt"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "Land",
     "sentTo": "Gesendet an",
     "availableRefunds": "Fordere deine Rückerstattung an",
-    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt."
+    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt.",
+    "noTransactions": "Hier ist nichts."
   },
   "info": {
     "detailMessage": "Hier erhalten Sie Ihr {{productType}}.",

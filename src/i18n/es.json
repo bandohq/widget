@@ -49,14 +49,26 @@
     "spend": "Gastar"
   },
   "form": {
+    "info": {
+      "buy": "Comprar",
+      "productDetail": "Detalles del producto",
+      "unlimitedGB": "GB ilimitados",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS ilimitados",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Llamadas ilimitadas",
+      "callQuantity": "{{quantity}} minutos",
+      "duration": "{{duration}} días"
+    },
     "status": {
-      "validatingReference": "Validando referencia",
       "signTransaction": "Por favor, firma la transacción",
-      "aproveTokens": "Por favor, aprueba los tokens requeridos",
+      "approveTokens": "Por favor, apruebe la cantidad de {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Pedido validado con éxito",
+      "processingOrder": "Procesando su pedido",
+      "wait": "Puede tardar un minuto",
       "validateAllowance": "Validando aprobación",
-      "validatingReferenceCompleted": "Referencia validada con éxito",
       "signTransactionCompleted": "Transacción firmada con éxito",
-      "validateAllowanceCompleted": "Tokens aprobados con éxito"
+      "validateAllowanceCompleted": "Cantidad aprobada"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "País",
     "sentTo": "Enviado a",
     "availableRefunds": "Obtén tu reembolso",
-    "instructions": "Tu dinero está seguro, tu reembolso ha sido autorizado."
+    "instructions": "Tu dinero está seguro, tu reembolso ha sido autorizado.",
+    "noTransactions": "Aquí no hay nada."
   },
   "info": {
     "detailMessage": "Es donde recibirás tu {{productType}}.",

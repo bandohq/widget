@@ -49,14 +49,26 @@
     "spend": "花费"
   },
   "form": {
+    "info": {
+      "buy": "购买",
+      "productDetail": "产品详情",
+      "unlimitedGB": "无限 GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "无限短信",
+      "smsQuantity": "{{quantity}} 条短信",
+      "unlimitedCalls": "无限通话",
+      "callQuantity": "{{quantity}} 分钟",
+      "duration": "{{duration}} 天"
+    },
     "status": {
-      "validatingReference": "正在验证参考",
       "signTransaction": "请签署交易",
-      "aproveTokens": "请批准所需的代币",
+      "approveTokens": "请批准 {{amount}} {{tokenSymbol}} 的金额",
+      "processingOrderCompleted": "订单已成功验证",
+      "processingOrder": "正在处理您的订单",
+      "wait": "可能需要一分钟",
       "validateAllowance": "正在验证额度",
-      "validatingReferenceCompleted": "引用验证成功",
       "signTransactionCompleted": "交易签署成功",
-      "validateAllowanceCompleted": "代币批准成功"
+      "validateAllowanceCompleted": "金额已批准"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "国家",
     "sentTo": "发送至",
     "availableRefunds": "获取您的退款",
-    "instructions": "您的资金是安全的，您的退款已获授权。"
+    "instructions": "您的资金是安全的，您的退款已获授权。",
+    "noTransactions": "这里什么都没有。"
   },
   "info": {
     "detailMessage": "这是您将接收 {{productType}} 的地方。",

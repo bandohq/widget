@@ -49,11 +49,24 @@
     "spend": "Pengeluaran"
   },
   "form": {
+    "info": {
+      "buy": "Beli",
+      "productDetail": "Detail produk",
+      "unlimitedGB": "GB tanpa batas",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "SMS tanpa batas",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Panggilan tanpa batas",
+      "callQuantity": "{{quantity}} menit",
+      "duration": "{{duration}} hari"
+    },
     "status": {
-      "validatingReference": "Memvalidasi referensi",
+      "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
+      "processingOrderCompleted": "Pesanan berhasil divalidasi",
+      "processingOrder": "Pesanan Anda sedang diproses",
+      "wait": "Ini mungkin memerlukan satu menit",
       "signTransaction": "Silakan tandatangani transaksi",
-      "aproveTokens": "Silakan setujui token yang diperlukan",
-      "validateAllowance": "Memvalidasi alokasi"
+      "validateAllowanceCompleted": "Jumlah disetujui"
     },
     "delivery": {
       "challenge": {
@@ -114,7 +127,8 @@
     "country": "Negara",
     "sentTo": "Dikirim ke",
     "availableRefunds": "Dapatkan pengembalian dana Anda",
-    "instructions": "Uang Anda aman, pengembalian dana Anda telah disetujui."
+    "instructions": "Uang Anda aman, pengembalian dana Anda telah disetujui.",
+    "noTransactions": "Tidak ada apa-apa di sini."
   },
   "info": {
     "detailMessage": "Di sini Anda akan menerima {{productType}} Anda.",

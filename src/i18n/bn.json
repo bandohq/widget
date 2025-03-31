@@ -49,14 +49,26 @@
     "spend": "ব্যয়"
   },
   "form": {
+    "info": {
+      "buy": "কিনুন",
+      "productDetail": "পণ্যের বিবরণ",
+      "unlimitedGB": "অসীম GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "অসীম SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "অসীম কল",
+      "callQuantity": "{{quantity}} মিনিট",
+      "duration": "{{duration}} দিন"
+    },
     "status": {
-      "validatingReference": "রেফারেন্স যাচাই করা হচ্ছে",
       "signTransaction": "অনুগ্রহ করে লেনদেন স্বাক্ষর করুন",
-      "aproveTokens": "প্রয়োজনীয় টোকেন অনুমোদন করুন",
+      "approveTokens": "অনুগ্রহ করে {{amount}} {{tokenSymbol}} পরিমাণ অনুমোদন করুন",
+      "processingOrderCompleted": "অর্ডার সফলভাবে যাচাই করা হয়েছে",
+      "processingOrder": "আপনার অর্ডার প্রক্রিয়াকরণ করা হচ্ছে",
+      "wait": "এটি এক মিনিট সময় নিতে পারে",
       "validateAllowance": "ভাতা যাচাই করা হচ্ছে",
-      "validatingReferenceCompleted": "রেফারেন্স সফলভাবে যাচাই করা হয়েছে",
       "signTransactionCompleted": "লেনদেন সফলভাবে স্বাক্ষরিত হয়েছে",
-      "validateAllowanceCompleted": "টোকেন সফলভাবে অনুমোদিত হয়েছে"
+      "validateAllowanceCompleted": "পরিমাণ অনুমোদিত"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "দেশ",
     "sentTo": "প্রেরিত হয়েছে",
     "availableRefunds": "আপনার রিফান্ড পান",
-    "instructions": "আপনার অর্থ নিরাপদ, আপনার রিফান্ড অনুমোদিত হয়েছে।"
+    "instructions": "আপনার অর্থ নিরাপদ, আপনার রিফান্ড অনুমোদিত হয়েছে।",
+    "noTransactions": "এখানে কিছু নেই।"
   },
   "info": {
     "detailMessage": "এটি যেখানে আপনি আপনার {{productType}} পাবেন।",

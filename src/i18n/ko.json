@@ -49,14 +49,26 @@
     "spend": "소비"
   },
   "form": {
+    "info": {
+      "buy": "구매",
+      "productDetail": "제품 세부정보",
+      "unlimitedGB": "무제한 GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "무제한 SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "무제한 통화",
+      "callQuantity": "{{quantity}} 분",
+      "duration": "{{duration}} 일"
+    },
     "status": {
-      "validatingReference": "참조 검증 중",
       "signTransaction": "거래에 서명해 주세요",
-      "aproveTokens": "필요한 토큰을 승인해 주세요",
+      "approveTokens": "{{amount}} {{tokenSymbol}} 금액을 승인해 주세요",
+      "processingOrderCompleted": "주문이 성공적으로 검증되었습니다",
+      "processingOrder": "주문을 처리 중입니다",
+      "wait": "1분 정도 걸릴 수 있습니다",
       "validateAllowance": "허용량 검증 중",
-      "validatingReferenceCompleted": "참조가 성공적으로 검증되었습니다",
       "signTransactionCompleted": "거래 서명이 완료되었습니다",
-      "validateAllowanceCompleted": "토큰이 성공적으로 승인되었습니다"
+      "validateAllowanceCompleted": "금액 승인됨"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "국가",
     "sentTo": "보낸 사람",
     "availableRefunds": "환불 받기",
-    "instructions": "귀하의 자금은 안전하며, 환불이 승인되었습니다."
+    "instructions": "귀하의 자금은 안전하며, 환불이 승인되었습니다.",
+    "noTransactions": "여기에는 아무것도 없습니다."
   },
   "info": {
     "detailMessage": "여기에서 {{productType}}를 받습니다.",

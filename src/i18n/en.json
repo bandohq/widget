@@ -49,14 +49,26 @@
     "spend": "Spend"
   },
   "form": {
+    "info": {
+      "buy": "Buy",
+      "productDetail": "Product details",
+      "unlimitedGB": "Unlimited GB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "Unlimited SMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "Unlimited calls",
+      "callQuantity": "{{quantity}} minutes",
+      "duration": "{{duration}} days"
+    },
     "status": {
-      "validatingReferenceCompleted": "Reference validated successfully",
-      "validatingReference": "Validating reference",
+      "processingOrderCompleted": "Order validated successfully",
+      "processingOrder": "Processing your order",
+      "wait": "It may take a minute",
       "signTransaction": "Please sign the transaction",
       "signTransactionCompleted": "Transaction signed successfully",
-      "aproveTokens": "Please approve the required tokens",
+      "approveTokens": "Please approve the amount of {{amount}} {{tokenSymbol}}",
       "validateAllowance": "Validating allowance",
-      "validateAllowanceCompleted": "Tokens approved successfully"
+      "validateAllowanceCompleted": "Amount approved"
     },
     "delivery": {
       "challenge": {
@@ -118,7 +130,8 @@
     "country": "Country",
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
-    "instructions": "Your crypto is safe, you have refunds available"
+    "instructions": "Your crypto is safe, you have refunds available",
+    "noTransactions": "There is nothing here."
   },
   "info": {
     "detailMessage" : "Is where you will recibe your {{productType}}.",

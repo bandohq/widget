@@ -49,14 +49,26 @@
     "spend": "消費する"
   },
   "form": {
+    "info": {
+      "buy": "購入",
+      "productDetail": "製品の詳細",
+      "unlimitedGB": "無制限のGB",
+      "gbQuantity": "{{quantity}} GB",
+      "unlimitedSMS": "無制限のSMS",
+      "smsQuantity": "{{quantity}} SMS",
+      "unlimitedCalls": "無制限の通話",
+      "callQuantity": "{{quantity}} 分",
+      "duration": "{{duration}} 日間"
+    },
     "status": {
-      "validatingReference": "参照を検証中",
       "signTransaction": "取引に署名してください",
-      "aproveTokens": "必要なトークンを承認してください",
+      "approveTokens": "{{amount}} {{tokenSymbol}} の承認をお願いします",
+      "processingOrderCompleted": "注文が正常に検証されました",
+      "processingOrder": "ご注文を処理中です",
+      "wait": "1分かかる場合があります",
       "validateAllowance": "許容量を検証中",
-      "validatingReferenceCompleted": "参照の検証に成功しました",
       "signTransactionCompleted": "取引の署名が完了しました",
-      "validateAllowanceCompleted": "トークンの承認が完了しました"
+      "validateAllowanceCompleted": "金額が承認されました"
     },
     "delivery": {
       "challenge": {
@@ -117,7 +129,8 @@
     "country": "国",
     "sentTo": "送信先",
     "availableRefunds": "返金を受け取る",
-    "instructions": "あなたのお金は安全で、返金が承認されました。"
+    "instructions": "あなたのお金は安全で、返金が承認されました。",
+    "noTransactions": "ここには何もありません。"
   },
   "info": {
     "detailMessage": "ここで{{productType}}を受け取ります。",

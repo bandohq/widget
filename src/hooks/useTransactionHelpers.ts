@@ -10,7 +10,6 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
-import { roundUpAmount } from "../utils/roundUpTotalAmount";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -66,7 +65,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount,
+      fiatAmount: quote?.fiatAmount * 100,
       serviceRef: txId,
       weiAmount,
     };
@@ -97,11 +96,17 @@ export const useTransactionHelpers = () => {
     serviceID,
     token,
   }) => {
-    addStep({ message: "form.status.aproveTokens", type: "info" });
-
     const totalAmount = parseFloat(quote?.totalAmount);
-    const roundedAmount = roundUpAmount(totalAmount, 4);
-    const amountInUnits = parseUnits(roundedAmount.toString(), token?.decimals);
+    const increaseAmount = totalAmount * 1.01; //Add 1% to the total amount for allowance issue
+    const amountInUnits = parseUnits(
+      increaseAmount.toString(),
+      token?.decimals
+    );
+    addStep({
+      message: "form.status.approveTokens",
+      type: "info",
+      variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
+    });
 
     await approveERC20(
       chain?.protocolContracts?.BandoRouterProxy,
@@ -134,7 +139,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount,
+      fiatAmount: quote?.fiatAmount * 100,
       serviceRef: txId,
       token: token.address,
       tokenAmount: parseUnits(
@@ -173,7 +178,8 @@ export const useTransactionHelpers = () => {
         );
 
         addStep({
-          message: "form.status.validatingReference",
+          message: "form.status.processingOrder",
+          description: "form.status.wait",
           type: "loading",
         });
 
@@ -185,7 +191,7 @@ export const useTransactionHelpers = () => {
         );
 
         updateStep({
-          message: "form.status.validatingReferenceCompleted",
+          message: "form.status.processingOrderCompleted",
           type: "completed",
         });
 

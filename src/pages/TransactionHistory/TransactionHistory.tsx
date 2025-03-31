@@ -5,7 +5,7 @@ import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
 import { useFetch } from "../../hooks/useFetch";
 import { TransactionList } from "../../components/TransactionList/TransactionList";
-import { List } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 import { useConfig } from "wagmi";
 import { useChain } from "../../hooks/useChain";
@@ -14,6 +14,8 @@ import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1.json";
 import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1.json";
 import { readContract } from "wagmi/actions";
+import { Box } from "@mui/system";
+import { NoTransactionsFound } from "./NoTransactionsFound";
 
 export interface Transaction {
   id: string;
@@ -45,7 +47,11 @@ export const TransactionsHistoryPage = () => {
   );
   const { searchToken, isLoading: isLoadingToken } = useToken(chain);
 
-  const { data: transactions, isPending } = useFetch({
+  const {
+    data: transactions,
+    isPending,
+    error,
+  } = useFetch({
     url: account.address ? `wallets/${account.address}/transactions` : "",
     method: "GET",
     queryOptions: {
@@ -122,13 +128,18 @@ export const TransactionsHistoryPage = () => {
   }
 
   return (
-    <PageContainer bottomGutters>
-      {!isPending && (
-        <TransactionList
-          transactions={transactions.transactions}
-          refunds={refunds}
-        />
-      )}
+    <PageContainer>
+      <Box>
+        {error && !transactions?.transactions?.length && !isPending && (
+          <NoTransactionsFound />
+        )}
+        {!isPending && transactions && (
+          <TransactionList
+            transactions={transactions.transactions}
+            refunds={refunds}
+          />
+        )}
+      </Box>
     </PageContainer>
   );
 };
