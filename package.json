@@ -42,7 +42,7 @@
     "!tsconfig.json"
   ],
   "dependencies": {
-    "@bandohq/contract-abis": "^1.0.2",
+    "@bandohq/contract-abis": "^1.2.0",
     "@bigmi/client": "^0.0.4",
     "@bigmi/core": "^0.0.4",
     "@fontsource/kanit": "^5.1.0",
