@@ -43,11 +43,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const renderChipLabel = (transactionId: string, status: string) => {
-    return isRefundAvailable(transactionId, refunds) ? (
+    const refund = refunds.find((refund) => refund?.id === transactionId);
+    return refund?.txStatus === 2 ? (
       <div style={{ display: "flex", alignItems: "center" }}>
         <ArrowRight size={16} />
         Refund available
       </div>
+    ) : refund?.txStatus === 3 ? (
+      <div style={{ display: "flex", alignItems: "center" }}>Refunded</div>
     ) : (
       status.toLocaleLowerCase()
     );
@@ -55,7 +58,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
   const handleClick = (transaction: Transaction) => {
     const refund = refunds.find((refund) => refund.id === transaction.id);
-    if (refund) {
+    if (refund.txStatus === 2) {
       navigate(
         `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}`
       );

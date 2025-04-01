@@ -30,9 +30,10 @@ export const executeRefund = async ({
   }
 };
 
-const REFUND_CODE = 3;
+const REFUND_CODE = 2;
 export const isRefundAvailable = (transactionId, refunds) => {
-  return refunds.some(
+  return refunds.find(
     (refund) => refund.id === transactionId && refund.txStatus === REFUND_CODE
   );
 };
+
