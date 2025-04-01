@@ -57,15 +57,19 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   const handleClick = (transaction: Transaction) => {
-    const refund = refunds.find((refund) => refund.id === transaction.id);
-    if (refund.txStatus === 2) {
+    const refund = refunds.find((refund) => refund?.id === transaction.id);
+    if (refund?.txStatus === 2) {
       navigate(
-        `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}`
+        `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}&status=${refund?.txStatus}`
       );
       return;
     }
 
-    navigate(`/transaction-detail/${transaction.id}`);
+    navigate(
+      `/transaction-detail/${transaction.id}?status=${
+        refund ? refund?.txStatus : 1
+      }`
+    );
   };
 
   return (
