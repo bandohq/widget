@@ -12,14 +12,16 @@ import {
   Typography,
   ListItem,
   Divider,
+  Box,
+  Chip,
 } from "@mui/material";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
-import { Barcode } from "@phosphor-icons/react";
+import { ArrowRight, Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useChain } from "../../hooks/useChain";
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
 import { useConfig } from "wagmi";
 import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
@@ -27,16 +29,19 @@ import { useToken } from "../../hooks/useToken";
 import { useEffect, useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { executeRefund } from "../../utils/refunds";
+import { useTheme } from "@mui/system";
+import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
+  const theme = useTheme();
   const { account } = useAccount();
   const { chain } = useChain(account.chainId);
   const config = useConfig();
   const [searchParams] = useSearchParams();
   const serviceId = searchParams.get("serviceId");
   const tokenUsed = searchParams.get("tokenUsed");
-  const amount = searchParams.get("amount");
+  const status = searchParams.get("status");
   const { transactionId } = useParams();
   const { showNotification } = useNotificationContext();
   const { availableCountries } = useCountryContext();
@@ -53,14 +58,6 @@ export const TransactionsDetailPage = () => {
       queryKey: ["transaction", transactionId],
     },
   });
-
-  const openRefundSheet = () => {
-    if (serviceId && amount) {
-      return true;
-    }
-
-    return false;
-  };
 
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
@@ -83,7 +80,7 @@ export const TransactionsDetailPage = () => {
       transformToChainConfig(chain, nativeToken)
     );
 
-    if (serviceId && amount) {
+    if (serviceId && formattedChain) {
       try {
         const isNativeToken = nativeToken.key === token.key;
 
@@ -96,9 +93,7 @@ export const TransactionsDetailPage = () => {
           functionName: isNativeToken
             ? "withdrawRefund"
             : "withdrawERC20Refund",
-          args: isNativeToken
-            ? [serviceId, account.address]
-            : [serviceId, transactionData.tokenUsed, account.address],
+          args: [serviceId, transactionData?.recordId],
           accountAddress: account?.address,
         });
 
@@ -114,11 +109,25 @@ export const TransactionsDetailPage = () => {
     }
   };
 
+  const renderChipLabel = () => {
+    return status === "2" ? (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        Refund available
+      </div>
+    ) : status === "3" ? (
+      <div style={{ display: "flex", alignItems: "center" }}>Refunded</div>
+    ) : (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {transactionData?.status}
+      </div>
+    );
+  };
+
   useEffect(() => {
-    if (serviceId && amount) {
+    if (serviceId) {
       setOpen(true);
     }
-  }, [serviceId, amount]);
+  }, [serviceId]);
 
   if (isPending || !transactionData) {
     return null;
@@ -144,6 +153,36 @@ export const TransactionsDetailPage = () => {
       <Typography variant="h4" align="center" mt={2}>
         {transactionData?.product?.name}
       </Typography>
+
+      {status && (
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Chip
+            color="default"
+            onClick={() => {
+              if (status === "2") {
+                setOpen(!open);
+              }
+            }}
+            sx={
+              status === "2"
+                ? {
+                    backgroundColor: theme.palette.primary.main,
+                  }
+                : transactionData.status === "COMPLETED" ||
+                  transactionData.status === "SUCCESS"
+                ? {
+                    backgroundColor: theme.palette.primary.light,
+                    color: theme.palette.getContrastText(
+                      theme.palette.primary.light
+                    ),
+                  }
+                : {}
+            }
+            size="small"
+            label={renderChipLabel()}
+          />
+        </Box>
+      )}
 
       <Typography variant="h5" align="center" my={2}>
         {transactionData?.fiatUnitPrice} {transactionData?.fiatCurrency}
@@ -188,17 +227,9 @@ export const TransactionsDetailPage = () => {
       </List>
 
       {/* Refund section */}
-      {amount && Number(BigInt(amount)) > 0 && (
+      {serviceId && transactionData.tokenAmountPaid && (
         <BottomSheet open={open}>
           <Paper sx={{ padding: 2 }}>
-            <Typography variant="body1" align="center" mb={2}>
-              {!amount || !token
-                ? "No refund available"
-                : `You have ${
-                    Number(BigInt(amount)) / Math.pow(10, token.decimals)
-                  }
-            ${token.symbol} to refund`}
-            </Typography>
             <Button
               disabled={loading}
               variant="contained"
