@@ -19,7 +19,7 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useChain } from "../../hooks/useChain";
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
 import { useConfig } from "wagmi";
 import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
