@@ -63,11 +63,8 @@ export const CategorySection = ({ category, onMoreClick }) => {
         )}
       </div>
       <BrandsContainer>
-        {category.brands.map((brand) => (
-          <BrandsGrid
-            key={splitCamelCase(brand.brandName)}
-            onClick={() => handleBrandClick(brand)}
-          >
+        {category.brands.map((brand, index) => (
+          <BrandsGrid key={index} onClick={() => handleBrandClick(brand)}>
             <ImageAvatar
               name={splitCamelCase(brand.brandName)}
               src={brand.imageUrl}

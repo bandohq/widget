@@ -103,7 +103,6 @@ export default function VariantSlider({
              />
              <Box>
                <Typography variant="h6" color="primary">
-                 $
                  {!isNaN(parseFloat(current?.price?.fiatValue || "0"))
                    ? parseFloat(current?.price?.fiatValue || "0").toFixed(2)
                    : "0.00"}{" "}
