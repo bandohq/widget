@@ -28,8 +28,7 @@ export const RecentSpends = () => {
         ).values()
       )
     : [];
-  console.log(uniqueBrandTransactions);
-  if (!account.address || !uniqueBrandTransactions.length) return null;
+  if (!account.address || !uniqueBrandTransactions.length || error) return null;
   return (
     <div style={{ display: "flex" }}>
       <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
@@ -37,7 +36,7 @@ export const RecentSpends = () => {
           <ClockCounterClockwise /> Recent Spends
         </Typography>
       </div>
-      <HorizontalSlider items={uniqueBrandTransactions} />
+      <HorizontalSlider items={uniqueBrandTransactions} isPending={isPending} />
     </div>
   );
 };

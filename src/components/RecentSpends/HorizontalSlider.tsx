@@ -1,7 +1,13 @@
 import React from "react";
-import { Box, Chip, Paper, Typography } from "@mui/material";
+import { Box, Chip, Paper, Skeleton, Typography } from "@mui/material";
 
-const HorizontalSlider = ({ items }: { items: any[] }) => {
+const HorizontalSlider = ({
+  items,
+  isPending,
+}: {
+  items: any[];
+  isPending: boolean;
+}) => {
   return (
     <Box
       sx={{
@@ -12,14 +18,24 @@ const HorizontalSlider = ({ items }: { items: any[] }) => {
         scrollbarWidth: "none",
       }}
     >
-      {items.map((item) => (
-        <Chip
-          color="default"
-          onClick={() => {}}
-          size="small"
-          label={item.brandName}
-        />
-      ))}
+      {!isPending
+        ? Array.from({ length: 3 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              variant="rounded"
+              width={"200px"}
+              height={32}
+              animation="wave"
+            />
+          ))
+        : items.map((item) => (
+            <Chip
+              color="default"
+              onClick={() => {}}
+              size="small"
+              label={item.brandName}
+            />
+          ))}
     </Box>
   );
 };
