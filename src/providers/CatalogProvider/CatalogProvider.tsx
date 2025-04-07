@@ -44,10 +44,68 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (groupedCatalogResponse?.products) {
-      const p = groupedCatalogResponse?.products || [];
-      setProducts(p);
+      const allProducts = groupedCatalogResponse.products;
+
+      const finalProducts = transformGroupedProducts(allProducts);
+      setProducts(finalProducts);
     }
   }, [groupedCatalogResponse]);
+  
+  function transformGroupedProducts(products: Product[]): Product[] {
+    const esimProducts = products.filter((p) => p.productType === "esim");
+    const otherProducts = products.filter((p) => p.productType !== "esim");
+
+    const esimProduct = createGroupedEsimProduct(esimProducts);
+
+    return esimProduct ? [...otherProducts, esimProduct] : otherProducts;
+  }
+
+  // Groups all eSIM variants by country and creates a single `Product`
+  function createGroupedEsimProduct(products: Product[]): Product | null {
+    const esimVariants = products.flatMap((product) =>
+      product.brands.flatMap((brand) => brand.variants)
+    );
+
+    const esimBrandsByCountry = groupVariantsByTargetCountry(esimVariants);
+
+    const esimBrands: Brand[] = Object.values(esimBrandsByCountry);
+
+    if (esimBrands.length === 0) return null;
+
+    return {
+      productType: "esim",
+      brands: esimBrands.sort((a, b) => a.brandName.localeCompare(b.brandName)),
+    };
+  }
+
+  function groupVariantsByTargetCountry(
+    variants: Variant[]
+  ): Record<string, Brand> {
+    const grouped: Record<string, Brand> = {};
+
+    for (const variant of variants) {
+      const target = (variant as any).targetCountry;
+
+      if (!target) continue;
+
+      const countryCode = target.countryCode;
+
+      if (!grouped[countryCode]) {
+        grouped[countryCode] = {
+          brandName: target.countryName,
+          brandSlug: countryCode.toLowerCase(),
+          imageUrl: target.flagUrl,
+          order: 0,
+          variants: [],
+        };
+      }
+
+      grouped[countryCode].variants.push(variant);
+    }
+
+    return grouped;
+  }
+  
 
   useEffect(() => {
     if (buildUrl) {

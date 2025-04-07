@@ -31,6 +31,15 @@ export interface Variant {
   sendPrice: number | null;
 }
 
+export interface EsimVariant extends Variant {
+  targetCountry: {
+    countryName: string;
+    countryCode: string;
+    flagUrl: string;
+  };
+}
+
+
 // Type for a grouped brand
 export interface BrandGroup {
     brandName: string;
