@@ -18,7 +18,7 @@ const HorizontalSlider = ({
         scrollbarWidth: "none",
       }}
     >
-      {!isPending
+      {isPending
         ? Array.from({ length: 3 }).map((_, index) => (
             <Skeleton
               key={index}
