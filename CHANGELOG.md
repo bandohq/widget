@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13-beta.53](https://github.com/bandohq/widget/compare/v0.1.13-beta.51...v0.1.13-beta.53) (2025-04-08)
+
 ### [0.1.13-beta.52](https://github.com/bandohq/widget/compare/v0.1.13-beta.51...v0.1.13-beta.52) (2025-04-08)
 
 ### [0.1.13-beta.51](https://github.com/bandohq/widget/compare/v0.1.13-beta.50...v0.1.13-beta.51) (2025-04-01)
