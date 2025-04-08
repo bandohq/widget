@@ -54,6 +54,10 @@ export const useTransactionHelpers = () => {
       (item) => item.name === "requestService"
     );
 
+    const formattedFiatAmount = (parseFloat(quote?.fiatAmount) * 100).toFixed(
+      0
+    );
+
     const weiAmount = parseUnits(
       quote?.digitalAssetAmount.toString(),
       chain?.nativeToken?.decimals
@@ -65,7 +69,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount * 100,
+      fiatAmount: formattedFiatAmount,
       serviceRef: txId,
       weiAmount,
     };
@@ -137,9 +141,13 @@ export const useTransactionHelpers = () => {
       (item) => item.name === "requestERC20Service"
     );
 
+    const formattedFiatAmount = (parseFloat(quote?.fiatAmount) * 100).toFixed(
+      0
+    );
+
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount * 100,
+      fiatAmount: formattedFiatAmount,
       serviceRef: txId,
       token: token.address,
       tokenAmount: parseUnits(
