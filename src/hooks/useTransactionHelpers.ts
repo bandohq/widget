@@ -16,6 +16,10 @@ export const useTransactionHelpers = () => {
   const { addStep, updateStep, clearStep } = useSteps();
   const { showNotification } = useNotificationContext();
 
+  const formatFiatAmount = (amount: string | undefined): string => {
+    return amount ? (parseFloat(amount) * 100).toFixed(0) : "0";
+  };
+
   const approveERC20 = async (
     spenderAddress,
     amount,
@@ -65,7 +69,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount * 100,
+      fiatAmount: formatFiatAmount(quote?.totalAmount),
       serviceRef: txId,
       weiAmount,
     };
@@ -139,7 +143,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: quote?.fiatAmount * 100,
+      fiatAmount: formatFiatAmount(quote?.totalAmount),
       serviceRef: txId,
       token: token.address,
       tokenAmount: parseUnits(
