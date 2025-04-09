@@ -22,8 +22,6 @@ export const ErrorView = ({ transaction }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  console.log(transaction);
-
   //Todo: send direct to refound page once serviceId comes from transaction detail
   const goToHistory = () => {
     navigate(navigationRoutes.transactionHistory);
