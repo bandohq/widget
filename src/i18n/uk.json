@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "Я приймаю <0>умови та положення</0>",
   "button": {
     "backToOrder": "Повернутися до вашого замовлення",
     "discover": "Відкрити більше",
