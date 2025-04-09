@@ -14,6 +14,7 @@ import { ChangeEvent, useState } from "react";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { CaretDown } from "@phosphor-icons/react";
+import { useTheme } from "@mui/system";
 
 interface ProductSearchProps {
   productType?: string;
@@ -22,6 +23,7 @@ interface ProductSearchProps {
 export const ProductSearch = ({
   productType,
 }: ProductSearchProps): JSX.Element | null => {
+  const theme = useTheme();
   const { selectedCountry: country, availableCountries: countries } =
     useCountryContext();
   const { fuzzySearchBrands } = useCatalogContext();
@@ -71,7 +73,13 @@ export const ProductSearch = ({
               />
             </Tooltip>
           )}
-          <CaretDown size="18px" style={{ paddingLeft: 5, color: "black" }} />
+          <CaretDown
+            size="18px"
+            style={{
+              paddingLeft: 5,
+              color: theme.palette.mode === "light" ? "black" : "white",
+            }}
+          />
         </StyledCountryDiv>
       </SearchContainer>
     </>
