@@ -47,6 +47,7 @@ export const UserWalletProvider = ({ children }: Props) => {
     },
     queryOptions: {
       queryKey: ["wallet-info"],
+      retry: false,
     },
   });
 
