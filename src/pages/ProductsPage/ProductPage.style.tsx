@@ -40,9 +40,9 @@ export const InputContainer = styled("div")(({ theme }) => ({
   overflow: "hidden",
   backgroundColor:
     theme.palette.mode === "light"
-      ? alpha(theme.palette.common.black, 0.04)
-      : alpha(theme.palette.common.white, 0.08),
-  border: theme.palette.mode === "light" ? "1px solid #e2e8f0" : "none",
+      ? alpha(theme.palette.background.paper, 0.04)
+      : alpha(theme.palette.background.paper, 0.08),
+  border: "1px solid #e2e8f0",
   borderRadius: "10px",
   width: "100%",
   height: "40px",
@@ -64,7 +64,7 @@ export const StyledIconButton = styled(IconButton)(({ theme }) => ({
 
 export const StyledCountryDiv = styled("div")(({ theme }) => ({
   height: "100%",
-  border: theme.palette.mode === "light" ? "1px solid #e2e8f0" : "none",
+  border: "1px solid #e2e8f0",
   borderRadius: "10px",
   display: "flex",
   justifyContent: "center",
@@ -73,6 +73,6 @@ export const StyledCountryDiv = styled("div")(({ theme }) => ({
   cursor: "pointer",
   backgroundColor:
     theme.palette.mode === "light"
-      ? alpha(theme.palette.common.black, 0.04)
-      : alpha(theme.palette.common.white, 0.08),
+      ? alpha(theme.palette.background.paper, 0.04)
+      : alpha(theme.palette.background.paper, 0.08),
 }));
