@@ -34,6 +34,10 @@ export const CategorySection = ({ category, onMoreClick }) => {
     }
   };
 
+  if (category.productType === "esim") {
+    return null;
+  }
+
   return (
     <div>
       <div
