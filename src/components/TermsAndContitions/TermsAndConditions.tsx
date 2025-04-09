@@ -4,10 +4,13 @@ import {
   Typography,
   Checkbox,
   FormControlLabel,
+  Link,
 } from "@mui/material";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { useTranslation, Trans } from "react-i18next";
 
 export const TermsAndConditions = () => {
+  const { t } = useTranslation();
   const {
     walletInfo,
     isPending,
@@ -41,7 +44,20 @@ export const TermsAndConditions = () => {
               }
             />
           }
-          label="Acepto los términos y condiciones"
+          label={
+            <Typography variant="body2">
+              <Trans
+                i18nKey="termsAndConditionsHtml"
+                components={[
+                  <Link
+                    href="https://ramp.bando.cool/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />,
+                ]}
+              />
+            </Typography>
+          }
         />
       ) : null}
     </Box>
