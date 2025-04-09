@@ -15,6 +15,7 @@ import {
 } from '../../utils/reviewValidations';
 import { useAccount } from '@lifi/wallet-management';
 import { navigationRoutes } from '../../utils/navigationRoutes';
+import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -30,12 +31,13 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { account } = useAccount();
   const { showNotification, hideNotification } = useNotificationContext();
   const { isPending } = useTransactionFlow();
+  const { userAcceptedTermsAndConditions } = useUserWallet();
   const { isPurchasePossible } = useQuotes();
-  const tokenKey = FormKeyHelper.getTokenKey('from');
+  const tokenKey = FormKeyHelper.getTokenKey("from");
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
-    'reference',
-    'requiredFields'
+    "reference",
+    "requiredFields"
   );
 
   const { chain: selectedChain } = useChain(account?.chainId);
@@ -54,13 +56,20 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       !referenceValid ||
       !requiredFieldsValid ||
       !isPurchasePossible ||
-      !selectedChain?.isActive
+      !selectedChain?.isActive ||
+      !userAcceptedTermsAndConditions
     );
-  }, [tokenAddress, reference, referenceType, requiredFields]);
+  }, [
+    tokenAddress,
+    reference,
+    referenceType,
+    requiredFields,
+    userAcceptedTermsAndConditions,
+  ]);
 
   useEffect(() => {
     if (account?.isConnected && !selectedChain?.isActive) {
-      showNotification('error', t('error.message.unavailableChain'), true);
+      showNotification("error", t("error.message.unavailableChain"), true);
     } else {
       hideNotification();
     }
@@ -69,7 +78,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   return (
     <BaseTransactionButton
       disabled={disabled || isPending || !tokenAddress}
-      text={t('header.spend')}
+      text={t("header.spend")}
       onClick={handleClick}
       loading={isPending}
     />
