@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
@@ -59,7 +53,10 @@ export const UserWalletProvider = ({ children }: Props) => {
   });
 
   useEffect(() => {
-    if (walletInfo?.wallet?.hasAcceptedTerms) {
+    if (
+      walletInfo?.wallet &&
+      walletInfo.wallet.hasAcceptedTerms !== undefined
+    ) {
       setUserAcceptedTermsAndConditions(walletInfo.wallet.hasAcceptedTerms);
     }
   }, [walletInfo]);

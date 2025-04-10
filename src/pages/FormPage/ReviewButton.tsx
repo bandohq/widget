@@ -1,20 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { BaseTransactionButton } from '../../components/BaseTransactionButton/BaseTransactionButton';
-import { useTransactionFlow } from '../../hooks/useTransactionFlow';
-import { useFieldValues } from '../../stores/form/useFieldValues';
-import { FormKeyHelper } from '../../stores/form/types';
-import { ReferenceType } from '../../providers/CatalogProvider/types';
-import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider';
-import { useChain } from '../../hooks/useChain';
-import { useNotificationContext } from '../../providers/AlertProvider/NotificationProvider';
+import React, { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
+import { useTransactionFlow } from "../../hooks/useTransactionFlow";
+import { useFieldValues } from "../../stores/form/useFieldValues";
+import { FormKeyHelper } from "../../stores/form/types";
+import { ReferenceType } from "../../providers/CatalogProvider/types";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
+import { useChain } from "../../hooks/useChain";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import {
   areRequiredFieldsValid,
   isReferenceValid,
-} from '../../utils/reviewValidations';
-import { useAccount } from '@lifi/wallet-management';
-import { navigationRoutes } from '../../utils/navigationRoutes';
+} from "../../utils/reviewValidations";
+import { useAccount } from "@lifi/wallet-management";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 
 interface ReviewButtonProps {
@@ -65,6 +65,9 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     referenceType,
     requiredFields,
     userAcceptedTermsAndConditions,
+    isPurchasePossible,
+    requiredFieldsProps,
+    selectedChain?.isActive,
   ]);
 
   useEffect(() => {

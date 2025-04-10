@@ -93,6 +93,8 @@ export const useTransactionFlow = () => {
     quote?.digitalAsset,
     quote?.digitalAssetAmount,
     account?.address,
+    userAcceptedTermsAndConditions,
+    integrator,
   ]);
 
   return {
@@ -100,4 +102,3 @@ export const useTransactionFlow = () => {
     isPending,
   };
 };
-
