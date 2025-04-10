@@ -34,8 +34,8 @@ export const ProductList: React.FC<ProductListProps> = ({
   });
 
   const handleSelectBrand = (brand: Brand) => {
+    updateBrand(brand);
     if (brand.variants.length > 1) {
-      updateBrand(brand);
       setOpen(true);
     } else {
       onSelectVariant(brand.variants[0]);
