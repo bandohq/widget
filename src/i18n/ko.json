@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "<0>이용 약관</0>에 동의합니다",
   "button": {
     "backToOrder": "주문으로 돌아가기",
     "discover": "더 알아보기",
