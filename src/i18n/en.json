@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "I accept the <0>terms and conditions</0>",
   "button": {
     "backToOrder": "Back to your order",
     "discover": "Discover more",
@@ -115,7 +116,7 @@
       "your": "Your {{field}}",
       "enter_your": "Enter your {{field}}"
     }
-  },  
+  },
   "countries": {
     "title": "Countries",
     "deleted": "Deleted countries",
@@ -134,7 +135,7 @@
     "noTransactions": "There is nothing here."
   },
   "info": {
-    "detailMessage" : "Is where you will recibe your {{productType}}.",
+    "detailMessage": "Is where you will recibe your {{productType}}.",
     "message": {
       "autoRefuel": "Change the network on your wallet to see the balance on that chain",
       "emptyActiveTransactions": "Transactions in progress will appear here. Once completed, find them in transaction history.",
@@ -174,7 +175,7 @@
   },
   "error": {
     "message": {
-      "unavailableChain" : "Your wallet is connected to an unavailable chain",
+      "unavailableChain": "Your wallet is connected to an unavailable chain",
       "allowanceRequired": "Transfer amount for {{tokenSymbol}} exceeds your current allowance. Please increase your allowance and try again.",
       "insufficientFunds": "You don't have enough gas to cover the cost of the transaction.",
       "remainInYourWallet": "{{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} on {{chainName}} remain in your wallet.",

@@ -12,11 +12,13 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
+import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
   const { integrator } = useWidgetConfig();
+  const { userAcceptedTermsAndConditions } = useUserWallet();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
   const { clearStep } = useSteps();
@@ -48,7 +50,9 @@ export const useTransactionFlow = () => {
               token,
             });
             clearStep();
-            navigate(`/status/${data?.transactionIntent?.id}`, { state: { signature } });
+            navigate(`/status/${data?.transactionIntent?.id}`, {
+              state: { signature },
+            });
           } catch (error) {
             clearStep();
             showNotification(
@@ -77,9 +81,19 @@ export const useTransactionFlow = () => {
         amount: quote?.digitalAssetAmount,
         wallet: account?.address,
         integrator,
+        has_accepted_terms: userAcceptedTermsAndConditions,
       },
     });
-  }, [mutate, reference, requiredFields, product?.sku, chain?.key, quote?.digitalAsset, quote?.digitalAssetAmount, account?.address]);
+  }, [
+    mutate,
+    reference,
+    requiredFields,
+    product?.sku,
+    chain?.key,
+    quote?.digitalAsset,
+    quote?.digitalAssetAmount,
+    account?.address,
+  ]);
 
   return {
     handleTransaction,

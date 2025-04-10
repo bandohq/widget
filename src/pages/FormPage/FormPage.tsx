@@ -10,6 +10,7 @@ import { SelectProductButton } from '../../components/SelectProductButton/Select
 import { useProduct } from '../../stores/ProductProvider/ProductProvider';
 import { DetailSection } from './DetailSection';
 import { useSteps } from '../../providers/StepsProvider/StepsProvider';
+import { TermsAndConditions } from "../../components/TermsAndContitions/TermsAndConditions";
 
 export const FormPage: React.FC = () => {
   const { hiddenUI } = useWidgetConfig();
@@ -35,6 +36,8 @@ export const FormPage: React.FC = () => {
           requiredFields={product?.requiredFields}
         />
       )}
+
+      <TermsAndConditions />
 
       <Box display="flex" mb={showPoweredBy ? 1 : 3} gap={1.5}>
         <ReviewButton

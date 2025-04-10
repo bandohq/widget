@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
@@ -46,9 +52,17 @@ export const UserWalletProvider = ({ children }: Props) => {
       integrator: integrator,
     },
     queryOptions: {
-      queryKey: ["wallet-info"],
+      queryKey: ["wallet-info", account.address, integrator],
+      retry: false,
+      enabled: !!account.address,
     },
   });
+
+  useEffect(() => {
+    if (walletInfo?.wallet?.hasAcceptedTerms) {
+      setUserAcceptedTermsAndConditions(walletInfo.wallet.hasAcceptedTerms);
+    }
+  }, [walletInfo]);
 
   return (
     <UserWalletContext.Provider

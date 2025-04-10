@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "我接受<0>条款和条件</0>",
   "button": {
     "backToOrder": "返回您的订单",
     "discover": "发现更多",
