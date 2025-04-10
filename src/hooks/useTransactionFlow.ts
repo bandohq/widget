@@ -81,7 +81,7 @@ export const useTransactionFlow = () => {
         amount: quote?.digitalAssetAmount,
         wallet: account?.address,
         integrator,
-        userAcceptedTermsAndConditions,
+        has_accepted_terms: userAcceptedTermsAndConditions,
       },
     });
   }, [

@@ -52,8 +52,9 @@ export const UserWalletProvider = ({ children }: Props) => {
       integrator: integrator,
     },
     queryOptions: {
-      queryKey: ["wallet-info"],
+      queryKey: ["wallet-info", account.address, integrator],
       retry: false,
+      enabled: !!account.address,
     },
   });
 
