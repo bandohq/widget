@@ -59,7 +59,7 @@ export const UserWalletProvider = ({ children }: Props) => {
   });
 
   useEffect(() => {
-    if (walletInfo) {
+    if (walletInfo?.wallet?.hasAcceptedTerms) {
       setUserAcceptedTermsAndConditions(walletInfo.wallet.hasAcceptedTerms);
     }
   }, [walletInfo]);
