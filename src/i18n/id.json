@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "Saya menyetujui <0>Syarat dan Ketentuan</0>",
   "button": {
     "backToOrder": "Kembali ke pesanan Anda",
     "discover": "Temukan lebih banyak",
