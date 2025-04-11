@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "我接受<0>条款和条件</0>",
   "button": {
     "backToOrder": "返回您的订单",
     "discover": "发现更多",
@@ -36,7 +37,7 @@
     "checkout": "支付",
     "checkoutDetails": "支付详情",
     "gas": "燃气费",
-    "payWith": "支付方式",
+    "yourProduct": "您的产品",
     "selectChain": "选择网络",
     "selectWallet": "选择你的钱包",
     "send": "发送",
@@ -199,7 +200,7 @@
   },
   "main": {
     "allTokens": "所有代币",
-    "from": "从",
+    "payWith": "使用以下方式付款",
     "inProgress": "进行中",
     "myTokens": "我的代币",
     "onChain": "在 {{chainName}}",

@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "Accetto i <0>termini e condizioni</0>",
   "button": {
     "backToOrder": "Torna al tuo ordine",
     "discover": "Scopri di più",
@@ -200,7 +201,7 @@
   },
   "main": {
     "allTokens": "Tutti i token",
-    "from": "Da",
+    "payWith": "Da",
     "inProgress": "in corso",
     "maxSlippage": "Slittamento massimo",
     "minReceived": "Ricevuto minimo",

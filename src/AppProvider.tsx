@@ -18,6 +18,7 @@ import { CatalogProvider } from './providers/CatalogProvider/CatalogProvider';
 import { QuotesProvider } from './providers/QuotesProvider/QuotesProvider';
 import { NotificationProvider } from './providers/AlertProvider/NotificationProvider';
 import { StepsProvider } from './providers/StepsProvider/StepsProvider';
+import { UserWalletProvider } from "./providers/UserWalletProvider/UserWalletProvider";
 
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
@@ -31,15 +32,17 @@ export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
           <ThemeProvider>
             <NotificationProvider>
               <WalletProvider>
-                <StoreProvider config={config} formRef={formRef}>
-                  <AppRouter>
-                    <CatalogProvider>
-                      <QuotesProvider>
-                        <StepsProvider>{children}</StepsProvider>
-                      </QuotesProvider>
-                    </CatalogProvider>
-                  </AppRouter>
-                </StoreProvider>
+                <UserWalletProvider>
+                  <StoreProvider config={config} formRef={formRef}>
+                    <AppRouter>
+                      <CatalogProvider>
+                        <QuotesProvider>
+                          <StepsProvider>{children}</StepsProvider>
+                        </QuotesProvider>
+                      </CatalogProvider>
+                    </AppRouter>
+                  </StoreProvider>
+                </UserWalletProvider>
               </WalletProvider>
             </NotificationProvider>
           </ThemeProvider>

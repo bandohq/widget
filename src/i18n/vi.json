@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "Tôi chấp nhận <0>các điều khoản và điều kiện</0>",
   "button": {
     "backToOrder": "Quay lại đơn hàng của bạn",
     "discover": "Khám phá thêm",
@@ -36,7 +37,7 @@
     "checkout": "Thanh toán",
     "checkoutDetails": "Chi tiết thanh toán",
     "gas": "Gas",
-    "payWith": "Thanh toán bằng",
+    "yourProduct": "Sản phẩm của bạn",
     "selectChain": "Chọn chain",
     "selectWallet": "Chọn ví",
     "send": "Gửi",
@@ -199,7 +200,7 @@
   },
   "main": {
     "allTokens": "Tất cả mã thông báo",
-    "from": "Từ",
+    "payWith": "Thanh toán bằng",
     "inProgress": "Đang xử lý",
     "myTokens": "Mã thông báo của tôi",
     "onChain": "Tại {{chainName}}",

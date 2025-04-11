@@ -7,6 +7,7 @@ import { ImageAvatar } from "../Avatar/Avatar";
 import { splitCamelCase } from "../../utils/truncateText";
 import { VariantSelector } from "../VariantSelector/VariantSelector";
 import { Variant } from "../../stores/ProductProvider/types";
+import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 
 interface ProductListProps {
   brands: Brand[];
@@ -21,7 +22,7 @@ export const ProductList: React.FC<ProductListProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [dropdownOpen] = useState(isDropdown);
-  const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
+  const { updateBrand, brand } = useProduct();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -33,8 +34,8 @@ export const ProductList: React.FC<ProductListProps> = ({
   });
 
   const handleSelectBrand = (brand: Brand) => {
+    updateBrand(brand);
     if (brand.variants.length > 1) {
-      setSelectedBrand(brand);
       setOpen(true);
     } else {
       onSelectVariant(brand.variants[0]);
@@ -99,7 +100,7 @@ export const ProductList: React.FC<ProductListProps> = ({
       <VariantSelector
         open={open}
         onClose={() => setOpen(false)}
-        selectedBrand={selectedBrand}
+        selectedBrand={brand}
         onVariantSelect={(item) => {
           setOpen(false);
           onSelectVariant(item);

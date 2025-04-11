@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "<0>利用規約</0>に同意します",
   "button": {
     "backToOrder": "注文に戻る",
     "discover": "さらに発見する",
@@ -36,7 +37,7 @@
     "checkout": "支払い",
     "checkoutDetails": "支払いの詳細",
     "gas": "ガス",
-    "payWith": "お支払い方法",
+    "payWith": "で支払う",
     "selectChain": "チェーン選択",
     "selectWallet": "ウォレットを選択",
     "send": "送金",
@@ -200,7 +201,7 @@
   },
   "main": {
     "allTokens": "すべてのトークン",
-    "from": "交換元",
+    "payWith": "交換元",
     "inProgress": "進行中",
     "maxSlippage": "最大スリップページ",
     "minReceived": "最小受け取り",

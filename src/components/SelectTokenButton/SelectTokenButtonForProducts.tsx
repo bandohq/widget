@@ -68,7 +68,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const defaultPlaceholder = !account.isConnected
     ? t("button.connectWallet")
     : product && !quote && t("main.selectToken");
-  const cardTitle: string = t(`main.${formType}`);
+  const cardTitle: string = t(`main.payWith`);
 
   useEffect(() => {
     renderWarning();

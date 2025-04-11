@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "मैं <0>नियमों और शर्तों</0> से सहमत हूँ",
   "button": {
     "auto": "स्वतः",
     "backToOrder": "अपने ऑर्डर पर वापस जाएं",
@@ -218,7 +219,7 @@
   },
   "main": {
     "allTokens": "सभी टोकन",
-    "from": "से",
+    "payWith": "से",
     "inProgress": "प्रगति में",
     "maxSlippage": "अधिकतम स्लिपेज",
     "minReceived": "न्यूनतम प्राप्त",

@@ -8,6 +8,7 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "termsAndConditionsHtml": "Acepto los <0>términos y condiciones</0>",
   "button": {
     "backToOrder": "Volver al pedido",
     "discover": "Descubrir más",
@@ -36,7 +37,7 @@
     "checkout": "Checkout",
     "checkoutDetails": "Detalles del checkout",
     "gas": "Gas",
-    "payWith": "Pagar con",
+    "yourProduct": "Tu producto",
     "selectChain": "Seleccionar cadena",
     "selectWallet": "Seleccionar billetera",
     "send": "Enviar",
@@ -223,7 +224,7 @@
   },
   "main": {
     "allTokens": "Todos los tokens",
-    "from": "Desde",
+    "payWith": "Pagar con",
     "inProgress": "en progreso",
     "maxSlippage": "Máx. deslizamiento",
     "minReceived": "Mín. recibido",
