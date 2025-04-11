@@ -79,7 +79,7 @@ export const SelectProductButton: React.FC<
           compact={compact}
           onClick={readOnly ? undefined : () => navigate(navigationRoutes.home)}
         >
-          <CardTitle>You spend</CardTitle>
+          <CardTitle>{t("header.yourProduct")}</CardTitle>
           <SelectProductCardHeader
             avatar={
               product ? (

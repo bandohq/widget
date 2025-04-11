@@ -37,7 +37,7 @@
     "checkout": "Розрахунок",
     "checkoutDetails": "Деталі платежу",
     "gas": "Газ",
-    "payWith": "Сплатити за допомогою",
+    "yourProduct": "Ваш продукт",
     "selectChain": "Виберіть чейн",
     "selectWallet": "Виберіть свій гаманець",
     "send": "Відправляєте",
@@ -200,7 +200,7 @@
   },
   "main": {
     "allTokens": "Всі токени",
-    "from": "З",
+    "payWith": "Сплатити за допомогою",
     "inProgress": "в процесі",
     "myTokens": "Мої токени",
     "onChain": "{{chainName}}",

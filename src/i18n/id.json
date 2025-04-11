@@ -199,7 +199,7 @@
   },
   "main": {
     "allTokens": "Semua Token",
-    "from": "Dari",
+    "payWith": "Dari",
     "inProgress": "sedang berlangsung",
     "maxSlippage": "Slip maksimum",
     "minReceived": "Minimal diterima",

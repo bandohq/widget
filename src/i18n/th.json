@@ -37,7 +37,7 @@
     "checkout": "เช็คเอาท์",
     "checkoutDetails": "รายละเอียดการชำระเงิน",
     "gas": "แก็ส",
-    "payWith": "ชำระด้วย",
+    "payWith": "ชำระเงินด้วย",
     "selectChain": "เลือกเชน",
     "selectWallet": "เลือกกระเป๋าของคุณ",
     "send": "ส่ง",
@@ -200,7 +200,7 @@
   },
   "main": {
     "allTokens": "โทเคนทั้งหมด",
-    "from": "จาก",
+    "payWith": "ชำระเงินด้วย",
     "inProgress": "กำลังดำเนินการ",
     "myTokens": "โทเคนของฉัน",
     "onChain": "บน {{chainName}}",

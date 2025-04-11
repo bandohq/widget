@@ -37,7 +37,7 @@
     "checkout": "Zur Kasse",
     "checkoutDetails": "Details zur Kasse",
     "gas": "Gas",
-    "payWith": "Bezahlen mit",
+    "yourProduct": "Ihr Produkt",
     "selectChain": "Chain auswählen",
     "selectWallet": "Wallet auswählen",
     "send": "Senden",
@@ -199,7 +199,7 @@
   },
   "main": {
     "allTokens": "Alle Tokens",
-    "from": "Von",
+    "payWith": "Bezahlen mit",
     "inProgress": "In Bearbeitung",
     "maxSlippage": "Maximaler Schlupf",
     "minReceived": "Minimal erhalten",
