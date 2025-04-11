@@ -22,6 +22,8 @@ const HorizontalSlider = ({
       (p) => p.productType === productType
     ).brands;
 
+    if (!productArray) return;
+
     const brand = productArray.find((p) => p.brandName === item.brandName);
     if (brand) {
       updateBrand(brand);
