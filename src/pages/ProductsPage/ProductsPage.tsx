@@ -11,6 +11,7 @@ import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvid
 import { BrandsContainer } from "./ProductPage.style";
 import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
+import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export const ProductsPage = () => {
   return (
     <PageContainer>
       <ProductSearch />
+      <RecentSpends />
       {filteredBrands.length > 0 && (
         <ProductList
           brands={filteredBrands}
@@ -59,48 +61,46 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading ? (
-        Array.from(new Array(2)).map((_, index) => (
-          <Box key={index} sx={{ marginBottom: 4 }}>
-            <Skeleton
-              variant="rectangular"
-              width="20%"
-              height="20px"
-              sx={{ marginBottom: 1, mt: 2 }}
-            />
-            <BrandsContainer>
-              {Array.from(new Array(10)).map((_, index) => (
-                <Skeleton
-                  key={index}
-                  variant="rectangular"
-                  width="100%"
-                  height="100%"
-                  sx={{ marginBottom: 1, borderRadius: "5px" }}
-                />
+      {isLoading
+        ? Array.from(new Array(2)).map((_, index) => (
+            <Box key={index} sx={{ marginBottom: 4 }}>
+              <Skeleton
+                variant="rectangular"
+                width="20%"
+                height="20px"
+                sx={{ marginBottom: 1, mt: 2 }}
+              />
+              <BrandsContainer>
+                {Array.from(new Array(10)).map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    variant="rectangular"
+                    width="100%"
+                    height="100%"
+                    sx={{ marginBottom: 1, borderRadius: "5px" }}
+                  />
+                ))}
+              </BrandsContainer>
+            </Box>
+          ))
+        : filteredBrands.length == 0 && (
+            <div style={{ overflow: "hidden" }}>
+              {filteredData?.map((category) => (
+                <Box
+                  key={category.productType}
+                  sx={{
+                    marginBottom: "30px",
+                    marginTop: "20px",
+                  }}
+                >
+                  <CategorySection
+                    category={category}
+                    onMoreClick={() => handleMoreClick(category)}
+                  />
+                </Box>
               ))}
-            </BrandsContainer>
-          </Box>
-        ))
-      ) : (
-        filteredBrands.length == 0 &&  (
-          <div style={{ overflow: "hidden" }}>
-            {filteredData?.map((category) => (
-              <Box
-                key={category.productType}
-                sx={{
-                  marginBottom: "30px",
-                  marginTop: "20px",
-                }}
-              >
-                <CategorySection
-                  category={category}
-                  onMoreClick={() => handleMoreClick(category)}
-                />
-              </Box>
-            ))}
-          </div>
-        )
-      )}
+            </div>
+          )}
     </PageContainer>
   );
 };
