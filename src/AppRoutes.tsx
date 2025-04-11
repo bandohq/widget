@@ -8,7 +8,6 @@ import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 import { navigationRoutes } from "./utils/navigationRoutes";
 import { StatusPage } from "./pages/StatusPage/StatusPage";
 import { ProductsPage } from "./pages/ProductsPage/ProductsPage";
-import { CountryPage } from "./pages/CountryPage";
 import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionHistory";
@@ -54,10 +53,6 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,
-  },
-  {
-    path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
-    element: <CountryPage />,
   },
   {
     path: "*",
