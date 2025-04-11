@@ -201,7 +201,7 @@
   },
   "main": {
     "allTokens": "Tutti i token",
-    "from": "Da",
+    "payWith": "Da",
     "inProgress": "in corso",
     "maxSlippage": "Slittamento massimo",
     "minReceived": "Ricevuto minimo",

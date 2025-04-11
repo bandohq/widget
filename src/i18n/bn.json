@@ -37,7 +37,7 @@
     "checkout": "চেকআউট",
     "checkoutDetails": "চেকআউটের বিস্তারিত",
     "gas": "গ্যাস",
-    "payWith": "পেমেন্ট করুন",
+    "yourProduct": "আপনার পণ্য",
     "selectChain": "চেইন নির্বাচন করুন",
     "selectWallet": "আপনার ওয়ালেট নির্বাচন করুন",
     "send": "পাঠান",
@@ -200,7 +200,7 @@
   },
   "main": {
     "allTokens": "সমস্ত টোকেন",
-    "from": "থেকে",
+    "payWith": "এর মাধ্যমে পরিশোধ করুন",
     "inProgress": "চলমান",
     "maxSlippage": "সর্বাধিক স্লিপেজ",
     "minReceived": "সর্বনিম্ন প্রাপ্ত",
