@@ -199,7 +199,7 @@
   },
   "main": {
     "allTokens": "Todos os tokens",
-    "from": "De",
+    "payWith": "Pagar com",
     "inProgress": "em andamento",
     "maxSlippage": "Diferença máxima",
     "minReceived": "Mínimo recebido",

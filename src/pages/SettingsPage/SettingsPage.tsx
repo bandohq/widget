@@ -5,7 +5,6 @@ import { LanguageSetting } from "./LanguageSetting";
 import { SettingsList } from "./SettingsCard/SettingCard.style";
 import { SettingsCardAccordion } from "./SettingsCard/SettingsAccordian";
 import { ThemeSettings } from "./ThemeSettings";
-import { CountriesSetting } from "./CountriesSetting";
 import { useAccount } from "@lifi/wallet-management";
 import { Typography } from "@mui/material";
 import { shortenAddress } from "../../utils/wallet";
@@ -21,11 +20,10 @@ export const SettingsPage = () => {
         <SettingsCardAccordion>
           <ThemeSettings />
           <LanguageSetting />
-          <CountriesSetting />
           <HistorySettings />
         </SettingsCardAccordion>
         {account.address && (
-          <Typography sx={{ textAlign: 'right', fontSize: '1px', mt: '20px' }}>
+          <Typography sx={{ textAlign: "right", fontSize: "1px", mt: "20px" }}>
             Connected To {shortenAddress(account.address)}
           </Typography>
         )}

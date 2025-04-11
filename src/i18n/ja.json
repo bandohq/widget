@@ -37,7 +37,7 @@
     "checkout": "支払い",
     "checkoutDetails": "支払いの詳細",
     "gas": "ガス",
-    "payWith": "お支払い方法",
+    "payWith": "で支払う",
     "selectChain": "チェーン選択",
     "selectWallet": "ウォレットを選択",
     "send": "送金",
@@ -201,7 +201,7 @@
   },
   "main": {
     "allTokens": "すべてのトークン",
-    "from": "交換元",
+    "payWith": "交換元",
     "inProgress": "進行中",
     "maxSlippage": "最大スリップページ",
     "minReceived": "最小受け取り",

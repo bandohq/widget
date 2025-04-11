@@ -219,7 +219,7 @@
   },
   "main": {
     "allTokens": "सभी टोकन",
-    "from": "से",
+    "payWith": "से",
     "inProgress": "प्रगति में",
     "maxSlippage": "अधिकतम स्लिपेज",
     "minReceived": "न्यूनतम प्राप्त",

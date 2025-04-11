@@ -37,7 +37,7 @@
     "checkout": "주문",
     "checkoutDetails": "주문 세부사항",
     "gas": "가스",
-    "payWith": "결제 수단",
+    "payWith": "다음으로 결제",
     "selectChain": "체인 선택",
     "selectWallet": "지갑 선택",
     "send": "보내기",
@@ -201,7 +201,7 @@
   },
   "main": {
     "allTokens": "모든 토큰",
-    "from": "다음에서",
+    "payWith": "다음에서",
     "inProgress": "진행 중",
     "maxSlippage": "최대 슬리피지",
     "minReceived": "최소 수령",
