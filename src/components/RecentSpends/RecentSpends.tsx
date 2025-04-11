@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { ClockCounterClockwise } from "@phosphor-icons/react";
-import HorizontalSlider from "./HorizontalSlider";
+import { HorizontalSlider, Transaction } from "./HorizontalSlider";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
 
@@ -10,7 +10,7 @@ export const RecentSpends = () => {
     data: transactions,
     isPending,
     error,
-  } = useFetch({
+  } = useFetch<{ transactions: Transaction[] }>({
     url: account.address ? `wallets/${account.address}/transactions` : "",
     method: "GET",
     queryOptions: {
