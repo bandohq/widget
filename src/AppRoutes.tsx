@@ -12,6 +12,7 @@ import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionHistory";
 import { TransactionsDetailPage } from "./pages/TransactionHistory/TransactionDetail";
+import { CountryPage } from "./pages/CountryPage";
 
 const routes: RouteObject[] = [
   {
@@ -53,6 +54,10 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,
+  },
+  {
+    path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
+    element: <CountryPage />,
   },
   {
     path: "*",
