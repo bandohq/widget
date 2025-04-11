@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { splitCamelCase } from "../../utils/truncateText";
 import { VariantSelector } from "../../components/VariantSelector/VariantSelector";
+import { EsimBanner } from "../../components/Esims/EsimBanner";
 
 export const CategorySection = ({ category, onMoreClick }) => {
   const { updateProduct, updateBrand } = useProduct();
@@ -35,7 +36,7 @@ export const CategorySection = ({ category, onMoreClick }) => {
   };
 
   if (category.productType === "esim") {
-    return null;
+    return <EsimBanner />;
   }
 
   return (
