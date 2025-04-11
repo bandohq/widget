@@ -12,6 +12,7 @@ import { CategoryPage } from "./pages/ProductsPage/CategoryPage/CategoryPage";
 import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionHistory";
 import { TransactionsDetailPage } from "./pages/TransactionHistory/TransactionDetail";
+import { EsimsPage } from "./pages/EsimsPage/EsimsPage";
 
 const routes: RouteObject[] = [
   {
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.products}/:category`,
     element: <CategoryPage />,
+  },
+  {
+    path: "esims",
+    element: <EsimsPage />,
   },
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,

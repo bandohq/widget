@@ -18,6 +18,11 @@ export interface Variant {
   productType: string;
   shortNotes: string | null;
   subTypes: string[]; // Array of subtypes
+  targetCountry: {
+    countryName: string;
+    countryCode: string;
+    flagUrl: string;
+  };
   imageUrl: string | null;
   dataGB: number | null;
   dataSpeeds: number | null;

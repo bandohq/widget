@@ -7,27 +7,28 @@ export const navigationRoutes = {
   transactionHistory: "/transaction-history",
   transactionDetail: "/transaction-detail",
   products: "/products",
+  esims: "/esims",
   form: "/form",
   formSteps: "/form-steps",
   settings: "/settings",
 };
 
-  
-  export const navigationRoutesValues = Object.values(navigationRoutes)
-  
-  export const stickyHeaderRoutes = [
-    navigationRoutes.home,
-    navigationRoutes.settings,
-  ]
-  
-  export const backButtonRoutes = [
-    navigationRoutes.languages,
-    navigationRoutes.form,
-    navigationRoutes.fromToken,
-    navigationRoutes.settings,
-    navigationRoutes.transactionHistory,
-    navigationRoutes.transactionDetail,
-  ];
+export const navigationRoutesValues = Object.values(navigationRoutes);
+
+export const stickyHeaderRoutes = [
+  navigationRoutes.home,
+  navigationRoutes.settings,
+];
+
+export const backButtonRoutes = [
+  navigationRoutes.languages,
+  navigationRoutes.form,
+  navigationRoutes.fromToken,
+  navigationRoutes.settings,
+  navigationRoutes.transactionHistory,
+  navigationRoutes.transactionDetail,
+  navigationRoutes.esims,
+];
 
   export const backToHomeRoutes = [navigationRoutes.transactionHistory];
   
