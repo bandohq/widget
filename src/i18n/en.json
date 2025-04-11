@@ -37,7 +37,7 @@
     "checkout": "Checkout",
     "checkoutDetails": "Checkout details",
     "gas": "Gas",
-    "payWith": "Pay with",
+    "yourProduct": "Your product",
     "selectChain": "Select chain",
     "selectWallet": "Select your wallet",
     "send": "Send",
@@ -224,7 +224,7 @@
   },
   "main": {
     "allTokens": "All tokens",
-    "from": "From",
+    "payWith": "Pay with",
     "inProgress": "in progress",
     "maxSlippage": "Max. slippage",
     "minReceived": "Min. received",

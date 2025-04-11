@@ -37,7 +37,7 @@
     "checkout": "Thanh toán",
     "checkoutDetails": "Chi tiết thanh toán",
     "gas": "Gas",
-    "payWith": "Thanh toán bằng",
+    "yourProduct": "Sản phẩm của bạn",
     "selectChain": "Chọn chain",
     "selectWallet": "Chọn ví",
     "send": "Gửi",
@@ -200,7 +200,7 @@
   },
   "main": {
     "allTokens": "Tất cả mã thông báo",
-    "from": "Từ",
+    "payWith": "Thanh toán bằng",
     "inProgress": "Đang xử lý",
     "myTokens": "Mã thông báo của tôi",
     "onChain": "Tại {{chainName}}",

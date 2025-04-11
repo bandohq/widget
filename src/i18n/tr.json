@@ -37,7 +37,7 @@
     "checkout": "Ödeme yap",
     "checkoutDetails": "Ödeme detayları",
     "gas": "Gaz",
-    "payWith": "Şununla öde",
+    "yourProduct": "Ürününüz",
     "selectChain": "Zincir Seç",
     "selectWallet": "Bir Cüzdan Seçin",
     "send": "Gönder",
@@ -200,7 +200,7 @@
   },
   "main": {
     "allTokens": "Tüm varlıklar",
-    "from": "Gönderen",
+    "payWith": "Şununla öde",
     "inProgress": "İşlem devam ediyor",
     "myTokens": "Varlıklarım",
     "onChain": "{{chainName}} üzerinde",
