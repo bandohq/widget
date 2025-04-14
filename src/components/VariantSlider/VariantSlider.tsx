@@ -72,7 +72,7 @@ export default function VariantSlider({
   };
 
   return (
-    <Box sx={{ height: "65vh", overflow: "auto", mt: 2 }}>
+    <Box sx={{ height: "60vh", overflow: "auto", mt: 2 }}>
       <div
         style={{
           display: "flex",
