@@ -57,14 +57,15 @@ export default function VariantSlider({
   ) => {
     if (isUnlimited) {
       return (
-        <Typography variant="body1" color="text.secondary">
-          {t(unlimitedTransKey)}
+        <Typography variant="body1" color="text.secondary" textAlign="left">
+          <span style={{ fontWeight: "bold" }}>{t(unlimitedTransKey)}</span>
         </Typography>
       );
     } else if (isValidValue(value)) {
       return (
-        <Typography variant="body1" color="text.secondary">
-          {t(title)}: {t(valueTransKey, { [valueParam]: value })}
+        <Typography variant="body1" color="text.secondary" textAlign="left">
+          <span style={{ fontWeight: "bold" }}>{t(title)}</span>:{" "}
+          {t(valueTransKey, { [valueParam]: value })}
         </Typography>
       );
     }
@@ -72,7 +73,7 @@ export default function VariantSlider({
   };
 
   return (
-    <Box sx={{ height: "60vh", overflow: "auto", mt: 2 }}>
+    <Box sx={{ height: "80vh", overflow: "auto", mt: 2 }}>
       <div
         style={{
           display: "flex",
@@ -129,7 +130,10 @@ export default function VariantSlider({
           onChange={handleChange}
           valueLabelFormat={(i) => variants[i].shortNotes}
         />
-        <Typography variant="body2" color="text.secondary" align="center">
+        <Typography variant="body1" align="left">
+          Description
+        </Typography>
+        <Typography variant="body2" color="text.secondary" textAlign="left">
           {current?.notes
             ? current?.notes
             : t("form.info.topupSliderGenericDesc", {
@@ -172,7 +176,7 @@ export default function VariantSlider({
           )}
           {isValidValue(current?.durationDays) && (
             <Typography variant="body1" color="text.secondary">
-              {t("duration")}:{" "}
+              <span style={{ fontWeight: "bold" }}>{t("duration")}</span>:{" "}
               {t("form.info.duration", { duration: current?.durationDays })}
             </Typography>
           )}
