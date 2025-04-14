@@ -129,12 +129,7 @@ export default function VariantSlider({
           onChange={handleChange}
           valueLabelFormat={(i) => variants[i].shortNotes}
         />
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          align="center"
-          sx={{ height: "40%" }}
-        >
+        <Typography variant="body2" color="text.secondary" align="center">
           {current?.notes
             ? current?.notes
             : t("form.info.topupSliderGenericDesc", {
@@ -146,10 +141,9 @@ export default function VariantSlider({
 
         <Box
           sx={{
-            height: 50,
             display: "grid",
-            justifyContent: "center",
-            gridTemplateColumns: "1fr 1fr",
+            justifyContent: "start",
+            gridTemplateColumns: "1fr",
           }}
         >
           {renderFeature(
