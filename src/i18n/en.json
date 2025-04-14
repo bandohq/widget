@@ -59,7 +59,8 @@
       "smsQuantity": "{{quantity}} SMS",
       "unlimitedCalls": "Unlimited calls",
       "callQuantity": "{{quantity}} minutes",
-      "duration": "{{duration}} days"
+      "duration": "{{duration}} days",
+      "topupSliderGenericDesc": "{{amount}}{{currency}} for {{brand}} Airtime & Data"
     },
     "status": {
       "processingOrderCompleted": "Order validated successfully",

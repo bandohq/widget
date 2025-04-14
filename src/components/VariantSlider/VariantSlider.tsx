@@ -138,9 +138,11 @@ export default function VariantSlider({
         >
           {current?.notes
             ? current?.notes
-            : `${parseFloat(current?.price?.fiatValue || "0").toFixed(2)}${
-                current?.price.fiatCurrency
-              } for ${title} ${t(`main.${current?.productType}`)}`}
+            : t("form.info.topupSliderGenericDesc", {
+                amount: parseFloat(current?.price?.fiatValue || "0").toFixed(2),
+                currency: current?.price?.fiatCurrency,
+                brand: title,
+              })}
         </Typography>
 
         <Box
