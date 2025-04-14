@@ -101,11 +101,10 @@ export const SelectTokenButtonForProducts: React.FC<
                 />
               </>
             }
-            title={<Skeleton width={100} />}
+            title={<Skeleton />}
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={<Skeleton width={80} />}
             subheaderTypographyProps={
               isSelected
                 ? {
