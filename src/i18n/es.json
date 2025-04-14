@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Datos",
+  "voice": "Voz",
+  "sms": "SMS",
+  "duration": "Duración",
   "termsAndConditionsHtml": "Acepto los <0>términos y condiciones</0>",
   "button": {
     "backToOrder": "Volver al pedido",
