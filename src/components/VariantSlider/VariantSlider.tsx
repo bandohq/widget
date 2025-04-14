@@ -175,7 +175,7 @@ export default function VariantSlider({
             "quantity"
           )}
           {isValidValue(current?.durationDays) && (
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" color="text.secondary" textAlign="left">
               <span style={{ fontWeight: "bold" }}>{t("duration")}</span>:{" "}
               {t("form.info.duration", { duration: current?.durationDays })}
             </Typography>
