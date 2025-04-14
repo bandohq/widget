@@ -101,11 +101,10 @@ export const SelectTokenButtonForProducts: React.FC<
                 />
               </>
             }
-            title={<Skeleton width={100} />}
+            title={<Skeleton />}
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={<Skeleton width={80} />}
             subheaderTypographyProps={
               isSelected
                 ? {
@@ -120,9 +119,6 @@ export const SelectTokenButtonForProducts: React.FC<
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
             title={defaultPlaceholder}
-            subheader={`${parseFloat(product.price?.fiatValue)} ${
-              product.price?.fiatCurrency
-            }`}
             compact={compact}
           />
         ) : (
@@ -146,7 +142,6 @@ export const SelectTokenButtonForProducts: React.FC<
             titleTypographyProps={{
               title: token.symbol,
             }}
-            subheader={`${quote?.fiatAmount} ${quote?.fiatCurrency}`}
             subheaderTypographyProps={
               isSelected
                 ? {
