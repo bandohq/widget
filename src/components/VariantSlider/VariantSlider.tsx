@@ -30,8 +30,6 @@ export default function VariantSlider({
 
   if (!variants || variants.length === 0) return null;
 
-  console.log(variants);
-
   const handleChange = (_event: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       setIndex(newValue);
@@ -50,6 +48,7 @@ export default function VariantSlider({
   const current = variants[index];
 
   const renderFeature = (
+    title: string,
     isUnlimited,
     value,
     unlimitedTransKey,
@@ -65,7 +64,7 @@ export default function VariantSlider({
     } else if (isValidValue(value)) {
       return (
         <Typography variant="body1" color="text.secondary">
-          {t(valueTransKey, { [valueParam]: value })}
+          {t(title)}: {t(valueTransKey, { [valueParam]: value })}
         </Typography>
       );
     }
@@ -154,6 +153,7 @@ export default function VariantSlider({
           }}
         >
           {renderFeature(
+            "data",
             current?.dataUnlimited,
             current?.dataGB,
             "form.info.unlimitedGB",
@@ -161,6 +161,7 @@ export default function VariantSlider({
             "quantity"
           )}
           {renderFeature(
+            "voice",
             current?.voiceUnlimited,
             current?.voiceMinutes,
             "form.info.unlimitedCalls",
@@ -168,6 +169,7 @@ export default function VariantSlider({
             "quantity"
           )}
           {renderFeature(
+            "sms",
             current?.smsUnlimited,
             current?.smsNumber,
             "form.info.unlimitedSMS",
@@ -176,6 +178,7 @@ export default function VariantSlider({
           )}
           {isValidValue(current?.durationDays) && (
             <Typography variant="body1" color="text.secondary">
+              {t("duration")}:{" "}
               {t("form.info.duration", { duration: current?.durationDays })}
             </Typography>
           )}
