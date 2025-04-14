@@ -225,5 +225,9 @@
     "theme": "테마",
     "custom": "사용자 정의",
     "status": "상태 페이지"
-  }
+  },
+  "data": "데이터",
+  "voice": "음성",
+  "sms": "SMS",
+  "duration": "기간"
 }
