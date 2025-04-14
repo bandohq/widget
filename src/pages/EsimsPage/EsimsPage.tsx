@@ -2,6 +2,8 @@ import { Box } from "@mui/material";
 import { useHeader } from "../../hooks/useHeader";
 import { Variant } from "../../stores/ProductProvider/types";
 import { PageContainer } from "../../components/PageContainer";
+import { BrandsGrid } from "../ProductsPage/ProductPage.style";
+import { ImageAvatar } from "../../components/Avatar/Avatar";
 
 const mockVariants: Variant[] = [
   {
@@ -74,10 +76,19 @@ export const EsimsPage = () => {
         }}
       >
         {mockVariants.map((variant) => (
-          <Box key={variant.id}>
-            <img src={variant.imageUrl} alt={variant.brand} />
-            <Box>{variant.brand}</Box>
-          </Box>
+          <BrandsGrid key={variant.id} onClick={() => {}}>
+            <ImageAvatar
+              name={variant.brand}
+              src={variant.imageUrl}
+              sx={{
+                maxHeight: "60px",
+                maxWidth: "60px",
+                width: "60px",
+                height: "60px",
+                objectFit: "contain",
+              }}
+            />
+          </BrandsGrid>
         ))}
       </Box>
     </PageContainer>
