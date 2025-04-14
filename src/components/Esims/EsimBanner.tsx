@@ -18,21 +18,14 @@ export const EsimBanner = () => {
             : "linear-gradient(65deg, rgba(247,251,252,1) 0%,rgba(220,244,235,0.8) 40%,rgba(64,180,148,0.5) 100%);",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "start",
       }}
     >
-      <Typography
-        variant="h6"
-        sx={{
-          fontWeight: 500,
-          color: "#fff",
-        }}
-      >
-        Esim
-      </Typography>
+      <Typography variant="h6">Esim</Typography>
       <Button
         variant="contained"
         size="small"
+        sx={{ mt: 1, borderRadius: 1, color: "#fff" }}
         onClick={() => navigate("/esims")}
       >
         Learn more
