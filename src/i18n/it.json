@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Dati",
+  "voice": "Voce",
+  "sms": "SMS",
+  "duration": "Durata",
   "termsAndConditionsHtml": "Accetto i <0>termini e condizioni</0>",
   "button": {
     "backToOrder": "Torna al tuo ordine",
@@ -67,7 +71,7 @@
       "processingOrderCompleted": "Ordine convalidato con successo",
       "processingOrder": "Elaborazione del tuo ordine",
       "wait": "Potrebbe richiedere un minuto",
-      "validateAllowance": "Convalida dell’assegno",
+      "validateAllowance": "Convalida dell'assegno",
       "signTransactionCompleted": "Transazione firmata con successo",
       "validateAllowanceCompleted": "Importo approvato"
     },

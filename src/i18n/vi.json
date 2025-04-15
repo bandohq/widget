@@ -223,5 +223,9 @@
     "theme": "Giao diện",
     "custom": "Tùy chỉnh",
     "status": "Trang trạng thái"
-  }
+  },
+  "data": "Dữ liệu",
+  "voice": "Thoại",
+  "sms": "SMS",
+  "duration": "Thời hạn"
 }

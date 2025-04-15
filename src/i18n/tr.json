@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Veri",
+  "voice": "Ses",
+  "sms": "SMS",
+  "duration": "Süre",
   "termsAndConditionsHtml": "<0>Şartlar ve koşulları</0> kabul ediyorum",
   "button": {
     "backToOrder": "Siparişinize geri dönün",
@@ -174,7 +178,7 @@
   },
   "error": {
     "message": {
-      "unavailableChain": "Wallet’iniz kullanılamayan bir Chain’e bağlı",
+      "unavailableChain": "Wallet'iniz kullanılamayan bir Chain'e bağlı",
       "allowanceRequired": "{{tokenSymbol}} için verilen izinden fazla miktarda transfer yapılamaz. Token izinlerini arttırıp tekrar deneyiniz.",
       "insufficientFunds": "Bu işlemi gerçekleştirmek için yeterli gaz bulunmamaktadır.",
       "remainInYourWallet": "{{chainName}} üzerinde {{amount, number(maximumFractionDigits: 9)}} {{tokenSymbol}} cüzdanınızda bulunmaktadır.",
