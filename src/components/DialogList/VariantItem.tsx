@@ -1,6 +1,7 @@
 import { alpha, Typography, useTheme } from "@mui/material";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
+import { StyledItem } from "./DialogList.styles";
 
 export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
   item,
@@ -44,30 +45,13 @@ export const VariantItem: React.FC<{ item: any; onClose?: () => void }> = ({
 
   return (
     <>
-      <div
-        onClick={handleSelectProduct}
-        style={{
-          padding: "15px 10px",
-          display: "flex",
-          width: "90%",
-          margin: "0 auto",
-          borderRadius: "5px",
-          backgroundColor:
-            theme.palette.mode === "light"
-              ? alpha(theme.palette.common.black, 0.04)
-              : alpha(theme.palette.common.white, 0.08),
-          alignItems: "center",
-          justifyContent:
-            item.productType === "topup" ? "space-between" : "center",
-          cursor: "pointer",
-        }}
-      >
+      <StyledItem>
         <Typography style={{ fontSize: "18px" }}>
           {parseFloat(item.price.fiatValue).toFixed(2)}{" "}
           {item.price.fiatCurrency}
         </Typography>
         {item.productType === "topup" && ItemData()}
-      </div>
+      </StyledItem>
     </>
   );
 };
