@@ -10,22 +10,21 @@ export const StyledSearchInput = styled("input")(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-export const VariantCardBox = styled("div")<{
-  isSelected: boolean;
-  theme: any;
-}>(({ isSelected, theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "start",
-  justifyContent: "center",
-  backgroundColor: isSelected
-    ? theme.palette.primary.main
-    : theme.palette.background.paper,
-  padding: "10px 15px",
-  borderRadius: 10,
-  margin: "0 5px",
-  color: isSelected ? theme.palette.primary.contrastText : "inherit",
-}));
+export const VariantCardBox = styled("div")<{ isSelected: boolean }>(
+  ({ isSelected, theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    justifyContent: "center",
+    backgroundColor: isSelected
+      ? theme.palette.primary.main
+      : theme.palette.background.paper,
+    padding: "10px 15px",
+    borderRadius: 10,
+    margin: "0 5px",
+    color: isSelected ? theme.palette.primary.contrastText : "inherit",
+  })
+);
 
 export const GridContainer = styled("div")({
   display: "grid",

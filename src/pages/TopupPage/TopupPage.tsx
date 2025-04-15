@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
@@ -15,13 +15,21 @@ import { useHeader } from "../../hooks/useHeader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  GridContainer,
+  SliderWrapper,
+  StyledSearchInput,
+} from "../../components/VariantCard/VariantCard.styles";
+import { VariantCard } from "../../components/VariantCard/VariantCard";
+import { getClosestVariantIndex } from "../../utils/getClosestVariant";
 
 export const TopupPage: React.FC = () => {
   const { brand } = useProduct();
   const theme = useTheme();
-  const [inputValue, setInputValue] = useState<string>("");
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const sliderRef = React.useRef<Slider>(null);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const sliderRef = useRef<Slider>(null);
+  const debounceTimeoutRef = useRef<NodeJS.Timeout>();
 
   useHeader(brand.brandName);
 
@@ -29,32 +37,32 @@ export const TopupPage: React.FC = () => {
     (a, b) => parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
   );
 
+  const updateSelectedVariant = useCallback(
+    (value: string) => {
+      if (value && !isNaN(Number(value))) {
+        const targetValue = parseFloat(value);
+        const closestIndex = getClosestVariantIndex(
+          orderedVariants,
+          targetValue
+        );
+        setSelectedIndex(closestIndex);
+        sliderRef.current?.slickGoTo(closestIndex);
+      }
+    },
+    [orderedVariants]
+  );
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(value);
 
-    if (value && !isNaN(Number(value))) {
-      const targetValue = parseFloat(value);
-      const closestVariant = orderedVariants.reduce(
-        (closest, current, index) => {
-          const currentValue = parseFloat(current.price.fiatValue);
-          const closestValue = parseFloat(closest.price.fiatValue);
-          const currentDiff = Math.abs(currentValue - targetValue);
-          const closestDiff = Math.abs(closestValue - targetValue);
-
-          if (currentDiff < closestDiff) {
-            setSelectedIndex(index);
-            return current;
-          }
-          return closest;
-        },
-        brand.variants[0]
-      );
-
-      if (sliderRef.current) {
-        sliderRef.current.slickGoTo(selectedIndex);
-      }
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
     }
+
+    debounceTimeoutRef.current = setTimeout(() => {
+      updateSelectedVariant(value);
+    }, 300);
   };
 
   const sliderSettings = {
@@ -65,35 +73,6 @@ export const TopupPage: React.FC = () => {
     slidesToScroll: 1,
     ref: sliderRef,
   };
-
-  const VariantCard = ({
-    variant,
-    isSelected,
-  }: {
-    variant: any;
-    isSelected: boolean;
-  }) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "start",
-        justifyContent: "center",
-        backgroundColor: isSelected
-          ? theme.palette.primary.main
-          : theme.palette.background.paper,
-        padding: "10px 15px",
-        borderRadius: 10,
-        margin: "0 5px",
-        color: isSelected ? theme.palette.primary.contrastText : "inherit",
-      }}
-    >
-      <Typography variant="body1">
-        {parseFloat(variant.price.fiatValue).toFixed(2)}
-      </Typography>
-      <Typography variant="body1">{variant.price.fiatCurrency}</Typography>
-    </div>
-  );
 
   return (
     <PageContainer>
@@ -111,9 +90,9 @@ export const TopupPage: React.FC = () => {
         Type of product
       </Typography>
       <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
-        <Chip label={"airtime"} />
-        <Chip label={"data"} />
-        <Chip label={"sms"} />
+        <Chip label="airtime" />
+        <Chip label="data" />
+        <Chip label="sms" />
       </Box>
 
       <Typography
@@ -135,13 +114,7 @@ export const TopupPage: React.FC = () => {
               </InputAdornment>
             ),
           }}
-          variant="outlined"
-          sx={{
-            width: "100%",
-            border: "none",
-            background: "transparent",
-            outline: "none",
-          }}
+          fullWidth
         />
       </Box>
 
@@ -152,7 +125,7 @@ export const TopupPage: React.FC = () => {
         All available amounts
       </Typography>
       {inputValue ? (
-        <Box sx={{ mt: 1, px: 1 }}>
+        <SliderWrapper>
           <Slider {...sliderSettings}>
             {orderedVariants.map((variant, index) => (
               <VariantCard
@@ -162,16 +135,9 @@ export const TopupPage: React.FC = () => {
               />
             ))}
           </Slider>
-        </Box>
+        </SliderWrapper>
       ) : (
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 1,
-            mt: 1,
-          }}
-        >
+        <GridContainer>
           {orderedVariants.map((variant, index) => (
             <VariantCard
               key={variant.price.fiatValue}
@@ -179,7 +145,7 @@ export const TopupPage: React.FC = () => {
               isSelected={index === selectedIndex}
             />
           ))}
-        </Box>
+        </GridContainer>
       )}
     </PageContainer>
   );

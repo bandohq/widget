@@ -11,7 +11,7 @@ export const VariantCard: React.FC<Props> = ({ variant, isSelected }) => {
   const theme = useTheme();
 
   return (
-    <VariantCardBox isSelected={isSelected} theme={theme}>
+    <VariantCardBox isSelected={isSelected}>
       <Typography variant="body1">
         {parseFloat(variant.price.fiatValue).toFixed(2)}
       </Typography>
