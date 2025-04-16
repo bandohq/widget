@@ -43,10 +43,7 @@ export const FormsStepsPage = () => {
             <ListItemAvatar>
               <ChainAvatar />
             </ListItemAvatar>
-            <ListItemText
-              primary={quote?.totalAmount}
-              secondary={`${quote?.fiatAmount} ${quote?.fiatCurrency}`}
-            />
+            <ListItemText primary={quote?.totalAmount} />
           </ListItem>
           <Steps />
           <ListItem>
