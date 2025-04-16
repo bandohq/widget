@@ -22,6 +22,8 @@ import {
 } from "../../components/VariantCard/VariantCard.styles";
 import { VariantCard } from "../../components/VariantCard/VariantCard";
 import { getClosestVariantIndex } from "../../utils/getClosestVariant";
+import VariantInfo from "../../components/VariantInfo/VariantInfo";
+import { Variant } from "../../stores/ProductProvider/types";
 
 export const TopupPage: React.FC = () => {
   const { brand } = useProduct();
@@ -65,12 +67,24 @@ export const TopupPage: React.FC = () => {
     }, 300);
   };
 
+  const handleVariantClick = (variant: Variant, index: number) => {
+    const value = parseFloat(variant.price.fiatValue).toFixed(2).toString();
+    setInputValue(value);
+
+    const variantIndex = orderedVariants.findIndex((v) => v.id === variant.id);
+    setSelectedIndex(variantIndex);
+    sliderRef.current?.slickGoTo(variantIndex);
+  };
+
   const sliderSettings = {
+    centerMode: true,
     dots: false,
-    infinite: false,
-    speed: 500,
+    infinite: true,
+    draggable: true,
+    speed: 100,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    swipe: true,
+    swipeToSlide: true,
     ref: sliderRef,
   };
 
@@ -124,18 +138,27 @@ export const TopupPage: React.FC = () => {
       >
         All available amounts
       </Typography>
-      {inputValue ? (
-        <SliderWrapper>
-          <Slider {...sliderSettings}>
-            {orderedVariants.map((variant, index) => (
-              <VariantCard
-                key={variant.price.fiatValue}
-                variant={variant}
-                isSelected={index === selectedIndex}
-              />
-            ))}
-          </Slider>
-        </SliderWrapper>
+      {inputValue || selectedIndex ? (
+        <>
+          <SliderWrapper>
+            <Slider {...sliderSettings}>
+              {orderedVariants.map((variant, index) => (
+                <VariantCard
+                  onClick={() => handleVariantClick(variant, index)}
+                  key={variant.price.fiatValue}
+                  variant={variant}
+                  isSelected={index === selectedIndex}
+                />
+              ))}
+            </Slider>
+          </SliderWrapper>
+          <Box sx={{ mt: 4 }}>
+            <VariantInfo
+              variant={orderedVariants[selectedIndex]}
+              title={brand.brandName}
+            />
+          </Box>
+        </>
       ) : (
         <GridContainer>
           {orderedVariants.map((variant, index) => (
@@ -143,6 +166,7 @@ export const TopupPage: React.FC = () => {
               key={variant.price.fiatValue}
               variant={variant}
               isSelected={index === selectedIndex}
+              onClick={() => handleVariantClick(variant, index)}
             />
           ))}
         </GridContainer>

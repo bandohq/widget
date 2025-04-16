@@ -5,13 +5,18 @@ import { VariantCardBox } from "./VariantCard.styles";
 type Props = {
   variant: any;
   isSelected: boolean;
+  onClick?: () => void;
 };
 
-export const VariantCard: React.FC<Props> = ({ variant, isSelected }) => {
+export const VariantCard: React.FC<Props> = ({
+  variant,
+  isSelected,
+  onClick,
+}) => {
   const theme = useTheme();
 
   return (
-    <VariantCardBox isSelected={isSelected}>
+    <VariantCardBox isSelected={isSelected} onClick={onClick}>
       <Typography variant="body1">
         {parseFloat(variant.price.fiatValue).toFixed(2)}
       </Typography>
