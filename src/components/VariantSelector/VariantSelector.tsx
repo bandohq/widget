@@ -6,6 +6,7 @@ import { StyledItem } from "../DialogList/DialogList.styles.js";
 import { VariantItem } from "../DialogList/VariantItem.js";
 import VariantSlider from "../VariantSlider/VariantSlider.js";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider.js";
+import { navigationRoutes } from "../../utils/navigationRoutes.js";
 
 interface VariantSelectorProps {
   open: boolean;
@@ -15,8 +16,28 @@ interface VariantSelectorProps {
     imageUrl?: string;
     variants: Variant[];
   } | null;
-  onVariantSelect: (item: any) => void;
+  onVariantSelect: (item: Variant) => void;
 }
+
+const sortByPrice = (variants: Variant[]) =>
+  [...variants].sort(
+    (a, b) => parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
+  );
+
+const renderTopupSubtypes = (
+  variants: Variant[],
+  onSubtypeClick: (subType: string) => void
+) => {
+  const uniqueSubTypes = Array.from(
+    new Set(variants.map((variant) => variant.subTypes?.[0]))
+  );
+
+  return uniqueSubTypes.map((subType) => (
+    <StyledItem key={subType} onClick={() => onSubtypeClick(subType!)}>
+      {subType}
+    </StyledItem>
+  ));
+};
 
 export const VariantSelector: React.FC<VariantSelectorProps> = ({
   open,
@@ -24,39 +45,37 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
   selectedBrand,
   onVariantSelect,
 }) => {
-  if (!selectedBrand) return null;
   const navigate = useNavigate();
   const { updateBrand } = useProduct();
 
-  const handleTopupClick = () => {
+  if (!selectedBrand) return null;
+
+  const { brandName = "", imageUrl = "", variants } = selectedBrand;
+  const sortedVariants = sortByPrice(variants);
+  const productType = variants[0]?.productType;
+
+  const handleTopupNavigation = (subType: string) => {
     updateBrand(selectedBrand);
-    navigate(`/topup`);
+    navigate(`${navigationRoutes.topup}?type=${subType}`);
   };
 
   return (
     <BottomSheet open={open} onClose={onClose}>
-      {selectedBrand.variants.length > 1 &&
-      selectedBrand.variants[0].productType === "esim" ? (
+      {productType === "esim" && variants.length > 1 ? (
         <VariantSlider
           onClose={onClose}
-          title={selectedBrand.brandName || ""}
-          variants={[...selectedBrand.variants].sort(
-            (a, b) =>
-              parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
-          )}
+          title={brandName}
+          variants={sortedVariants}
         />
-      ) : selectedBrand.variants[0].productType === "topup" ? (
-        <StyledItem onClick={handleTopupClick}>hola</StyledItem>
+      ) : productType === "topup" ? (
+        renderTopupSubtypes(variants, handleTopupNavigation)
       ) : (
         <DialogList
-          type={selectedBrand?.variants[0].productType}
-          items={[...selectedBrand.variants].sort(
-            (a, b) =>
-              parseFloat(a.price.fiatValue) - parseFloat(b.price.fiatValue)
-          )}
+          type={productType}
+          items={sortedVariants}
           onClose={onClose}
-          title={selectedBrand.brandName || ""}
-          image={selectedBrand.imageUrl || ""}
+          title={brandName}
+          image={imageUrl}
           renderItem={(item) => (
             <VariantItem item={item} onClose={() => onVariantSelect(item)} />
           )}
