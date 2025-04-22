@@ -16,7 +16,7 @@ import {
 } from './SelectTokenButton.style.js';
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
 import { useCallback, useEffect } from 'react';
-import { useAccount } from '@lifi/wallet-management';
+import { useAccount, useWalletMenu } from "@lifi/wallet-management";
 import { Avatar, Skeleton } from '@mui/material';
 import { CaretDown } from '@phosphor-icons/react';
 import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
@@ -39,6 +39,7 @@ export const SelectTokenButtonForProducts: React.FC<
     isPurchasePossible,
   } = useQuotes();
   const { account } = useAccount();
+  const { openWalletMenu } = useWalletMenu();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
@@ -118,6 +119,7 @@ export const SelectTokenButtonForProducts: React.FC<
         ) : (product && !quote) || !token ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
+            onClick={openWalletMenu}
             title={defaultPlaceholder}
             compact={compact}
           />
