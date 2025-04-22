@@ -40,7 +40,7 @@ export const VariantList: React.FC<VariantListProps> = ({
       <Typography variant="body2" sx={{ mt: 2, color: "text.secondary" }}>
         All available amounts
       </Typography>
-      {variants.length > 0 ? (
+      {variants.length > 0 && selectedIndex !== -1 ? (
         <>
           <SliderWrapper>
             <Slider {...sliderSettings}>

@@ -22,7 +22,7 @@ import { useSearchParams } from "react-router-dom";
 export const TopupPage: React.FC = () => {
   const { brand } = useProduct();
   const [inputValue, setInputValue] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [selectedSubType, setSelectedSubType] = useState<string>("");
   const sliderRef = useRef<Slider>(null);
   const debounceTimeoutRef = useRef<NodeJS.Timeout>();
@@ -83,7 +83,7 @@ export const TopupPage: React.FC = () => {
 
   const handleSubTypeClick = (subType: string) => {
     setSelectedSubType(subType);
-    setSelectedIndex(0);
+    setSelectedIndex(-1);
     setInputValue("");
   };
 
