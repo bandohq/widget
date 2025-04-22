@@ -13,6 +13,7 @@ createRoot(document.getElementById("root")!).render(
   >
     <App
       integrator="bando-app" // TODO: CONFIGURE THIS
+      buildUrl={true}
       config={{
         theme: {
           container: {
