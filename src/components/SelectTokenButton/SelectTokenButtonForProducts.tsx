@@ -21,8 +21,7 @@ import { Avatar, Skeleton } from '@mui/material';
 import { CaretDown } from '@phosphor-icons/react';
 import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
 import { Box } from '@mui/material';
-import { WidgetEvent, InsufficientBalance } from '../../types/events.js';
-import { useExternalWalletProvider } from "../../providers/WalletProvider/useExternalWalletProvider.js";
+import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 
 export const SelectTokenButtonForProducts: React.FC<
@@ -43,7 +42,6 @@ export const SelectTokenButtonForProducts: React.FC<
   const { account } = useAccount();
   const { openWalletMenu } = useWalletMenu();
   const { walletConfig } = useWidgetConfig();
-  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
@@ -61,11 +59,13 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const handleConnect = () => {
-    if (walletConfig?.onConnect) {
+    if (account.isConnected) {
+      handleClick();
+    } else if (walletConfig?.onConnect) {
       walletConfig.onConnect();
-      return;
+    } else {
+      openWalletMenu();
     }
-    openWalletMenu();
   };
 
   const renderWarning = () => {
@@ -90,7 +90,7 @@ export const SelectTokenButtonForProducts: React.FC<
   return (
     <SelectTokenCard
       component="button"
-      onClick={account?.isConnected && product ? handleClick : undefined}
+      onClick={account?.isConnected && product ? handleClick : handleConnect}
     >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
@@ -131,9 +131,6 @@ export const SelectTokenButtonForProducts: React.FC<
         ) : (product && !quote) || !token ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
-            onClick={
-              !useExternalWalletProvidersOnly ? handleConnect : undefined
-            }
             title={defaultPlaceholder}
             compact={compact}
           />
