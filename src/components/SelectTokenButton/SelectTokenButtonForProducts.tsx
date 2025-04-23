@@ -22,6 +22,8 @@ import { CaretDown } from '@phosphor-icons/react';
 import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
 import { Box } from '@mui/material';
 import { WidgetEvent, InsufficientBalance } from '../../types/events.js';
+import { useExternalWalletProvider } from "../../providers/WalletProvider/useExternalWalletProvider.js";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -40,6 +42,8 @@ export const SelectTokenButtonForProducts: React.FC<
   } = useQuotes();
   const { account } = useAccount();
   const { openWalletMenu } = useWalletMenu();
+  const { walletConfig } = useWidgetConfig();
+  const { useExternalWalletProvidersOnly } = useExternalWalletProvider();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
@@ -54,6 +58,14 @@ export const SelectTokenButtonForProducts: React.FC<
   const handleClick = () => {
     if (readOnly) return;
     navigate(navigationRoutes.fromToken);
+  };
+
+  const handleConnect = () => {
+    if (walletConfig?.onConnect) {
+      walletConfig.onConnect();
+      return;
+    }
+    openWalletMenu();
   };
 
   const renderWarning = () => {
@@ -119,7 +131,9 @@ export const SelectTokenButtonForProducts: React.FC<
         ) : (product && !quote) || !token ? (
           <SelectTokenCardHeader
             avatar={<AvatarBadgedDefault />}
-            onClick={openWalletMenu}
+            onClick={
+              !useExternalWalletProvidersOnly ? handleConnect : undefined
+            }
             title={defaultPlaceholder}
             compact={compact}
           />
