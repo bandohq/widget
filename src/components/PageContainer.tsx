@@ -18,6 +18,7 @@ const WidgetContainer = styled(Container, {
   ({ theme, disableGutters, halfGutters, topGutters, bottomGutters }) => ({
     display: "flex",
     flexDirection: "column",
+    scrollbarWidth: "none",
     flex: 1,
     padding: disableGutters
       ? 0
