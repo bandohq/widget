@@ -39,7 +39,6 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     fuzzySearchBrands("");
-    updateProduct(null);
   }, []);
 
   const handleMoreClick = (category) => {

@@ -15,11 +15,13 @@ import { CloseDrawerButton } from "./CloseDrawerButton";
 import { HeaderAppBar, HeaderControlsContainer } from "./Header.style";
 import { SettingsButton } from "./SettingsButton";
 import { SplitWalletMenuButton } from "./WalletHeader";
+import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 
 export const NavigationHeader: React.FC = () => {
   const { subvariant, hiddenUI, variant } = useWidgetConfig();
   const { navigateBack } = useNavigateBack();
   const navigate = useNavigate();
+  const { updateProduct } = useProduct();
   const { element, title } = useHeaderStore((state) => state);
   const { pathname } = useLocation();
 
@@ -41,6 +43,9 @@ export const NavigationHeader: React.FC = () => {
     if (isBackToHome) {
       navigate(navigationRoutes.home);
     } else {
+      if (basePath === navigationRoutes.form.replace(/^\//, "")) {
+        updateProduct(null);
+      }
       navigateBack();
     }
   };
