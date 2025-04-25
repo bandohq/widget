@@ -26,7 +26,7 @@ export const executeRefund = async ({
       account: accountAddress,
     });
   } catch (error) {
-    throw new Error(`Contract write failed: ${error.message}`);
+    console.error(error);
   }
 };
 

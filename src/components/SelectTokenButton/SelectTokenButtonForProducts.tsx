@@ -16,12 +16,13 @@ import {
 } from './SelectTokenButton.style.js';
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
 import { useCallback, useEffect } from 'react';
-import { useAccount } from '@lifi/wallet-management';
+import { useAccount, useWalletMenu } from "@lifi/wallet-management";
 import { Avatar, Skeleton } from '@mui/material';
 import { CaretDown } from '@phosphor-icons/react';
 import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
 import { Box } from '@mui/material';
-import { WidgetEvent, InsufficientBalance } from '../../types/events.js';
+import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -39,6 +40,8 @@ export const SelectTokenButtonForProducts: React.FC<
     isPurchasePossible,
   } = useQuotes();
   const { account } = useAccount();
+  const { openWalletMenu } = useWalletMenu();
+  const { walletConfig } = useWidgetConfig();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
@@ -53,6 +56,16 @@ export const SelectTokenButtonForProducts: React.FC<
   const handleClick = () => {
     if (readOnly) return;
     navigate(navigationRoutes.fromToken);
+  };
+
+  const handleConnect = () => {
+    if (account.isConnected) {
+      handleClick();
+    } else if (walletConfig?.onConnect) {
+      walletConfig.onConnect();
+    } else {
+      openWalletMenu();
+    }
   };
 
   const renderWarning = () => {
@@ -77,7 +90,7 @@ export const SelectTokenButtonForProducts: React.FC<
   return (
     <SelectTokenCard
       component="button"
-      onClick={account?.isConnected && product ? handleClick : undefined}
+      onClick={account?.isConnected && product ? handleClick : handleConnect}
     >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
