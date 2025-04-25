@@ -28,7 +28,7 @@ export const DialogList: React.FC<DialogListProps> = ({
     count: items.length,
     overscan: 5,
     getScrollElement: () => scrollElementRef.current,
-    estimateSize: () => (type === "topup" ? 100 : 70),
+    estimateSize: () => 70,
   });
 
   return (
@@ -36,10 +36,25 @@ export const DialogList: React.FC<DialogListProps> = ({
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
-          padding: "12px 12px 0 0",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "12px 12px 0 12px",
+          position: "relative",
         }}
       >
+        <div style={{ flex: 1 }} />
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            textAlign: "center",
+          }}
+        >
+          {splitCamelCase(title)}
+        </Typography>
         <IconButton
           edge="start"
           color="inherit"
@@ -57,16 +72,6 @@ export const DialogList: React.FC<DialogListProps> = ({
           padding: "10px 0",
         }}
       >
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            textAlign: "center",
-            marginTop: 2,
-          }}
-        >
-          {splitCamelCase(title)}
-        </Typography>
         <ImageAvatar
           hideName
           name={title}
@@ -82,7 +87,6 @@ export const DialogList: React.FC<DialogListProps> = ({
       <div
         ref={scrollElementRef}
         style={{
-          height: "400px",
           overflowY: "auto",
         }}
       >
