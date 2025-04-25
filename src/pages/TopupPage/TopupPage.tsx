@@ -92,7 +92,7 @@ export const TopupPage: React.FC = () => {
       <ImageAvatar
         src={brand.imageUrl}
         name={brand.brandName}
-        sx={{ width: 100, height: 100 }}
+        sx={{ width: 80, height: 80 }}
         hideName
       />
 
