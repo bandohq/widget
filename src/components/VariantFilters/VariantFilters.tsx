@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Chip,
-  TextField,
-  InputAdornment,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Chip, InputAdornment, Typography, useTheme } from "@mui/material";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { Variant } from "../../stores/ProductProvider/types";
+import { StyledTextField } from "./VariantFilters.styles";
 
 interface VariantFiltersProps {
   uniqueSubTypes: string[];
@@ -53,7 +46,7 @@ export const VariantFilters: React.FC<VariantFiltersProps> = ({
         Search by amount
       </Typography>
       <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
-        <TextField
+        <StyledTextField
           placeholder="Amount"
           type="number"
           value={inputValue}
@@ -61,7 +54,7 @@ export const VariantFilters: React.FC<VariantFiltersProps> = ({
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <MagnifyingGlass />
+                <MagnifyingGlass size={18} />
               </InputAdornment>
             ),
           }}
