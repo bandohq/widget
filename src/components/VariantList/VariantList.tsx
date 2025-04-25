@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import {
@@ -25,15 +25,27 @@ export const VariantList: React.FC<VariantListProps> = ({
   sliderRef,
 }) => {
   const sliderSettings = {
+    arrows: false,
     dots: false,
-    infinite: true,
     draggable: true,
     speed: 100,
     slidesToShow: 3,
+    infinite: false,
     swipe: true,
     swipeToSlide: true,
     ref: sliderRef,
+    initialSlide: selectedIndex > 0 ? selectedIndex : 0,
   };
+
+  // Asegurarse de que el slider se posicione correctamente cuando cambia el índice seleccionado
+  useEffect(() => {
+    if (selectedIndex !== -1 && sliderRef.current) {
+      // Pequeño retraso para asegurar que el slider esté completamente renderizado
+      setTimeout(() => {
+        sliderRef.current?.slickGoTo(selectedIndex, true);
+      }, 50);
+    }
+  }, [selectedIndex, sliderRef]);
 
   return (
     <>

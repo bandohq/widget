@@ -8,13 +8,7 @@ type Props = {
   onClick?: () => void;
 };
 
-export const VariantCard: React.FC<Props> = ({
-  variant,
-  isSelected,
-  onClick,
-}) => {
-  const theme = useTheme();
-
+export const VariantCard: React.FC<Props> = ({ variant, isSelected, onClick }) => {
   return (
     <VariantCardBox isSelected={isSelected} onClick={onClick}>
       <Typography variant="body1">
