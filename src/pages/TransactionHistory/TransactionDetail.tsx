@@ -159,7 +159,7 @@ export const TransactionsDetailPage = () => {
           <Chip
             color="default"
             onClick={() => {
-              if (status === "2") {
+              if (status === "0") {
                 setOpen(!open);
               }
             }}

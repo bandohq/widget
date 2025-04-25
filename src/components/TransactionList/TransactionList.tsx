@@ -44,7 +44,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
   const renderChipLabel = (transactionId: string, status: string) => {
     const refund = refunds.find((refund) => refund?.id === transactionId);
-    return refund?.txStatus === 2 ? (
+    return refund?.txStatus === 0 ? (
       <div style={{ display: "flex", alignItems: "center" }}>
         <ArrowRight size={16} />
         Refund available
@@ -58,7 +58,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
   const handleClick = (transaction: Transaction) => {
     const refund = refunds.find((refund) => refund?.id === transaction.id);
-    if (refund?.txStatus === 2) {
+    if (refund?.txStatus === 0) {
       navigate(
         `/transaction-detail/${transaction.id}?serviceId=${transaction.serviceId}&tokenUsed=${transaction.tokenUsed}&status=${refund?.txStatus}`
       );

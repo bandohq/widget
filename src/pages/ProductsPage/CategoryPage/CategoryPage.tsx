@@ -45,6 +45,7 @@ export const CategoryPage = () => {
             height: "550px",
             overflow: "auto",
             paddingBottom: "10px",
+            scrollbarWidth: "none",
           }}
         >
           <ProductSearch productType={category} />
