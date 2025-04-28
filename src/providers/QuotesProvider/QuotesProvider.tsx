@@ -6,6 +6,7 @@ import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
 
 interface QuoteData {
+  id: number;
   digitalAssetAmount: number;
   digitalAsset: string;
   totalAmount: number;
