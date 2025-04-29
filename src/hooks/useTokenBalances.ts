@@ -40,7 +40,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
 
         // Execute multicall
         // @ts-ignore number controlled by whitelist
-        const data = await multicall(config, { contracts });
+        const data = await multicall(config, { batchSize: 0, contracts });
 
         // Format and filter balances
         const formattedBalances = data.map((balanceRaw, index) => {
