@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Chip, InputAdornment, Typography, useTheme } from "@mui/material";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { StyledTextField } from "./VariantFilters.styles";
+import { useTranslation } from "react-i18next";
 
 interface VariantFiltersProps {
   uniqueSubTypes: string[];
@@ -19,6 +20,7 @@ export const VariantFilters: React.FC<VariantFiltersProps> = ({
   onInputChange,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -26,7 +28,7 @@ export const VariantFilters: React.FC<VariantFiltersProps> = ({
         variant="body2"
         sx={{ mt: 2, color: theme.palette.text.secondary }}
       >
-        Type of product
+        {t("variantFilters.typeOfProduct")}
       </Typography>
       <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
         {uniqueSubTypes.map((subType) => (
@@ -43,11 +45,11 @@ export const VariantFilters: React.FC<VariantFiltersProps> = ({
         variant="body2"
         sx={{ mt: 2, color: theme.palette.text.secondary }}
       >
-        Search by amount
+        {t("variantFilters.searchByAmount")}
       </Typography>
       <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
         <StyledTextField
-          placeholder="Amount"
+          placeholder={t("variantFilters.amount")}
           type="number"
           value={inputValue}
           onChange={onInputChange}

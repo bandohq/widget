@@ -224,5 +224,13 @@
   "data": "数据",
   "voice": "语音",
   "sms": "短信",
-  "duration": "时长"
+  "duration": "时长",
+  "variantList": {
+    "allAvailableAmounts": "所有可用金额"
+  },
+  "variantFilters": {
+    "typeOfProduct": "产品类型",
+    "searchByAmount": "按金额搜索",
+    "amount": "金额"
+  }
 }

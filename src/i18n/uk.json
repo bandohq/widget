@@ -228,5 +228,13 @@
   "data": "Дані",
   "voice": "Голос",
   "sms": "SMS",
-  "duration": "Тривалість"
+  "duration": "Тривалість",
+  "variantList": {
+    "allAvailableAmounts": "Всі доступні суми"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Тип продукту",
+    "searchByAmount": "Пошук за сумою",
+    "amount": "Сума"
+  }
 }
