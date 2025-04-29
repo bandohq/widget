@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import Slider from "react-slick";
 import {
   GridContainer,
@@ -8,6 +8,8 @@ import {
 import { VariantCard } from "../VariantCard/VariantCard";
 import VariantInfo from "../VariantInfo/VariantInfo";
 import { Variant } from "../../stores/ProductProvider/types";
+import { useTranslation } from "react-i18next";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 interface VariantListProps {
   variants: Variant[];
@@ -24,8 +26,13 @@ export const VariantList: React.FC<VariantListProps> = ({
   onVariantClick,
   sliderRef,
 }) => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+
+  const iconColor = theme.palette.mode === "light" ? "black" : "white";
+
   const sliderSettings = {
-    arrows: false,
+    arrows: true,
     dots: false,
     draggable: true,
     speed: 100,
@@ -35,6 +42,8 @@ export const VariantList: React.FC<VariantListProps> = ({
     swipeToSlide: true,
     ref: sliderRef,
     initialSlide: selectedIndex > 0 ? selectedIndex : 0,
+    nextArrow: <CaretRight color={iconColor} />,
+    prevArrow: <CaretLeft color={iconColor} />,
   };
 
   // Asegurarse de que el slider se posicione correctamente cuando cambia el índice seleccionado
@@ -50,7 +59,7 @@ export const VariantList: React.FC<VariantListProps> = ({
   return (
     <>
       <Typography variant="body2" sx={{ mt: 2, color: "text.secondary" }}>
-        All available amounts
+        {t("variantList.allAvailableAmounts")}
       </Typography>
       {variants.length > 0 && selectedIndex !== -1 ? (
         <>
