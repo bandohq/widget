@@ -253,5 +253,13 @@
     "theme": "Theme",
     "custom": "Custom",
     "status": "Status page"
+  },
+  "variantList": {
+    "allAvailableAmounts": "All available amounts"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Type of product",
+    "searchByAmount": "Search by amount",
+    "amount": "Amount"
   }
 }

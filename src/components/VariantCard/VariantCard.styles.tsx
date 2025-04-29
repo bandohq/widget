@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { alpha, styled } from "@mui/material";
 
 export const StyledSearchInput = styled("input")(({ theme }) => ({
   width: "100%",
@@ -12,13 +12,16 @@ export const StyledSearchInput = styled("input")(({ theme }) => ({
 
 export const VariantCardBox = styled("div")<{ isSelected: boolean }>(
   ({ isSelected, theme }) => ({
+    cursor: "pointer",
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
     justifyContent: "center",
     backgroundColor: isSelected
       ? theme.palette.primary.main
-      : theme.palette.background.paper,
+      : theme.palette.mode === "light"
+      ? alpha(theme.palette.common.black, 0.04)
+      : alpha(theme.palette.common.white, 0.08),
     padding: "10px 15px",
     borderRadius: 10,
     margin: "0 5px",

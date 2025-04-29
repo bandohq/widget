@@ -227,5 +227,13 @@
   "data": "Dữ liệu",
   "voice": "Thoại",
   "sms": "SMS",
-  "duration": "Thời hạn"
+  "duration": "Thời hạn",
+  "variantList": {
+    "allAvailableAmounts": "Tất cả số tiền có sẵn"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Loại sản phẩm",
+    "searchByAmount": "Tìm kiếm theo số tiền",
+    "amount": "Số tiền"
+  }
 }
