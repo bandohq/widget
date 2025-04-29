@@ -34,7 +34,7 @@ export const TopupPage: React.FC = () => {
   const uniqueSubTypes = getUniqueSubTypes(brand.variants);
   const filteredVariants = filterVariantsBySubType(
     brand.variants,
-    selectedSubType
+    selectedSubType || uniqueSubTypes[0]
   );
   const orderedVariants = sortVariantsByPrice(filteredVariants);
 
