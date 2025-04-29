@@ -111,7 +111,7 @@ export default function VariantInfo({ variant, title }: VariantInfoProps) {
         sx={{ mt: 2 }}
         onClick={handleContinue}
       >
-        {t("common.continue")}
+        {t("form.common.continue")}
       </Button>
     </>
   );
