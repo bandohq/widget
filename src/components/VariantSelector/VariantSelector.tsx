@@ -69,7 +69,6 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
         />
       ) : productType === "topup" ? (
         <DialogList
-          type={productType}
           items={Array.from(
             new Set(variants.map((variant) => variant.subTypes?.[0]))
           )}
@@ -84,7 +83,6 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
         />
       ) : (
         <DialogList
-          type={productType}
           items={sortedVariants}
           onClose={onClose}
           title={brandName}

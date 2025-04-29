@@ -7,6 +7,10 @@ export const getClosestVariantIndex = (
   let closestIndex = 0;
   let closestDiff = Infinity;
 
+  if (!variants || variants.length === 0) {
+    return -1;
+  }
+
   variants.forEach((variant, index) => {
     const currentValue = parseFloat(variant.price.fiatValue);
     const currentDiff = Math.abs(currentValue - targetValue);

@@ -117,8 +117,9 @@
       "msisdn": "Telefonnummer des Absenders"
     },
     "common": {
-      "your": "Dein {{field}}",
-      "enter_your": "Gib dein {{field}} ein"
+      "your": "Ihr {{field}}",
+      "enter_your": "Geben Sie Ihr {{field}} ein",
+      "continue": "Fortfahren"
     }
   },
   "countries": {

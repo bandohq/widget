@@ -25,7 +25,7 @@ export const TopupPage: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [selectedSubType, setSelectedSubType] = useState<string>("");
   const sliderRef = useRef<Slider>(null);
-  const debounceTimeoutRef = useRef<NodeJS.Timeout>();
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
 
@@ -71,6 +71,14 @@ export const TopupPage: React.FC = () => {
       updateSelectedVariant(value);
     }, 300);
   };
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleVariantClick = (variant: Variant, index: number) => {
     const value = formatPrice(variant.price.fiatValue);

@@ -113,8 +113,9 @@
       "msisdn": "หมายเลขโทรศัพท์ของผู้ส่ง"
     },
     "common": {
-      "your": "ของคุณ {{field}}",
-      "enter_your": "ป้อน {{field}} ของคุณ"
+      "your": "{{field}} ของคุณ",
+      "enter_your": "ป้อน {{field}} ของคุณ",
+      "continue": "ดำเนินการต่อ"
     }
   },
   "countries": {

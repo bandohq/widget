@@ -113,8 +113,9 @@
       "msisdn": "发件人电话号码"
     },
     "common": {
-      "your": "您的 {{field}}",
-      "enter_your": "输入您的 {{field}}"
+      "your": "您的{{field}}",
+      "enter_your": "输入您的{{field}}",
+      "continue": "继续"
     }
   },
   "countries": {

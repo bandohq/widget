@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "আপনার {{field}}",
-      "enter_your": "আপনার {{field}} লিখুন"
+      "enter_your": "আপনার {{field}} লিখুন",
+      "continue": "চালিয়ে যান"
     }
   },
   "countries": {

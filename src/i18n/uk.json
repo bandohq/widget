@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "Ваш {{field}}",
-      "enter_your": "Введіть ваш {{field}}"
+      "enter_your": "Введіть ваш {{field}}",
+      "continue": "Продовжити"
     }
   },
   "countries": {

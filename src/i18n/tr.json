@@ -117,8 +117,9 @@
       "msisdn": "Göndericinin telefon numarası"
     },
     "common": {
-      "your": "Senin {{field}}",
-      "enter_your": "{{field}} girin"
+      "your": "{{field}}'ınız",
+      "enter_your": "{{field}}'ınızı girin",
+      "continue": "Devam et"
     }
   },
   "countries": {

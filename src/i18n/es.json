@@ -118,7 +118,8 @@
     },
     "common": {
       "your": "Tu {{field}}",
-      "enter_your": "Ingresa tu {{field}}"
+      "enter_your": "Ingresa tu {{field}}",
+      "continue": "Continuar"
     }
   },
   "countries": {

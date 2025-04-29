@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "{{field}} của bạn",
-      "enter_your": "Nhập {{field}} của bạn"
+      "enter_your": "Nhập {{field}} của bạn",
+      "continue": "Tiếp tục"
     }
   },
   "countries": {

@@ -1,9 +1,10 @@
 import React from "react";
 import { Typography, useTheme } from "@mui/material";
 import { VariantCardBox } from "./VariantCard.styles";
+import { Variant } from "../../stores/ProductProvider/types";
 
 type Props = {
-  variant: any;
+  variant: Variant;
   isSelected: boolean;
   onClick?: () => void;
 };

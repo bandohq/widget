@@ -134,7 +134,8 @@
     },
     "common": {
       "your": "आपका {{field}}",
-      "enter_your": "अपना {{field}} दर्ज करें"
+      "enter_your": "अपना {{field}} दर्ज करें",
+      "continue": "जारी रखें"
     }
   },
   "countries": {

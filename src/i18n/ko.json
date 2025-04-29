@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "당신의 {{field}}",
-      "enter_your": "{{field}}을(를) 입력하세요"
+      "enter_your": "{{field}}을(를) 입력하세요",
+      "continue": "계속"
     }
   },
   "countries": {

@@ -29,5 +29,6 @@ export const findVariantIndex = (
 };
 
 export const formatPrice = (price: string): string => {
-  return parseFloat(price).toFixed(2).toString();
+  const parsedPrice = parseFloat(price);
+  return !isNaN(parsedPrice) ? parsedPrice.toFixed(2).toString() : "0.00";
 };

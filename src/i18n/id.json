@@ -111,8 +111,9 @@
       "msisdn": "Nomor Telepon Pengirim"
     },
     "common": {
-      "your": "Anda {{field}}",
-      "enter_your": "Masukkan {{field}} Anda"
+      "your": "{{field}} Anda",
+      "enter_your": "Masukkan {{field}} Anda",
+      "continue": "Lanjutkan"
     }
   },
   "countries": {

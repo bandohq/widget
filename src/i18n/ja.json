@@ -113,8 +113,9 @@
       "msisdn": "送信者の電話番号"
     },
     "common": {
-      "your": "あなたの {{field}}",
-      "enter_your": "{{field}} を入力してください"
+      "your": "あなたの{{field}}",
+      "enter_your": "{{field}}を入力してください",
+      "continue": "続ける"
     }
   },
   "countries": {
