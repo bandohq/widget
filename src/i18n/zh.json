@@ -113,8 +113,9 @@
       "msisdn": "发件人电话号码"
     },
     "common": {
-      "your": "您的 {{field}}",
-      "enter_your": "输入您的 {{field}}"
+      "your": "您的{{field}}",
+      "enter_your": "输入您的{{field}}",
+      "continue": "继续"
     }
   },
   "countries": {
@@ -224,5 +225,13 @@
   "data": "数据",
   "voice": "语音",
   "sms": "短信",
-  "duration": "时长"
+  "duration": "时长",
+  "variantList": {
+    "allAvailableAmounts": "所有可用金额"
+  },
+  "variantFilters": {
+    "typeOfProduct": "产品类型",
+    "searchByAmount": "按金额搜索",
+    "amount": "金额"
+  }
 }

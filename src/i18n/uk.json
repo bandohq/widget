@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "Ваш {{field}}",
-      "enter_your": "Введіть ваш {{field}}"
+      "enter_your": "Введіть ваш {{field}}",
+      "continue": "Продовжити"
     }
   },
   "countries": {
@@ -228,5 +229,13 @@
   "data": "Дані",
   "voice": "Голос",
   "sms": "SMS",
-  "duration": "Тривалість"
+  "duration": "Тривалість",
+  "variantList": {
+    "allAvailableAmounts": "Всі доступні суми"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Тип продукту",
+    "searchByAmount": "Пошук за сумою",
+    "amount": "Сума"
+  }
 }

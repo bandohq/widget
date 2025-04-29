@@ -118,7 +118,8 @@
     },
     "common": {
       "your": "Votre {{field}}",
-      "enter_your": "Entrez votre {{field}}"
+      "enter_your": "Entrez votre {{field}}",
+      "continue": "Continuer"
     }
   },
   "countries": {
@@ -228,5 +229,13 @@
     "theme": "Thème",
     "custom": "Personnalisé",
     "status": "Page de statut"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tous les montants disponibles"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Type de produit",
+    "searchByAmount": "Rechercher par montant",
+    "amount": "Montant"
   }
 }

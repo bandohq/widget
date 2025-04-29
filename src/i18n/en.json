@@ -119,7 +119,8 @@
     },
     "common": {
       "your": "Your {{field}}",
-      "enter_your": "Enter your {{field}}"
+      "enter_your": "Enter your {{field}}",
+      "continue": "Continue"
     }
   },
   "countries": {
@@ -253,5 +254,13 @@
     "theme": "Theme",
     "custom": "Custom",
     "status": "Status page"
+  },
+  "variantList": {
+    "allAvailableAmounts": "All available amounts"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Type of product",
+    "searchByAmount": "Search by amount",
+    "amount": "Amount"
   }
 }

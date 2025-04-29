@@ -117,8 +117,9 @@
       "msisdn": "Göndericinin telefon numarası"
     },
     "common": {
-      "your": "Senin {{field}}",
-      "enter_your": "{{field}} girin"
+      "your": "{{field}}'ınız",
+      "enter_your": "{{field}}'ınızı girin",
+      "continue": "Devam et"
     }
   },
   "countries": {
@@ -224,5 +225,13 @@
     "theme": "Tema",
     "custom": "Özel",
     "status": "Durum sayfası"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tüm mevcut tutarlar"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Ürün tipi",
+    "searchByAmount": "Tutara göre ara",
+    "amount": "Tutar"
   }
 }

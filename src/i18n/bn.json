@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "আপনার {{field}}",
-      "enter_your": "আপনার {{field}} লিখুন"
+      "enter_your": "আপনার {{field}} লিখুন",
+      "continue": "চালিয়ে যান"
     }
   },
   "countries": {
@@ -225,5 +226,13 @@
     "custom": "স্বনির্ধারিত",
     "resetSettings": "আপনি কাস্টম সেটিংস ব্যবহার করছেন।",
     "status": "স্ট্যাটাস পেজ"
+  },
+  "variantList": {
+    "allAvailableAmounts": "সকল উপলব্ধ পরিমাণ"
+  },
+  "variantFilters": {
+    "typeOfProduct": "পণ্যের ধরন",
+    "searchByAmount": "পরিমাণ অনুসারে খুঁজুন",
+    "amount": "পরিমাণ"
   }
 }

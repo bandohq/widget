@@ -118,7 +118,8 @@
     },
     "common": {
       "your": "Il tuo {{field}}",
-      "enter_your": "Inserisci il tuo {{field}}"
+      "enter_your": "Inserisci il tuo {{field}}",
+      "continue": "Continua"
     }
   },
   "countries": {
@@ -229,5 +230,13 @@
     "theme": "Tema",
     "custom": "Personalizzato",
     "status": "Pagina di status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tutti gli importi disponibili"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo di prodotto",
+    "searchByAmount": "Cerca per importo",
+    "amount": "Importo"
   }
 }

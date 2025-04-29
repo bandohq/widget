@@ -118,7 +118,8 @@
     },
     "common": {
       "your": "Seu {{field}}",
-      "enter_your": "Digite seu {{field}}"
+      "enter_your": "Digite seu {{field}}",
+      "continue": "Continuar"
     }
   },
   "countries": {
@@ -228,5 +229,13 @@
     "custom": "Personalizado",
     "language": "Idioma",
     "status": "Página de status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Todos os valores disponíveis"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo de produto",
+    "searchByAmount": "Pesquisar por valor",
+    "amount": "Valor"
   }
 }
