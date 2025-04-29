@@ -224,5 +224,13 @@
     "theme": "Tema",
     "custom": "Özel",
     "status": "Durum sayfası"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tüm mevcut tutarlar"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Ürün tipi",
+    "searchByAmount": "Tutara göre ara",
+    "amount": "Tutar"
   }
 }

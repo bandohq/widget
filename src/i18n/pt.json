@@ -228,5 +228,13 @@
     "custom": "Personalizado",
     "language": "Idioma",
     "status": "Página de status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Todos os valores disponíveis"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo de produto",
+    "searchByAmount": "Pesquisar por valor",
+    "amount": "Valor"
   }
 }

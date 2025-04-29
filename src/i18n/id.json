@@ -223,5 +223,13 @@
     "theme": "Tema",
     "custom": "Kustom",
     "status": "Halaman status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Semua jumlah yang tersedia"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Jenis produk",
+    "searchByAmount": "Cari berdasarkan jumlah",
+    "amount": "Jumlah"
   }
 }

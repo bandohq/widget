@@ -229,5 +229,13 @@
     "theme": "Tema",
     "custom": "Personalizzato",
     "status": "Pagina di status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tutti gli importi disponibili"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo di prodotto",
+    "searchByAmount": "Cerca per importo",
+    "amount": "Importo"
   }
 }

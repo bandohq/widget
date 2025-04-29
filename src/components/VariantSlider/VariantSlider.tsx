@@ -11,6 +11,7 @@ import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Variant } from "../../stores/ProductProvider/types";
+import VariantInfo from "../VariantInfo/VariantInfo";
 
 interface VariantSliderProps {
   variants: Variant[];
@@ -130,57 +131,8 @@ export default function VariantSlider({
           onChange={handleChange}
           valueLabelFormat={(i) => variants[i].shortNotes}
         />
-        <Typography variant="body1" align="left">
-          Description
-        </Typography>
-        <Typography variant="body2" color="text.secondary" textAlign="left">
-          {current?.notes
-            ? current?.notes
-            : t("form.info.topupSliderGenericDesc", {
-                amount: parseFloat(current?.price?.fiatValue || "0").toFixed(2),
-                currency: current?.price?.fiatCurrency,
-                brand: title,
-              })}
-        </Typography>
 
-        <Box
-          sx={{
-            display: "grid",
-            justifyContent: "start",
-            gridTemplateColumns: "1fr",
-          }}
-        >
-          {renderFeature(
-            "data",
-            current?.dataUnlimited,
-            current?.dataGB,
-            "form.info.unlimitedGB",
-            "form.info.gbQuantity",
-            "quantity"
-          )}
-          {renderFeature(
-            "voice",
-            current?.voiceUnlimited,
-            current?.voiceMinutes,
-            "form.info.unlimitedCalls",
-            "form.info.callQuantity",
-            "quantity"
-          )}
-          {renderFeature(
-            "sms",
-            current?.smsUnlimited,
-            current?.smsNumber,
-            "form.info.unlimitedSMS",
-            "form.info.smsQuantity",
-            "quantity"
-          )}
-          {isValidValue(current?.durationDays) && (
-            <Typography variant="body1" color="text.secondary" textAlign="left">
-              <span style={{ fontWeight: "bold" }}>{t("duration")}</span>:{" "}
-              {t("form.info.duration", { duration: current?.durationDays })}
-            </Typography>
-          )}
-        </Box>
+        <VariantInfo variant={current} title={title} />
 
         <Button
           variant="contained"

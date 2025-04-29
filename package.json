@@ -63,6 +63,8 @@
     "react-i18next": "^15.1.0",
     "react-phone-number-input": "^3.4.10",
     "react-router-dom": "^6.27.0",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
     "standard-version": "^9.5.0",
     "vite-plugin-dts": "^4.5.0",
     "zustand": "^5.0.0-rc.2"

@@ -1,6 +1,6 @@
 {
   "language": {
-    "name": "अंग्रेज़ी",
+    "name": "अंग्रे़ी",
     "title": "भाषा"
   },
   "format": {
@@ -243,5 +243,13 @@
     "theme": "थीम",
     "custom": "कस्टम",
     "status": "स्थिति पृष्ठ"
+  },
+  "variantList": {
+    "allAvailableAmounts": "सभी उपलब्ध राशियां"
+  },
+  "variantFilters": {
+    "typeOfProduct": "उत्पाद का प्रकार",
+    "searchByAmount": "राशि से खोजें",
+    "amount": "राशि"
   }
 }

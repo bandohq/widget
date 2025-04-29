@@ -252,5 +252,13 @@
     "theme": "Tema",
     "custom": "Personalizado",
     "status": "Estatus del sitio"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Todos los montos disponibles"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo de producto",
+    "searchByAmount": "Buscar por monto",
+    "amount": "Monto"
   }
 }

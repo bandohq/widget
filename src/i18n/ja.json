@@ -225,5 +225,13 @@
     "theme": "テーマ",
     "custom": "カスタム設定",
     "status": "ステータスページ"
+  },
+  "variantList": {
+    "allAvailableAmounts": "利用可能なすべての金額"
+  },
+  "variantFilters": {
+    "typeOfProduct": "製品タイプ",
+    "searchByAmount": "金額で検索",
+    "amount": "金額"
   }
 }

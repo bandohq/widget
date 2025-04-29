@@ -227,5 +227,13 @@
     "theme": "Thema",
     "custom": "Benutzerdefiniert",
     "status": "Statusseite"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Alle verfügbaren Beträge"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Produktart",
+    "searchByAmount": "Nach Betrag suchen",
+    "amount": "Betrag"
   }
 }
