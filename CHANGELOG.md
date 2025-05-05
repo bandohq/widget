@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.18](https://github.com/bandohq/widget/compare/v0.1.17...v0.1.18) (2025-04-29)
+
+### [0.1.17](https://github.com/bandohq/widget/compare/v0.1.16...v0.1.17) (2025-04-29)
+
+### [0.1.16](https://github.com/bandohq/widget/compare/v0.1.15...v0.1.16) (2025-04-29)
+
+### [0.1.15](https://github.com/bandohq/widget/compare/v0.1.14...v0.1.15) (2025-04-28)
+
+### [0.1.14](https://github.com/bandohq/widget/compare/v0.1.14-beta.0...v0.1.14) (2025-04-25)
+
+### [0.1.14-beta.0](https://github.com/bandohq/widget/compare/v0.1.13...v0.1.14-beta.0) (2025-04-25)
+
+### [0.1.13](https://github.com/bandohq/widget/compare/v0.1.13-beta.71...v0.1.13) (2025-04-23)
+
+### [0.1.13-beta.71](https://github.com/bandohq/widget/compare/v0.1.13-beta.70...v0.1.13-beta.71) (2025-04-23)
+
+### [0.1.13-beta.70](https://github.com/bandohq/widget/compare/v0.1.13-beta.69...v0.1.13-beta.70) (2025-04-23)
+
+### [0.1.13-beta.69](https://github.com/bandohq/widget/compare/v0.1.13-beta.68...v0.1.13-beta.69) (2025-04-23)
+
+### [0.1.13-beta.68](https://github.com/bandohq/widget/compare/v0.1.13-beta.67...v0.1.13-beta.68) (2025-04-22)
+
+### [0.1.13-beta.67](https://github.com/bandohq/widget/compare/v0.1.13-beta.66...v0.1.13-beta.67) (2025-04-15)
+
+### [0.1.13-beta.66](https://github.com/bandohq/widget/compare/v0.1.13-beta.65...v0.1.13-beta.66) (2025-04-14)
+
+### [0.1.13-beta.65](https://github.com/bandohq/widget/compare/v0.1.13-beta.64...v0.1.13-beta.65) (2025-04-14)
+
+### [0.1.13-beta.64](https://github.com/bandohq/widget/compare/v0.1.13-beta.63...v0.1.13-beta.64) (2025-04-14)
+
+### [0.1.13-beta.63](https://github.com/bandohq/widget/compare/v0.1.13-beta.61...v0.1.13-beta.63) (2025-04-14)
+
+### [0.1.13-beta.62](https://github.com/bandohq/widget/compare/v0.1.13-beta.61...v0.1.13-beta.62) (2025-04-14)
+
+### [0.1.13-beta.61](https://github.com/bandohq/widget/compare/v0.1.13-beta.60...v0.1.13-beta.61) (2025-04-14)
+
+### [0.1.13-beta.59](https://github.com/bandohq/widget/compare/v0.1.13-beta.58...v0.1.13-beta.59) (2025-04-11)
+
+### [0.1.13-beta.60](https://github.com/bandohq/widget/compare/v0.1.13-beta.58...v0.1.13-beta.60) (2025-04-11)
+
+### [0.1.13-beta.59](https://github.com/bandohq/widget/compare/v0.1.13-beta.58...v0.1.13-beta.59) (2025-04-11)
+
 ### [0.1.13-beta.58](https://github.com/bandohq/widget/compare/v0.1.13-beta.57...v0.1.13-beta.58) (2025-04-11)
 
 ### [0.1.13-beta.57](https://github.com/bandohq/widget/compare/v0.1.13-beta.56...v0.1.13-beta.57) (2025-04-10)

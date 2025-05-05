@@ -84,6 +84,7 @@ export const CssBaselineContainer = styled(ScopedCssBaseline, {
   overflowY: "auto",
   height: theme.container?.display === "flex" ? "auto" : "100%",
   paddingTop: paddingTopAdjustment,
+  scrollbarWidth: "none",
   // This allows FullPageContainer.tsx to expand and fill the available vertical space in max height and default layout modes
   "&:has(.full-page-container)": {
     height: theme.container?.maxHeight

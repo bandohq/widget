@@ -1,10 +1,10 @@
 import {
   Box,
-  Skeleton,
   Typography,
   Checkbox,
   FormControlLabel,
   Link,
+  Collapse,
 } from "@mui/material";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 import { useTranslation, Trans } from "react-i18next";
@@ -20,21 +20,14 @@ export const TermsAndConditions = () => {
   } = useUserWallet();
 
   if (isPending) {
-    return (
-      <Box sx={{ p: 2 }}>
-        <Skeleton
-          variant="rectangular"
-          width="100%"
-          height={60}
-          sx={{ mb: 2 }}
-        />
-      </Box>
-    );
+    return null;
   }
 
+  const showTerms = !!error || !walletInfo?.wallet?.hasAcceptedTerms;
+
   return (
-    <Box sx={{ p: 2 }}>
-      {error || !walletInfo?.wallet?.hasAcceptedTerms ? (
+    <Box sx={showTerms ? {} : { display: "none" }}>
+      <Collapse in={showTerms}>
         <FormControlLabel
           control={
             <Checkbox
@@ -60,7 +53,7 @@ export const TermsAndConditions = () => {
             </Typography>
           }
         />
-      ) : null}
+      </Collapse>
     </Box>
   );
 };

@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Data",
+  "voice": "Voice",
+  "sms": "SMS",
+  "duration": "Duration",
   "termsAndConditionsHtml": "I accept the <0>terms and conditions</0>",
   "button": {
     "backToOrder": "Back to your order",
@@ -59,7 +63,8 @@
       "smsQuantity": "{{quantity}} SMS",
       "unlimitedCalls": "Unlimited calls",
       "callQuantity": "{{quantity}} minutes",
-      "duration": "{{duration}} days"
+      "duration": "{{duration}} days",
+      "topupSliderGenericDesc": "{{amount}}{{currency}} for {{brand}} Airtime & Data"
     },
     "status": {
       "processingOrderCompleted": "Order validated successfully",
@@ -114,7 +119,8 @@
     },
     "common": {
       "your": "Your {{field}}",
-      "enter_your": "Enter your {{field}}"
+      "enter_your": "Enter your {{field}}",
+      "continue": "Continue"
     }
   },
   "countries": {
@@ -248,5 +254,13 @@
     "theme": "Theme",
     "custom": "Custom",
     "status": "Status page"
+  },
+  "variantList": {
+    "allAvailableAmounts": "All available amounts"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Type of product",
+    "searchByAmount": "Search by amount",
+    "amount": "Amount"
   }
 }

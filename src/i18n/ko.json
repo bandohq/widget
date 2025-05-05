@@ -114,7 +114,8 @@
     },
     "common": {
       "your": "당신의 {{field}}",
-      "enter_your": "{{field}}을(를) 입력하세요"
+      "enter_your": "{{field}}을(를) 입력하세요",
+      "continue": "계속"
     }
   },
   "countries": {
@@ -225,5 +226,17 @@
     "theme": "테마",
     "custom": "사용자 정의",
     "status": "상태 페이지"
+  },
+  "data": "데이터",
+  "voice": "음성",
+  "sms": "SMS",
+  "duration": "기간",
+  "variantList": {
+    "allAvailableAmounts": "사용 가능한 모든 금액"
+  },
+  "variantFilters": {
+    "typeOfProduct": "제품 유형",
+    "searchByAmount": "금액으로 검색",
+    "amount": "금액"
   }
 }

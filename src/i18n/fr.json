@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Données",
+  "voice": "Voix",
+  "sms": "SMS",
+  "duration": "Durée",
   "termsAndConditionsHtml": "J'accepte les <0>conditions générales</0>",
   "button": {
     "backToOrder": "Retour à votre commande",
@@ -17,7 +21,7 @@
     "connectAnotherWallet": "Connecter un autre portefeuille",
     "connectWallet": "Connecter un portefeuille",
     "contactSupport": "Contacter le support",
-    "copyAddress": "Copier l’adresse",
+    "copyAddress": "Copier l'adresse",
     "dark": "Sombre",
     "disconnect": "Déconnecter",
     "done": "Terminé",
@@ -67,7 +71,7 @@
       "processingOrderCompleted": "Commande validée avec succès",
       "processingOrder": "Traitement de votre commande",
       "wait": "Cela peut prendre une minute",
-      "validateAllowance": "Validation de l’allocation",
+      "validateAllowance": "Validation de l'allocation",
       "signTransactionCompleted": "Transaction signée avec succès",
       "validateAllowanceCompleted": "Montant approuvé"
     },
@@ -114,7 +118,8 @@
     },
     "common": {
       "your": "Votre {{field}}",
-      "enter_your": "Entrez votre {{field}}"
+      "enter_your": "Entrez votre {{field}}",
+      "continue": "Continuer"
     }
   },
   "countries": {
@@ -224,5 +229,13 @@
     "theme": "Thème",
     "custom": "Personnalisé",
     "status": "Page de statut"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tous les montants disponibles"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Type de produit",
+    "searchByAmount": "Rechercher par montant",
+    "amount": "Montant"
   }
 }

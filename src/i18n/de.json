@@ -5,9 +5,13 @@
   },
   "format": {
     "currency": "{{value, currencyExt(currency: USD)}}",
-    "number": "{{value, number(maximumFractionDigits: 4)}}",
+    "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Daten",
+  "voice": "Sprache",
+  "sms": "SMS",
+  "duration": "Dauer",
   "termsAndConditionsHtml": "Ich akzeptiere die <0>Allgemeinen Geschäftsbedingungen</0>",
   "button": {
     "backToOrder": "Zurück zu Ihrer Bestellung",
@@ -113,8 +117,9 @@
       "msisdn": "Telefonnummer des Absenders"
     },
     "common": {
-      "your": "Dein {{field}}",
-      "enter_your": "Gib dein {{field}} ein"
+      "your": "Ihr {{field}}",
+      "enter_your": "Geben Sie Ihr {{field}} ein",
+      "continue": "Fortfahren"
     }
   },
   "countries": {
@@ -223,5 +228,13 @@
     "theme": "Thema",
     "custom": "Benutzerdefiniert",
     "status": "Statusseite"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Alle verfügbaren Beträge"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Produktart",
+    "searchByAmount": "Nach Betrag suchen",
+    "amount": "Betrag"
   }
 }

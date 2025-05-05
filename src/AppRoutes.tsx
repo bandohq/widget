@@ -13,6 +13,8 @@ import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionHistory";
 import { TransactionsDetailPage } from "./pages/TransactionHistory/TransactionDetail";
 import { EsimsPage } from "./pages/EsimsPage/EsimsPage";
+import { CountryPage } from "./pages/CountryPage";
+import { TopupPage } from "./pages/TopupPage/TopupPage";
 
 const routes: RouteObject[] = [
   {
@@ -58,6 +60,14 @@ const routes: RouteObject[] = [
   {
     path: `${navigationRoutes.settings}/${navigationRoutes.languages}`,
     element: <LanguagesPage />,
+  },
+  {
+    path: `${navigationRoutes.settings}/${navigationRoutes.countries}`,
+    element: <CountryPage />,
+  },
+  {
+    path: navigationRoutes.topup,
+    element: <TopupPage />,
   },
   {
     path: "*",

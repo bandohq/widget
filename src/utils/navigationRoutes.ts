@@ -9,6 +9,7 @@ export const navigationRoutes = {
   products: "/products",
   esims: "/esims",
   form: "/form",
+  topup: "/topup",
   formSteps: "/form-steps",
   settings: "/settings",
 };
@@ -28,11 +29,13 @@ export const backButtonRoutes = [
   navigationRoutes.transactionHistory,
   navigationRoutes.transactionDetail,
   navigationRoutes.esims,
+  navigationRoutes.topup,
+  navigationRoutes.formSteps,
 ];
 
-  export const backToHomeRoutes = [navigationRoutes.transactionHistory];
-  
-  export type NavigationRouteTypeKeys = keyof typeof navigationRoutes
-  
-  export type NavigationRouteType =
-    (typeof navigationRoutes)[NavigationRouteTypeKeys]
+export const backToHomeRoutes = [navigationRoutes.transactionHistory];
+
+export type NavigationRouteTypeKeys = keyof typeof navigationRoutes;
+
+export type NavigationRouteType =
+  (typeof navigationRoutes)[NavigationRouteTypeKeys];

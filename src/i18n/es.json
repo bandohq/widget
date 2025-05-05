@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Datos",
+  "voice": "Voz",
+  "sms": "SMS",
+  "duration": "Duración",
   "termsAndConditionsHtml": "Acepto los <0>términos y condiciones</0>",
   "button": {
     "backToOrder": "Volver al pedido",
@@ -114,7 +118,8 @@
     },
     "common": {
       "your": "Tu {{field}}",
-      "enter_your": "Ingresa tu {{field}}"
+      "enter_your": "Ingresa tu {{field}}",
+      "continue": "Continuar"
     }
   },
   "countries": {
@@ -248,5 +253,13 @@
     "theme": "Tema",
     "custom": "Personalizado",
     "status": "Estatus del sitio"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Todos los montos disponibles"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo de producto",
+    "searchByAmount": "Buscar por monto",
+    "amount": "Monto"
   }
 }

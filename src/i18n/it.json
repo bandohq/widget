@@ -8,6 +8,10 @@
     "number": "{{value, number(maximumFractionDigits: 9)}}",
     "percent": "{{value, percent(maximumFractionDigits: 2)}}"
   },
+  "data": "Dati",
+  "voice": "Voce",
+  "sms": "SMS",
+  "duration": "Durata",
   "termsAndConditionsHtml": "Accetto i <0>termini e condizioni</0>",
   "button": {
     "backToOrder": "Torna al tuo ordine",
@@ -67,7 +71,7 @@
       "processingOrderCompleted": "Ordine convalidato con successo",
       "processingOrder": "Elaborazione del tuo ordine",
       "wait": "Potrebbe richiedere un minuto",
-      "validateAllowance": "Convalida dell’assegno",
+      "validateAllowance": "Convalida dell'assegno",
       "signTransactionCompleted": "Transazione firmata con successo",
       "validateAllowanceCompleted": "Importo approvato"
     },
@@ -114,7 +118,8 @@
     },
     "common": {
       "your": "Il tuo {{field}}",
-      "enter_your": "Inserisci il tuo {{field}}"
+      "enter_your": "Inserisci il tuo {{field}}",
+      "continue": "Continua"
     }
   },
   "countries": {
@@ -225,5 +230,13 @@
     "theme": "Tema",
     "custom": "Personalizzato",
     "status": "Pagina di status"
+  },
+  "variantList": {
+    "allAvailableAmounts": "Tutti gli importi disponibili"
+  },
+  "variantFilters": {
+    "typeOfProduct": "Tipo di prodotto",
+    "searchByAmount": "Cerca per importo",
+    "amount": "Importo"
   }
 }
