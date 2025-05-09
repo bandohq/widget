@@ -1,15 +1,16 @@
-import { defineChain, parseUnits } from "viem";
+import { defineChain, encodeFunctionData, parseUnits } from "viem";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
-import { writeContract } from '@wagmi/core'
-import {  ERC20ApproveABI } from "../utils/abis";
+import { writeContract } from "@wagmi/core";
+import { ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
+import { detectMultisig, sdk, sendViaSafe } from "../utils/safeFunctions";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -28,7 +29,20 @@ export const useTransactionHelpers = () => {
     chain,
     config
   ) => {
+    const isMultisig = await detectMultisig();
+
     try {
+      if (isMultisig) {
+        sendViaSafe({
+          to: tokenAddress,
+          abi: ERC20ApproveABI,
+          functionName: "approve",
+          args: [spenderAddress, amount],
+        });
+
+        return true;
+      }
+
       await writeContract(config, {
         address: tokenAddress,
         abi: ERC20ApproveABI,
@@ -54,6 +68,8 @@ export const useTransactionHelpers = () => {
     serviceID,
     formattedChain,
   }) => {
+    const isMultisig = await detectMultisig();
+
     const requestServiceABI = BandoRouter.abi.find(
       (item) => item.name === "requestService"
     );
@@ -68,7 +84,9 @@ export const useTransactionHelpers = () => {
     );
 
     const payload = {
-      payer: account?.address,
+      payer: isMultisig
+        ? (await sdk.safe.getInfo()).safeAddress
+        : account?.address,
       fiatAmount: formatFiatAmount(quote?.totalAmount),
       serviceRef: txId,
       weiAmount,
@@ -76,15 +94,23 @@ export const useTransactionHelpers = () => {
 
     addStep({ message: "form.status.signTransaction", type: "info" });
 
-    await writeContract(config, {
-      value,
-      address: chain?.protocolContracts?.BandoRouterProxy,
-      abi: [requestServiceABI],
-      functionName: "requestService",
-      args: [serviceID, payload],
-      chain: formattedChain,
-      account: account?.address,
-    });
+    if (isMultisig) {
+      await sendViaSafe({
+        to: chain?.protocolContracts?.BandoRouterProxy,
+        abi: [requestServiceABI],
+        functionName: "requestService",
+        args: [serviceID, payload],
+      });
+    } else {
+      await writeContract(config, {
+        value,
+        address: chain?.protocolContracts?.BandoRouterProxy,
+        abi: [requestServiceABI],
+        functionName: "requestService",
+        chain: formattedChain,
+        account: account?.address,
+      });
+    }
 
     updateStep({
       message: "form.status.signTransactionCompleted",
@@ -100,6 +126,7 @@ export const useTransactionHelpers = () => {
     serviceID,
     token,
   }) => {
+    const isMultisig = await detectMultisig();
     const totalAmount = parseFloat(quote?.totalAmount);
     const increaseAmount = totalAmount * 1.01; //Add 1% to the total amount for allowance issue
     const amountInUnits = parseUnits(
@@ -112,7 +139,7 @@ export const useTransactionHelpers = () => {
       variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
     });
 
-    await approveERC20(
+    const approveResult = await approveERC20(
       chain?.protocolContracts?.BandoRouterProxy,
       amountInUnits,
       token.address,
@@ -120,6 +147,10 @@ export const useTransactionHelpers = () => {
       chain,
       config
     );
+
+    if (!approveResult) {
+      throw new Error("Failed to approve tokens");
+    }
 
     updateStep({ message: "form.status.validateAllowance", type: "loading" });
 
@@ -142,7 +173,9 @@ export const useTransactionHelpers = () => {
     );
 
     const payload = {
-      payer: account?.address,
+      payer: isMultisig
+        ? (await sdk.safe.getInfo()).safeAddress
+        : account?.address,
       fiatAmount: formatFiatAmount(quote?.totalAmount),
       serviceRef: txId,
       token: token.address,
@@ -154,14 +187,23 @@ export const useTransactionHelpers = () => {
 
     addStep({ message: "form.status.signTransaction", type: "info" });
 
-    await writeContract(config, {
-      address: chain?.protocolContracts?.BandoRouterProxy,
-      abi: [requestERC20ServiceABI],
-      functionName: "requestERC20Service",
-      args: [serviceID, payload],
-      chain: chain.chainId,
-      account: account?.address,
-    });
+    if (isMultisig) {
+      await sendViaSafe({
+        to: chain?.protocolContracts?.BandoRouterProxy,
+        abi: [requestERC20ServiceABI],
+        functionName: "requestERC20Service",
+        args: [serviceID, payload],
+      });
+    } else {
+      await writeContract(config, {
+        address: chain?.protocolContracts?.BandoRouterProxy,
+        abi: [requestERC20ServiceABI],
+        functionName: "requestERC20Service",
+        args: [serviceID, payload],
+        chain: chain.chainId,
+        account: account?.address,
+      });
+    }
 
     updateStep({
       message: "form.status.signTransactionCompleted",

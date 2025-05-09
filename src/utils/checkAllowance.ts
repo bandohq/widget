@@ -1,5 +1,6 @@
 import { readContract } from "@wagmi/core";
 import { ERC20AllowanceABI } from "../utils/abis";
+import { detectMultisig, sdk } from "./safeFunctions";
 
 export const checkAllowance = async (
   spenderAddress,
@@ -13,17 +14,30 @@ export const checkAllowance = async (
   const delay = 5000;
   let attempt = 0;
   let allowance = BigInt(0);
+  const isMultisig = await detectMultisig();
 
   while (attempt < maxAttempts) {
     try {
       attempt++;
-      allowance = (await readContract(config, {
-        address: tokenAddress,
-        abi: ERC20AllowanceABI,
-        functionName: "allowance",
-        args: [account?.address, spenderAddress],
-        chainId: chain?.chainId,
-      })) as bigint;
+
+      if (isMultisig) {
+        const safeInfo = await sdk.safe.getInfo();
+        allowance = (await readContract(config, {
+          address: tokenAddress,
+          abi: ERC20AllowanceABI,
+          functionName: "allowance",
+          args: [safeInfo.safeAddress, spenderAddress],
+          chainId: chain?.chainId,
+        })) as bigint;
+      } else {
+        allowance = (await readContract(config, {
+          address: tokenAddress,
+          abi: ERC20AllowanceABI,
+          functionName: "allowance",
+          args: [account?.address, spenderAddress],
+          chainId: chain?.chainId,
+        })) as bigint;
+      }
 
       console.log(
         `Allowance check attempt ${attempt}:`,
