@@ -1,4 +1,4 @@
-import { defineChain, encodeFunctionData, parseUnits } from "viem";
+import { defineChain, parseUnits } from "viem";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
@@ -33,7 +33,7 @@ export const useTransactionHelpers = () => {
 
     try {
       if (isMultisig) {
-        sendViaSafe({
+        await sendViaSafe({
           to: tokenAddress,
           abi: ERC20ApproveABI,
           functionName: "approve",
