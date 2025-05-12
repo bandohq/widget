@@ -22,9 +22,9 @@ export const sendViaSafe = async ({ to, abi, functionName, args }) => {
     args,
   });
 
-  await sdk.txs.send({
+  const response = await sdk.txs.send({
     txs: [{ to, value: "0", data }],
   });
 
-  return { success: true };
+  return response;
 };

@@ -8,13 +8,20 @@ export const checkAllowance = async (
   account,
   chain,
   config,
-  amount
+  amount,
+  skipWaitForSafe = false
 ) => {
   const maxAttempts = 10;
   const delay = 5000;
   let attempt = 0;
   let allowance = BigInt(0);
   const isMultisig = await detectMultisig();
+
+  // For safe transactions, if skipWaitForSafe is true, we don't wait for the allowance check
+  if (isMultisig && skipWaitForSafe) {
+    console.log("Safe transaction detected, skipping allowance check wait");
+    return BigInt(amount.toString());
+  }
 
   while (attempt < maxAttempts) {
     try {
