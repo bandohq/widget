@@ -1,6 +1,6 @@
 {
   "name": "@bandohq/widget",
-  "version": "0.1.19",
+  "version": "0.1.20-beta.3",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -51,6 +51,7 @@
     "@mui/material": "^6.1.5",
     "@mui/system": "^6.1.6",
     "@phosphor-icons/react": "^2.1.7",
+    "@safe-global/safe-apps-sdk": "^9.1.0",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/web3.js": "^1.95.3",
     "@tanstack/react-virtual": "^3.10.9",
