@@ -1,6 +1,6 @@
 import { useAccount } from "@lifi/wallet-management";
 import { Box } from "@mui/material";
-import { type FC } from "react";
+import { type FC, useMemo } from "react";
 import { useChain } from "../../hooks/useChain.js";
 import { useDebouncedWatch } from "../../hooks/useDebouncedWatch";
 import { TokenNotFound } from "./TokenNotFound.js";
@@ -28,17 +28,29 @@ export const TokenList: FC<TokenListProps> = ({
     selectedChain ?? undefined
   );
 
+  const filteredTokens = useMemo(() => {
+    if (!tokenSearchFilter) return balances;
+
+    const searchTerm = tokenSearchFilter.toLowerCase();
+    return balances.filter(
+      (token) =>
+        token.name?.toLowerCase().includes(searchTerm) ||
+        token.symbol?.toLowerCase().includes(searchTerm) ||
+        token.address?.toLowerCase().includes(searchTerm)
+    );
+  }, [balances, tokenSearchFilter]);
+
   const handleTokenClick = useTokenSelect(formType, onClick);
   const showCategories = !tokenSearchFilter;
 
   return (
     <Box ref={parentRef} style={{ height, overflow: "auto" }}>
-      {!balances.length && !isLoading ? (
+      {!filteredTokens.length && !isLoading ? (
         <TokenNotFound formType={formType} />
       ) : null}
       <VirtualizedTokenList
         account={account}
-        tokens={balances}
+        tokens={filteredTokens}
         scrollElementRef={parentRef}
         chainId={account?.chainId}
         chain={selectedChain}
