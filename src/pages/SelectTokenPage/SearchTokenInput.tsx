@@ -18,11 +18,16 @@ export const SearchTokenInput = () => {
     [setFieldValue]
   );
 
+  const handleSearchChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const searchValue = (e.target as HTMLInputElement).value;
+    onChange(searchValue);
+  };
+
   return (
     <SearchInput
       name={name}
       placeholder={t("main.tokenSearch")}
-      onChange={(e) => onChange((e.target as HTMLInputElement).value)}
+      onChange={handleSearchChange}
       onBlur={onBlur}
       value={value as string | undefined}
     />

@@ -41,14 +41,6 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
           formType={formType}
         />
       </Box>
-      <Box
-        mt={"auto"}
-        p={2}
-        textAlign="center"
-        sx={{ bgcolor: palette.grey[200], fontSize: "11px" }}
-      >
-        {t("info.message.emptyTokenList")}
-      </Box>
     </FullPageContainer>
   );
 };
