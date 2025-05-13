@@ -2,7 +2,7 @@ import { defineChain, parseUnits } from "viem";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
-import { writeContract } from "@wagmi/core";
+import { writeContract, readContract } from "@wagmi/core";
 import { ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
@@ -10,7 +10,12 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
-import { detectMultisig, sdk, sendViaSafe } from "../utils/safeFunctions";
+import {
+  detectMultisig,
+  sdk,
+  sendViaSafe,
+  sendBatchViaSafe,
+} from "../utils/safeFunctions";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -102,6 +107,7 @@ export const useTransactionHelpers = () => {
         abi: [requestServiceABI],
         functionName: "requestService",
         args: [serviceID, payload],
+        value: value.toString(),
       });
 
       console.log("Safe transaction submitted:", safeResponse);
@@ -132,6 +138,32 @@ export const useTransactionHelpers = () => {
     }
   };
 
+  const checkCurrentAllowance = async (
+    spenderAddress,
+    tokenAddress,
+    account,
+    chain,
+    config
+  ) => {
+    try {
+      const safeAddress = (await sdk.safe.getInfo()).safeAddress;
+      const ownerAddress = safeAddress || account?.address;
+
+      const allowance = await readContract(config, {
+        address: tokenAddress,
+        abi: ERC20ApproveABI,
+        functionName: "allowance",
+        args: [ownerAddress, spenderAddress],
+        chainId: chain.chainId,
+      });
+
+      return allowance;
+    } catch (error) {
+      console.error("Error checking allowance:", error);
+      return BigInt(0);
+    }
+  };
+
   const handleERC20TokenRequest = async ({
     chain,
     account,
@@ -152,6 +184,18 @@ export const useTransactionHelpers = () => {
       type: "info",
       variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
     });
+
+    if (isMultisig) {
+      return await handleERC20BatchMultisig({
+        chain,
+        account,
+        quote,
+        txId,
+        serviceID,
+        token,
+        amountInUnits,
+      });
+    }
 
     const approveResult = await approveERC20(
       chain?.protocolContracts?.BandoRouterProxy,
@@ -248,6 +292,89 @@ export const useTransactionHelpers = () => {
     }
   };
 
+  const handleERC20BatchMultisig = async ({
+    chain,
+    account,
+    quote,
+    txId,
+    serviceID,
+    token,
+    amountInUnits,
+  }) => {
+    const safeAddress = (await sdk.safe.getInfo()).safeAddress;
+    const requestERC20ServiceABI = BandoRouter.abi.find(
+      (item) => item.name === "requestERC20Service"
+    );
+
+    const payload = {
+      payer: safeAddress,
+      fiatAmount: formatFiatAmount(quote?.totalAmount),
+      serviceRef: txId,
+      token: token.address,
+      tokenAmount: parseUnits(
+        quote?.digitalAssetAmount.toString(),
+        token?.decimals
+      ),
+    };
+
+    // Verificar si ya tiene suficiente allowance
+    updateStep({ message: "form.status.checkingAllowance", type: "loading" });
+    const requiredAmount = parseUnits(
+      quote?.totalAmount.toString(),
+      token?.decimals
+    );
+    const currentAllowance = await checkCurrentAllowance(
+      chain?.protocolContracts?.BandoRouterProxy,
+      token.address,
+      account,
+      chain,
+      config
+    );
+
+    let transactions = [];
+
+    // Solo agregar la transacción de approve si es necesario
+    if (
+      typeof currentAllowance === "bigint" &&
+      currentAllowance < BigInt(requiredAmount)
+    ) {
+      transactions.push({
+        to: token.address,
+        abi: ERC20ApproveABI,
+        functionName: "approve",
+        args: [chain?.protocolContracts?.BandoRouterProxy, amountInUnits],
+      });
+    }
+
+    // Agregar la transacción de solicitud de servicio
+    transactions.push({
+      to: chain?.protocolContracts?.BandoRouterProxy,
+      abi: [requestERC20ServiceABI],
+      functionName: "requestERC20Service",
+      args: [serviceID, payload],
+    });
+
+    updateStep({
+      message:
+        transactions.length > 1
+          ? "form.status.batchTransaction"
+          : "form.status.signTransaction",
+      type: "info",
+      description: "form.status.wait",
+    });
+
+    try {
+      const safeResponse = await sendBatchViaSafe(transactions);
+      console.log("Safe batch transaction submitted:", safeResponse);
+
+      return { success: true, isMultisig: true, safeResponse };
+    } catch (error) {
+      showNotification("error", "Error al enviar transacción batch");
+      console.error("Error en batch transaction:", error);
+      throw error;
+    }
+  };
+
   const handleServiceRequest = useCallback(
     async ({ txId, chain, account, quote, product, token }) => {
       try {
@@ -323,5 +450,6 @@ export const useTransactionHelpers = () => {
   return {
     approveERC20,
     handleServiceRequest,
+    handleERC20BatchMultisig,
   };
 };

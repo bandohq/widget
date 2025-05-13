@@ -15,7 +15,13 @@ export const detectMultisig = async (): Promise<boolean> => {
   }
 };
 
-export const sendViaSafe = async ({ to, abi, functionName, args }) => {
+export const sendViaSafe = async ({
+  to,
+  abi,
+  functionName,
+  args,
+  value = "0",
+}) => {
   const data = encodeFunctionData({
     abi,
     functionName,
@@ -23,8 +29,26 @@ export const sendViaSafe = async ({ to, abi, functionName, args }) => {
   });
 
   const response = await sdk.txs.send({
-    txs: [{ to, value: "0", data }],
+    txs: [{ to, value, data }],
   });
+
+  return response;
+};
+
+export const sendBatchViaSafe = async (transactions) => {
+  const txs = transactions.map(
+    ({ to, abi, functionName, args, value = "0" }) => {
+      const data = encodeFunctionData({
+        abi,
+        functionName,
+        args,
+      });
+
+      return { to, value, data };
+    }
+  );
+
+  const response = await sdk.txs.send({ txs });
 
   return response;
 };
