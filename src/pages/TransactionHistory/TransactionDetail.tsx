@@ -4,7 +4,7 @@ import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
 import { BottomSheet } from "../../components/BottomSheet/BottomSheet";
-import { defineChain } from "viem";
+import { defineChain, encodeFunctionData } from "viem";
 import {
   Button,
   List,
@@ -30,7 +30,7 @@ import { useEffect, useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { executeRefund } from "../../utils/refunds";
 import { useTheme } from "@mui/system";
-import { s } from "vite/dist/node/types.d-aGj9QkWt";
+import { detectMultisig, sendViaSafe } from "../../utils/safeFunctions";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -83,23 +83,49 @@ export const TransactionsDetailPage = () => {
     if (serviceId && formattedChain) {
       try {
         const isNativeToken = nativeToken.key === token.key;
+        const isMultisig = await detectMultisig();
 
-        await executeRefund({
-          config,
-          chain: formattedChain,
-          contractAddress: chain?.protocolContracts?.BandoRouterProxy,
-          abiName: isNativeToken ? "withdrawRefund" : "withdrawERC20Refund",
-          abi: BandoRouter.abi,
-          functionName: isNativeToken
+        if (isMultisig) {
+          const abiName = isNativeToken
             ? "withdrawRefund"
-            : "withdrawERC20Refund",
-          args: [serviceId, transactionData?.recordId],
-          accountAddress: account?.address,
-        });
+            : "withdrawERC20Refund";
+          const contractABI = BandoRouter.abi.find(
+            (item) => item.name === abiName
+          );
 
-        setLoading(false);
-        setOpen(false);
-        showNotification("success", t("history.refundSuccess"));
+          if (!contractABI) {
+            throw new Error(`ABI for function ${abiName} not found`);
+          }
+
+          const safeResponse = await sendViaSafe({
+            to: chain?.protocolContracts?.BandoRouterProxy,
+            abi: [contractABI],
+            functionName: abiName,
+            args: [serviceId, transactionData?.recordId],
+          });
+
+          console.log("Safe refund transaction submitted:", safeResponse);
+          setLoading(false);
+          setOpen(false);
+          showNotification("success", t("history.refundSuccess"));
+        } else {
+          await executeRefund({
+            config,
+            chain: formattedChain,
+            contractAddress: chain?.protocolContracts?.BandoRouterProxy,
+            abiName: isNativeToken ? "withdrawRefund" : "withdrawERC20Refund",
+            abi: BandoRouter.abi,
+            functionName: isNativeToken
+              ? "withdrawRefund"
+              : "withdrawERC20Refund",
+            args: [serviceId, transactionData?.recordId],
+            accountAddress: account?.address,
+          });
+
+          setLoading(false);
+          setOpen(false);
+          showNotification("success", t("history.refundSuccess"));
+        }
       } catch (error) {
         setLoading(false);
         setOpen(false);
