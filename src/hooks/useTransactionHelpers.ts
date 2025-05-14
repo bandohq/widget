@@ -317,7 +317,7 @@ export const useTransactionHelpers = () => {
       ),
     };
 
-    // Verificar si ya tiene suficiente allowance
+    // Check if the user has enough allowance
     updateStep({ message: "form.status.checkingAllowance", type: "loading" });
     const requiredAmount = parseUnits(
       quote?.totalAmount.toString(),
@@ -333,7 +333,7 @@ export const useTransactionHelpers = () => {
 
     let transactions = [];
 
-    // Solo agregar la transacción de approve si es necesario
+    // Only add the approve transaction if necessary
     if (
       typeof currentAllowance === "bigint" &&
       currentAllowance < BigInt(requiredAmount)
@@ -346,7 +346,7 @@ export const useTransactionHelpers = () => {
       });
     }
 
-    // Agregar la transacción de solicitud de servicio
+    // Add the service request transaction
     transactions.push({
       to: chain?.protocolContracts?.BandoRouterProxy,
       abi: [requestERC20ServiceABI],
@@ -369,8 +369,8 @@ export const useTransactionHelpers = () => {
 
       return { success: true, isMultisig: true, safeResponse };
     } catch (error) {
-      showNotification("error", "Error al enviar transacción batch");
-      console.error("Error en batch transaction:", error);
+      showNotification("error", "Error on transaction");
+      console.error("Error on batch transaction:", error);
       throw error;
     }
   };
