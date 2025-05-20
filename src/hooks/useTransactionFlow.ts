@@ -55,16 +55,14 @@ export const useTransactionFlow = () => {
             });
           } catch (error) {
             clearStep();
-            showNotification(
-              "error",
-              "Error handling the transaction signature"
-            );
-            console.error("Error handling the transaction signature:", error);
+            showNotification("error", "Error processing transaction signature");
+            console.error("Error processing transaction signature:", error);
           }
         }
       },
       onError: (error) => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching transaction data:", error);
+        showNotification("error", "Error fetching transaction data");
       },
     },
   });

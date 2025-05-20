@@ -105,7 +105,10 @@ export const TransactionsHistoryPage = () => {
             return { id: transaction.id, txStatus: txStatus.status as number };
           }
         } catch (error) {
-          console.error(error);
+          console.error(
+            "Error al verificar el estado de la transacción:",
+            error
+          );
           return {
             id: transaction.id,
             txStatus: -1,
@@ -113,7 +116,11 @@ export const TransactionsHistoryPage = () => {
         }
       });
 
-      Promise.all(refundPromises).then(setRefunds);
+      Promise.all(refundPromises)
+        .then(setRefunds)
+        .catch((error) => {
+          console.error("Error al procesar los reembolsos:", error);
+        });
     }
   }, [transactions, isPending, config, chain, account, isLoadingToken]);
 

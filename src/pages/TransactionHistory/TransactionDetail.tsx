@@ -104,8 +104,12 @@ export const TransactionsDetailPage = () => {
         setLoading(false);
         setOpen(false);
         showNotification("error", t("history.refundError"));
-        console.error("Error on refunding tokens:", error);
+        console.error("Error processing refund:", error);
       }
+    } else {
+      setLoading(false);
+      console.error("Missing required data for refund");
+      showNotification("error", "Missing required data for refund");
     }
   };
 

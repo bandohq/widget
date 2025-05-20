@@ -30,8 +30,10 @@ export const validateReference = async (chain, serviceID, referenceCode, config)
         await new Promise((resolve) => setTimeout(resolve, 5000)); 
       }
     } catch (error) {
+      console.error("Error validating reference:", error);
       if (attempt >= maxAttempts) {
-        throw new Error("Validation failed after maximum attempts.");
+        console.error("Validation failed after maximum attempts");
+        return false;
       }
       await new Promise((resolve) => setTimeout(resolve, 5000)); 
     }
