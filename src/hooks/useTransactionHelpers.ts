@@ -101,15 +101,11 @@ export const useTransactionHelpers = () => {
     token,
   }) => {
     const totalAmount = parseFloat(quote?.totalAmount);
-    const increaseAmount = totalAmount;
-    const amountInUnits = parseUnits(
-      increaseAmount.toString(),
-      token?.decimals
-    );
+    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
     addStep({
       message: "form.status.approveTokens",
       type: "info",
-      variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
+      variables: { amount: totalAmount, tokenSymbol: token?.symbol },
     });
 
     await approveERC20(
@@ -146,10 +142,7 @@ export const useTransactionHelpers = () => {
       fiatAmount: formatFiatAmount(quote?.totalAmount),
       serviceRef: txId,
       token: token.address,
-      tokenAmount: parseUnits(
-        quote?.digitalAssetAmount.toString(),
-        token?.decimals
-      ),
+      tokenAmount: parseUnits(quote?.totalAmount.toString(), token?.decimals),
     };
 
     addStep({ message: "form.status.signTransaction", type: "info" });
