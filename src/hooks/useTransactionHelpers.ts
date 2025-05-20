@@ -101,7 +101,7 @@ export const useTransactionHelpers = () => {
     token,
   }) => {
     const totalAmount = parseFloat(quote?.totalAmount);
-    const increaseAmount = totalAmount * 1.01; //Add 1% to the total amount for allowance issue
+    const increaseAmount = totalAmount;
     const amountInUnits = parseUnits(
       increaseAmount.toString(),
       token?.decimals
