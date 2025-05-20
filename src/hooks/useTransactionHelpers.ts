@@ -29,7 +29,7 @@ export const useTransactionHelpers = () => {
     config
   ) => {
     try {
-      await writeContract(config, {
+      const result = await writeContract(config, {
         address: tokenAddress,
         abi: ERC20ApproveABI,
         functionName: "approve",
@@ -38,11 +38,11 @@ export const useTransactionHelpers = () => {
         account: account?.address,
       });
 
-      return true;
+      return result as `0x${string}`;
     } catch (error) {
       showNotification("error", "Error on approving tokens, try later");
       console.error("Error on approving tokens:", error);
-      return false;
+      return null;
     }
   };
 
@@ -108,7 +108,7 @@ export const useTransactionHelpers = () => {
       variables: { amount: totalAmount, tokenSymbol: token?.symbol },
     });
 
-    await approveERC20(
+    const approvalTxHash = await approveERC20(
       chain?.protocolContracts?.BandoRouterProxy,
       amountInUnits,
       token.address,
@@ -116,6 +116,10 @@ export const useTransactionHelpers = () => {
       chain,
       config
     );
+
+    if (!approvalTxHash) {
+      throw new Error("Failed to approve tokens");
+    }
 
     updateStep({ message: "form.status.validateAllowance", type: "loading" });
 
@@ -125,7 +129,8 @@ export const useTransactionHelpers = () => {
       account,
       chain,
       config,
-      parseUnits(quote?.totalAmount.toString(), token?.decimals)
+      parseUnits(quote?.totalAmount.toString(), token?.decimals),
+      approvalTxHash
     );
 
     updateStep({
