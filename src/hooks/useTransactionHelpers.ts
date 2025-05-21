@@ -29,6 +29,11 @@ export const useTransactionHelpers = () => {
     config
   ) => {
     try {
+      console.log(
+        `Approve: Owner: ${
+          account?.address
+        }, Spender: ${spenderAddress}, Token: ${tokenAddress}, Amount: ${amount.toString()}`
+      );
       const result = await writeContract(config, {
         address: tokenAddress,
         abi: ERC20ApproveABI,
@@ -101,7 +106,11 @@ export const useTransactionHelpers = () => {
     token,
   }) => {
     const totalAmount = parseFloat(quote?.totalAmount);
-    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
+    const incrementedAmount = totalAmount * 1.02;
+    const amountInUnits = parseUnits(
+      incrementedAmount.toString(),
+      token?.decimals
+    );
     addStep({
       message: "form.status.approveTokens",
       type: "info",
@@ -117,10 +126,6 @@ export const useTransactionHelpers = () => {
       config
     );
 
-    if (!approvalTxHash) {
-      throw new Error("Failed to approve tokens");
-    }
-
     updateStep({ message: "form.status.validateAllowance", type: "loading" });
 
     await checkAllowance(
@@ -129,8 +134,7 @@ export const useTransactionHelpers = () => {
       account,
       chain,
       config,
-      parseUnits(quote?.totalAmount.toString(), token?.decimals),
-      approvalTxHash
+      parseUnits(quote?.totalAmount.toString(), token?.decimals)
     );
 
     updateStep({
@@ -149,6 +153,12 @@ export const useTransactionHelpers = () => {
       token: token.address,
       tokenAmount: parseUnits(quote?.totalAmount.toString(), token?.decimals),
     };
+
+    console.log(
+      `Payload: Payer: ${payload.payer}, Token: ${
+        payload.token
+      }, TokenAmount: ${payload.tokenAmount.toString()}`
+    );
 
     addStep({ message: "form.status.signTransaction", type: "info" });
 

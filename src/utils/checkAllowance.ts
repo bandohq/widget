@@ -8,25 +8,12 @@ export const checkAllowance = async (
   account,
   chain,
   config,
-  amount,
-  approvalTxHash?: `0x${string}`
+  amount
 ) => {
   const maxAttempts = 10;
   const delay = 5000;
   let attempt = 0;
   let allowance = BigInt(0);
-
-  if (approvalTxHash) {
-    try {
-      const publicClient = getPublicClient(config);
-      await publicClient.waitForTransactionReceipt({
-        hash: approvalTxHash,
-      });
-    } catch (error) {
-      console.error("Error waiting for approval transaction:", error);
-      throw new Error("Failed to confirm approval transaction");
-    }
-  }
 
   while (attempt < maxAttempts) {
     try {
@@ -41,10 +28,12 @@ export const checkAllowance = async (
 
       console.log(
         `Allowance check attempt ${attempt}:`,
-        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`
+        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`,
+        `Owner: ${account?.address}, Spender: ${spenderAddress}, Token: ${tokenAddress}`
       );
 
       if (allowance >= amount) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
         break;
       }
 
