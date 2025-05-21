@@ -28,11 +28,10 @@ export const checkAllowance = async (
 
       console.log(
         `Allowance check attempt ${attempt}:`,
-        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`,
-        `Owner: ${account?.address}, Spender: ${spenderAddress}, Token: ${tokenAddress}`
+        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`
       );
 
-      if (allowance >= amount) {
+      if (allowance > amount) {
         await new Promise((resolve) => setTimeout(resolve, delay));
         break;
       }

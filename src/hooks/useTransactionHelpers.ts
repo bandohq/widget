@@ -114,7 +114,7 @@ export const useTransactionHelpers = () => {
     addStep({
       message: "form.status.approveTokens",
       type: "info",
-      variables: { amount: totalAmount, tokenSymbol: token?.symbol },
+      variables: { amount: incrementedAmount, tokenSymbol: token?.symbol },
     });
 
     const approvalTxHash = await approveERC20(
@@ -148,7 +148,7 @@ export const useTransactionHelpers = () => {
 
     const payload = {
       payer: account?.address,
-      fiatAmount: formatFiatAmount(quote?.totalAmount),
+      fiatAmount: formatFiatAmount(quote?.fiatAmount),
       serviceRef: txId,
       token: token.address,
       tokenAmount: parseUnits(quote?.totalAmount.toString(), token?.decimals),
@@ -161,6 +161,12 @@ export const useTransactionHelpers = () => {
     );
 
     addStep({ message: "form.status.signTransaction", type: "info" });
+
+    console.log("ANTES DE writeContract");
+    console.log("quote.totalAmount:", quote.totalAmount);
+    console.log("token.decimals:", token.decimals);
+    console.log("payload.tokenAmount:", payload.tokenAmount.toString());
+    console.log("payload:", payload);
 
     await writeContract(config, {
       address: chain?.protocolContracts?.BandoRouterProxy,
