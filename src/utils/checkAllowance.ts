@@ -1,5 +1,4 @@
 import { readContract } from "@wagmi/core";
-import { getPublicClient } from "wagmi/actions";
 import { ERC20AllowanceABI } from "../utils/abis";
 
 export const checkAllowance = async (

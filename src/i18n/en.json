@@ -68,7 +68,7 @@
     },
     "status": {
       "processingOrderCompleted": "Transaction details validated successfully",
-      "processingOrder": "Validating transaction Details",
+      "processingOrder": "Validating transaction details",
       "wait": "It may take a minute",
       "signTransaction": "Please sign the transaction",
       "signTransactionCompleted": "Transaction signed successfully",
