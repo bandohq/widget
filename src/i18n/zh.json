@@ -64,8 +64,8 @@
     "status": {
       "signTransaction": "请签署交易",
       "approveTokens": "请批准 {{amount}} {{tokenSymbol}} 的金额",
-      "processingOrderCompleted": "订单已成功验证",
-      "processingOrder": "正在处理您的订单",
+      "processingOrder": "正在验证交易详情",
+      "processingOrderCompleted": "交易详情验证成功",
       "wait": "可能需要一分钟",
       "validateAllowance": "正在验证额度",
       "signTransactionCompleted": "交易签署成功",

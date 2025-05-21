@@ -64,8 +64,8 @@
     "status": {
       "signTransaction": "Будь ласка, підпишіть транзакцію",
       "approveTokens": "Будь ласка, затвердьте суму {{amount}} {{tokenSymbol}}",
-      "processingOrderCompleted": "Замовлення успішно перевірено",
-      "processingOrder": "Обробка вашого замовлення",
+      "processingOrder": "Перевірка деталей транзакції",
+      "processingOrderCompleted": "Деталі транзакції успішно перевірені",
       "wait": "Це може зайняти хвилину",
       "validateAllowance": "Перевірка дозволу",
       "signTransactionCompleted": "Транзакцію успішно підписано",
