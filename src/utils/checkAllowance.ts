@@ -26,12 +26,7 @@ export const checkAllowance = async (
         chainId: chain?.chainId,
       })) as bigint;
 
-      console.log(
-        `Allowance check attempt ${attempt}:`,
-        `Allowance: ${allowance.toString()}, Amount: ${amount.toString()}`
-      );
-
-      if (allowance > amount) {
+      if (allowance >= amount) {
         await new Promise((resolve) => setTimeout(resolve, delay));
         break;
       }
