@@ -102,15 +102,11 @@ export const useTransactionHelpers = () => {
   }) => {
     try {
       const totalAmount = parseFloat(quote?.totalAmount);
-      const incrementedAmount = totalAmount * 1;
-      const amountInUnits = parseUnits(
-        incrementedAmount.toString(),
-        token?.decimals
-      );
+      const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
       addStep({
         message: "form.status.approveTokens",
         type: "info",
-        variables: { amount: incrementedAmount, tokenSymbol: token?.symbol },
+        variables: { amount: totalAmount, tokenSymbol: token?.symbol },
       });
 
       await approveERC20(
