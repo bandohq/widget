@@ -150,11 +150,11 @@
       "notification": "{{productType}} を {{reference}} に送信します。"
     },
     "title": {
-      "orderInProgress": "対応中です！",
-      "paymentReceived": "お支払いを確認しました。ご注文を処理しています。",
+      "orderInProgress": "注文を処理中です",
+      "paymentReceived": "数分かかります。",
       "orderCompleted": "注文完了",
       "thanks": "ご購入ありがとうございます。",
-      "orderDetails": "注文の詳細"
+      "orderDetails": "注文詳細"
     }
   },
   "pending": {

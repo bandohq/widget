@@ -171,8 +171,8 @@
       "notification": "हम आपको {{productType}} {{reference}} पर भेजेंगे।"
     },
     "title": {
-      "orderInProgress": "हम इस पर काम कर रहे हैं!",
-      "paymentReceived": "भुगतान प्राप्त हो गया है। हम आपके ऑर्डर को प्रोसेस कर रहे हैं।",
+      "orderInProgress": "आपका ऑर्डर प्रोसेस हो रहा है",
+      "paymentReceived": "इसमें कुछ मिनट लगेंगे।",
       "orderCompleted": "ऑर्डर पूरा हुआ",
       "thanks": "आपकी खरीदारी के लिए धन्यवाद।",
       "orderDetails": "ऑर्डर विवरण"

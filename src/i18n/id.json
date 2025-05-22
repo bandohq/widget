@@ -148,8 +148,8 @@
       "notification": "Kami akan mengirimkan {{productType}} ke {{reference}}."
     },
     "title": {
-      "orderInProgress": "Kami sedang mengurusnya!",
-      "paymentReceived": "Pembayaran diterima. Kami sedang memproses pesanan Anda.",
+      "orderInProgress": "Memproses pesanan Anda",
+      "paymentReceived": "Ini akan memakan waktu beberapa menit.",
       "orderCompleted": "Pesanan selesai",
       "thanks": "Terima kasih atas pembelian Anda.",
       "orderDetails": "Detail pesanan"
