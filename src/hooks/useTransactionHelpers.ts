@@ -10,7 +10,6 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
-import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { formatTotalAmount } from "../utils/format";
 
 export const useTransactionHelpers = () => {
