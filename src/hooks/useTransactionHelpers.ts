@@ -5,7 +5,6 @@ import nativeTokenCatalog from "../utils/nativeTokenCatalog";
 import { writeContract } from '@wagmi/core'
 import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
-import { formatTokenAmount } from "../utils/format";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
