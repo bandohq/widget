@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "ฉันยอมรับ <0>ข้อกำหนดและเงื่อนไข</0>",
   "button": {
     "backToOrder": "กลับไปที่คำสั่งซื้อของคุณ",
-    "discover": "ค้นพบเพิ่มเติม",
+    "backToHome": "กลับหน้าหลัก",
     "cancel": "ยกเลิก",
     "close": "ปิด",
     "connectAnotherWallet": "เชื่อมต่อกระเป๋าเงินอื่น",

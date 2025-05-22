@@ -15,7 +15,7 @@
   "termsAndConditionsHtml": "I accept the <0>terms and conditions</0>",
   "button": {
     "backToOrder": "Back to your order",
-    "discover": "Discover more",
+    "backToHome": "Back to home",
     "cancel": "Cancel",
     "close": "Close",
     "connectAnotherWallet": "Connect another wallet",

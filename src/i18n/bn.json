@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "আমি <0>শর্তাবলী</0> মেনে নিচ্ছি",
   "button": {
     "backToOrder": "আপনার অর্ডারে ফিরে যান",
-    "discover": "আরও আবিষ্কার করুন",
+    "backToHome": "হোমে ফিরে যান",
     "cancel": "বাতিল করুন",
     "close": "বন্ধ করুন",
     "connectAnotherWallet": "অন্য ওয়ালেট সংযুক্ত করুন",
