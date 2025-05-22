@@ -25,7 +25,7 @@ export const SuccessView = ({ status }) => {
   return (
     <>
       <IconWrapper
-        bgColor={isStatusCompleted ? palette.success.main : "transparent"}
+        bgColor={isStatusCompleted ? palette.primary.main : "transparent"}
       >
         {isStatusCompleted ? (
           <Check size={50} />
@@ -56,7 +56,7 @@ export const SuccessView = ({ status }) => {
             name={status?.product?.name || ""}
             src={status?.product?.logoUrl}
             sx={{
-              filter: isStatusCompleted ? "none" : "grayscale(40%)",
+              opacity: isStatusCompleted ? 1 : 0.6,
               transition: "all 0.3s ease",
               maxHeight: "75px",
               objectFit: "contain",
