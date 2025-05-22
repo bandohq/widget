@@ -13,7 +13,7 @@ import {
 import { BackButton } from "./BackButton";
 import { CloseDrawerButton } from "./CloseDrawerButton";
 import { HeaderAppBar, HeaderControlsContainer } from "./Header.style";
-import { SettingsButton } from "./SettingsButton";
+import { SettingsButton, HistoryButton } from "./SettingsButton";
 import { SplitWalletMenuButton } from "./WalletHeader";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 
@@ -75,6 +75,7 @@ export const NavigationHeader: React.FC = () => {
               path={navigationRoutes.home}
               element={
                 <HeaderControlsContainer>
+                  <HistoryButton />
                   {!hiddenUI?.includes(HiddenUI.Header) && <SettingsButton />}
                   {variant === "drawer" &&
                   !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (
