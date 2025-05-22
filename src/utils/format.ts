@@ -10,6 +10,15 @@ export const precisionFormatter = new Intl.NumberFormat('en', {
   useGrouping: false,
 })
 
+export const formatTotalAmount = (quote: any, token: any) => {
+  // Use friendlyDecimals if available.
+  if (token.friendlyDecimals) {
+    // Convert number to float before passing to formatTokenAmount
+    return parseFloat(quote?.totalAmount).toFixed(token.friendlyDecimals);
+  }
+  return parseFloat(quote?.totalAmount).toFixed(token.decimals);
+};
+
 /**
  * Format token amount to at least 6 decimals.
  * @param amount amount to format.

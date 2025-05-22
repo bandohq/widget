@@ -23,6 +23,7 @@ import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
 import { Box } from '@mui/material';
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
+import { formatTotalAmount } from '../../utils/format.js';
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -151,7 +152,7 @@ export const SelectTokenButtonForProducts: React.FC<
                 <AvatarBadgedDefault />
               )
             }
-            title={`${quote?.totalAmount} ${token?.symbol}`}
+            title={`${formatTotalAmount(quote, token)} ${token?.symbol}`}
             titleTypographyProps={{
               title: token.symbol,
             }}

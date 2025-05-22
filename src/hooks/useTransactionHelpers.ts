@@ -10,6 +10,7 @@ import { useNotificationContext } from "../providers/AlertProvider/NotificationP
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
+import { formatTotalAmount } from "../utils/format";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -106,7 +107,7 @@ export const useTransactionHelpers = () => {
       addStep({
         message: "form.status.approveTokens",
         type: "info",
-        variables: { amount: totalAmount, tokenSymbol: token?.symbol },
+        variables: { amount: formatTotalAmount(quote, token), tokenSymbol: token?.symbol },
       });
 
       await approveERC20(
