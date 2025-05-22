@@ -14,6 +14,7 @@ interface IconWrapperProps extends BoxProps {
 
 interface TypographyProps extends BoxProps {
   fontSize?: string;
+  isCompleted?: boolean;
 }
 
 interface AnimatedCircularProgressProps extends BoxProps {
@@ -47,20 +48,28 @@ export const StatusPageContainer = styled(Box)(() => ({
 }));
 
 export const StatusTitle = styled(Typography)<TypographyProps>(
-  ({ fontSize }) => ({
+  ({ theme, fontSize, isCompleted = true }) => ({
     fontSize: fontSize || "32px",
+    color: isCompleted
+      ? theme.palette.text.primary
+      : theme.palette.text.disabled,
     fontWeight: 500,
     textAlign: "center",
     margin: "10px 0",
+    transition: "color 0.3s ease",
   })
 );
 
 export const StatusSubtitle = styled(Typography)<TypographyProps>(
-  ({ fontSize }) => ({
+  ({ fontSize, theme, isCompleted = true }) => ({
     fontSize: fontSize || "24px",
+    color: isCompleted
+      ? theme.palette.text.primary
+      : theme.palette.text.disabled,
     fontWeight: 200,
     textAlign: "center",
     margin: "0",
+    transition: "color 0.3s ease",
   })
 );
 
@@ -68,11 +77,11 @@ export const IconWrapper = styled(Box)<IconWrapperProps>(({ bgColor }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  marginBottom: "20px",
   borderRadius: "100%",
   width: "70px",
   height: "70px",
   backgroundColor: bgColor || "transparent",
+  transition: "background-color 0.3s ease",
 }));
 
 export const CustomAccordion = styled(Accordion)(({ theme }) => ({
