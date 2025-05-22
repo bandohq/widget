@@ -13,7 +13,7 @@ export const precisionFormatter = new Intl.NumberFormat('en', {
 export const formatTotalAmount = (quote: any, token: any) => {
   // Use friendlyDecimals if available.
   if (token.friendlyDecimals) {
-    // Convert number to bigint before passing to formatTokenAmount
+    // Convert number to float before passing to formatTokenAmount
     return parseFloat(quote?.totalAmount).toFixed(token.friendlyDecimals);
   }
   return parseFloat(quote?.totalAmount).toFixed(token.decimals);
