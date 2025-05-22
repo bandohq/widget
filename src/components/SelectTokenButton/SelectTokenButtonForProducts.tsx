@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { formatTokenAmount } from '../../utils/format.js';
 import { useChain } from '../../hooks/useChain.js';
 import { useToken } from '../../hooks/useToken';
 import type { FormTypeProps } from '../../stores/form/types.js';
