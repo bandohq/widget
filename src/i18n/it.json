@@ -68,8 +68,8 @@
     "status": {
       "signTransaction": "Si prega di firmare la transazione",
       "approveTokens": "Si prega di approvare l'importo di {{amount}} {{tokenSymbol}}",
-      "processingOrderCompleted": "Ordine convalidato con successo",
-      "processingOrder": "Elaborazione del tuo ordine",
+      "processingOrder": "Validazione dei dettagli della transazione",
+      "processingOrderCompleted": "Dettagli della transazione validati con successo",
       "wait": "Potrebbe richiedere un minuto",
       "validateAllowance": "Convalida dell'assegno",
       "signTransactionCompleted": "Transazione firmata con successo",

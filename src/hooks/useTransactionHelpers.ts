@@ -29,7 +29,7 @@ export const useTransactionHelpers = () => {
     config
   ) => {
     try {
-      await writeContract(config, {
+      const result = await writeContract(config, {
         address: tokenAddress,
         abi: ERC20ApproveABI,
         functionName: "approve",
@@ -38,11 +38,11 @@ export const useTransactionHelpers = () => {
         account: account?.address,
       });
 
-      return true;
+      return result as `0x${string}`;
     } catch (error) {
-      showNotification("error", "Error on approving tokens, try later");
-      console.error("Error on approving tokens:", error);
-      return false;
+      showNotification("error", "Error al aprobar tokens, intente más tarde");
+      console.error("Error al aprobar tokens:", error);
+      throw error;
     }
   };
 
@@ -100,73 +100,76 @@ export const useTransactionHelpers = () => {
     serviceID,
     token,
   }) => {
-    const totalAmount = parseFloat(quote?.totalAmount);
-    const increaseAmount = totalAmount * 1.01; //Add 1% to the total amount for allowance issue
-    const amountInUnits = parseUnits(
-      increaseAmount.toString(),
-      token?.decimals
-    );
-    addStep({
-      message: "form.status.approveTokens",
-      type: "info",
-      variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
-    });
+    try {
+      const totalAmount = parseFloat(quote?.totalAmount);
+      const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
+      addStep({
+        message: "form.status.approveTokens",
+        type: "info",
+        variables: { amount: totalAmount, tokenSymbol: token?.symbol },
+      });
 
-    await approveERC20(
-      chain?.protocolContracts?.BandoRouterProxy,
-      amountInUnits,
-      token.address,
-      account,
-      chain,
-      config
-    );
+      await approveERC20(
+        chain?.protocolContracts?.BandoRouterProxy,
+        amountInUnits,
+        token.address,
+        account,
+        chain,
+        config
+      );
 
-    updateStep({ message: "form.status.validateAllowance", type: "loading" });
+      updateStep({ message: "form.status.validateAllowance", type: "loading" });
 
-    await checkAllowance(
-      chain?.protocolContracts?.BandoRouterProxy,
-      token.address,
-      account,
-      chain,
-      config,
-      parseUnits(quote?.totalAmount.toString(), token?.decimals)
-    );
+      await checkAllowance(
+        chain?.protocolContracts?.BandoRouterProxy,
+        token.address,
+        account,
+        chain,
+        config,
+        parseUnits(quote?.totalAmount.toString(), token?.decimals)
+      );
 
-    updateStep({
-      message: "form.status.validateAllowanceCompleted",
-      type: "completed",
-    });
+      updateStep({
+        message: "form.status.validateAllowanceCompleted",
+        type: "completed",
+      });
 
-    const requestERC20ServiceABI = BandoRouter.abi.find(
-      (item) => item.name === "requestERC20Service"
-    );
+      const requestERC20ServiceABI = BandoRouter.abi.find(
+        (item) => item.name === "requestERC20Service"
+      );
 
-    const payload = {
-      payer: account?.address,
-      fiatAmount: formatFiatAmount(quote?.totalAmount),
-      serviceRef: txId,
-      token: token.address,
-      tokenAmount: parseUnits(
-        quote?.digitalAssetAmount.toString(),
-        token?.decimals
-      ),
-    };
+      const payload = {
+        payer: account?.address,
+        fiatAmount: formatFiatAmount(quote?.fiatAmount),
+        serviceRef: txId,
+        token: token.address,
+        tokenAmount: parseUnits(
+          quote?.digitalAssetAmount.toString(),
+          token?.decimals
+        ),
+      };
 
-    addStep({ message: "form.status.signTransaction", type: "info" });
+      addStep({ message: "form.status.signTransaction", type: "info" });
 
-    await writeContract(config, {
-      address: chain?.protocolContracts?.BandoRouterProxy,
-      abi: [requestERC20ServiceABI],
-      functionName: "requestERC20Service",
-      args: [serviceID, payload],
-      chain: chain.chainId,
-      account: account?.address,
-    });
+      await writeContract(config, {
+        address: chain?.protocolContracts?.BandoRouterProxy,
+        abi: [requestERC20ServiceABI],
+        functionName: "requestERC20Service",
+        args: [serviceID, payload],
+        chain: chain.chainId,
+        account: account?.address,
+      });
 
-    updateStep({
-      message: "form.status.signTransactionCompleted",
-      type: "completed",
-    });
+      updateStep({
+        message: "form.status.signTransactionCompleted",
+        type: "completed",
+      });
+    } catch (error) {
+      clearStep();
+      showNotification("error", "Error in handleERC20TokenRequest");
+      console.error("Error in handleERC20TokenRequest:", error);
+      throw error;
+    }
   };
 
   const handleServiceRequest = useCallback(
