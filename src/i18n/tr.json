@@ -14,8 +14,8 @@
   "duration": "Süre",
   "termsAndConditionsHtml": "<0>Şartlar ve koşulları</0> kabul ediyorum",
   "button": {
-    "backToOrder": "Siparişinize geri dönün",
-    "discover": "Daha fazlasını keşfedin",
+    "backToOrder": "Siparişinize Geri Dönün",
+    "backToHome": "Ana Sayfaya Dön",
     "cancel": "İptal",
     "close": "Kapat",
     "connectAnotherWallet": "Başka bir cüzdan bağla",

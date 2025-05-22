@@ -10,8 +10,8 @@
   },
   "termsAndConditionsHtml": "Saya menyetujui <0>Syarat dan Ketentuan</0>",
   "button": {
-    "backToOrder": "Kembali ke pesanan Anda",
-    "discover": "Temukan lebih banyak",
+    "backToOrder": "Kembali ke Pesanan Anda",
+    "backToHome": "Kembali ke Beranda",
     "cancel": "Batal",
     "close": "Tutup",
     "connectAnotherWallet": "Hubungkan dompet lain",

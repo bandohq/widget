@@ -93,7 +93,7 @@ export const SuccessView = ({ status }) => {
         style={{ borderRadius: "30px" }}
         onClick={gotoHome}
       >
-        {t("button.discover")}
+        {t("button.backToHome")}
       </Button>
     </>
   );

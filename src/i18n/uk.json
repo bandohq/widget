@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "Я приймаю <0>умови та положення</0>",
   "button": {
     "backToOrder": "Повернутися до вашого замовлення",
-    "discover": "Відкрити більше",
+    "backToHome": "Повернутися на головну",
     "cancel": "Скасувати",
     "close": "Закрити",
     "connectAnotherWallet": "Під'єднати інший гаманець",

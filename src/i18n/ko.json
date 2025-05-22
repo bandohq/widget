@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "<0>이용 약관</0>에 동의합니다",
   "button": {
     "backToOrder": "주문으로 돌아가기",
-    "discover": "더 알아보기",
+    "backToHome": "홈으로 돌아가기",
     "cancel": "취소",
     "close": "닫기",
     "connectAnotherWallet": "다른 지갑 연결",

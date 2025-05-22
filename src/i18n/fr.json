@@ -15,7 +15,7 @@
   "termsAndConditionsHtml": "J'accepte les <0>conditions générales</0>",
   "button": {
     "backToOrder": "Retour à votre commande",
-    "discover": "Découvrir plus",
+    "backToHome": "Retour à l'accueil",
     "cancel": "Annuler",
     "close": "Fermer",
     "connectAnotherWallet": "Connecter un autre portefeuille",

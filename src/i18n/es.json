@@ -15,7 +15,7 @@
   "termsAndConditionsHtml": "Acepto los <0>términos y condiciones</0>",
   "button": {
     "backToOrder": "Volver al pedido",
-    "discover": "Descubrir más",
+    "backToHome": "Volver al inicio",
     "cancel": "Cancelar",
     "close": "Cerrar",
     "connectAnotherWallet": "Conectar otra billetera",

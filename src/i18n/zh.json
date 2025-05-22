@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "我接受<0>条款和条件</0>",
   "button": {
     "backToOrder": "返回您的订单",
-    "discover": "发现更多",
+    "backToHome": "返回首页",
     "cancel": "取消",
     "close": "关闭",
     "connectAnotherWallet": "关联其他钱包",

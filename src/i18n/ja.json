@@ -11,7 +11,7 @@
   "termsAndConditionsHtml": "<0>利用規約</0>に同意します",
   "button": {
     "backToOrder": "注文に戻る",
-    "discover": "さらに発見する",
+    "backToHome": "ホームに戻る",
     "cancel": "キャンセル",
     "close": "閉じる",
     "connectAnotherWallet": "別のウォレットを接続",
