@@ -68,8 +68,8 @@
     "status": {
       "signTransaction": "Lütfen işlemi imzalayın",
       "approveTokens": "Lütfen {{amount}} {{tokenSymbol}} tutarını onaylayın",
-      "processingOrderCompleted": "Sipariş başarıyla doğrulandı",
-      "processingOrder": "Siparişiniz işleniyor",
+      "processingOrder": "İşlem detayları doğrulanıyor",
+      "processingOrderCompleted": "İşlem detayları başarıyla doğrulandı",
       "wait": "Bir dakika sürebilir",
       "validateAllowance": "İzin doğrulanıyor",
       "signTransactionCompleted": "İşlem başarıyla imzalandı",

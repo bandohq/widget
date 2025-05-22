@@ -64,8 +64,8 @@
     "status": {
       "signTransaction": "取引に署名してください",
       "approveTokens": "{{amount}} {{tokenSymbol}} の承認をお願いします",
-      "processingOrderCompleted": "注文が正常に検証されました",
-      "processingOrder": "ご注文を処理中です",
+      "processingOrder": "取引詳細を検証中",
+      "processingOrderCompleted": "取引詳細の検証が完了しました",
       "wait": "1分かかる場合があります",
       "validateAllowance": "許容量を検証中",
       "signTransactionCompleted": "取引の署名が完了しました",

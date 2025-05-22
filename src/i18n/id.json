@@ -63,8 +63,8 @@
     },
     "status": {
       "approveTokens": "Silakan setujui jumlah {{amount}} {{tokenSymbol}}",
-      "processingOrderCompleted": "Pesanan berhasil divalidasi",
-      "processingOrder": "Pesanan Anda sedang diproses",
+      "processingOrder": "Memvalidasi detail transaksi",
+      "processingOrderCompleted": "Detail transaksi berhasil divalidasi",
       "wait": "Ini mungkin memerlukan satu menit",
       "signTransaction": "Silakan tandatangani transaksi",
       "validateAllowanceCompleted": "Jumlah disetujui"

@@ -68,8 +68,8 @@
     "status": {
       "signTransaction": "Bitte unterzeichnen Sie die Transaktion",
       "approveTokens": "Bitte genehmigen Sie den Betrag von {{amount}} {{tokenSymbol}}",
-      "processingOrderCompleted": "Bestellung erfolgreich validiert",
-      "processingOrder": "Ihre Bestellung wird verarbeitet",
+      "processingOrder": "Transaktionsdetails werden validiert",
+      "processingOrderCompleted": "Transaktionsdetails erfolgreich validiert",
       "wait": "Es kann eine Minute dauern",
       "validateAllowance": "Zulassung wird validiert",
       "signTransactionCompleted": "Transaktion erfolgreich signiert",

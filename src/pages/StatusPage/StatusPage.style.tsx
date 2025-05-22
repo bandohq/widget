@@ -16,6 +16,10 @@ interface TypographyProps extends BoxProps {
   fontSize?: string;
 }
 
+interface AnimatedCircularProgressProps extends BoxProps {
+  size?: number;
+}
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -25,8 +29,14 @@ const rotate = keyframes`
   }
 `;
 
-export const AnimatedCircularProgress = styled(Box)(() => ({
-  display: "inline-block",
+export const AnimatedCircularProgress = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "size",
+})<AnimatedCircularProgressProps>(({ size = 32 }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: size,
+  height: size,
   animation: `${rotate} 2s linear infinite`,
 }));
 
