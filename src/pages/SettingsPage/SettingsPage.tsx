@@ -8,7 +8,6 @@ import { ThemeSettings } from "./ThemeSettings";
 import { useAccount } from "@lifi/wallet-management";
 import { Typography } from "@mui/material";
 import { shortenAddress } from "../../utils/wallet";
-import { HistorySettings } from "./HistorySettings";
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
@@ -20,7 +19,6 @@ export const SettingsPage = () => {
         <SettingsCardAccordion>
           <ThemeSettings />
           <LanguageSetting />
-          <HistorySettings />
         </SettingsCardAccordion>
         {account.address && (
           <Typography sx={{ textAlign: "right", fontSize: "1px", mt: "20px" }}>
