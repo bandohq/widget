@@ -45,6 +45,7 @@ export const StatusPageContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  padding: "20px",
 }));
 
 export const StatusTitle = styled(Typography)<TypographyProps>(

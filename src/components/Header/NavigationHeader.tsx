@@ -50,6 +50,11 @@ export const NavigationHeader: React.FC = () => {
     }
   };
 
+  const isStatusPage = cleanedPathname.startsWith(navigationRoutes.status);
+  if (isStatusPage) {
+    return null;
+  }
+
   return (
     <>
       {(isBackButtonVisible || !hiddenUI?.includes(HiddenUI.Header)) && (
