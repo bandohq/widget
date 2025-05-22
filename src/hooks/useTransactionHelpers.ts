@@ -5,11 +5,14 @@ import nativeTokenCatalog from "../utils/nativeTokenCatalog";
 import { writeContract } from '@wagmi/core'
 import {  ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
+import { formatTokenAmount } from "../utils/format";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
+import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
+import { formatTotalAmount } from "../utils/format";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -109,7 +112,7 @@ export const useTransactionHelpers = () => {
     addStep({
       message: "form.status.approveTokens",
       type: "info",
-      variables: { amount: increaseAmount, tokenSymbol: token?.symbol },
+      variables: { amount: formatTotalAmount(quote, token), tokenSymbol: token?.symbol },
     });
 
     await approveERC20(

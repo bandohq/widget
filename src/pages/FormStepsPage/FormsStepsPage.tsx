@@ -16,6 +16,13 @@ import { ChainAvatar } from './ChainAvatar';
 import { AvatarBadgedDefault } from '../../components/Avatar/Avatar';
 import { Steps } from '../../components/Steps/Step';
 import { useTransactionFlow } from '../../hooks/useTransactionFlow';
+import { useAccount } from '@lifi/wallet-management';
+import { useChain } from '../../hooks/useChain';
+import { useToken } from '../../hooks/useToken';
+import { FormKeyHelper } from '../../stores/form/types';
+import { useFieldValues } from '../../stores/form/useFieldValues';
+import { formatTotalAmount } from '../../utils/format';
+
 
 export const FormsStepsPage = () => {
   const { t } = useTranslation();
@@ -23,7 +30,12 @@ export const FormsStepsPage = () => {
   const { quote } = useQuotes();
   const { handleTransaction } = useTransactionFlow();
   useHeader(t('header.title'));
-
+  const tokenKey = FormKeyHelper.getTokenKey("from");
+  const [tokenAddress] = useFieldValues(tokenKey);
+  const { account } = useAccount();
+  const { chain } = useChain(account?.chainId);
+  const { token } = useToken(chain, tokenAddress);
+  
   const renderProductAvatar = () =>
     product ? (
       <Avatar alt={product.name} src={product.imageUrl} />
@@ -43,7 +55,7 @@ export const FormsStepsPage = () => {
             <ListItemAvatar>
               <ChainAvatar />
             </ListItemAvatar>
-            <ListItemText primary={quote?.totalAmount} />
+            <ListItemText primary={formatTotalAmount(quote, token)} />
           </ListItem>
           <Steps />
           <ListItem>

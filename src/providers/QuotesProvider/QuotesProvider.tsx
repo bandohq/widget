@@ -7,11 +7,11 @@ import { useTranslation } from "react-i18next";
 
 interface QuoteData {
   id: number;
-  digitalAssetAmount: number;
+  digitalAssetAmount: string;
   digitalAsset: string;
-  totalAmount: number;
-  feeAmount: number;
-  fiatAmount: number;
+  totalAmount: string;
+  feeAmount: string;
+  fiatAmount: string;
   fiatCurrency: string;
 }
 
@@ -68,7 +68,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [data, fetchPending]);
 
   useEffect(() => {
-    if ((quote && currentBalance >= quote.totalAmount) || !quote?.totalAmount) {
+    console.log("currentBalance", currentBalance, "quote?.totalAmount", quote?.totalAmount);
+    if ((quote && Number(currentBalance) >= Number(quote.totalAmount)) || !quote?.totalAmount) {
       setIsPurchasePossible(true);
     } else {
       setIsPurchasePossible(false);

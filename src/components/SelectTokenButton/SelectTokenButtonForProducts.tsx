@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { formatTokenAmount } from '../../utils/format.js';
 import { useChain } from '../../hooks/useChain.js';
 import { useToken } from '../../hooks/useToken';
 import type { FormTypeProps } from '../../stores/form/types.js';
@@ -23,6 +24,7 @@ import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
 import { Box } from '@mui/material';
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
+import { formatTotalAmount } from '../../utils/format.js';
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -151,7 +153,7 @@ export const SelectTokenButtonForProducts: React.FC<
                 <AvatarBadgedDefault />
               )
             }
-            title={`${quote?.totalAmount} ${token?.symbol}`}
+            title={`${formatTotalAmount(quote, token)} ${token?.symbol}`}
             titleTypographyProps={{
               title: token.symbol,
             }}

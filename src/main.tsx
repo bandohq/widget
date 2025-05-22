@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")!).render(
             borderRadius: "16px",
           },
         },
-        blockedCountries: ["AF", "AL"],
+        blockedCountries: ["US"],
         country: "MX",
       }}
     />
