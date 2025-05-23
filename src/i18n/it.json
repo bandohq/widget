@@ -154,8 +154,8 @@
       "notification": "Ti invieremo il {{productType}} a {{reference}}."
     },
     "title": {
-      "orderInProgress": "Ci stiamo lavorando!",
-      "paymentReceived": "Pagamento ricevuto. Stiamo elaborando il tuo ordine.",
+      "orderInProgress": "Elaborazione del tuo ordine",
+      "paymentReceived": "Ci vorranno alcuni minuti.",
       "orderCompleted": "Ordine completato",
       "thanks": "Grazie per il tuo acquisto.",
       "orderDetails": "Dettagli dell'ordine"

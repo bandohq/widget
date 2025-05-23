@@ -1,32 +1,39 @@
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Button } from '@mui/material';
+import { Button } from "@mui/material";
 import {
   AnimatedCircularProgress,
   IconWrapper,
   ProductBox,
   StatusSubtitle,
   StatusTitle,
-} from './StatusPage.style';
-import { Check, Barcode, SpinnerGap } from '@phosphor-icons/react';
-import { palette } from '../../themes/palettes';
-import { navigationRoutes } from '../../utils/navigationRoutes';
-import { useTranslation } from 'react-i18next';
-import { ImageAvatar } from '../../components/Avatar/Avatar';
-import { Box } from '@mui/system';
+} from "./StatusPage.style";
+import { Check, Barcode, SpinnerGap } from "@phosphor-icons/react";
+import { palette } from "../../themes/palettes";
+import { navigationRoutes } from "../../utils/navigationRoutes";
+import { useTranslation } from "react-i18next";
+import { ImageAvatar } from "../../components/Avatar/Avatar";
 
 export const SuccessView = ({ status }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const isStatusCompleted = status?.status === 'COMPLETED';
+  const isStatusCompleted = status?.status === "COMPLETED";
 
   const gotoHome = () => {
     navigate(navigationRoutes.home);
   };
   return (
     <>
-      <IconWrapper bgColor={palette.primary.medium}>
-        <Check size={50} />
+      <IconWrapper
+        bgColor={isStatusCompleted ? palette.primary.main : "transparent"}
+      >
+        {isStatusCompleted ? (
+          <Check size={50} />
+        ) : (
+          <AnimatedCircularProgress size={75}>
+            <SpinnerGap size={75} color={palette.primary.main} />
+          </AnimatedCircularProgress>
+        )}
       </IconWrapper>
       <StatusTitle>
         {t(
@@ -35,21 +42,6 @@ export const SuccessView = ({ status }) => {
             : "success.title.orderInProgress"
         )}
       </StatusTitle>
-      {!isStatusCompleted && (
-        <div
-          style={{
-            marginBottom: "10px",
-            display: "flex",
-            gap: "10px",
-            alignItems: "center",
-          }}
-        >
-          <AnimatedCircularProgress>
-            <SpinnerGap size={25} color={palette.primary.main} />
-          </AnimatedCircularProgress>
-          <StatusSubtitle fontSize={"14px"}>{status?.status}</StatusSubtitle>
-        </div>
-      )}
       <StatusSubtitle fontSize={"16px"}>
         {t(
           isStatusCompleted
@@ -64,6 +56,8 @@ export const SuccessView = ({ status }) => {
             name={status?.product?.name || ""}
             src={status?.product?.logoUrl}
             sx={{
+              opacity: isStatusCompleted ? 1 : 0.6,
+              transition: "all 0.3s ease",
               maxHeight: "75px",
               objectFit: "contain",
               margin: "auto",
@@ -72,14 +66,14 @@ export const SuccessView = ({ status }) => {
         ) : (
           <Barcode size={50} />
         )}
-        <StatusTitle fontSize="26px">
+        <StatusTitle fontSize="26px" isCompleted={isStatusCompleted}>
           {status?.productType &&
             t(`main.${status?.productType}`) + " " + status?.product?.name}
           {" - "}
           {isStatusCompleted &&
             status?.fiatUnitPrice + "" + status?.fiatCurrency}
         </StatusTitle>
-        <StatusSubtitle fontSize="18px">
+        <StatusSubtitle fontSize="18px" isCompleted={isStatusCompleted}>
           {t("success.message.notification", {
             productType: status?.productType || "item",
             reference: status?.givenReference || "your reference",
@@ -89,6 +83,7 @@ export const SuccessView = ({ status }) => {
 
       <Button
         variant="contained"
+        disabled={!isStatusCompleted}
         fullWidth
         style={{ borderRadius: "30px" }}
         onClick={gotoHome}

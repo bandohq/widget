@@ -150,8 +150,8 @@
       "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
     },
     "title": {
-      "orderInProgress": "Chúng tôi đang xử lý!",
-      "paymentReceived": "Thanh toán đã được nhận. Chúng tôi đang xử lý đơn hàng của bạn.",
+      "orderInProgress": "Đang xử lý đơn hàng của bạn",
+      "paymentReceived": "Sẽ mất vài phút.",
       "orderCompleted": "Đơn hàng hoàn tất",
       "thanks": "Cảm ơn bạn đã mua hàng.",
       "orderDetails": "Chi tiết đơn hàng"

@@ -15,6 +15,7 @@ export const RecentSpends = () => {
     method: "GET",
     queryOptions: {
       queryKey: ["transactions", account.address, account.chainId],
+      enabled: !!account.address && !!account.chainId,
     },
     queryParams: {
       chainId: account.chainId,
