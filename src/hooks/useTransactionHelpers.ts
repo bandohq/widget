@@ -11,6 +11,7 @@ import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
 import { formatTotalAmount } from "../utils/format";
+import { MiniKit, Tokens, tokenToDecimals } from "@worldcoin/minikit-js";
 
 export const useTransactionHelpers = () => {
   const config = useConfig();
@@ -107,7 +108,10 @@ export const useTransactionHelpers = () => {
       addStep({
         message: "form.status.approveTokens",
         type: "info",
-        variables: { amount: formatTotalAmount(quote, token), tokenSymbol: token?.symbol },
+        variables: {
+          amount: formatTotalAmount(quote, token),
+          tokenSymbol: token?.symbol,
+        },
       });
 
       await approveERC20(
@@ -173,6 +177,65 @@ export const useTransactionHelpers = () => {
     }
   };
 
+  const handleWorldTransaction = async ({
+    txId: reference,
+    chain,
+    quote,
+    token,
+  }) => {
+    try {
+      addStep({ message: "form.status.signTransaction", type: "info" });
+
+      const amount = quote?.totalAmount?.toString();
+      const tokenSymbol = token.symbol === "USDC" ? Tokens.USDCE : Tokens.WLD;
+      const tokenAmount = tokenToDecimals(
+        parseFloat(amount),
+        tokenSymbol
+      ).toString();
+
+      const { finalPayload } = await MiniKit.commandsAsync.pay({
+        reference,
+        to: chain?.protocolContracts?.BandoRouterProxy,
+        tokens: [{ symbol: tokenSymbol, token_amount: tokenAmount }],
+        description: ``,
+      });
+
+      if (finalPayload.status !== "success") {
+        throw new Error("Payment failed.");
+      }
+
+      const confirm = await fetch(
+        `https://developer.worldcoin.org/api/v2/minikit/transaction/${finalPayload.transaction_id}?app_id=${process.env.APP_ID}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ transaction_id: finalPayload.transaction_id }),
+        }
+      );
+
+      const { success } = await confirm.json();
+
+      if (!success) {
+        throw new Error("Pago no verificado.");
+      }
+
+      updateStep({
+        message: "form.status.signTransactionCompleted",
+        type: "completed",
+      });
+
+      clearStep();
+      return;
+    } catch (error) {
+      clearStep();
+      showNotification(
+        "error",
+        error.message || "Error processing World transaction"
+      );
+      throw error;
+    }
+  };
+
   const handleServiceRequest = useCallback(
     async ({ txId, chain, account, quote, product, token }) => {
       try {
@@ -206,6 +269,16 @@ export const useTransactionHelpers = () => {
         if (!isReferenceValid) {
           showNotification("error", "Invalid reference code");
           clearStep();
+          return;
+        }
+
+        if (MiniKit.isInstalled()) {
+          await handleWorldTransaction({
+            txId,
+            chain,
+            quote,
+            token,
+          });
           return;
         }
 
