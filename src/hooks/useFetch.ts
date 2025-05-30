@@ -17,6 +17,7 @@ type FetchOptions<T> = {
   mutationOptions?: UseMutationOptions<T, Error, unknown, unknown>;
   useFullUrl?: boolean;
   enabled?: boolean;
+  headers?: Record<string, string>;
 };
 
 function buildQueryString(queryParams: Record<string, string | number> = {}) {
@@ -52,17 +53,21 @@ export function useFetch<T = any>({
   mutationOptions,
   useFullUrl = true,
   enabled = true,
+  headers,
 }: FetchOptions<T>): any {
   const fetchOptions: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
+      ...headers,
     },
     body: data ? JSON.stringify(data) : undefined,
   };
 
   const queryString = buildQueryString(queryParams);
-  const fullUrl = !useFullUrl ? `${url}${queryString}` : `${BANDO_API_URL}${url}${queryString}`;
+  const fullUrl = !useFullUrl
+    ? `${url}${queryString}`
+    : `${BANDO_API_URL}${url}${queryString}`;
 
   if (method === "GET") {
     return useQuery<T>({
