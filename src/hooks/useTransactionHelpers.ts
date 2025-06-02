@@ -1,24 +1,86 @@
-import { defineChain, parseUnits } from "viem";
+import { defineChain, erc20Abi, parseEther, parseUnits } from "viem";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
 import nativeTokenCatalog from "../utils/nativeTokenCatalog";
-import { writeContract } from '@wagmi/core'
-import {  ERC20ApproveABI } from "../utils/abis";
+import { writeContract } from "@wagmi/core";
+import { ERC20ApproveABI } from "../utils/abis";
 import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { checkAllowance } from "../utils/checkAllowance";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { formatTotalAmount } from "../utils/format";
+import { sendTransaction } from "@wagmi/core";
+import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
+import { Address } from "../pages/SelectChainPage/types";
+import { Token } from "../types/widget";
+import { useAccount } from "@lifi/wallet-management";
 
 export const useTransactionHelpers = () => {
+  const [loading, setLoading] = useState(false);
   const config = useConfig();
   const { addStep, updateStep, clearStep } = useSteps();
   const { showNotification } = useNotificationContext();
+  const { account } = useAccount();
 
   const formatFiatAmount = (amount: string | undefined): string => {
     return amount ? (parseFloat(amount) * 100).toFixed(0) : "0";
+  };
+
+  const transferNativeToken = async (
+    transactionRequest: TransactionRequest
+  ) => {
+    try {
+      const txHash = await sendTransaction(config, {
+        to: transactionRequest.to,
+        value: parseEther(transactionRequest.value),
+        data: transactionRequest.data,
+        chain: transactionRequest.chainId,
+      });
+
+      return txHash;
+    } catch (error) {
+      showNotification("error", "Error al enviar la transacción");
+      console.error("Error at transferNativeToken:", error);
+      throw error;
+    }
+  };
+
+  const transferErc20Token = async (
+    transactionRequest: TransactionRequest,
+    token: Token
+  ) => {
+    try {
+      const txHash = await writeContract(config, {
+        address: token.address,
+        abi: erc20Abi,
+        functionName: "transfer",
+        args: [
+          transactionRequest.to as Address,
+          parseUnits(transactionRequest.value, token.decimals),
+        ],
+        chain: undefined,
+        account: account?.address as Address,
+      });
+
+      return txHash;
+    } catch (error) {
+      showNotification("error", "Error al enviar la transacción");
+      console.error("Error at transferErc20Token:", error);
+      throw error;
+    }
+  };
+
+  const signTransfer = async (transactionRequest: TransactionRequest) => {
+    setLoading(true);
+    try {
+      //TODO: Implement the logic to sign the transaction for native and erc20 tokens
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const approveERC20 = async (
@@ -107,7 +169,10 @@ export const useTransactionHelpers = () => {
       addStep({
         message: "form.status.approveTokens",
         type: "info",
-        variables: { amount: formatTotalAmount(quote, token), tokenSymbol: token?.symbol },
+        variables: {
+          amount: formatTotalAmount(quote, token),
+          tokenSymbol: token?.symbol,
+        },
       });
 
       await approveERC20(
@@ -241,6 +306,7 @@ export const useTransactionHelpers = () => {
   );
 
   return {
+    signTransfer,
     approveERC20,
     handleServiceRequest,
   };
