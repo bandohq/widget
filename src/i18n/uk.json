@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "Ми надішлемо вам {{productType}} на {{reference}}."
+      "notification": "Ви отримаєте свій {{brand}} {{productType}} на {{reference}}"
     },
     "title": {
       "orderInProgress": "Обробка вашого замовлення",

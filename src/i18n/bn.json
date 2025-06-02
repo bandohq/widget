@@ -148,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "আমরা আপনাকে {{productType}} {{reference}} এ পাঠাব।"
+      "notification": "আপনি আপনার {{brand}} {{productType}} {{reference}} এ পাবেন"
     },
     "title": {
       "orderInProgress": "আমরা এটিতে কাজ করছি!",

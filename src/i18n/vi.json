@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
+      "notification": "Bạn sẽ nhận được {{brand}} {{productType}} của mình tại {{reference}}"
     },
     "title": {
       "orderInProgress": "Đang xử lý đơn hàng của bạn",

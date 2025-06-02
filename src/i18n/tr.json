@@ -151,7 +151,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
+      "notification": "{{brand}} {{productType}}'inizi {{reference}} adresine alacaksınız"
     },
     "title": {
       "orderInProgress": "Siparişiniz işleniyor",

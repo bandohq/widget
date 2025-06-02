@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "我们会将{{productType}}发送到{{reference}}。"
+      "notification": "您将在 {{reference}} 收到您的 {{brand}} {{productType}}"
     },
     "title": {
       "orderInProgress": "正在处理您的订单",

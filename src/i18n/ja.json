@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} を {{reference}} に送信します。"
+      "notification": "{{brand}} {{productType}} を {{reference}} に送信します。"
     },
     "title": {
       "orderInProgress": "注文を処理中です",

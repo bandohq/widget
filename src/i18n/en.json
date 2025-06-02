@@ -153,7 +153,7 @@
   },
   "success": {
     "message": {
-      "notification": "We will send you the {{productType}} to {{reference}}."
+      "notification": "You'll receive your {{brand}} {{productType}} to {{reference}}"
     },
     "title": {
       "orderInProgress": "Processing your order",
