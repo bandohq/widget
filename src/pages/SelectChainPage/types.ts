@@ -82,19 +82,19 @@ export interface ChainWithSpecialContracts extends Chain {
 export interface ExtendedChain extends ChainWithNativeToken, ChainWithSpecialContracts {}
 
 export interface ProtocolContracts {
-  BandoRouter?: Adress;
-  BandoFulfillable?: Adress;
-  BandoRouterProxy?: Adress;
-  ERC20TokenRegistry?: Adress;
-  FulfillableRegistry?: Adress;
-  BandoERC20Fulfillable?: Adress;
-  BandoFulfillableProxy?: Adress;
-  BandoFulfillmentManager?: Adress;
-  ERC20TokenRegistryProxy?: Adress;
-  FulfillableRegistryProxy?: Adress;
-  BandoERC20FulfillableProxy?: Adress;
-  BandoFulfillmentManagerProxy?: Adress;
+  BandoRouter?: Address;
+  BandoFulfillable?: Address;
+  BandoRouterProxy?: Address;
+  ERC20TokenRegistry?: Address;
+  FulfillableRegistry?: Address;
+  BandoERC20Fulfillable?: Address;
+  BandoFulfillableProxy?: Address;
+  BandoFulfillmentManager?: Address;
+  ERC20TokenRegistryProxy?: Address;
+  FulfillableRegistryProxy?: Address;
+  BandoERC20FulfillableProxy?: Address;
+  BandoFulfillmentManagerProxy?: Address;
 }
 
-export type Adress = `0x${string}`
+export type Address = `0x${string}`;
 
