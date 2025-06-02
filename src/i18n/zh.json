@@ -215,7 +215,8 @@
     "searchProducts": "按品牌搜索产品",
     "topup": "话费和流量",
     "esim": "eSIMs",
-    "gift_card": "预付费代码"
+    "gift_card": "预付费代码",
+    "gift_card_singular": "预付费代码"
   },
   "settings": {
     "theme": "主题",

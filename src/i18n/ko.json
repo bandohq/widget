@@ -220,7 +220,8 @@
     "searchProducts": "제품 브랜드 검색",
     "topup": "에어타임 및 데이터",
     "esim": "eSIM",
-    "gift_card": "선불 코드"
+    "gift_card": "선불 코드",
+    "gift_card_singular": "선불 코드"
   },
   "settings": {
     "theme": "테마",

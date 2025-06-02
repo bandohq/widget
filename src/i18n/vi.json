@@ -218,7 +218,8 @@
     "searchProducts": "Tìm kiếm theo thương hiệu sản phẩm",
     "topup": "Nạp tiền & Dữ liệu",
     "esim": "eSIM",
-    "gift_card": "Mã trả trước"
+    "gift_card": "Mã trả trước",
+    "gift_card_singular": "Mã trả trước"
   },
   "settings": {
     "theme": "Giao diện",

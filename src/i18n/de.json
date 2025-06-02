@@ -220,9 +220,10 @@
     "sending": "Wird gesendet",
     "tokenSearch": "Nach Token-Name oder Adresse suchen",
     "searchProducts": "Nach Produktmarke suchen",
-    "topup": "Airtime & Daten",
-    "esim": "eSIMs",
-    "gift_card": "Prepaid-Codes"
+    "topup": "Guthaben & Daten",
+    "esim": "eSIM",
+    "gift_card": "Prepaid-Codes",
+    "gift_card_singular": "Prepaid-Code"
   },
   "settings": {
     "theme": "Thema",

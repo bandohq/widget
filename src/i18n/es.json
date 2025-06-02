@@ -245,9 +245,10 @@
     "sending": "Enviando",
     "tokenSearch": "Buscar por nombre o dirección del token",
     "searchProducts": "Buscar por marca de producto",
-    "topup": "Tiempo Aire y Datos",
-    "esim": "eSIMs",
-    "gift_card": "Prepago"
+    "topup": "Tiempo de aire y datos",
+    "esim": "eSIM",
+    "gift_card": "Códigos prepago",
+    "gift_card_singular": "Código prepago"
   },
   "settings": {
     "theme": "Tema",

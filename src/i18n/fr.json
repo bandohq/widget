@@ -222,8 +222,9 @@
     "tokenSearch": "Recherche par nom de jeton ou adresse",
     "searchProducts": "Rechercher par marque de produit",
     "topup": "Temps d'antenne et données",
-    "esim": "eSIMs",
-    "gift_card": "Codes prépayés"
+    "esim": "eSIM",
+    "gift_card": "Codes prépayés",
+    "gift_card_singular": "Code prépayé"
   },
   "settings": {
     "theme": "Thème",
