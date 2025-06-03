@@ -127,12 +127,6 @@ export const Input: React.FC<ReferenceInputProps> = ({
     }
   }, [currentValue]);
 
-  useEffect(() => {
-    if (!isRequired) {
-      onChange("");
-    }
-  }, []);
-
   const title = referenceType.name;
 
   return (
