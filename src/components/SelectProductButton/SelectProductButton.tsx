@@ -71,8 +71,6 @@ export const SelectProductButton: React.FC<
     </Button>
   );
 
-  console.log(selectedBrand, product);
-
   return (
     <>
       <SelectProductCard>
