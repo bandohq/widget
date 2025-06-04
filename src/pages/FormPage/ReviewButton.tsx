@@ -36,7 +36,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const { signTransfer } = useTransactionHelpers();
+  const { signTransfer, loading: transactionLoading } = useTransactionHelpers();
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
     "reference",
@@ -44,10 +44,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   );
 
   const { chain: selectedChain } = useChain(account?.chainId);
-
-  const handleClick = () => {
-    navigate(navigationRoutes.formSteps);
-  };
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -86,7 +82,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       disabled={disabled || isPending || !tokenAddress}
       text={t("header.spend")}
       onClick={() => signTransfer(quote?.transactionRequest)}
-      loading={isPending}
+      loading={transactionLoading}
     />
   );
 };

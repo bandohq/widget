@@ -16,13 +16,23 @@ import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
 import { Address } from "../pages/SelectChainPage/types";
 import { Token } from "../types/widget";
 import { useAccount } from "@lifi/wallet-management";
+import { useToken } from "../hooks/useToken";
+import { useChain } from "../hooks/useChain";
+import { FormKeyHelper } from "../stores/form/types";
+import { useFieldValues } from "../stores/form/useFieldValues";
+import { useTranslation } from "react-i18next";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
   const config = useConfig();
+  const { account } = useAccount();
+  const { t } = useTranslation();
+  const tokenKey = FormKeyHelper.getTokenKey("from");
+  const [tokenAddress] = useFieldValues(tokenKey);
+  const { chain } = useChain(account?.chainId);
+  const { token } = useToken(chain, tokenAddress);
   const { addStep, updateStep, clearStep } = useSteps();
   const { showNotification } = useNotificationContext();
-  const { account } = useAccount();
 
   const formatFiatAmount = (amount: string | undefined): string => {
     return amount ? (parseFloat(amount) * 100).toFixed(0) : "0";
@@ -41,16 +51,13 @@ export const useTransactionHelpers = () => {
 
       return txHash;
     } catch (error) {
-      showNotification("error", "Error al enviar la transacción");
+      showNotification("error", t("error.title.transactionFailed"));
       console.error("Error at transferNativeToken:", error);
       throw error;
     }
   };
 
-  const transferErc20Token = async (
-    transactionRequest: TransactionRequest,
-    token: Token
-  ) => {
+  const transferErc20Token = async (transactionRequest: TransactionRequest) => {
     try {
       const txHash = await writeContract(config, {
         address: token.address,
@@ -66,7 +73,7 @@ export const useTransactionHelpers = () => {
 
       return txHash;
     } catch (error) {
-      showNotification("error", "Error al enviar la transacción");
+      showNotification("error", t("error.title.transactionFailed"));
       console.error("Error at transferErc20Token:", error);
       throw error;
     }
@@ -75,9 +82,13 @@ export const useTransactionHelpers = () => {
   const signTransfer = async (transactionRequest: TransactionRequest) => {
     setLoading(true);
     try {
-      //TODO: Implement the logic to sign the transaction for native and erc20 tokens
-    } catch (error) {
-      throw error;
+      const nativeToken = chain?.nativeToken;
+
+      if (nativeToken.address === token.address) {
+        return await transferNativeToken(transactionRequest);
+      } else {
+        return await transferErc20Token(transactionRequest);
+      }
     } finally {
       setLoading(false);
     }
@@ -306,6 +317,7 @@ export const useTransactionHelpers = () => {
   );
 
   return {
+    loading,
     signTransfer,
     approveERC20,
     handleServiceRequest,
