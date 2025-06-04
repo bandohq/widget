@@ -37,8 +37,7 @@ export const useTransactionFlow = () => {
     url: `/wallets/${account?.address}/transactions/`,
     method: "POST",
     headers: {
-      QuoteIdempotencyKeyHeader: quote?.id.toString(),
-      IntegratorSlug: integrator,
+      "Idempotency-Key": quote?.id.toString(),
     },
     mutationOptions: {
       onSuccess: async ({ data }) => {
