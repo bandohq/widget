@@ -23,7 +23,6 @@ import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvi
 import { useChain } from "../../hooks/useChain";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
 import { useConfig } from "wagmi";
-import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { useToken } from "../../hooks/useToken";
 import { useEffect, useState } from "react";
@@ -75,16 +74,14 @@ export const TransactionsDetailPage = () => {
   const handleRefund = async () => {
     setLoading(true);
 
-    const nativeToken = nativeTokenCatalog.find(
-      (item) => item.key === chain?.key
-    );
+    const nativeToken = chain.nativeToken;
     const formattedChain = defineChain(
       transformToChainConfig(chain, nativeToken)
     );
 
     if (serviceId && formattedChain) {
       try {
-        const isNativeToken = nativeToken.key === token.key;
+        const isNativeToken = nativeToken.symbol === token.symbol;
 
         await executeRefund({
           config,

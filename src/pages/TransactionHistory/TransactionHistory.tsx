@@ -10,7 +10,6 @@ import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem"
 import { useConfig } from "wagmi";
 import { useChain } from "../../hooks/useChain";
 import { useToken } from "../../hooks/useToken";
-import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1_2.json";
 import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1_2.json";
 import { readContract } from "wagmi/actions";
@@ -74,12 +73,10 @@ export const TransactionsHistoryPage = () => {
 
       const refundPromises = possibleRefunds.map(async (transaction) => {
         const token = searchToken(transaction.tokenUsed);
-        const nativeToken = nativeTokenCatalog.find(
-          (item) => item.key === chain?.key
-        );
+        const nativeToken = chain.nativeToken;
 
         try {
-          if (token.key === nativeToken?.key) {
+          if (token.symbol === nativeToken?.symbol) {
             const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
               (item) => item.name === "record"
             );
