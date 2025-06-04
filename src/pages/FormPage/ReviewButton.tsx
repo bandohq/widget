@@ -16,6 +16,7 @@ import {
 import { useAccount } from "@lifi/wallet-management";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { useTransactionHelpers } from "../../hooks/useTransactionHelpers";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -34,6 +35,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
+  const { quote } = useQuotes();
+  const { signTransfer, loading: transactionLoading } = useTransactionHelpers();
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
     "reference",
@@ -41,10 +44,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   );
 
   const { chain: selectedChain } = useChain(account?.chainId);
-
-  const handleClick = () => {
-    navigate(navigationRoutes.formSteps);
-  };
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -82,8 +81,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     <BaseTransactionButton
       disabled={disabled || isPending || !tokenAddress}
       text={t("header.spend")}
-      onClick={handleClick}
-      loading={isPending}
+      onClick={() => signTransfer(quote?.transactionRequest)}
+      loading={transactionLoading}
     />
   );
 };
