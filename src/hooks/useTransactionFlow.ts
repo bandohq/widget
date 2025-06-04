@@ -7,7 +7,6 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
-import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { useCallback } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
@@ -28,7 +27,6 @@ export const useTransactionFlow = () => {
   const { chain } = useChain(chainId);
   const { account } = useAccount({ chainType: chain?.networkType });
   const { signTransfer } = useTransactionHelpers();
-  const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
     url: `/wallets/${account?.address}/transactions/`,
     method: "POST",
