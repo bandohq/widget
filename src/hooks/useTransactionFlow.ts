@@ -7,9 +7,7 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
-import { useToken } from "./useToken";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
-import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
@@ -21,17 +19,15 @@ export const useTransactionFlow = () => {
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
-  const { clearStep } = useSteps();
-  const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
+  const [chainId, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
     tokenKey,
     "reference",
     "requiredFields"
   );
   const { chain } = useChain(chainId);
-  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { handleServiceRequest } = useTransactionHelpers();
+  const { signTransfer } = useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
     url: `/wallets/${account?.address}/transactions/`,
@@ -45,24 +41,11 @@ export const useTransactionFlow = () => {
         const txId = data.validationId;
         if (txId) {
           try {
-            const signature = await handleServiceRequest({
-              txId,
-              chain,
-              account,
-              quote,
-              product,
-              token,
-            });
-            clearStep();
+            const signature = await signTransfer(quote.transactionRequest);
             navigate(`/status/${data?.transactionIntent?.id}`, {
               state: { signature },
             });
           } catch (error) {
-            clearStep();
-            showNotification(
-              "error",
-              "Error handling the transaction signature"
-            );
             console.error("Error handling the transaction signature:", error);
           }
         }
