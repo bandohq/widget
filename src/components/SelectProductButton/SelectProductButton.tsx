@@ -91,7 +91,7 @@ export const SelectProductButton: React.FC<
               )
             }
             action={product && renderActionButton()}
-            title={product?.brand || "Select product"}
+            title={selectedBrand?.brandName || "Select product"}
             subheader={
               product
                 ? `${t(`main.${product?.productType}`)} in ${product.country}`
