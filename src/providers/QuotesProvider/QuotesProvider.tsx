@@ -53,17 +53,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
-  const mockTransactionRequest: TransactionRequest = {
-    chainId: account?.chainId,
-    type: 0,
-    to: "0x0000000000000000000000000000000000000000",
-    data: "0x",
-    value: quote?.totalAmount || "0",
-    gas: "",
-    gasPrice: "",
-    gasLimit: "",
-  };
-
   const {
     data,
     mutate,
@@ -86,10 +75,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     setIsPending(fetchPending);
     if (data?.data) {
-      // setQuote(data.data);
       setQuote({
         ...data.data,
-        transactionRequest: mockTransactionRequest,
       });
     }
   }, [data, fetchPending]);
