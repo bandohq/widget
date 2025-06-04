@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "我们会将{{productType}}发送到{{reference}}。"
+      "notification": "您将在 {{reference}} 收到您的 {{brand}} {{productType}}"
     },
     "title": {
       "orderInProgress": "正在处理您的订单",
@@ -215,7 +215,8 @@
     "searchProducts": "按品牌搜索产品",
     "topup": "话费和流量",
     "esim": "eSIMs",
-    "gift_card": "预付费代码"
+    "gift_card": "预付费代码",
+    "gift_card_singular": "预付费代码"
   },
   "settings": {
     "theme": "主题",
