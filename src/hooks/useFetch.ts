@@ -7,6 +7,7 @@ import {
   UseMutationResult,
 } from "@tanstack/react-query";
 import { BANDO_API_URL } from "../config/constants";
+import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 
 type FetchOptions<T> = {
   url: string;
@@ -20,8 +21,15 @@ type FetchOptions<T> = {
   headers?: Record<string, string>;
 };
 
-function buildQueryString(queryParams: Record<string, string | number> = {}) {
-  const query = new URLSearchParams(queryParams as Record<string, string>);
+function buildQueryString(
+  queryParams: Record<string, string | number> = {},
+  integrator: string
+) {
+  const params = {
+    ...queryParams,
+    integrator,
+  };
+  const query = new URLSearchParams(params as Record<string, string>);
   return query.toString() ? `?${query.toString()}` : "";
 }
 
@@ -55,6 +63,7 @@ export function useFetch<T = any>({
   enabled = true,
   headers,
 }: FetchOptions<T>): any {
+  const { integrator } = useWidgetConfig();
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -64,7 +73,7 @@ export function useFetch<T = any>({
     body: data ? JSON.stringify(data) : undefined,
   };
 
-  const queryString = buildQueryString(queryParams);
+  const queryString = buildQueryString(queryParams, integrator);
   const fullUrl = !useFullUrl
     ? `${url}${queryString}`
     : `${BANDO_API_URL}${url}${queryString}`;
