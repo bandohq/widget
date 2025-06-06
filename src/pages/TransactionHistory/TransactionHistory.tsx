@@ -7,12 +7,6 @@ import { useFetch } from "../../hooks/useFetch";
 import { TransactionList } from "../../components/TransactionList/TransactionList";
 import { List, Typography } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
-import { useConfig } from "wagmi";
-import { useChain } from "../../hooks/useChain";
-import { useToken } from "../../hooks/useToken";
-import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1_2.json";
-import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1_2.json";
-import { readContract } from "wagmi/actions";
 import { Box } from "@mui/system";
 import { NoTransactionsFound } from "./NoTransactionsFound";
 
@@ -37,14 +31,8 @@ export interface Transaction {
 
 export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
-  const config = useConfig();
   useHeader(t("history.title"));
   const { account } = useAccount();
-  const { chain } = useChain(account.chainId);
-  const [refunds, setRefunds] = useState<{ id: string; txStatus: number }[]>(
-    []
-  );
-  const { searchToken, isLoading: isLoadingToken } = useToken(chain);
 
   const {
     data: transactions,
@@ -60,59 +48,6 @@ export const TransactionsHistoryPage = () => {
       chainId: account.chainId,
     },
   });
-
-  useEffect(() => {
-    if (transactions && !isPending && !isLoadingToken) {
-      const possibleRefunds = transactions.transactions.filter(
-        (transaction) => transaction.status === "FAILED"
-      );
-
-      if (possibleRefunds.length === 0) {
-        return;
-      }
-
-      const refundPromises = possibleRefunds.map(async (transaction) => {
-        const token = searchToken(transaction.tokenUsed);
-        const nativeToken = chain.nativeToken;
-
-        try {
-          if (token.symbol === nativeToken?.symbol) {
-            const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
-              (item) => item.name === "record"
-            );
-            const txStatus = (await readContract(config, {
-              address: chain?.protocolContracts?.BandoFulfillableProxy,
-              abi: [FulfillableRegistryABI],
-              functionName: "record",
-              args: [transaction.recordId],
-              chainId: chain?.chainId,
-            })) as { status: number };
-            return { id: transaction.id, txStatus: txStatus.status as number };
-          } else {
-            const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
-              (item) => item.name === "record"
-            );
-            const txStatus = (await readContract(config, {
-              address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
-              abi: [FulfillableRegistryABI],
-              functionName: "record",
-              args: [transaction.recordId],
-              chainId: chain?.chainId,
-            })) as { status: number };
-            return { id: transaction.id, txStatus: txStatus.status as number };
-          }
-        } catch (error) {
-          console.error(error);
-          return {
-            id: transaction.id,
-            txStatus: -1,
-          };
-        }
-      });
-
-      Promise.all(refundPromises).then(setRefunds);
-    }
-  }, [transactions, isPending, config, chain, account, isLoadingToken]);
 
   if (isPending) {
     return (
@@ -131,10 +66,7 @@ export const TransactionsHistoryPage = () => {
           <NoTransactionsFound />
         )}
         {!isPending && transactions && (
-          <TransactionList
-            transactions={transactions.transactions}
-            refunds={refunds}
-          />
+          <TransactionList transactions={transactions.transactions} />
         )}
       </Box>
     </PageContainer>
