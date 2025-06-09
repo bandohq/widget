@@ -12,6 +12,7 @@ import { useChain } from "../hooks/useChain";
 import { FormKeyHelper } from "../stores/form/types";
 import { useFieldValues } from "../stores/form/useFieldValues";
 import { useTranslation } from "react-i18next";
+import { MiniKit, PayCommandInput } from "@worldcoin/minikit-js";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
@@ -65,10 +66,47 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const signTransfer = async (transactionRequest: TransactionRequest) => {
+  const WorldTransfer = async (
+    transactionRequest: TransactionRequest,
+    txId: string
+  ) => {
+    const payload: PayCommandInput = {
+      reference: txId,
+      tokens: [
+        {
+          symbol: token.symbol,
+          token_amount: transactionRequest.value,
+        },
+      ],
+      description: "Bando Widget",
+      to: transactionRequest.to,
+    };
+
+    const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
+    if (finalPayload.status == "success") {
+      const res = await fetch(`/api/confirm-payment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalPayload),
+      });
+      const payment = await res.json();
+      if (payment.success) {
+        return payment.txHash;
+      }
+    }
+  };
+
+  const signTransfer = async (
+    transactionRequest: TransactionRequest,
+    txId: string
+  ) => {
     setLoading(true);
     try {
       const nativeToken = chain?.nativeToken;
+
+      if (MiniKit.isInstalled()) {
+        return await WorldTransfer(transactionRequest, txId);
+      }
 
       if (nativeToken.address === token.address) {
         return await transferNativeToken(transactionRequest);

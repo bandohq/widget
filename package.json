@@ -1,6 +1,6 @@
 {
   "name": "@bandohq/widget",
-  "version": "0.1.24",
+  "version": "0.1.25-beta.2",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -54,6 +54,8 @@
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/web3.js": "^1.95.3",
     "@tanstack/react-virtual": "^3.10.9",
+    "@worldcoin/minikit-js": "^1.9.5",
+    "@worldcoin/minikit-react": "^1.9.6",
     "add": "^2.0.6",
     "fuse.js": "^7.0.0",
     "i18next": "^23.16.2",
