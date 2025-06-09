@@ -22,7 +22,7 @@ export const App = forwardRef<unknown, WidgetProps>((props, ref) => {
   }, [props]);
 
   useEffect(() => {
-    MiniKit.isInstalled();
+    console.log("MiniKit.isInstalled()", MiniKit.isInstalled());
   }, []);
   return (
     <AppProvider config={config} formRef={props.formRef}>
