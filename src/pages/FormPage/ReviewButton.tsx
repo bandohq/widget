@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
@@ -14,7 +13,6 @@ import {
   isReferenceValid,
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
-import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 import { useTransactionHelpers } from "../../hooks/useTransactionHelpers";
 
@@ -27,7 +25,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   referenceType,
   requiredFields: requiredFieldsProps,
 }) => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { account } = useAccount();
   const { showNotification, hideNotification } = useNotificationContext();
@@ -35,8 +32,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { isPurchasePossible } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
-  const { quote } = useQuotes();
-  const { signTransfer, loading: transactionLoading } = useTransactionHelpers();
+  const { handleTransaction } = useTransactionFlow();
+  const { loading: transactionLoading } = useTransactionHelpers();
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
     "reference",
@@ -81,7 +78,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     <BaseTransactionButton
       disabled={disabled || isPending || !tokenAddress}
       text={t("header.spend")}
-      onClick={() => signTransfer(quote?.transactionRequest)}
+      onClick={() => handleTransaction()}
       loading={transactionLoading}
     />
   );
