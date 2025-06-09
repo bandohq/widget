@@ -39,7 +39,10 @@ export const useTransactionFlow = () => {
         const txId = data.validationId;
         if (txId) {
           try {
-            const signature = await signTransfer(quote.transactionRequest);
+            const signature = await signTransfer(
+              quote.transactionRequest,
+              txId
+            );
             navigate(`/status/${data?.transactionIntent?.id}`, {
               state: { signature },
             });
