@@ -141,7 +141,7 @@
     "noTransactions": "There is nothing here."
   },
   "info": {
-    "detailMessage": "Is where you will recibe your {{productType}}.",
+    "detailMessage": "Is where you will receive your {{productType}}.",
     "message": {
       "autoRefuel": "Change the network on your wallet to see the balance on that chain",
       "emptyActiveTransactions": "Transactions in progress will appear here. Once completed, find them in transaction history.",
