@@ -12,8 +12,9 @@ export interface TransactionRequest {
   data: string;
   value: string;
   gas: string;
-  gasPrice: string;
   gasLimit: string;
+  maxFeePerGas?: string;
+  maxPriorityFeePerGas?: string;
 }
 
 interface QuoteData {

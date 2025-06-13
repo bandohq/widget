@@ -12,12 +12,15 @@ import { useChain } from "../hooks/useChain";
 import { FormKeyHelper } from "../stores/form/types";
 import { useFieldValues } from "../stores/form/useFieldValues";
 import { useTranslation } from "react-i18next";
+import { transformToChainConfig } from "../utils/TransformToChainConfig";
+import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
   const { t } = useTranslation();
+  const { quote } = useQuotes();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
@@ -28,11 +31,23 @@ export const useTransactionHelpers = () => {
     transactionRequest: TransactionRequest
   ) => {
     try {
+      if (!chain) throw new Error("Chain not found");
+
+      const configChain = transformToChainConfig(chain, chain.nativeToken);
       const txHash = await sendTransaction(config, {
         to: transactionRequest.to,
-        value: parseEther(transactionRequest.value),
+        value: BigInt(transactionRequest.value),
         data: transactionRequest.data,
-        chain: transactionRequest.chainId,
+        chain: configChain,
+        gas: BigInt(transactionRequest.gas),
+        gasLimit: BigInt(transactionRequest.gasLimit),
+        maxFeePerGas: transactionRequest.maxFeePerGas
+          ? BigInt(transactionRequest.maxFeePerGas)
+          : undefined,
+        maxPriorityFeePerGas: transactionRequest.maxPriorityFeePerGas
+          ? BigInt(transactionRequest.maxPriorityFeePerGas)
+          : undefined,
+        type: transactionRequest.type,
       });
 
       return txHash;
@@ -45,16 +60,28 @@ export const useTransactionHelpers = () => {
 
   const transferErc20Token = async (transactionRequest: TransactionRequest) => {
     try {
+      if (!chain) throw new Error("Chain not found");
+
+      const configChain = transformToChainConfig(chain, chain.nativeToken);
       const txHash = await writeContract(config, {
         address: token.address,
         abi: erc20Abi,
         functionName: "transfer",
         args: [
           transactionRequest.to as Address,
-          parseUnits(transactionRequest.value, token.decimals),
+          parseUnits(quote?.totalAmount, token.decimals),
         ],
-        chain: undefined,
+        chain: configChain,
         account: account?.address as Address,
+        gas: BigInt(transactionRequest.gas),
+        gasLimit: BigInt(transactionRequest.gasLimit),
+        maxFeePerGas: transactionRequest.maxFeePerGas
+          ? BigInt(transactionRequest.maxFeePerGas)
+          : undefined,
+        maxPriorityFeePerGas: transactionRequest.maxPriorityFeePerGas
+          ? BigInt(transactionRequest.maxPriorityFeePerGas)
+          : undefined,
+        type: transactionRequest.type,
       });
 
       return txHash;
@@ -85,3 +112,7 @@ export const useTransactionHelpers = () => {
     signTransfer,
   };
 };
+function useQuote(): { quote: any } {
+  throw new Error("Function not implemented.");
+}
+
