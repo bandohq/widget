@@ -75,8 +75,14 @@ export const SuccessView = ({ status }) => {
         </StatusTitle>
         <StatusSubtitle fontSize="18px" isCompleted={isStatusCompleted}>
           {t("success.message.notification", {
-            productType: status?.productType || "item",
+            productType:
+              t(
+                status?.productType === "gift_card"
+                  ? `main.${status?.productType}_singular`
+                  : `main.${status?.productType}`
+              ) || "item",
             reference: status?.givenReference || "your reference",
+            brand: status?.product?.brand || "",
           })}
         </StatusSubtitle>
       </ProductBox>

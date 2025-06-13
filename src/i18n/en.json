@@ -153,7 +153,7 @@
   },
   "success": {
     "message": {
-      "notification": "We will send you the {{productType}} to {{reference}}."
+      "notification": "You'll receive your {{brand}} {{productType}} to {{reference}}"
     },
     "title": {
       "orderInProgress": "Processing your order",
@@ -248,7 +248,8 @@
     "searchProducts": "Search by product brand",
     "topup": "Airtime & Data",
     "esim": "eSIMs",
-    "gift_card": "Prepaid Codes"
+    "gift_card": "Prepaid Codes",
+    "gift_card_singular": "Prepaid Code"
   },
   "settings": {
     "theme": "Theme",

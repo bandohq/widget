@@ -105,6 +105,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiatCurrency,
       digitalAsset,
+      sender: account?.address,
       chainId: account?.chainId,
     });
   };
