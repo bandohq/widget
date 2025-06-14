@@ -217,6 +217,8 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
 
     walletConfig?: WidgetWalletConfig;
 
+    productType?: string;
+
     buildUrl?: boolean;
     keyPrefix?: string;
 

@@ -14,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
     <App
       integrator="bando-app" // TODO: CONFIGURE THIS
       buildUrl={true}
+      productType="gaming"
       config={{
         theme: {
           container: {

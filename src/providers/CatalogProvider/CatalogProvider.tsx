@@ -25,7 +25,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   const navigate = useNavigate();
   const { selectedCountry: country, isCountryPending } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
-  const { buildUrl } = useWidgetConfig();
+  const { buildUrl, productType } = useWidgetConfig();
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredBrands, setFilteredBrands] = useState<Brand[]>([]);
 
@@ -38,6 +38,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     url: "products/grouped/",
     queryParams: {
       country: !!country ? country?.isoAlpha2 : null,
+      category: productType,
     },
     enabled: !!country && !isCountryPending,
   });
