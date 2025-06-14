@@ -18,7 +18,7 @@ import { SplitWalletMenuButton } from "./WalletHeader";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 
 export const NavigationHeader: React.FC = () => {
-  const { subvariant, hiddenUI, variant } = useWidgetConfig();
+  const { subvariant, hiddenUI, variant, header } = useWidgetConfig();
   const { navigateBack } = useNavigateBack();
   const navigate = useNavigate();
   const { updateProduct } = useProduct();
@@ -38,6 +38,33 @@ export const NavigationHeader: React.FC = () => {
   const isBackToHome = backToHomeRoutes.includes(`/${basePath}`);
 
   const splitSubvariant = subvariant === "split" && !hasPath;
+
+  const headerTitle =
+    header && basePath === undefined ? (
+      typeof header === "string" ? (
+        <Typography
+          fontSize={24}
+          align={"left"}
+          fontWeight="700"
+          flex={1}
+          noWrap
+        >
+          {header}
+        </Typography>
+      ) : (
+        <Box flex={1}>{header}</Box>
+      )
+    ) : (
+      <Typography
+        fontSize={hasPath ? 18 : 24}
+        align={hasPath ? "center" : "left"}
+        fontWeight="700"
+        flex={1}
+        noWrap
+      >
+        {title}
+      </Typography>
+    );
 
   const goto = () => {
     if (isBackToHome) {
@@ -65,15 +92,7 @@ export const NavigationHeader: React.FC = () => {
               <SplitWalletMenuButton />
             </Box>
           ) : (
-            <Typography
-              fontSize={hasPath ? 18 : 24}
-              align={hasPath ? "center" : "left"}
-              fontWeight="700"
-              flex={1}
-              noWrap
-            >
-              {title}
-            </Typography>
+            headerTitle
           )}
           <Routes>
             <Route
