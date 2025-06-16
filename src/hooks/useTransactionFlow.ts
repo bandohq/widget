@@ -10,12 +10,14 @@ import { useFetch } from "./useFetch";
 import { useCallback } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
   const { integrator } = useWidgetConfig();
   const { userAcceptedTermsAndConditions } = useUserWallet();
+  const { showNotification } = useNotificationContext();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
   const [chainId, reference, requiredFields] = useFieldValues(
@@ -28,7 +30,7 @@ export const useTransactionFlow = () => {
   const { account } = useAccount({ chainType: chain?.networkType });
   const { signTransfer } = useTransactionHelpers();
   const { mutate, isPending } = useFetch({
-    url: `/wallets/${account?.address}/transactions/`,
+    url: `wallets/${account?.address}/transactions/`,
     method: "POST",
     headers: {
       QuoteIdempotencyKeyHeader: quote?.id.toString(),
@@ -36,16 +38,32 @@ export const useTransactionFlow = () => {
     },
     mutationOptions: {
       onSuccess: async ({ data }) => {
+        console.log("onSuccess triggered with data:", data);
         const txId = data.validationId;
         if (txId) {
           try {
+            console.log(
+              "Attempting to sign transfer with request:",
+              quote.transactionRequest
+            );
             const signature = await signTransfer(quote.transactionRequest);
+            console.log("Signature received:", signature);
+            if (!signature) {
+              throw new Error("No se pudo obtener la firma de la transacción");
+            }
+            console.log(
+              "Navigating to status page with ID:",
+              data?.transactionIntent?.id
+            );
             navigate(`/status/${data?.transactionIntent?.id}`, {
               state: { signature },
             });
           } catch (error) {
             console.error("Error handling the transaction signature:", error);
+            showNotification("error", "Error al firmar la transacción");
           }
+        } else {
+          console.log("No txId found in response data");
         }
       },
       onError: (error) => {
