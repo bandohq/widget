@@ -5,6 +5,17 @@ import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
 
+export interface TransactionRequest {
+  chainId: number;
+  type: number;
+  to: string;
+  data: string;
+  value: string;
+  gas: string;
+  gasPrice: string;
+  gasLimit: string;
+}
+
 interface QuoteData {
   id: number;
   digitalAssetAmount: string;
@@ -13,6 +24,7 @@ interface QuoteData {
   feeAmount: string;
   fiatAmount: string;
   fiatCurrency: string;
+  transactionRequest?: TransactionRequest;
 }
 
 interface QuotesContextType {
@@ -41,6 +53,17 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
+  const mockTransactionRequest: TransactionRequest = {
+    chainId: account?.chainId,
+    type: 0,
+    to: "0x0000000000000000000000000000000000000000",
+    data: "0x",
+    value: quote?.totalAmount || "0",
+    gas: "",
+    gasPrice: "",
+    gasLimit: "",
+  };
+
   const {
     data,
     mutate,
@@ -63,12 +86,19 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     setIsPending(fetchPending);
     if (data?.data) {
-      setQuote(data.data);
+      // setQuote(data.data);
+      setQuote({
+        ...data.data,
+        transactionRequest: mockTransactionRequest,
+      });
     }
   }, [data, fetchPending]);
 
   useEffect(() => {
-    if ((quote && Number(currentBalance) >= Number(quote.totalAmount)) || !quote?.totalAmount) {
+    if (
+      (quote && Number(currentBalance) >= Number(quote.totalAmount)) ||
+      !quote?.totalAmount
+    ) {
       setIsPurchasePossible(true);
     } else {
       setIsPurchasePossible(false);

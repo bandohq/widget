@@ -2,14 +2,14 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
-import { Adress } from "../../pages/SelectChainPage/types";
+import { Address } from "../../pages/SelectChainPage/types";
 
 type WalletInfo = {
   errorCode?: string;
   message?: string;
   wallet?: {
     hasAcceptedTerms: boolean;
-    walletAddress: Adress;
+    walletAddress: Address;
   };
 };
 
