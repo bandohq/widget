@@ -224,8 +224,8 @@
     "searchProducts": "Cerca per marca di prodotto",
     "topup": "Ricarica e Dati",
     "esim": "eSIM",
-    "gift_card": "Codici prepagati",
-    "gift_card_singular": "Codice prepagato"
+    "gift_card": "Carte regalo",
+    "gift_card_singular": "Carta regalo"
   },
   "settings": {
     "theme": "Tema",

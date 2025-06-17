@@ -219,8 +219,8 @@
     "searchProducts": "Шукати за брендом продукту",
     "topup": "Поповнення рахунку та дані",
     "esim": "eSIMs",
-    "gift_card": "Передплачені коди",
-    "gift_card_singular": "Передплачений код"
+    "gift_card": "Подарункові картки",
+    "gift_card_singular": "Подарункова картка"
   },
   "settings": {
     "theme": "Тема",

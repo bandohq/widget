@@ -223,8 +223,8 @@
     "searchProducts": "Rechercher par marque de produit",
     "topup": "Temps d'antenne et données",
     "esim": "eSIM",
-    "gift_card": "Codes prépayés",
-    "gift_card_singular": "Code prépayé"
+    "gift_card": "Cartes cadeaux",
+    "gift_card_singular": "Carte cadeau"
   },
   "settings": {
     "theme": "Thème",

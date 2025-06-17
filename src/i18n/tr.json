@@ -219,8 +219,8 @@
     "searchProducts": "Ürün markasına göre ara",
     "topup": "Airtime & Veri",
     "esim": "eSIM",
-    "gift_card": "Ön Ödemeli Kodlar",
-    "gift_card_singular": "Ön Ödemeli Kod"
+    "gift_card": "Hediye kartları",
+    "gift_card_singular": "Hediye kartı"
   },
   "settings": {
     "theme": "Tema",
