@@ -32,9 +32,11 @@ export const useTransactionFlow = () => {
   const { mutate, isPending } = useFetch({
     url: `wallets/${account?.address}/transactions/`,
     method: "POST",
+    queryParams: {
+      integrator,
+    },
     headers: {
-      QuoteIdempotencyKeyHeader: quote?.id.toString(),
-      IntegratorSlug: integrator,
+      "Idempotency-Key": quote?.id.toString(),
     },
     mutationOptions: {
       onSuccess: async ({ data }) => {
