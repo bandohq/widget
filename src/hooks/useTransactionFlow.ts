@@ -17,12 +17,9 @@ export const useTransactionFlow = () => {
   const { product } = useProduct();
   const { integrator } = useWidgetConfig();
   const { userAcceptedTermsAndConditions } = useUserWallet();
-  const { showNotification } = useNotificationContext();
-  const tokenKey = FormKeyHelper.getTokenKey("from");
   const { quote } = useQuotes();
   const [chainId, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
-    tokenKey,
     "reference",
     "requiredFields"
   );
@@ -43,27 +40,7 @@ export const useTransactionFlow = () => {
         console.log("onSuccess triggered with data:", data);
         const txId = data.validationId;
         if (txId) {
-          try {
-            console.log(
-              "Attempting to sign transfer with request:",
-              quote.transactionRequest
-            );
-            const signature = await signTransfer(quote.transactionRequest);
-            console.log("Signature received:", signature);
-            if (!signature) {
-              throw new Error("No se pudo obtener la firma de la transacción");
-            }
-            console.log(
-              "Navigating to status page with ID:",
-              data?.transactionIntent?.id
-            );
-            navigate(`/status/${data?.transactionIntent?.id}`, {
-              state: { signature },
-            });
-          } catch (error) {
-            console.error("Error handling the transaction signature:", error);
-            showNotification("error", "Error al firmar la transacción");
-          }
+          navigate(`/status/${data?.transactionIntent?.id}`);
         } else {
           console.log("No txId found in response data");
         }
@@ -74,17 +51,22 @@ export const useTransactionFlow = () => {
     },
   });
 
-  const handleTransaction = useCallback(() => {
+  const handleTransaction = useCallback(async () => {
+    const signature = await signTransfer(quote.transactionRequest);
     mutate({
       reference: reference,
       requiredFields,
+      transactionReceipt: {
+        hash: signature,
+        virtualMachineType: account?.chainType,
+      },
       transactionIntent: {
         sku: product?.sku,
         chain: chain?.key,
         token: quote?.digitalAsset, // Token address
         quote_id: quote?.id,
         quantity: 1,
-        amount: quote?.digitalAssetAmount,
+        amount: parseFloat(quote?.digitalAssetAmount),
         wallet: account?.address,
         integrator,
         has_accepted_terms: userAcceptedTermsAndConditions,

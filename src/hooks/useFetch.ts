@@ -82,6 +82,9 @@ export function useFetch<T = any>({
       mutationFn: (mutationData) => {
         const dynamicOptions: RequestInit = {
           ...fetchOptions,
+          headers: {
+            ...fetchOptions.headers,
+          },
           body: mutationData ? JSON.stringify(mutationData) : undefined,
         };
         return fetchData<T>(fullUrl, dynamicOptions);
