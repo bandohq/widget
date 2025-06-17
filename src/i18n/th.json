@@ -219,8 +219,8 @@
     "searchProducts": "ค้นหาตามแบรนด์สินค้า",
     "topup": "เติมเงิน & ข้อมูล",
     "esim": "eSIM",
-    "gift_card": "รหัสเติมเงิน",
-    "gift_card_singular": "รหัสเติมเงิน"
+    "gift_card": "บัตรของขวัญ",
+    "gift_card_singular": "บัตรของขวัญ"
   },
   "settings": {
     "theme": "ธีม",

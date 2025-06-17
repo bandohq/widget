@@ -220,8 +220,8 @@
     "searchProducts": "製品ブランドで検索",
     "topup": "エアタイムとデータ",
     "esim": "eSIM",
-    "gift_card": "プリペイドコード",
-    "gift_card_singular": "プリペイドコード"
+    "gift_card": "ギフトカード",
+    "gift_card_singular": "ギフトカード"
   },
   "settings": {
     "theme": "テーマ",

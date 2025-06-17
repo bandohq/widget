@@ -218,8 +218,8 @@
     "searchProducts": "Cari berdasarkan merek produk",
     "topup": "Pulsa & Data",
     "esim": "eSIM",
-    "gift_card": "Kode Prapembayaran",
-    "gift_card_singular": "Kode Prapembayaran"
+    "gift_card": "Kartu hadiah",
+    "gift_card_singular": "Kartu hadiah"
   },
   "settings": {
     "theme": "Tema",
