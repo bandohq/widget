@@ -151,7 +151,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
+      "notification": "{{brand}} {{productType}}'inizi {{reference}} adresine alacaksınız"
     },
     "title": {
       "orderInProgress": "Siparişiniz işleniyor",
@@ -219,7 +219,8 @@
     "searchProducts": "Ürün markasına göre ara",
     "topup": "Airtime & Veri",
     "esim": "eSIM",
-    "gift_card": "Ön Ödemeli Kodlar"
+    "gift_card": "Ön Ödemeli Kodlar",
+    "gift_card_singular": "Ön Ödemeli Kod"
   },
   "settings": {
     "theme": "Tema",

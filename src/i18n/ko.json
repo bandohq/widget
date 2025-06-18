@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}}을(를) {{reference}}로 보내드립니다."
+      "notification": "{{brand}} {{productType}}을(를) {{reference}}(으)로 받으실 수 있습니다"
     },
     "title": {
       "orderInProgress": "주문 처리 중",
@@ -220,7 +220,8 @@
     "searchProducts": "제품 브랜드 검색",
     "topup": "에어타임 및 데이터",
     "esim": "eSIM",
-    "gift_card": "선불 코드"
+    "gift_card": "선불 코드",
+    "gift_card_singular": "선불 코드"
   },
   "settings": {
     "theme": "테마",

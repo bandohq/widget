@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} を {{reference}} に送信します。"
+      "notification": "{{brand}} {{productType}} を {{reference}} に送信します。"
     },
     "title": {
       "orderInProgress": "注文を処理中です",
@@ -220,7 +220,8 @@
     "searchProducts": "製品ブランドで検索",
     "topup": "エアタイムとデータ",
     "esim": "eSIM",
-    "gift_card": "プリペイドコード"
+    "gift_card": "プリペイドコード",
+    "gift_card_singular": "プリペイドコード"
   },
   "settings": {
     "theme": "テーマ",

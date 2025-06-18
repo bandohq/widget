@@ -151,7 +151,7 @@
   },
   "success": {
     "message": {
-      "notification": "Ti invieremo il {{productType}} a {{reference}}."
+      "notification": "Riceverai il tuo {{brand}} {{productType}} a {{reference}}"
     },
     "title": {
       "orderInProgress": "Elaborazione del tuo ordine",
@@ -222,9 +222,10 @@
     "sending": "Invio in corso",
     "tokenSearch": "Cerca per nome o indirizzo del token",
     "searchProducts": "Cerca per marca di prodotto",
-    "topup": "Ricarica & Dati",
+    "topup": "Ricarica e Dati",
     "esim": "eSIM",
-    "gift_card": "Codici Prepagati"
+    "gift_card": "Codici prepagati",
+    "gift_card_singular": "Codice prepagato"
   },
   "settings": {
     "theme": "Tema",

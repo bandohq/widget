@@ -168,7 +168,7 @@
   },
   "success": {
     "message": {
-      "notification": "हम आपको {{productType}} {{reference}} पर भेजेंगे।"
+      "notification": "आपको अपना {{brand}} {{productType}} {{reference}} पर प्राप्त होगा"
     },
     "title": {
       "orderInProgress": "आपका ऑर्डर प्रोसेस हो रहा है",
@@ -238,8 +238,9 @@
     "tokenSearch": "टोकन नाम या पता खोजें",
     "searchProducts": "उत्पाद खोजें",
     "topup": "एयरटाइम और डेटा",
-    "esim": "ईसिम",
-    "gift_card": "प्रीपेड कोड"
+    "esim": "eSIM",
+    "gift_card": "प्रीपेड कोड",
+    "gift_card_singular": "प्रीपेड कोड"
   },
   "settings": {
     "theme": "थीम",

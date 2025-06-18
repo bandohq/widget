@@ -12,8 +12,9 @@ export interface TransactionRequest {
   data: string;
   value: string;
   gas: string;
-  gasPrice: string;
   gasLimit: string;
+  maxFeePerGas?: string;
+  maxPriorityFeePerGas?: string;
 }
 
 interface QuoteData {
@@ -53,17 +54,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
-  const mockTransactionRequest: TransactionRequest = {
-    chainId: account?.chainId,
-    type: 0,
-    to: "0x0000000000000000000000000000000000000000",
-    data: "0x",
-    value: quote?.totalAmount || "0",
-    gas: "",
-    gasPrice: "",
-    gasLimit: "",
-  };
-
   const {
     data,
     mutate,
@@ -86,10 +76,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     setIsPending(fetchPending);
     if (data?.data) {
-      // setQuote(data.data);
       setQuote({
         ...data.data,
-        transactionRequest: mockTransactionRequest,
       });
     }
   }, [data, fetchPending]);
@@ -118,6 +106,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiatCurrency,
       digitalAsset,
+      sender: account?.address,
       chainId: account?.chainId,
     });
   };

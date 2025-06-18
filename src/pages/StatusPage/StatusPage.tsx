@@ -5,17 +5,21 @@ import { StatusPageContainer } from "./StatusPage.style";
 import { SuccessView } from "./SuccessView";
 import { useParams } from "react-router-dom";
 import { useAccount } from "@lifi/wallet-management";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 export const StatusPage = () => {
   const { transactionId } = useParams();
   const { account } = useAccount();
-
+  const { integrator } = useWidgetConfig();
   const { data: transactionData } = useFetch({
     url:
       transactionId && account?.address
         ? `wallets/${account?.address}/transactions/${transactionId}/`
         : "",
     method: "GET",
+    queryParams: {
+      integrator,
+    },
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
       refetchInterval: 10000,

@@ -147,7 +147,7 @@
   },
   "success": {
     "message": {
-      "notification": "เราจะส่ง {{productType}} ไปยัง {{reference}}"
+      "notification": "คุณจะได้รับ {{brand}} {{productType}} ของคุณที่ {{reference}}"
     },
     "title": {
       "orderInProgress": "กำลังประมวลผลคำสั่งซื้อของคุณ",
@@ -219,7 +219,8 @@
     "searchProducts": "ค้นหาตามแบรนด์สินค้า",
     "topup": "เติมเงิน & ข้อมูล",
     "esim": "eSIM",
-    "gift_card": "รหัสเติมเงิน"
+    "gift_card": "รหัสเติมเงิน",
+    "gift_card_singular": "รหัสเติมเงิน"
   },
   "settings": {
     "theme": "ธีม",

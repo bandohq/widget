@@ -148,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "আমরা আপনাকে {{productType}} {{reference}} এ পাঠাব।"
+      "notification": "আপনি আপনার {{brand}} {{productType}} {{reference}} এ পাবেন"
     },
     "title": {
       "orderInProgress": "আমরা এটিতে কাজ করছি!",
@@ -219,7 +219,8 @@
     "searchProducts": "পণ্য ব্র্যান্ড অনুসন্ধান করুন",
     "topup": "এয়ারটাইম এবং ডেটা",
     "esim": "ইসিম",
-    "gift_card": "প্রিপেইড কোড"
+    "gift_card": "প্রিপেইড কোড",
+    "gift_card_singular": "প্রিপেইড কোড"
   },
   "settings": {
     "theme": "থিম",

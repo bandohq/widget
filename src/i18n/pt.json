@@ -151,7 +151,7 @@
   },
   "success": {
     "message": {
-      "notification": "Enviaremos o {{productType}} para {{reference}}."
+      "notification": "Você receberá seu {{brand}} {{productType}} em {{reference}}"
     },
     "title": {
       "orderInProgress": "Processando seu pedido",
@@ -222,7 +222,8 @@
     "searchProducts": "Pesquisar por marca do produto",
     "topup": "Tempo de antena e dados",
     "esim": "eSIM",
-    "gift_card": "Códigos pré-pagos"
+    "gift_card": "Códigos pré-pagos",
+    "gift_card_singular": "Código pré-pago"
   },
   "settings": {
     "theme": "Tema",

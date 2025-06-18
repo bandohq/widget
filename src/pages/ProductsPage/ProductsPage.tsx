@@ -12,6 +12,7 @@ import { BrandsContainer } from "./ProductPage.style";
 import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
+import { useFieldActions } from "../../stores/form/useFieldActions";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -20,8 +21,13 @@ export const ProductsPage = () => {
   const { products, isLoading, filteredBrands, fuzzySearchBrands } =
     useCatalogContext();
   const { updateProduct } = useProduct();
+  const { setFieldValue } = useFieldActions();
 
   useHeader(t("header.spend"));
+
+  useEffect(() => {
+    setFieldValue("reference", "");
+  }, []);
 
   useEffect(() => {
     if (!isLoading && products) {
