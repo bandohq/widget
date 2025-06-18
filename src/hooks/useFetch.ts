@@ -27,6 +27,10 @@ function buildQueryString(queryParams: Record<string, string | number> = {}) {
 async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    if (errorData) {
+      throw errorData;
+    }
     throw new Error(`Error: ${response.status}`);
   }
   return response.json();
