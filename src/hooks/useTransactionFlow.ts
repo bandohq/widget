@@ -36,11 +36,11 @@ export const useTransactionFlow = () => {
       "Idempotency-Key": quote?.id.toString(),
     },
     mutationOptions: {
-      onSuccess: async ({ data }) => {
-        console.log("onSuccess triggered with data:", data);
-        const txId = data.validationId;
+      onSuccess: async ({ transactionId }) => {
+        console.log("onSuccess triggered with data:", transactionId);
+        const txId = transactionId;
         if (txId) {
-          navigate(`/status/${data?.transactionIntent?.id}`);
+          navigate(`/status/${txId}`);
         } else {
           console.log("No txId found in response data");
         }
