@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ### [0.1.32](https://github.com/bandohq/widget/compare/v0.1.31...v0.1.32) (2025-06-19)
+ - Improve copies for token selection flow
 
 ### [0.1.31](https://github.com/bandohq/widget/compare/v0.1.30...v0.1.31) (2025-06-19)
 
