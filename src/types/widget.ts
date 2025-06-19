@@ -179,52 +179,52 @@ import { ChainType } from '../pages/SelectChainPage/types.js'
   } & AllowDeny<LanguageKey>
   
   export interface WidgetConfig {
-    fromChain?: number
-    fromToken?: string
-    productId?: string
-    country?: string
-    blockedCountries?: string[]
-    toAmount?: number | string
-    formUpdateKey?: string
-  
-    contractCalls?: ContractCall[]
-    contractComponent?: ReactNode
-    contractSecondaryComponent?: ReactNode
-    contractCompactComponent?: ReactNode
-    contractTool?: WidgetContractTool
-    integrator: string
-    apiKey?: string
+    fromChain?: number;
+    fromToken?: string;
+    productId?: string;
+    country?: string;
+    allowedCountries?: string[];
+    toAmount?: number | string;
+    formUpdateKey?: string;
+
+    contractCalls?: ContractCall[];
+    contractComponent?: ReactNode;
+    contractSecondaryComponent?: ReactNode;
+    contractCompactComponent?: ReactNode;
+    contractTool?: WidgetContractTool;
+    integrator: string;
+    apiKey?: string;
     /**
      * @deprecated Use `feeConfig` instead.
      */
-    fee?: number
-    feeConfig?: WidgetFeeConfig
-    referrer?: string
-  
-    slippage?: number
-  
-    variant?: WidgetVariant
-    subvariant?: WidgetSubvariant
-    subvariantOptions?: SubvariantOptions
-  
-    appearance?: Appearance
-    theme?: WidgetTheme
-  
-    disabledUI?: DisabledUIType[]
-    hiddenUI?: HiddenUIType[]
-    useRecommendedRoute?: boolean
-  
-    walletConfig?: WidgetWalletConfig
-  
-    buildUrl?: boolean
-    keyPrefix?: string
-  
-    chains?: WidgetChains
-    tokens?: WidgetTokens
-    languages?: WidgetLanguages
-    languageResources?: LanguageResources
+    fee?: number;
+    feeConfig?: WidgetFeeConfig;
+    referrer?: string;
+
+    slippage?: number;
+
+    variant?: WidgetVariant;
+    subvariant?: WidgetSubvariant;
+    subvariantOptions?: SubvariantOptions;
+
+    appearance?: Appearance;
+    theme?: WidgetTheme;
+
+    disabledUI?: DisabledUIType[];
+    hiddenUI?: HiddenUIType[];
+    useRecommendedRoute?: boolean;
+
+    walletConfig?: WidgetWalletConfig;
+
+    buildUrl?: boolean;
+    keyPrefix?: string;
+
+    chains?: WidgetChains;
+    tokens?: WidgetTokens;
+    languages?: WidgetLanguages;
+    languageResources?: LanguageResources;
     explorerUrls?: Record<number, string[]> &
-      Partial<Record<'internal', string[]>>
+      Partial<Record<"internal", string[]>>;
   }
   
   export interface FormFieldOptions {

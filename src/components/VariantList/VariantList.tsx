@@ -46,10 +46,10 @@ export const VariantList: React.FC<VariantListProps> = ({
     prevArrow: <CaretLeft color={iconColor} />,
   };
 
-  // Asegurarse de que el slider se posicione correctamente cuando cambia el índice seleccionado
+  // be sure the slider is positioned correctly when the selected index changes
   useEffect(() => {
     if (selectedIndex !== -1 && sliderRef.current) {
-      // Pequeño retraso para asegurar que el slider esté completamente renderizado
+      // small delay to ensure the slider is fully rendered
       setTimeout(() => {
         sliderRef.current?.slickGoTo(selectedIndex, true);
       }, 50);
