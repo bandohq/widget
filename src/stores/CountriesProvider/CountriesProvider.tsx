@@ -28,8 +28,6 @@ export const CountriesProvider: React.FC<{
     if (countriesResponse?.data?.results) {
       const allCountries = countriesResponse.data.results;
 
-      // Si hay allowedCountries especificados, filtrar solo esos países
-      // Si está vacío o no se especifica, mostrar todos los países
       const filteredCountries =
         initialAllowedCountries && initialAllowedCountries.length > 0
           ? allCountries.filter((country) =>
