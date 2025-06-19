@@ -48,7 +48,7 @@
     "settings": "Ajustes",
     "title": "Gastar",
     "youGet": "Obtienes",
-    "youPay": "Pagas",
+    "youPay": "Pagas con",
     "tokens": "Tokens",
     "products": "Productos",
     "spend": "Gastar"
@@ -229,7 +229,7 @@
   },
   "main": {
     "allTokens": "Todos los tokens",
-    "payWith": "Pagar con",
+    "totalToPay": "Total a pagar",
     "inProgress": "en progreso",
     "maxSlippage": "Máx. deslizamiento",
     "minReceived": "Mín. recibido",

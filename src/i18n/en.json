@@ -230,7 +230,7 @@
   },
   "main": {
     "allTokens": "All tokens",
-    "payWith": "Pay with",
+    "totalToPay": "Total to pay",
     "inProgress": "in progress",
     "maxSlippage": "Max. slippage",
     "minReceived": "Min. received",
