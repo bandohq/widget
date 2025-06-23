@@ -44,7 +44,7 @@ export const LaunchDarklyProvider: React.FC<LaunchDarklyProviderProps> = ({
   }
 
   return (
-    <LDProvider clientSideID="" context={context}>
+    <LDProvider clientSideID="68533cbf1d687d0946833532" context={context}>
       {children}
     </LDProvider>
   );
