@@ -15,6 +15,8 @@ import {
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { useFlags } from "launchdarkly-react-client-sdk";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -27,10 +29,12 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = useAccount();
+  const navigate = useNavigate();
   const { showNotification, hideNotification } = useNotificationContext();
   const { isPending } = useTransactionFlow();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { isPurchasePossible } = useQuotes();
+  const { transactionFlow } = useFlags();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { handleTransaction, isPending: transactionLoading } =
     useTransactionFlow();
@@ -39,6 +43,16 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     "reference",
     "requiredFields"
   );
+
+  console.log("transactionFlow", transactionFlow);
+
+  const handleClick = () => {
+    if (transactionFlow) {
+      handleTransaction();
+    } else {
+      navigate(navigationRoutes.formSteps);
+    }
+  };
 
   const { chain: selectedChain } = useChain(account?.chainId);
 
@@ -78,7 +92,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     <BaseTransactionButton
       disabled={disabled || isPending || !tokenAddress}
       text={t("header.spend")}
-      onClick={() => handleTransaction()}
+      onClick={() => handleClick()}
       loading={transactionLoading}
     />
   );

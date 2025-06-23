@@ -7,10 +7,13 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
+import { useToken } from "./useToken";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
-import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -18,52 +21,88 @@ export const useTransactionFlow = () => {
   const { integrator } = useWidgetConfig();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { quote } = useQuotes();
-  const [chainId, reference, requiredFields] = useFieldValues(
+  const { clearStep } = useSteps();
+  const tokenKey = FormKeyHelper.getTokenKey("from");
+  const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
+    tokenKey,
     "reference",
     "requiredFields"
   );
   const { chain } = useChain(chainId);
+  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { signTransfer } = useTransactionHelpers();
-  const { mutate, isPending } = useFetch({
+  const { handleServiceRequest, signTransfer } = useTransactionHelpers();
+  const { showNotification } = useNotificationContext();
+  const { transactionFlow } = useFlags();
+
+  // Nuevo flujo
+  const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
     url: `wallets/${account?.address}/transactions/`,
     method: "POST",
-    queryParams: {
-      integrator,
-    },
+    queryParams: { integrator },
     headers: {
       "Idempotency-Key": quote?.id.toString(),
     },
     mutationOptions: {
       onSuccess: async ({ transactionId }) => {
-        console.log("onSuccess triggered with data:", transactionId);
-        const txId = transactionId;
-        if (txId) {
-          navigate(`/status/${txId}`);
+        if (transactionId) {
+          navigate(`/status/${transactionId}`);
         } else {
-          console.log("No txId found in response data");
+          console.error("No transaction ID returned");
         }
       },
       onError: (error) => {
-        console.error("Error fetching data:", error);
+        console.error("New flow error:", error);
+      },
+    },
+  });
+
+  // Flujo viejo
+  const { mutate: mutateOld, isPending: isPendingOld } = useFetch({
+    url: "references/",
+    method: "POST",
+    mutationOptions: {
+      onSuccess: async ({ data }) => {
+        const txId = data.validationId;
+        if (txId) {
+          try {
+            const signature = await handleServiceRequest({
+              txId,
+              chain,
+              account,
+              quote,
+              product,
+              token,
+            });
+            clearStep();
+            navigate(`/status/${data?.transactionIntent?.id}`, {
+              state: { signature },
+            });
+          } catch (error) {
+            clearStep();
+            showNotification(
+              "error",
+              "Error handling the transaction signature"
+            );
+            console.error("handleServiceRequest failed:", error);
+          }
+        }
+      },
+      onError: (error) => {
+        console.error("Old flow error:", error);
       },
     },
   });
 
   const handleTransaction = useCallback(async () => {
-    const signature = await signTransfer(quote.transactionRequest);
-    mutate({
-      reference: reference,
+    const payload = {
+      reference,
       requiredFields,
-      transactionReceipt: {
-        hash: signature,
-        virtualMachineType: account?.chainType,
-      },
       transactionIntent: {
         sku: product?.sku,
         chain: chain?.key,
-        token: quote?.digitalAsset, // Token address
+        token: quote?.digitalAsset,
         quote_id: quote?.id,
         quantity: 1,
         amount: parseFloat(quote?.digitalAssetAmount),
@@ -71,22 +110,40 @@ export const useTransactionFlow = () => {
         integrator,
         has_accepted_terms: userAcceptedTermsAndConditions,
       },
-    });
+    };
+
+    if (transactionFlow) {
+      const signature = await signTransfer(quote.transactionRequest);
+      mutateNew({
+        ...payload,
+        transactionReceipt: {
+          hash: signature,
+          virtualMachineType: account?.chainType,
+        },
+      });
+    } else {
+      mutateOld(payload);
+    }
   }, [
-    mutate,
-    reference,
-    requiredFields,
+    transactionFlow,
+    mutateNew,
+    mutateOld,
+    signTransfer,
+    quote,
     product?.sku,
     chain?.key,
+    reference,
+    requiredFields,
     quote?.digitalAsset,
     quote?.digitalAssetAmount,
     account?.address,
     userAcceptedTermsAndConditions,
     integrator,
+    account?.chainType,
   ]);
 
   return {
     handleTransaction,
-    isPending,
+    isPending: transactionFlow ? isPendingNew : isPendingOld,
   };
 };
