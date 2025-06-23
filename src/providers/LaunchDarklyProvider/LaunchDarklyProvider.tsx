@@ -38,13 +38,17 @@ export const LaunchDarklyProvider: React.FC<LaunchDarklyProviderProps> = ({
     }
   }, [account?.address, isInitialized]);
 
-  // Don't render until we have a stable key
+  // Don't render until we have initialized
   if (!isInitialized) {
     return null;
   }
 
   return (
-    <LDProvider clientSideID="68533cbf1d687d0946833532" context={context}>
+    <LDProvider
+      clientSideID="68533cbf1d687d0946833532"
+      context={context}
+      key={contextKey}
+    >
       {children}
     </LDProvider>
   );
