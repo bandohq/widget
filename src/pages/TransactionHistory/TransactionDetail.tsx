@@ -24,7 +24,7 @@ import { useState } from "react";
 import { useChain } from "../../hooks/useChain";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { executeRefund } from "../../utils/refunds";
-import { useConfig } from "@bigmi/react/dist/esm/hooks/useConfig";
+import { useConfig } from "wagmi";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
 import { defineChain } from "viem";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
