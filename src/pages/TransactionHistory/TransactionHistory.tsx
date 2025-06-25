@@ -5,10 +5,17 @@ import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
 import { useFetch } from "../../hooks/useFetch";
 import { TransactionList } from "../../components/TransactionList/TransactionList";
-import { List, Typography } from "@mui/material";
+import { List } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 import { Box } from "@mui/system";
 import { NoTransactionsFound } from "./NoTransactionsFound";
+import { useConfig } from "wagmi";
+import { useChain } from "../../hooks/useChain";
+import { useToken } from "../../hooks/useToken";
+import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1_2.json";
+import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1_2.json";
+import { readContract } from "wagmi/actions";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export interface Transaction {
   id: string;
@@ -31,8 +38,15 @@ export interface Transaction {
 
 export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
+  const { transactionFlow } = useFlags();
+  const config = useConfig();
   useHeader(t("history.title"));
   const { account } = useAccount();
+  const { chain } = useChain(account.chainId);
+  const [refunds, setRefunds] = useState<{ id: string; txStatus: number }[]>(
+    []
+  );
+  const { searchToken, isLoading: isLoadingToken } = useToken(chain);
 
   const {
     data: transactions,
@@ -48,6 +62,64 @@ export const TransactionsHistoryPage = () => {
       chainId: account.chainId,
     },
   });
+
+  useEffect(() => {
+    if (
+      !transactionFlow &&
+      transactions &&
+      !isPending &&
+      !isLoadingToken &&
+      refunds.length === 0
+    ) {
+      const possibleRefunds = transactions.transactions.filter(
+        (transaction) => transaction.status === "FAILED"
+      );
+
+      if (possibleRefunds.length === 0) return;
+
+      const refundPromises = possibleRefunds.map(async (transaction) => {
+        const token = searchToken(transaction.tokenUsed);
+        const nativeToken = chain?.nativeToken;
+
+        try {
+          const abi =
+            token.key === nativeToken?.symbol
+              ? BandoFulfillableV1.abi.find((item) => item.name === "record")
+              : BandoERC20FulfillableV1.abi.find(
+                  (item) => item.name === "record"
+                );
+
+          const address =
+            token.key === nativeToken?.symbol
+              ? chain?.protocolContracts?.BandoFulfillableProxy
+              : chain?.protocolContracts?.BandoERC20FulfillableProxy;
+
+          const txStatus = (await readContract(config, {
+            address,
+            abi: [abi],
+            functionName: "record",
+            args: [transaction.recordId],
+            chainId: chain?.chainId,
+          })) as { status: number };
+
+          return { id: transaction.id, txStatus: txStatus.status };
+        } catch (error) {
+          console.error(error);
+          return { id: transaction.id, txStatus: -1 };
+        }
+      });
+
+      Promise.all(refundPromises).then(setRefunds);
+    }
+  }, [
+    transactionFlow,
+    transactions,
+    isPending,
+    config,
+    chain,
+    account,
+    isLoadingToken,
+  ]);
 
   if (isPending) {
     return (
@@ -66,7 +138,10 @@ export const TransactionsHistoryPage = () => {
           <NoTransactionsFound />
         )}
         {!isPending && transactions && (
-          <TransactionList transactions={transactions.transactions} />
+          <TransactionList
+            transactions={transactions.transactions}
+            refunds={transactionFlow ? undefined : refunds}
+          />
         )}
       </Box>
     </PageContainer>
