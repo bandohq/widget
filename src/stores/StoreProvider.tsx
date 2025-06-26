@@ -13,7 +13,7 @@ export const StoreProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
 }) => {
   return (
     <CountriesProvider
-      blockedCountries={config.blockedCountries}
+      allowedCountries={config.allowedCountries}
       configCountry={config.country}
     >
       <ProductProvider>

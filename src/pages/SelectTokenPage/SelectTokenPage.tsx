@@ -24,7 +24,7 @@ export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
 
   const { t } = useTranslation();
 
-  useHeader(t("header.tokens"));
+  useHeader(t("header.youPay"));
 
   return (
     <FullPageContainer disableGutters isDrawer>

@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
     }}
   >
     <App
-      integrator="bando-app" // TODO: CONFIGURE THIS
+      integrator="bando-app"
       buildUrl={true}
       config={{
         theme: {
@@ -21,7 +21,6 @@ createRoot(document.getElementById("root")!).render(
             borderRadius: "16px",
           },
         },
-        blockedCountries: ["AF", "AL"],
         country: "MX",
       }}
     />
