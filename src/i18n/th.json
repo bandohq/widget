@@ -132,7 +132,8 @@
     "sentTo": "ส่งถึง",
     "availableRefunds": "รับเงินคืนของคุณ",
     "instructions": "เงินของคุณปลอดภัย การคืนเงินของคุณได้รับการอนุมัติแล้ว",
-    "noTransactions": "ที่นี่ไม่มีอะไรเลย"
+    "instructionsNewFlow": "เงินของคุณปลอดภัย คุณจะได้รับเงินคืนในอีกไม่กี่นาที",
+    "noTransactions": "ไม่มีอะไรที่นี่"
   },
   "info": {
     "detailMessage": "คุณจะได้รับ {{productType}} ที่นี่",

@@ -135,8 +135,9 @@
     "country": "Paese",
     "sentTo": "Inviato a",
     "availableRefunds": "Ottieni il tuo rimborso",
-    "instructions": "Il tuo denaro è al sicuro, il tuo rimborso è stato autorizzato.",
-    "noTransactions": "Non c'è niente qui."
+    "instructions": "I tuoi soldi sono al sicuro, il tuo rimborso è stato autorizzato.",
+    "instructionsNewFlow": "I tuoi soldi sono al sicuro, riceverai il tuo rimborso tra pochi minuti",
+    "noTransactions": "Non c'è nulla qui."
   },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",
