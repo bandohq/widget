@@ -44,8 +44,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     "requiredFields"
   );
 
-  console.log("transactionFlow", transactionFlow);
-
   const handleClick = () => {
     if (transactionFlow) {
       handleTransaction();
