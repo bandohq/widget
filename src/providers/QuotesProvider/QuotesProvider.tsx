@@ -33,6 +33,7 @@ interface QuotesContextType {
   isPending: boolean;
   isPurchasePossible: boolean;
   handleCurrentBalanceChange: (newBalance: bigint | null) => void;
+  resetQuote: () => void;
   fetchQuote: (
     sku: string,
     fiatCurrency: string,
@@ -111,8 +112,12 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  useEffect(() => {
+  const resetQuote = () => {
     setQuote(null);
+  };
+
+  useEffect(() => {
+    resetQuote();
   }, [account?.chainId, product?.sku]);
 
   return (
@@ -122,6 +127,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
         isPending,
         isPurchasePossible,
         fetchQuote,
+        resetQuote,
         handleCurrentBalanceChange,
       }}
     >
