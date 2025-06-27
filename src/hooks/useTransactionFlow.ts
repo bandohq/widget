@@ -34,8 +34,11 @@ export const useTransactionFlow = () => {
   const { handleServiceRequest } = useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { mutate, isPending } = useFetch({
-    url: "references/",
+    url: `/wallets/${account?.address}/transactions/`,
     method: "POST",
+    headers: {
+      "Idempotency-Key": quote?.id.toString(),
+    },
     mutationOptions: {
       onSuccess: async ({ data }) => {
         const txId = data.validationId;

@@ -18,7 +18,7 @@ import {
 import { useParams, useSearchParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
-import { ArrowRight, Barcode } from "@phosphor-icons/react";
+import { Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useChain } from "../../hooks/useChain";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
@@ -30,7 +30,6 @@ import { useEffect, useState } from "react";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { executeRefund } from "../../utils/refunds";
 import { useTheme } from "@mui/system";
-import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -52,10 +51,13 @@ export const TransactionsDetailPage = () => {
   useHeader(t("history.detailTitle"));
 
   const { data: transactionData, isPending } = useFetch({
-    url: transactionId ? `transactions/${transactionId}/` : "",
+    url:
+      transactionId && account?.address
+        ? `wallets/${account?.address}/transactions/${transactionId}/`
+        : "",
     method: "GET",
     queryOptions: {
-      queryKey: ["transaction", transactionId],
+      queryKey: ["transaction", transactionId, account?.address],
     },
   });
 
