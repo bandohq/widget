@@ -66,9 +66,7 @@ export const CountryPage: React.FC = () => {
                   sx={{ objectFit: "cover" }}
                 />
               </ListItemIcon>
-              <ListItemText
-                primary={`${country.name} - ${country.isoAlpha2}`}
-              />
+              <ListItemText primary={country.name} />
               <Chip
                 color="error"
                 label={t("countries.excluded")}
@@ -98,7 +96,7 @@ export const CountryPage: React.FC = () => {
                 sx={{ objectFit: "cover" }}
               />
             </ListItemIcon>
-            <ListItemText primary={`${country.name} - ${country.isoAlpha2}`} />
+            <ListItemText primary={country.name} />
           </SettingsListItemButton>
         ))}
       </List>
