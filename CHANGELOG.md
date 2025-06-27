@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ### [0.1.33](https://github.com/bandohq/widget/compare/v0.1.29-beta.5...v0.1.33) (2025-06-27)
+- new transaction flow
+    - feature flags
+    - mantain old flow for testing and new to allowed users
 
 ### [0.1.32](https://github.com/bandohq/widget/compare/v0.1.31...v0.1.32) (2025-06-19)
 
