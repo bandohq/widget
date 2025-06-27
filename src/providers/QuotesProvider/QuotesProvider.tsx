@@ -4,6 +4,7 @@ import { useAccount } from "@lifi/wallet-management";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export interface TransactionRequest {
   chainId: number;
@@ -15,6 +16,17 @@ export interface TransactionRequest {
   gasLimit: string;
   maxFeePerGas?: string;
   maxPriorityFeePerGas?: string;
+}
+
+interface QuoteError {
+  error: string;
+  message: string;
+  data?: {
+    error_code: string;
+    error_type: string;
+    reason: string;
+    message: string;
+  };
 }
 
 interface QuoteData {
@@ -32,6 +44,7 @@ interface QuotesContextType {
   quote: QuoteData | null;
   isPending: boolean;
   isPurchasePossible: boolean;
+  error: QuoteError | null;
   handleCurrentBalanceChange: (newBalance: bigint | null) => void;
   resetQuote: () => void;
   fetchQuote: (
@@ -54,12 +67,14 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentBalance, setCurrentBalance] = useState<bigint | number>(0);
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const { transactionFlow } = useFlags();
+  const [error, setError] = useState<QuoteError | null>(null);
 
   const {
     data,
     mutate,
     isPending: fetchPending,
-    error,
+    error: fetchError,
   } = useFetch({
     url: "quotes/",
     method: "POST",
@@ -69,12 +84,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   useEffect(() => {
-    if (error) {
-      showNotification("error", t("error.message.quoteFailed"));
-    }
-  }, [error]);
-
-  useEffect(() => {
     setIsPending(fetchPending);
     if (data?.data) {
       setQuote({
@@ -82,6 +91,31 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       });
     }
   }, [data, fetchPending]);
+
+  useEffect(() => {
+    if (fetchError) {
+      if (typeof fetchError === "object" && "error" in fetchError) {
+        setError(fetchError as QuoteError);
+        showNotification(
+          "error",
+          (fetchError as QuoteError).data.error_code === "INSUFFICIENT_BALANCE"
+            ? t("warning.message.insufficientFunds")
+            : t("error.message.quoteFailed")
+        );
+      } else {
+        setError({
+          error: "UNKNOWN_ERROR",
+          message:
+            fetchError instanceof Error
+              ? fetchError.message
+              : t("error.message.quoteFailed"),
+        });
+        showNotification("error", t("error.message.quoteFailed"));
+      }
+    } else {
+      setError(null);
+    }
+  }, [fetchError]);
 
   useEffect(() => {
     if (
@@ -107,7 +141,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiatCurrency,
       digitalAsset,
-      sender: account?.address,
+      sender: transactionFlow ? account?.address : undefined,
       chainId: account?.chainId,
     });
   };
@@ -126,6 +160,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
         quote,
         isPending,
         isPurchasePossible,
+        error,
         fetchQuote,
         resetQuote,
         handleCurrentBalanceChange,

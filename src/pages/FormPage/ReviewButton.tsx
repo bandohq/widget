@@ -33,7 +33,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { showNotification, hideNotification } = useNotificationContext();
   const { isPending } = useTransactionFlow();
   const { userAcceptedTermsAndConditions } = useUserWallet();
-  const { isPurchasePossible } = useQuotes();
+  const { isPurchasePossible, error: quoteError } = useQuotes();
   const { transactionFlow } = useFlags();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { handleTransaction, isPending: transactionLoading } =
@@ -65,7 +65,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       !requiredFieldsValid ||
       !isPurchasePossible ||
       !selectedChain?.isActive ||
-      !userAcceptedTermsAndConditions
+      !userAcceptedTermsAndConditions ||
+      !!quoteError
     );
   }, [
     tokenAddress,
@@ -76,6 +77,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     isPurchasePossible,
     requiredFieldsProps,
     selectedChain?.isActive,
+    quoteError,
   ]);
 
   useEffect(() => {
