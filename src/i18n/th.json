@@ -132,7 +132,8 @@
     "sentTo": "ส่งถึง",
     "availableRefunds": "รับเงินคืนของคุณ",
     "instructions": "เงินของคุณปลอดภัย การคืนเงินของคุณได้รับการอนุมัติแล้ว",
-    "noTransactions": "ที่นี่ไม่มีอะไรเลย"
+    "instructionsNewFlow": "เงินของคุณปลอดภัย คุณจะได้รับเงินคืนในอีกไม่กี่นาที",
+    "noTransactions": "ไม่มีอะไรที่นี่"
   },
   "info": {
     "detailMessage": "คุณจะได้รับ {{productType}} ที่นี่",
@@ -147,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "เราจะส่ง {{productType}} ไปยัง {{reference}}"
+      "notification": "คุณจะได้รับ {{brand}} {{productType}} ของคุณที่ {{reference}}"
     },
     "title": {
       "orderInProgress": "กำลังประมวลผลคำสั่งซื้อของคุณ",
@@ -201,25 +202,26 @@
   },
   "main": {
     "allTokens": "โทเคนทั้งหมด",
-    "payWith": "ชำระเงินด้วย",
+    "totalToPay": "รวมที่ต้องชำระ",
     "inProgress": "กำลังดำเนินการ",
+    "maxSlippage": "สลิปเพจสูงสุด",
+    "minReceived": "ได้รับขั้นต่ำ",
     "myTokens": "โทเคนของฉัน",
     "onChain": "บน {{chainName}}",
-    "quotedAmount": "จำนวนทั้งหมดที่เสนอ",
-    "receiving": "ได้รับ",
+    "ownedBy": "เป็นเจ้าของโดย",
+    "quotedAmount": "จำนวนที่เสนอราคา",
+    "rateChange": "การเปลี่ยนแปลงอัตรา",
+    "receiving": "กำลังรับ",
     "selectChain": "เลือกเชน",
+    "selectChainAndToken": "เลือกเชนและโทเคน",
     "selectToken": "เลือกโทเคน",
     "sending": "กำลังส่ง",
-    "to": "ถึง",
-    "tokenSearch": "ค้นหาชื่อของเหรียญ หรือ ที่อยู่",
-    "maxSlippage": "การคลาดเคลื่อนสูงสุด",
-    "minReceived": "ได้รับขั้นต่ำ",
-    "ownedBy": "เป็นเจ้าของโดย",
-    "rateChange": "การเปลี่ยนแปลงอัตรา",
-    "searchProducts": "ค้นหาตามแบรนด์สินค้า",
+    "tokenSearch": "ค้นหาด้วยชื่อหรือที่อยู่โทเคน",
+    "searchProducts": "ค้นหาด้วยยี่ห้อสินค้า",
     "topup": "เติมเงิน & ข้อมูล",
     "esim": "eSIM",
-    "gift_card": "รหัสเติมเงิน"
+    "gift_card": "บัตรของขวัญ",
+    "gift_card_singular": "บัตรของขวัญ"
   },
   "settings": {
     "theme": "ธีม",

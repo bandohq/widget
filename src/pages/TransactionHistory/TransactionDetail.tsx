@@ -1,60 +1,58 @@
 import { useTranslation } from "react-i18next";
-import { writeContract } from "@wagmi/core";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
-import { BottomSheet } from "../../components/BottomSheet/BottomSheet";
-import { defineChain } from "viem";
 import {
-  Button,
   List,
-  Paper,
   Typography,
   ListItem,
   Divider,
   Box,
   Chip,
+  Paper,
+  Button,
 } from "@mui/material";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
-import { useChain } from "../../hooks/useChain";
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
-import { useConfig } from "wagmi";
-import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
-import { transformToChainConfig } from "../../utils/TransformToChainConfig";
-import { useToken } from "../../hooks/useToken";
-import { useEffect, useState } from "react";
-import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
-import { executeRefund } from "../../utils/refunds";
 import { useTheme } from "@mui/system";
+import { useFlags } from "launchdarkly-react-client-sdk";
+import { BottomSheet } from "../../components/BottomSheet/BottomSheet";
+import { useState } from "react";
+import { useChain } from "../../hooks/useChain";
+import { transformToChainConfig } from "../../utils/TransformToChainConfig";
+import { executeRefund } from "../../utils/refunds";
+import { useConfig } from "wagmi";
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
+import { defineChain } from "viem";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
-  const { account } = useAccount();
-  const { chain } = useChain(account.chainId);
   const config = useConfig();
+  const { account } = useAccount();
   const [searchParams] = useSearchParams();
-  const serviceId = searchParams.get("serviceId");
-  const tokenUsed = searchParams.get("tokenUsed");
   const status = searchParams.get("status");
+  const serviceId = searchParams.get("serviceId");
   const { transactionId } = useParams();
-  const { showNotification } = useNotificationContext();
   const { availableCountries } = useCountryContext();
-  const { token } = useToken(chain, tokenUsed);
-  const [loading, setLoading] = useState(false);
+  const { transactionFlow } = useFlags();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { chain } = useChain(account.chainId);
+  const { showNotification } = useNotificationContext();
 
   useHeader(t("history.detailTitle"));
 
   const { data: transactionData, isPending } = useFetch({
-    url:
-      transactionId && account?.address
+    url: transactionId
+      ? transactionFlow
         ? `wallets/${account?.address}/transactions/${transactionId}/`
-        : "",
+        : `transactions/${transactionId}/`
+      : "",
     method: "GET",
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
@@ -72,19 +70,30 @@ export const TransactionsDetailPage = () => {
     }).format(date);
   };
 
+  const renderChipLabel = () => {
+    return status === "2" ? (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        Refund available
+      </div>
+    ) : status === "3" ? (
+      <div style={{ display: "flex", alignItems: "center" }}>Refunded</div>
+    ) : (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {transactionData?.status}
+      </div>
+    );
+  };
   const handleRefund = async () => {
     setLoading(true);
 
-    const nativeToken = nativeTokenCatalog.find(
-      (item) => item.key === chain?.key
-    );
+    const nativeToken = chain?.nativeToken;
     const formattedChain = defineChain(
       transformToChainConfig(chain, nativeToken)
     );
 
     if (serviceId && formattedChain) {
       try {
-        const isNativeToken = nativeToken.key === token.key;
+        const isNativeToken = nativeToken.symbol === transactionData?.token;
 
         await executeRefund({
           config,
@@ -110,26 +119,6 @@ export const TransactionsDetailPage = () => {
       }
     }
   };
-
-  const renderChipLabel = () => {
-    return status === "2" ? (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        Refund available
-      </div>
-    ) : status === "3" ? (
-      <div style={{ display: "flex", alignItems: "center" }}>Refunded</div>
-    ) : (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        {transactionData?.status}
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    if (serviceId) {
-      setOpen(true);
-    }
-  }, [serviceId]);
 
   if (isPending || !transactionData) {
     return null;
@@ -160,11 +149,6 @@ export const TransactionsDetailPage = () => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Chip
             color="default"
-            onClick={() => {
-              if (status === "0") {
-                setOpen(!open);
-              }
-            }}
             sx={
               status === "2"
                 ? {
@@ -189,7 +173,6 @@ export const TransactionsDetailPage = () => {
       <Typography variant="h5" align="center" my={2}>
         {transactionData?.fiatUnitPrice} {transactionData?.fiatCurrency}
       </Typography>
-      {/* TODO: truncate id and add copy button */}
       <Typography variant="body2" align="center" mt={2}>
         Transaction ID: {transactionData?.transactionId}
       </Typography>
@@ -227,9 +210,7 @@ export const TransactionsDetailPage = () => {
           </Typography>
         </ListItem>
       </List>
-
-      {/* Refund section */}
-      {serviceId && transactionData.tokenAmountPaid && (
+      {!transactionFlow && serviceId && transactionData.tokenAmountPaid && (
         <BottomSheet open={open}>
           <Paper sx={{ padding: 2 }}>
             <Button
@@ -247,4 +228,3 @@ export const TransactionsDetailPage = () => {
     </PageContainer>
   );
 };
-

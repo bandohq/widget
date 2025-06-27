@@ -62,7 +62,11 @@ export const FormsStepsPage = () => {
             <ListItemAvatar>{renderProductAvatar()}</ListItemAvatar>
             <ListItemText
               primary={product?.brand}
-              secondary={`${product.productType} in ${product.country}`}
+              secondary={`${t(
+                product?.productType === "gift_card"
+                  ? `main.${product?.productType}_singular`
+                  : `main.${product?.productType}`
+              )} in ${product.country}`}
             />
           </ListItem>
         </List>

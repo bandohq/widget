@@ -5,17 +5,17 @@ import { useHeader } from "../../hooks/useHeader";
 import { useAccount } from "@lifi/wallet-management";
 import { useFetch } from "../../hooks/useFetch";
 import { TransactionList } from "../../components/TransactionList/TransactionList";
-import { List, Typography } from "@mui/material";
+import { List } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
+import { Box } from "@mui/system";
+import { NoTransactionsFound } from "./NoTransactionsFound";
 import { useConfig } from "wagmi";
 import { useChain } from "../../hooks/useChain";
 import { useToken } from "../../hooks/useToken";
-import nativeTokenCatalog from "../../utils/nativeTokenCatalog";
 import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20FulfillableV1_2.json";
 import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1_2.json";
 import { readContract } from "wagmi/actions";
-import { Box } from "@mui/system";
-import { NoTransactionsFound } from "./NoTransactionsFound";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export interface Transaction {
   id: string;
@@ -38,6 +38,7 @@ export interface Transaction {
 
 export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
+  const { transactionFlow } = useFlags();
   const config = useConfig();
   useHeader(t("history.title"));
   const { account } = useAccount();
@@ -63,59 +64,62 @@ export const TransactionsHistoryPage = () => {
   });
 
   useEffect(() => {
-    if (transactions && !isPending && !isLoadingToken) {
+    if (
+      !transactionFlow &&
+      transactions &&
+      !isPending &&
+      !isLoadingToken &&
+      refunds.length === 0
+    ) {
       const possibleRefunds = transactions.transactions.filter(
         (transaction) => transaction.status === "FAILED"
       );
 
-      if (possibleRefunds.length === 0) {
-        return;
-      }
+      if (possibleRefunds.length === 0) return;
 
       const refundPromises = possibleRefunds.map(async (transaction) => {
         const token = searchToken(transaction.tokenUsed);
-        const nativeToken = nativeTokenCatalog.find(
-          (item) => item.key === chain?.key
-        );
+        const nativeToken = chain?.nativeToken;
 
         try {
-          if (token.key === nativeToken?.key) {
-            const FulfillableRegistryABI = BandoFulfillableV1.abi.find(
-              (item) => item.name === "record"
-            );
-            const txStatus = (await readContract(config, {
-              address: chain?.protocolContracts?.BandoFulfillableProxy,
-              abi: [FulfillableRegistryABI],
-              functionName: "record",
-              args: [transaction.recordId],
-              chainId: chain?.chainId,
-            })) as { status: number };
-            return { id: transaction.id, txStatus: txStatus.status as number };
-          } else {
-            const FulfillableRegistryABI = BandoERC20FulfillableV1.abi.find(
-              (item) => item.name === "record"
-            );
-            const txStatus = (await readContract(config, {
-              address: chain?.protocolContracts?.BandoERC20FulfillableProxy,
-              abi: [FulfillableRegistryABI],
-              functionName: "record",
-              args: [transaction.recordId],
-              chainId: chain?.chainId,
-            })) as { status: number };
-            return { id: transaction.id, txStatus: txStatus.status as number };
-          }
+          const abi =
+            token.key === nativeToken?.symbol
+              ? BandoFulfillableV1.abi.find((item) => item.name === "record")
+              : BandoERC20FulfillableV1.abi.find(
+                  (item) => item.name === "record"
+                );
+
+          const address =
+            token.key === nativeToken?.symbol
+              ? chain?.protocolContracts?.BandoFulfillableProxy
+              : chain?.protocolContracts?.BandoERC20FulfillableProxy;
+
+          const txStatus = (await readContract(config, {
+            address,
+            abi: [abi],
+            functionName: "record",
+            args: [transaction.recordId],
+            chainId: chain?.chainId,
+          })) as { status: number };
+
+          return { id: transaction.id, txStatus: txStatus.status };
         } catch (error) {
           console.error(error);
-          return {
-            id: transaction.id,
-            txStatus: -1,
-          };
+          return { id: transaction.id, txStatus: -1 };
         }
       });
 
       Promise.all(refundPromises).then(setRefunds);
     }
-  }, [transactions, isPending, config, chain, account, isLoadingToken]);
+  }, [
+    transactionFlow,
+    transactions,
+    isPending,
+    config,
+    chain,
+    account,
+    isLoadingToken,
+  ]);
 
   if (isPending) {
     return (
@@ -136,7 +140,7 @@ export const TransactionsHistoryPage = () => {
         {!isPending && transactions && (
           <TransactionList
             transactions={transactions.transactions}
-            refunds={refunds}
+            refunds={transactionFlow ? undefined : refunds}
           />
         )}
       </Box>

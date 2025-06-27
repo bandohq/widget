@@ -131,7 +131,8 @@
     "country": "国",
     "sentTo": "送信先",
     "availableRefunds": "返金を受け取る",
-    "instructions": "あなたのお金は安全で、返金が承認されました。",
+    "instructions": "あなたのお金は安全です。返金が承認されました。",
+    "instructionsNewFlow": "あなたのお金は安全です。数分で返金を受け取ります",
     "noTransactions": "ここには何もありません。"
   },
   "info": {
@@ -147,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} を {{reference}} に送信します。"
+      "notification": "{{brand}} {{productType}} を {{reference}} に送信します。"
     },
     "title": {
       "orderInProgress": "注文を処理中です",
@@ -202,25 +203,26 @@
   },
   "main": {
     "allTokens": "すべてのトークン",
-    "payWith": "交換元",
+    "totalToPay": "支払い合計",
     "inProgress": "進行中",
-    "maxSlippage": "最大スリップページ",
-    "minReceived": "最小受け取り",
+    "maxSlippage": "最大スリッページ",
+    "minReceived": "最小受取額",
     "myTokens": "自分のトークン",
     "onChain": "{{chainName}} 上",
     "ownedBy": "所有者",
-    "quotedAmount": "見積もり額",
-    "rateChange": "レート変更",
-    "receiving": "受け取り中",
-    "selectChain": "チェーン選択",
+    "quotedAmount": "見積額",
+    "rateChange": "レート変動",
+    "receiving": "受取中",
+    "selectChain": "チェーンを選択",
     "selectChainAndToken": "チェーンとトークンを選択",
     "selectToken": "トークンを選択",
     "sending": "送信中",
     "tokenSearch": "トークン名またはアドレスで検索",
-    "searchProducts": "製品ブランドで検索",
-    "topup": "エアタイムとデータ",
+    "searchProducts": "商品ブランドで検索",
+    "topup": "エアタイム＆データ",
     "esim": "eSIM",
-    "gift_card": "プリペイドコード"
+    "gift_card": "ギフトカード",
+    "gift_card_singular": "ギフトカード"
   },
   "settings": {
     "theme": "テーマ",

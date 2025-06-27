@@ -134,8 +134,9 @@
     "refundFailed": "Erro ao reembolsar tokens, tente novamente mais tarde",
     "country": "País",
     "sentTo": "Enviado para",
-    "availableRefunds": "Receba seu reembolso",
+    "availableRefunds": "Obtenha seu reembolso",
     "instructions": "Seu dinheiro está seguro, seu reembolso foi autorizado.",
+    "instructionsNewFlow": "Seu dinheiro está seguro, você receberá seu reembolso em alguns minutos",
     "noTransactions": "Não há nada aqui."
   },
   "info": {
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "Enviaremos o {{productType}} para {{reference}}."
+      "notification": "Você receberá seu {{brand}} {{productType}} em {{reference}}"
     },
     "title": {
       "orderInProgress": "Processando seu pedido",
@@ -204,25 +205,26 @@
   },
   "main": {
     "allTokens": "Todos os tokens",
-    "payWith": "Pagar com",
+    "totalToPay": "Total a pagar",
     "inProgress": "em andamento",
-    "maxSlippage": "Diferença máxima",
-    "minReceived": "Mínimo recebido",
+    "maxSlippage": "Deslizamento máx.",
+    "minReceived": "Mín. recebido",
     "myTokens": "Meus tokens",
-    "onChain": "em {{chainName}}",
-    "ownedBy": "Possuído por",
-    "quotedAmount": "Valor da cotação",
-    "rateChange": "Alterar taxa",
+    "onChain": "na {{chainName}}",
+    "ownedBy": "Pertencente a",
+    "quotedAmount": "Valor cotado",
+    "rateChange": "Alteração de taxa",
     "receiving": "Recebendo",
-    "selectChain": "Selecione a rede",
-    "selectChainAndToken": "Selecione a rede e o token",
-    "selectToken": "Selecione o Token",
+    "selectChain": "Selecionar cadeia",
+    "selectChainAndToken": "Selecionar cadeia e token",
+    "selectToken": "Selecionar token",
     "sending": "Enviando",
-    "tokenSearch": "Pesquisar pelo nome do token ou endereço",
+    "tokenSearch": "Pesquisar por nome ou endereço do token",
     "searchProducts": "Pesquisar por marca do produto",
-    "topup": "Tempo de antena e dados",
-    "esim": "eSIM",
-    "gift_card": "Códigos pré-pagos"
+    "topup": "Tempo de uso & Dados",
+    "esim": "eSIMs",
+    "gift_card": "Cartões presente",
+    "gift_card_singular": "Cartão presente"
   },
   "settings": {
     "theme": "Tema",

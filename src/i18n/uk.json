@@ -132,6 +132,7 @@
     "sentTo": "Відправлено до",
     "availableRefunds": "Отримайте свій відшкодування",
     "instructions": "Ваші гроші в безпеці, ваше відшкодування було схвалено.",
+    "instructionsNewFlow": "Ваші гроші в безпеці, ви отримаєте відшкодування через кілька хвилин",
     "noTransactions": "Тут нічого немає."
   },
   "info": {
@@ -147,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "Ми надішлемо вам {{productType}} на {{reference}}."
+      "notification": "Ви отримаєте свій {{brand}} {{productType}} на {{reference}}"
     },
     "title": {
       "orderInProgress": "Обробка вашого замовлення",
@@ -201,25 +202,26 @@
   },
   "main": {
     "allTokens": "Всі токени",
-    "payWith": "Сплатити за допомогою",
+    "totalToPay": "Всього до сплати",
     "inProgress": "в процесі",
+    "maxSlippage": "Макс. прослизання",
+    "minReceived": "Мін. отримано",
     "myTokens": "Мої токени",
-    "onChain": "{{chainName}}",
+    "onChain": "на {{chainName}}",
+    "ownedBy": "Власник",
     "quotedAmount": "Запропонована сума",
-    "receiving": "Отримання",
-    "selectChain": "Виберіть чейн",
-    "selectToken": "Виберіть токен",
-    "sending": "Відправлення",
-    "to": "До",
-    "tokenSearch": "Шукати за ім'ям або адресою",
-    "maxSlippage": "Максимальне прослизання",
-    "minReceived": "Мінімум отримано",
-    "ownedBy": "Володіє",
     "rateChange": "Зміна курсу",
-    "searchProducts": "Шукати за брендом продукту",
-    "topup": "Поповнення рахунку та дані",
-    "esim": "eSIMs",
-    "gift_card": "Передплачені коди"
+    "receiving": "Отримання",
+    "selectChain": "Вибрати мережу",
+    "selectChainAndToken": "Вибрати мережу та токен",
+    "selectToken": "Вибрати токен",
+    "sending": "Відправлення",
+    "tokenSearch": "Пошук за назвою токена або адресою",
+    "searchProducts": "Пошук за брендом продукту",
+    "topup": "Поповнення та дані",
+    "esim": "eSIM",
+    "gift_card": "Подарункові картки",
+    "gift_card_singular": "Подарункова картка"
   },
   "settings": {
     "theme": "Тема",

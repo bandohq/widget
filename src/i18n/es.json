@@ -48,7 +48,7 @@
     "settings": "Ajustes",
     "title": "Gastar",
     "youGet": "Obtienes",
-    "youPay": "Pagas",
+    "youPay": "Pagas con",
     "tokens": "Tokens",
     "products": "Productos",
     "spend": "Gastar"
@@ -136,6 +136,7 @@
     "sentTo": "Enviado a",
     "availableRefunds": "Obtén tu reembolso",
     "instructions": "Tu dinero está seguro, tu reembolso ha sido autorizado.",
+    "instructionsNewFlow": "Tu dinero está seguro, recibirás tu reembolso en unos minutos",
     "noTransactions": "Aquí no hay nada."
   },
   "info": {
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "Te enviaremos el {{productType}} a {{reference}}."
+      "notification": "Recibirás tu {{brand}} {{productType}} en {{reference}}"
     },
     "title": {
       "orderInProgress": "Procesando tu orden",
@@ -229,7 +230,7 @@
   },
   "main": {
     "allTokens": "Todos los tokens",
-    "payWith": "Pagar con",
+    "totalToPay": "Total a pagar",
     "inProgress": "en progreso",
     "maxSlippage": "Máx. deslizamiento",
     "minReceived": "Mín. recibido",
@@ -245,9 +246,10 @@
     "sending": "Enviando",
     "tokenSearch": "Buscar por nombre o dirección del token",
     "searchProducts": "Buscar por marca de producto",
-    "topup": "Tiempo Aire y Datos",
-    "esim": "eSIMs",
-    "gift_card": "Prepago"
+    "topup": "Tiempo de aire y datos",
+    "esim": "eSIM",
+    "gift_card": "Tarjetas de regalo",
+    "gift_card_singular": "Tarjeta de regalo"
   },
   "settings": {
     "theme": "Tema",

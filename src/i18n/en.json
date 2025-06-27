@@ -138,10 +138,11 @@
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
     "instructions": "Your crypto is safe, you have refunds available",
+    "instructionsNewFlow": "Your crypto is safe, you'll receive your refund in a few minutes",
     "noTransactions": "There is nothing here."
   },
   "info": {
-    "detailMessage": "Is where you will recibe your {{productType}}.",
+    "detailMessage": "Is where you will receive your {{productType}}.",
     "message": {
       "autoRefuel": "Change the network on your wallet to see the balance on that chain",
       "emptyActiveTransactions": "Transactions in progress will appear here. Once completed, find them in transaction history.",
@@ -153,7 +154,7 @@
   },
   "success": {
     "message": {
-      "notification": "We will send you the {{productType}} to {{reference}}."
+      "notification": "You'll receive your {{brand}} {{productType}} to {{reference}}"
     },
     "title": {
       "orderInProgress": "Processing your order",
@@ -230,7 +231,7 @@
   },
   "main": {
     "allTokens": "All tokens",
-    "payWith": "Pay with",
+    "totalToPay": "Total to pay",
     "inProgress": "in progress",
     "maxSlippage": "Max. slippage",
     "minReceived": "Min. received",
@@ -248,7 +249,8 @@
     "searchProducts": "Search by product brand",
     "topup": "Airtime & Data",
     "esim": "eSIMs",
-    "gift_card": "Prepaid Codes"
+    "gift_card": "Gift cards",
+    "gift_card_singular": "Gift card"
   },
   "settings": {
     "theme": "Theme",
