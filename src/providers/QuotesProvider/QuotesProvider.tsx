@@ -139,8 +139,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     digitalAsset: string | null,
     transactionFlow: boolean
   ) => {
-    console.log("transactionFlow", transactionFlow);
-
     mutate({
       sku,
       fiatCurrency,
