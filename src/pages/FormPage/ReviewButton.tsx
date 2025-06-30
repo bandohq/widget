@@ -31,7 +31,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const { account } = useAccount();
   const navigate = useNavigate();
   const { showNotification, hideNotification } = useNotificationContext();
-  const { isPending } = useTransactionFlow();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { isPurchasePossible, error: quoteError } = useQuotes();
   const { transactionFlow } = useFlags();
@@ -90,7 +89,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 
   return (
     <BaseTransactionButton
-      disabled={disabled || isPending || !tokenAddress}
+      disabled={disabled || transactionLoading || !tokenAddress}
       text={t("header.spend")}
       onClick={() => handleClick()}
       loading={transactionLoading}
