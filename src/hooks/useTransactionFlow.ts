@@ -115,6 +115,7 @@ export const useTransactionFlow = () => {
     if (transactionFlow) {
       try {
         const signature = await signTransfer(quote.transactionRequest);
+        await setTimeout(() => {}, 1000);
         mutateNew({
           ...payload,
           transactionReceipt: {
