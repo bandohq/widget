@@ -130,6 +130,7 @@
     "sentTo": "Dikirim ke",
     "availableRefunds": "Dapatkan pengembalian dana Anda",
     "instructions": "Uang Anda aman, pengembalian dana Anda telah disetujui.",
+    "instructionsNewFlow": "Uang Anda aman, Anda akan menerima pengembalian dana dalam beberapa menit",
     "noTransactions": "Tidak ada apa-apa di sini."
   },
   "info": {

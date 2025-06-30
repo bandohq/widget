@@ -130,8 +130,9 @@
     "refundFailed": "Lỗi khi hoàn tiền token, thử lại sau",
     "country": "Quốc gia",
     "sentTo": "Đã gửi tới",
-    "availableRefunds": "Nhận khoản hoàn tiền của bạn",
-    "instructions": "Tiền của bạn an toàn, khoản hoàn tiền của bạn đã được phê duyệt.",
+    "availableRefunds": "Nhận hoàn tiền của bạn",
+    "instructions": "Tiền của bạn an toàn, hoàn tiền của bạn đã được phê duyệt.",
+    "instructionsNewFlow": "Tiền của bạn an toàn, bạn sẽ nhận được hoàn tiền trong vài phút",
     "noTransactions": "Không có gì ở đây."
   },
   "info": {

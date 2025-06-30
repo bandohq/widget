@@ -131,7 +131,8 @@
     "country": "国",
     "sentTo": "送信先",
     "availableRefunds": "返金を受け取る",
-    "instructions": "あなたのお金は安全で、返金が承認されました。",
+    "instructions": "あなたのお金は安全です。返金が承認されました。",
+    "instructionsNewFlow": "あなたのお金は安全です。数分で返金を受け取ります",
     "noTransactions": "ここには何もありません。"
   },
   "info": {

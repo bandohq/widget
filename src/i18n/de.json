@@ -134,8 +134,9 @@
     "refundFailed": "Fehler bei der Rückerstattung von Tokens, später erneut versuchen",
     "country": "Land",
     "sentTo": "Gesendet an",
-    "availableRefunds": "Fordere deine Rückerstattung an",
-    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt.",
+    "availableRefunds": "Erhalten Sie Ihre Rückerstattung",
+    "instructions": "Ihr Geld ist sicher, Ihre Rückerstattung wurde genehmigt.",
+    "instructionsNewFlow": "Ihr Geld ist sicher, Sie erhalten Ihre Rückerstattung in wenigen Minuten",
     "noTransactions": "Hier ist nichts."
   },
   "info": {

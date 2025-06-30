@@ -23,38 +23,37 @@ import type {
     LanguageResources,
   } from '../providers/I18nProvider/types.js'
   import type { DefaultFieldValues } from '../stores/form/types'
-import { ChainType } from '../pages/SelectChainPage/types.js'
-  
-  
-  export interface ContractCall {
-    target: string;
-    callData: string;
-    value?: number;
-  }
-  
-  export interface RouteExtended {
-    id: string;
-    steps: any[];
-  }
-  
-  export interface RouteOptions {
-    slippage?: number;
-    timeout?: number;
-  }
-  
-  export interface SDKConfig {
-    apiKey?: string;
-    disableVersionCheck?: boolean;
-    integrator?: string;
-    widgetVersion?: string;
-  }
-  
-  export interface StaticToken {
-    address: string;
-    symbol: string;
-    decimals: number;
-    chainId: number;
-  }
+import { Address, ChainType } from "../pages/SelectChainPage/types.js";
+
+export interface ContractCall {
+  target: string;
+  callData: string;
+  value?: number;
+}
+
+export interface RouteExtended {
+  id: string;
+  steps: any[];
+}
+
+export interface RouteOptions {
+  slippage?: number;
+  timeout?: number;
+}
+
+export interface SDKConfig {
+  apiKey?: string;
+  disableVersionCheck?: boolean;
+  integrator?: string;
+  widgetVersion?: string;
+}
+
+export interface StaticToken {
+  address: Address;
+  symbol: string;
+  decimals: number;
+  chainId: number;
+}
   
   export interface Token extends StaticToken {
     name?: string;

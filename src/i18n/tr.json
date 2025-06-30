@@ -134,8 +134,9 @@
     "refundFailed": "Jeton iade hatası, daha sonra tekrar deneyin",
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
-    "availableRefunds": "İadenizi alın",
+    "availableRefunds": "İade alın",
     "instructions": "Paranız güvende, iadeniz onaylandı.",
+    "instructionsNewFlow": "Paranız güvende, iadenizi birkaç dakika içinde alacaksınız",
     "noTransactions": "Burada hiçbir şey yok."
   },
   "info": {

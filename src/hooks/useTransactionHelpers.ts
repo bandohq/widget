@@ -1,22 +1,74 @@
-import { defineChain, parseUnits } from "viem";
-import { transformToChainConfig } from "../utils/TransformToChainConfig";
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
-import nativeTokenCatalog from "../utils/nativeTokenCatalog";
-import { writeContract } from '@wagmi/core'
-import {  ERC20ApproveABI } from "../utils/abis";
-import { validateReference } from "../utils/validateReference";
 import { useConfig } from "wagmi";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
-import { checkAllowance } from "../utils/checkAllowance";
+import { useCallback, useState } from "react";
+import { sendTransaction, writeContract } from "@wagmi/core";
+import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
+import { useAccount } from "@lifi/wallet-management";
+import { useChain } from "../hooks/useChain";
+import { useTranslation } from "react-i18next";
+import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
-import { useCallback } from "react";
+import { ERC20ApproveABI } from "../utils/abis";
+import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
+import { defineChain, parseUnits } from "viem";
 import { formatTotalAmount } from "../utils/format";
+import { checkAllowance } from "../utils/checkAllowance";
+import { validateReference } from "../utils/validateReference";
 
 export const useTransactionHelpers = () => {
+  const [loading, setLoading] = useState(false);
   const config = useConfig();
-  const { addStep, updateStep, clearStep } = useSteps();
+  const { account } = useAccount();
+  const { t } = useTranslation();
+  const { chain } = useChain(account?.chainId);
   const { showNotification } = useNotificationContext();
+  const { addStep, updateStep, clearStep } = useSteps();
 
+  // New flow
+
+  const sendToken = async (transactionRequest: TransactionRequest) => {
+    try {
+      if (!chain) throw new Error("Chain not found");
+
+      const configChain = transformToChainConfig(chain, chain.nativeToken);
+
+      const txHash = await sendTransaction(config, {
+        to: transactionRequest.to,
+        value: BigInt(transactionRequest.value || 0),
+        data: transactionRequest.data,
+        chain: configChain,
+        gas: BigInt(transactionRequest.gas),
+        gasLimit: BigInt(transactionRequest.gasLimit),
+        maxFeePerGas: transactionRequest.maxFeePerGas
+          ? BigInt(transactionRequest.maxFeePerGas)
+          : undefined,
+        maxPriorityFeePerGas: transactionRequest.maxPriorityFeePerGas
+          ? BigInt(transactionRequest.maxPriorityFeePerGas)
+          : undefined,
+        type: transactionRequest.type,
+      });
+
+      return txHash;
+    } catch (error) {
+      showNotification("error", t("error.title.transactionFailed"));
+      console.error("Error at sendToken:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signTransfer = async (transactionRequest: TransactionRequest) => {
+    setLoading(true);
+    try {
+      return await sendToken(transactionRequest);
+    } catch (error) {
+      console.error("Error at signTransfer:", error);
+      throw error;
+    }
+  };
+
+  // Old flow
   const formatFiatAmount = (amount: string | undefined): string => {
     return amount ? (parseFloat(amount) * 100).toFixed(0) : "0";
   };
@@ -107,7 +159,10 @@ export const useTransactionHelpers = () => {
       addStep({
         message: "form.status.approveTokens",
         type: "info",
-        variables: { amount: formatTotalAmount(quote, token), tokenSymbol: token?.symbol },
+        variables: {
+          amount: formatTotalAmount(quote, token),
+          tokenSymbol: token?.symbol,
+        },
       });
 
       await approveERC20(
@@ -177,9 +232,7 @@ export const useTransactionHelpers = () => {
     async ({ txId, chain, account, quote, product, token }) => {
       try {
         const serviceID = product?.evmServiceId;
-        const nativeToken = nativeTokenCatalog.find(
-          (item) => item.key === chain?.key
-        );
+        const nativeToken = chain?.nativeToken;
 
         const formattedChain = defineChain(
           transformToChainConfig(chain, nativeToken)
@@ -209,7 +262,7 @@ export const useTransactionHelpers = () => {
           return;
         }
 
-        if (token.key === nativeToken?.native_token.symbol) {
+        if (token.key?.toLowerCase() === nativeToken?.symbol?.toLowerCase()) {
           await handleNativeTokenRequest({
             chain,
             account,
@@ -241,7 +294,8 @@ export const useTransactionHelpers = () => {
   );
 
   return {
-    approveERC20,
+    loading,
+    signTransfer,
     handleServiceRequest,
   };
 };

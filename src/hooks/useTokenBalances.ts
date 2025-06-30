@@ -4,9 +4,11 @@ import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
-import nativeTokenCatalog from "../utils/nativeTokenCatalog";
 
-export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) => {
+export const useTokenBalances = (
+  accountAddress: string,
+  chain: ExtendedChain
+) => {
   const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +18,7 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
   useEffect(() => {
     const fetchBalances = async () => {
       if (!tokens || tokensLoading || !chain || !accountAddress) return;
-      const nativeToken = nativeTokenCatalog.find((item) => item.key === chain?.key);
+      const nativeToken = chain.nativeToken;
 
       setLoading(true);
       setError(null);
@@ -26,8 +28,8 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
         const config = createDynamicConfig(chain);
 
         const nativeTokenBalance = await getBalance(config, {
-          address: accountAddress as `0x${string}`, 
-        })
+          address: accountAddress as `0x${string}`,
+        });
 
         // Build contracts for multicall
         const contracts = tokens.map((token) => ({
@@ -48,12 +50,12 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
           const decimals = token?.decimals || 18;
           let formattedBalance: number;
 
-          if (nativeToken?.native_token?.symbol === tokens[index].symbol) {
-            formattedBalance = Number(nativeTokenBalance.value) / 10 ** decimals;
+          if (chain?.nativeToken?.symbol === tokens[index].symbol) {
+            formattedBalance =
+              Number(nativeTokenBalance.value) / 10 ** decimals;
           } else {
-            formattedBalance = Number(balanceRaw.result) / 10 ** decimals; 
+            formattedBalance = Number(balanceRaw.result) / 10 ** decimals;
           }
-          
 
           return {
             key: token.key,
@@ -65,7 +67,9 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
           };
         });
 
-        const nonZeroBalances = formattedBalances.filter((token) => token.balance > 0);
+        const nonZeroBalances = formattedBalances.filter(
+          (token) => token.balance > 0
+        );
 
         setBalances(nonZeroBalances);
       } catch (err) {
@@ -79,5 +83,5 @@ export const useTokenBalances = (accountAddress: string, chain: ExtendedChain) =
     fetchBalances();
   }, [tokens, tokensLoading, accountAddress, chain]);
 
-  return { balances, isLoading:loading, error };
+  return { balances, isLoading: loading, error };
 };

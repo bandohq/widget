@@ -136,6 +136,7 @@
     "sentTo": "Envoyé à",
     "availableRefunds": "Obtenez votre remboursement",
     "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé.",
+    "instructionsNewFlow": "Votre argent est en sécurité, vous recevrez votre remboursement dans quelques minutes",
     "noTransactions": "Il n'y a rien ici."
   },
   "info": {

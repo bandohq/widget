@@ -138,6 +138,7 @@
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
     "instructions": "Your crypto is safe, you have refunds available",
+    "instructionsNewFlow": "Your crypto is safe, you'll receive your refund in a few minutes",
     "noTransactions": "There is nothing here."
   },
   "info": {

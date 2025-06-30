@@ -16,16 +16,23 @@ import { SmileyMelting, CaretDown } from "@phosphor-icons/react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const ErrorView = ({ transaction }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { transactionFlow } = useFlags();
 
-  //Todo: send direct to refound page once serviceId comes from transaction detail
-  const goToHistory = () => {
-    navigate(navigationRoutes.transactionHistory);
+  //Todo: send direct to refound or main page depending on transactionFlow
+  const goTo = () => {
+    if (transactionFlow) {
+      navigate(navigationRoutes.home);
+    } else {
+      navigate(navigationRoutes.transactionHistory);
+    }
   };
+
   return (
     <>
       <IconWrapper bgColor="#FAC985">
@@ -35,7 +42,11 @@ export const ErrorView = ({ transaction }) => {
       <StatusSubtitle>{t("error.title.retry")}</StatusSubtitle>
 
       <Alert sx={{ mt: 2 }} severity="info">
-        {t("history.instructions")}
+        {t(
+          transactionFlow
+            ? "history.instructionsNewFlow"
+            : "history.instructions"
+        )}
       </Alert>
       <Button
         fullWidth
@@ -48,9 +59,9 @@ export const ErrorView = ({ transaction }) => {
           },
         }}
         style={{ borderRadius: "30px" }}
-        onClick={goToHistory}
+        onClick={goTo}
       >
-        {t("history.availableRefunds")}
+        {t(transactionFlow ? "button.backToHome" : "history.availableRefunds")}
       </Button>
     </>
   );
