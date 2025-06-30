@@ -10,7 +10,7 @@ import { useFetch } from "./useFetch";
 import { useToken } from "./useToken";
 import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
 import { useFlags } from "launchdarkly-react-client-sdk";
@@ -29,6 +29,7 @@ export const useTransactionFlow = () => {
     "reference",
     "requiredFields"
   );
+  const [loading, setLoading] = useState(false);
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
@@ -46,6 +47,7 @@ export const useTransactionFlow = () => {
     },
     mutationOptions: {
       onSuccess: async ({ transactionId }) => {
+        setLoading(false);
         if (transactionId) {
           navigate(`/status/${transactionId}`);
         } else {
@@ -96,6 +98,7 @@ export const useTransactionFlow = () => {
   });
 
   const handleTransaction = useCallback(async () => {
+    setLoading(true);
     const payload = {
       reference,
       requiredFields,
@@ -149,6 +152,6 @@ export const useTransactionFlow = () => {
 
   return {
     handleTransaction,
-    isPending: transactionFlow ? isPendingNew : isPendingOld,
+    isPending: transactionFlow ? loading : isPendingOld,
   };
 };
