@@ -59,7 +59,12 @@ export const SelectTokenButtonForProducts: React.FC<
         transactionFlow
       );
     }
-  }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
+  }, [
+    product?.sku,
+    product?.price?.fiatCurrency,
+    token?.symbol,
+    transactionFlow,
+  ]);
 
   const handleClick = () => {
     if (readOnly) return;
