@@ -134,8 +134,9 @@
     "refundFailed": "Erro ao reembolsar tokens, tente novamente mais tarde",
     "country": "País",
     "sentTo": "Enviado para",
-    "availableRefunds": "Receba seu reembolso",
+    "availableRefunds": "Obtenha seu reembolso",
     "instructions": "Seu dinheiro está seguro, seu reembolso foi autorizado.",
+    "instructionsNewFlow": "Seu dinheiro está seguro, você receberá seu reembolso em alguns minutos",
     "noTransactions": "Não há nada aqui."
   },
   "info": {

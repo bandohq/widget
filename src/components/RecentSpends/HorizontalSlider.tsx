@@ -3,7 +3,7 @@ import { Box, Chip, Skeleton } from "@mui/material";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
 import { VariantSelector } from "../VariantSelector/VariantSelector";
-import { Adress } from "../../pages/SelectChainPage/types";
+import { Address } from "../../pages/SelectChainPage/types";
 
 export interface Transaction {
   id: string;
@@ -23,7 +23,7 @@ export interface Transaction {
   imageUrl: string;
   created: string;
   brandName: string;
-  walletAddress: Adress;
+  walletAddress: Address;
   blockchainTransactionHash: string | null;
   serviceId: number;
   recordId: number;

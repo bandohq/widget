@@ -17,16 +17,12 @@ import { defaultWalletConnectConfig } from "../../config/walletConnect";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { useChains } from "../../hooks/useChains";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
-import nativeTokenCatalog, {
-  NativeTokenCatalog,
-} from "../../utils/nativeTokenCatalog";
+import { ExtendedChain } from "../../pages/SelectChainPage/types";
 
 export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const { chains, isLoading } = useChains();
   const { walletConfig } = useWidgetConfig();
-  const [availableChains, setAvailableChains] = useState<NativeTokenCatalog[]>(
-    []
-  );
+  const [availableChains, setAvailableChains] = useState([]);
   const wagmi = useRef<DefaultWagmiConfigResult>();
 
   useEffect(() => {
@@ -34,10 +30,9 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
       const customChains = chains
         ?.filter((chain) => chain.isActive)
         .map((chain) => {
-          const nativeToken = nativeTokenCatalog.find(
-            (item) => item.key === chain?.key
-          );
-          return transformToChainConfig(chain, nativeToken);
+          if (!chain.nativeToken)
+            throw new Error(`Native token required for chain ${chain.name}`);
+          return transformToChainConfig(chain, chain.nativeToken);
         });
 
       setAvailableChains(customChains);
