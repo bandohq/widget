@@ -262,7 +262,7 @@ export const useTransactionHelpers = () => {
           return;
         }
 
-        if (token.key === nativeToken?.symbol) {
+        if (token.key?.toLowerCase() === nativeToken?.symbol?.toLowerCase()) {
           await handleNativeTokenRequest({
             chain,
             account,
@@ -299,6 +299,3 @@ export const useTransactionHelpers = () => {
     handleServiceRequest,
   };
 };
-function useQuote(): { quote: any } {
-  throw new Error("Function not implemented.");
-}

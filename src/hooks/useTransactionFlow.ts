@@ -113,14 +113,18 @@ export const useTransactionFlow = () => {
     };
 
     if (transactionFlow) {
-      const signature = await signTransfer(quote.transactionRequest);
-      mutateNew({
-        ...payload,
-        transactionReceipt: {
-          hash: signature,
-          virtualMachineType: account?.chainType,
-        },
-      });
+      try {
+        const signature = await signTransfer(quote.transactionRequest);
+        mutateNew({
+          ...payload,
+          transactionReceipt: {
+            hash: signature,
+            virtualMachineType: account?.chainType,
+          },
+        });
+      } catch (error) {
+        console.error("Error signing transaction:", error);
+      }
     } else {
       mutateOld(payload);
     }

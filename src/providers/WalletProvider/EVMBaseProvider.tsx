@@ -17,6 +17,7 @@ import { defaultWalletConnectConfig } from "../../config/walletConnect";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { useChains } from "../../hooks/useChains";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
+import { ExtendedChain } from "../../pages/SelectChainPage/types";
 
 export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const { chains, isLoading } = useChains();
@@ -29,8 +30,9 @@ export const EVMBaseProvider: FC<PropsWithChildren> = ({ children }) => {
       const customChains = chains
         ?.filter((chain) => chain.isActive)
         .map((chain) => {
-          const nativeToken = chain.nativeToken;
-          return transformToChainConfig(chain, nativeToken);
+          if (!chain.nativeToken)
+            throw new Error(`Native token required for chain ${chain.name}`);
+          return transformToChainConfig(chain, chain.nativeToken);
         });
 
       setAvailableChains(customChains);

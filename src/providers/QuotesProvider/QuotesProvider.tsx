@@ -98,7 +98,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
         setError(fetchError as QuoteError);
         showNotification(
           "error",
-          (fetchError as QuoteError).data.error_code === "INSUFFICIENT_BALANCE"
+          (fetchError as QuoteError).data?.error_code === "INSUFFICIENT_BALANCE"
             ? t("warning.message.insufficientFunds")
             : t("error.message.quoteFailed")
         );
