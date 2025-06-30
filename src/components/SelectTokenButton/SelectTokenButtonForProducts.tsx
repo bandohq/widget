@@ -24,6 +24,7 @@ import { Box } from '@mui/material';
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import { formatTotalAmount } from '../../utils/format.js';
+import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -32,6 +33,7 @@ export const SelectTokenButtonForProducts: React.FC<
 > = ({ formType, compact, readOnly }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { transactionFlow } = useFlags();
   const { product } = useProduct();
   const emitter = useWidgetEvents();
   const {
@@ -50,7 +52,12 @@ export const SelectTokenButtonForProducts: React.FC<
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
-      fetchQuote(product.sku, product.price.fiatCurrency, token.address);
+      fetchQuote(
+        product.sku,
+        product.price.fiatCurrency,
+        token.address,
+        transactionFlow
+      );
     }
   }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
