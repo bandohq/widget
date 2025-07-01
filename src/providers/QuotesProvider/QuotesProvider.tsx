@@ -4,7 +4,6 @@ import { useAccount } from "@lifi/wallet-management";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
-import { useFlags } from "launchdarkly-react-client-sdk";
 
 export interface TransactionRequest {
   chainId: number;
@@ -21,6 +20,7 @@ export interface TransactionRequest {
 interface QuoteError {
   error: string;
   message: string;
+  status: number;
   data?: {
     error_code: string;
     error_type: string;
@@ -68,7 +68,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentBalance, setCurrentBalance] = useState<bigint | number>(0);
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const { transactionFlow } = useFlags();
   const [error, setError] = useState<QuoteError | null>(null);
 
   const {
@@ -79,9 +78,6 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   } = useFetch({
     url: "quotes/",
     method: "POST",
-    queryOptions: {
-      queryKey: ["quote"],
-    },
   });
 
   useEffect(() => {
@@ -95,21 +91,18 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (fetchError) {
-      if (typeof fetchError === "object" && "error" in fetchError) {
-        setError(fetchError as QuoteError);
-        showNotification(
-          "error",
-          (fetchError as QuoteError).data?.error_code === "INSUFFICIENT_BALANCE"
-            ? t("warning.message.insufficientFunds")
-            : t("error.message.quoteFailed")
-        );
+      if (fetchError.message === "INSUFFICIENT_BALANCE") {
+        setError({
+          error: "INSUFFICIENT_BALANCE",
+          message: t("warning.message.insufficientFunds"),
+          status: 400,
+        });
+        showNotification("error", t("warning.message.insufficientFunds"));
       } else {
         setError({
           error: "UNKNOWN_ERROR",
-          message:
-            fetchError instanceof Error
-              ? fetchError.message
-              : t("error.message.quoteFailed"),
+          message: t("error.message.quoteFailed"),
+          status: 400,
         });
         showNotification("error", t("error.message.quoteFailed"));
       }
