@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ### [0.1.34](https://github.com/bandohq/widget/compare/v0.1.34-beta.1...v0.1.34) (2025-07-01)
+- Improved error handling in useFetch hook
+- New Transaction Flow under flag
+    - Delete approval
+    - Change sign contrar for transaction
+    - Delete Steps screen
 
 ### [0.1.34-beta.1](https://github.com/bandohq/widget/compare/v0.1.34-beta.0...v0.1.34-beta.1) (2025-07-01)
 
