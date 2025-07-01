@@ -28,11 +28,32 @@ function buildQueryString(queryParams: Record<string, string | number> = {}) {
 
 async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
+
+  const rawBody = await response.text();
+  let parsedBody: any;
+  try {
+    parsedBody = rawBody ? JSON.parse(rawBody) : null;
+  } catch {
+    parsedBody = rawBody; // was not JSON
   }
-  return response.json();
+
+  if (!response.ok) {
+    // Extend Error to attach extra info
+    const err = new Error(
+      parsedBody?.data?.error_code || `Error: ${response.status}`
+    ) as Error & {
+      status: number;
+      data: unknown;
+    };
+
+    err.status = response.status;
+    err.data = parsedBody;
+    throw err;
+  }
+
+  return parsedBody as T;
 }
+
 
 /**
  * Overloads to ensure TypeScript correctly infers the return type based on the method
