@@ -20,7 +20,7 @@ import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvi
 import { useTheme } from "@mui/system";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import { BottomSheet } from "../../components/BottomSheet/BottomSheet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useChain } from "../../hooks/useChain";
 import { transformToChainConfig } from "../../utils/TransformToChainConfig";
 import { executeRefund } from "../../utils/refunds";
@@ -44,6 +44,12 @@ export const TransactionsDetailPage = () => {
   const [loading, setLoading] = useState(false);
   const { chain } = useChain(account.chainId);
   const { showNotification } = useNotificationContext();
+
+  useEffect(() => {
+    if (!transactionFlow && serviceId && transactionId) {
+      setOpen(true);
+    }
+  }, [transactionFlow, serviceId, transactionId]);
 
   useHeader(t("history.detailTitle"));
 
@@ -166,6 +172,11 @@ export const TransactionsDetailPage = () => {
             }
             size="small"
             label={renderChipLabel()}
+            onClick={
+              !transactionFlow && serviceId && transactionId
+                ? () => setOpen(!open)
+                : undefined
+            }
           />
         </Box>
       )}
