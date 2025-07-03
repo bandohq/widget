@@ -12,8 +12,21 @@ export interface TransactionRequest {
   data: string;
   value: string;
   gas: string;
-  gasPrice: string;
   gasLimit: string;
+  maxFeePerGas?: string;
+  maxPriorityFeePerGas?: string;
+}
+
+interface QuoteError {
+  error: string;
+  message: string;
+  status: number;
+  data?: {
+    error_code: string;
+    error_type: string;
+    reason: string;
+    message: string;
+  };
 }
 
 interface QuoteData {
@@ -31,11 +44,14 @@ interface QuotesContextType {
   quote: QuoteData | null;
   isPending: boolean;
   isPurchasePossible: boolean;
+  error: QuoteError | null;
   handleCurrentBalanceChange: (newBalance: bigint | null) => void;
+  resetQuote: () => void;
   fetchQuote: (
     sku: string,
     fiatCurrency: string,
-    digitalAsset: string | null
+    digitalAsset: string | null,
+    transactionFlow: boolean
   ) => void;
 }
 
@@ -52,25 +68,17 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentBalance, setCurrentBalance] = useState<bigint | number>(0);
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<QuoteError | null>(null);
 
   const {
     data,
     mutate,
     isPending: fetchPending,
-    error,
+    error: fetchError,
   } = useFetch({
     url: "quotes/",
     method: "POST",
-    queryOptions: {
-      queryKey: ["quote"],
-    },
   });
-
-  useEffect(() => {
-    if (error) {
-      showNotification("error", t("error.message.quoteFailed"));
-    }
-  }, [error]);
 
   useEffect(() => {
     setIsPending(fetchPending);
@@ -80,6 +88,28 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       });
     }
   }, [data, fetchPending]);
+
+  useEffect(() => {
+    if (fetchError) {
+      if (fetchError.message === "INSUFFICIENT_BALANCE") {
+        setError({
+          error: "INSUFFICIENT_BALANCE",
+          message: t("warning.message.insufficientFunds"),
+          status: 400,
+        });
+        showNotification("error", t("warning.message.insufficientFunds"));
+      } else {
+        setError({
+          error: "UNKNOWN_ERROR",
+          message: t("error.message.quoteFailed"),
+          status: 400,
+        });
+        showNotification("error", t("error.message.quoteFailed"));
+      }
+    } else {
+      setError(null);
+    }
+  }, [fetchError]);
 
   useEffect(() => {
     if (
@@ -99,18 +129,24 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const fetchQuote = (
     sku: string,
     fiatCurrency: string,
-    digitalAsset: string | null
+    digitalAsset: string | null,
+    transactionFlow: boolean
   ) => {
     mutate({
       sku,
       fiatCurrency,
       digitalAsset,
+      sender: transactionFlow ? account?.address : undefined,
       chainId: account?.chainId,
     });
   };
 
-  useEffect(() => {
+  const resetQuote = () => {
     setQuote(null);
+  };
+
+  useEffect(() => {
+    resetQuote();
   }, [account?.chainId, product?.sku]);
 
   return (
@@ -119,7 +155,9 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
         quote,
         isPending,
         isPurchasePossible,
+        error,
         fetchQuote,
+        resetQuote,
         handleCurrentBalanceChange,
       }}
     >

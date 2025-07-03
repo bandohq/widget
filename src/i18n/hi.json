@@ -152,8 +152,9 @@
     "country": "देश",
     "sentTo": "भेजा गया",
     "availableRefunds": "अपना रिफंड प्राप्त करें",
-    "instructions": "आपका पैसा सुरक्षित है, आपका रिफंड स्वीकृत हो गया है।",
-    "noTransactions": "यहाँ कुछ भी नहीं है।"
+    "instructions": "आपका पैसा सुरक्षित है, आपका रिफंड स्वीकृत किया गया है।",
+    "instructionsNewFlow": "आपका पैसा सुरक्षित है, आपको कुछ मिनटों में रिफंड मिलेगा",
+    "noTransactions": "यहाँ कुछ नहीं है।"
   },
   "info": {
     "detailMessage": "यह वह स्थान है जहाँ आपको आपका {{productType}} प्राप्त होगा।",
@@ -168,7 +169,7 @@
   },
   "success": {
     "message": {
-      "notification": "हम आपको {{productType}} {{reference}} पर भेजेंगे।"
+      "notification": "आपको अपना {{brand}} {{productType}} {{reference}} पर प्राप्त होगा"
     },
     "title": {
       "orderInProgress": "आपका ऑर्डर प्रोसेस हो रहा है",
@@ -221,25 +222,26 @@
   },
   "main": {
     "allTokens": "सभी टोकन",
-    "payWith": "से",
+    "totalToPay": "कुल भुगतान",
     "inProgress": "प्रगति में",
     "maxSlippage": "अधिकतम स्लिपेज",
     "minReceived": "न्यूनतम प्राप्त",
     "myTokens": "मेरे टोकन",
     "onChain": "{{chainName}} पर",
-    "ownedBy": "मालिक",
+    "ownedBy": "के स्वामी",
     "quotedAmount": "उद्धृत राशि",
     "rateChange": "दर परिवर्तन",
-    "receiving": "प्राप्त करना",
+    "receiving": "प्राप्त हो रहा है",
     "selectChain": "चेन चुनें",
     "selectChainAndToken": "चेन और टोकन चुनें",
     "selectToken": "टोकन चुनें",
-    "sending": "भेजा जा रहा है",
-    "tokenSearch": "टोकन नाम या पता खोजें",
-    "searchProducts": "उत्पाद खोजें",
+    "sending": "भेजना",
+    "tokenSearch": "टोकन नाम या पता द्वारा खोजें",
+    "searchProducts": "उत्पाद ब्रांड द्वारा खोजें",
     "topup": "एयरटाइम और डेटा",
-    "esim": "ईसिम",
-    "gift_card": "प्रीपेड कोड"
+    "esim": "eSIM",
+    "gift_card": "गिफ्ट कार्ड",
+    "gift_card_singular": "गिफ्ट कार्ड"
   },
   "settings": {
     "theme": "थीम",

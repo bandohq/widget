@@ -3,6 +3,7 @@ import { forwardRef, useEffect, useMemo } from "react";
 import { AppDefault } from "./AppDefault.js";
 import { AppProvider } from "./AppProvider.js";
 import type { WidgetConfig, WidgetProps } from "./types/widget.js";
+import { LaunchDarklyProvider } from "./providers/LaunchDarklyProvider/LaunchDarklyProvider.js";
 import "react-phone-number-input/style.css";
 import { MiniKit } from "@worldcoin/minikit-js";
 
@@ -26,7 +27,9 @@ export const App = forwardRef<unknown, WidgetProps>((props, ref) => {
   }, []);
   return (
     <AppProvider config={config} formRef={props.formRef}>
-      <AppDefault />
+      <LaunchDarklyProvider>
+        <AppDefault />
+      </LaunchDarklyProvider>
     </AppProvider>
   );
 });

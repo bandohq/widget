@@ -130,6 +130,7 @@
     "sentTo": "Dikirim ke",
     "availableRefunds": "Dapatkan pengembalian dana Anda",
     "instructions": "Uang Anda aman, pengembalian dana Anda telah disetujui.",
+    "instructionsNewFlow": "Uang Anda aman, Anda akan menerima pengembalian dana dalam beberapa menit",
     "noTransactions": "Tidak ada apa-apa di sini."
   },
   "info": {
@@ -145,7 +146,7 @@
   },
   "success": {
     "message": {
-      "notification": "Kami akan mengirimkan {{productType}} ke {{reference}}."
+      "notification": "Anda akan menerima {{brand}} {{productType}} Anda di {{reference}}."
     },
     "title": {
       "orderInProgress": "Memproses pesanan Anda",
@@ -199,26 +200,27 @@
     "settingsModified": "Pengaturan (diubah)"
   },
   "main": {
-    "allTokens": "Semua Token",
-    "payWith": "Dari",
+    "allTokens": "Semua token",
+    "totalToPay": "Total yang harus dibayar",
     "inProgress": "sedang berlangsung",
-    "maxSlippage": "Slip maksimum",
-    "minReceived": "Minimal diterima",
+    "maxSlippage": "Slippage maks.",
+    "minReceived": "Min. diterima",
     "myTokens": "Token saya",
     "onChain": "di {{chainName}}",
     "ownedBy": "Dimiliki oleh",
     "quotedAmount": "Jumlah yang dikutip",
-    "rateChange": "Perubahan rate",
+    "rateChange": "Perubahan kurs",
     "receiving": "Menerima",
-    "selectChain": "Pilih jaringan",
-    "selectChainAndToken": "Pilih jaringan dan token",
+    "selectChain": "Pilih chain",
+    "selectChainAndToken": "Pilih chain dan token",
     "selectToken": "Pilih token",
     "sending": "Mengirim",
     "tokenSearch": "Cari berdasarkan nama atau alamat token",
     "searchProducts": "Cari berdasarkan merek produk",
     "topup": "Pulsa & Data",
     "esim": "eSIM",
-    "gift_card": "Kode Prabayar"
+    "gift_card": "Kartu hadiah",
+    "gift_card_singular": "Kartu hadiah"
   },
   "settings": {
     "theme": "Tema",

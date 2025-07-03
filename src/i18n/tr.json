@@ -134,8 +134,9 @@
     "refundFailed": "Jeton iade hatası, daha sonra tekrar deneyin",
     "country": "Ülke",
     "sentTo": "Gönderildiği kişi",
-    "availableRefunds": "İadenizi alın",
+    "availableRefunds": "İade alın",
     "instructions": "Paranız güvende, iadeniz onaylandı.",
+    "instructionsNewFlow": "Paranız güvende, iadenizi birkaç dakika içinde alacaksınız",
     "noTransactions": "Burada hiçbir şey yok."
   },
   "info": {
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}} öğesini {{reference}} adresine göndereceğiz."
+      "notification": "{{brand}} {{productType}}'inizi {{reference}} adresine alacaksınız"
     },
     "title": {
       "orderInProgress": "Siparişiniz işleniyor",
@@ -204,22 +205,27 @@
     "settingsModified": "Ayarlar (değiştirilen)"
   },
   "main": {
-    "allTokens": "Tüm varlıklar",
-    "payWith": "Şununla öde",
-    "inProgress": "İşlem devam ediyor",
-    "myTokens": "Varlıklarım",
+    "allTokens": "Tüm tokenler",
+    "totalToPay": "Ödenecek toplam",
+    "inProgress": "devam ediyor",
+    "maxSlippage": "Maks. kayma",
+    "minReceived": "Min. alınan",
+    "myTokens": "Tokenlerim",
     "onChain": "{{chainName}} üzerinde",
-    "quotedAmount": "Teklif edilen tutar",
+    "ownedBy": "Sahibi",
+    "quotedAmount": "Teklif edilen miktar",
+    "rateChange": "Kur değişikliği",
     "receiving": "Alınıyor",
-    "selectChain": "Zincir",
-    "selectToken": "Jeton",
+    "selectChain": "Zincir seç",
+    "selectChainAndToken": "Zincir ve token seç",
+    "selectToken": "Token seç",
     "sending": "Gönderiliyor",
-    "to": "Şuna",
-    "tokenSearch": "Jeton adını veya adresini arayın",
+    "tokenSearch": "Token adı veya adresiyle ara",
     "searchProducts": "Ürün markasına göre ara",
-    "topup": "Airtime & Veri",
+    "topup": "Kontör & Veri",
     "esim": "eSIM",
-    "gift_card": "Ön Ödemeli Kodlar"
+    "gift_card": "Hediye kartları",
+    "gift_card_singular": "Hediye kartı"
   },
   "settings": {
     "theme": "Tema",

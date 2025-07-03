@@ -7,6 +7,7 @@ import {
   UseMutationResult,
 } from "@tanstack/react-query";
 import { BANDO_API_URL } from "../config/constants";
+import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 
 type FetchOptions<T> = {
   url: string;
@@ -27,11 +28,32 @@ function buildQueryString(queryParams: Record<string, string | number> = {}) {
 
 async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   const response = await fetch(url, options);
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
+
+  const rawBody = await response.text();
+  let parsedBody: any;
+  try {
+    parsedBody = rawBody ? JSON.parse(rawBody) : null;
+  } catch {
+    parsedBody = rawBody; // was not JSON
   }
-  return response.json();
+
+  if (!response.ok) {
+    // Extend Error to attach extra info
+    const err = new Error(
+      parsedBody?.data?.error_code || `Error: ${response.status}`
+    ) as Error & {
+      status: number;
+      data: unknown;
+    };
+
+    err.status = response.status;
+    err.data = parsedBody;
+    throw err;
+  }
+
+  return parsedBody as T;
 }
+
 
 /**
  * Overloads to ensure TypeScript correctly infers the return type based on the method
@@ -55,6 +77,8 @@ export function useFetch<T = any>({
   enabled = true,
   headers,
 }: FetchOptions<T>): any {
+  const { integrator } = useWidgetConfig();
+
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -64,14 +88,20 @@ export function useFetch<T = any>({
     body: data ? JSON.stringify(data) : undefined,
   };
 
-  const queryString = buildQueryString(queryParams);
+  // Automatically include integrator in query params
+  const finalQueryParams = {
+    integrator,
+    ...queryParams,
+  };
+
+  const queryString = buildQueryString(finalQueryParams);
   const fullUrl = !useFullUrl
     ? `${url}${queryString}`
     : `${BANDO_API_URL}${url}${queryString}`;
 
   if (method === "GET") {
     return useQuery<T>({
-      queryKey: [url, queryParams],
+      queryKey: [url, finalQueryParams],
       queryFn: () => fetchData<T>(fullUrl, fetchOptions),
       enabled,
       ...queryOptions,
@@ -82,6 +112,9 @@ export function useFetch<T = any>({
       mutationFn: (mutationData) => {
         const dynamicOptions: RequestInit = {
           ...fetchOptions,
+          headers: {
+            ...fetchOptions.headers,
+          },
           body: mutationData ? JSON.stringify(mutationData) : undefined,
         };
         return fetchData<T>(fullUrl, dynamicOptions);

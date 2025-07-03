@@ -14,7 +14,8 @@ import {
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
-import { useTransactionHelpers } from "../../hooks/useTransactionHelpers";
+import { useFlags } from "launchdarkly-react-client-sdk";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -27,18 +28,27 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = useAccount();
+  const navigate = useNavigate();
   const { showNotification, hideNotification } = useNotificationContext();
-  const { isPending } = useTransactionFlow();
   const { userAcceptedTermsAndConditions } = useUserWallet();
-  const { isPurchasePossible } = useQuotes();
+  const { isPurchasePossible, error: quoteError } = useQuotes();
+  const { transactionFlow } = useFlags();
   const tokenKey = FormKeyHelper.getTokenKey("from");
-  const { handleTransaction } = useTransactionFlow();
-  const { loading: transactionLoading } = useTransactionHelpers();
+  const { handleTransaction, isPending: transactionLoading } =
+    useTransactionFlow();
   const [tokenAddress, reference, requiredFields] = useFieldValues(
     tokenKey,
     "reference",
     "requiredFields"
   );
+
+  const handleClick = () => {
+    if (transactionFlow) {
+      handleTransaction();
+    } else {
+      navigate(navigationRoutes.formSteps);
+    }
+  };
 
   const { chain: selectedChain } = useChain(account?.chainId);
 
@@ -53,7 +63,8 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       !requiredFieldsValid ||
       !isPurchasePossible ||
       !selectedChain?.isActive ||
-      !userAcceptedTermsAndConditions
+      !userAcceptedTermsAndConditions ||
+      !!quoteError
     );
   }, [
     tokenAddress,
@@ -64,6 +75,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     isPurchasePossible,
     requiredFieldsProps,
     selectedChain?.isActive,
+    quoteError,
   ]);
 
   useEffect(() => {
@@ -76,9 +88,9 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 
   return (
     <BaseTransactionButton
-      disabled={disabled || isPending || !tokenAddress}
+      disabled={disabled || transactionLoading || !tokenAddress}
       text={t("header.spend")}
-      onClick={() => handleTransaction()}
+      onClick={() => handleClick()}
       loading={transactionLoading}
     />
   );

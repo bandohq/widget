@@ -8,11 +8,11 @@ const CountryContext = createContext<CountryContextType | undefined>(undefined);
 export const CountriesProvider: React.FC<{
   children: React.ReactNode;
   configCountry?: string;
-  blockedCountries?: string[];
+  allowedCountries?: string[];
 }> = ({
   children,
   configCountry,
-  blockedCountries: initialBlockedCountries,
+  allowedCountries: initialAllowedCountries,
 }) => {
   const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
   const [blockedCountries, setBlockedCountries] = useState<Country[]>([]);
@@ -28,40 +28,44 @@ export const CountriesProvider: React.FC<{
     if (countriesResponse?.data?.results) {
       const allCountries = countriesResponse.data.results;
 
-      setAvailableCountries(allCountries);
+      const filteredCountries =
+        initialAllowedCountries && initialAllowedCountries.length > 0
+          ? allCountries.filter((country) =>
+              initialAllowedCountries.includes(country.isoAlpha2)
+            )
+          : allCountries;
+
+      setAvailableCountries(filteredCountries);
 
       const searchParams = new URLSearchParams(window.location.search);
       const urlCountryIso = searchParams.get("country");
 
-      const urlCountry = allCountries.find(
+      const urlCountry = filteredCountries.find(
         (country) => country.isoAlpha2 === urlCountryIso
       );
 
       const configSelectedCountry = configCountry
-        ? allCountries.find((country) => country.isoAlpha2 === configCountry)
+        ? filteredCountries.find(
+            (country) => country.isoAlpha2 === configCountry
+          )
         : null;
 
-      const isCurrentCountry = allCountries.find((country) => country.isCurrent);
+      const isCurrentCountry = filteredCountries.find(
+        (country) => country.isCurrent
+      );
 
-      const defaultCountry = urlCountry && buildUrl
-        ? urlCountry
-        : configSelectedCountry
-        ? configSelectedCountry
-        : isCurrentCountry
-        ? isCurrentCountry
-        : allCountries.find((country) => country.isoAlpha2 === "US");
+      const defaultCountry =
+        urlCountry && buildUrl
+          ? urlCountry
+          : configSelectedCountry
+          ? configSelectedCountry
+          : isCurrentCountry
+          ? isCurrentCountry
+          : filteredCountries.find((country) => country.isoAlpha2 === "US");
 
       setSelectedCountry(defaultCountry || null);
     }
-  }, [countriesResponse]);
-
-  useEffect(() => {
-    if (countriesResponse?.data?.results && initialBlockedCountries) {
-      initialBlockedCountries.forEach((isoCode) => {
-        removeCountry(isoCode);
-      });
-    }
-  }, [initialBlockedCountries, countriesResponse]);
+  }, [countriesResponse, initialAllowedCountries]);
 
   const selectCountry = (isoCode: string) => {
     const country = availableCountries.find((c) => c.isoAlpha2 === isoCode);

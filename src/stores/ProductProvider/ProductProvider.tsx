@@ -30,9 +30,15 @@ export const ProductProvider = ({ children }) => {
     setBrand(newBrand);
   };
 
+  const resetProduct = () => {
+    setProduct(null);
+    setBrand(null);
+    updateUrlProduct(null);
+  };
+
   return (
     <ProductContext.Provider
-      value={{ product, brand, updateProduct, updateBrand }}
+      value={{ product, brand, updateProduct, updateBrand, resetProduct }}
     >
       {children}
     </ProductContext.Provider>

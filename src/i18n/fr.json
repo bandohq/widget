@@ -136,6 +136,7 @@
     "sentTo": "Envoyé à",
     "availableRefunds": "Obtenez votre remboursement",
     "instructions": "Votre argent est en sécurité, votre remboursement a été autorisé.",
+    "instructionsNewFlow": "Votre argent est en sécurité, vous recevrez votre remboursement dans quelques minutes",
     "noTransactions": "Il n'y a rien ici."
   },
   "info": {
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "Nous vous enverrons le {{productType}} à {{reference}}."
+      "notification": "Vous recevrez votre {{brand}} {{productType}} à {{reference}}"
     },
     "title": {
       "orderInProgress": "Traitement de votre commande",
@@ -205,25 +206,26 @@
   },
   "main": {
     "allTokens": "Tous les tokens",
-    "payWith": "Payer avec",
+    "totalToPay": "Total à payer",
     "inProgress": "en cours",
-    "maxSlippage": "Glissement maximum",
-    "minReceived": "Minimum reçu",
-    "myTokens": "Mes jetons",
+    "maxSlippage": "Glissement max.",
+    "minReceived": "Min. reçu",
+    "myTokens": "Mes tokens",
     "onChain": "sur {{chainName}}",
-    "ownedBy": "Propriétaire",
-    "quotedAmount": "Montant indiqué",
-    "rateChange": "Taux de change",
-    "receiving": "En cours de réception",
+    "ownedBy": "Appartenant à",
+    "quotedAmount": "Montant coté",
+    "rateChange": "Changement de taux",
+    "receiving": "Réception",
     "selectChain": "Sélectionner la chaîne",
-    "selectChainAndToken": "Sélectionnez la chaîne et le jeton",
-    "selectToken": "Choisissez un jeton",
+    "selectChainAndToken": "Sélectionner la chaîne et le token",
+    "selectToken": "Sélectionner le token",
     "sending": "Envoi",
-    "tokenSearch": "Recherche par nom de jeton ou adresse",
+    "tokenSearch": "Rechercher par nom ou adresse du token",
     "searchProducts": "Rechercher par marque de produit",
-    "topup": "Temps d'antenne et données",
+    "topup": "Crédit & Données",
     "esim": "eSIMs",
-    "gift_card": "Codes prépayés"
+    "gift_card": "Cartes cadeaux",
+    "gift_card_singular": "Carte cadeau"
   },
   "settings": {
     "theme": "Thème",

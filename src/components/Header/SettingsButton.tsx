@@ -35,8 +35,6 @@ export const NavigationButton = ({
     </Tooltip>
   );
 };
-
-//
 export const SettingsButton = () => {
   return (
     <NavigationButton

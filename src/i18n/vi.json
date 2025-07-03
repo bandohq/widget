@@ -130,8 +130,9 @@
     "refundFailed": "Lỗi khi hoàn tiền token, thử lại sau",
     "country": "Quốc gia",
     "sentTo": "Đã gửi tới",
-    "availableRefunds": "Nhận khoản hoàn tiền của bạn",
-    "instructions": "Tiền của bạn an toàn, khoản hoàn tiền của bạn đã được phê duyệt.",
+    "availableRefunds": "Nhận hoàn tiền của bạn",
+    "instructions": "Tiền của bạn an toàn, hoàn tiền của bạn đã được phê duyệt.",
+    "instructionsNewFlow": "Tiền của bạn an toàn, bạn sẽ nhận được hoàn tiền trong vài phút",
     "noTransactions": "Không có gì ở đây."
   },
   "info": {
@@ -147,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "Chúng tôi sẽ gửi {{productType}} đến {{reference}}."
+      "notification": "Bạn sẽ nhận được {{brand}} {{productType}} của mình tại {{reference}}"
     },
     "title": {
       "orderInProgress": "Đang xử lý đơn hàng của bạn",
@@ -200,25 +201,27 @@
     "settingsModified": "Cài đặt (Đã điều chỉnh)"
   },
   "main": {
-    "allTokens": "Tất cả mã thông báo",
-    "payWith": "Thanh toán bằng",
-    "inProgress": "Đang xử lý",
-    "myTokens": "Mã thông báo của tôi",
-    "onChain": "Tại {{chainName}}",
-    "quotedAmount": "Số tiền báo giá",
-    "receiving": "Đang nhận",
-    "selectChain": "Chọn chain",
-    "selectToken": "Chọn mã thông báo",
-    "sending": "Đang gửi",
-    "to": "Đến",
-    "tokenSearch": "Tìm kiếm theo tên mã thông báo hoặc địa chỉ",
+    "allTokens": "Tất cả token",
+    "totalToPay": "Tổng cộng phải trả",
+    "inProgress": "đang tiến hành",
+    "maxSlippage": "Trượt giá tối đa",
     "minReceived": "Nhận tối thiểu",
+    "myTokens": "Token của tôi",
+    "onChain": "trên {{chainName}}",
     "ownedBy": "Sở hữu bởi",
+    "quotedAmount": "Số tiền báo giá",
     "rateChange": "Thay đổi tỷ giá",
+    "receiving": "Đang nhận",
+    "selectChain": "Chọn chuỗi",
+    "selectChainAndToken": "Chọn chuỗi và token",
+    "selectToken": "Chọn token",
+    "sending": "Đang gửi",
+    "tokenSearch": "Tìm kiếm theo tên hoặc địa chỉ token",
     "searchProducts": "Tìm kiếm theo thương hiệu sản phẩm",
     "topup": "Nạp tiền & Dữ liệu",
     "esim": "eSIM",
-    "gift_card": "Mã trả trước"
+    "gift_card": "Thẻ quà tặng",
+    "gift_card_singular": "Thẻ quà tặng"
   },
   "settings": {
     "theme": "Giao diện",

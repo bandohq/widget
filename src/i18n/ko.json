@@ -130,9 +130,10 @@
     "refundFailed": "토큰 환불 오류, 나중에 다시 시도하세요",
     "country": "국가",
     "sentTo": "보낸 사람",
-    "availableRefunds": "환불 받기",
-    "instructions": "귀하의 자금은 안전하며, 환불이 승인되었습니다.",
-    "noTransactions": "여기에는 아무것도 없습니다."
+    "availableRefunds": "환불받기",
+    "instructions": "귀하의 돈은 안전하며, 환불이 승인되었습니다.",
+    "instructionsNewFlow": "귀하의 돈은 안전하며, 몇 분 내에 환불을 받으실 것입니다",
+    "noTransactions": "여기에 아무것도 없습니다."
   },
   "info": {
     "detailMessage": "여기에서 {{productType}}를 받습니다.",
@@ -147,7 +148,7 @@
   },
   "success": {
     "message": {
-      "notification": "{{productType}}을(를) {{reference}}로 보내드립니다."
+      "notification": "{{brand}} {{productType}}을(를) {{reference}}(으)로 받으실 수 있습니다"
     },
     "title": {
       "orderInProgress": "주문 처리 중",
@@ -202,25 +203,26 @@
   },
   "main": {
     "allTokens": "모든 토큰",
-    "payWith": "다음에서",
+    "totalToPay": "총 지불 금액",
     "inProgress": "진행 중",
     "maxSlippage": "최대 슬리피지",
-    "minReceived": "최소 수령",
+    "minReceived": "최소 수신",
     "myTokens": "내 토큰",
     "onChain": "{{chainName}}에서",
     "ownedBy": "소유자",
     "quotedAmount": "견적 금액",
-    "rateChange": "비율 변경",
-    "receiving": "받는 중",
+    "rateChange": "환율 변동",
+    "receiving": "수신 중",
     "selectChain": "체인 선택",
-    "selectChainAndToken": "체인과 토큰 선택",
+    "selectChainAndToken": "체인 및 토큰 선택",
     "selectToken": "토큰 선택",
     "sending": "전송 중",
     "tokenSearch": "토큰 이름 또는 주소로 검색",
-    "searchProducts": "제품 브랜드 검색",
-    "topup": "에어타임 및 데이터",
+    "searchProducts": "제품 브랜드로 검색",
+    "topup": "에어타임 & 데이터",
     "esim": "eSIM",
-    "gift_card": "선불 코드"
+    "gift_card": "기프트 카드",
+    "gift_card_singular": "기프트 카드"
   },
   "settings": {
     "theme": "테마",

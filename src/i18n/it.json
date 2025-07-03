@@ -135,8 +135,9 @@
     "country": "Paese",
     "sentTo": "Inviato a",
     "availableRefunds": "Ottieni il tuo rimborso",
-    "instructions": "Il tuo denaro è al sicuro, il tuo rimborso è stato autorizzato.",
-    "noTransactions": "Non c'è niente qui."
+    "instructions": "I tuoi soldi sono al sicuro, il tuo rimborso è stato autorizzato.",
+    "instructionsNewFlow": "I tuoi soldi sono al sicuro, riceverai il tuo rimborso tra pochi minuti",
+    "noTransactions": "Non c'è nulla qui."
   },
   "info": {
     "detailMessage": "Qui riceverai il tuo {{productType}}.",
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "Ti invieremo il {{productType}} a {{reference}}."
+      "notification": "Riceverai il tuo {{brand}} {{productType}} a {{reference}}"
     },
     "title": {
       "orderInProgress": "Elaborazione del tuo ordine",
@@ -206,25 +207,26 @@
   },
   "main": {
     "allTokens": "Tutti i token",
-    "payWith": "Da",
+    "totalToPay": "Totale da pagare",
     "inProgress": "in corso",
-    "maxSlippage": "Slittamento massimo",
-    "minReceived": "Ricevuto minimo",
+    "maxSlippage": "Slippage max.",
+    "minReceived": "Min. ricevuto",
     "myTokens": "I miei token",
     "onChain": "su {{chainName}}",
     "ownedBy": "Di proprietà di",
-    "quotedAmount": "Totale quotato",
-    "rateChange": "Cambio tasso",
-    "receiving": "In ricezione",
-    "selectChain": "Seleziona la chain",
-    "selectChainAndToken": "Seleziona la chain e il token",
-    "selectToken": "Seleziona un token",
-    "sending": "Invio in corso",
+    "quotedAmount": "Importo quotato",
+    "rateChange": "Variazione del tasso",
+    "receiving": "Ricezione",
+    "selectChain": "Seleziona catena",
+    "selectChainAndToken": "Seleziona catena e token",
+    "selectToken": "Seleziona token",
+    "sending": "Invio",
     "tokenSearch": "Cerca per nome o indirizzo del token",
-    "searchProducts": "Cerca per marca di prodotto",
+    "searchProducts": "Cerca per marca del prodotto",
     "topup": "Ricarica & Dati",
-    "esim": "eSIM",
-    "gift_card": "Codici Prepagati"
+    "esim": "eSIMs",
+    "gift_card": "Carte regalo",
+    "gift_card_singular": "Carta regalo"
   },
   "settings": {
     "theme": "Tema",

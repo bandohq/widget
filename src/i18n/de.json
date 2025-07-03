@@ -134,8 +134,9 @@
     "refundFailed": "Fehler bei der Rückerstattung von Tokens, später erneut versuchen",
     "country": "Land",
     "sentTo": "Gesendet an",
-    "availableRefunds": "Fordere deine Rückerstattung an",
-    "instructions": "Dein Geld ist sicher, deine Rückerstattung wurde genehmigt.",
+    "availableRefunds": "Erhalten Sie Ihre Rückerstattung",
+    "instructions": "Ihr Geld ist sicher, Ihre Rückerstattung wurde genehmigt.",
+    "instructionsNewFlow": "Ihr Geld ist sicher, Sie erhalten Ihre Rückerstattung in wenigen Minuten",
     "noTransactions": "Hier ist nichts."
   },
   "info": {
@@ -151,7 +152,7 @@
   },
   "success": {
     "message": {
-      "notification": "Wir senden Ihnen das {{productType}} an {{reference}}."
+      "notification": "Sie erhalten Ihr {{brand}} {{productType}} an {{reference}}"
     },
     "title": {
       "orderInProgress": "Ihre Bestellung wird bearbeitet",
@@ -203,26 +204,27 @@
     "settingsModified": "Einstellungen (geändert)"
   },
   "main": {
-    "allTokens": "Alle Tokens",
-    "payWith": "Bezahlen mit",
-    "inProgress": "In Bearbeitung",
-    "maxSlippage": "Maximaler Schlupf",
-    "minReceived": "Minimal erhalten",
-    "myTokens": "Meine Tokens",
-    "onChain": "Auf {{chainName}}",
+    "allTokens": "Alle Token",
+    "totalToPay": "Gesamt zu zahlen",
+    "inProgress": "in Bearbeitung",
+    "maxSlippage": "Max. Slippage",
+    "minReceived": "Min. erhalten",
+    "myTokens": "Meine Token",
+    "onChain": "auf {{chainName}}",
     "ownedBy": "Im Besitz von",
     "quotedAmount": "Angebotener Betrag",
-    "rateChange": "Wechselkurs ändern",
-    "receiving": "Erhalten",
-    "selectChain": "Chain auswählen",
-    "selectChainAndToken": "Chain und Token auswählen",
+    "rateChange": "Kursänderung",
+    "receiving": "Empfang",
+    "selectChain": "Kette auswählen",
+    "selectChainAndToken": "Kette und Token auswählen",
     "selectToken": "Token auswählen",
-    "sending": "Wird gesendet",
+    "sending": "Senden",
     "tokenSearch": "Nach Token-Name oder Adresse suchen",
     "searchProducts": "Nach Produktmarke suchen",
-    "topup": "Airtime & Daten",
+    "topup": "Guthaben & Daten",
     "esim": "eSIMs",
-    "gift_card": "Prepaid-Codes"
+    "gift_card": "Geschenkkarten",
+    "gift_card_singular": "Geschenkkarte"
   },
   "settings": {
     "theme": "Thema",
