@@ -61,38 +61,48 @@ export const useTransactionHelpers = () => {
 
   const WorldTransfer = async (
     transactionRequest: TransactionRequest,
-    txId?: string,
+    quoteId?: string,
     tokenSymbol?: string
   ) => {
-    const payload: PayCommandInput = {
-      reference: txId,
-      tokens: [
-        {
-          symbol: tokenSymbol,
-          token_amount: transactionRequest.value,
-        },
-      ],
-      description: "Bando Widget",
-      to: transactionRequest.to,
-    };
+    try {
+      const payload: PayCommandInput = {
+        reference: quoteId,
+        tokens: [
+          {
+            symbol: tokenSymbol,
+            token_amount: transactionRequest.value,
+          },
+        ],
+        description: transactionRequest.data,
+        to: transactionRequest.to,
+      };
 
-    const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
-    if (finalPayload.status == "success") {
-      const res = await fetch(`/api/confirm-payment`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalPayload),
-      });
-      const payment = await res.json();
-      if (payment.success) {
-        return payment.txHash;
+      const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
+      if (finalPayload.status == "success") {
+        const res = await fetch(`/api/confirm-payment`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(finalPayload),
+        });
+        const payment = await res.json();
+        if (payment.success) {
+          return payment.txHash;
+        } else {
+          throw new Error("Payment confirmation failed");
+        }
+      } else {
+        throw new Error("MiniKit payment failed");
       }
+    } catch (error) {
+      showNotification("error", t("error.title.transactionFailed"));
+      console.error("Error in WorldTransfer:", error);
+      throw error;
     }
   };
 
   const signTransfer = async (
     transactionRequest: TransactionRequest,
-    txId?: string,
+    quoteId?: string,
     tokenSymbol?: string
   ) => {
     setLoading(true);
@@ -100,7 +110,7 @@ export const useTransactionHelpers = () => {
       const nativeToken = chain?.nativeToken;
 
       if (MiniKit.isInstalled()) {
-        return await WorldTransfer(transactionRequest, txId, tokenSymbol);
+        return await WorldTransfer(transactionRequest, quoteId, tokenSymbol);
       }
 
       return await sendToken(transactionRequest);

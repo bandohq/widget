@@ -120,7 +120,7 @@ export const useTransactionFlow = () => {
         // TODO: reference
         const signature = await signTransfer(
           quote.transactionRequest,
-          "123",
+          quote?.id.toString(),
           token?.symbol
         );
         await new Promise((resolve) => setTimeout(resolve, 1000));
