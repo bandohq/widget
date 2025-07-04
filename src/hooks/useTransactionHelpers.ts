@@ -61,13 +61,14 @@ export const useTransactionHelpers = () => {
 
   const WorldTransfer = async (
     transactionRequest: TransactionRequest,
-    txId: string
+    txId?: string,
+    tokenSymbol?: string
   ) => {
     const payload: PayCommandInput = {
       reference: txId,
       tokens: [
         {
-          symbol: token.symbol,
+          symbol: tokenSymbol,
           token_amount: transactionRequest.value,
         },
       ],
@@ -91,21 +92,18 @@ export const useTransactionHelpers = () => {
 
   const signTransfer = async (
     transactionRequest: TransactionRequest,
-    txId: string
+    txId?: string,
+    tokenSymbol?: string
   ) => {
     setLoading(true);
     try {
       const nativeToken = chain?.nativeToken;
 
       if (MiniKit.isInstalled()) {
-        return await WorldTransfer(transactionRequest, txId);
+        return await WorldTransfer(transactionRequest, txId, tokenSymbol);
       }
 
-      if (nativeToken.address === token.address) {
-        return await transferNativeToken(transactionRequest);
-      } else {
-        return await transferErc20Token(transactionRequest);
-      }
+      return await sendToken(transactionRequest);
     } finally {
       setLoading(false);
     }
