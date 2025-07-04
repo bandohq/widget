@@ -28,6 +28,7 @@ export const App = forwardRef<unknown, WidgetProps>((props, ref) => {
   return (
     <AppProvider config={config} formRef={props.formRef}>
       <LaunchDarklyProvider>
+        {MiniKit.isInstalled() && <p>MiniKit is installed</p>}
         <AppDefault />
       </LaunchDarklyProvider>
     </AppProvider>

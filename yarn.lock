@@ -2346,10 +2346,18 @@
     ox "^0.1.0"
     zustand "^4.5"
 
-"@worldcoin/minikit-js@1.9.5", "@worldcoin/minikit-js@^1.9.5":
+"@worldcoin/minikit-js@1.9.5":
   version "1.9.5"
   resolved "https://registry.yarnpkg.com/@worldcoin/minikit-js/-/minikit-js-1.9.5.tgz#aa6ebd337cab17496abe10680a34691a5cee7718"
   integrity sha512-pO2gy4OxBcZoFFkZlpKv1Ov73apoRa3UCTCnScFj20LHH8ByjFhcTDEi1rxYg5i9ljby2PfRpClSGeG/1wbtUg==
+  dependencies:
+    "@worldcoin/idkit-core" "^2.0.2"
+    abitype "^1.0.6"
+
+"@worldcoin/minikit-js@^1.9.6":
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@worldcoin/minikit-js/-/minikit-js-1.9.6.tgz#c653cf00bbbb6c9fe477e81956932aa4c6ebd797"
+  integrity sha512-nKPj9hQngHV0bD4/SD/XZmNAYv/zfZjptPjnuzIWouRR8AQHFpdkCPIw03QujhBG+3kUwUpsBAgYPwEk4vj2dw==
   dependencies:
     "@worldcoin/idkit-core" "^2.0.2"
     abitype "^1.0.6"
