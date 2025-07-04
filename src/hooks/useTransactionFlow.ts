@@ -117,7 +117,12 @@ export const useTransactionFlow = () => {
 
     if (transactionFlow) {
       try {
-        const signature = await signTransfer(quote.transactionRequest);
+        // TODO: reference
+        const signature = await signTransfer(
+          quote.transactionRequest,
+          quote?.id.toString(),
+          token?.symbol
+        );
         await new Promise((resolve) => setTimeout(resolve, 1000));
         mutateNew({
           ...payload,

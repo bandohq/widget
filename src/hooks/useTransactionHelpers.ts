@@ -6,6 +6,7 @@ import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
 import { useAccount } from "@lifi/wallet-management";
 import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
+import { MiniKit, PayCommandInput, Tokens } from "@worldcoin/minikit-js";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { ERC20ApproveABI } from "../utils/abis";
@@ -58,13 +59,63 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const signTransfer = async (transactionRequest: TransactionRequest) => {
+  const WorldTransfer = async (
+    transactionRequest: TransactionRequest,
+    quoteId?: string,
+    tokenSymbol?: string
+  ) => {
+    try {
+      const payload: PayCommandInput = {
+        reference: quoteId,
+        tokens: [
+          {
+            symbol: tokenSymbol as Tokens,
+            token_amount: transactionRequest.value,
+          },
+        ],
+        description: transactionRequest.data,
+        to: transactionRequest.to,
+      };
+
+      const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
+      if (finalPayload.status == "success") {
+        const res = await fetch(`/api/confirm-payment`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(finalPayload),
+        });
+        const payment = await res.json();
+        if (payment.success) {
+          return payment.txHash;
+        } else {
+          throw new Error("Payment confirmation failed");
+        }
+      } else {
+        throw new Error("MiniKit payment failed");
+      }
+    } catch (error) {
+      showNotification("error", t("error.title.transactionFailed"));
+      console.error("Error in WorldTransfer:", error);
+      throw error;
+    }
+  };
+
+  const signTransfer = async (
+    transactionRequest: TransactionRequest,
+    quoteId?: string,
+    tokenSymbol?: string
+  ) => {
     setLoading(true);
     try {
+      const nativeToken = chain?.nativeToken;
+
+      if (MiniKit.isInstalled()) {
+        return await WorldTransfer(transactionRequest, quoteId, tokenSymbol);
+      }
+
       return await sendToken(transactionRequest);
-    } catch (error) {
-      console.error("Error at signTransfer:", error);
-      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
