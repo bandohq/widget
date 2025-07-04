@@ -6,7 +6,7 @@ import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
 import { useAccount } from "@lifi/wallet-management";
 import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
-import { MiniKit, PayCommandInput } from "@worldcoin/minikit-js";
+import { MiniKit, PayCommandInput, Tokens } from "@worldcoin/minikit-js";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { ERC20ApproveABI } from "../utils/abis";
@@ -69,7 +69,7 @@ export const useTransactionHelpers = () => {
         reference: quoteId,
         tokens: [
           {
-            symbol: tokenSymbol,
+            symbol: tokenSymbol as Tokens,
             token_amount: transactionRequest.value,
           },
         ],
