@@ -6,12 +6,17 @@ import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
 import { useAccount } from "@lifi/wallet-management";
 import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
-import { MiniKit, PayCommandInput, Tokens } from "@worldcoin/minikit-js";
+import {
+  MiniKit,
+  tokenToDecimals,
+  Tokens,
+  PayCommandInput,
+} from "@worldcoin/minikit-js";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { ERC20ApproveABI } from "../utils/abis";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
-import { defineChain, parseUnits } from "viem";
+import { defineChain, encodeFunctionData, parseUnits } from "viem";
 import { formatTotalAmount } from "../utils/format";
 import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
@@ -59,44 +64,32 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const WorldTransfer = async (
-    transactionRequest: TransactionRequest,
-    quoteId?: string,
-    tokenSymbol?: string
-  ) => {
-    try {
-      const payload: PayCommandInput = {
-        reference: quoteId,
-        tokens: [
-          {
-            symbol: tokenSymbol as Tokens,
-            token_amount: transactionRequest.value,
-          },
-        ],
-        description: transactionRequest.data,
-        to: transactionRequest.to,
-      };
+  const WorldTransfer = async ({
+    reference,
+    to,
+    amount,
+    token,
+    description = "Bando Payment through World App",
+  }) => {
+    const payload: PayCommandInput = {
+      reference,
+      to,
+      tokens: [
+        {
+          symbol: Tokens[token],
+          token_amount: tokenToDecimals(amount, Tokens[token]).toString(),
+        },
+      ],
+      description,
+    };
 
-      const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
-      if (finalPayload.status == "success") {
-        const res = await fetch(`/api/confirm-payment`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(finalPayload),
-        });
-        const payment = await res.json();
-        if (payment.success) {
-          return payment.txHash;
-        } else {
-          throw new Error("Payment confirmation failed");
-        }
-      } else {
-        throw new Error("MiniKit payment failed");
-      }
-    } catch (error) {
+    const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
+
+    if (finalPayload.status === "success") {
+      return finalPayload.transaction_id;
+    } else {
       showNotification("error", t("error.title.transactionFailed"));
-      console.error("Error in WorldTransfer:", error);
-      throw error;
+      throw new Error(`Payment failed: ${finalPayload.error_code}`);
     }
   };
 
@@ -107,10 +100,13 @@ export const useTransactionHelpers = () => {
   ) => {
     setLoading(true);
     try {
-      const nativeToken = chain?.nativeToken;
-
       if (MiniKit.isInstalled()) {
-        return await WorldTransfer(transactionRequest, quoteId, tokenSymbol);
+        return await WorldTransfer({
+          reference: quoteId,
+          to: transactionRequest.to,
+          amount: transactionRequest.value,
+          token: tokenSymbol,
+        });
       }
 
       return await sendToken(transactionRequest);
