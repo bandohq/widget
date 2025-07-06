@@ -19,7 +19,6 @@ import { QuotesProvider } from './providers/QuotesProvider/QuotesProvider';
 import { NotificationProvider } from "./providers/AlertProvider/NotificationProvider";
 import { UserWalletProvider } from "./providers/UserWalletProvider/UserWalletProvider";
 import { StepsProvider } from "./providers/StepsProvider/StepsProvider";
-
 export const AppProvider: React.FC<PropsWithChildren<WidgetConfigProps>> = ({
   children,
   config,

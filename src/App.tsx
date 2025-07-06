@@ -22,9 +22,6 @@ export const App = forwardRef<unknown, WidgetProps>((props, ref) => {
     return config;
   }, [props]);
 
-  useEffect(() => {
-    console.log("MiniKit.isInstalled()", MiniKit.isInstalled());
-  }, []);
   return (
     <AppProvider config={config} formRef={props.formRef}>
       <LaunchDarklyProvider>
