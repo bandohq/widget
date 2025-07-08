@@ -15,15 +15,16 @@ import {
   SelectTokenCardHeader,
 } from './SelectTokenButton.style.js';
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from "react";
 import { useAccount, useWalletMenu } from "@lifi/wallet-management";
-import { Avatar, Skeleton } from '@mui/material';
-import { CaretDown } from '@phosphor-icons/react';
-import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
-import { Box } from '@mui/material';
+import { useWorldAccount } from "../../hooks/useWorldAccount";
+import { Avatar, Skeleton } from "@mui/material";
+import { CaretDown } from "@phosphor-icons/react";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
+import { Box } from "@mui/material";
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
-import { formatTotalAmount } from '../../utils/format.js';
+import { formatTotalAmount } from "../../utils/format.js";
 import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const SelectTokenButtonForProducts: React.FC<
@@ -43,12 +44,15 @@ export const SelectTokenButtonForProducts: React.FC<
     isPurchasePossible,
   } = useQuotes();
   const { account } = useAccount();
+  const worldAccount = useWorldAccount();
   const { openWalletMenu } = useWalletMenu();
   const { walletConfig } = useWidgetConfig();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
-  const { chain } = useChain(account?.chainId);
+  const { chain } = useChain(worldAccount?.chainId ?? account?.chainId);
   const { token } = useToken(chain, tokenAddress);
+
+  const isConnected = worldAccount?.isWorld || account?.isConnected;
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
@@ -72,7 +76,7 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const handleConnect = () => {
-    if (account.isConnected) {
+    if (isConnected) {
       handleClick();
     } else if (walletConfig?.onConnect) {
       walletConfig.onConnect();
@@ -91,7 +95,7 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const defaultPlaceholder = !account.isConnected
+  const defaultPlaceholder = isConnected
     ? t("button.connectWallet")
     : product && !quote && t("main.selectToken");
   const cardTitle: string = t(`main.totalToPay`);
