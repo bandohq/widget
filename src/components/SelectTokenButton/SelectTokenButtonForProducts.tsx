@@ -54,6 +54,10 @@ export const SelectTokenButtonForProducts: React.FC<
 
   const isConnected = worldAccount?.isWorld || account?.isConnected;
 
+  console.log("worldAccount", worldAccount);
+  console.log("account", account);
+  console.log("isConnected", isConnected);
+
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
       fetchQuote(
@@ -95,7 +99,7 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const defaultPlaceholder = isConnected
+  const defaultPlaceholder = !isConnected
     ? t("button.connectWallet")
     : product && !quote && t("main.selectToken");
   const cardTitle: string = t(`main.totalToPay`);
