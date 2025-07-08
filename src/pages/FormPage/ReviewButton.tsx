@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
@@ -17,6 +16,7 @@ import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import { navigationRoutes } from "../../utils/navigationRoutes";
+import { useNavigate } from "react-router-dom";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;

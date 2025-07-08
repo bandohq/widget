@@ -6,11 +6,17 @@ import { TransactionRequest } from "../providers/QuotesProvider/QuotesProvider";
 import { useAccount } from "@lifi/wallet-management";
 import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
+import {
+  MiniKit,
+  tokenToDecimals,
+  Tokens,
+  PayCommandInput,
+} from "@worldcoin/minikit-js";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { ERC20ApproveABI } from "../utils/abis";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1.json";
-import { defineChain, parseUnits } from "viem";
+import { defineChain, encodeFunctionData, parseUnits } from "viem";
 import { formatTotalAmount } from "../utils/format";
 import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
@@ -58,13 +64,54 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const signTransfer = async (transactionRequest: TransactionRequest) => {
+  const WorldTransfer = async ({
+    reference,
+    to,
+    amount,
+    token,
+    description = "Bando Payment through World App",
+  }) => {
+    const payload: PayCommandInput = {
+      reference,
+      to,
+      tokens: [
+        {
+          symbol: Tokens[token],
+          token_amount: tokenToDecimals(amount, Tokens[token]).toString(),
+        },
+      ],
+      description,
+    };
+
+    const { finalPayload } = await MiniKit.commandsAsync.pay(payload);
+
+    if (finalPayload.status === "success") {
+      return finalPayload.transaction_id;
+    } else {
+      showNotification("error", t("error.title.transactionFailed"));
+      throw new Error(`Payment failed: ${finalPayload.error_code}`);
+    }
+  };
+
+  const signTransfer = async (
+    transactionRequest: TransactionRequest,
+    quoteId?: string,
+    tokenSymbol?: string
+  ) => {
     setLoading(true);
     try {
+      if (MiniKit.isInstalled()) {
+        return await WorldTransfer({
+          reference: quoteId,
+          to: transactionRequest.to,
+          amount: transactionRequest.value,
+          token: tokenSymbol,
+        });
+      }
+
       return await sendToken(transactionRequest);
-    } catch (error) {
-      console.error("Error at signTransfer:", error);
-      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
+import { useWorldAccount } from "../../hooks/useWorldAccount";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
@@ -62,6 +63,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { showNotification } = useNotificationContext();
   const { account } = useAccount();
+  const worldAccount = useWorldAccount();
   const { product } = useProduct();
   const { t } = useTranslation();
   const [quote, setQuote] = useState<QuoteData | null>(null);
@@ -69,6 +71,9 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<QuoteError | null>(null);
+
+  const activeAddress = worldAccount?.address ?? account?.address ?? "";
+  const activeChainId = worldAccount?.chainId ?? account?.chainId;
 
   const {
     data,
@@ -136,8 +141,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiatCurrency,
       digitalAsset,
-      sender: transactionFlow ? account?.address : undefined,
-      chainId: account?.chainId,
+      sender: transactionFlow ? activeAddress : undefined,
+      chainId: activeChainId,
     });
   };
 
@@ -147,7 +152,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     resetQuote();
-  }, [account?.chainId, product?.sku]);
+  }, [activeChainId, product?.sku]);
 
   return (
     <QuotesContext.Provider

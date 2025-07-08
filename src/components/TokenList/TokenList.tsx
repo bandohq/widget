@@ -1,4 +1,5 @@
 import { useAccount } from "@lifi/wallet-management";
+import { useWorldAccount } from "../../hooks/useWorldAccount";
 import { Box } from "@mui/material";
 import { type FC, useMemo } from "react";
 import { useChain } from "../../hooks/useChain.js";
@@ -21,10 +22,13 @@ export const TokenList: FC<TokenListProps> = ({
   );
 
   const { account } = useAccount();
-  const { chain: selectedChain } = useChain(account?.chainId);
+  const worldAccount = useWorldAccount();
+  const activeAddress = worldAccount?.address ?? account?.address ?? "";
+  const activeChainId = worldAccount?.chainId ?? account?.chainId;
 
+  const { chain: selectedChain } = useChain(activeChainId);
   const { balances, isLoading } = useTokenBalances(
-    account?.address ?? "",
+    activeAddress,
     selectedChain ?? undefined
   );
 
