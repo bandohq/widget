@@ -19,14 +19,11 @@ import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useFlags } from "launchdarkly-react-client-sdk";
 
 interface ErrorViewProps {
-  errorMessage: any;
+  errorMessage?: any;
   isErrorLoading?: boolean;
 }
 
-export const ErrorView = ({
-  errorMessage,
-  isErrorLoading = false,
-}: ErrorViewProps) => {
+export const ErrorView = ({ isErrorLoading = false }: ErrorViewProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();

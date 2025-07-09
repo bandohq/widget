@@ -3,7 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { ErrorView } from "./ErrorView";
 import { StatusPageContainer } from "./StatusPage.style";
 import { SuccessView } from "./SuccessView";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { useEffect } from "react";
@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 
 export const StatusPage = () => {
   const { transactionId } = useParams();
+  const [errorState] = useSearchParams();
   const { account } = useAccount();
   const { integrator } = useWidgetConfig();
   const { resetProduct } = useProduct();
@@ -35,6 +36,7 @@ export const StatusPage = () => {
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
       refetchInterval: 10000,
+      enabled: !!(transactionId && account?.address),
     },
   });
 
@@ -46,12 +48,16 @@ export const StatusPage = () => {
 
   const renderStatusView = () => {
     if (error) {
-      return <ErrorView errorMessage={error} isErrorLoading={true} />;
+      return <ErrorView isErrorLoading={true} />;
+    }
+
+    if (errorState.get("error") === "true") {
+      return <ErrorView />;
     }
 
     switch (transactionData?.status) {
       case "FAILED":
-        return <ErrorView errorMessage={error} isErrorLoading={false} />;
+        return <ErrorView isErrorLoading={false} />;
       default:
         return <SuccessView status={transactionData} />;
     }

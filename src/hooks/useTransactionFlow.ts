@@ -15,6 +15,7 @@ import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import { useTranslation } from "react-i18next";
+import { navigationRoutes } from "../utils/navigationRoutes";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -58,8 +59,8 @@ export const useTransactionFlow = () => {
       },
       onError: (error) => {
         console.error("New flow error:", error);
-        showNotification("error", t("error.message.errorProcessingPurchase"));
         setLoading(false);
+        navigate(`${navigationRoutes.status}?error=true`);
       },
     },
   });
