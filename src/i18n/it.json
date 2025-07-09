@@ -192,7 +192,8 @@
       "unknown": "Riprova o contatta il nostro supporto.",
       "walletChangedDuringExecution": "L'indirizzo del portafoglio che ha richiesto la quota non corrisponde all'indirizzo del portafoglio che tenta di firmare la transazione. Assicurati di utilizzare lo stesso portafoglio per tutta la durata della transazione.",
       "quoteFailed": "Errore nel recupero del preventivo, riprova più tardi",
-      "errorProcessingPurchase": "Errore durante l'elaborazione dell'acquisto"
+      "errorProcessingPurchase": "Errore durante l'elaborazione dell'acquisto",
+      "checkHistoryForStatus": "Si è verificato un errore nel caricamento dello stato del tuo acquisto, puoi controllarlo dalla cronologia"
     },
     "title": {
       "allowanceRequired": "Quota massima insufficiente",

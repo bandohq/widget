@@ -185,7 +185,8 @@
       "transactionCanceled": "Giao dịch đã bị hủy.",
       "unknown": "Xảy ra lỗi. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
       "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau",
-      "errorProcessingPurchase": "Lỗi khi xử lý mua hàng"
+      "errorProcessingPurchase": "Lỗi khi xử lý mua hàng",
+      "checkHistoryForStatus": "Đã xảy ra lỗi khi tải trạng thái mua hàng của bạn, bạn có thể kiểm tra từ lịch sử"
     },
     "title": {
       "allowanceRequired": "Giới hạn không đủ",

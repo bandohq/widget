@@ -190,7 +190,8 @@
       "unknown": "Tente novamente ou fale com o suporte.",
       "walletChangedDuringExecution": "O endereço da carteira que solicitou a cotação não corresponde ao endereço tentando assinar a transação.",
       "quoteFailed": "Erro ao obter a cotação, tente novamente mais tarde",
-      "errorProcessingPurchase": "Erro ao processar a compra"
+      "errorProcessingPurchase": "Erro ao processar a compra",
+      "checkHistoryForStatus": "Houve um erro ao carregar o status da sua compra, você pode verificá-lo no histórico"
     },
     "title": {
       "allowanceRequired": "Permissão insuficiente",

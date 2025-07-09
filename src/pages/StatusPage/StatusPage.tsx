@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useFieldActions } from "../../stores/form/useFieldActions";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
+import { useTranslation } from "react-i18next";
 
 export const StatusPage = () => {
   const { transactionId } = useParams();
@@ -18,8 +20,10 @@ export const StatusPage = () => {
   const { resetProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
   const { resetQuote } = useQuotes();
+  const { showNotification } = useNotificationContext();
+  const { t } = useTranslation();
 
-  const { data: transactionData } = useFetch({
+  const { data: transactionData, error } = useFetch({
     url:
       transactionId && account?.address
         ? `wallets/${account?.address}/transactions/${transactionId}/`
@@ -34,10 +38,20 @@ export const StatusPage = () => {
     },
   });
 
+  useEffect(() => {
+    if (error) {
+      showNotification("error", t("error.message.errorProcessingPurchase"));
+    }
+  }, [error]);
+
   const renderStatusView = () => {
+    if (error) {
+      return <ErrorView errorMessage={error} isErrorLoading={true} />;
+    }
+
     switch (transactionData?.status) {
       case "FAILED":
-        return <ErrorView transaction={transactionData} />;
+        return <ErrorView errorMessage={error} isErrorLoading={false} />;
       default:
         return <SuccessView status={transactionData} />;
     }

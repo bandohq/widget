@@ -41,7 +41,7 @@ export const useTransactionFlow = () => {
 
   // Nuevo flujo
   const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
-    url: `wallets/${account?.address}/transaction/`,
+    url: `wallets/${account?.address}/transactions/`,
     method: "POST",
     queryParams: { integrator },
     headers: {

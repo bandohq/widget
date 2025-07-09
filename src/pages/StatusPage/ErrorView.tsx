@@ -18,7 +18,15 @@ import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useFlags } from "launchdarkly-react-client-sdk";
 
-export const ErrorView = ({ transaction }) => {
+interface ErrorViewProps {
+  errorMessage: any;
+  isErrorLoading?: boolean;
+}
+
+export const ErrorView = ({
+  errorMessage,
+  isErrorLoading = false,
+}: ErrorViewProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -26,11 +34,45 @@ export const ErrorView = ({ transaction }) => {
 
   //Todo: send direct to refound or main page depending on transactionFlow
   const goTo = () => {
-    if (transactionFlow) {
+    if (isErrorLoading) {
+      navigate(navigationRoutes.transactionHistory);
+    } else if (transactionFlow) {
       navigate(navigationRoutes.home);
     } else {
       navigate(navigationRoutes.transactionHistory);
     }
+  };
+
+  const getTitle = () => {
+    if (isErrorLoading) {
+      return t("error.title.unknown");
+    }
+    return t("error.title.orderFailed");
+  };
+
+  const getSubtitle = () => {
+    if (isErrorLoading) {
+      return t("error.title.checkHistory");
+    }
+    return t("error.title.retry");
+  };
+
+  const getAlertMessage = () => {
+    if (isErrorLoading) {
+      return t("error.message.checkHistoryForStatus");
+    }
+    return t(
+      transactionFlow ? "history.instructionsNewFlow" : "history.instructions"
+    );
+  };
+
+  const getButtonText = () => {
+    if (isErrorLoading) {
+      return t("button.goToHistory");
+    }
+    return t(
+      transactionFlow ? "button.backToHome" : "history.availableRefunds"
+    );
   };
 
   return (
@@ -38,15 +80,11 @@ export const ErrorView = ({ transaction }) => {
       <IconWrapper bgColor="#FAC985">
         <SmileyMelting size={50} />
       </IconWrapper>
-      <StatusTitle>{t("error.title.orderFailed")}</StatusTitle>
-      <StatusSubtitle>{t("error.title.retry")}</StatusSubtitle>
+      <StatusTitle>{getTitle()}</StatusTitle>
+      <StatusSubtitle>{getSubtitle()}</StatusSubtitle>
 
       <Alert sx={{ mt: 2 }} severity="info">
-        {t(
-          transactionFlow
-            ? "history.instructionsNewFlow"
-            : "history.instructions"
-        )}
+        {getAlertMessage()}
       </Alert>
       <Button
         fullWidth
@@ -61,7 +99,7 @@ export const ErrorView = ({ transaction }) => {
         style={{ borderRadius: "30px" }}
         onClick={goTo}
       >
-        {t(transactionFlow ? "button.backToHome" : "history.availableRefunds")}
+        {getButtonText()}
       </Button>
     </>
   );
