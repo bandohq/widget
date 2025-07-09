@@ -133,7 +133,7 @@
     "detailTitle": "Transaction detail",
     "buyDetails": "buy detail",
     "refundSuccess": "Refund sent successfully",
-    "refundFailed": "Error on refunding tokens, try later",
+    "refundFailed": "Error on refunding tokens, try again later",
     "country": "Country",
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
