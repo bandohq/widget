@@ -193,7 +193,8 @@
       "transactionSimulationFailed": "The transaction could not be executed in simulation.",
       "unknown": "Please try again or contact support.",
       "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution.",
-      "quoteFailed": "Error getting the quote, try later"
+      "quoteFailed": "Error getting the quote, try later",
+      "errorProcessingPurchase": "Error processing purchase"
     },
     "title": {
       "allowanceRequired": "Insufficient allowance",

@@ -189,7 +189,8 @@
       "transactionFailed": "Bitte überprüfen Sie den Block-Explorer für weitere Informationen.",
       "unknown": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support.",
       "walletChangedDuringExecution": "Die Wallet-Adresse, die das Angebot angefordert hat, stimmt nicht mit der Wallet-Adresse überein, die die Transaktion signieren möchte.",
-      "quoteFailed": "Fehler beim Abrufen des Angebots, versuchen Sie es später erneut"
+      "quoteFailed": "Fehler beim Abrufen des Angebots, versuchen Sie es später erneut",
+      "errorProcessingPurchase": "Fehler beim Verarbeiten des Kaufs"
     },
     "title": {
       "allowanceRequired": "Unzureichende Freigabe",

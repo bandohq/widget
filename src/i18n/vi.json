@@ -184,7 +184,8 @@
       "slippageThreshold": "Trượt giá vượt ngưỡng. Vui lòng yêu cầu lộ trình mới.",
       "transactionCanceled": "Giao dịch đã bị hủy.",
       "unknown": "Xảy ra lỗi. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
-      "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau"
+      "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau",
+      "errorProcessingPurchase": "Lỗi khi xử lý mua hàng"
     },
     "title": {
       "allowanceRequired": "Giới hạn không đủ",

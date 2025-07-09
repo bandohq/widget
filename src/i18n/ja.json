@@ -187,7 +187,8 @@
       "transactionSimulationFailed": "トランザクションのシミュレーションが失敗しました。",
       "unknown": "再度お試しいただくか、サポートまでお問い合わせください",
       "walletChangedDuringExecution": "見積もりを要求したウォレットアドレスがトランザクションに署名しようとしているウォレットアドレスと一致しません。同じウォレットを使用してください。",
-      "quoteFailed": "見積もりの取得中にエラーが発生しました。後でもう一度お試しください"
+      "quoteFailed": "見積もりの取得中にエラーが発生しました。後でもう一度お試しください",
+      "errorProcessingPurchase": "購入の処理中にエラーが発生しました"
     },
     "title": {
       "allowanceRequired": "許可が不足しています",
