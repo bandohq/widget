@@ -224,7 +224,7 @@
       "walletMismatch": "Wallet address mismatch",
       "orderFailed": "Oh... There was a problem",
       "retry": "Please, try again later.",
-      "transactionFailed": "Error loading transaction"
+      "transactionLoadFailed": "Error loading transaction"
     }
   },
   "loading": {
