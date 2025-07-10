@@ -76,7 +76,7 @@ export const TransactionErrorView = ({ error, onRetry }: TransactionErrorViewPro
       </Box>
 
       <Typography variant="h5" gutterBottom>
-        {t("error.title.transactionFailed", "Error at fetching transaction")}
+        {t("error.title.orderFailed", "Error at fetching transaction")}
       </Typography>
 
       <Typography
