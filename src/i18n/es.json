@@ -223,7 +223,7 @@
       "walletMismatch": "La dirección de billetera no coincide",
       "orderFailed": "Oh... Hubo un problema",
       "retry": "Por favor, inténtalo de nuevo más tarde.",
-      "transactionFailed": "Error al cargar la transacción"
+      "transactionLoadFailed": "Error al cargar la transacción"
     }
   },
   "loading": {
