@@ -77,32 +77,6 @@ export const ProductsPage = () => {
     );
   }
 
-  // Show catalog error if there's an error with the catalog
-  if (catalogError) {
-    return (
-      <PageContainer>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            py: 4,
-            px: 2,
-          }}
-        >
-          <Typography variant="h6" sx={{ mb: 1 }}>
-            {t("error.title.unknown")}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {t("error.message.unknown")}
-          </Typography>
-        </Box>
-      </PageContainer>
-    );
-  }
-
   return (
     <PageContainer>
       <ProductSearch productType="" />
