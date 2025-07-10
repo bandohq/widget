@@ -60,7 +60,7 @@ export const useTransactionFlow = () => {
       onError: (error) => {
         console.error("New flow error:", error);
         setLoading(false);
-        navigate(`${navigationRoutes.status}?error=true`);
+        navigate(`${navigationRoutes.error}?error=true`);
       },
     },
   });
