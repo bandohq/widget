@@ -28,6 +28,7 @@ import { useConfig } from "wagmi";
 import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
 import { defineChain } from "viem";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
+import { TransactionErrorView } from "./TransactionErrorView";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -53,7 +54,12 @@ export const TransactionsDetailPage = () => {
 
   useHeader(t("history.detailTitle"));
 
-  const { data: transactionData, isPending } = useFetch({
+  const {
+    data: transactionData,
+    isPending,
+    error,
+    refetch,
+  } = useFetch({
     url: transactionId
       ? transactionFlow
         ? `wallets/${account?.address}/transactions/${transactionId}/`
@@ -62,8 +68,39 @@ export const TransactionsDetailPage = () => {
     method: "GET",
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
+      retry: 2,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Backoff exponencial
     },
   });
+
+  if (error) {
+    return (
+      <PageContainer>
+        <TransactionErrorView error={error} onRetry={() => refetch()} />
+      </PageContainer>
+    );
+  }
+
+  if (isPending || !transactionData) {
+    return (
+      <PageContainer>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "60vh",
+            padding: 3,
+          }}
+        >
+          <Typography variant="h6" color="text.secondary">
+            {t("loading.transaction", "Cargando detalles de la transacción...")}
+          </Typography>
+        </Box>
+      </PageContainer>
+    );
+  }
 
   const formatDate = (dateString: string) => {
     if (!dateString) return "";
@@ -125,10 +162,6 @@ export const TransactionsDetailPage = () => {
       }
     }
   };
-
-  if (isPending || !transactionData) {
-    return null;
-  }
 
   return (
     <PageContainer bottomGutters>
