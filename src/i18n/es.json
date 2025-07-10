@@ -33,7 +33,7 @@
     "resetSettings": "Reiniciar ajustes",
     "seeDetails": "Ver detalles",
     "showAll": "Mostrar todo",
-    "tryAgain": "Intentar otra vez",
+    "retry": "Reintentar",
     "viewCoverage": "Ver cobertura",
     "viewOnExplorer": "Ver en explorador",
     "goToHistory": "Ir al historial"
@@ -195,6 +195,9 @@
       "quoteFailed": "Error al cotizar, intente más tarde",
       "errorProcessingPurchase": "Error al procesar la compra",
       "checkHistoryForStatus": "Hubo un error al cargar el estado de tu compra, puedes verlo desde tu historial"
+      "transactionNotFound": "Transacción no encontrada",
+      "unauthorized": "No tienes permisos para ver esta transacción",
+      "serverError": "Error del servidor, inténtalo más tarde"
     },
     "title": {
       "allowanceRequired": "Autorización insuficiente",
@@ -224,7 +227,11 @@
       "retry": "Por favor, inténtalo de nuevo más tarde.",
       "errorLoadingStatus": "Error al cargar el estado",
       "checkHistory": "Puedes verlo desde tu historial"
+      "transactionLoadFailed": "Error al cargar la transacción"
     }
+  },
+  "loading": {
+    "transaction": "Cargando detalles de la transacción..."
   },
   "tooltip": {
     "notFound": {
