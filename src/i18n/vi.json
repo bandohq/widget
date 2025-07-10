@@ -185,7 +185,8 @@
       "transactionCanceled": "Giao dịch đã bị hủy.",
       "unknown": "Xảy ra lỗi. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
       "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau",
-      "tokenLoadFailed": "Không thể tải token. Vui lòng thử lại."
+      "tokenLoadFailed": "Không thể tải token. Vui lòng thử lại.",
+      "balanceLoadFailed": "Không thể tải số dư. Vui lòng thử lại."
     },
     "title": {
       "allowanceRequired": "Giới hạn không đủ",

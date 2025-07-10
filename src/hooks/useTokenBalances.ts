@@ -89,8 +89,7 @@ export const useTokenBalances = (
 
         setBalances(nonZeroBalances);
       } catch (err) {
-        const errorMessage =
-          "Error at fetching token balances, please try again later";
+        const errorMessage = t("error.message.balanceLoadFailed");
         setError(errorMessage);
         showNotification("error", errorMessage);
         setBalances([]);
