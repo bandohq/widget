@@ -26,6 +26,7 @@
     "disconnect": "Disconnect",
     "done": "Done",
     "light": "Light",
+    "loading": "Loading...",
     "max": "max",
     "ok": "Ok",
     "options": "Options",
@@ -193,7 +194,9 @@
       "transactionSimulationFailed": "The transaction could not be executed in simulation.",
       "unknown": "Please try again or contact support.",
       "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution.",
-      "quoteFailed": "Error getting the quote, try later"
+      "quoteFailed": "Error getting the quote, try later",
+      "countriesFetchFailed": "Could not load available countries. Check your connection and try again.",
+      "noCountriesAvailable": "No countries are available at the moment."
     },
     "title": {
       "allowanceRequired": "Insufficient allowance",
@@ -219,7 +222,8 @@
       "walletChainTypeInvalid": "Wallet address doesn't match the selected destination chain {{chainName}}",
       "walletMismatch": "Wallet address mismatch",
       "orderFailed": "Oh... There was a problem",
-      "retry": "Please, try again later."
+      "retry": "Please, try again later.",
+      "countriesUnavailable": "Countries unavailable"
     }
   },
   "tooltip": {

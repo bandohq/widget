@@ -23,7 +23,12 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { selectedCountry: country, isCountryPending } = useCountryContext();
+  const {
+    selectedCountry: country,
+    isCountryPending,
+    error: countryError,
+    hasCountries,
+  } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
   const { buildUrl } = useWidgetConfig();
   const [products, setProducts] = useState<Product[]>([]);
@@ -39,7 +44,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     queryParams: {
       country: !!country ? country?.isoAlpha2 : null,
     },
-    enabled: !!country && !isCountryPending,
+    enabled: !!country && !isCountryPending && hasCountries && !countryError,
   });
 
   useEffect(() => {
@@ -77,40 +82,47 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       }
     }
-  }, [buildUrl, products]);
+  }, [buildUrl, products, updateProduct, updateBrand, navigate]);
 
   const fuzzySearchBrands = (searchTerm: string, productType?: string) => {
-    const filteredProducts = productType
-      ? products.filter((product) => product.productType === productType)
-      : products;
+    if (!products.length) return;
 
-    const allBrands = filteredProducts.flatMap((product) => product.brands);
-
-    if (!searchTerm.trim() && productType) {
-      // if the search term is empty, show all brands for the selected category
-      setFilteredBrands(allBrands);
-      return;
-    }
-
-    const fuse = new Fuse(allBrands, {
-      keys: ["brandName"],
+    const fuse = new Fuse(products, {
+      keys: ["brands.name", "brands.description"],
       threshold: 0.3,
     });
 
-    const results = fuse.search(searchTerm);
-    setFilteredBrands(results.map((result) => result.item));
-  };
+    let searchResults = products;
 
-  const value = {
-    products,
-    filteredBrands,
-    isLoading: isPending,
-    error,
-    fuzzySearchBrands,
+    if (searchTerm) {
+      const results = fuse.search(searchTerm);
+      searchResults = results.map((result) => result.item);
+    }
+
+    let filteredProducts = searchResults;
+
+    if (productType) {
+      filteredProducts = searchResults.filter(
+        (product) => product.productType === productType
+      );
+    }
+
+    const allBrands = filteredProducts.flatMap((product) => product.brands);
+    setFilteredBrands(allBrands);
   };
 
   return (
-    <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>
+    <CatalogContext.Provider
+      value={{
+        products,
+        filteredBrands,
+        isLoading: isPending || isCountryPending,
+        error: error || countryError,
+        fuzzySearchBrands,
+      }}
+    >
+      {children}
+    </CatalogContext.Provider>
   );
 };
 

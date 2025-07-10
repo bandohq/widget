@@ -2,13 +2,22 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { List, ListItemIcon, Avatar, Chip } from "@mui/material";
+import {
+  List,
+  ListItemIcon,
+  Avatar,
+  Chip,
+  Box,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
 import { SettingsListItemButton } from "../components/SettingsListItemButton";
 import { useHeader } from "../hooks/useHeader";
 import { SearchBar } from "../components/SearchInput/SearchInput";
+import { CountriesError } from "../components/CountriesError/CountriesError";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +31,9 @@ export const CountryPage: React.FC = () => {
     blockedCountries,
     availableCountries,
     isCountryPending,
+    error,
+    hasCountries,
+    retryFetch,
   } = useCountryContext();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -35,8 +47,66 @@ export const CountryPage: React.FC = () => {
     country.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Show loading state
   if (isCountryPending) {
-    return <div>Loading...</div>;
+    return (
+      <PageContainer disableGutters isDrawer>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            py: 4,
+          }}
+        >
+          <CircularProgress size={48} />
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            {t("button.loading")}
+          </Typography>
+        </Box>
+      </PageContainer>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <PageContainer disableGutters isDrawer>
+        <CountriesError
+          error={error}
+          onRetry={retryFetch}
+          isRetrying={isCountryPending}
+          variant="fullPage"
+        />
+      </PageContainer>
+    );
+  }
+
+  // Show no countries available state
+  if (!hasCountries) {
+    return (
+      <PageContainer disableGutters isDrawer>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            py: 4,
+            px: 2,
+          }}
+        >
+          <Typography variant="h6" sx={{ mb: 1 }}>
+            {t("error.title.countriesUnavailable")}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {t("error.message.noCountriesAvailable")}
+          </Typography>
+        </Box>
+      </PageContainer>
+    );
   }
 
   return (
@@ -99,6 +169,17 @@ export const CountryPage: React.FC = () => {
             <ListItemText primary={country.name} />
           </SettingsListItemButton>
         ))}
+
+        {/* No search results */}
+        {searchQuery &&
+          filteredAvailableCountries.length === 0 &&
+          filteredBlockedCountries.length === 0 && (
+            <Box sx={{ textAlign: "center", py: 4 }}>
+              <Typography variant="body2" color="text.secondary">
+                {t("tooltip.notFound.text")}
+              </Typography>
+            </Box>
+          )}
       </List>
     </PageContainer>
   );

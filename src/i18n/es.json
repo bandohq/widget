@@ -26,6 +26,7 @@
     "disconnect": "Desconectar",
     "done": "Hecho",
     "light": "Claro",
+    "loading": "Cargando...",
     "max": "máximo",
     "ok": "Ok",
     "options": "Opciones",
@@ -191,7 +192,9 @@
       "transactionSimulationFailed": "La transacción no pudo ejecutarse en simulación.",
       "unknown": "Por favor, inténtalo de nuevo o contacta soporte.",
       "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución.",
-      "quoteFailed": "Error al cotizar, intente más tarde"
+      "quoteFailed": "Error al cotizar, intente más tarde",
+      "countriesFetchFailed": "No se pudieron cargar los países disponibles. Verifica tu conexión e intenta de nuevo.",
+      "noCountriesAvailable": "No hay países disponibles en este momento."
     },
     "title": {
       "allowanceRequired": "Autorización insuficiente",
@@ -218,7 +221,8 @@
       "walletChainTypeInvalid": "La dirección de billetera no coincide con la cadena seleccionada {{chainName}}",
       "walletMismatch": "La dirección de billetera no coincide",
       "orderFailed": "Oh... Hubo un problema",
-      "retry": "Por favor, inténtalo de nuevo más tarde."
+      "retry": "Por favor, inténtalo de nuevo más tarde.",
+      "countriesUnavailable": "Países no disponibles"
     }
   },
   "tooltip": {

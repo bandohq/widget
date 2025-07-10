@@ -2,24 +2,32 @@ import { useState, useEffect } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { CategorySection } from "./CategorySection";
-import { Skeleton, Box } from "@mui/material";
+import { Skeleton, Box, Typography } from "@mui/material";
 import { ProductSearch } from "./ProductSearch";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
+import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { BrandsContainer } from "./ProductPage.style";
 import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
+import { CountriesError } from "../../components/CountriesError/CountriesError";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState(null);
-  const { products, isLoading, filteredBrands, fuzzySearchBrands } =
-    useCatalogContext();
+  const {
+    products,
+    isLoading,
+    filteredBrands,
+    fuzzySearchBrands,
+    error: catalogError,
+  } = useCatalogContext();
+  const { error: countryError, retryFetch } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
 
@@ -56,9 +64,48 @@ export const ProductsPage = () => {
     navigate(`/form`);
   };
 
+  // Show country error if there's an error with countries
+  if (countryError) {
+    return (
+      <PageContainer>
+        <CountriesError
+          error={countryError}
+          onRetry={retryFetch}
+          variant="fullPage"
+        />
+      </PageContainer>
+    );
+  }
+
+  // Show catalog error if there's an error with the catalog
+  if (catalogError) {
+    return (
+      <PageContainer>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            py: 4,
+            px: 2,
+          }}
+        >
+          <Typography variant="h6" sx={{ mb: 1 }}>
+            {t("error.title.unknown")}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {t("error.message.unknown")}
+          </Typography>
+        </Box>
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
-      <ProductSearch />
+      <ProductSearch productType="" />
       <RecentSpends />
       {filteredBrands.length > 0 && (
         <ProductList

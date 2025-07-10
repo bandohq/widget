@@ -17,21 +17,26 @@ import { CaretDown } from "@phosphor-icons/react";
 import { useTheme } from "@mui/system";
 
 interface ProductSearchProps {
-  productType?: string;
+  productType: string;
 }
 
 export const ProductSearch = ({
   productType,
 }: ProductSearchProps): JSX.Element | null => {
   const theme = useTheme();
-  const { selectedCountry: country, availableCountries: countries } =
-    useCountryContext();
+  const {
+    selectedCountry: country,
+    availableCountries: countries,
+    error,
+    hasCountries,
+  } = useCountryContext();
   const { fuzzySearchBrands } = useCatalogContext();
   const { t } = useTranslation();
   const [, setSearchKey] = useState("");
   const navigate = useNavigate();
 
-  if (!countries.length) {
+  // Don't render if there's an error or no countries available
+  if (error || !hasCountries) {
     return null;
   }
 
