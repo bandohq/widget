@@ -33,7 +33,7 @@
     "resetSettings": "Reset settings",
     "seeDetails": "See details",
     "showAll": "Show all",
-    "tryAgain": "Try again",
+    "retry": "Retry",
     "viewCoverage": "View coverage",
     "viewOnExplorer": "View on explorer"
   },
@@ -196,6 +196,9 @@
       "quoteFailed": "Error getting the quote, try later",
       "tokenLoadFailed": "Could not load tokens. Please try again.",
       "balanceLoadFailed": "Could not load balances. Please try again."
+      "transactionNotFound": "Transaction not found",
+      "unauthorized": "You don't have permission to view this transaction",
+      "serverError": "Server error, please try again later"
     },
     "title": {
       "allowanceRequired": "Insufficient allowance",
@@ -221,8 +224,12 @@
       "walletChainTypeInvalid": "Wallet address doesn't match the selected destination chain {{chainName}}",
       "walletMismatch": "Wallet address mismatch",
       "orderFailed": "Oh... There was a problem",
-      "retry": "Please, try again later."
+      "retry": "Please, try again later.",
+      "transactionLoadFailed": "Error loading transaction"
     }
+  },
+  "loading": {
+    "transaction": "Loading transaction details..."
   },
   "tooltip": {
     "notFound": {
