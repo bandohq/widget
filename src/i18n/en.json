@@ -33,7 +33,7 @@
     "resetSettings": "Reset settings",
     "seeDetails": "See details",
     "showAll": "Show all",
-    "tryAgain": "Try again",
+    "retry": "Retry",
     "viewCoverage": "View coverage",
     "viewOnExplorer": "View on explorer"
   },
@@ -193,7 +193,10 @@
       "transactionSimulationFailed": "The transaction could not be executed in simulation.",
       "unknown": "Please try again or contact support.",
       "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution.",
-      "quoteFailed": "Error getting the quote, try later"
+      "quoteFailed": "Error getting the quote, try later",
+      "transactionNotFound": "Transaction not found",
+      "unauthorized": "You don't have permission to view this transaction",
+      "serverError": "Server error, please try again later"
     },
     "title": {
       "allowanceRequired": "Insufficient allowance",
@@ -219,8 +222,12 @@
       "walletChainTypeInvalid": "Wallet address doesn't match the selected destination chain {{chainName}}",
       "walletMismatch": "Wallet address mismatch",
       "orderFailed": "Oh... There was a problem",
-      "retry": "Please, try again later."
+      "retry": "Please, try again later.",
+      "transactionLoadFailed": "Error loading transaction"
     }
+  },
+  "loading": {
+    "transaction": "Loading transaction details..."
   },
   "tooltip": {
     "notFound": {
