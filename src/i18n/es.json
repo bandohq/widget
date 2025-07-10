@@ -33,7 +33,7 @@
     "resetSettings": "Reiniciar ajustes",
     "seeDetails": "Ver detalles",
     "showAll": "Mostrar todo",
-    "tryAgain": "Intentar otra vez",
+    "retry": "Reintentar",
     "viewCoverage": "Ver cobertura",
     "viewOnExplorer": "Ver en explorador"
   },
@@ -194,6 +194,9 @@
       "quoteFailed": "Error al cotizar, intente más tarde",
       "catalogLoadFailed": "No se pudieron cargar los productos. Por favor, inténtalo de nuevo.",
       "noProductsAvailable": "No hay productos disponibles para tu país en este momento."
+      "transactionNotFound": "Transacción no encontrada",
+      "unauthorized": "No tienes permisos para ver esta transacción",
+      "serverError": "Error del servidor, inténtalo más tarde"
     },
     "title": {
       "allowanceRequired": "Autorización insuficiente",
@@ -220,8 +223,12 @@
       "walletChainTypeInvalid": "La dirección de billetera no coincide con la cadena seleccionada {{chainName}}",
       "walletMismatch": "La dirección de billetera no coincide",
       "orderFailed": "Oh... Hubo un problema",
-      "retry": "Por favor, inténtalo de nuevo más tarde."
+      "retry": "Por favor, inténtalo de nuevo más tarde.",
+      "transactionLoadFailed": "Error al cargar la transacción"
     }
+  },
+  "loading": {
+    "transaction": "Cargando detalles de la transacción..."
   },
   "tooltip": {
     "notFound": {
