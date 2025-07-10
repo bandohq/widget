@@ -27,27 +27,21 @@ export const TransactionErrorView = ({ error, onRetry }: TransactionErrorViewPro
 
   const getErrorMessage = () => {
     if (error.status === 404) {
-      return t(
-        "error.message.transactionNotFound",
-        "Transacción no encontrada"
-      );
+      return t("error.message.transactionNotFound", "Transaction not found");
     }
     if (error.status === 403) {
       return t(
         "error.message.unauthorized",
-        "No tienes permisos para ver esta transacción"
+        "You don't have permission to view this transaction"
       );
     }
     if (error.status >= 500) {
       return t(
         "error.message.serverError",
-        "Error del servidor, inténtalo más tarde"
+        "Server error, please try again later"
       );
     }
-    return t(
-      "error.message.unknown",
-      "Por favor, inténtalo de nuevo o contacta soporte."
-    );
+    return t("error.message.unknown", "Please try again or contact support.");
   };
 
   const handleGoBack = () => {
@@ -82,7 +76,7 @@ export const TransactionErrorView = ({ error, onRetry }: TransactionErrorViewPro
       </Box>
 
       <Typography variant="h5" gutterBottom>
-        {t("error.title.transactionFailed", "Error al cargar la transacción")}
+        {t("error.title.transactionFailed", "Error at fetching transaction")}
       </Typography>
 
       <Typography
@@ -128,7 +122,7 @@ export const TransactionErrorView = ({ error, onRetry }: TransactionErrorViewPro
             },
           }}
         >
-          {t("history.availableRefunds", "Obtén tu reembolso")}
+          {t("button.goBack", "Go back")}
         </Button>
       </Box>
     </Box>
