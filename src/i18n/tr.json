@@ -26,6 +26,7 @@
     "disconnect": "Bağlantıyı Kes",
     "done": "Tamamlandı",
     "light": "Açık",
+    "loading": "Yükleniyor...",
     "max": "maksimum",
     "ok": "Tamam",
     "options": "Ayarlar",
@@ -188,13 +189,16 @@
       "slippageThreshold": "Slipaj, tanımlanan eşikten daha büyük. Yeni bir fiyat teklifi almak için lütfen yeni bir rota isteyin.",
       "transactionCanceled": "İşlem iptal edildi.",
       "unknown": "Lütfen tekrar deneyin veya desteğe başvurun.",
-      "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin"
+      "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin",
+      "countriesFetchFailed": "Mevcut ülkeler yüklenemedi. Bağlantınızı kontrol edin ve tekrar deneyin.",
+      "noCountriesAvailable": "Şu anda hiçbir ülke mevcut değil."
     },
     "title": {
       "allowanceRequired": "İzin miktarı yetersiz",
       "insufficientFunds": "Yetersiz bakiye",
       "transactionCanceled": "İşlem iptal edildi",
-      "unknown": "Bir sorun oluştu"
+      "unknown": "Bir sorun oluştu",
+      "countriesUnavailable": "Ülkeler mevcut değil"
     }
   },
   "tooltip": {
