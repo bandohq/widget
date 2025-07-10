@@ -8,7 +8,7 @@ export const useTokens = (chain: Chain) => {
     error,
     isError,
   } = useFetch({
-    url: `token/${chain?.key}/`,
+    url: `tokens/${chain?.key}/`,
     method: "GET",
     queryOptions: {
       queryKey: ["tokens", chain?.chainId],
