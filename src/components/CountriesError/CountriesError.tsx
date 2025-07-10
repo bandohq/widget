@@ -70,7 +70,6 @@ export const CountriesError: React.FC<CountriesErrorProps> = ({
         variant="contained"
         onClick={handleRetry}
         disabled={isRetrying}
-        loading={isRetrying}
         startIcon={<ArrowClockwise />}
         sx={{ borderRadius: 2 }}
       >
