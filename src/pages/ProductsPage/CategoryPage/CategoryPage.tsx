@@ -7,13 +7,21 @@ import { useCatalogContext } from "../../../providers/CatalogProvider/CatalogPro
 import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 import { ProductList } from "../../../components/ProductList/ProductList";
 import { useTranslation } from "react-i18next";
+import { ProductError } from "../../../components/ProductError/ProductError";
+import { Box, Skeleton } from "@mui/material";
 
 export const CategoryPage = () => {
   const { category } = useParams(); // productType
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { products, filteredBrands, fuzzySearchBrands, isLoading } =
-    useCatalogContext();
+  const {
+    products,
+    filteredBrands,
+    fuzzySearchBrands,
+    isLoading,
+    error,
+    retryLoad,
+  } = useCatalogContext();
   const { updateProduct } = useProduct();
 
   useEffect(() => {
@@ -37,6 +45,15 @@ export const CategoryPage = () => {
 
   useHeader(t(`main.${category}`));
 
+  if (error && !isLoading) {
+    return (
+      <PageContainer>
+        <ProductSearch productType={category} />
+        <ProductError type="loadError" onRetry={retryLoad} />
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       {!isLoading && (
@@ -58,7 +75,17 @@ export const CategoryPage = () => {
       {isLoading && (
         <div>
           <ProductSearch productType={category} />
-          {/* Placeholder skeletons */}
+          <Box sx={{ padding: 2 }}>
+            {Array.from(new Array(5)).map((_, index) => (
+              <Skeleton
+                key={index}
+                variant="rectangular"
+                width="100%"
+                height="80px"
+                sx={{ marginBottom: 2, borderRadius: "8px" }}
+              />
+            ))}
+          </Box>
         </div>
       )}
     </PageContainer>

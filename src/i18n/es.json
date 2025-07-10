@@ -191,7 +191,9 @@
       "transactionSimulationFailed": "La transacción no pudo ejecutarse en simulación.",
       "unknown": "Por favor, inténtalo de nuevo o contacta soporte.",
       "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución.",
-      "quoteFailed": "Error al cotizar, intente más tarde"
+      "quoteFailed": "Error al cotizar, intente más tarde",
+      "catalogLoadFailed": "No se pudieron cargar los productos. Por favor, inténtalo de nuevo.",
+      "noProductsAvailable": "No hay productos disponibles para tu país en este momento."
     },
     "title": {
       "allowanceRequired": "Autorización insuficiente",

@@ -13,13 +13,21 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
+import { ProductError } from "../../components/ProductError/ProductError";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState(null);
-  const { products, isLoading, filteredBrands, fuzzySearchBrands } =
-    useCatalogContext();
+  const {
+    products,
+    isLoading,
+    filteredBrands,
+    fuzzySearchBrands,
+    error,
+    hasProducts,
+    retryLoad,
+  } = useCatalogContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
 
@@ -55,6 +63,26 @@ export const ProductsPage = () => {
     updateProduct(variant);
     navigate(`/form`);
   };
+
+  if (error && !isLoading) {
+    return (
+      <PageContainer>
+        <ProductSearch />
+        <RecentSpends />
+        <ProductError type="loadError" onRetry={retryLoad} />
+      </PageContainer>
+    );
+  }
+
+  if (!hasProducts && !isLoading && !error) {
+    return (
+      <PageContainer>
+        <ProductSearch />
+        <RecentSpends />
+        <ProductError type="noProducts" />
+      </PageContainer>
+    );
+  }
 
   return (
     <PageContainer>

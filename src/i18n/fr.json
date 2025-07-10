@@ -190,7 +190,9 @@
       "transactionFailed": "Veuillez consulter l'explorateur de blocs pour plus d'informations.",
       "unknown": "Veuillez réessayer ou contacter le support.",
       "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
-      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard"
+      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard",
+      "catalogLoadFailed": "Impossible de charger les produits. Veuillez réessayer.",
+      "noProductsAvailable": "Aucun produit disponible pour votre pays pour le moment."
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",
