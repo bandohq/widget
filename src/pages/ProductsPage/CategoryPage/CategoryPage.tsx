@@ -58,7 +58,7 @@ export const CategoryPage = () => {
       )}
       {isLoading && (
         <div>
-          <ProductSearch productType={category} disabled={error} />
+          <ProductSearch productType={category} />
           <Box sx={{ padding: 2 }}>
             {Array.from(new Array(5)).map((_, index) => (
               <Skeleton

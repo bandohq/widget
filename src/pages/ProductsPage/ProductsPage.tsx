@@ -58,7 +58,7 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
-      <ProductSearch disabled={isLoading || error} />
+      <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
         <ProductList

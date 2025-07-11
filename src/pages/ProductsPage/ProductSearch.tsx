@@ -38,6 +38,9 @@ export const ProductSearch = ({
   }
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (disabled) {
+      return;
+    }
     setSearchKey(event.target.value);
     fuzzySearchBrands(event.target.value, productType);
   };
