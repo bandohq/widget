@@ -8,8 +8,6 @@ import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { Variant } from "../../stores/ProductProvider/types";
-import { useNotificationContext } from "../AlertProvider/NotificationProvider";
-import { useTranslation } from "react-i18next";
 
 interface CatalogContextType {
   products: Product[];
@@ -17,7 +15,6 @@ interface CatalogContextType {
   isLoading: boolean;
   error: any;
   hasProducts: boolean;
-  retryLoad: () => void;
   fuzzySearchBrands: (searchTerm: string, productType?: string) => void;
 }
 
@@ -27,8 +24,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-  const { showNotification } = useNotificationContext();
   const { selectedCountry: country, isCountryPending } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
   const { buildUrl } = useWidgetConfig();
@@ -39,10 +34,9 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     data: groupedCatalogResponse,
     isPending,
     error,
-    refetch,
   } = useFetch<ProductQueryResult>({
     method: "GET",
-    url: "products/grouped/",
+    url: "product/grouped/",
     queryParams: {
       country: !!country ? country?.isoAlpha2 : null,
     },
@@ -55,12 +49,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
       setProducts(p);
     }
   }, [groupedCatalogResponse]);
-
-  useEffect(() => {
-    if (error && !isPending) {
-      showNotification("error", t("error.message.catalogLoadFailed"));
-    }
-  }, [error, isPending, showNotification, t]);
 
   useEffect(() => {
     if (buildUrl) {
@@ -119,7 +107,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     isLoading: isPending,
     error,
     hasProducts: products.length > 0,
-    retryLoad: () => refetch(),
     fuzzySearchBrands,
   };
 

@@ -13,21 +13,13 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
-import { ProductError } from "../../components/ProductError/ProductError";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState(null);
-  const {
-    products,
-    isLoading,
-    filteredBrands,
-    fuzzySearchBrands,
-    error,
-    hasProducts,
-    retryLoad,
-  } = useCatalogContext();
+  const { products, isLoading, filteredBrands, fuzzySearchBrands, error } =
+    useCatalogContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
 
@@ -64,29 +56,9 @@ export const ProductsPage = () => {
     navigate(`/form`);
   };
 
-  if (error && !isLoading) {
-    return (
-      <PageContainer>
-        <ProductSearch />
-        <RecentSpends />
-        <ProductError type="loadError" onRetry={retryLoad} />
-      </PageContainer>
-    );
-  }
-
-  if (!hasProducts && !isLoading && !error) {
-    return (
-      <PageContainer>
-        <ProductSearch />
-        <RecentSpends />
-        <ProductError type="noProducts" />
-      </PageContainer>
-    );
-  }
-
   return (
     <PageContainer>
-      <ProductSearch />
+      <ProductSearch disabled={isLoading || error} />
       <RecentSpends />
       {filteredBrands.length > 0 && (
         <ProductList
@@ -95,7 +67,7 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading
+      {isLoading || error
         ? Array.from(new Array(2)).map((_, index) => (
             <Box key={index} sx={{ marginBottom: 4 }}>
               <Skeleton

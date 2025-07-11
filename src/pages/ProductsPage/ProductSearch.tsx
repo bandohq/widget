@@ -18,10 +18,12 @@ import { useTheme } from "@mui/system";
 
 interface ProductSearchProps {
   productType?: string;
+  disabled?: boolean;
 }
 
 export const ProductSearch = ({
   productType,
+  disabled,
 }: ProductSearchProps): JSX.Element | null => {
   const theme = useTheme();
   const { selectedCountry: country, availableCountries: countries } =
@@ -57,6 +59,7 @@ export const ProductSearch = ({
             placeholder={t("main.searchProducts")}
             onChange={handleSearchChange}
             inputProps={{ "aria-label": "search products" }}
+            disabled={disabled}
           />
           <StyledIconButton aria-label="search">
             <SearchIcon />
