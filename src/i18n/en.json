@@ -133,7 +133,7 @@
     "detailTitle": "Transaction detail",
     "buyDetails": "buy detail",
     "refundSuccess": "Refund sent successfully",
-    "refundFailed": "Error on refunding tokens, try later",
+    "refundFailed": "Error on refunding tokens, try again later",
     "country": "Country",
     "sentTo": "Sent to",
     "availableRefunds": "Available refunds",
@@ -196,6 +196,8 @@
       "quoteFailed": "Error getting the quote, try later",
       "tokenLoadFailed": "Could not load tokens. Please try again.",
       "balanceLoadFailed": "Could not load balances. Please try again.",
+      "errorProcessingPurchase": "Error processing purchase",
+      "checkHistoryForStatus": "There was an error loading your purchase status, you can check it from your history"
       "transactionNotFound": "Transaction not found",
       "unauthorized": "You don't have permission to view this transaction",
       "serverError": "Server error, please try again later"

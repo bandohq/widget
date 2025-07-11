@@ -188,7 +188,9 @@
       "slippageThreshold": "Slipaj, tanımlanan eşikten daha büyük. Yeni bir fiyat teklifi almak için lütfen yeni bir rota isteyin.",
       "transactionCanceled": "İşlem iptal edildi.",
       "unknown": "Lütfen tekrar deneyin veya desteğe başvurun.",
-      "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin"
+      "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin",
+      "errorProcessingPurchase": "Satın alma işlenirken hata oluştu",
+      "checkHistoryForStatus": "Satın alma durumunuz yüklenirken bir hata oluştu, geçmişinizden kontrol edebilirsiniz"
     },
     "title": {
       "allowanceRequired": "İzin miktarı yetersiz",

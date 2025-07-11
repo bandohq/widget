@@ -3,23 +3,28 @@ import { useFetch } from "../../hooks/useFetch";
 import { ErrorView } from "./ErrorView";
 import { StatusPageContainer } from "./StatusPage.style";
 import { SuccessView } from "./SuccessView";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 import { useEffect } from "react";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useFieldActions } from "../../stores/form/useFieldActions";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
+import { useTranslation } from "react-i18next";
 
 export const StatusPage = () => {
   const { transactionId } = useParams();
+  const [errorState] = useSearchParams();
   const { account } = useAccount();
   const { integrator } = useWidgetConfig();
   const { resetProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
   const { resetQuote } = useQuotes();
+  const { showNotification } = useNotificationContext();
+  const { t } = useTranslation();
 
-  const { data: transactionData } = useFetch({
+  const { data: transactionData, error } = useFetch({
     url:
       transactionId && account?.address
         ? `wallets/${account?.address}/transactions/${transactionId}/`
@@ -31,13 +36,28 @@ export const StatusPage = () => {
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
       refetchInterval: 10000,
+      enabled: !!(transactionId && account?.address),
     },
   });
 
+  useEffect(() => {
+    if (error) {
+      showNotification("error", t("error.message.errorProcessingPurchase"));
+    }
+  }, [error]);
+
   const renderStatusView = () => {
+    if (error) {
+      return <ErrorView isErrorLoading={true} />;
+    }
+
+    if (errorState.get("error") === "true") {
+      return <ErrorView />;
+    }
+
     switch (transactionData?.status) {
       case "FAILED":
-        return <ErrorView transaction={transactionData} />;
+        return <ErrorView isErrorLoading={false} />;
       default:
         return <SuccessView status={transactionData} />;
     }
