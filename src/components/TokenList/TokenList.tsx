@@ -47,20 +47,21 @@ export const TokenList: FC<TokenListProps> = ({
   const handleTokenClick = useTokenSelect(formType, onClick);
   const showCategories = !tokenSearchFilter;
 
+  const isLoading =
+    isError || balancesError || tokensLoading || balancesLoading;
+
   return (
     <Box ref={parentRef} style={{ height, overflow: "auto" }}>
-      {(!filteredTokens.length && !balancesLoading && !tokensLoading) ||
-      isError ||
-      balancesError ? (
+      {!filteredTokens.length && !balancesLoading && !tokensLoading && (
         <TokenNotFound formType={formType} />
-      ) : null}
+      )}
       <VirtualizedTokenList
         account={account}
         tokens={filteredTokens}
         scrollElementRef={parentRef}
         chainId={account?.chainId}
         chain={selectedChain}
-        isLoading={isError ? false : tokensLoading || balancesLoading}
+        isLoading={isLoading}
         showCategories={showCategories}
         isBalanceLoading={balancesLoading}
         onClick={handleTokenClick}

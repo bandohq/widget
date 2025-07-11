@@ -184,9 +184,7 @@
       "slippageThreshold": "滑点超过了预设值，请选择其他路径并获取新的价格。",
       "transactionCanceled": "交易已取消。",
       "unknown": "出现未知错误，请稍后再试或联系客服。",
-      "quoteFailed": "获取报价时出错，请稍后再试",
-      "tokenLoadFailed": "无法加载代币。请重试。",
-      "balanceLoadFailed": "无法加载余额。请重试。"
+      "quoteFailed": "获取报价时出错，请稍后再试"
     },
     "title": {
       "allowanceRequired": "支出限额不足",

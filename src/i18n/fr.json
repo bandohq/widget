@@ -190,9 +190,7 @@
       "transactionFailed": "Veuillez consulter l'explorateur de blocs pour plus d'informations.",
       "unknown": "Veuillez réessayer ou contacter le support.",
       "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
-      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard",
-      "tokenLoadFailed": "Impossible de charger les jetons. Veuillez réessayer.",
-      "balanceLoadFailed": "Impossible de charger les soldes. Veuillez réessayer."
+      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard"
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",

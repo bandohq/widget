@@ -4,7 +4,6 @@ import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
-import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
 
 export const useTokenBalances = (
@@ -15,7 +14,6 @@ export const useTokenBalances = (
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
-  const { showNotification } = useNotificationContext();
 
   const {
     data: tokens,
@@ -29,7 +27,6 @@ export const useTokenBalances = (
         const errorMessage = t("error.message.tokenLoadFailed");
         setError(errorMessage);
         setLoading(false);
-        showNotification("error", errorMessage);
         setBalances([]);
         return;
       }
@@ -91,7 +88,6 @@ export const useTokenBalances = (
       } catch (err) {
         const errorMessage = t("error.message.balanceLoadFailed");
         setError(errorMessage);
-        showNotification("error", errorMessage);
         setBalances([]);
       } finally {
         setLoading(false);

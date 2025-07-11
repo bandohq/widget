@@ -189,9 +189,7 @@
       "transactionFailed": "Verifique o explorador de blocos.",
       "unknown": "Tente novamente ou fale com o suporte.",
       "walletChangedDuringExecution": "O endereço da carteira que solicitou a cotação não corresponde ao endereço tentando assinar a transação.",
-      "quoteFailed": "Erro ao obter a cotação, tente novamente mais tarde",
-      "tokenLoadFailed": "Não foi possível carregar os tokens. Tente novamente.",
-      "balanceLoadFailed": "Não foi possível carregar os saldos. Tente novamente."
+      "quoteFailed": "Erro ao obter a cotação, tente novamente mais tarde"
     },
     "title": {
       "allowanceRequired": "Permissão insuficiente",

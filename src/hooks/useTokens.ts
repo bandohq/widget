@@ -12,6 +12,8 @@ export const useTokens = (chain: Chain) => {
     method: "GET",
     queryOptions: {
       queryKey: ["tokens", chain?.chainId],
+      retry: true,
+      retryDelay: 5000,
       refetchInterval: 300_000,
       staleTime: 300_000,
       enabled: !!chain,

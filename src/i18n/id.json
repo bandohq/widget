@@ -185,9 +185,7 @@
       "transactionSimulationFailed": "Transaksi tidak dapat dieksekusi dalam simulasi.",
       "unknown": "Silakan coba lagi atau hubungi bagian dukungan.",
       "walletChangedDuringExecution": "Alamat dompet yang meminta penawaran tidak cocok dengan alamat dompet yang mencoba menandatangani transaksi ini. Harap gunakan alamat dompet yang sama untuk digunakan di seluruh transaksi.",
-      "quoteFailed": "Kesalahan saat mendapatkan kutipan, coba lagi nanti",
-      "tokenLoadFailed": "Tidak dapat memuat token. Silakan coba lagi.",
-      "balanceLoadFailed": "Tidak dapat memuat saldo. Silakan coba lagi."
+      "quoteFailed": "Kesalahan saat mendapatkan kutipan, coba lagi nanti"
     },
     "title": {
       "allowanceRequired": "Saldo tidak mencukupi",
