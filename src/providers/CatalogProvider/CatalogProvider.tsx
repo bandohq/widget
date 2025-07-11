@@ -41,7 +41,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     error,
   } = useFetch<ProductQueryResult>({
     method: "GET",
-    url: "product/grouped/",
+    url: "products/grouped/",
     queryParams: {
       country: !!country ? country?.isoAlpha2 : null,
     },
