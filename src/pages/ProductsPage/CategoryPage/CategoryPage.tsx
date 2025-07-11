@@ -8,7 +8,7 @@ import { useCountryContext } from "../../../stores/CountriesProvider/CountriesPr
 import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 import { ProductList } from "../../../components/ProductList/ProductList";
 import { useTranslation } from "react-i18next";
-import { CountriesError } from "../../../components/CountriesError/CountriesError";
+import { Box, Skeleton } from "@mui/material";
 
 export const CategoryPage = () => {
   const { category } = useParams(); // productType
@@ -45,40 +45,6 @@ export const CategoryPage = () => {
 
   useHeader(t(`main.${category}`));
 
-  // Show country error if there's an error with countries
-  if (countryError) {
-    return (
-      <PageContainer>
-        <CountriesError
-          error={countryError}
-          onRetry={retryFetch}
-          variant="fullPage"
-        />
-      </PageContainer>
-    );
-  }
-
-  // Show catalog error if there's an error with the catalog
-  if (catalogError) {
-    return (
-      <PageContainer>
-        <div
-          style={{
-            height: "550px",
-            overflow: "auto",
-            paddingBottom: "10px",
-            scrollbarWidth: "none",
-          }}
-        >
-          <ProductSearch productType={category} />
-          <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p>{t("error.message.unknown")}</p>
-          </div>
-        </div>
-      </PageContainer>
-    );
-  }
-
   return (
     <PageContainer>
       {!isLoading && (
@@ -97,12 +63,24 @@ export const CategoryPage = () => {
           />
         </div>
       )}
-      {isLoading && (
-        <div>
-          <ProductSearch productType={category} />
-          {/* Placeholder skeletons */}
-        </div>
-      )}
+      {isLoading ||
+        catalogError ||
+        (countryError && (
+          <div>
+            <ProductSearch productType={category} />
+            <Box sx={{ padding: 2 }}>
+              {Array.from(new Array(5)).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  variant="rectangular"
+                  width="100%"
+                  height="80px"
+                  sx={{ marginBottom: 2, borderRadius: "8px" }}
+                />
+              ))}
+            </Box>
+          </div>
+        ))}
     </PageContainer>
   );
 };

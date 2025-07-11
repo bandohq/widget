@@ -14,6 +14,7 @@ interface CatalogContextType {
   filteredBrands: Brand[];
   isLoading: boolean;
   error: any;
+  hasProducts: boolean;
   fuzzySearchBrands: (searchTerm: string, productType?: string) => void;
 }
 
@@ -40,7 +41,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     error,
   } = useFetch<ProductQueryResult>({
     method: "GET",
-    url: "products/grouped/",
+    url: "product/grouped/",
     queryParams: {
       country: !!country ? country?.isoAlpha2 : null,
     },
@@ -85,44 +86,37 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [buildUrl, products, updateProduct, updateBrand, navigate]);
 
   const fuzzySearchBrands = (searchTerm: string, productType?: string) => {
-    if (!products.length) return;
+    const filteredProducts = productType
+      ? products.filter((product) => product.productType === productType)
+      : products;
 
-    const fuse = new Fuse(products, {
-      keys: ["brands.name", "brands.description"],
+    const allBrands = filteredProducts.flatMap((product) => product.brands);
+
+    if (!searchTerm.trim() && productType) {
+      setFilteredBrands(allBrands);
+      return;
+    }
+
+    const fuse = new Fuse(allBrands, {
+      keys: ["brandName"],
       threshold: 0.3,
     });
 
-    let searchResults = products;
+    const results = fuse.search(searchTerm);
+    setFilteredBrands(results.map((result) => result.item));
+  };
 
-    if (searchTerm) {
-      const results = fuse.search(searchTerm);
-      searchResults = results.map((result) => result.item);
-    }
-
-    let filteredProducts = searchResults;
-
-    if (productType) {
-      filteredProducts = searchResults.filter(
-        (product) => product.productType === productType
-      );
-    }
-
-    const allBrands = filteredProducts.flatMap((product) => product.brands);
-    setFilteredBrands(allBrands);
+  const value = {
+    products,
+    filteredBrands,
+    isLoading: isPending,
+    error,
+    hasProducts: products.length > 0,
+    fuzzySearchBrands,
   };
 
   return (
-    <CatalogContext.Provider
-      value={{
-        products,
-        filteredBrands,
-        isLoading: isPending || isCountryPending,
-        error: error || countryError,
-        fuzzySearchBrands,
-      }}
-    >
-      {children}
-    </CatalogContext.Provider>
+    <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>
   );
 };
 

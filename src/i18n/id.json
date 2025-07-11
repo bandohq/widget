@@ -29,7 +29,7 @@
     "resetSettings": "Setel ulang pengaturan",
     "seeDetails": "Lihat rinciannya",
     "showAll": "Tampilkan semua",
-    "tryAgain": "Coba lagi",
+    "retry": "Coba lagi",
     "viewCoverage": "Melihat cakupan",
     "viewOnExplorer": "Lihat di explorer"
   },
@@ -185,7 +185,11 @@
       "transactionSimulationFailed": "Transaksi tidak dapat dieksekusi dalam simulasi.",
       "unknown": "Silakan coba lagi atau hubungi bagian dukungan.",
       "walletChangedDuringExecution": "Alamat dompet yang meminta penawaran tidak cocok dengan alamat dompet yang mencoba menandatangani transaksi ini. Harap gunakan alamat dompet yang sama untuk digunakan di seluruh transaksi.",
-      "quoteFailed": "Kesalahan saat mendapatkan kutipan, coba lagi nanti"
+      "quoteFailed": "Kesalahan saat mendapatkan kutipan, coba lagi nanti",
+      "catalogLoadFailed": "Gagal memuat produk. Silakan coba lagi.",
+      "noProductsAvailable": "Tidak ada produk yang tersedia untuk negara Anda saat ini.",
+      "errorProcessingPurchase": "Kesalahan saat memproses pembelian",
+      "checkHistoryForStatus": "Terjadi error saat memuat status pembelian Anda, Anda dapat memeriksanya dari riwayat"
     },
     "title": {
       "allowanceRequired": "Saldo tidak mencukupi",

@@ -17,11 +17,13 @@ import { CaretDown } from "@phosphor-icons/react";
 import { useTheme } from "@mui/system";
 
 interface ProductSearchProps {
-  productType: string;
+  productType?: string;
+  disabled?: boolean;
 }
 
 export const ProductSearch = ({
   productType,
+  disabled,
 }: ProductSearchProps): JSX.Element | null => {
   const theme = useTheme();
   const {
@@ -35,12 +37,10 @@ export const ProductSearch = ({
   const [, setSearchKey] = useState("");
   const navigate = useNavigate();
 
-  // Don't render if there's an error or no countries available
-  if (error || !hasCountries) {
-    return null;
-  }
-
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (disabled || error || !hasCountries) {
+      return;
+    }
     setSearchKey(event.target.value);
     fuzzySearchBrands(event.target.value, productType);
   };
@@ -62,6 +62,7 @@ export const ProductSearch = ({
             placeholder={t("main.searchProducts")}
             onChange={handleSearchChange}
             inputProps={{ "aria-label": "search products" }}
+            disabled={disabled}
           />
           <StyledIconButton aria-label="search">
             <SearchIcon />

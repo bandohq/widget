@@ -64,22 +64,9 @@ export const ProductsPage = () => {
     navigate(`/form`);
   };
 
-  // Show country error if there's an error with countries
-  if (countryError) {
-    return (
-      <PageContainer>
-        <CountriesError
-          error={countryError}
-          onRetry={retryFetch}
-          variant="fullPage"
-        />
-      </PageContainer>
-    );
-  }
-
   return (
     <PageContainer>
-      <ProductSearch productType="" />
+      <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
         <ProductList
@@ -88,7 +75,7 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading
+      {isLoading || catalogError || countryError
         ? Array.from(new Array(2)).map((_, index) => (
             <Box key={index} sx={{ marginBottom: 4 }}>
               <Skeleton

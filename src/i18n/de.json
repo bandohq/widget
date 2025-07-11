@@ -34,7 +34,7 @@
     "resetSettings": "Einstellungen zurücksetzen",
     "seeDetails": "Details anzeigen",
     "showAll": "Alle anzeigen",
-    "tryAgain": "Erneut versuchen",
+    "retry": "Wiederholen",
     "viewCoverage": "Abdeckung anzeigen",
     "viewOnExplorer": "Im Explorer anzeigen"
   },
@@ -192,7 +192,11 @@
       "walletChangedDuringExecution": "Die Wallet-Adresse, die das Angebot angefordert hat, stimmt nicht mit der Wallet-Adresse überein, die die Transaktion signieren möchte.",
       "quoteFailed": "Fehler beim Abrufen des Angebots, versuchen Sie es später erneut",
       "countriesFetchFailed": "Verfügbare Länder konnten nicht geladen werden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
-      "noCountriesAvailable": "Derzeit sind keine Länder verfügbar."
+      "noCountriesAvailable": "Derzeit sind keine Länder verfügbar.",
+      "catalogLoadFailed": "Produkte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+      "noProductsAvailable": "Derzeit sind keine Produkte für Ihr Land verfügbar.",
+      "errorProcessingPurchase": "Fehler beim Verarbeiten des Kaufs",
+      "checkHistoryForStatus": "Es gab einen Fehler beim Laden des Kaufstatus, Sie können ihn in Ihrem Verlauf überprüfen"
     },
     "title": {
       "allowanceRequired": "Unzureichende Freigabe",

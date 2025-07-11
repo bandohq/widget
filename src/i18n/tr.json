@@ -34,7 +34,7 @@
     "resetSettings": "Ayarları Sıfırla",
     "seeDetails": "Detayları Gör",
     "showAll": "Tümünü Göster",
-    "tryAgain": "Tekrar Deneyin",
+    "retry": "Tekrar Dene",
     "viewCoverage": "Kapsamaya bak",
     "viewOnExplorer": "Tarayıcıda Görüntüle"
   },
@@ -191,7 +191,11 @@
       "unknown": "Lütfen tekrar deneyin veya desteğe başvurun.",
       "quoteFailed": "Teklif alınırken hata oluştu, daha sonra tekrar deneyin",
       "countriesFetchFailed": "Mevcut ülkeler yüklenemedi. Bağlantınızı kontrol edin ve tekrar deneyin.",
-      "noCountriesAvailable": "Şu anda hiçbir ülke mevcut değil."
+      "noCountriesAvailable": "Şu anda hiçbir ülke mevcut değil.",
+      "catalogLoadFailed": "Ürünler yüklenemedi. Lütfen tekrar deneyin.",
+      "noProductsAvailable": "Şu anda ülkeniz için mevcut ürün bulunmamaktadır.",
+      "errorProcessingPurchase": "Satın alma işlenirken hata oluştu",
+      "checkHistoryForStatus": "Satın alma durumunuz yüklenirken bir hata oluştu, geçmişinizden kontrol edebilirsiniz"
     },
     "title": {
       "allowanceRequired": "İzin miktarı yetersiz",
