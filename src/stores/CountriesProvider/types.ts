@@ -16,11 +16,9 @@ export type CountryContextType = {
   selectedCountry: Country | null;
   availableCountries: Country[];
   blockedCountries: Country[];
-  restoreCountry: (isoCode: string) => void;
   selectCountry: (isoCode: string) => void;
   removeCountry: (isoCode: string) => void;
   isCountryPending: boolean;
   error: CountryError | null;
   hasCountries: boolean;
-  retryFetch: () => void;
 };

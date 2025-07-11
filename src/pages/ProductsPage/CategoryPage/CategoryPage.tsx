@@ -21,7 +21,7 @@ export const CategoryPage = () => {
     isLoading,
     error: catalogError,
   } = useCatalogContext();
-  const { error: countryError, retryFetch } = useCountryContext();
+  const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
 
   useEffect(() => {

@@ -14,7 +14,6 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
-import { CountriesError } from "../../components/CountriesError/CountriesError";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ export const ProductsPage = () => {
     fuzzySearchBrands,
     error: catalogError,
   } = useCatalogContext();
-  const { error: countryError, retryFetch } = useCountryContext();
+  const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
 

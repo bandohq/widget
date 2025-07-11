@@ -17,7 +17,6 @@ import { PageContainer } from "../components/PageContainer";
 import { SettingsListItemButton } from "../components/SettingsListItemButton";
 import { useHeader } from "../hooks/useHeader";
 import { SearchBar } from "../components/SearchInput/SearchInput";
-import { CountriesError } from "../components/CountriesError/CountriesError";
 
 export const CountryPage: React.FC = () => {
   const { t } = useTranslation();
@@ -26,14 +25,12 @@ export const CountryPage: React.FC = () => {
   const isProductPage = searchParams.get("productPage");
   const {
     removeCountry,
-    restoreCountry,
     selectCountry,
     blockedCountries,
     availableCountries,
     isCountryPending,
     error,
     hasCountries,
-    retryFetch,
   } = useCountryContext();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -47,8 +44,8 @@ export const CountryPage: React.FC = () => {
     country.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Show loading state
-  if (isCountryPending) {
+  // Show loading state or error
+  if (isCountryPending || error) {
     return (
       <PageContainer disableGutters isDrawer>
         <Box
@@ -69,21 +66,6 @@ export const CountryPage: React.FC = () => {
     );
   }
 
-  // Show error state
-  if (error) {
-    return (
-      <PageContainer disableGutters isDrawer>
-        <CountriesError
-          error={error}
-          onRetry={retryFetch}
-          isRetrying={isCountryPending}
-          variant="fullPage"
-        />
-      </PageContainer>
-    );
-  }
-
-  // Show no countries available state
   if (!hasCountries) {
     return (
       <PageContainer disableGutters isDrawer>
@@ -120,33 +102,6 @@ export const CountryPage: React.FC = () => {
           paddingBottom: 1.5,
         }}
       >
-        {/* Blocked countries */}
-        {!isProductPage &&
-          filteredBlockedCountries.map((country) => (
-            <SettingsListItemButton
-              key={country.isoAlpha2}
-              onClick={() => {
-                restoreCountry(country.isoAlpha2);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  src={country.flagUrl}
-                  alt={country.name}
-                  sx={{ objectFit: "cover" }}
-                />
-              </ListItemIcon>
-              <ListItemText primary={country.name} />
-              <Chip
-                color="error"
-                label={t("countries.excluded")}
-                variant="outlined"
-                size="small"
-              />
-            </SettingsListItemButton>
-          ))}
-
-        {/* Available countries */}
         {filteredAvailableCountries.map((country) => (
           <SettingsListItemButton
             key={country.isoAlpha2}

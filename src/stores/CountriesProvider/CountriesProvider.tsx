@@ -26,10 +26,14 @@ export const CountriesProvider: React.FC<{
     data: countriesResponse,
     isPending,
     error: fetchError,
-    refetch,
   } = useFetch({
     method: "GET",
     url: "countries",
+    queryOptions: {
+      queryKey: ["countries"],
+      retry: 2,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000), // Backoff exponencial
+    },
   });
 
   // Handle fetch errors
@@ -114,23 +118,6 @@ export const CountriesProvider: React.FC<{
     }
   };
 
-  const restoreCountry = (isoCode: string) => {
-    setBlockedCountries((prev) =>
-      prev.filter((country) => country.isoAlpha2 !== isoCode)
-    );
-    const restoredCountry = blockedCountries.find(
-      (country) => country.isoAlpha2 === isoCode
-    );
-    if (restoredCountry) {
-      setAvailableCountries((prev) => [...prev, restoredCountry]);
-    }
-  };
-
-  const retryFetch = () => {
-    setError(null);
-    refetch();
-  };
-
   const hasCountries = availableCountries.length > 0;
 
   return (
@@ -141,11 +128,9 @@ export const CountriesProvider: React.FC<{
         selectedCountry,
         selectCountry,
         removeCountry,
-        restoreCountry,
         isCountryPending: isPending,
         error,
         hasCountries,
-        retryFetch,
       }}
     >
       {children}
