@@ -191,7 +191,9 @@
       "walletChangedDuringExecution": "O endereço da carteira que solicitou a cotação não corresponde ao endereço tentando assinar a transação.",
       "quoteFailed": "Erro ao obter a cotação, tente novamente mais tarde",
       "catalogLoadFailed": "Falha ao carregar produtos. Por favor, tente novamente.",
-      "noProductsAvailable": "Nenhum produto disponível para seu país no momento."
+      "noProductsAvailable": "Nenhum produto disponível para seu país no momento.",
+      "errorProcessingPurchase": "Erro ao processar a compra",
+      "checkHistoryForStatus": "Houve um erro ao carregar o status da sua compra, você pode verificá-lo no histórico"
     },
     "title": {
       "allowanceRequired": "Permissão insuficiente",

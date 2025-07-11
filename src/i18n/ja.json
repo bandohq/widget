@@ -189,7 +189,9 @@
       "walletChangedDuringExecution": "見積もりを要求したウォレットアドレスがトランザクションに署名しようとしているウォレットアドレスと一致しません。同じウォレットを使用してください。",
       "quoteFailed": "見積もりの取得中にエラーが発生しました。後でもう一度お試しください",
       "catalogLoadFailed": "商品の読み込みに失敗しました。もう一度お試しください。",
-      "noProductsAvailable": "現在、お客様の国で利用可能な商品はありません。"
+      "noProductsAvailable": "現在、お客様の国で利用可能な商品はありません。",
+      "errorProcessingPurchase": "購入の処理中にエラーが発生しました",
+      "checkHistoryForStatus": "購入ステータスの読み込み中にエラーが発生しました。履歴から確認できます"
     },
     "title": {
       "allowanceRequired": "許可が不足しています",

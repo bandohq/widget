@@ -14,6 +14,8 @@ import { useCallback, useState } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
 import { useFlags } from "launchdarkly-react-client-sdk";
+import { useTranslation } from "react-i18next";
+import { navigationRoutes } from "../utils/navigationRoutes";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ export const useTransactionFlow = () => {
   const { handleServiceRequest, signTransfer } = useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { transactionFlow } = useFlags();
+  const { t } = useTranslation();
 
   // Nuevo flujo
   const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
@@ -56,6 +59,8 @@ export const useTransactionFlow = () => {
       },
       onError: (error) => {
         console.error("New flow error:", error);
+        setLoading(false);
+        navigate(`${navigationRoutes.error}?error=true`);
       },
     },
   });
@@ -93,6 +98,8 @@ export const useTransactionFlow = () => {
       },
       onError: (error) => {
         console.error("Old flow error:", error);
+        showNotification("error", t("error.message.errorProcessingPurchase"));
+        setLoading(false);
       },
     },
   });

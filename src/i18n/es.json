@@ -35,7 +35,8 @@
     "showAll": "Mostrar todo",
     "retry": "Reintentar",
     "viewCoverage": "Ver cobertura",
-    "viewOnExplorer": "Ver en explorador"
+    "viewOnExplorer": "Ver en explorador",
+    "goToHistory": "Ir al historial"
   },
   "header": {
     "checkout": "Checkout",
@@ -193,7 +194,9 @@
       "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución.",
       "quoteFailed": "Error al cotizar, intente más tarde",
       "catalogLoadFailed": "No se pudieron cargar los productos. Por favor, inténtalo de nuevo.",
-      "noProductsAvailable": "No hay productos disponibles para tu país en este momento."
+      "noProductsAvailable": "No hay productos disponibles para tu país en este momento.",
+      "errorProcessingPurchase": "Error al procesar la compra",
+      "checkHistoryForStatus": "Hubo un error al cargar el estado de tu compra, puedes verlo desde tu historial",
       "transactionNotFound": "Transacción no encontrada",
       "unauthorized": "No tienes permisos para ver esta transacción",
       "serverError": "Error del servidor, inténtalo más tarde"
@@ -224,6 +227,8 @@
       "walletMismatch": "La dirección de billetera no coincide",
       "orderFailed": "Oh... Hubo un problema",
       "retry": "Por favor, inténtalo de nuevo más tarde.",
+      "errorLoadingStatus": "Error al cargar el estado",
+      "checkHistory": "Puedes verlo desde tu historial",
       "transactionLoadFailed": "Error al cargar la transacción"
     }
   },

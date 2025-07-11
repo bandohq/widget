@@ -192,7 +192,9 @@
       "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
       "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard",
       "catalogLoadFailed": "Impossible de charger les produits. Veuillez réessayer.",
-      "noProductsAvailable": "Aucun produit disponible pour votre pays pour le moment."
+      "noProductsAvailable": "Aucun produit disponible pour votre pays pour le moment.",
+      "errorProcessingPurchase": "Erreur lors du traitement de l'achat",
+      "checkHistoryForStatus": "Il y a eu une erreur lors du chargement du statut de votre achat, vous pouvez le vérifier depuis votre historique"
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",
