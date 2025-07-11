@@ -194,7 +194,7 @@
       "walletChangedDuringExecution": "La dirección de billetera que solicitó la cotización no coincide con la dirección que intenta firmar la transacción. Asegúrate de usar la misma dirección durante toda la ejecución.",
       "quoteFailed": "Error al cotizar, intente más tarde",
       "errorProcessingPurchase": "Error al procesar la compra",
-      "checkHistoryForStatus": "Hubo un error al cargar el estado de tu compra, puedes verlo desde tu historial"
+      "checkHistoryForStatus": "Hubo un error al cargar el estado de tu compra, puedes verlo desde tu historial",
       "transactionNotFound": "Transacción no encontrada",
       "unauthorized": "No tienes permisos para ver esta transacción",
       "serverError": "Error del servidor, inténtalo más tarde"
@@ -226,7 +226,7 @@
       "orderFailed": "Oh... Hubo un problema",
       "retry": "Por favor, inténtalo de nuevo más tarde.",
       "errorLoadingStatus": "Error al cargar el estado",
-      "checkHistory": "Puedes verlo desde tu historial"
+      "checkHistory": "Puedes verlo desde tu historial",
       "transactionLoadFailed": "Error al cargar la transacción"
     }
   },
