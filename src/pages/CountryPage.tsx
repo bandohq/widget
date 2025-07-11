@@ -6,10 +6,9 @@ import {
   List,
   ListItemIcon,
   Avatar,
-  Chip,
   Box,
   Typography,
-  CircularProgress,
+  Skeleton,
 } from "@mui/material";
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { ListItemText } from "../components/ListItemText";
@@ -54,13 +53,20 @@ export const CountryPage: React.FC = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            textAlign: "center",
             py: 4,
+            px: 2,
           }}
         >
-          <CircularProgress size={48} />
-          <Typography variant="body1" sx={{ mt: 2 }}>
-            {t("button.loading")}
-          </Typography>
+          {Array.from(new Array(10)).map((_, index) => (
+            <Skeleton
+              key={index}
+              variant="rectangular"
+              width="100%"
+              height={45}
+              sx={{ marginBottom: 1, borderRadius: "5px" }}
+            />
+          ))}
         </Box>
       </PageContainer>
     );
