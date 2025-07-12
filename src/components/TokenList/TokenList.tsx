@@ -8,6 +8,7 @@ import { VirtualizedTokenList } from "./VirtualizedTokenList.js";
 import type { TokenListProps } from "./types.js";
 import { useTokenSelect } from "./useTokenSelect.js";
 import { useTokenBalances } from "../../hooks/useTokenBalances.js";
+import { useTokens } from "../../hooks/useTokens.js";
 
 export const TokenList: FC<TokenListProps> = ({
   formType,
@@ -23,10 +24,13 @@ export const TokenList: FC<TokenListProps> = ({
   const { account } = useAccount();
   const { chain: selectedChain } = useChain(account?.chainId);
 
-  const { balances, isLoading } = useTokenBalances(
-    account?.address ?? "",
-    selectedChain ?? undefined
-  );
+  const { isPending: tokensLoading, isError } = useTokens(selectedChain);
+
+  const {
+    balances,
+    isLoading: balancesLoading,
+    error: balancesError,
+  } = useTokenBalances(account?.address ?? "", selectedChain ?? undefined);
 
   const filteredTokens = useMemo(() => {
     if (!tokenSearchFilter) return balances;
@@ -43,11 +47,14 @@ export const TokenList: FC<TokenListProps> = ({
   const handleTokenClick = useTokenSelect(formType, onClick);
   const showCategories = !tokenSearchFilter;
 
+  const isLoading =
+    isError || balancesError || tokensLoading || balancesLoading;
+
   return (
     <Box ref={parentRef} style={{ height, overflow: "auto" }}>
-      {!filteredTokens.length && !isLoading ? (
+      {!filteredTokens.length && !balancesLoading && !tokensLoading && (
         <TokenNotFound formType={formType} />
-      ) : null}
+      )}
       <VirtualizedTokenList
         account={account}
         tokens={filteredTokens}
@@ -56,7 +63,7 @@ export const TokenList: FC<TokenListProps> = ({
         chain={selectedChain}
         isLoading={isLoading}
         showCategories={showCategories}
-        isBalanceLoading
+        isBalanceLoading={balancesLoading}
         onClick={handleTokenClick}
       />
     </Box>
