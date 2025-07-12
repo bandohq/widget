@@ -31,7 +31,7 @@ export const CountriesProvider: React.FC<{
     url: "countries",
     queryOptions: {
       queryKey: ["countries"],
-      retry: 2,
+      retry: true,
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000), // Backoff exponencial
     },
   });
