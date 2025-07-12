@@ -41,6 +41,11 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
       country: !!country ? country?.isoAlpha2 : null,
     },
     enabled: !!country && !isCountryPending,
+    queryOptions: {
+      queryKey: ["products", country?.isoAlpha2],
+      retry: true,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000), // Backoff exponencial
+    },
   });
 
   useEffect(() => {
