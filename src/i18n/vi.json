@@ -185,6 +185,8 @@
       "transactionCanceled": "Giao dịch đã bị hủy.",
       "unknown": "Xảy ra lỗi. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
       "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau",
+      "catalogLoadFailed": "Không thể tải sản phẩm. Vui lòng thử lại.",
+      "noProductsAvailable": "Hiện tại không có sản phẩm nào khả dụng cho quốc gia của bạn.",
       "errorProcessingPurchase": "Lỗi khi xử lý mua hàng",
       "checkHistoryForStatus": "Đã xảy ra lỗi khi tải trạng thái mua hàng của bạn, bạn có thể kiểm tra từ lịch sử"
     },
