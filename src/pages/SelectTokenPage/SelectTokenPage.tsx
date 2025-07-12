@@ -10,7 +10,6 @@ import { useScrollableOverflowHidden } from "../../hooks/useScrollableContainer.
 import { type FormTypeProps } from "../../stores/form/types.js";
 import { SearchTokenInput } from "./SearchTokenInput.js";
 import { useTokenListHeight } from "./useTokenListHeight.js";
-import { palette } from "../../themes/palettes.js";
 
 export const SelectTokenPage: FC<FormTypeProps> = ({ formType }) => {
   useScrollableOverflowHidden();
