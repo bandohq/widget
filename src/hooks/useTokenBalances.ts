@@ -4,6 +4,7 @@ import { useTokens } from "./useTokens";
 import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
+import { useTranslation } from "react-i18next";
 
 export const useTokenBalances = (
   accountAddress: string,
@@ -12,11 +13,23 @@ export const useTokenBalances = (
   const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
-  const { data: tokens, isPending: tokensLoading } = useTokens(chain);
+  const {
+    data: tokens,
+    isPending: tokensLoading,
+    isError: tokensError,
+  } = useTokens(chain);
 
   useEffect(() => {
     const fetchBalances = async () => {
+      if (tokensError) {
+        const errorMessage = t("error.message.tokenLoadFailed");
+        setError(errorMessage);
+        setLoading(false);
+        setBalances([]);
+        return;
+      }
       if (!tokens || tokensLoading || !chain || !accountAddress) return;
       const nativeToken = chain.nativeToken;
 
@@ -73,7 +86,8 @@ export const useTokenBalances = (
 
         setBalances(nonZeroBalances);
       } catch (err) {
-        setError("Error fetching token balances");
+        const errorMessage = t("error.message.balanceLoadFailed");
+        setError(errorMessage);
         setBalances([]);
       } finally {
         setLoading(false);

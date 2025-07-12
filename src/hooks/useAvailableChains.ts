@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
-import { useFetch } from './useFetch';
-import { ExtendedChain } from '../pages/SelectChainPage/types.js';
+import { useCallback, useEffect } from "react";
+import { useFetch } from "./useFetch";
+import { ExtendedChain } from "../pages/SelectChainPage/types.js";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
 
 export type GetChainById = (
   chainId?: number,
@@ -8,20 +9,37 @@ export type GetChainById = (
 ) => ExtendedChain | undefined;
 
 export const useAvailableChains = () => {
-
-  const { data: response, isPending } = useFetch({
+  const { showNotification } = useNotificationContext();
+  const {
+    data: response,
+    isPending,
+    error,
+    isError,
+  } = useFetch({
     url: `networks/`,
-    method: 'GET',
-    queryParams: {
-    },
+    method: "GET",
+    queryParams: {},
     queryOptions: {
-      queryKey: ['available-chains'],
+      queryKey: ["available-chains"],
       refetchInterval: 300_000,
       staleTime: 300_000,
+      retry: (failureCount, error) => {
+        // Retry 3 times for network errors
+        if (failureCount < 3) {
+          return true;
+        }
+      },
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     },
   });
 
   const data = response?.data || [];
+  useEffect(() => {
+    if (error) {
+      console.error("Error fetching available chains:", error);
+      showNotification("error", "Error fetching available chains");
+    }
+  }, [error]);
 
   const getChainById: GetChainById = useCallback(
     (chainId?: number, chains: ExtendedChain[] | undefined = data) => {
@@ -30,7 +48,7 @@ export const useAvailableChains = () => {
       }
 
       const chain = chains?.find((chain) => chain.chainId === chainId);
-      return (chains.length > 0) && chain ? chain : chains[0];
+      return chains.length > 0 && chain ? chain : chains[0];
     },
     [data]
   );
@@ -39,5 +57,9 @@ export const useAvailableChains = () => {
     chains: data,
     getChainById,
     isPending,
+    isError,
+    error,
+    isLoading: isPending,
+    hasError: isError,
   };
 };

@@ -194,6 +194,8 @@
       "unknown": "Please try again or contact support.",
       "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution.",
       "quoteFailed": "Error getting the quote, try later",
+      "tokenLoadFailed": "Could not load tokens. Please try again.",
+      "balanceLoadFailed": "Could not load balances. Please try again.",
       "errorProcessingPurchase": "Error processing purchase",
       "checkHistoryForStatus": "There was an error loading your purchase status, you can check it from your history"
       "transactionNotFound": "Transaction not found",
