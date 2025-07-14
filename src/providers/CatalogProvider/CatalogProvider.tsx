@@ -88,7 +88,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       }
     }
-  }, [buildUrl, products, updateProduct, updateBrand, navigate]);
+  }, [buildUrl, products, updateProduct, updateBrand]);
 
   const fuzzySearchBrands = (searchTerm: string, productType?: string) => {
     const filteredProducts = productType

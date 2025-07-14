@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Country, CountryContextType, CountryError } from "./types";
 import { useFetch } from "../../hooks/useFetch";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
-import { useTranslation } from "react-i18next";
 
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
@@ -15,7 +14,6 @@ export const CountriesProvider: React.FC<{
   configCountry,
   allowedCountries: initialAllowedCountries,
 }) => {
-  const { t } = useTranslation();
   const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
   const [blockedCountries, setBlockedCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -40,14 +38,14 @@ export const CountriesProvider: React.FC<{
   useEffect(() => {
     if (fetchError) {
       setError({
-        message: t("error.message.countriesFetchFailed"),
+        message: "Error fetching countries",
         code: fetchError.message,
         status: (fetchError as any)?.status,
       });
     } else {
       setError(null);
     }
-  }, [fetchError, t]);
+  }, [fetchError]);
 
   useEffect(() => {
     if (countriesResponse?.data?.results) {
