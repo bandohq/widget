@@ -18,7 +18,7 @@ export const ProductsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState(null);
-  const { products, isLoading, filteredBrands, fuzzySearchBrands } =
+  const { products, isLoading, filteredBrands, fuzzySearchBrands, error } =
     useCatalogContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
@@ -67,7 +67,7 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading
+      {isLoading || error
         ? Array.from(new Array(2)).map((_, index) => (
             <Box key={index} sx={{ marginBottom: 4 }}>
               <Skeleton

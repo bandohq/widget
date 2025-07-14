@@ -7,12 +7,13 @@ import { useCatalogContext } from "../../../providers/CatalogProvider/CatalogPro
 import { useProduct } from "../../../stores/ProductProvider/ProductProvider";
 import { ProductList } from "../../../components/ProductList/ProductList";
 import { useTranslation } from "react-i18next";
+import { Box, Skeleton } from "@mui/material";
 
 export const CategoryPage = () => {
   const { category } = useParams(); // productType
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { products, filteredBrands, fuzzySearchBrands, isLoading } =
+  const { products, filteredBrands, fuzzySearchBrands, isLoading, error } =
     useCatalogContext();
   const { updateProduct } = useProduct();
 
@@ -58,7 +59,17 @@ export const CategoryPage = () => {
       {isLoading && (
         <div>
           <ProductSearch productType={category} />
-          {/* Placeholder skeletons */}
+          <Box sx={{ padding: 2 }}>
+            {Array.from(new Array(5)).map((_, index) => (
+              <Skeleton
+                key={index}
+                variant="rectangular"
+                width="100%"
+                height="80px"
+                sx={{ marginBottom: 2, borderRadius: "8px" }}
+              />
+            ))}
+          </Box>
         </div>
       )}
     </PageContainer>

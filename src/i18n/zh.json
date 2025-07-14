@@ -185,6 +185,8 @@
       "transactionCanceled": "交易已取消。",
       "unknown": "出现未知错误，请稍后再试或联系客服。",
       "quoteFailed": "获取报价时出错，请稍后再试",
+      "catalogLoadFailed": "加载产品失败。请重试。",
+      "noProductsAvailable": "目前您的国家/地区没有可用产品。",
       "errorProcessingPurchase": "处理购买时出错",
       "checkHistoryForStatus": "加载购买状态时出错，您可以从历史记录中查看"
     },
