@@ -46,7 +46,7 @@ export const CountryPage: React.FC = () => {
   // Show loading state or error
   if (isCountryPending || error) {
     return (
-      <PageContainer disableGutters isDrawer>
+      <PageContainer disableGutters>
         <Box
           sx={{
             display: "flex",
@@ -98,7 +98,7 @@ export const CountryPage: React.FC = () => {
   }
 
   return (
-    <PageContainer disableGutters isDrawer>
+    <PageContainer disableGutters>
       <SearchBar onSearch={setSearchQuery} />
       <List
         sx={{
