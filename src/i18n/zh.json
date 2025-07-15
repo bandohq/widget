@@ -22,6 +22,7 @@
     "disconnect": "断开连接",
     "done": "确认",
     "light": "浅色主题",
+    "loading": "加载中...",
     "max": "最大",
     "ok": "确认",
     "options": "选项",
@@ -185,6 +186,8 @@
       "transactionCanceled": "交易已取消。",
       "unknown": "出现未知错误，请稍后再试或联系客服。",
       "quoteFailed": "获取报价时出错，请稍后再试",
+      "countriesFetchFailed": "无法加载可用国家。请检查您的连接并重试。",
+      "noCountriesAvailable": "目前没有可用的国家。",
       "catalogLoadFailed": "加载产品失败。请重试。",
       "noProductsAvailable": "目前您的国家/地区没有可用产品。",
       "errorProcessingPurchase": "处理购买时出错",
@@ -194,7 +197,8 @@
       "allowanceRequired": "支出限额不足",
       "insufficientFunds": "资金不足",
       "transactionCanceled": "交易已取消",
-      "unknown": "未知错误"
+      "unknown": "未知错误",
+      "countriesUnavailable": "国家不可用"
     }
   },
   "tooltip": {

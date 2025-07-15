@@ -26,6 +26,7 @@
     "disconnect": "Déconnecter",
     "done": "Terminé",
     "light": "Clair",
+    "loading": "Chargement...",
     "max": "max",
     "ok": "Ok",
     "options": "Options",
@@ -191,6 +192,8 @@
       "unknown": "Veuillez réessayer ou contacter le support.",
       "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
       "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard",
+      "countriesFetchFailed": "Impossible de charger les pays disponibles. Vérifiez votre connexion et réessayez.",
+      "noCountriesAvailable": "Aucun pays n'est disponible pour le moment.",
       "catalogLoadFailed": "Impossible de charger les produits. Veuillez réessayer.",
       "noProductsAvailable": "Aucun produit disponible pour votre pays pour le moment.",
       "errorProcessingPurchase": "Erreur lors du traitement de l'achat",
@@ -198,7 +201,8 @@
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",
-      "transactionFailed": "La transaction a échoué."
+      "transactionFailed": "La transaction a échoué.",
+      "countriesUnavailable": "Pays non disponibles"
     }
   },
   "tooltip": {

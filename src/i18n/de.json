@@ -26,6 +26,7 @@
     "disconnect": "Trennen",
     "done": "Fertig",
     "light": "Hell",
+    "loading": "Lädt...",
     "max": "Max",
     "ok": "OK",
     "options": "Optionen",
@@ -190,6 +191,8 @@
       "unknown": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support.",
       "walletChangedDuringExecution": "Die Wallet-Adresse, die das Angebot angefordert hat, stimmt nicht mit der Wallet-Adresse überein, die die Transaktion signieren möchte.",
       "quoteFailed": "Fehler beim Abrufen des Angebots, versuchen Sie es später erneut",
+      "countriesFetchFailed": "Verfügbare Länder konnten nicht geladen werden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+      "noCountriesAvailable": "Derzeit sind keine Länder verfügbar.",
       "catalogLoadFailed": "Produkte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
       "noProductsAvailable": "Derzeit sind keine Produkte für Ihr Land verfügbar.",
       "errorProcessingPurchase": "Fehler beim Verarbeiten des Kaufs",
@@ -197,7 +200,8 @@
     },
     "title": {
       "allowanceRequired": "Unzureichende Freigabe",
-      "transactionFailed": "Transaktion fehlgeschlagen"
+      "transactionFailed": "Transaktion fehlgeschlagen",
+      "countriesUnavailable": "Länder nicht verfügbar"
     }
   },
   "tooltip": {

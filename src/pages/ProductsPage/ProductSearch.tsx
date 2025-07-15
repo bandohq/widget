@@ -26,19 +26,19 @@ export const ProductSearch = ({
   disabled,
 }: ProductSearchProps): JSX.Element | null => {
   const theme = useTheme();
-  const { selectedCountry: country, availableCountries: countries } =
-    useCountryContext();
+  const {
+    selectedCountry: country,
+    availableCountries: countries,
+    error,
+    hasCountries,
+  } = useCountryContext();
   const { fuzzySearchBrands } = useCatalogContext();
   const { t } = useTranslation();
   const [, setSearchKey] = useState("");
   const navigate = useNavigate();
 
-  if (!countries.length) {
-    return null;
-  }
-
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (disabled) {
+    if (disabled || error || !hasCountries) {
       return;
     }
     setSearchKey(event.target.value);

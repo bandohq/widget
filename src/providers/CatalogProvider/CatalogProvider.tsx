@@ -24,7 +24,12 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { selectedCountry: country, isCountryPending } = useCountryContext();
+  const {
+    selectedCountry: country,
+    isCountryPending,
+    error: countryError,
+    hasCountries,
+  } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
   const { buildUrl } = useWidgetConfig();
   const [products, setProducts] = useState<Product[]>([]);

@@ -26,6 +26,7 @@
     "disconnect": "Desconectar",
     "done": "Concluído",
     "light": "Claro",
+    "loading": "Carregando...",
     "max": "máximo",
     "ok": "Tudo certo",
     "options": "Opções",
@@ -190,6 +191,8 @@
       "unknown": "Tente novamente ou fale com o suporte.",
       "walletChangedDuringExecution": "O endereço da carteira que solicitou a cotação não corresponde ao endereço tentando assinar a transação.",
       "quoteFailed": "Erro ao obter a cotação, tente novamente mais tarde",
+      "countriesFetchFailed": "Não foi possível carregar os países disponíveis. Verifique sua conexão e tente novamente.",
+      "noCountriesAvailable": "Nenhum país disponível no momento.",
       "catalogLoadFailed": "Falha ao carregar produtos. Por favor, tente novamente.",
       "noProductsAvailable": "Nenhum produto disponível para seu país no momento.",
       "errorProcessingPurchase": "Erro ao processar a compra",
@@ -197,7 +200,8 @@
     },
     "title": {
       "allowanceRequired": "Permissão insuficiente",
-      "transactionFailed": "Transação falhou"
+      "transactionFailed": "Transação falhou",
+      "countriesUnavailable": "Países não disponíveis"
     }
   },
   "tooltip": {

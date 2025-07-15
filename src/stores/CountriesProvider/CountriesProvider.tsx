@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Country, CountryContextType } from "./types";
+import { Country, CountryContextType, CountryError } from "./types";
 import { useFetch } from "../../hooks/useFetch";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
@@ -17,12 +17,35 @@ export const CountriesProvider: React.FC<{
   const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
   const [blockedCountries, setBlockedCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [error, setError] = useState<CountryError | null>(null);
 
   const { buildUrl } = useWidgetConfig();
-  const { data: countriesResponse, isPending } = useFetch({
+  const {
+    data: countriesResponse,
+    isPending,
+    error: fetchError,
+  } = useFetch({
     method: "GET",
     url: "countries",
+    queryOptions: {
+      queryKey: ["countries"],
+      retry: true,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000), // Backoff exponencial
+    },
   });
+
+  // Handle fetch errors
+  useEffect(() => {
+    if (fetchError) {
+      setError({
+        message: "Error fetching countries",
+        code: fetchError.message,
+        status: (fetchError as any)?.status,
+      });
+    } else {
+      setError(null);
+    }
+  }, [fetchError]);
 
   useEffect(() => {
     if (countriesResponse?.data?.results) {
@@ -65,7 +88,7 @@ export const CountriesProvider: React.FC<{
 
       setSelectedCountry(defaultCountry || null);
     }
-  }, [countriesResponse, initialAllowedCountries]);
+  }, [countriesResponse, initialAllowedCountries, configCountry, buildUrl]);
 
   const selectCountry = (isoCode: string) => {
     const country = availableCountries.find((c) => c.isoAlpha2 === isoCode);
@@ -93,17 +116,7 @@ export const CountriesProvider: React.FC<{
     }
   };
 
-  const restoreCountry = (isoCode: string) => {
-    setBlockedCountries((prev) =>
-      prev.filter((country) => country.isoAlpha2 !== isoCode)
-    );
-    const restoredCountry = blockedCountries.find(
-      (country) => country.isoAlpha2 === isoCode
-    );
-    if (restoredCountry) {
-      setAvailableCountries((prev) => [...prev, restoredCountry]);
-    }
-  };
+  const hasCountries = availableCountries.length > 0;
 
   return (
     <CountryContext.Provider
@@ -113,8 +126,9 @@ export const CountriesProvider: React.FC<{
         selectedCountry,
         selectCountry,
         removeCountry,
-        restoreCountry,
         isCountryPending: isPending,
+        error,
+        hasCountries,
       }}
     >
       {children}

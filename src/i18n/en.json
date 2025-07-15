@@ -26,6 +26,7 @@
     "disconnect": "Disconnect",
     "done": "Done",
     "light": "Light",
+    "loading": "Loading...",
     "max": "max",
     "ok": "Ok",
     "options": "Options",
@@ -194,6 +195,8 @@
       "unknown": "Please try again or contact support.",
       "walletChangedDuringExecution": "The wallet address that requested the quote does not match the wallet address attempting to sign the transaction. Please ensure the same wallet address is used throughout the entire transaction execution.",
       "quoteFailed": "Error getting the quote, try later",
+      "countriesFetchFailed": "Could not load available countries. Check your connection and try again.",
+      "noCountriesAvailable": "No countries are available at the moment.",
       "catalogLoadFailed": "Failed to load products. Please try again.",
       "noProductsAvailable": "No products available for your country at the moment.",
       "tokenLoadFailed": "Could not load tokens. Please try again.",
@@ -229,6 +232,7 @@
       "walletMismatch": "Wallet address mismatch",
       "orderFailed": "Oh... There was a problem",
       "retry": "Please, try again later.",
+      "countriesUnavailable": "Countries unavailable",
       "transactionLoadFailed": "Error loading transaction"
     }
   },
