@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.36](https://github.com/bandohq/widget/compare/v0.1.36-beta.5...v0.1.36) (2025-07-15)
+Improve Error handling in all backend interactions and transaction flow
+
 ### [0.1.36-beta.5](https://github.com/bandohq/widget/compare/v0.1.36-beta.4...v0.1.36-beta.5) (2025-07-10)
 
 ### [0.1.36-beta.4](https://github.com/bandohq/widget/compare/v0.1.35...v0.1.36-beta.4) (2025-07-09)
