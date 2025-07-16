@@ -2,12 +2,13 @@ import { useState, useEffect, useMemo } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { CategorySection } from "./CategorySection";
-import { Skeleton, Box } from "@mui/material";
+import { Skeleton, Box, Typography } from "@mui/material";
 import { ProductSearch } from "./ProductSearch";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useCatalogContext } from "../../providers/CatalogProvider/CatalogProvider";
+import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { BrandsContainer } from "./ProductPage.style";
 import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
@@ -19,8 +20,14 @@ export const ProductsPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState(null);
-  const { products, isLoading, filteredBrands, fuzzySearchBrands } =
-    useCatalogContext();
+  const {
+    products,
+    isLoading,
+    filteredBrands,
+    fuzzySearchBrands,
+    error: catalogError,
+  } = useCatalogContext();
+  const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
   const isWorld = useIsWorld();
@@ -70,7 +77,7 @@ export const ProductsPage = () => {
           isDropdown
         />
       )}
-      {isLoading
+      {isLoading || catalogError || countryError
         ? Array.from(new Array(2)).map((_, index) => (
             <Box key={index} sx={{ marginBottom: 4 }}>
               <Skeleton

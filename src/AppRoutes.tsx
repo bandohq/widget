@@ -45,6 +45,10 @@ const routes: RouteObject[] = [
     element: <SelectTokenPage formType="from" />,
   },
   {
+    path: navigationRoutes.error,
+    element: <StatusPage />,
+  },
+  {
     path: `${navigationRoutes.status}/:transactionId`,
     element: <StatusPage />,
   },

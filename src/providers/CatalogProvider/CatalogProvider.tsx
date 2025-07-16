@@ -14,6 +14,7 @@ interface CatalogContextType {
   filteredBrands: Brand[];
   isLoading: boolean;
   error: any;
+  hasProducts: boolean;
   fuzzySearchBrands: (searchTerm: string, productType?: string) => void;
 }
 
@@ -23,7 +24,12 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { selectedCountry: country, isCountryPending } = useCountryContext();
+  const {
+    selectedCountry: country,
+    isCountryPending,
+    error: countryError,
+    hasCountries,
+  } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
   const { buildUrl } = useWidgetConfig();
   const [products, setProducts] = useState<Product[]>([]);
@@ -40,6 +46,11 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
       country: !!country ? country?.isoAlpha2 : null,
     },
     enabled: !!country && !isCountryPending,
+    queryOptions: {
+      queryKey: ["products", country?.isoAlpha2],
+      retry: true,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 5000), // Backoff exponencial
+    },
   });
 
   useEffect(() => {
@@ -87,7 +98,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     const allBrands = filteredProducts.flatMap((product) => product.brands);
 
     if (!searchTerm.trim() && productType) {
-      // if the search term is empty, show all brands for the selected category
       setFilteredBrands(allBrands);
       return;
     }
@@ -106,6 +116,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     filteredBrands,
     isLoading: isPending,
     error,
+    hasProducts: products.length > 0,
     fuzzySearchBrands,
   };
 

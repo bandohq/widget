@@ -26,6 +26,7 @@
     "disconnect": "Disconnetti",
     "done": "Fatto",
     "light": "Chiaro",
+    "loading": "Caricamento...",
     "max": "massimo",
     "ok": "Ok",
     "options": "Opzioni",
@@ -33,7 +34,7 @@
     "resetSettings": "Ripristina impostazioni",
     "seeDetails": "Vedi dettagli",
     "showAll": "Mostra tutto",
-    "tryAgain": "Riprova",
+    "retry": "Riprova",
     "viewCoverage": "Vedi copertura",
     "viewOnExplorer": "Visualizza sull'Explorer"
   },
@@ -191,11 +192,18 @@
       "transactionSimulationFailed": "La transazione non può essere eseguita nella simulazione.",
       "unknown": "Riprova o contatta il nostro supporto.",
       "walletChangedDuringExecution": "L'indirizzo del portafoglio che ha richiesto la quota non corrisponde all'indirizzo del portafoglio che tenta di firmare la transazione. Assicurati di utilizzare lo stesso portafoglio per tutta la durata della transazione.",
-      "quoteFailed": "Errore nel recupero del preventivo, riprova più tardi"
+      "quoteFailed": "Errore nel recupero del preventivo, riprova più tardi",
+      "countriesFetchFailed": "Impossibile caricare i paesi disponibili. Controlla la tua connessione e riprova.",
+      "noCountriesAvailable": "Nessun paese disponibile al momento.",
+      "catalogLoadFailed": "Impossibile caricare i prodotti. Riprova.",
+      "noProductsAvailable": "Nessun prodotto disponibile per il tuo paese al momento.",
+      "errorProcessingPurchase": "Errore durante l'elaborazione dell'acquisto",
+      "checkHistoryForStatus": "Si è verificato un errore nel caricamento dello stato del tuo acquisto, puoi controllarlo dalla cronologia"
     },
     "title": {
       "allowanceRequired": "Quota massima insufficiente",
-      "transactionFailed": "Transazione fallita."
+      "transactionFailed": "Transazione fallita.",
+      "countriesUnavailable": "Paesi non disponibili"
     }
   },
   "tooltip": {

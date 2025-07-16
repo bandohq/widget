@@ -1,6 +1,7 @@
 export const navigationRoutes = {
   home: "/",
   status: "/status",
+  error: "/error",
   fromToken: "/from-token",
   languages: "languages",
   countries: "countries",

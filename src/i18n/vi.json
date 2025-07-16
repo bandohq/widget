@@ -29,7 +29,7 @@
     "resetSettings": "Đặt lại cài đặt",
     "seeDetails": "Xem chi tiết",
     "showAll": "Hiển thị tất cả",
-    "tryAgain": "Thử lại",
+    "retry": "Thử lại",
     "viewCoverage": "Xem phạm vi bảo hiểm",
     "viewOnExplorer": "Xem tại Explorer"
   },
@@ -184,7 +184,11 @@
       "slippageThreshold": "Trượt giá vượt ngưỡng. Vui lòng yêu cầu lộ trình mới.",
       "transactionCanceled": "Giao dịch đã bị hủy.",
       "unknown": "Xảy ra lỗi. Vui lòng thử lại hoặc liên hệ hỗ trợ.",
-      "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau"
+      "quoteFailed": "Lỗi khi lấy báo giá, vui lòng thử lại sau",
+      "catalogLoadFailed": "Không thể tải sản phẩm. Vui lòng thử lại.",
+      "noProductsAvailable": "Hiện tại không có sản phẩm nào khả dụng cho quốc gia của bạn.",
+      "errorProcessingPurchase": "Lỗi khi xử lý mua hàng",
+      "checkHistoryForStatus": "Đã xảy ra lỗi khi tải trạng thái mua hàng của bạn, bạn có thể kiểm tra từ lịch sử"
     },
     "title": {
       "allowanceRequired": "Giới hạn không đủ",

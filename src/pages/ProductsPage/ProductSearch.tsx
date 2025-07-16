@@ -18,24 +18,29 @@ import { useTheme } from "@mui/system";
 
 interface ProductSearchProps {
   productType?: string;
+  disabled?: boolean;
 }
 
 export const ProductSearch = ({
   productType,
+  disabled,
 }: ProductSearchProps): JSX.Element | null => {
   const theme = useTheme();
-  const { selectedCountry: country, availableCountries: countries } =
-    useCountryContext();
+  const {
+    selectedCountry: country,
+    availableCountries: countries,
+    error,
+    hasCountries,
+  } = useCountryContext();
   const { fuzzySearchBrands } = useCatalogContext();
   const { t } = useTranslation();
   const [, setSearchKey] = useState("");
   const navigate = useNavigate();
 
-  if (!countries.length) {
-    return null;
-  }
-
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (disabled || error || !hasCountries) {
+      return;
+    }
     setSearchKey(event.target.value);
     fuzzySearchBrands(event.target.value, productType);
   };
@@ -57,6 +62,7 @@ export const ProductSearch = ({
             placeholder={t("main.searchProducts")}
             onChange={handleSearchChange}
             inputProps={{ "aria-label": "search products" }}
+            disabled={disabled}
           />
           <StyledIconButton aria-label="search">
             <SearchIcon />

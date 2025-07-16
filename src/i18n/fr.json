@@ -26,6 +26,7 @@
     "disconnect": "Déconnecter",
     "done": "Terminé",
     "light": "Clair",
+    "loading": "Chargement...",
     "max": "max",
     "ok": "Ok",
     "options": "Options",
@@ -33,7 +34,7 @@
     "resetSettings": "Réinitialiser les paramètres",
     "seeDetails": "Voir les détails",
     "showAll": "Afficher tout",
-    "tryAgain": "Réessayer",
+    "retry": "Réessayer",
     "viewCoverage": "Voir la couverture",
     "viewOnExplorer": "Voir sur l'explorateur"
   },
@@ -190,11 +191,18 @@
       "transactionFailed": "Veuillez consulter l'explorateur de blocs pour plus d'informations.",
       "unknown": "Veuillez réessayer ou contacter le support.",
       "walletChangedDuringExecution": "L'adresse du portefeuille qui a demandé le devis ne correspond pas à l'adresse du portefeuille tentant de signer la transaction. Veuillez vous assurer que la même adresse de portefeuille est utilisée tout au long de l'exécution de la transaction.",
-      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard"
+      "quoteFailed": "Erreur lors de l'obtention du devis, réessayez plus tard",
+      "countriesFetchFailed": "Impossible de charger les pays disponibles. Vérifiez votre connexion et réessayez.",
+      "noCountriesAvailable": "Aucun pays n'est disponible pour le moment.",
+      "catalogLoadFailed": "Impossible de charger les produits. Veuillez réessayer.",
+      "noProductsAvailable": "Aucun produit disponible pour votre pays pour le moment.",
+      "errorProcessingPurchase": "Erreur lors du traitement de l'achat",
+      "checkHistoryForStatus": "Il y a eu une erreur lors du chargement du statut de votre achat, vous pouvez le vérifier depuis votre historique"
     },
     "title": {
       "allowanceRequired": "Allocation insuffisante",
-      "transactionFailed": "La transaction a échoué."
+      "transactionFailed": "La transaction a échoué.",
+      "countriesUnavailable": "Pays non disponibles"
     }
   },
   "tooltip": {

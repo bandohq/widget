@@ -29,7 +29,7 @@
     "resetSettings": "設定をリセット",
     "seeDetails": "詳細を表示",
     "showAll": "すべて表示する",
-    "tryAgain": "再試行する",
+    "retry": "再試行",
     "viewCoverage": "適用範囲を表示",
     "viewOnExplorer": "エクスプローラーで表示"
   },
@@ -187,7 +187,11 @@
       "transactionSimulationFailed": "トランザクションのシミュレーションが失敗しました。",
       "unknown": "再度お試しいただくか、サポートまでお問い合わせください",
       "walletChangedDuringExecution": "見積もりを要求したウォレットアドレスがトランザクションに署名しようとしているウォレットアドレスと一致しません。同じウォレットを使用してください。",
-      "quoteFailed": "見積もりの取得中にエラーが発生しました。後でもう一度お試しください"
+      "quoteFailed": "見積もりの取得中にエラーが発生しました。後でもう一度お試しください",
+      "catalogLoadFailed": "商品の読み込みに失敗しました。もう一度お試しください。",
+      "noProductsAvailable": "現在、お客様の国で利用可能な商品はありません。",
+      "errorProcessingPurchase": "購入の処理中にエラーが発生しました",
+      "checkHistoryForStatus": "購入ステータスの読み込み中にエラーが発生しました。履歴から確認できます"
     },
     "title": {
       "allowanceRequired": "許可が不足しています",
