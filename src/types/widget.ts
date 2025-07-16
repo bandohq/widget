@@ -25,7 +25,6 @@ import type {
 } from "../providers/I18nProvider/types.js";
 import type { DefaultFieldValues } from "../stores/form/types";
 import { Address, ChainType } from "../pages/SelectChainPage/types.js";
-
 type MiniKitType = (typeof MiniKitNS)["MiniKit"];
 
 export type TransactionProvider = Pick<
@@ -221,6 +220,7 @@ export interface WidgetConfig {
   useRecommendedRoute?: boolean;
 
   walletConfig?: WidgetWalletConfig;
+  transactionProvider?: TransactionProvider;
 
   buildUrl?: boolean;
   keyPrefix?: string;
