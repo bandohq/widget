@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { PageContainer } from "../../components/PageContainer";
 import { useHeader } from "../../hooks/useHeader";
 import { CategorySection } from "./CategorySection";
@@ -13,6 +13,7 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
+import { useIsWorld } from "../../hooks/useIsWorld";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const ProductsPage = () => {
     useCatalogContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
+  const isWorld = useIsWorld();
 
   useHeader(t("header.spend"));
 
@@ -58,6 +60,7 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
+      {isWorld && <p>Worldcoin</p>}
       <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
