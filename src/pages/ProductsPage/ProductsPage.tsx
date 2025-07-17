@@ -14,7 +14,7 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
-import { useIsWorld } from "../../hooks/useIsWorld";
+import { useWorld } from "../../hooks/useWorld";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const ProductsPage = () => {
   const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
-  const isWorld = useIsWorld();
+  const { isWorld } = useWorld();
 
   useHeader(t("header.spend"));
 

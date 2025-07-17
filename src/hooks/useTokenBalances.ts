@@ -5,6 +5,7 @@ import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
 import { useTranslation } from "react-i18next";
+import { useWorld } from "./useWorld";
 
 export const useTokenBalances = (
   accountAddress: string,
@@ -13,6 +14,7 @@ export const useTokenBalances = (
   const [balances, setBalances] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { isWorld, provider } = useWorld();
   const { t } = useTranslation();
 
   const {
@@ -31,7 +33,6 @@ export const useTokenBalances = (
         return;
       }
       if (!tokens || tokensLoading || !chain || !accountAddress) return;
-      const nativeToken = chain.nativeToken;
 
       setLoading(true);
       setError(null);

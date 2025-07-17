@@ -2,9 +2,10 @@ import { useEffect, useState, useMemo } from "react";
 import { getProvider } from "../utils/getProvider";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 
-export const useIsWorld = () => {
+export const useWorld = () => {
   const { transactionProvider } = useWidgetConfig();
   const [isWorld, setIsWorld] = useState(false);
+  const [provider, setProvider] = useState<any>(null);
 
   // Memoizamos la promesa para no recrearla en cada render
   const providerPromise = useMemo(
@@ -21,7 +22,7 @@ export const useIsWorld = () => {
         if (mounted) setIsWorld(false);
         return;
       }
-
+      setProvider(provider);
       const installed = await provider.isInstalled();
       if (mounted) setIsWorld(installed);
     })();
@@ -31,5 +32,5 @@ export const useIsWorld = () => {
     };
   }, [providerPromise]);
 
-  return isWorld;
+  return { isWorld, provider };
 };
