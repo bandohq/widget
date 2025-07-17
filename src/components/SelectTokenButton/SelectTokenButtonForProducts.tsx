@@ -25,6 +25,7 @@ import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import { formatTotalAmount } from '../../utils/format.js';
 import { useFlags } from "launchdarkly-react-client-sdk";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -49,6 +50,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const [tokenAddress] = useFieldValues(tokenKey);
   const { chain } = useChain(account?.chainId);
   const { token } = useToken(chain, tokenAddress);
+  const { isWorld } = useWorld();
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
@@ -72,7 +74,7 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const handleConnect = () => {
-    if (account.isConnected) {
+    if (account.isConnected || isWorld) {
       handleClick();
     } else if (walletConfig?.onConnect) {
       walletConfig.onConnect();
