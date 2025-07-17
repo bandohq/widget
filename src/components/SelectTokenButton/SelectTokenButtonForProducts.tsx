@@ -41,6 +41,7 @@ export const SelectTokenButtonForProducts: React.FC<
     isPending: quotePending,
     fetchQuote,
     isPurchasePossible,
+    error: quoteError,
   } = useQuotes();
   const { account } = useAccount();
   const { openWalletMenu } = useWalletMenu();
@@ -180,7 +181,7 @@ export const SelectTokenButtonForProducts: React.FC<
           />
         )}
       </CardContent>
-      {quote?.totalAmount && !isPurchasePossible && (
+      {quoteError && !isPurchasePossible && (
         <Box
           sx={{
             color: "red",
