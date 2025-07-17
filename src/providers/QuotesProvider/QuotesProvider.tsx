@@ -97,7 +97,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
           message: t("warning.message.insufficientFunds"),
           status: 400,
         });
-        showNotification("error", t("warning.message.insufficientFunds"));
+        setIsPurchasePossible(false);
       } else {
         setError({
           error: "UNKNOWN_ERROR",

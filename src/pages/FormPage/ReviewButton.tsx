@@ -32,7 +32,11 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   const navigate = useNavigate();
   const { showNotification, hideNotification } = useNotificationContext();
   const { userAcceptedTermsAndConditions } = useUserWallet();
-  const { isPurchasePossible, error: quoteError } = useQuotes();
+  const {
+    isPurchasePossible,
+    error: quoteError,
+    isPending: quoteLoading,
+  } = useQuotes();
   const { transactionFlow } = useFlags();
   const tokenKey = FormKeyHelper.getTokenKey("from");
   const { handleTransaction, isPending: transactionLoading } =
@@ -89,7 +93,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 
   return (
     <BaseTransactionButton
-      disabled={disabled || transactionLoading || !tokenAddress}
+      disabled={disabled || transactionLoading || !tokenAddress || quoteLoading}
       text={t("header.spend")}
       onClick={() => handleClick()}
       loading={transactionLoading}
