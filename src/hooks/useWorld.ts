@@ -1,13 +1,22 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getProvider } from "../utils/getProvider";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
+import { TransactionProvider } from "../types/widget";
 
-export const useWorld = () => {
+interface WorldState {
+  isWorld: boolean;
+  provider: TransactionProvider | null;
+  error: unknown | null;
+}
+
+export const useWorld = (): WorldState => {
   const { transactionProvider } = useWidgetConfig();
-  const [isWorld, setIsWorld] = useState(false);
-  const [provider, setProvider] = useState<any>(null);
+  const [state, setState] = useState<WorldState>({
+    isWorld: false,
+    provider: null,
+    error: null,
+  });
 
-  // Memoizamos la promesa para no recrearla en cada render
   const providerPromise = useMemo(
     () => getProvider(transactionProvider),
     [transactionProvider]
@@ -17,14 +26,28 @@ export const useWorld = () => {
     let mounted = true;
 
     (async () => {
-      const provider = await providerPromise;
-      if (!provider) {
-        if (mounted) setIsWorld(false);
-        return;
+      try {
+        const prov = await providerPromise;
+        if (!mounted) return;
+
+        if (!prov) {
+          setState({ isWorld: false, provider: null, error: null });
+          return;
+        }
+
+        const installed = await prov.isInstalled();
+        if (!mounted) return;
+
+        setState({
+          isWorld: installed,
+          provider: prov,
+          error: null,
+        });
+      } catch (err) {
+        if (mounted) {
+          setState({ isWorld: false, provider: null, error: err });
+        }
       }
-      setProvider(provider);
-      const installed = await provider.isInstalled();
-      if (mounted) setIsWorld(installed);
     })();
 
     return () => {
@@ -32,5 +55,5 @@ export const useWorld = () => {
     };
   }, [providerPromise]);
 
-  return { isWorld, provider };
+  return state;
 };

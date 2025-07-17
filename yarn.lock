@@ -2346,7 +2346,7 @@
     ox "^0.1.0"
     zustand "^4.5"
 
-"@worldcoin/minikit-js@^0.12.0":
+"@worldcoin/minikit-js@^1.9.0":
   version "1.9.6"
   resolved "https://registry.yarnpkg.com/@worldcoin/minikit-js/-/minikit-js-1.9.6.tgz#c653cf00bbbb6c9fe477e81956932aa4c6ebd797"
   integrity sha512-nKPj9hQngHV0bD4/SD/XZmNAYv/zfZjptPjnuzIWouRR8AQHFpdkCPIw03QujhBG+3kUwUpsBAgYPwEk4vj2dw==
