@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.37](https://github.com/bandohq/widget/compare/v0.1.36...v0.1.37) (2025-07-17)
+
+
+### Bug Fixes
+
+* spend button blocks on quote pending ([b289193](https://github.com/bandohq/widget/commit/b2891934af35767b2572e126984f4f4e03843ac7))
+
 ### [0.1.36](https://github.com/bandohq/widget/compare/v0.1.36-beta.5...v0.1.36) (2025-07-15)
 Improve Error handling in all backend interactions and transaction flow
 
