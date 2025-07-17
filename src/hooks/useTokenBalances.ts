@@ -34,6 +34,10 @@ export const useTokenBalances = (
       }
       if (!tokens || tokensLoading || !chain || !accountAddress) return;
 
+      const usedAddress = isWorld
+        ? accountAddress
+        : accountAddress.toLowerCase();
+
       setLoading(true);
       setError(null);
 
@@ -42,7 +46,7 @@ export const useTokenBalances = (
         const config = createDynamicConfig(chain);
 
         const nativeTokenBalance = await getBalance(config, {
-          address: accountAddress as `0x${string}`,
+          address: usedAddress as `0x${string}`,
         });
 
         // Build contracts for multicall
@@ -50,7 +54,7 @@ export const useTokenBalances = (
           address: token.address,
           abi: wagmiContractAbi.abi,
           functionName: "balanceOf",
-          args: [accountAddress as `0x${string}`],
+          args: [usedAddress as `0x${string}`],
           chainId: chain.id,
         }));
 
