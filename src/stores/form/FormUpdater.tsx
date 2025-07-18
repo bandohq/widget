@@ -4,12 +4,14 @@ import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.j
 import { formDefaultValues } from "../../stores/form/createFormStore.js";
 import type { DefaultValues } from "./types.js";
 import { useFieldActions } from "./useFieldActions.js";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export const FormUpdater: React.FC<{
   reactiveFormValues: Partial<DefaultValues>;
 }> = ({ reactiveFormValues }) => {
   const { fromChain } = useWidgetConfig();
   const { account } = useAccount();
+  const { isWorld } = useWorld();
   const { isTouched, resetField, setFieldValue, setUserAndDefaultValues } =
     useFieldActions();
 
@@ -20,7 +22,9 @@ export const FormUpdater: React.FC<{
     }
 
     if (!fromChain && !isTouched("fromChain") && !isTouched("fromToken")) {
-      resetField("fromChain", { defaultValue: account.chainId });
+      resetField("fromChain", {
+        defaultValue: isWorld ? 480 : account.chainId,
+      });
       setFieldValue("fromToken", "");
       if (isTouched("fromAmount")) {
         setFieldValue("fromAmount", "");
@@ -30,6 +34,7 @@ export const FormUpdater: React.FC<{
     account.chainId,
     account.isConnected,
     fromChain,
+    isWorld,
     isTouched,
     resetField,
     setFieldValue,
@@ -39,9 +44,9 @@ export const FormUpdater: React.FC<{
   // should update userValues when defaultValues updates
   useEffect(() => {
     setUserAndDefaultValues(
-      accountForChainId(reactiveFormValues, account.chainId)
+      accountForChainId(reactiveFormValues, isWorld ? 480 : account.chainId)
     );
-  }, [account.chainId, reactiveFormValues, setUserAndDefaultValues]);
+  }, [account.chainId, reactiveFormValues, setUserAndDefaultValues, isWorld]);
 
   return null;
 };
