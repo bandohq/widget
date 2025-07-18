@@ -9,6 +9,7 @@ import type { TokenListProps } from "./types.js";
 import { useTokenSelect } from "./useTokenSelect.js";
 import { useTokenBalances } from "../../hooks/useTokenBalances.js";
 import { useTokens } from "../../hooks/useTokens.js";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export const TokenList: FC<TokenListProps> = ({
   formType,
@@ -22,6 +23,7 @@ export const TokenList: FC<TokenListProps> = ({
   );
 
   const { account } = useAccount();
+  const { isWorld, provider } = useWorld();
   const { chain: selectedChain } = useChain(account?.chainId);
 
   const { isPending: tokensLoading, isError } = useTokens(selectedChain);
@@ -30,7 +32,10 @@ export const TokenList: FC<TokenListProps> = ({
     balances,
     isLoading: balancesLoading,
     error: balancesError,
-  } = useTokenBalances(account?.address ?? "", selectedChain ?? undefined);
+  } = useTokenBalances(
+    isWorld ? provider?.user?.walletAddress : account?.address ?? "",
+    selectedChain ?? undefined
+  );
 
   const filteredTokens = useMemo(() => {
     if (!tokenSearchFilter) return balances;
