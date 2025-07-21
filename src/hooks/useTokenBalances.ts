@@ -5,7 +5,6 @@ import { ExtendedChain } from "../pages/SelectChainPage/types";
 import { createDynamicConfig } from "../utils/configWagmi";
 import { wagmiContractAbi } from "../utils/abis";
 import { useTranslation } from "react-i18next";
-import { useWorld } from "./useWorld";
 
 export const useTokenBalances = (
   accountAddress: string,
@@ -24,6 +23,7 @@ export const useTokenBalances = (
 
   useEffect(() => {
     const fetchBalances = async () => {
+      console.log("fetchBalances");
       if (tokensError) {
         const errorMessage = t("error.message.tokenLoadFailed");
         setError(errorMessage);
@@ -56,6 +56,7 @@ export const useTokenBalances = (
         // Execute multicall
         // @ts-ignore number controlled by whitelist
         const data = await multicall(config, { batchSize: 0, contracts });
+        console.log("balance data (multicall)", data);
 
         // Format and filter balances
         const formattedBalances = data.map((balanceRaw, index) => {
