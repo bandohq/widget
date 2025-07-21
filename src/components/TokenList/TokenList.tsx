@@ -24,7 +24,7 @@ export const TokenList: FC<TokenListProps> = ({
 
   const { account } = useAccount();
   const { isWorld, provider } = useWorld();
-  const { chain: selectedChain } = useChain(account?.chainId);
+  const { chain: selectedChain } = useChain(isWorld ? 480 : account?.chainId);
 
   const { isPending: tokensLoading, isError } = useTokens(selectedChain);
 
