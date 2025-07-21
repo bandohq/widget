@@ -30,7 +30,7 @@ export const ProductsPage = () => {
   const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
-  const { isWorld } = useWorld();
+  const { isWorld, provider } = useWorld();
 
   useHeader(t("header.spend"));
 
@@ -67,7 +67,7 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
-      {isWorld && <p>Worldcoin</p>}
+      {isWorld && <p>{provider?.user?.walletAddress}</p>}
       <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
