@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useFetch } from "../../hooks/useFetch";
 import Fuse from "fuse.js";
@@ -28,7 +34,6 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     selectedCountry: country,
     isCountryPending,
     error: countryError,
-    hasCountries,
   } = useCountryContext();
   const { updateProduct, updateBrand } = useProduct();
   const { buildUrl } = useWidgetConfig();
@@ -90,26 +95,29 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [buildUrl, products]);
 
-  const fuzzySearchBrands = (searchTerm: string, productType?: string) => {
-    const filteredProducts = productType
-      ? products.filter((product) => product.productType === productType)
-      : products;
+  const fuzzySearchBrands = useCallback(
+    (searchTerm: string, productType?: string) => {
+      const filteredProducts = productType
+        ? products.filter((product) => product.productType === productType)
+        : products;
 
-    const allBrands = filteredProducts.flatMap((product) => product.brands);
+      const allBrands = filteredProducts.flatMap((product) => product.brands);
 
-    if (!searchTerm.trim() && productType) {
-      setFilteredBrands(allBrands);
-      return;
-    }
+      if (!searchTerm.trim() && productType) {
+        setFilteredBrands(allBrands);
+        return;
+      }
 
-    const fuse = new Fuse(allBrands, {
-      keys: ["brandName"],
-      threshold: 0.3,
-    });
+      const fuse = new Fuse(allBrands, {
+        keys: ["brandName"],
+        threshold: 0.3,
+      });
 
-    const results = fuse.search(searchTerm);
-    setFilteredBrands(results.map((result) => result.item));
-  };
+      const results = fuse.search(searchTerm);
+      setFilteredBrands(results.map((result) => result.item));
+    },
+    [products]
+  );
 
   const value = {
     products,
