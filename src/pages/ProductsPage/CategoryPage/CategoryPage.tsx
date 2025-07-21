@@ -36,7 +36,7 @@ export const CategoryPage = () => {
         fuzzySearchBrands("", category);
       }
     }
-  }, [products, category, isLoading, fuzzySearchBrands, navigate]);
+  }, [products, category, isLoading]);
 
   const handleSelectVariant = (variant) => {
     updateProduct(variant);
