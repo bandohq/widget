@@ -48,9 +48,9 @@ export const SelectTokenButtonForProducts: React.FC<
   const { walletConfig } = useWidgetConfig();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
-  const { chain } = useChain(account?.chainId);
-  const { token } = useToken(chain, tokenAddress);
   const { isWorld } = useWorld();
+  const { chain } = useChain(isWorld ? 480 : account?.chainId);
+  const { token } = useToken(chain, tokenAddress);
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
@@ -74,7 +74,7 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const handleConnect = () => {
-    if (account.isConnected || isWorld) {
+    if (account.isConnected) {
       handleClick();
     } else if (walletConfig?.onConnect) {
       walletConfig.onConnect();
@@ -105,7 +105,11 @@ export const SelectTokenButtonForProducts: React.FC<
   return (
     <SelectTokenCard
       component="button"
-      onClick={account?.isConnected && product ? handleClick : handleConnect}
+      onClick={
+        (account?.isConnected || isWorld) && product
+          ? handleClick
+          : handleConnect
+      }
     >
       <CardContent formType={formType} compact={compact}>
         <CardTitle>{cardTitle}</CardTitle>
