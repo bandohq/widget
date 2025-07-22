@@ -14,17 +14,51 @@ import { defineChain, parseUnits } from "viem";
 import { formatTotalAmount } from "../utils/format";
 import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
+import { Tokens, tokenToDecimals } from "@worldcoin/minikit-js/*";
+import { PayCommandInput } from "@worldcoin/minikit-js/*";
+import { useWorld } from "./useWorld";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
   const { t } = useTranslation();
-  const { chain } = useChain(account?.chainId);
+  const { isWorld, provider } = useWorld();
+  const { chain } = useChain(isWorld ? 480 : account?.chainId);
   const { showNotification } = useNotificationContext();
   const { addStep, updateStep, clearStep } = useSteps();
 
   // New flow
+
+  const worldTransfer = async ({
+    reference,
+    to,
+    amount,
+    token,
+    description = "Bando Payment through World App",
+  }) => {
+    const payload: PayCommandInput = {
+      reference,
+      to,
+      tokens: [
+        {
+          symbol: Tokens[token],
+          token_amount: tokenToDecimals(amount, Tokens[token]).toString(),
+        },
+      ],
+      description,
+    };
+
+    const { finalPayload } = await provider?.commandsAsync.pay(payload);
+
+    if (finalPayload.status === "success") {
+      return finalPayload.transaction_id;
+    } else {
+      showNotification("error", t("error.title.transactionFailed"));
+      console.error("Error at worldTransfer:", finalPayload);
+      throw new Error(`Payment failed: ${finalPayload.error_code}`);
+    }
+  };
 
   const sendToken = async (transactionRequest: TransactionRequest) => {
     try {
@@ -296,6 +330,7 @@ export const useTransactionHelpers = () => {
   return {
     loading,
     signTransfer,
+    worldTransfer,
     handleServiceRequest,
   };
 };

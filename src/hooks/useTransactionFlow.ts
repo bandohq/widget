@@ -16,6 +16,8 @@ import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvide
 import { useFlags } from "launchdarkly-react-client-sdk";
 import { useTranslation } from "react-i18next";
 import { navigationRoutes } from "../utils/navigationRoutes";
+import { useWorld } from "./useWorld";
+import { ChainType } from "../pages/SelectChainPage/types";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -32,17 +34,23 @@ export const useTransactionFlow = () => {
     "requiredFields"
   );
   const [loading, setLoading] = useState(false);
+  const { isWorld, provider } = useWorld();
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { handleServiceRequest, signTransfer } = useTransactionHelpers();
+  const { handleServiceRequest, signTransfer, worldTransfer } =
+    useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { transactionFlow } = useFlags();
   const { t } = useTranslation();
 
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
+
   // Nuevo flujo
   const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
-    url: `wallets/${account?.address}/transactions/`,
+    url: `wallets/${userAddress}/transactions/`,
     method: "POST",
     queryParams: { integrator },
     headers: {
@@ -124,13 +132,23 @@ export const useTransactionFlow = () => {
 
     if (transactionFlow) {
       try {
-        const signature = await signTransfer(quote.transactionRequest);
+        let signature: string | undefined;
+        if (isWorld) {
+          signature = await worldTransfer({
+            reference: quote?.id.toString(),
+            to: quote?.transactionRequest?.to,
+            amount: quote?.transactionRequest?.value,
+            token: token?.symbol,
+          });
+        } else {
+          signature = await signTransfer(quote.transactionRequest);
+        }
         await new Promise((resolve) => setTimeout(resolve, 1000));
         mutateNew({
           ...payload,
           transactionReceipt: {
             hash: signature,
-            virtualMachineType: account?.chainType,
+            virtualMachineType: isWorld ? ChainType.EVM : account?.chainType,
           },
         });
       } catch (error) {
