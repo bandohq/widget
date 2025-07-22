@@ -14,8 +14,6 @@ import { defineChain, parseUnits } from "viem";
 import { formatTotalAmount } from "../utils/format";
 import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
-import { Tokens, tokenToDecimals } from "@worldcoin/minikit-js/*";
-import { PayCommandInput } from "@worldcoin/minikit-js/*";
 import { useWorld } from "./useWorld";
 
 export const useTransactionHelpers = () => {
@@ -37,13 +35,15 @@ export const useTransactionHelpers = () => {
     token,
     description = "Bando Payment through World App",
   }) => {
-    const payload: PayCommandInput = {
+    const totalAmount = parseFloat(amount);
+    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
+    const payload = {
       reference,
       to,
       tokens: [
         {
-          symbol: Tokens[token],
-          token_amount: tokenToDecimals(amount, Tokens[token]).toString(),
+          symbol: token,
+          token_amount: amountInUnits.toString(),
         },
       ],
       description,

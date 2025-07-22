@@ -137,7 +137,7 @@ export const useTransactionFlow = () => {
           signature = await worldTransfer({
             reference: quote?.id.toString(),
             to: quote?.transactionRequest?.to,
-            amount: quote?.transactionRequest?.value,
+            amount: quote?.totalAmount,
             token: token?.symbol,
           });
         } else {
