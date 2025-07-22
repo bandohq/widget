@@ -14,7 +14,6 @@ import { ProductList } from "../../components/ProductList/ProductList";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { RecentSpends } from "../../components/RecentSpends/RecentSpends";
 import { useFieldActions } from "../../stores/form/useFieldActions";
-import { useWorld } from "../../hooks/useWorld";
 
 export const ProductsPage = () => {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export const ProductsPage = () => {
   const { error: countryError } = useCountryContext();
   const { updateProduct } = useProduct();
   const { setFieldValue } = useFieldActions();
-  const { isWorld, provider } = useWorld();
 
   useHeader(t("header.spend"));
 
@@ -67,7 +65,6 @@ export const ProductsPage = () => {
 
   return (
     <PageContainer>
-      {isWorld && <p>{provider?.user?.walletAddress}</p>}
       <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
