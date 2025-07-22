@@ -7,6 +7,7 @@ import { useFieldValues } from "../../stores/form/useFieldValues";
 import type { BaseTransactionButtonProps } from "./types.js";
 import { AnimatedCircularProgress } from "../../pages/StatusPage/StatusPage.style";
 import { SpinnerGap } from "@phosphor-icons/react";
+import { useWorld } from "../../hooks/useWorld";
 
 export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
   onClick,
@@ -20,10 +21,11 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
   const [fromChainId] = useFieldValues("fromChain");
   const { chain } = useChain(fromChainId);
   const { palette } = useTheme();
+  const { isWorld } = useWorld();
   const { account } = useAccount({ chainType: chain?.networkType });
 
   const handleClick = async () => {
-    if (account.isConnected) {
+    if (account.isConnected || isWorld) {
       onClick?.();
     } else if (walletConfig?.onConnect) {
       walletConfig.onConnect();
@@ -40,7 +42,7 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
         </AnimatedCircularProgress>
       );
     }
-    if (account.isConnected) {
+    if (account.isConnected || isWorld) {
       if (text) {
         return text;
       }
@@ -53,7 +55,7 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
       variant="contained"
       color="primary"
       onClick={handleClick}
-      disabled={account.isConnected && disabled}
+      disabled={(account.isConnected || isWorld) && disabled}
       fullWidth
     >
       {getButtonText()}

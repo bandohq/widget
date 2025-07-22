@@ -17,6 +17,7 @@ import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
 import { useFlags } from "launchdarkly-react-client-sdk";
 import { navigationRoutes } from "../../utils/navigationRoutes";
+import { useWorld } from "../../hooks/useWorld";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -29,6 +30,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = useAccount();
+  const { isWorld } = useWorld();
   const navigate = useNavigate();
   const { showNotification, hideNotification } = useNotificationContext();
   const { userAcceptedTermsAndConditions } = useUserWallet();
@@ -80,7 +82,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
   ]);
 
   useEffect(() => {
-    if (account?.isConnected && !selectedChain?.isActive) {
+    if ((account?.isConnected || isWorld) && !selectedChain?.isActive) {
       showNotification("error", t("error.message.unavailableChain"), true);
     } else {
       hideNotification();
