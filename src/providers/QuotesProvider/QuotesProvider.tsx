@@ -143,7 +143,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       fiatCurrency,
       digitalAsset,
       sender: transactionFlow ? userAddress : undefined,
-      chainId: account?.chainId,
+      chainId: isWorld ? 480 : account?.chainId,
     });
   };
 
