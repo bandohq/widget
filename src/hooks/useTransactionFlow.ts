@@ -131,6 +131,8 @@ export const useTransactionFlow = () => {
       },
     };
 
+    console.log("payload", payload);
+
     if (transactionFlow) {
       try {
         let signature: string | undefined;
