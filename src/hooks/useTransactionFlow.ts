@@ -124,7 +124,7 @@ export const useTransactionFlow = () => {
         quote_id: quote?.id,
         quantity: 1,
         amount: parseFloat(quote?.digitalAssetAmount),
-        wallet: account?.address,
+        wallet: userAddress,
         integrator,
         has_accepted_terms: userAcceptedTermsAndConditions,
       },
