@@ -43,13 +43,11 @@ export const HorizontalSlider = ({
   const handleChipClick = (item) => {
     const productType = item.productType;
 
-    const productArray = products.find(
-      (p) => p.productType === productType
-    ).brands;
+    const product = products.find((p) => p.productType === productType);
 
-    if (!productArray) return;
+    if (!product || !product.brands) return;
 
-    const brand = productArray.find((p) => p.brandName === item.brandName);
+    const brand = product.brands.find((p) => p.brandName === item.brandName);
     if (brand) {
       updateBrand(brand);
       setOpen(true);
