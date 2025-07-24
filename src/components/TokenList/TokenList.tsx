@@ -37,10 +37,6 @@ export const TokenList: FC<TokenListProps> = ({
     selectedChain ?? undefined
   );
 
-  console.log("balances", balances);
-  console.log("isWorld", isWorld);
-  console.log("error", balancesError);
-
   const filteredTokens = useMemo(() => {
     if (!tokenSearchFilter) return balances;
 
