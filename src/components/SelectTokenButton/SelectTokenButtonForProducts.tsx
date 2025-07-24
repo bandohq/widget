@@ -17,13 +17,13 @@ import {
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
 import { useCallback, useEffect } from 'react';
 import { useAccount, useWalletMenu } from "@lifi/wallet-management";
-import { Avatar, Skeleton } from '@mui/material';
-import { CaretDown } from '@phosphor-icons/react';
-import { useQuotes } from '../../providers/QuotesProvider/QuotesProvider.js';
-import { Box } from '@mui/material';
+import { Alert, Avatar, Skeleton, Collapse } from "@mui/material";
+import { CaretDown } from "@phosphor-icons/react";
+import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
+import { Box } from "@mui/material";
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
-import { formatTotalAmount } from '../../utils/format.js';
+import { formatTotalAmount } from "../../utils/format.js";
 import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const SelectTokenButtonForProducts: React.FC<
@@ -102,56 +102,23 @@ export const SelectTokenButtonForProducts: React.FC<
   }, [quote?.totalAmount, isPurchasePossible, account?.chainId, tokenAddress]);
 
   return (
-    <SelectTokenCard
-      component="button"
-      onClick={account?.isConnected && product ? handleClick : handleConnect}
-    >
-      <CardContent formType={formType} compact={compact}>
-        <CardTitle>{cardTitle}</CardTitle>
-        {!token && !product && !quote ? (
-          <SelectTokenCardHeader
-            avatar={<AvatarBadgedSkeleton />}
-            title="0"
-            subheader="0 USD"
-            compact={compact}
-          />
-        ) : product && quotePending ? (
-          <SelectTokenCardHeader
-            avatar={
-              <>
-                <Avatar src={token.imageUrl} alt={token.symbol}>
-                  {token.symbol?.[0]}
-                </Avatar>
-                <CaretDown
-                  size={"25px"}
-                  style={{ margin: "auto", paddingLeft: 5 }}
-                />
-              </>
-            }
-            title={<Skeleton />}
-            titleTypographyProps={{
-              title: token.symbol,
-            }}
-            subheaderTypographyProps={
-              isSelected
-                ? {
-                    title: chain.name,
-                  }
-                : undefined
-            }
-            selected={isSelected}
-            compact={compact}
-          />
-        ) : (product && !quote) || !token ? (
-          <SelectTokenCardHeader
-            avatar={<AvatarBadgedDefault />}
-            title={defaultPlaceholder}
-            compact={compact}
-          />
-        ) : (
-          <SelectTokenCardHeader
-            avatar={
-              isSelected ? (
+    <>
+      <SelectTokenCard
+        component="button"
+        onClick={account?.isConnected && product ? handleClick : handleConnect}
+      >
+        <CardContent formType={formType} compact={compact}>
+          <CardTitle>{cardTitle}</CardTitle>
+          {!token && !product && !quote ? (
+            <SelectTokenCardHeader
+              avatar={<AvatarBadgedSkeleton />}
+              title="0"
+              subheader="0 USD"
+              compact={compact}
+            />
+          ) : product && quotePending ? (
+            <SelectTokenCardHeader
+              avatar={
                 <>
                   <Avatar src={token.imageUrl} alt={token.symbol}>
                     {token.symbol?.[0]}
@@ -161,39 +128,66 @@ export const SelectTokenButtonForProducts: React.FC<
                     style={{ margin: "auto", paddingLeft: 5 }}
                   />
                 </>
-              ) : (
-                <AvatarBadgedDefault />
-              )
-            }
-            title={`${formatTotalAmount(quote, token)} ${token?.symbol}`}
-            titleTypographyProps={{
-              title: token.symbol,
-            }}
-            subheaderTypographyProps={
-              isSelected
-                ? {
-                    title: chain.name,
-                  }
-                : undefined
-            }
-            selected={isSelected}
-            compact={compact}
-          />
-        )}
-      </CardContent>
-      {quoteError && !isPurchasePossible && (
-        <Box
-          sx={{
-            color: "red",
-            display: "flex",
-            justifyContent: "center",
-            padding: "5px",
-            textAlign: "right",
-          }}
-        >
+              }
+              title={<Skeleton />}
+              titleTypographyProps={{
+                title: token.symbol,
+              }}
+              subheaderTypographyProps={
+                isSelected
+                  ? {
+                      title: chain.name,
+                    }
+                  : undefined
+              }
+              selected={isSelected}
+              compact={compact}
+            />
+          ) : (product && !quote) || !token ? (
+            <SelectTokenCardHeader
+              avatar={<AvatarBadgedDefault />}
+              title={defaultPlaceholder}
+              compact={compact}
+            />
+          ) : (
+            <SelectTokenCardHeader
+              avatar={
+                isSelected ? (
+                  <>
+                    <Avatar src={token.imageUrl} alt={token.symbol}>
+                      {token.symbol?.[0]}
+                    </Avatar>
+                    <CaretDown
+                      size={"25px"}
+                      style={{ margin: "auto", paddingLeft: 5 }}
+                    />
+                  </>
+                ) : (
+                  <AvatarBadgedDefault />
+                )
+              }
+              title={`${formatTotalAmount(quote, token)} ${token?.symbol}`}
+              titleTypographyProps={{
+                title: token.symbol,
+              }}
+              subheaderTypographyProps={
+                isSelected
+                  ? {
+                      title: chain.name,
+                    }
+                  : undefined
+              }
+              selected={isSelected}
+              compact={compact}
+            />
+          )}
+        </CardContent>
+      </SelectTokenCard>
+      <Collapse in={quoteError && !isPurchasePossible} timeout={300}>
+        <Alert sx={{ marginTop: 2 }} severity="error">
           {t("warning.message.insufficientFunds")}
-        </Box>
-      )}
-    </SelectTokenCard>
+        </Alert>
+      </Collapse>
+    </>
   );
 };
