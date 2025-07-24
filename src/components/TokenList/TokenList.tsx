@@ -37,6 +37,10 @@ export const TokenList: FC<TokenListProps> = ({
     selectedChain ?? undefined
   );
 
+  console.log("balances", balances);
+  console.log("isWorld", isWorld);
+  console.log("error", balancesError);
+
   const filteredTokens = useMemo(() => {
     if (!tokenSearchFilter) return balances;
 
@@ -59,6 +63,11 @@ export const TokenList: FC<TokenListProps> = ({
     <Box ref={parentRef} style={{ height, overflow: "auto" }}>
       {!filteredTokens.length && !balancesLoading && !tokensLoading && (
         <TokenNotFound formType={formType} />
+      )}
+      {isWorld ? (
+        <p>{provider?.user?.walletAddress}</p>
+      ) : (
+        <p>{account?.address}</p>
       )}
       <VirtualizedTokenList
         account={account}
