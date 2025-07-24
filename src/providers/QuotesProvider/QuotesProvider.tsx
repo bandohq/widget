@@ -83,6 +83,11 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   } = useFetch({
     url: "quotes/",
     method: "POST",
+    mutationOptions: {
+      onSuccess: (data) => {
+        console.log("Quote data:", JSON.stringify(data, null, 2));
+      },
+    },
   });
 
   useEffect(() => {
