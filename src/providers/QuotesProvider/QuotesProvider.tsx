@@ -91,6 +91,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (fetchError) {
+      setQuote(null);
       if (fetchError.message === "INSUFFICIENT_BALANCE") {
         setError({
           error: "INSUFFICIENT_BALANCE",
