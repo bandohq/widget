@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { navigationRoutes } from "../utils/navigationRoutes";
 import { useWorld } from "./useWorld";
 import { ChainType } from "../pages/SelectChainPage/types";
+import { parseERC20TransferData } from "../utils/format";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -135,18 +136,20 @@ export const useTransactionFlow = () => {
       try {
         let signature: string | undefined;
         if (isWorld) {
-          console.log(
-            "worldTransfer payload",
-            JSON.stringify({
-              reference: quote?.id.toString(),
-              to: quote?.transactionRequest?.to,
-              amount: quote?.totalAmount,
-              token: token?.symbol,
-            })
+          const destinationAddress = parseERC20TransferData(
+            quote?.transactionRequest?.data
           );
+
+          if (!destinationAddress) {
+            console.error("Error parsing destination address from ERC20 data");
+            throw new Error(
+              "Error parsing destination address from ERC20 data"
+            );
+          }
+
           signature = await worldTransfer({
             reference: quote?.id.toString(),
-            to: quote?.transactionRequest?.to,
+            to: destinationAddress,
             amount: quote?.totalAmount,
             token: token?.symbol,
             description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
