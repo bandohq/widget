@@ -170,7 +170,7 @@ export const parseERC20TransferData = (data: string): string | null => {
 
     // convert hex to Ethereum address (remove padding of zeros)
     const destinationAddress = '0x' + destinationAddressHex.slice(24); // remove the 12 bytes of padding (24 characters)
-  
+    console.log("destinationAddress", destinationAddress);
     return destinationAddress;
   } catch (error) {
     console.error('Error parsing ERC20 transfer data:', error);
