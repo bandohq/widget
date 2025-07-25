@@ -131,17 +131,25 @@ export const useTransactionFlow = () => {
       },
     };
 
-    console.log("payload", payload);
-
     if (transactionFlow) {
       try {
         let signature: string | undefined;
         if (isWorld) {
+          console.log(
+            "worldTransfer payload",
+            JSON.stringify({
+              reference: quote?.id.toString(),
+              to: quote?.transactionRequest?.to,
+              amount: quote?.totalAmount,
+              token: token?.symbol,
+            })
+          );
           signature = await worldTransfer({
             reference: quote?.id.toString(),
             to: quote?.transactionRequest?.to,
             amount: quote?.totalAmount,
             token: token?.symbol,
+            description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
           });
         } else {
           signature = await signTransfer(quote.transactionRequest);

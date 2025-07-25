@@ -63,18 +63,6 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFieldsProps
     );
 
-    console.log(
-      "disabled const",
-      JSON.stringify({
-        referenceValid,
-        requiredFieldsValid,
-        isPurchasePossible,
-        selectedChain: selectedChain?.isActive,
-        userAcceptedTermsAndConditions,
-        quoteError: !!quoteError,
-      })
-    );
-
     return (
       !referenceValid ||
       !requiredFieldsValid ||
