@@ -52,10 +52,12 @@ export const useTransactionHelpers = () => {
     const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
     if (finalPayload.status === "success") {
+      console.log("finalPayload success", JSON.stringify(finalPayload));
       return finalPayload.transaction_id;
     } else {
+      console.log("finalPayload error", JSON.stringify(finalPayload));
+      console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
       showNotification("error", t("error.title.transactionFailed"));
-      console.error("Error at worldTransfer:", finalPayload);
       throw new Error(`Payment failed: ${finalPayload.error_code}`);
     }
   };
