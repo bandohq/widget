@@ -91,7 +91,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     userAcceptedTermsAndConditions,
     isPurchasePossible,
     requiredFieldsProps,
-    selectedChain,
+    selectedChain?.isActive,
     quoteError,
     isWorld,
   ]);
