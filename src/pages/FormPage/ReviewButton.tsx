@@ -63,13 +63,11 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFieldsProps
     );
 
-    const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
-
     return (
       !referenceValid ||
       !requiredFieldsValid ||
       !isPurchasePossible ||
-      !isChainActive ||
+      !selectedChain.isActive ||
       !userAcceptedTermsAndConditions ||
       !!quoteError
     );
@@ -85,6 +83,15 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     quoteError,
     isWorld,
   ]);
+
+  console.log(
+    "disable spend button",
+    JSON.stringify({
+      disabled,
+      transactionLoading,
+      tokenAddress,
+    })
+  );
 
   useEffect(() => {
     const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
