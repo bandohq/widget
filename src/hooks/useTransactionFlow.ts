@@ -141,11 +141,20 @@ export const useTransactionFlow = () => {
           );
 
           if (!destinationAddress) {
-            console.error("Error parsing destination address from ERC20 data");
             throw new Error(
               "Error parsing destination address from ERC20 data"
             );
           }
+
+          console.log(
+            "worldTransfer payload",
+            JSON.stringify({
+              reference: quote?.id.toString(),
+              to: destinationAddress,
+              amount: quote?.totalAmount,
+              token: token?.symbol,
+            })
+          );
 
           signature = await worldTransfer({
             reference: quote?.id.toString(),
