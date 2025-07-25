@@ -85,7 +85,6 @@ export const useTokenBalances = (
 
         setBalances(nonZeroBalances);
       } catch (err) {
-        console.log("balance error", err);
         const errorMessage = t("error.message.balanceLoadFailed");
         setError(errorMessage);
         setBalances([]);

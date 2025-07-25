@@ -146,16 +146,6 @@ export const useTransactionFlow = () => {
             );
           }
 
-          console.log(
-            "worldTransfer payload",
-            JSON.stringify({
-              reference: quote?.id.toString(),
-              to: destinationAddress,
-              amount: quote?.totalAmount,
-              token: token?.symbol,
-            })
-          );
-
           signature = await worldTransfer({
             reference: quote?.id.toString(),
             to: destinationAddress,
@@ -163,6 +153,17 @@ export const useTransactionFlow = () => {
             token: token?.symbol,
             description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
           });
+
+          console.log(
+            "worldTransfer hash",
+            JSON.stringify({
+              reference: quote?.id.toString(),
+              to: destinationAddress,
+              amount: quote?.totalAmount,
+              token: token?.symbol,
+              hash: signature,
+            })
+          );
         } else {
           signature = await signTransfer(quote.transactionRequest);
         }

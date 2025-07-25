@@ -60,11 +60,6 @@ export const TokenList: FC<TokenListProps> = ({
       {!filteredTokens.length && !balancesLoading && !tokensLoading && (
         <TokenNotFound formType={formType} />
       )}
-      {isWorld ? (
-        <p>{provider?.user?.walletAddress}</p>
-      ) : (
-        <p>{account?.address}</p>
-      )}
       <VirtualizedTokenList
         account={account}
         tokens={filteredTokens}
