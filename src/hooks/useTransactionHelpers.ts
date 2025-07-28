@@ -15,6 +15,7 @@ import { formatTotalAmount } from "../utils/format";
 import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
 import { useWorld } from "./useWorld";
+import { getTxHashByReference } from "../utils/getTxHashByReference";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
@@ -52,8 +53,9 @@ export const useTransactionHelpers = () => {
     const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
     if (finalPayload.status === "success") {
-      console.log("finalPayload success", JSON.stringify(finalPayload));
-      return finalPayload.transaction_id;
+      const txHash = await getTxHashByReference(reference, chain?.rpcUrl);
+      console.log("txHash", txHash);
+      return txHash;
     } else {
       console.log("finalPayload error", JSON.stringify(finalPayload));
       console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
