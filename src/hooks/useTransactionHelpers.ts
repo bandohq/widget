@@ -53,8 +53,8 @@ export const useTransactionHelpers = () => {
     const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
     if (finalPayload.status === "success") {
+      await new Promise((resolve) => setTimeout(resolve, 800));
       const txHash = await getTxHashByReference(reference, chain?.rpcUrl);
-      console.log("txHash", txHash);
       return txHash;
     } else {
       console.log("finalPayload error", JSON.stringify(finalPayload));
