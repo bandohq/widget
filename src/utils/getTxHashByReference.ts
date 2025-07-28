@@ -29,7 +29,7 @@ export async function getTxHashByReference(
     const logs = (await web3.eth.getPastLogs({
       fromBlock,
       toBlock: "latest",
-      topics: [sig, recipientTopic, refHash, "true"], // filter by recipient + reference + success tx
+      topics: [sig, recipientTopic, refHash], // filter by recipient + reference
     })) as Log[];
 
     return logs[0]?.transactionHash?.toString() ?? null;
