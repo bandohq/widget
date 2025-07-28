@@ -1,82 +1,42 @@
-import Web3 from "web3";
+import { Web3 } from "web3";
+import type { Log } from "web3-types";
 
-const LOOKBACK_BLOCKS = 3000;
-const MAX_RETRIES = 3;
-const INITIAL_DELAY = 1000;
-const MAX_DELAY = 10000;
-
-/** Look for the first TransferReference with your reference and return the tx hash */
 export async function getTxHashByReference(
-  reference,
-  rpc,
-  retryCount = 0
+  reference: string,
+  to: string,
+  rpc: string,
+  startBlock?: number
 ): Promise<string | null> {
   const web3 = new Web3(rpc);
-  const latest = await web3.eth.getBlockNumber();
 
-  const eventSig = web3.utils.sha3(
-    "TransferReference(address,address,uint256,address,string,bool)"
-  );
-  const refHash = web3.utils.keccak256(reference);
+  // window short if no startBlock is passed
+  const fromBlock =
+    startBlock ?? Math.max(0, Number(await web3.eth.getBlockNumber()) - 500);
 
-  try {
-    const [log] = await web3.eth.getPastLogs({
-      fromBlock: Math.max(0, Number(latest) - LOOKBACK_BLOCKS),
+  const sigString = web3.utils
+    .sha3("TransferReference(address,address,uint256,address,string,bool)")!
+    .toString();
+  const sigBytes32 = web3.utils
+    .sha3("TransferReference(address,address,uint256,address,bytes32,bool)")!
+    .toString();
+  const refHash = web3.utils.keccak256(reference)!.toString();
+
+  // topic of the recipient: address padded to 32 bytes
+  const recipientTopic =
+    "0x" + "0".repeat(24) + to.toLowerCase().replace(/^0x/, "");
+
+  const query = async (sig: string) => {
+    const logs = (await web3.eth.getPastLogs({
+      fromBlock,
       toBlock: "latest",
-      topics: [eventSig, null, refHash],
-    });
+      topics: [sig, recipientTopic, refHash, "true"], // filter by recipient + reference + success tx
+    })) as Log[];
 
-    const txHash =
-      typeof log === "object" ? log?.transactionHash ?? null : null;
+    return logs[0]?.transactionHash?.toString() ?? null;
+  };
 
-    if (txHash) {
-      return txHash;
-    }
+  console.log("tx hash", await query(sigString));
 
-    if (retryCount < MAX_RETRIES) {
-      const delay = Math.min(
-        INITIAL_DELAY * Math.pow(2, retryCount),
-        MAX_DELAY
-      );
-
-      console.log(
-        `No se encontró la transacción para la referencia ${reference}. Reintentando en ${delay}ms... (intento ${
-          retryCount + 1
-        }/${MAX_RETRIES})`
-      );
-
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      return getTxHashByReference(reference, rpc, retryCount + 1);
-    }
-
-    // If we have no more attempts, return null
-    console.log(
-      `No se pudo encontrar la transacción para la referencia ${reference} después de ${MAX_RETRIES} intentos.`
-    );
-    return null;
-  } catch (error) {
-    if (retryCount < MAX_RETRIES) {
-      const delay = Math.min(
-        INITIAL_DELAY * Math.pow(2, retryCount),
-        MAX_DELAY
-      );
-
-      console.log(
-        `Error al buscar la transacción para la referencia ${reference}: ${
-          error.message
-        }. Reintentando en ${delay}ms... (intento ${
-          retryCount + 1
-        }/${MAX_RETRIES})`
-      );
-
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      return getTxHashByReference(reference, rpc, retryCount + 1);
-    }
-
-    console.error(
-      `Error final al buscar la transacción para la referencia ${reference}:`,
-      error
-    );
-    throw error;
-  }
+  // try both signatures (string/bytes32 for reference)
+  return (await query(sigString)) ?? (await query(sigBytes32));
 }

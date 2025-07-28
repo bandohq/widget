@@ -16,6 +16,7 @@ import { checkAllowance } from "../utils/checkAllowance";
 import { validateReference } from "../utils/validateReference";
 import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
+import Web3 from "web3";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,9 @@ export const useTransactionHelpers = () => {
     token,
     description = "Bando Payment through World App",
   }) => {
+    const rpc = chain?.rpcUrl;
+    const web3 = new Web3(rpc);
+    const startBlock = Number(await web3.eth.getBlockNumber());
     const totalAmount = parseFloat(amount);
     const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
     const payload = {
@@ -50,17 +54,29 @@ export const useTransactionHelpers = () => {
       description,
     };
 
-    const { finalPayload } = await provider?.commandsAsync.pay(payload);
+    try {
+      const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
-    if (finalPayload.status === "success") {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      const txHash = await getTxHashByReference(reference, chain?.rpcUrl);
-      return txHash;
-    } else {
-      console.log("finalPayload error", JSON.stringify(finalPayload));
-      console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
-      showNotification("error", t("error.title.transactionFailed"));
-      throw new Error(`Payment failed: ${finalPayload.error_code}`);
+      if (finalPayload.status === "success") {
+        await new Promise((r) => setTimeout(r, 1500));
+
+        const txHash = await getTxHashByReference(
+          reference,
+          to,
+          chain?.rpcUrl,
+          startBlock
+        );
+        console.log("tx hash outside", txHash);
+        return txHash;
+      } else {
+        console.log("finalPayload error", JSON.stringify(finalPayload));
+        console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
+        showNotification("error", t("error.title.transactionFailed"));
+        throw new Error(`Payment failed: ${finalPayload.error_code}`);
+      }
+    } catch (error) {
+      console.error("Error at worldTransfer:", error);
+      throw error;
     }
   };
 
