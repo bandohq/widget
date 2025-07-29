@@ -54,6 +54,8 @@ export const useTransactionHelpers = () => {
       description,
     };
 
+    console.log("world payload", JSON.stringify(payload));
+
     try {
       const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
