@@ -59,6 +59,7 @@ export const useTransactionFlow = () => {
     },
     mutationOptions: {
       onSuccess: async ({ transactionId }) => {
+        console.log("success tx on backend", transactionId);
         setLoading(false);
         if (transactionId) {
           navigate(`/status/${transactionId}`);
@@ -67,7 +68,7 @@ export const useTransactionFlow = () => {
         }
       },
       onError: (error) => {
-        console.log("New flow error:", error);
+        console.log("New flow error:", JSON.stringify(error));
         console.error("New flow error:", error);
         setLoading(false);
         navigate(`${navigationRoutes.error}?error=true`);
@@ -168,6 +169,10 @@ export const useTransactionFlow = () => {
           signature = await signTransfer(quote.transactionRequest);
         }
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(
+          "call to backend with payload",
+          JSON.stringify({ payload, signature })
+        );
         mutateNew({
           ...payload,
           transactionReceipt: {

@@ -35,8 +35,6 @@ export async function getTxHashByReference(
     return logs[0]?.transactionHash?.toString() ?? null;
   };
 
-  console.log("tx hash", await query(sigString));
-
   // try both signatures (string/bytes32 for reference)
   return (await query(sigString)) ?? (await query(sigBytes32));
 }
