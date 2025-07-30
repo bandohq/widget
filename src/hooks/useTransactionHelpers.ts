@@ -18,7 +18,6 @@ import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
 import Web3 from "web3";
 
-
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
   const config = useConfig();
@@ -41,24 +40,28 @@ export const useTransactionHelpers = () => {
     const rpc = chain?.rpcUrl;
     const web3 = new Web3(rpc);
     const startBlock = Number(await web3.eth.getBlockNumber());
-    const amountInUnits = parseUnits(amount, token?.decimals);
-    console.log("pay payload", {
-      reference,
-      to,
-      tokens: [
-        {
-          symbol: token?.symbol,
-          token_amount: amountInUnits.toString(),
+    const totalAmount = parseFloat(amount);
+    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
+    console.log(
+      "world pay payload",
+      JSON.stringify({
+        reference,
+        to,
+        tokens: [
+          {
+            symbol: token,
+            token_amount: amountInUnits.toString(),
+          },
+        ],
+        description,
+        internal: {
+          amount: amountInUnits.toString(),
+          token: token,
+          decimals: token?.decimals,
         },
-      ],
-      description,
-      internal: {
-        amount: amount,
-        token: token?.symbol,
-        decimals: token?.decimals,
-      },
-    });
-    
+      })
+    );
+
     const payload = {
       reference,
       to,
