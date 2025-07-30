@@ -152,7 +152,7 @@ export const useTransactionFlow = () => {
             reference: quote?.id.toString(),
             to: destinationAddress,
             amount: quote?.totalAmount,
-            token: token?.symbol,
+            token: token,
             description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
           });
 

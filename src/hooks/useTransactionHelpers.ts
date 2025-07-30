@@ -17,7 +17,13 @@ import { validateReference } from "../utils/validateReference";
 import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
 import Web3 from "web3";
-import { getTokenToDecimals } from "../utils/tokenUtils";
+import {
+  MiniKit,
+  tokenToDecimals,
+  Tokens,
+  PayCommandInput,
+} from "@worldcoin/minikit-js";
+
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
@@ -41,18 +47,24 @@ export const useTransactionHelpers = () => {
     const rpc = chain?.rpcUrl;
     const web3 = new Web3(rpc);
     const startBlock = Number(await web3.eth.getBlockNumber());
-
-    // Get minikit functions dynamically
-    const tokenToDecimalsFn = await getTokenToDecimals();
-
-    if (!tokenToDecimalsFn) {
-      throw new Error(
-        "World App functionality not available - minikit-js not found"
-      );
-    }
-
-    const amountInUnits = tokenToDecimalsFn(amount, token?.decimals);
-    console.log("amount sent", amountInUnits.toString());
+    const amountInUnits = parseUnits(amount, token?.decimals);
+    console.log("pay payload", {
+      reference,
+      to,
+      tokens: [
+        {
+          symbol: token?.symbol,
+          token_amount: amountInUnits.toString(),
+        },
+      ],
+      description,
+      internal: {
+        amount: amount,
+        token: token?.symbol,
+        decimals: token?.decimals,
+      },
+    });
+    
     const payload = {
       reference,
       to,
