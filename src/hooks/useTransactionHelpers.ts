@@ -17,6 +17,7 @@ import { validateReference } from "../utils/validateReference";
 import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
 import Web3 from "web3";
+import { getTokenToDecimals } from "../utils/tokenUtils";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
@@ -40,8 +41,18 @@ export const useTransactionHelpers = () => {
     const rpc = chain?.rpcUrl;
     const web3 = new Web3(rpc);
     const startBlock = Number(await web3.eth.getBlockNumber());
-    const totalAmount = parseFloat(amount);
-    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
+
+    // Get minikit functions dynamically
+    const tokenToDecimalsFn = await getTokenToDecimals();
+
+    if (!tokenToDecimalsFn) {
+      throw new Error(
+        "World App functionality not available - minikit-js not found"
+      );
+    }
+
+    const amountInUnits = tokenToDecimalsFn(amount, token?.decimals);
+    console.log("amount sent", amountInUnits.toString());
     const payload = {
       reference,
       to,
