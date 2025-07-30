@@ -17,12 +17,6 @@ import { validateReference } from "../utils/validateReference";
 import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
 import Web3 from "web3";
-import {
-  MiniKit,
-  tokenToDecimals,
-  Tokens,
-  PayCommandInput,
-} from "@worldcoin/minikit-js";
 
 
 export const useTransactionHelpers = () => {
