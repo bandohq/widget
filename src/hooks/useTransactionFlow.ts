@@ -19,6 +19,7 @@ import { navigationRoutes } from "../utils/navigationRoutes";
 import { useWorld } from "./useWorld";
 import { ChainType } from "../pages/SelectChainPage/types";
 import { parseERC20TransferData } from "../utils/format";
+import { waitForReceipt } from "../utils/getTxHashByReference";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -168,11 +169,21 @@ export const useTransactionFlow = () => {
         } else {
           signature = await signTransfer(quote.transactionRequest);
         }
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const receipt = await waitForReceipt({
+          rpc: chain?.rpcUrl,
+          txHash: signature,
+          confirmations: 1,
+        });
+        console.log("receipt", JSON.stringify(receipt));
         console.log(
           "call to backend with payload",
           JSON.stringify({ payload, signature })
         );
+
+        if (!receipt) {
+          throw new Error("Transaction receipt not found");
+        }
+
         mutateNew({
           ...payload,
           transactionReceipt: {

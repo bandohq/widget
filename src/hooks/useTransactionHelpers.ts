@@ -54,8 +54,6 @@ export const useTransactionHelpers = () => {
       description,
     };
 
-    console.log("world payload", JSON.stringify(payload));
-
     try {
       const { finalPayload } = await provider?.commandsAsync.pay(payload);
 
@@ -68,7 +66,6 @@ export const useTransactionHelpers = () => {
           chain?.rpcUrl,
           startBlock
         );
-        console.log("tx hash outside", txHash);
         return txHash;
       } else {
         console.log("finalPayload error", JSON.stringify(finalPayload));
@@ -77,8 +74,7 @@ export const useTransactionHelpers = () => {
         throw new Error(`Payment failed: ${finalPayload.error_code}`);
       }
     } catch (error) {
-      console.error("Error at worldTransfer:", error);
-      throw error;
+      throw new Error("Error at worldTransfer", { cause: error });
     }
   };
 

@@ -1,5 +1,13 @@
 import { Web3 } from "web3";
-import type { Log } from "web3-types";
+import type { Log, TransactionReceipt } from "web3-types";
+
+type WaitForReceiptOpts = {
+  rpc: string;
+  txHash: string;
+  confirmations?: number;
+  timeoutMs?: number;
+  pollMs?: number;
+};
 
 export async function getTxHashByReference(
   reference: string,
@@ -37,4 +45,41 @@ export async function getTxHashByReference(
 
   // try both signatures (string/bytes32 for reference)
   return (await query(sigString)) ?? (await query(sigBytes32));
+}
+
+export async function waitForReceipt({
+  rpc,
+  txHash,
+  confirmations = 1,
+  timeoutMs = 60_000,
+  pollMs = 1_500,
+}: WaitForReceiptOpts): Promise<boolean> {
+  const web3 = new Web3(rpc);
+  const start = Date.now();
+
+  let receipt: TransactionReceipt | null = null;
+
+  while (Date.now() - start < timeoutMs) {
+    try {
+      receipt = await web3.eth.getTransactionReceipt(txHash);
+    } catch (e: any) {
+      // Some public RPCs may return 409/429 in bursts; wait and retry
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+
+    if (receipt && receipt.blockNumber != null) {
+      if (confirmations <= 1) {
+        return Boolean(receipt.status);
+      }
+      // Wait for additional confirmations
+      const current = Number(await web3.eth.getBlockNumber());
+      if (current - Number(receipt.blockNumber) + 1 >= confirmations) {
+        return Boolean(receipt.status);
+      }
+    }
+
+    await new Promise((r) => setTimeout(r, pollMs));
+  }
+
+  throw new Error("Timeout waiting for transaction receipt");
 }
