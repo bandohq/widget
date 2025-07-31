@@ -40,8 +40,6 @@ export const useTransactionHelpers = () => {
     const rpc = chain?.rpcUrl;
     const web3 = new Web3(rpc);
     const startBlock = Number(await web3.eth.getBlockNumber());
-    const totalAmount = parseFloat(amount);
-    const amountInUnits = parseUnits(totalAmount.toString(), token?.decimals);
     console.log(
       "world pay payload",
       JSON.stringify({
@@ -50,12 +48,12 @@ export const useTransactionHelpers = () => {
         tokens: [
           {
             symbol: token?.symbol,
-            token_amount: amountInUnits.toString(),
+            token_amount: amount,
           },
         ],
         description,
         internal: {
-          amount: amountInUnits.toString(),
+          amount: amount,
           token: token,
           decimals: token?.decimals,
         },
@@ -68,7 +66,7 @@ export const useTransactionHelpers = () => {
       tokens: [
         {
           symbol: token?.symbol,
-          token_amount: amountInUnits.toString(),
+          token_amount: amount,
         },
       ],
       description,

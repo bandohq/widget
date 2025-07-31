@@ -172,8 +172,8 @@ export const parseERC20TransferData = (data: string): { destinationAddress: stri
     // the amount is in the next 32 bytes (64 characters hex)
     const amountHex = dataWithoutPrefix.slice(64, 128);
 
-    // convert hex to string (keeping the raw hex value as string)
-    const amount = "0x" + amountHex;
+    // convert hex to bigint and then to string
+    const amount = BigInt("0x" + amountHex).toString();
 
     return { destinationAddress, amount };
   } catch (error) {
