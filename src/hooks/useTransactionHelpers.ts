@@ -84,6 +84,19 @@ export const useTransactionHelpers = () => {
           chain?.rpcUrl,
           startBlock
         );
+        
+        if (!txHash) {
+          console.log("⚠️ it didn't find the tx hash, retrying...");
+          await new Promise((r) => setTimeout(r, 5000));
+          const retryTxHash = await getTxHashByReference(
+            reference,
+            to,
+            chain?.rpcUrl,
+            startBlock
+          );
+          return retryTxHash;
+        }
+        
         return txHash;
       } else {
         console.log("finalPayload error", JSON.stringify(finalPayload));

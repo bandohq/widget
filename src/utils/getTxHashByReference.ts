@@ -17,9 +17,9 @@ export async function getTxHashByReference(
 ): Promise<string | null> {
   const web3 = new Web3(rpc);
 
-  // window short if no startBlock is passed
+  // window if no startBlock is passed
   const fromBlock =
-    startBlock ?? Math.max(0, Number(await web3.eth.getBlockNumber()) - 500);
+    startBlock ?? Math.max(0, Number(await web3.eth.getBlockNumber()) - 2000);
 
   const sigString = web3.utils
     .sha3("TransferReference(address,address,uint256,address,string,bool)")!
