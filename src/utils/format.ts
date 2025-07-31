@@ -151,8 +151,8 @@ export function convertToSubscriptFormat(
   return `${value > 0 ? "" : "-"}0.0${subscript}${fractionalPart}`;
 }
 
-// function to parse the data of an ERC20 transfer and extract the destination address
-export const parseERC20TransferData = (data: string): string | null => {
+// function to parse the data of an ERC20 transfer and extract the destination address and amount
+export const parseERC20TransferData = (data: string): { destinationAddress: string; amount: string } | null => {
   try {
     // check if the data starts with the function signature of an ERC20 transfer
     // Function signature: 0xa9059cbb (transfer)
@@ -168,7 +168,14 @@ export const parseERC20TransferData = (data: string): string | null => {
 
     // convert hex to Ethereum address (remove padding of zeros)
     const destinationAddress = "0x" + destinationAddressHex.slice(24); // remove the 12 bytes of padding (24 characters)
-    return destinationAddress;
+
+    // the amount is in the next 32 bytes (64 characters hex)
+    const amountHex = dataWithoutPrefix.slice(64, 128);
+
+    // convert hex to string (keeping the raw hex value as string)
+    const amount = "0x" + amountHex;
+
+    return { destinationAddress, amount };
   } catch (error) {
     console.error("Error parsing ERC20 transfer data:", error);
     return null;

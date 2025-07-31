@@ -138,11 +138,11 @@ export const useTransactionFlow = () => {
       try {
         let signature: string | undefined;
         if (isWorld) {
-          const destinationAddress = parseERC20TransferData(
+          const { destinationAddress, amount } = parseERC20TransferData(
             quote?.transactionRequest?.data
           );
 
-          if (!destinationAddress) {
+          if (!destinationAddress || !amount) {
             throw new Error(
               "Error parsing destination address from ERC20 data"
             );
@@ -151,7 +151,7 @@ export const useTransactionFlow = () => {
           signature = await worldTransfer({
             reference: quote?.id.toString(),
             to: destinationAddress,
-            amount: quote?.totalAmount,
+            amount: amount,
             token: token,
             description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
           });
