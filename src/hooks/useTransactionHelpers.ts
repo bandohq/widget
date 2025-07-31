@@ -49,7 +49,7 @@ export const useTransactionHelpers = () => {
         to,
         tokens: [
           {
-            symbol: token,
+            symbol: token?.symbol,
             token_amount: amountInUnits.toString(),
           },
         ],
@@ -67,7 +67,7 @@ export const useTransactionHelpers = () => {
       to,
       tokens: [
         {
-          symbol: token,
+          symbol: token?.symbol,
           token_amount: amountInUnits.toString(),
         },
       ],

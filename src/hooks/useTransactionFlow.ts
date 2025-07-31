@@ -155,17 +155,6 @@ export const useTransactionFlow = () => {
             token: token,
             description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
           });
-
-          console.log(
-            "worldTransfer hash",
-            JSON.stringify({
-              reference: quote?.id.toString(),
-              to: destinationAddress,
-              amount: quote?.totalAmount,
-              token: token?.symbol,
-              hash: signature,
-            })
-          );
         } else {
           signature = await signTransfer(quote.transactionRequest);
         }
@@ -174,7 +163,6 @@ export const useTransactionFlow = () => {
           txHash: signature,
           confirmations: 1,
         });
-        console.log("receipt", JSON.stringify(receipt));
         console.log(
           "call to backend with payload",
           JSON.stringify({ payload, signature })
