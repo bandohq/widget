@@ -158,10 +158,13 @@ export const useTransactionFlow = () => {
         } else {
           signature = await signTransfer(quote.transactionRequest);
         }
+
+        console.log("tx hash", signature);
         const receipt = await waitForReceipt({
           rpc: chain?.rpcUrl,
           txHash: signature,
           confirmations: 1,
+          timeoutMs: 120000,
         });
         console.log(
           "call to backend with payload",
