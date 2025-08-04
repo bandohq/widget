@@ -17,9 +17,9 @@ import { useFlags } from "launchdarkly-react-client-sdk";
 import { useTranslation } from "react-i18next";
 import { navigationRoutes } from "../utils/navigationRoutes";
 import { useWorld } from "./useWorld";
-import { ChainType } from "../pages/SelectChainPage/types";
 import { parseERC20TransferData } from "../utils/format";
 import { waitForReceipt } from "../utils/getTxHashByReference";
+import { ChainType } from "../pages/SelectChainPage/types";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export const useTransactionFlow = () => {
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { handleServiceRequest, signTransfer, worldTransfer } =
+  const { signTransfer, worldTransfer, handleServiceRequest } =
     useTransactionHelpers();
   const { showNotification } = useNotificationContext();
   const { transactionFlow } = useFlags();
@@ -50,7 +50,7 @@ export const useTransactionFlow = () => {
     ? provider?.user?.walletAddress
     : account?.address;
 
-  // Nuevo flujo
+  // New flow
   const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
     url: `wallets/${userAddress}/transactions/`,
     method: "POST",
@@ -60,7 +60,6 @@ export const useTransactionFlow = () => {
     },
     mutationOptions: {
       onSuccess: async ({ transactionId }) => {
-        console.log("success tx on backend", transactionId);
         setLoading(false);
         if (transactionId) {
           navigate(`/status/${transactionId}`);
@@ -69,7 +68,6 @@ export const useTransactionFlow = () => {
         }
       },
       onError: (error) => {
-        console.log("New flow error:", JSON.stringify(error));
         console.error("New flow error:", error);
         setLoading(false);
         navigate(`${navigationRoutes.error}?error=true`);
@@ -77,7 +75,7 @@ export const useTransactionFlow = () => {
     },
   });
 
-  // Flujo viejo
+  // Old flow
   const { mutate: mutateOld, isPending: isPendingOld } = useFetch({
     url: "references/",
     method: "POST",
@@ -116,27 +114,74 @@ export const useTransactionFlow = () => {
     },
   });
 
-  const handleTransaction = useCallback(async () => {
-    setLoading(true);
-    const payload = {
+  const processTransactionWithReceipt = useCallback(
+    async (signature: string) => {
+      try {
+        const receipt = await waitForReceipt({
+          rpc: chain?.rpcUrl,
+          txHash: signature,
+          confirmations: 1,
+          timeoutMs: 120000,
+        });
+
+        if (!receipt) {
+          throw new Error("Transaction receipt not found");
+        }
+
+        const payload = {
+          reference,
+          requiredFields,
+          transactionIntent: {
+            sku: product?.sku,
+            chain: chain?.key,
+            token: quote?.digitalAsset,
+            quote_id: quote?.id,
+            quantity: 1,
+            amount: parseFloat(quote?.digitalAssetAmount),
+            wallet: userAddress,
+            integrator,
+            has_accepted_terms: userAcceptedTermsAndConditions,
+          },
+          transactionReceipt: {
+            hash: signature,
+            virtualMachineType: isWorld ? ChainType.EVM : account?.chainType,
+          },
+        };
+
+        mutateNew(payload);
+      } catch (error) {
+        console.error("Error processing transaction:", error);
+        showNotification("error", "Error processing transaction");
+        navigate(`${navigationRoutes.error}?error=true`);
+      }
+    },
+    [
+      chain?.rpcUrl,
       reference,
       requiredFields,
-      transactionIntent: {
-        sku: product?.sku,
-        chain: chain?.key,
-        token: quote?.digitalAsset,
-        quote_id: quote?.id,
-        quantity: 1,
-        amount: parseFloat(quote?.digitalAssetAmount),
-        wallet: userAddress,
-        integrator,
-        has_accepted_terms: userAcceptedTermsAndConditions,
-      },
-    };
+      product?.sku,
+      chain?.key,
+      quote?.digitalAsset,
+      quote?.id,
+      quote?.digitalAssetAmount,
+      userAddress,
+      integrator,
+      userAcceptedTermsAndConditions,
+      isWorld,
+      account?.chainType,
+      mutateNew,
+      showNotification,
+      navigate,
+    ]
+  );
+
+  const handleTransaction = useCallback(async () => {
+    setLoading(true);
 
     if (transactionFlow) {
       try {
         let signature: string | undefined;
+
         if (isWorld) {
           const { destinationAddress, amount } = parseERC20TransferData(
             quote?.transactionRequest?.data
@@ -159,40 +204,43 @@ export const useTransactionFlow = () => {
           signature = await signTransfer(quote.transactionRequest);
         }
 
-        console.log("tx hash", signature);
-        const receipt = await waitForReceipt({
-          rpc: chain?.rpcUrl,
-          txHash: signature,
-          confirmations: 1,
-          timeoutMs: 120000,
-        });
-        console.log(
-          "call to backend with payload",
-          JSON.stringify({ payload, signature })
-        );
-
-        if (!receipt) {
-          throw new Error("Transaction receipt not found");
-        }
-
-        mutateNew({
-          ...payload,
-          transactionReceipt: {
-            hash: signature,
-            virtualMachineType: isWorld ? ChainType.EVM : account?.chainType,
+        // Navigate to SuccessView with signature and processTransactionWithReceipt
+        navigate(`/status/pending`, {
+          state: {
+            signature,
+            processTransactionWithReceipt,
+            isPendingNew,
           },
         });
       } catch (error) {
         console.error("Error signing transaction:", error);
+        setLoading(false);
+        navigate(`${navigationRoutes.error}?error=true`);
       }
     } else {
+      // Old flow
+      const payload = {
+        reference,
+        requiredFields,
+        transactionIntent: {
+          sku: product?.sku,
+          chain: chain?.key,
+          token: quote?.digitalAsset,
+          quote_id: quote?.id,
+          quantity: 1,
+          amount: parseFloat(quote?.digitalAssetAmount),
+          wallet: userAddress,
+          integrator,
+          has_accepted_terms: userAcceptedTermsAndConditions,
+        },
+      };
       mutateOld(payload);
     }
   }, [
     transactionFlow,
-    mutateNew,
     mutateOld,
     signTransfer,
+    worldTransfer,
     quote,
     product?.sku,
     chain?.key,
@@ -204,10 +252,17 @@ export const useTransactionFlow = () => {
     userAcceptedTermsAndConditions,
     integrator,
     account?.chainType,
+    isWorld,
+    token,
+    userAddress,
+    processTransactionWithReceipt,
+    isPendingNew,
   ]);
 
   return {
     handleTransaction,
     isPending: transactionFlow ? loading : isPendingOld,
+    processTransactionWithReceipt,
+    isPendingNew,
   };
 };

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import {
   AnimatedCircularProgress,
@@ -12,16 +12,57 @@ import { palette } from "../../themes/palettes";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useTranslation } from "react-i18next";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
+import { useEffect, useState } from "react";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 
 export const SuccessView = ({ status }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
+  const { showNotification } = useNotificationContext();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [localStatus, setLocalStatus] = useState(status);
 
-  const isStatusCompleted = status?.status === "COMPLETED";
+  // Data comes from from useTransactionFlow
+  const { signature, processTransactionWithReceipt, isPendingNew } =
+    location.state || {};
+
+  useEffect(() => {
+    if (
+      signature &&
+      !isProcessing &&
+      !localStatus?.status &&
+      processTransactionWithReceipt
+    ) {
+      setIsProcessing(true);
+
+      const processTransaction = async () => {
+        try {
+          await processTransactionWithReceipt(signature);
+        } catch (error) {
+          console.error("Error processing transaction:", error);
+          setIsProcessing(false);
+          showNotification("error", "Error processing transaction");
+          navigate(`${navigationRoutes.error}?error=true`);
+        }
+      };
+
+      processTransaction();
+    }
+  }, [
+    signature,
+    isProcessing,
+    localStatus?.status,
+    processTransactionWithReceipt,
+  ]);
+
+  const isStatusCompleted =
+    localStatus?.status === "COMPLETED" || status?.status === "COMPLETED";
 
   const gotoHome = () => {
     navigate(navigationRoutes.home);
   };
+
   return (
     <>
       <IconWrapper
@@ -50,11 +91,11 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {status?.product?.logoUrl ? (
+        {localStatus?.product?.logoUrl || status?.product?.logoUrl ? (
           <ImageAvatar
             hideName
-            name={status?.product?.name || ""}
-            src={status?.product?.logoUrl}
+            name={localStatus?.product?.name || status?.product?.name || ""}
+            src={localStatus?.product?.logoUrl || status?.product?.logoUrl}
             sx={{
               opacity: isStatusCompleted ? 1 : 0.6,
               transition: "all 0.3s ease",
@@ -67,22 +108,32 @@ export const SuccessView = ({ status }) => {
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px" isCompleted={isStatusCompleted}>
-          {status?.productType &&
-            t(`main.${status?.productType}`) + " " + status?.product?.name}
+          {(localStatus?.productType || status?.productType) &&
+            t(`main.${localStatus?.productType || status?.productType}`) +
+              " " +
+              (localStatus?.product?.name || status?.product?.name)}
           {" - "}
           {isStatusCompleted &&
-            status?.fiatUnitPrice + "" + status?.fiatCurrency}
+            (localStatus?.fiatUnitPrice || status?.fiatUnitPrice) +
+              "" +
+              (localStatus?.fiatCurrency || status?.fiatCurrency)}
         </StatusTitle>
         <StatusSubtitle fontSize="18px" isCompleted={isStatusCompleted}>
           {t("success.message.notification", {
             productType:
               t(
-                status?.productType === "gift_card"
-                  ? `main.${status?.productType}_singular`
-                  : `main.${status?.productType}`
+                (localStatus?.productType || status?.productType) ===
+                  "gift_card"
+                  ? `main.${
+                      localStatus?.productType || status?.productType
+                    }_singular`
+                  : `main.${localStatus?.productType || status?.productType}`
               ) || "item",
-            reference: status?.givenReference || "your reference",
-            brand: status?.product?.brand || "",
+            reference:
+              localStatus?.givenReference ||
+              status?.givenReference ||
+              "your reference",
+            brand: localStatus?.product?.brand || status?.product?.brand || "",
           })}
         </StatusSubtitle>
       </ProductBox>

@@ -24,9 +24,12 @@ export const StatusPage = () => {
   const { showNotification } = useNotificationContext();
   const { t } = useTranslation();
 
+  // Check if it's the new flow (pending)
+  const isNewFlow = transactionId === "pending";
+
   const { data: transactionData, error } = useFetch({
     url:
-      transactionId && account?.address
+      transactionId && account?.address && !isNewFlow
         ? `wallets/${account?.address}/transactions/${transactionId}/`
         : "",
     method: "GET",
@@ -36,7 +39,7 @@ export const StatusPage = () => {
     queryOptions: {
       queryKey: ["transaction", transactionId, account?.address],
       refetchInterval: 10000,
-      enabled: !!(transactionId && account?.address),
+      enabled: !!(transactionId && account?.address && !isNewFlow),
     },
   });
 
@@ -47,6 +50,10 @@ export const StatusPage = () => {
   }, [error]);
 
   const renderStatusView = () => {
+    if (isNewFlow) {
+      return <SuccessView status={null} />;
+    }
+
     if (error) {
       return <ErrorView isErrorLoading={true} />;
     }

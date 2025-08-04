@@ -40,25 +40,6 @@ export const useTransactionHelpers = () => {
     const rpc = chain?.rpcUrl;
     const web3 = new Web3(rpc);
     const startBlock = Number(await web3.eth.getBlockNumber());
-    console.log(
-      "world pay payload",
-      JSON.stringify({
-        reference,
-        to,
-        tokens: [
-          {
-            symbol: token?.symbol,
-            token_amount: amount,
-          },
-        ],
-        description,
-        internal: {
-          amount: amount,
-          token: token,
-          decimals: token?.decimals,
-        },
-      })
-    );
 
     const payload = {
       reference,
@@ -84,9 +65,8 @@ export const useTransactionHelpers = () => {
           chain?.rpcUrl,
           startBlock
         );
-        
+
         if (!txHash) {
-          console.log("⚠️ it didn't find the tx hash, retrying...");
           await new Promise((r) => setTimeout(r, 5000));
           const retryTxHash = await getTxHashByReference(
             reference,
@@ -96,10 +76,9 @@ export const useTransactionHelpers = () => {
           );
           return retryTxHash;
         }
-        
+
         return txHash;
       } else {
-        console.log("finalPayload error", JSON.stringify(finalPayload));
         console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
         showNotification("error", t("error.title.transactionFailed"));
         throw new Error(`Payment failed: ${finalPayload.error_code}`);
