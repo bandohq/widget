@@ -50,8 +50,7 @@ interface QuotesContextType {
   fetchQuote: (
     sku: string,
     fiatCurrency: string,
-    digitalAsset: string | null,
-    transactionFlow: boolean
+    digitalAsset: string | null
   ) => void;
 }
 
@@ -130,14 +129,13 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const fetchQuote = (
     sku: string,
     fiatCurrency: string,
-    digitalAsset: string | null,
-    transactionFlow: boolean
+    digitalAsset: string | null
   ) => {
     mutate({
       sku,
       fiatCurrency,
       digitalAsset,
-      sender: transactionFlow ? account?.address : undefined,
+      sender: account?.address,
       chainId: account?.chainId,
     });
   };

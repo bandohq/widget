@@ -10,7 +10,6 @@ export const navigationRoutes = {
   products: "/products",
   form: "/form",
   topup: "/topup",
-  formSteps: "/form-steps",
   settings: "/settings",
 };
 
@@ -29,7 +28,6 @@ export const backButtonRoutes = [
   navigationRoutes.transactionHistory,
   navigationRoutes.transactionDetail,
   navigationRoutes.topup,
-  navigationRoutes.formSteps,
 ];
 
   export const backToHomeRoutes = [navigationRoutes.transactionHistory];

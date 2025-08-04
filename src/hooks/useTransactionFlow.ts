@@ -7,14 +7,9 @@ import { useQuotes } from "../providers/QuotesProvider/QuotesProvider";
 import { useProduct } from "../stores/ProductProvider/ProductProvider";
 import { useTransactionHelpers } from "./useTransactionHelpers";
 import { useFetch } from "./useFetch";
-import { useToken } from "./useToken";
-import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
-import { useSteps } from "../providers/StepsProvider/StepsProvider";
 import { useCallback, useState } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
-import { useFlags } from "launchdarkly-react-client-sdk";
-import { useTranslation } from "react-i18next";
 import { navigationRoutes } from "../utils/navigationRoutes";
 
 export const useTransactionFlow = () => {
@@ -23,25 +18,17 @@ export const useTransactionFlow = () => {
   const { integrator } = useWidgetConfig();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { quote } = useQuotes();
-  const { clearStep } = useSteps();
-  const tokenKey = FormKeyHelper.getTokenKey("from");
-  const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
+  const [chainId, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
-    tokenKey,
     "reference",
     "requiredFields"
   );
   const [loading, setLoading] = useState(false);
   const { chain } = useChain(chainId);
-  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { handleServiceRequest, signTransfer } = useTransactionHelpers();
-  const { showNotification } = useNotificationContext();
-  const { transactionFlow } = useFlags();
-  const { t } = useTranslation();
+  const { signTransfer } = useTransactionHelpers();
 
-  // Nuevo flujo
-  const { mutate: mutateNew, isPending: isPendingNew } = useFetch({
+  const { mutate: mutateNew } = useFetch({
     url: `wallets/${account?.address}/transactions/`,
     method: "POST",
     queryParams: { integrator },
@@ -65,45 +52,6 @@ export const useTransactionFlow = () => {
     },
   });
 
-  // Flujo viejo
-  const { mutate: mutateOld, isPending: isPendingOld } = useFetch({
-    url: "references/",
-    method: "POST",
-    mutationOptions: {
-      onSuccess: async ({ data }) => {
-        const txId = data.validationId;
-        if (txId) {
-          try {
-            const signature = await handleServiceRequest({
-              txId,
-              chain,
-              account,
-              quote,
-              product,
-              token,
-            });
-            clearStep();
-            navigate(`/status/${data?.transactionIntent?.id}`, {
-              state: { signature },
-            });
-          } catch (error) {
-            clearStep();
-            showNotification(
-              "error",
-              "Error handling the transaction signature"
-            );
-            console.error("handleServiceRequest failed:", error);
-          }
-        }
-      },
-      onError: (error) => {
-        console.error("Old flow error:", error);
-        showNotification("error", t("error.message.errorProcessingPurchase"));
-        setLoading(false);
-      },
-    },
-  });
-
   const handleTransaction = useCallback(async () => {
     setLoading(true);
     const payload = {
@@ -122,27 +70,21 @@ export const useTransactionFlow = () => {
       },
     };
 
-    if (transactionFlow) {
-      try {
-        const signature = await signTransfer(quote.transactionRequest);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        mutateNew({
-          ...payload,
-          transactionReceipt: {
-            hash: signature,
-            virtualMachineType: account?.chainType,
-          },
-        });
-      } catch (error) {
-        console.error("Error signing transaction:", error);
-      }
-    } else {
-      mutateOld(payload);
+    try {
+      const signature = await signTransfer(quote.transactionRequest);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      mutateNew({
+        ...payload,
+        transactionReceipt: {
+          hash: signature,
+          virtualMachineType: account?.chainType,
+        },
+      });
+    } catch (error) {
+      console.error("Error signing transaction:", error);
     }
   }, [
-    transactionFlow,
     mutateNew,
-    mutateOld,
     signTransfer,
     quote,
     product?.sku,
@@ -159,6 +101,6 @@ export const useTransactionFlow = () => {
 
   return {
     handleTransaction,
-    isPending: transactionFlow ? loading : isPendingOld,
+    isPending: loading,
   };
 };

@@ -15,16 +15,14 @@ import {
   SelectTokenCardHeader,
 } from './SelectTokenButton.style.js';
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from "react";
 import { useAccount, useWalletMenu } from "@lifi/wallet-management";
 import { Alert, Avatar, Skeleton, Collapse } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
-import { Box } from "@mui/material";
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import { formatTotalAmount } from "../../utils/format.js";
-import { useFlags } from "launchdarkly-react-client-sdk";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -33,7 +31,6 @@ export const SelectTokenButtonForProducts: React.FC<
 > = ({ formType, compact, readOnly }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { transactionFlow } = useFlags();
   const { product } = useProduct();
   const emitter = useWidgetEvents();
   const {
@@ -53,19 +50,9 @@ export const SelectTokenButtonForProducts: React.FC<
 
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
-      fetchQuote(
-        product.sku,
-        product.price.fiatCurrency,
-        token.address,
-        transactionFlow
-      );
+      fetchQuote(product.sku, product.price.fiatCurrency, token.address);
     }
-  }, [
-    product?.sku,
-    product?.price?.fiatCurrency,
-    token?.symbol,
-    transactionFlow,
-  ]);
+  }, [product?.sku, product?.price?.fiatCurrency, token?.symbol]);
 
   const handleClick = () => {
     if (readOnly) return;

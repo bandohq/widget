@@ -13,7 +13,6 @@ import { TransactionsHistoryPage } from "./pages/TransactionHistory/TransactionH
 import { TransactionsDetailPage } from "./pages/TransactionHistory/TransactionDetail";
 import { CountryPage } from "./pages/CountryPage";
 import { TopupPage } from "./pages/TopupPage/TopupPage";
-import { FormsStepsPage } from "./pages/FormStepsPage/FormsStepsPage";
 
 const routes: RouteObject[] = [
   {
@@ -27,10 +26,6 @@ const routes: RouteObject[] = [
   {
     path: navigationRoutes.settings,
     element: <SettingsPage />,
-  },
-  {
-    path: navigationRoutes.formSteps,
-    element: <FormsStepsPage />,
   },
   {
     path: navigationRoutes.transactionHistory,
