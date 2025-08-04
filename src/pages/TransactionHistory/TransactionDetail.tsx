@@ -9,31 +9,16 @@ import { ImageAvatar } from "../../components/Avatar/Avatar";
 import { Barcode } from "@phosphor-icons/react";
 import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvider";
 import { useTheme } from "@mui/system";
-import { useState } from "react";
-import { useChain } from "../../hooks/useChain";
-import { transformToChainConfig } from "../../utils/TransformToChainConfig";
-import { executeRefund } from "../../utils/refunds";
-import { useConfig } from "wagmi";
-import BandoRouter from "@bandohq/contract-abis/abis/BandoRouterV1_1.json";
-import { defineChain } from "viem";
-import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { TransactionErrorView } from "./TransactionErrorView";
 
 export const TransactionsDetailPage = () => {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
-  const config = useConfig();
   const { account } = useAccount();
   const [searchParams] = useSearchParams();
   const status = searchParams.get("status");
-  const serviceId = searchParams.get("serviceId");
   const { transactionId } = useParams();
   const { availableCountries } = useCountryContext();
-
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { chain } = useChain(account.chainId);
-  const { showNotification } = useNotificationContext();
 
   useHeader(t("history.detailTitle"));
 
@@ -150,7 +135,6 @@ export const TransactionsDetailPage = () => {
             }
             size="small"
             label={renderChipLabel()}
-            onClick={undefined}
           />
         </Box>
       )}
