@@ -5,18 +5,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import {
-  CustomAccordion,
-  CustomAccordionSummary,
-  IconWrapper,
-  StatusSubtitle,
-  StatusTitle,
-} from "./StatusPage.style";
+import { IconWrapper, StatusSubtitle, StatusTitle } from "./StatusPage.style";
 import { SmileyMelting, CaretDown } from "@phosphor-icons/react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { navigationRoutes } from "../../utils/navigationRoutes";
-import { useFlags } from "launchdarkly-react-client-sdk";
 
 interface ErrorViewProps {
   errorMessage?: any;
@@ -27,16 +20,12 @@ export const ErrorView = ({ isErrorLoading = false }: ErrorViewProps) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { transactionFlow } = useFlags();
 
-  //Todo: send direct to refound or main page depending on transactionFlow
   const goTo = () => {
     if (isErrorLoading) {
       navigate(navigationRoutes.transactionHistory);
-    } else if (transactionFlow) {
-      navigate(navigationRoutes.home);
     } else {
-      navigate(navigationRoutes.transactionHistory);
+      navigate(navigationRoutes.home);
     }
   };
 
@@ -58,18 +47,14 @@ export const ErrorView = ({ isErrorLoading = false }: ErrorViewProps) => {
     if (isErrorLoading) {
       return t("error.message.checkHistoryForStatus");
     }
-    return t(
-      transactionFlow ? "history.instructionsNewFlow" : "history.instructions"
-    );
+    return t("history.instructionsNewFlow");
   };
 
   const getButtonText = () => {
     if (isErrorLoading) {
       return t("button.goToHistory");
     }
-    return t(
-      transactionFlow ? "button.backToHome" : "history.availableRefunds"
-    );
+    return t("button.backToHome");
   };
 
   return (
