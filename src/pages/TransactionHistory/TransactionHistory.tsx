@@ -16,6 +16,7 @@ import BandoERC20FulfillableV1 from "@bandohq/contract-abis/abis/BandoERC20Fulfi
 import BandoFulfillableV1 from "@bandohq/contract-abis/abis/BandoFulfillableV1_2.json";
 import { readContract } from "wagmi/actions";
 import { useFlags } from "launchdarkly-react-client-sdk";
+import { useWorld } from "../../hooks/useWorld";
 
 export interface Transaction {
   id: string;
@@ -47,19 +48,26 @@ export const TransactionsHistoryPage = () => {
     []
   );
   const { searchToken, isLoading: isLoadingToken } = useToken(chain);
+  const { isWorld, provider } = useWorld();
+
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
+
+  const chainId = isWorld ? 480 : account.chainId;
 
   const {
     data: transactions,
     isPending,
     error,
   } = useFetch({
-    url: account.address ? `wallets/${account.address}/transactions` : "",
+    url: userAddress ? `wallets/${userAddress}/transactions` : "",
     method: "GET",
     queryOptions: {
-      queryKey: ["transactions", account.address, account.chainId],
+      queryKey: ["transactions", userAddress, chainId],
     },
     queryParams: {
-      chainId: account.chainId,
+      chainId: chainId,
     },
   });
 

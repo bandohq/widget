@@ -3,22 +3,29 @@ import { ClockCounterClockwise } from "@phosphor-icons/react";
 import { HorizontalSlider, Transaction } from "./HorizontalSlider";
 import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
+import { useWorld } from "../../hooks/useWorld";
 
 export const RecentSpends = () => {
   const { account } = useAccount();
+  const { isWorld, provider } = useWorld();
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
+  const chainId = isWorld ? 480 : account.chainId;
+
   const {
     data: transactions,
     isPending,
     error,
   } = useFetch<{ transactions: Transaction[] }>({
-    url: account.address ? `wallets/${account.address}/transactions` : "",
+    url: userAddress ? `wallets/${userAddress}/transactions` : "",
     method: "GET",
     queryOptions: {
-      queryKey: ["transactions", account.address, account.chainId],
-      enabled: !!account.address && !!account.chainId,
+      queryKey: ["transactions", userAddress, chainId],
+      enabled: !!userAddress && !!chainId,
     },
     queryParams: {
-      chainId: account.chainId,
+      chainId: chainId,
     },
   });
 
