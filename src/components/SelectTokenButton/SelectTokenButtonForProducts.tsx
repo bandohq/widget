@@ -93,9 +93,15 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const defaultPlaceholder = !account.isConnected
-    ? t("button.connectWallet")
-    : product && !quote && t("main.selectToken");
+  const defaultPlaceholder =
+    !account.isConnected && isWorld && product && !quote
+      ? t("main.selectToken")
+      : !account.isConnected
+      ? t("button.connectWallet")
+      : product && !quote && isWorld
+      ? t("main.selectToken")
+      : product && !quote && t("main.selectToken");
+
   const cardTitle: string = t(`main.totalToPay`);
 
   useEffect(() => {

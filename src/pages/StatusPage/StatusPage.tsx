@@ -12,6 +12,7 @@ import { useFieldActions } from "../../stores/form/useFieldActions";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider";
 import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
+import { useWorld } from "../../hooks/useWorld";
 
 export const StatusPage = () => {
   const { transactionId } = useParams();
@@ -23,23 +24,28 @@ export const StatusPage = () => {
   const { resetQuote } = useQuotes();
   const { showNotification } = useNotificationContext();
   const { t } = useTranslation();
+  const { isWorld, provider } = useWorld();
 
   // Check if it's the new flow (pending)
   const isNewFlow = transactionId === "pending";
 
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
+
   const { data: transactionData, error } = useFetch({
     url:
-      transactionId && account?.address && !isNewFlow
-        ? `wallets/${account?.address}/transactions/${transactionId}/`
+      transactionId && userAddress && !isNewFlow
+        ? `wallets/${userAddress}/transactions/${transactionId}/`
         : "",
     method: "GET",
     queryParams: {
       integrator,
     },
     queryOptions: {
-      queryKey: ["transaction", transactionId, account?.address],
+      queryKey: ["transaction", transactionId, userAddress],
       refetchInterval: 10000,
-      enabled: !!(transactionId && account?.address && !isNewFlow),
+      enabled: !!(transactionId && userAddress && !isNewFlow),
     },
   });
 
