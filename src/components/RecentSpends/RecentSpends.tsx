@@ -36,7 +36,7 @@ export const RecentSpends = () => {
         ).values()
       )
     : [];
-  if (!account.address || !uniqueBrandTransactions.length || error) return null;
+  if (!userAddress || !uniqueBrandTransactions.length || error) return null;
   return (
     <div style={{ display: "flex" }}>
       <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
