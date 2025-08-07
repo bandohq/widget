@@ -76,8 +76,10 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
           title={brandName}
           image={imageUrl}
           renderItem={(subType) => (
-            <StyledItem onClick={() => handleTopupNavigation(subType)}>
-              {subType}
+            <StyledItem
+              onClick={() => handleTopupNavigation(subType || "Topup")}
+            >
+              {subType || "Topup"}
             </StyledItem>
           )}
         />

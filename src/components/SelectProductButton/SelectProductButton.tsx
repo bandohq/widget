@@ -48,7 +48,11 @@ export const SelectProductButton: React.FC<
 
   const renderAvatar = () =>
     product ? (
-      <Avatar variant="rounded" alt={product.name} src={product.imageUrl} />
+      <Avatar
+        variant="rounded"
+        alt={product.name}
+        src={selectedBrand.imageUrl}
+      />
     ) : (
       <AvatarBadgedDefault />
     );
