@@ -1,23 +1,23 @@
 import { Variant } from "../stores/ProductProvider/types";
 
-export const getUniqueSubTypes = (variants: Variant[]): string[] => {
-  const normalizedVariants = variants.map((variant) => {
-    // if subTypes is undefined, null or an empty array, replace it with ["topup"]
-    if (
-      !variant.subTypes ||
-      variant.subTypes.length === 0 ||
-      variant.subTypes.every((subType) => !subType || subType.trim() === "")
-    ) {
-      return { ...variant, subTypes: ["Topup"] };
-    }
-    return variant;
-  });
+// Helper function to normalize subTypes
+const normalizeSubTypes = (subTypes: string[] | undefined): string[] => {
+  if (
+    !subTypes ||
+    subTypes.length === 0 ||
+    subTypes.every((subType) => !subType || subType.trim() === "")
+  ) {
+    return ["Topup"];
+  }
+  return subTypes;
+};
 
+export const getUniqueSubTypes = (variants: Variant[]): string[] => {
   const subTypes = Array.from(
-    new Set(normalizedVariants.flatMap((variant) => variant.subTypes || []))
+    new Set(variants.flatMap((variant) => normalizeSubTypes(variant.subTypes)))
   );
 
-  // Filtrar y limpiar
+  // filter and clean
   return subTypes
     .filter((subType): subType is string => typeof subType === "string")
     .map((subType) => (subType.trim() === "" ? "Topup" : subType));
@@ -28,17 +28,7 @@ export const filterVariantsBySubType = (
   subType: string
 ): Variant[] => {
   return variants.filter((variant) => {
-    const normalizedSubTypes =
-      !variant.subTypes ||
-      variant.subTypes.length === 0 ||
-      variant.subTypes.every((sub) => !sub || sub.trim() === "")
-        ? ["Topup"]
-        : variant.subTypes;
-
-    if (subType === "Topup") {
-      return normalizedSubTypes.includes("Topup");
-    }
-
+    const normalizedSubTypes = normalizeSubTypes(variant.subTypes);
     return normalizedSubTypes.includes(subType);
   });
 };
