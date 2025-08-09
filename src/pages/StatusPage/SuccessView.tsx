@@ -35,7 +35,15 @@ export const SuccessView = ({ status }) => {
           </AnimatedCircularProgress>
         )}
       </IconWrapper>
-      <StatusTitle>
+      <StatusTitle
+        id="conversion-success-element"
+        data-conversion-id={status?.transactionId || ""}
+        data-transaction-status={isStatusCompleted ? "completed" : "processing"}
+        data-transaction-amount={status?.fiatUnitPrice || ""}
+        data-transaction-currency={status?.fiatCurrency || ""}
+        data-product-type={status?.productType || ""}
+        data-product-name={status?.product?.name || ""}
+      >
         {t(
           isStatusCompleted
             ? "success.title.orderCompleted"
