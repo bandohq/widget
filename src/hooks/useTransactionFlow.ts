@@ -61,12 +61,12 @@ export const useTransactionFlow = () => {
         sku: product?.sku,
         chain: chain?.key,
         token: quote?.digitalAsset,
-        quote_id: quote?.id,
+        quoteId: quote?.id,
         quantity: 1,
         amount: parseFloat(quote?.digitalAssetAmount),
         wallet: account?.address,
         integrator,
-        has_accepted_terms: userAcceptedTermsAndConditions,
+        hasAcceptedTerms: userAcceptedTermsAndConditions,
       },
     };
 
