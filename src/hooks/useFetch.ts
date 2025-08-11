@@ -38,16 +38,30 @@ async function fetchData<T>(url: string, options: RequestInit): Promise<T> {
   }
 
   if (!response.ok) {
+    const errorMessage =
+      parsedBody?.message ||
+      parsedBody?.data?.error_code ||
+      `Error: ${response.status}`;
+
     // Extend Error to attach extra info
-    const err = new Error(
-      parsedBody?.data?.error_code || `Error: ${response.status}`
-    ) as Error & {
+    const err = new Error(errorMessage) as Error & {
       status: number;
       data: unknown;
+      errorCode?: string;
+      fields?: Record<string, string>;
     };
 
     err.status = response.status;
     err.data = parsedBody;
+
+    // Add errorCode and fields from the backend response
+    if (parsedBody?.errorCode) {
+      err.errorCode = parsedBody.errorCode;
+    }
+    if (parsedBody?.fields) {
+      err.fields = parsedBody.fields;
+    }
+
     throw err;
   }
 

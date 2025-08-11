@@ -20,7 +20,9 @@ export interface TransactionRequest {
 interface QuoteError {
   error: string;
   message: string;
-  status: number;
+  status?: number;
+  errorCode?: string;
+  fields?: Record<string, string>;
   data?: {
     error_code: string;
     error_type: string;
@@ -91,11 +93,15 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     if (fetchError) {
       setQuote(null);
-      if (fetchError.message === "INSUFFICIENT_BALANCE") {
+      const errorCode = (fetchError as any).errorCode || fetchError.message;
+
+      if (errorCode === "INSUFFICIENT_BALANCE") {
         setError({
           error: "INSUFFICIENT_BALANCE",
           message: t("warning.message.insufficientFunds"),
           status: 400,
+          errorCode: (fetchError as any).errorCode,
+          fields: (fetchError as any).fields,
         });
         setIsPurchasePossible(false);
       } else {
@@ -103,13 +109,15 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
           error: "UNKNOWN_ERROR",
           message: t("error.message.quoteFailed"),
           status: 400,
+          errorCode: (fetchError as any).errorCode,
+          fields: (fetchError as any).fields,
         });
         showNotification("error", t("error.message.quoteFailed"));
       }
     } else {
       setError(null);
     }
-  }, [fetchError]);
+  }, [fetchError, t]);
 
   useEffect(() => {
     if (
