@@ -83,9 +83,9 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     setIsPending(fetchPending);
-    if (data?.data) {
+    if (data) {
       setQuote({
-        ...data.data,
+        ...data,
       });
     }
   }, [data, fetchPending]);
