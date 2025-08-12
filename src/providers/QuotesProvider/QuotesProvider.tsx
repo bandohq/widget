@@ -117,7 +117,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
     } else {
       setError(null);
     }
-  }, [fetchError, t]);
+  }, [fetchError]);
 
   useEffect(() => {
     if (
