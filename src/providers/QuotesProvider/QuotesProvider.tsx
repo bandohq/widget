@@ -100,8 +100,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
           error: "INSUFFICIENT_BALANCE",
           message: t("warning.message.insufficientFunds"),
           status: 400,
-          errorCode: (fetchError as any).errorCode,
-          fields: (fetchError as any).fields,
+          errorCode: (fetchError as any)?.errorCode || fetchError.message,
+          fields: (fetchError as any)?.fields || {},
         });
         setIsPurchasePossible(false);
       } else {
@@ -109,8 +109,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
           error: "UNKNOWN_ERROR",
           message: t("error.message.quoteFailed"),
           status: 400,
-          errorCode: (fetchError as any).errorCode,
-          fields: (fetchError as any).fields,
+          errorCode: (fetchError as any)?.errorCode || fetchError.message,
+          fields: (fetchError as any)?.fields || {},
         });
         showNotification("error", t("error.message.quoteFailed"));
       }
