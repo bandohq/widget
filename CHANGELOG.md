@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.36-beta.57](https://github.com/bandohq/widget/compare/v0.1.36-beta.56...v0.1.36-beta.57) (2025-08-12)
+
+
+### Bug Fixes
+
+* camel case updates ([7c4d6a4](https://github.com/bandohq/widget/commit/7c4d6a471d39676329859a49a40851275d181e58))
+
 ### [0.1.36-beta.56](https://github.com/bandohq/widget/compare/v0.1.36-beta.55...v0.1.36-beta.56) (2025-08-06)
 
 ### [0.1.36-beta.55](https://github.com/bandohq/widget/compare/v0.1.36-beta.54...v0.1.36-beta.55) (2025-08-06)
