@@ -24,13 +24,19 @@ import type {
   } from '../providers/I18nProvider/types.js'
   import type { DefaultFieldValues } from '../stores/form/types'
 import { Address, ChainType } from "../pages/SelectChainPage/types.js";
-import type * as MiniKitNS from "@worldcoin/minikit-js";
-type MiniKitType = (typeof MiniKitNS)["MiniKit"];
 
-export type TransactionProvider = Pick<
-  MiniKitType,
-  "isInstalled" | "commandsAsync" | "user"
->;
+// Commands from world minikit-js library
+export type CommandsAsync = <T = unknown>(
+  command: string,
+  args?: unknown
+) => Promise<T>;
+
+// TransactionProvider from world minikit-js library
+export interface TransactionProvider {
+  isInstalled: () => boolean | Promise<boolean>;
+  commandsAsync: CommandsAsync;
+  user?: { id?: string } | undefined;
+}
 
 export interface ContractCall {
   target: string;

@@ -3,16 +3,25 @@ import type { TransactionProvider } from "../types/widget";
 export const getProvider = async (
   override?: TransactionProvider
 ): Promise<TransactionProvider | null> => {
-  // instance passed by the integrator
   if (override) return override;
-
   try {
-    // lazy load the minikit-js library
-    const { MiniKit } = await import("@worldcoin/minikit-js");
-    return MiniKit;
+    const loadMiniKit = async (): Promise<TransactionProvider> => {
+      // @ts-ignore - Ignore type error for dynamic import
+      const module = await import("@worldcoin/minikit-js");
+      return module.MiniKit as TransactionProvider;
+    };
+
+    return await loadMiniKit();
   } catch (err: any) {
-    // if the minikit-js library is not found, return null
-    if (err?.code === "MODULE_NOT_FOUND") return null;
+    const code = err?.code || err?.name;
+    const msg = String(err?.message || err);
+    if (
+      code === "MODULE_NOT_FOUND" ||
+      code === "ERR_MODULE_NOT_FOUND" ||
+      /Cannot find module/.test(msg)
+    ) {
+      return null;
+    }
     throw err;
   }
 };
