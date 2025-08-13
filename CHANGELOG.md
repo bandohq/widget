@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.44](https://github.com/bandohq/widget/compare/v0.1.44-beta.2...v0.1.44) (2025-08-13)
+Adds conversion tracking support for the success view element.
+
 ### [0.1.43](https://github.com/bandohq/widget/compare/v0.1.43-beta.2...v0.1.43) (2025-08-12)
 
 ### [0.1.43-beta.2](https://github.com/bandohq/widget/compare/v0.1.42...v0.1.43-beta.2) (2025-08-12)
