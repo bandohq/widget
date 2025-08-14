@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
@@ -14,6 +15,7 @@ import {
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useWorld } from "../../hooks/useWorld";
 import { isChainActiveForWorld } from "../../utils/world";
 
@@ -49,9 +51,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     handleTransaction();
   };
 
-  const chainId = isWorld ? 480 : account?.chainId;
-
-  const { chain: selectedChain } = useChain(chainId);
+  const { chain: selectedChain } = useChain(isWorld ? 480 : account?.chainId);
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -59,6 +59,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFields,
       requiredFieldsProps
     );
+
     return (
       !referenceValid ||
       !requiredFieldsValid ||
@@ -88,7 +89,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     } else {
       hideNotification();
     }
-  }, [disabled, selectedChain, isWorld]);
+  }, [disabled, t, selectedChain, isWorld]);
 
   return (
     <BaseTransactionButton
