@@ -14,6 +14,8 @@ import {
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { useWorld } from "../../hooks/useWorld";
+import { isChainActiveForWorld } from "../../utils/world";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -26,6 +28,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = useAccount();
+  const { isWorld } = useWorld();
   const { showNotification, hideNotification } = useNotificationContext();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const {
@@ -46,7 +49,9 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     handleTransaction();
   };
 
-  const { chain: selectedChain } = useChain(account?.chainId);
+  const chainId = isWorld ? 480 : account?.chainId;
+
+  const { chain: selectedChain } = useChain(chainId);
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -72,15 +77,18 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     requiredFieldsProps,
     selectedChain?.isActive,
     quoteError,
+    isWorld,
   ]);
 
   useEffect(() => {
-    if (account?.isConnected && !selectedChain?.isActive) {
+    const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
+
+    if ((account?.isConnected || isWorld) && !isChainActive) {
       showNotification("error", t("error.message.unavailableChain"), true);
     } else {
       hideNotification();
     }
-  }, [disabled, t, selectedChain?.isActive]);
+  }, [disabled, selectedChain, isWorld]);
 
   return (
     <BaseTransactionButton
