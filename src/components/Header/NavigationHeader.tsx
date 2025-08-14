@@ -17,6 +17,7 @@ import { SettingsButton, HistoryButton } from "./SettingsButton";
 import { SplitWalletMenuButton } from "./WalletHeader";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useAccount } from "@lifi/wallet-management";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export const NavigationHeader: React.FC = () => {
   const { subvariant, hiddenUI, variant } = useWidgetConfig();
@@ -26,6 +27,7 @@ export const NavigationHeader: React.FC = () => {
   const { element, title } = useHeaderStore((state) => state);
   const { pathname } = useLocation();
   const { account } = useAccount();
+  const { isWorld } = useWorld();
 
   const cleanedPathname = pathname.endsWith("/")
     ? pathname.slice(0, -1)
@@ -82,7 +84,7 @@ export const NavigationHeader: React.FC = () => {
               path={navigationRoutes.home}
               element={
                 <HeaderControlsContainer>
-                  {account.address && <HistoryButton />}
+                  {(account.address || isWorld) && <HistoryButton />}
                   {!hiddenUI?.includes(HiddenUI.Header) && <SettingsButton />}
                   {variant === "drawer" &&
                   !hiddenUI?.includes(HiddenUI.DrawerCloseButton) ? (
