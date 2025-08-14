@@ -4,6 +4,7 @@ import { useAccount } from "@lifi/wallet-management";
 import { useProduct } from "../../stores/ProductProvider/ProductProvider";
 import { useNotificationContext } from "../AlertProvider/NotificationProvider";
 import { useTranslation } from "react-i18next";
+import { useWorld } from "../../hooks/useWorld";
 
 export interface TransactionRequest {
   chainId: number;
@@ -70,6 +71,11 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPurchasePossible, setIsPurchasePossible] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<QuoteError | null>(null);
+  const { isWorld, provider } = useWorld();
+
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
 
   const {
     data,
@@ -143,8 +149,8 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
       sku,
       fiatCurrency,
       digitalAsset,
-      sender: account?.address,
-      chainId: account?.chainId,
+      sender: userAddress,
+      chainId: isWorld ? 480 : account?.chainId,
     });
   };
 
@@ -154,7 +160,7 @@ export const QuotesProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     resetQuote();
-  }, [account?.chainId, product?.sku]);
+  }, [account?.chainId, product?.sku, userAddress]);
 
   return (
     <QuotesContext.Provider
