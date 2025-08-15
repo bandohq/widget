@@ -59,12 +59,13 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFields,
       requiredFieldsProps
     );
+    const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
 
     return (
       !referenceValid ||
       !requiredFieldsValid ||
       !isPurchasePossible ||
-      !selectedChain?.isActive ||
+      !isChainActive ||
       !userAcceptedTermsAndConditions ||
       !!quoteError
     );
@@ -76,7 +77,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     userAcceptedTermsAndConditions,
     isPurchasePossible,
     requiredFieldsProps,
-    selectedChain?.isActive,
+    selectedChain,
     quoteError,
     isWorld,
   ]);
