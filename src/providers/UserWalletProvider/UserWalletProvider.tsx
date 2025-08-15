@@ -32,21 +32,19 @@ type Props = {
 
 export const UserWalletProvider = ({ children }: Props) => {
   const { account } = useAccount();
-  const { integrator } = useWidgetConfig();
   const { isWorld, provider } = useWorld();
+  const { integrator } = useWidgetConfig();
   const [userAcceptedTermsAndConditions, setUserAcceptedTermsAndConditions] =
     useState(false);
 
-  const userAddress = isWorld
-    ? provider?.user?.walletAddress
-    : account?.address;
+  const userAddress = isWorld ? provider?.user?.walletAddress : account.address;
 
   const {
     data: walletInfo,
     isPending,
     error,
   } = useFetch({
-    url: userAddress ? `wallets/${userAddress}/` : "",
+    url: `wallets/${userAddress}/`,
     method: "GET",
     queryParams: {
       integrator: integrator,
