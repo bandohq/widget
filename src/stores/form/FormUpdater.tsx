@@ -15,17 +15,15 @@ export const FormUpdater: React.FC<{
   const { isTouched, resetField, setFieldValue, setUserAndDefaultValues } =
     useFieldActions();
 
-  const chainId = isWorld ? 480 : account.chainId;
-
   // Set wallet chain as default if they were not changed during widget usage
   useEffect(() => {
-    if (!account.isConnected || !chainId) {
+    if (!account.isConnected || !account.chainId) {
       return;
     }
 
     if (!fromChain && !isTouched("fromChain") && !isTouched("fromToken")) {
       resetField("fromChain", {
-        defaultValue: chainId,
+        defaultValue: isWorld ? 480 : account.chainId,
       });
       setFieldValue("fromToken", "");
       if (isTouched("fromAmount")) {
@@ -33,7 +31,7 @@ export const FormUpdater: React.FC<{
       }
     }
   }, [
-    chainId,
+    account.chainId,
     account.isConnected,
     fromChain,
     isWorld,
@@ -45,8 +43,10 @@ export const FormUpdater: React.FC<{
   // Makes widget config options reactive to changes
   // should update userValues when defaultValues updates
   useEffect(() => {
-    setUserAndDefaultValues(accountForChainId(reactiveFormValues, chainId));
-  }, [chainId, reactiveFormValues, setUserAndDefaultValues]);
+    setUserAndDefaultValues(
+      accountForChainId(reactiveFormValues, isWorld ? 480 : account.chainId)
+    );
+  }, [account.chainId, reactiveFormValues, setUserAndDefaultValues, isWorld]);
 
   return null;
 };
