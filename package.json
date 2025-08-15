@@ -1,6 +1,6 @@
 {
   "name": "@bandohq/widget",
-  "version": "0.1.47",
+  "version": "0.1.44-beta.3",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -30,11 +30,17 @@
   },
   "peerDependencies": {
     "@bigmi/react": ">=0.1.0",
+    "@worldcoin/minikit-js": "^1.9.0",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@tanstack/react-query": "^5.62.0",
     "react": ">=18",
     "react-dom": ">=18",
     "wagmi": "^2.14.0"
+  },
+  "peerDependenciesMeta": {
+    "@worldcoin/minikit-js": {
+      "optional": true
+    }
   },
   "files": [
     "dist/**",
@@ -68,6 +74,7 @@
     "slick-carousel": "^1.8.1",
     "standard-version": "^9.5.0",
     "vite-plugin-dts": "^4.5.0",
+    "web3": "^4.16.0",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {

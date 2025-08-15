@@ -7,26 +7,27 @@ export default defineConfig({
   plugins: [react(), dts(), cssInjectedByJsPlugin()],
   build: {
     lib: {
-      entry: 'src/index.ts',
-      name: 'BandoWidget',
-      formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`
+      entry: "src/index.ts",
+      name: "BandoWidget",
+      formats: ["es", "cjs"],
+      fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
     },
     rollupOptions: {
       external: [
-        'react', 
-        'react-dom', 
-        '@solana/wallet-adapter-react', 
-        '@tanstack/react-query', 
-        'wagmi', 
-        '@bigmi/react'
+        "react",
+        "react-dom",
+        "@solana/wallet-adapter-react",
+        "@tanstack/react-query",
+        "wagmi",
+        "@bigmi/react",
+        "@worldcoin/minikit-js",
       ],
       output: {
         globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
-    }
-  }
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
+  },
 });
