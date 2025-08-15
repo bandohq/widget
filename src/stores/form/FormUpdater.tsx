@@ -19,7 +19,7 @@ export const FormUpdater: React.FC<{
 
   // Set wallet chain as default if they were not changed during widget usage
   useEffect(() => {
-    if ((!account.isConnected && !isWorld) || !chainId) {
+    if (!account.isConnected || !chainId) {
       return;
     }
 
