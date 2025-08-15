@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useWorld } from "./useWorld";
 import { getTxHashByReference } from "../utils/getTxHashByReference";
+import { RetryPresets } from "../utils/retryUtils";
 import Web3 from "web3";
 
 export const useTransactionHelpers = () => {
@@ -53,19 +54,15 @@ export const useTransactionHelpers = () => {
           reference,
           to,
           chain?.rpcUrl,
-          startBlock
+          startBlock,
+          {
+            ...RetryPresets.blockchain,
+            maxAttempts: 10,
+            initialDelay: 1500,
+            maxDelay: 20000,
+            backoffMultiplier: 1.8,
+          }
         );
-
-        if (!txHash) {
-          await new Promise((r) => setTimeout(r, 5000));
-          const retryTxHash = await getTxHashByReference(
-            reference,
-            to,
-            chain?.rpcUrl,
-            startBlock
-          );
-          return retryTxHash;
-        }
 
         return txHash;
       } else {
