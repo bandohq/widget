@@ -25,11 +25,27 @@ import type {
 import type { DefaultFieldValues } from "../stores/form/types";
 import { Address, ChainType } from "../pages/SelectChainPage/types.js";
 
+export type PayCommandInput = {
+  reference: string;
+  to: string;
+  tokens: Array<{
+    symbol: string;
+    token_amount: string;
+  }>;
+  description: string;
+};
+
+export type PayCommandResponse = {
+  finalPayload: {
+    status: string;
+    error_code?: string;
+  };
+};
+
 // Commands from world minikit-js library
-export type CommandsAsync = <T = unknown>(
-  command: string,
-  args?: unknown
-) => Promise<T>;
+export interface CommandsAsync {
+  pay: (payload: PayCommandInput) => Promise<PayCommandResponse>;
+}
 
 // TransactionProvider from world minikit-js library
 export interface TransactionProvider {
