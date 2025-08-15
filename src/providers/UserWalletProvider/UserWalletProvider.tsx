@@ -3,6 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { useAccount } from "@lifi/wallet-management";
 import { useWidgetConfig } from "../WidgetProvider/WidgetProvider";
 import { Address } from "../../pages/SelectChainPage/types";
+import { useWorld } from "../../hooks/useWorld";
 
 type WalletInfo = {
   errorCode?: string;
@@ -31,24 +32,27 @@ type Props = {
 
 export const UserWalletProvider = ({ children }: Props) => {
   const { account } = useAccount();
+  const { isWorld, provider } = useWorld();
   const { integrator } = useWidgetConfig();
   const [userAcceptedTermsAndConditions, setUserAcceptedTermsAndConditions] =
     useState(false);
+
+  const userAddress = isWorld ? provider?.user?.walletAddress : account.address;
 
   const {
     data: walletInfo,
     isPending,
     error,
   } = useFetch({
-    url: `wallets/${account.address}/`,
+    url: `wallets/${userAddress}/`,
     method: "GET",
     queryParams: {
       integrator: integrator,
     },
     queryOptions: {
-      queryKey: ["wallet-info", account.address, integrator],
+      queryKey: ["wallet-info", userAddress, integrator],
       retry: false,
-      enabled: !!account.address,
+      enabled: !!userAddress,
     },
   });
 
