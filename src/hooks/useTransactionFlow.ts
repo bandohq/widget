@@ -11,25 +11,35 @@ import { useCallback, useState } from "react";
 import { useWidgetConfig } from "../providers/WidgetProvider/WidgetProvider";
 import { useUserWallet } from "../providers/UserWalletProvider/UserWalletProvider";
 import { navigationRoutes } from "../utils/navigationRoutes";
+import { useWorld } from "./useWorld";
+import { parseERC20TransferData } from "../utils/format";
+import { useToken } from "./useToken";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
   const { product } = useProduct();
+  const { isWorld, provider } = useWorld();
   const { integrator } = useWidgetConfig();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const { quote } = useQuotes();
-  const [chainId, reference, requiredFields] = useFieldValues(
+  const [chainId, tokenAddress, reference, requiredFields] = useFieldValues(
     FormKeyHelper.getChainKey("from"),
+    FormKeyHelper.getTokenKey("from"),
     "reference",
     "requiredFields"
   );
   const [loading, setLoading] = useState(false);
   const { chain } = useChain(chainId);
+  const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
-  const { signTransfer } = useTransactionHelpers();
+  const { signTransfer, worldTransfer } = useTransactionHelpers();
+
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
 
   const { mutate: mutateNew } = useFetch({
-    url: `wallets/${account?.address}/transactions/`,
+    url: `wallets/${userAddress}/transactions/`,
     method: "POST",
     queryParams: { integrator },
     headers: {
@@ -54,29 +64,49 @@ export const useTransactionFlow = () => {
 
   const handleTransaction = useCallback(async () => {
     setLoading(true);
-    const payload = {
-      reference,
-      requiredFields,
-      transactionIntent: {
-        sku: product?.sku,
-        chain: chain?.key,
-        token: quote?.digitalAsset,
-        quoteId: quote?.id,
-        quantity: 1,
-        amount: parseFloat(quote?.digitalAssetAmount),
-        wallet: account?.address,
-        integrator,
-        hasAcceptedTerms: userAcceptedTermsAndConditions,
-      },
-    };
 
     try {
-      const signature = await signTransfer(quote.transactionRequest);
+      let txHash: string | undefined;
+      const payload = {
+        reference,
+        requiredFields,
+        transactionIntent: {
+          sku: product?.sku,
+          chain: chain?.key,
+          token: quote?.digitalAsset,
+          quoteId: quote?.id,
+          quantity: 1,
+          amount: parseFloat(quote?.digitalAssetAmount),
+          wallet: userAddress,
+          integrator,
+          hasAcceptedTerms: userAcceptedTermsAndConditions,
+        },
+      };
+
+      if (isWorld) {
+        const { destinationAddress, amount } = parseERC20TransferData(
+          quote?.transactionRequest?.data
+        );
+
+        if (!destinationAddress || !amount) {
+          throw new Error("Error parsing destination address from ERC20 data");
+        }
+
+        txHash = await worldTransfer({
+          reference: quote?.id.toString(),
+          to: destinationAddress,
+          amount: amount,
+          token: token,
+          description: `Purchase of ${quote?.digitalAssetAmount} ${token?.symbol}: ${quote?.id}`,
+        });
+      } else {
+        txHash = await signTransfer(quote.transactionRequest);
+      }
       await new Promise((resolve) => setTimeout(resolve, 1000));
       mutateNew({
         ...payload,
         transactionReceipt: {
-          hash: signature,
+          hash: txHash,
           virtualMachineType: account?.chainType,
         },
       });

@@ -7,14 +7,73 @@ import { useAccount } from "@lifi/wallet-management";
 import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
+import { useWorld } from "./useWorld";
+import { getTxHashByReference } from "../utils/getTxHashByReference";
+import { RetryPresets } from "../utils/retryUtils";
+import Web3 from "web3";
 
 export const useTransactionHelpers = () => {
   const [loading, setLoading] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
   const { t } = useTranslation();
-  const { chain } = useChain(account?.chainId);
+  const { isWorld, provider } = useWorld();
+  const { chain } = useChain(isWorld ? 480 : account?.chainId);
   const { showNotification } = useNotificationContext();
+
+  const worldTransfer = async ({
+    reference,
+    to,
+    amount,
+    token,
+    description = "Bando Payment through World App",
+  }) => {
+    const rpc = chain?.rpcUrl;
+    const web3 = new Web3(rpc);
+    const startBlock = Number(await web3.eth.getBlockNumber());
+
+    const payload = {
+      reference,
+      to,
+      tokens: [
+        {
+          symbol: token?.symbol,
+          token_amount: amount,
+        },
+      ],
+      description,
+    };
+
+    try {
+      const { finalPayload } = await provider?.commandsAsync.pay(payload);
+
+      if (finalPayload.status === "success") {
+        await new Promise((r) => setTimeout(r, 1500));
+
+        const txHash = await getTxHashByReference(
+          reference,
+          to,
+          chain?.rpcUrl,
+          startBlock,
+          {
+            ...RetryPresets.blockchain,
+            maxAttempts: 10,
+            initialDelay: 1500,
+            maxDelay: 20000,
+            backoffMultiplier: 1.8,
+          }
+        );
+
+        return txHash;
+      } else {
+        console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
+        showNotification("error", t("error.title.transactionFailed"));
+        throw new Error(`Payment failed: ${finalPayload.error_code}`);
+      }
+    } catch (error) {
+      throw new Error("Error at worldTransfer", { cause: error });
+    }
+  };
 
   const sendToken = async (transactionRequest: TransactionRequest) => {
     try {
@@ -61,5 +120,6 @@ export const useTransactionHelpers = () => {
   return {
     loading,
     signTransfer,
+    worldTransfer,
   };
 };

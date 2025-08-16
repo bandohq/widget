@@ -150,3 +150,35 @@ export function convertToSubscriptFormat(
 
   return `${value > 0 ? '' : '-'}0.0${subscript}${fractionalPart}`
 }
+
+export const parseERC20TransferData = (
+  data: string
+): { destinationAddress: string; amount: string } | null => {
+  try {
+    // check if the data starts with the function signature of an ERC20 transfer
+    // Function signature: 0xa9059cbb (transfer)
+    if (!data.startsWith("0xa9059cbb")) {
+      return null;
+    }
+
+    // remove the 0x prefix and the function signature (8 characters = 4 bytes)
+    const dataWithoutPrefix = data.slice(10); // 0x + 8 characters of signature
+
+    // the destination address is in the first 32 bytes (64 characters hex)
+    const destinationAddressHex = dataWithoutPrefix.slice(0, 64);
+
+    // convert hex to Ethereum address (remove padding of zeros)
+    const destinationAddress = "0x" + destinationAddressHex.slice(24); // remove the 12 bytes of padding (24 characters)
+
+    // the amount is in the next 32 bytes (64 characters hex)
+    const amountHex = dataWithoutPrefix.slice(64, 128);
+
+    // convert hex to bigint and then to string
+    const amount = BigInt("0x" + amountHex).toString();
+
+    return { destinationAddress, amount };
+  } catch (error) {
+    console.error("Error parsing ERC20 transfer data:", error);
+    return null;
+  }
+};
