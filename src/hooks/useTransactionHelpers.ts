@@ -67,8 +67,7 @@ export const useTransactionHelpers = () => {
         return txHash;
       } else {
         console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
-        //showNotification("error", t("error.title.transactionFailed"));
-        showNotification("error", JSON.stringify(finalPayload));
+        showNotification("error", t("error.title.transactionFailed"));
         throw new Error(`Payment failed: ${finalPayload.error_code}`);
       }
     } catch (error) {
