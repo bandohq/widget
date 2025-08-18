@@ -135,36 +135,9 @@ export const useTransactionHelpers = () => {
     }
   };
 
-  const waitForTransactionReceipt = async (
-    txHash: string,
-    confirmations: number = 1,
-    timeoutMs: number = 60_000
-  ): Promise<boolean> => {
-    if (!chain?.rpcUrl) {
-      throw new Error("Chain RPC URL not available");
-    }
-
-    try {
-      return await waitForReceipt({
-        rpc: chain.rpcUrl,
-        txHash,
-        confirmations,
-        timeoutMs,
-        retryConfig: {
-          ...RetryPresets.receipt,
-          maxAttempts: Math.floor(timeoutMs / 1500), // Calculate based on timeout
-        },
-      });
-    } catch (error) {
-      console.error("Error waiting for transaction receipt:", error);
-      throw error;
-    }
-  };
-
   return {
     loading,
     signTransfer,
     worldTransfer,
-    waitForTransactionReceipt,
   };
 };
