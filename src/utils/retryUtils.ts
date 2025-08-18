@@ -117,4 +117,13 @@ export const RetryPresets = {
     backoffMultiplier: 2,
     jitter: false,
   } as RetryConfig,
+
+  // For polling transaction receipts
+  receipt: {
+    maxAttempts: 40, // 40 attempts * 1.5s = 60s default timeout
+    initialDelay: 1500,
+    maxDelay: 10000,
+    backoffMultiplier: 1.2,
+    jitter: true,
+  } as RetryConfig,
 };
