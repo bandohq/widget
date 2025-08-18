@@ -8,7 +8,7 @@ import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useWorld } from "./useWorld";
-import { getTxHashByReference } from "../utils/getTxHashByReference";
+import { getTxHashByReference, waitForReceipt } from "../utils/txUtils";
 import { RetryPresets } from "../utils/retryUtils";
 import Web3 from "web3";
 
@@ -64,6 +64,24 @@ export const useTransactionHelpers = () => {
           }
         );
 
+        if (txHash) {
+          // Optionally wait for transaction confirmation
+          try {
+            const isConfirmed = await waitForReceipt({
+              rpc: chain?.rpcUrl,
+              txHash,
+              confirmations: 1,
+              retryConfig: RetryPresets.receipt,
+            });
+
+            if (!isConfirmed) {
+              console.warn("Transaction was found but failed to confirm");
+            }
+          } catch (error) {
+            console.warn("Failed to wait for transaction confirmation:", error);
+          }
+        }
+
         return txHash;
       } else {
         console.error("Error at worldTransfer:", JSON.stringify(finalPayload));
@@ -117,9 +135,36 @@ export const useTransactionHelpers = () => {
     }
   };
 
+  const waitForTransactionReceipt = async (
+    txHash: string,
+    confirmations: number = 1,
+    timeoutMs: number = 60_000
+  ): Promise<boolean> => {
+    if (!chain?.rpcUrl) {
+      throw new Error("Chain RPC URL not available");
+    }
+
+    try {
+      return await waitForReceipt({
+        rpc: chain.rpcUrl,
+        txHash,
+        confirmations,
+        timeoutMs,
+        retryConfig: {
+          ...RetryPresets.receipt,
+          maxAttempts: Math.floor(timeoutMs / 1500), // Calculate based on timeout
+        },
+      });
+    } catch (error) {
+      console.error("Error waiting for transaction receipt:", error);
+      throw error;
+    }
+  };
+
   return {
     loading,
     signTransfer,
     worldTransfer,
+    waitForTransactionReceipt,
   };
 };
