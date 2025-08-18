@@ -48,6 +48,10 @@ const routes: RouteObject[] = [
     element: <StatusPage />,
   },
   {
+    path: `${navigationRoutes.status}/pending`,
+    element: <StatusPage />,
+  },
+  {
     path: `${navigationRoutes.products}/:category`,
     element: <CategoryPage />,
   },
