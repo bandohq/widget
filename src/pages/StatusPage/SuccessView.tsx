@@ -99,11 +99,11 @@ export const SuccessView = ({ status }) => {
         )}
       </StatusSubtitle>
       <ProductBox>
-        {localStatus?.product?.logoUrl ? (
+        {status?.product?.logoUrl ? (
           <ImageAvatar
             hideName
-            name={localStatus?.product?.name || ""}
-            src={localStatus?.product?.logoUrl}
+            name={status?.product?.name || ""}
+            src={status?.product?.logoUrl}
             sx={{
               opacity: isStatusCompleted ? 1 : 0.6,
               transition: "all 0.3s ease",
@@ -116,24 +116,24 @@ export const SuccessView = ({ status }) => {
           <Barcode size={50} />
         )}
         <StatusTitle fontSize="26px" isCompleted={isStatusCompleted}>
-          {localStatus?.productType &&
-            t(`main.${localStatus?.productType}`) +
-              " " +
-              localStatus?.product?.name}
+          {status?.productType &&
+            t(`main.${status?.productType}`) + " " + status?.product?.name}
           {" - "}
           {isStatusCompleted &&
-            localStatus?.fiatUnitPrice + "" + localStatus?.fiatCurrency}
+            status?.fiatUnitPrice + "" + status?.fiatCurrency}
         </StatusTitle>
         <StatusSubtitle fontSize="18px" isCompleted={isStatusCompleted}>
           {t("success.message.notification", {
             productType:
               t(
-                localStatus?.productType === "gift_card"
-                  ? `main.${localStatus?.productType}_singular`
-                  : `main.${localStatus?.productType}`
-              ) || "item",
-            reference: localStatus?.givenReference || "your reference",
-            brand: localStatus?.product?.brand || "",
+                !status?.productType
+                  ? "product"
+                  : status?.productType === "gift_card"
+                  ? `main.${status?.productType}_singular`
+                  : `main.${status?.productType}`
+              ) || "product",
+            reference: status?.givenReference || "your reference",
+            brand: status?.product?.brand || "",
           })}
         </StatusSubtitle>
       </ProductBox>
