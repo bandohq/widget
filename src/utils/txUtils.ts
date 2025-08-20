@@ -2,6 +2,13 @@ import { Web3 } from "web3";
 import type { Log } from "web3-types";
 import { RetryConfig, RetryPresets, retryWithBackoff } from "./retryUtils";
 
+type WaitForReceiptOpts = {
+  rpc: string;
+  txHash: string;
+  confirmations?: number;
+  retryConfig: RetryConfig;
+};
+
 export async function getTxHashByReference(
   reference: string,
   to: string,
@@ -55,13 +62,63 @@ export async function getTxHashByReference(
     finalConfig,
     (attempt, maxAttempts, error) => {
       if (error) {
-        console.warn(`Intento ${attempt}/${maxAttempts} falló:`, error.message);
         if (error.message.includes("network")) {
           console.log("Error de red detectado, continuando con reintentos...");
         }
-      } else {
-        console.log(
-          `Intento ${attempt}/${maxAttempts}: No se encontró transacción, reintentando...`
+      }
+    }
+  );
+
+  if (result.success) {
+    return result.data;
+  } else {
+    if (result.lastError) {
+      console.error("last error:", result.lastError);
+    }
+    return null;
+  }
+}
+
+export async function waitForReceipt({
+  rpc,
+  txHash,
+  confirmations = 1,
+  retryConfig,
+}: WaitForReceiptOpts): Promise<boolean> {
+  const web3 = new Web3(rpc);
+
+  const checkReceipt = async (): Promise<boolean | null> => {
+    try {
+      const receipt = await web3.eth.getTransactionReceipt(txHash);
+
+      if (receipt && receipt.blockNumber != null) {
+        if (confirmations <= 1) {
+          return Boolean(receipt.status);
+        }
+
+        // Wait for additional confirmations
+        const current = Number(await web3.eth.getBlockNumber());
+        if (current - Number(receipt.blockNumber) + 1 >= confirmations) {
+          return Boolean(receipt.status);
+        }
+      }
+
+      // Receipt not found or not enough confirmations yet
+      return null;
+    } catch (error) {
+      // Some public RPCs may return 409/429 in bursts; throw to trigger retry
+      throw error;
+    }
+  };
+
+  const result = await retryWithBackoff(
+    checkReceipt,
+    retryConfig,
+    (attempt, maxAttempts, error) => {
+      if (error) {
+        console.warn(
+          `Receipt check attempt ${attempt}/${maxAttempts} failed:`,
+          error.message
         );
       }
     }
@@ -70,12 +127,9 @@ export async function getTxHashByReference(
   if (result.success) {
     return result.data;
   } else {
-    console.warn(
-      `couldn't find tx hash for reference: ${reference} after ${result.totalTime}ms`
+    console.error(
+      `Timeout waiting for transaction receipt after ${result.attempts} attempts in ${result.totalTime}ms`
     );
-    if (result.lastError) {
-      console.error("last error:", result.lastError);
-    }
-    return null;
+    throw new Error("Timeout waiting for transaction receipt");
   }
 }

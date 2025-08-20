@@ -14,6 +14,10 @@ import { navigationRoutes } from "../utils/navigationRoutes";
 import { useWorld } from "./useWorld";
 import { parseERC20TransferData } from "../utils/format";
 import { useToken } from "./useToken";
+import { ChainType } from "../pages/SelectChainPage/types";
+import { useNotificationContext } from "../providers/AlertProvider/NotificationProvider";
+import { waitForReceipt } from "../utils/txUtils";
+import { RetryPresets } from "../utils/retryUtils";
 
 export const useTransactionFlow = () => {
   const navigate = useNavigate();
@@ -32,13 +36,14 @@ export const useTransactionFlow = () => {
   const { chain } = useChain(chainId);
   const { token } = useToken(chain, tokenAddress);
   const { account } = useAccount({ chainType: chain?.networkType });
+  const { showNotification } = useNotificationContext();
   const { signTransfer, worldTransfer } = useTransactionHelpers();
 
   const userAddress = isWorld
     ? provider?.user?.walletAddress
     : account?.address;
 
-  const { mutate: mutateNew } = useFetch({
+  const { mutate: mutateNew, isPending } = useFetch({
     url: `wallets/${userAddress}/transactions/`,
     method: "POST",
     queryParams: { integrator },
@@ -62,26 +67,69 @@ export const useTransactionFlow = () => {
     },
   });
 
+  const processTransactionWithReceipt = useCallback(
+    async (signature: string) => {
+      try {
+        const receipt = await waitForReceipt({
+          rpc: chain?.rpcUrl,
+          txHash: signature,
+          confirmations: 1,
+          retryConfig: RetryPresets.receipt,
+        });
+
+        if (!receipt) {
+          throw new Error("Transaction receipt not found");
+        }
+
+        const payload = {
+          reference,
+          requiredFields,
+          transactionIntent: {
+            sku: product?.sku,
+            chain: chain?.key,
+            token: quote?.digitalAsset,
+            quoteId: quote?.id,
+            quantity: 1,
+            amount: parseFloat(quote?.digitalAssetAmount),
+            wallet: userAddress,
+            integrator,
+            hasAcceptedTerms: userAcceptedTermsAndConditions,
+          },
+          transactionReceipt: {
+            hash: signature,
+            virtualMachineType: isWorld ? ChainType.EVM : account?.chainType,
+          },
+        };
+
+        mutateNew(payload);
+      } catch (error) {
+        console.error("Error processing transaction:", error);
+        showNotification("error", "Error processing transaction");
+        navigate(`${navigationRoutes.error}?error=true`);
+      }
+    },
+    [
+      chain?.rpcUrl,
+      reference,
+      requiredFields,
+      product?.sku,
+      chain?.key,
+      quote?.digitalAsset,
+      quote?.id,
+      quote?.digitalAssetAmount,
+      userAddress,
+      integrator,
+      userAcceptedTermsAndConditions,
+      isWorld,
+      account?.chainType,
+    ]
+  );
+
   const handleTransaction = useCallback(async () => {
     setLoading(true);
 
     try {
       let txHash: string | undefined;
-      const payload = {
-        reference,
-        requiredFields,
-        transactionIntent: {
-          sku: product?.sku,
-          chain: chain?.key,
-          token: quote?.digitalAsset,
-          quoteId: quote?.id,
-          quantity: 1,
-          amount: parseFloat(quote?.digitalAssetAmount),
-          wallet: userAddress,
-          integrator,
-          hasAcceptedTerms: userAcceptedTermsAndConditions,
-        },
-      };
 
       if (isWorld) {
         const { destinationAddress, amount } = parseERC20TransferData(
@@ -103,11 +151,11 @@ export const useTransactionFlow = () => {
         txHash = await signTransfer(quote.transactionRequest);
       }
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      mutateNew({
-        ...payload,
-        transactionReceipt: {
-          hash: txHash,
-          virtualMachineType: account?.chainType,
+      navigate(`/status/pending`, {
+        state: {
+          signature: txHash,
+          processTransactionWithReceipt,
+          isPending,
         },
       });
     } catch (error) {
@@ -131,6 +179,7 @@ export const useTransactionFlow = () => {
 
   return {
     handleTransaction,
+    processTransactionWithReceipt,
     isPending: loading,
   };
 };

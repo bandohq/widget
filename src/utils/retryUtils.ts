@@ -104,6 +104,7 @@ export const RetryPresets = {
   blockchain: {
     maxAttempts: 8,
     initialDelay: 2000,
+    timeout: 30000,
     maxDelay: 15000,
     backoffMultiplier: 1.5,
     jitter: true,
@@ -113,8 +114,19 @@ export const RetryPresets = {
   quick: {
     maxAttempts: 3,
     initialDelay: 500,
+    timeout: 15000,
     maxDelay: 2000,
     backoffMultiplier: 2,
     jitter: false,
+  } as RetryConfig,
+
+  // For polling transaction receipts
+  receipt: {
+    maxAttempts: 40, // 40 attempts * 1.5s = 60s default timeout
+    initialDelay: 1500,
+    timeout: 120000,
+    maxDelay: 10000,
+    backoffMultiplier: 1.2,
+    jitter: true,
   } as RetryConfig,
 };

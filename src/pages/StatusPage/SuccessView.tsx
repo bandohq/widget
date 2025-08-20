@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import {
   AnimatedCircularProgress,
@@ -12,16 +13,56 @@ import { palette } from "../../themes/palettes";
 import { navigationRoutes } from "../../utils/navigationRoutes";
 import { useTranslation } from "react-i18next";
 import { ImageAvatar } from "../../components/Avatar/Avatar";
+import { useNotificationContext } from "../../providers/AlertProvider/NotificationProvider";
 
 export const SuccessView = ({ status }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
+  const { showNotification } = useNotificationContext();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [localStatus, setLocalStatus] = useState(status);
 
-  const isStatusCompleted = status?.status === "COMPLETED";
+  // Data comes from from useTransactionFlow
+  const { signature, processTransactionWithReceipt, isPendingNew } =
+    location.state || {};
+
+  useEffect(() => {
+    if (
+      signature &&
+      !isProcessing &&
+      !localStatus?.status &&
+      processTransactionWithReceipt
+    ) {
+      setIsProcessing(true);
+
+      const processTransaction = async () => {
+        try {
+          await processTransactionWithReceipt(signature);
+        } catch (error) {
+          console.error("Error processing transaction:", error);
+          setIsProcessing(false);
+          showNotification("error", t("error.message.errorProcessingPurchase"));
+          navigate(`${navigationRoutes.error}?error=true`);
+        }
+      };
+
+      processTransaction();
+    }
+  }, [
+    signature,
+    isProcessing,
+    localStatus?.status,
+    processTransactionWithReceipt,
+  ]);
+
+  const isStatusCompleted =
+    localStatus?.status === "COMPLETED" || status?.status === "COMPLETED";
 
   const gotoHome = () => {
     navigate(navigationRoutes.home);
   };
+
   return (
     <>
       <IconWrapper
@@ -85,10 +126,12 @@ export const SuccessView = ({ status }) => {
           {t("success.message.notification", {
             productType:
               t(
-                status?.productType === "gift_card"
+                !status?.productType
+                  ? "product"
+                  : status?.productType === "gift_card"
                   ? `main.${status?.productType}_singular`
                   : `main.${status?.productType}`
-              ) || "item",
+              ) || "product",
             reference: status?.givenReference || "your reference",
             brand: status?.product?.brand || "",
           })}

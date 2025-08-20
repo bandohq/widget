@@ -8,7 +8,7 @@ import { useChain } from "../hooks/useChain";
 import { useTranslation } from "react-i18next";
 import { transformToChainConfig } from "../utils/TransformToChainConfig";
 import { useWorld } from "./useWorld";
-import { getTxHashByReference } from "../utils/getTxHashByReference";
+import { getTxHashByReference, waitForReceipt } from "../utils/txUtils";
 import { RetryPresets } from "../utils/retryUtils";
 import Web3 from "web3";
 
@@ -63,6 +63,24 @@ export const useTransactionHelpers = () => {
             backoffMultiplier: 1.8,
           }
         );
+
+        if (txHash) {
+          // Optionally wait for transaction confirmation
+          try {
+            const isConfirmed = await waitForReceipt({
+              rpc: chain?.rpcUrl,
+              txHash,
+              confirmations: 1,
+              retryConfig: RetryPresets.receipt,
+            });
+
+            if (!isConfirmed) {
+              console.warn("Transaction was found but failed to confirm");
+            }
+          } catch (error) {
+            console.warn("Failed to wait for transaction confirmation:", error);
+          }
+        }
 
         return txHash;
       } else {
