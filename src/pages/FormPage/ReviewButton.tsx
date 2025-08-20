@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { BaseTransactionButton } from "../../components/BaseTransactionButton/BaseTransactionButton";
 import { useTransactionFlow } from "../../hooks/useTransactionFlow";
 import { useFieldValues } from "../../stores/form/useFieldValues";
@@ -14,6 +15,9 @@ import {
 } from "../../utils/reviewValidations";
 import { useAccount } from "@lifi/wallet-management";
 import { useUserWallet } from "../../providers/UserWalletProvider/UserWalletProvider";
+import { navigationRoutes } from "../../utils/navigationRoutes";
+import { useWorld } from "../../hooks/useWorld";
+import { isChainActiveForWorld } from "../../utils/world";
 
 interface ReviewButtonProps {
   referenceType: ReferenceType;
@@ -26,6 +30,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
 }) => {
   const { t } = useTranslation();
   const { account } = useAccount();
+  const { isWorld } = useWorld();
   const { showNotification, hideNotification } = useNotificationContext();
   const { userAcceptedTermsAndConditions } = useUserWallet();
   const {
@@ -46,7 +51,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     handleTransaction();
   };
 
-  const { chain: selectedChain } = useChain(account?.chainId);
+  const { chain: selectedChain } = useChain(isWorld ? 480 : account?.chainId);
 
   const disabled = useMemo(() => {
     const referenceValid = isReferenceValid(reference, referenceType);
@@ -54,11 +59,13 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
       requiredFields,
       requiredFieldsProps
     );
+    const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
+
     return (
       !referenceValid ||
       !requiredFieldsValid ||
       !isPurchasePossible ||
-      !selectedChain?.isActive ||
+      !isChainActive ||
       !userAcceptedTermsAndConditions ||
       !!quoteError
     );
@@ -70,17 +77,20 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({
     userAcceptedTermsAndConditions,
     isPurchasePossible,
     requiredFieldsProps,
-    selectedChain?.isActive,
+    selectedChain,
     quoteError,
+    isWorld,
   ]);
 
   useEffect(() => {
-    if (account?.isConnected && !selectedChain?.isActive) {
+    const isChainActive = isChainActiveForWorld(selectedChain, isWorld);
+
+    if ((account?.isConnected || isWorld) && !isChainActive) {
       showNotification("error", t("error.message.unavailableChain"), true);
     } else {
       hideNotification();
     }
-  }, [disabled, t, selectedChain?.isActive]);
+  }, [disabled, t, selectedChain, isWorld]);
 
   return (
     <BaseTransactionButton
