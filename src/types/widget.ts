@@ -1,28 +1,28 @@
 import type {
-    Components,
-    PaletteMode,
-    PaletteOptions,
-    Shape,
-    Theme,
-  } from '@mui/material'
-  import type { TypographyOptions } from '@mui/material/styles/createTypography.js'
-  import type {
-    CSSProperties,
-    FC,
-    MutableRefObject,
-    ReactNode,
-    RefObject,
-  } from 'react'
-  import type {
-    CoinbaseWalletParameters,
-    MetaMaskParameters,
-    WalletConnectParameters,
-  } from 'wagmi/connectors'
-  import type {
-    LanguageKey,
-    LanguageResources,
-  } from '../providers/I18nProvider/types.js'
-  import type { DefaultFieldValues } from '../stores/form/types'
+  Components,
+  PaletteMode,
+  PaletteOptions,
+  Shape,
+  Theme,
+} from "@mui/material";
+import type { TypographyOptions } from "@mui/material/styles/createTypography.js";
+import type {
+  CSSProperties,
+  FC,
+  MutableRefObject,
+  ReactNode,
+  RefObject,
+} from "react";
+import type {
+  CoinbaseWalletParameters,
+  MetaMaskParameters,
+  WalletConnectParameters,
+} from "wagmi/connectors";
+import type {
+  LanguageKey,
+  LanguageResources,
+} from "../providers/I18nProvider/types.js";
+import type { DefaultFieldValues } from "../stores/form/types";
 import { Address, ChainType } from "../pages/SelectChainPage/types.js";
 
 // Commands from world minikit-js library
@@ -35,7 +35,7 @@ export type CommandsAsync = <T = unknown>(
 export interface TransactionProvider {
   isInstalled: () => boolean | Promise<boolean>;
   commandsAsync: CommandsAsync;
-  user?: { id?: string } | undefined;
+  user?: { id?: string; walletAddress?: `0x${string}` } | undefined;
 }
 
 export interface ContractCall {
@@ -238,52 +238,52 @@ export interface WidgetConfig {
   explorerUrls?: Record<number, string[]> &
     Partial<Record<"internal", string[]>>;
 }
-  
-  export interface FormFieldOptions {
-    setUrlSearchParam: boolean
-  }
-  
-  export interface FieldValues
-    extends Omit<DefaultFieldValues, 'fromAmount' | 'toAmount'> {
-    fromAmount?: number | string
-  }
-  
-  export type FieldNames = keyof FieldValues
-  
-  export type SetFieldValueFunction = <K extends FieldNames>(
-    key: K,
-    value: FieldValues[K],
-    options?: FormFieldOptions
-  ) => void
-  
-  export type FormState = {
-    setFieldValue: SetFieldValueFunction
-  }
-  
-  export type FormRef = MutableRefObject<FormState | null>
-  
-  export interface FormRefProps {
-    formRef?: FormRef
-  }
-  
-  export interface WidgetConfigProps extends FormRefProps {
-    config: WidgetConfig
-  }
-  
-  export interface WidgetConfigPartialProps {
-    config?: Partial<WidgetConfig>
-  }
 
-  export type WidgetProps = WidgetDrawerProps &
+export interface FormFieldOptions {
+  setUrlSearchParam: boolean;
+}
+
+export interface FieldValues
+  extends Omit<DefaultFieldValues, "fromAmount" | "toAmount"> {
+  fromAmount?: number | string;
+}
+
+export type FieldNames = keyof FieldValues;
+
+export type SetFieldValueFunction = <K extends FieldNames>(
+  key: K,
+  value: FieldValues[K],
+  options?: FormFieldOptions
+) => void;
+
+export type FormState = {
+  setFieldValue: SetFieldValueFunction;
+};
+
+export type FormRef = MutableRefObject<FormState | null>;
+
+export interface FormRefProps {
+  formRef?: FormRef;
+}
+
+export interface WidgetConfigProps extends FormRefProps {
+  config: WidgetConfig;
+}
+
+export interface WidgetConfigPartialProps {
+  config?: Partial<WidgetConfig>;
+}
+
+export type WidgetProps = WidgetDrawerProps &
   WidgetConfig &
   WidgetConfigPartialProps &
-  FormRefProps
+  FormRefProps;
 
-  export interface WidgetDrawerProps extends WidgetConfigPartialProps {
-    elementRef?: RefObject<HTMLDivElement>
-    open?: boolean
-    /**
-     * Make sure to make the onClose callback stable (e.g. using useCallback) to avoid causing re-renders of the entire widget
-     */
-    onClose?(): void
-  }
+export interface WidgetDrawerProps extends WidgetConfigPartialProps {
+  elementRef?: RefObject<HTMLDivElement>;
+  open?: boolean;
+  /**
+   * Make sure to make the onClose callback stable (e.g. using useCallback) to avoid causing re-renders of the entire widget
+   */
+  onClose?(): void;
+}

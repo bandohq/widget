@@ -23,6 +23,7 @@ import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider.js";
 import { formatTotalAmount } from "../../utils/format.js";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export const SelectTokenButtonForProducts: React.FC<
   FormTypeProps & {
@@ -45,7 +46,8 @@ export const SelectTokenButtonForProducts: React.FC<
   const { walletConfig } = useWidgetConfig();
   const tokenKey = FormKeyHelper.getTokenKey(formType);
   const [tokenAddress] = useFieldValues(tokenKey);
-  const { chain } = useChain(account?.chainId);
+  const { isWorld } = useWorld();
+  const { chain } = useChain(isWorld ? 480 : account?.chainId);
   const { token } = useToken(chain, tokenAddress);
 
   useEffect(() => {
@@ -79,9 +81,23 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const defaultPlaceholder = !account.isConnected
-    ? t("button.connectWallet")
-    : product && !quote && t("main.selectToken");
+
+  const defaultPlaceholder = () => {
+    // world case - no quote
+    if (!account.isConnected && isWorld && product && !quote) {
+      return t("main.selectToken");
+    }
+    // non-world case - no quote - no account connected
+    if (!account.isConnected && !isWorld && product && !quote) {
+      return t("button.connectWallet");
+    }
+    // non-world case - no quote - account connected
+    if (account.isConnected && !isWorld && product && !quote) {
+      return t("main.selectToken");
+    }
+    return t("main.selectToken");
+  };
+
   const cardTitle: string = t(`main.totalToPay`);
 
   useEffect(() => {
@@ -92,7 +108,11 @@ export const SelectTokenButtonForProducts: React.FC<
     <>
       <SelectTokenCard
         component="button"
-        onClick={account?.isConnected && product ? handleClick : handleConnect}
+        onClick={
+          (account?.isConnected || isWorld) && product
+            ? handleClick
+            : handleConnect
+        }
       >
         <CardContent formType={formType} compact={compact}>
           <CardTitle>{cardTitle}</CardTitle>
@@ -133,7 +153,7 @@ export const SelectTokenButtonForProducts: React.FC<
           ) : (product && !quote) || !token ? (
             <SelectTokenCardHeader
               avatar={<AvatarBadgedDefault />}
-              title={defaultPlaceholder}
+              title={defaultPlaceholder()}
               compact={compact}
             />
           ) : (
