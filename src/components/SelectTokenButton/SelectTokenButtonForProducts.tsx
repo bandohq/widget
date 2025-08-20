@@ -81,14 +81,23 @@ export const SelectTokenButtonForProducts: React.FC<
   };
 
   const isSelected = !!(chain && token);
-  const defaultPlaceholder =
-    !account.isConnected && isWorld && product && !quote
-      ? t("main.selectToken")
-      : !account.isConnected
-      ? t("button.connectWallet")
-      : product && !quote && isWorld
-      ? t("main.selectToken")
-      : product && !quote && t("main.selectToken");
+
+  const defaultPlaceholder = () => {
+    // world case - no quote
+    if (!account.isConnected && isWorld && product && !quote) {
+      return t("main.selectToken");
+    }
+    // non-world case - no quote - no account connected
+    if (!account.isConnected && !isWorld && product && !quote) {
+      return t("button.connectWallet");
+    }
+    // non-world case - no quote - account connected
+    if (account.isConnected && !isWorld && product && !quote) {
+      return t("main.selectToken");
+    }
+    return t("main.selectToken");
+  };
+
   const cardTitle: string = t(`main.totalToPay`);
 
   useEffect(() => {
@@ -144,7 +153,7 @@ export const SelectTokenButtonForProducts: React.FC<
           ) : (product && !quote) || !token ? (
             <SelectTokenCardHeader
               avatar={<AvatarBadgedDefault />}
-              title={defaultPlaceholder}
+              title={defaultPlaceholder()}
               compact={compact}
             />
           ) : (
