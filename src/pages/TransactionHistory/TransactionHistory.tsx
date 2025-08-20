@@ -8,6 +8,7 @@ import { List } from "@mui/material";
 import { TokenListItemSkeleton } from "../../components/TokenList/TokenListItem";
 import { Box } from "@mui/system";
 import { NoTransactionsFound } from "./NoTransactionsFound";
+import { useWorld } from "../../hooks/useWorld.js";
 
 export interface Transaction {
   id: string;
@@ -32,19 +33,25 @@ export const TransactionsHistoryPage = () => {
   const { t } = useTranslation();
   useHeader(t("history.title"));
   const { account } = useAccount();
+  const { isWorld, provider } = useWorld();
+
+  const userAddress = isWorld
+    ? provider?.user?.walletAddress
+    : account?.address;
+  const chainId = isWorld ? 480 : account?.chainId;
 
   const {
     data: transactions,
     isPending,
     error,
   } = useFetch({
-    url: account.address ? `wallets/${account.address}/transactions` : "",
+    url: userAddress ? `wallets/${userAddress}/transactions` : "",
     method: "GET",
     queryOptions: {
-      queryKey: ["transactions", account.address, account.chainId],
+      queryKey: ["transactions", userAddress, chainId],
     },
     queryParams: {
-      chainId: account.chainId,
+      chainId,
     },
   });
 
