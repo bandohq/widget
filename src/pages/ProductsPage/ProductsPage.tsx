@@ -34,6 +34,7 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     setFieldValue("reference", "");
+    updateProduct(null);
   }, []);
 
   useEffect(() => {

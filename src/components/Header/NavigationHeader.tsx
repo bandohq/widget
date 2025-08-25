@@ -47,9 +47,6 @@ export const NavigationHeader: React.FC = () => {
     if (isBackToHome) {
       navigate(navigationRoutes.home);
     } else {
-      if (basePath === navigationRoutes.form.replace(/^\//, "")) {
-        updateProduct(null);
-      }
       navigateBack();
     }
   };
