@@ -13,6 +13,7 @@ export interface Variant {
   brand: string;
   country: string;
   notes: string | null;
+  categories: string[];
   sku: string;
   price: Price;
   productType: string;
