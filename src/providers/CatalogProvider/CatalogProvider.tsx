@@ -56,7 +56,11 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (groupedCatalogResponse?.products) {
-      setRawProducts(groupedCatalogResponse.products || []);
+      const normalized = groupedCatalogResponse.products.map((p) => ({
+        ...p,
+        brands: p.brands ?? [],
+      }));
+      setRawProducts(normalized);
     }
   }, [groupedCatalogResponse]);
 
@@ -118,7 +122,9 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
         ? products.filter((product) => product.productType === productType)
         : products;
 
-      const brandsPool = baseProducts.flatMap((product) => product.brands);
+      const brandsPool = baseProducts.flatMap(
+        (product) => product.brands ?? []
+      );
 
       const fuse = new Fuse(brandsPool, {
         keys: ["brandName"],
