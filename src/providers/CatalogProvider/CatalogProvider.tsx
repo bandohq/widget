@@ -107,7 +107,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
       updateBrand(foundBrand);
       navigate(navigationRoutes.form);
     }
-  }, [buildUrl, rawProducts, navigate, updateBrand, updateProduct]);
+  }, [buildUrl, rawProducts]);
 
   const fuzzySearchBrands = useCallback(
     (searchTerm: string, productType?: string) => {
