@@ -23,7 +23,7 @@ export const ProductsPage = () => {
     products,
     isLoading,
     filteredBrands,
-    fuzzySearchBrands,
+    resetFilteredBrands,
     error: catalogError,
   } = useCatalogContext();
   const { error: countryError } = useCountryContext();
@@ -52,7 +52,7 @@ export const ProductsPage = () => {
   }, [products, isLoading]);
 
   useEffect(() => {
-    fuzzySearchBrands("");
+    resetFilteredBrands();
   }, []);
 
   const handleMoreClick = (category) => {

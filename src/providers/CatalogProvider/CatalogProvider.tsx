@@ -22,6 +22,7 @@ interface CatalogContextType {
   error: any;
   hasProducts: boolean;
   fuzzySearchBrands: (searchTerm: string, productType?: string) => void;
+  resetFilteredBrands: () => void;
 }
 
 const CatalogContext = createContext<CatalogContextType | undefined>(undefined);
@@ -109,14 +110,13 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [buildUrl, rawProducts]);
 
+  const resetFilteredBrands = useCallback(() => {
+    setFilteredBrands([]);
+  }, []);
+
   const fuzzySearchBrands = useCallback(
     (searchTerm: string, productType?: string) => {
       const term = searchTerm?.trim() ?? "";
-
-      if (!term) {
-        setFilteredBrands([]);
-        return;
-      }
 
       const baseProducts = productType
         ? products.filter((product) => product.productType === productType)
@@ -125,6 +125,11 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
       const brandsPool = baseProducts.flatMap(
         (product) => product.brands ?? []
       );
+
+      if (!term) {
+        setFilteredBrands(brandsPool);
+        return;
+      }
 
       const fuse = new Fuse(brandsPool, {
         keys: ["brandName"],
@@ -144,6 +149,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     error,
     hasProducts: products.some((p) => (p.brands?.length ?? 0) > 0),
     fuzzySearchBrands,
+    resetFilteredBrands,
   };
 
   return (
