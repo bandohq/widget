@@ -74,8 +74,8 @@ export const ProductSearch = ({
               <img
                 src={country.flagUrl}
                 alt={country.isoAlpha2}
-                width={20}
-                style={{ marginRight: 8 }}
+                width={30}
+                style={{ marginRight: 8, borderRadius: "5px" }}
               />
             </Tooltip>
           )}

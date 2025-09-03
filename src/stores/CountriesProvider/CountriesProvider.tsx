@@ -2,6 +2,12 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Country, CountryContextType, CountryError } from "./types";
 import { useFetch } from "../../hooks/useFetch";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
+import { FLAG_S3_BUCKET_URL } from "../../config/constants";
+
+// Helper function to convert country name to snake case (preserving capitalization)
+const toSnakeCase = (str: string): string => {
+  return str.replace(/ /g, '_');
+};
 
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
@@ -49,7 +55,16 @@ export const CountriesProvider: React.FC<{
 
   useEffect(() => {
     if (countriesResponse?.data?.results) {
-      const allCountries = countriesResponse.data.results;
+      // Transform country data to use S3 bucket for flag URLs
+      const allCountries = countriesResponse.data.results.map(country => {
+        // Format the country name to snake case if it contains spaces
+        const formattedName = country.name.includes(' ') ? toSnakeCase(country.name) : country.name;
+        
+        return {
+          ...country,
+          flagUrl: `${FLAG_S3_BUCKET_URL}/${formattedName}.svg`
+        };
+      });
 
       const filteredCountries =
         initialAllowedCountries && initialAllowedCountries.length > 0

@@ -8,6 +8,7 @@ import React, {
 import type { CardProps } from "@mui/material";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import { countryFlag } from "../PhoneInput/countryFlag.jsx";
 import type { FormTypeProps } from "../../stores/form/types.js";
 import { fitInputText } from "../../utils/input.js";
 import { CardTitle } from "../Card/CardTitle.js";
@@ -147,6 +148,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
                   defaultCountry={country?.isoAlpha2}
                   value={inputValue}
                   onChange={handlePhoneChange}
+                  flagComponent={countryFlag}
                 />
               </StyledPhoneInput>
             ) : (

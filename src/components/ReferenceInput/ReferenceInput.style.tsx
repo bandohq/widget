@@ -85,4 +85,11 @@ export const StyledPhoneInput = styled("div")(({ theme }) => ({
   "& .PhoneInputCountrySelect": {
     display: "none",
   },
+  "& .PhoneInputCountrySelectArrow": {
+    display: "none",
+  },
+  "& .PhoneInputCountryIcon--border": {
+    border: "none",
+    boxShadow: "none",
+  },
 }));

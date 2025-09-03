@@ -10,6 +10,12 @@ import {
   Typography,
   Skeleton,
 } from "@mui/material";
+import { FLAG_S3_BUCKET_URL } from "../config/constants";
+
+// Helper function to convert country name to snake case (preserving capitalization)
+const toSnakeCase = (str: string): string => {
+  return str.replace(/ /g, '_');
+};
 import { useCountryContext } from "../stores/CountriesProvider/CountriesProvider";
 import { ListItemText } from "../components/ListItemText";
 import { PageContainer } from "../components/PageContainer";
@@ -122,7 +128,7 @@ export const CountryPage: React.FC = () => {
           >
             <ListItemIcon>
               <Avatar
-                src={country.flagUrl}
+                src={`${FLAG_S3_BUCKET_URL}/${country.name.includes(' ') ? toSnakeCase(country.name) : country.name}.svg`}
                 alt={country.name}
                 sx={{ objectFit: "cover" }}
               />

@@ -69,7 +69,7 @@ export const StyledCountryDiv = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: theme.spacing(2),
+  padding: theme.spacing(0.5),
   cursor: "pointer",
   backgroundColor:
     theme.palette.mode === "light"
