@@ -213,6 +213,7 @@ export interface WidgetConfig {
   allowedCountries?: string[];
   toAmount?: number | string;
   formUpdateKey?: string;
+  categories?: string[];
 
   contractCalls?: ContractCall[];
   contractComponent?: ReactNode;

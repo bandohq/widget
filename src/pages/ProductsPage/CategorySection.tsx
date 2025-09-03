@@ -38,6 +38,10 @@ export const CategorySection = ({ category, onMoreClick }) => {
     return null;
   }
 
+  if (category.brands.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       <div
