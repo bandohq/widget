@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")!).render(
       integrator="bando-app"
       buildUrl={true}
       config={{
-        categories: ["gaming"],
+        categories: [],
         theme: {
           container: {
             boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.08)",
