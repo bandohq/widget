@@ -105,7 +105,7 @@ export const CountryPage: React.FC = () => {
 
   return (
     <PageContainer disableGutters>
-      <SearchBar onSearch={setSearchQuery} />
+      <SearchBar onSearch={setSearchQuery} placeholder={"Search countries"} />
       <List
         sx={{
           paddingTop: 0,

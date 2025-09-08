@@ -9,6 +9,7 @@ interface DialogListProps {
   title: string;
   image: string;
   items: Array<any>;
+  className?: string;
   onClose: () => void;
   renderItem: (item: any, index: number) => React.ReactNode;
 }
@@ -18,6 +19,7 @@ export const DialogList: React.FC<DialogListProps> = ({
   title,
   image,
   items,
+  className,
   renderItem,
 }) => {
   const scrollElementRef = useRef<HTMLDivElement | null>(null);
@@ -96,6 +98,8 @@ export const DialogList: React.FC<DialogListProps> = ({
         >
           {virtualizer.getVirtualItems().map((virtualItem) => (
             <div
+              className={className}
+              data-variant={items[virtualItem.index]}
               key={virtualItem.key}
               style={{
                 position: "absolute",

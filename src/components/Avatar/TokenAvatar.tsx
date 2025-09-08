@@ -66,6 +66,7 @@ export const TokenAvatarBase: React.FC<{
     <AvatarBadgedSkeleton />
   ) : (
     <Badge
+      className="token-button"
       overlap="circular"
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       badgeContent={

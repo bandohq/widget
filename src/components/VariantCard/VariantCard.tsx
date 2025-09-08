@@ -11,7 +11,12 @@ type Props = {
 
 export const VariantCard: React.FC<Props> = ({ variant, isSelected, onClick }) => {
   return (
-    <VariantCardBox isSelected={isSelected} onClick={onClick}>
+    <VariantCardBox 
+      isSelected={isSelected} 
+      onClick={onClick} 
+      className="topup-amount" 
+      data-variant={variant.id}
+    >
       <Typography variant="body1">
         {parseFloat(variant.price.fiatValue).toFixed(2)}
       </Typography>
