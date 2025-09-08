@@ -54,6 +54,8 @@ export const BaseTransactionButton: React.FC<BaseTransactionButtonProps> = ({
 
   return (
     <Button
+      id={isConnected ? "signature-request-button" : "connect-wallet-button"}
+      className={isConnected ? "signature-request-button" : "connect-wallet-button"}
       variant="contained"
       color="primary"
       onClick={handleClick}

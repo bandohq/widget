@@ -65,7 +65,7 @@ export const ProductsPage = () => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer className="products-page-container">
       <ProductSearch />
       <RecentSpends />
       {filteredBrands.length > 0 && (
@@ -98,10 +98,11 @@ export const ProductsPage = () => {
             </Box>
           ))
         : filteredBrands.length == 0 && (
-            <div style={{ overflow: "hidden" }}>
+            <div className="categories-container" style={{ overflow: "hidden" }}>
               {filteredData?.map((category) => (
                 <Box
                   key={category.productType}
+                  className={`category-box category-${category.productType}`}
                   sx={{
                     marginBottom: "30px",
                     marginTop: "20px",

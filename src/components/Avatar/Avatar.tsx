@@ -33,6 +33,7 @@ export const ImageAvatar: React.FC<{
 }> = ({ src, sx, name, hideName }) => {
   return src ? (
     <div
+      className="brand-button"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -63,6 +64,7 @@ export const ImageAvatar: React.FC<{
     </div>
   ) : (
     <div
+      className="brand-button"
       //@ts-ignore
       style={{
         ...sx,

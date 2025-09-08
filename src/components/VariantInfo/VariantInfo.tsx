@@ -104,6 +104,8 @@ export default function VariantInfo({ variant, title }: VariantInfoProps) {
       </Box>
 
       <Button
+        className="variant-select"
+        data-variant-name={variant?.brand}
         variant="contained"
         disabled={!variant}
         color="primary"

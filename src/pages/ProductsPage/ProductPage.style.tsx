@@ -1,4 +1,4 @@
-import { alpha, Box, IconButton, InputBase, styled } from "@mui/material";
+import { alpha, Box, IconButton, InputBase, styled, CSSObject } from "@mui/material";
 
 export const BrandsContainer = styled(Box)(({ theme }) => ({
   display: "grid",
@@ -34,19 +34,37 @@ export const SearchContainer = styled("div")(() => ({
   margin: "10px 0",
 }));
 
-export const InputContainer = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  overflow: "hidden",
-  backgroundColor:
-    theme.palette.mode === "light"
-      ? alpha(theme.palette.background.paper, 0.04)
-      : alpha(theme.palette.background.paper, 0.08),
-  border: "1px solid #e2e8f0",
-  borderRadius: "10px",
-  width: "100%",
-  height: "40px",
-}));
+export const InputContainer = styled("div")(({ theme }) => {
+  const root = theme.components?.MuiInputCard?.styleOverrides?.root as CSSObject
+  if(root) {
+    return {
+      ...root,
+      display: "flex",
+      alignItems: "center",
+      overflow: "hidden",
+      backgroundColor:
+        theme.palette.mode === "light"
+          ? root.backgroundColor?.toString()
+          : root.backgroundColor?.toString(),
+      borderRadius: "10px",
+      width: "100%",
+      height: "40px",
+    }
+  } else {
+    return {
+      display: "flex",
+      alignItems: "center",
+      overflow: "hidden",
+      backgroundColor:
+        theme.palette.mode === "light"
+          ? alpha(theme.palette.grey[800], 0.1)
+          : alpha(theme.palette.grey[300], 0.1),
+      borderRadius: "10px",
+      width: "100%",
+      height: "40px",
+    }
+  }
+});
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   marginLeft: theme.spacing(1),
@@ -62,17 +80,32 @@ export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-export const StyledCountryDiv = styled("div")(({ theme }) => ({
-  height: "100%",
-  border: "1px solid #e2e8f0",
-  borderRadius: "10px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: theme.spacing(0.5),
-  cursor: "pointer",
-  backgroundColor:
-    theme.palette.mode === "light"
-      ? alpha(theme.palette.background.paper, 0.04)
-      : alpha(theme.palette.background.paper, 0.08),
-}));
+export const StyledCountryDiv = styled("div")(({ theme }) => {
+  const root = theme.components?.MuiInputCard?.styleOverrides?.root as CSSObject
+  if(root) {
+    return {
+      ...root,
+      height: "100%",
+      borderRadius: "10px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: theme.spacing(0.5),
+      cursor: "pointer",
+    }
+  } else {
+    return {
+      height: "100%",
+      borderRadius: "10px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: theme.spacing(0.5),
+      cursor: "pointer",
+      backgroundColor:
+        theme.palette.mode === "light"
+          ? alpha(theme.palette.grey[800], 0.1)
+          : alpha(theme.palette.grey[300], 0.1),
+    }
+  }
+});

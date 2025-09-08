@@ -5,9 +5,10 @@ import { StyledTextField } from "./SearchInput.style";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
+  placeholder?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeholder }) => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value);
   };
@@ -16,7 +17,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     <StyledTextField
       fullWidth
       variant="outlined"
-      placeholder="Search for anything"
+      placeholder={placeholder}
       onChange={handleSearch}
       InputProps={{
         endAdornment: (

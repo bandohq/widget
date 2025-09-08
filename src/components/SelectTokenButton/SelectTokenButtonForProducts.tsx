@@ -158,6 +158,7 @@ export const SelectTokenButtonForProducts: React.FC<
             />
           ) : (
             <SelectTokenCardHeader
+              className="quote-requested"
               avatar={
                 isSelected ? (
                   <>

@@ -4,6 +4,7 @@ import type { FocusEventHandler, FormEventHandler } from "react";
 import { InputCard } from "../../components/Card/InputCard";
 import { useHeaderHeight } from "../../stores/header/useHeaderStore";
 import { Input, StickySearchInputContainer } from "./SearchInput.style";
+import { useTheme } from "@mui/material";
 
 interface SearchInputProps {
   name?: string;
@@ -22,6 +23,7 @@ export const SearchInput = ({
   value,
   autoFocus,
 }: SearchInputProps) => {
+  const theme = useTheme();
   return (
     <InputCard>
       <FormControl fullWidth>
@@ -33,6 +35,9 @@ export const SearchInput = ({
               <Search />
             </InputAdornment>
           }
+          sx={{
+            backgroundColor: theme.palette.grey[300],
+          }}
           inputProps={{
             inputMode: "search",
             onChange,
