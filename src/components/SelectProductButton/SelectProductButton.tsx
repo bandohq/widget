@@ -23,6 +23,7 @@ import { CaretDown, ShoppingCart } from "@phosphor-icons/react";
 import { useTheme } from "@mui/system";
 import { VariantSelector } from "../VariantSelector/VariantSelector.js";
 import { useTranslation } from "react-i18next";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 export const SelectProductButton: React.FC<
   FormTypeProps & { compact: boolean }
@@ -33,6 +34,7 @@ export const SelectProductButton: React.FC<
   const { product, brand: selectedBrand, updateProduct } = useProduct();
   const navigate = useNavigate();
   const { palette } = useTheme();
+  const { theme: widgetTheme } = useWidgetConfig();
 
   const handleButtonClick = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -57,7 +59,7 @@ export const SelectProductButton: React.FC<
       <AvatarBadgedDefault />
     );
 
-  const renderActionButton = () => (
+  const renderActionButton = (styleOverrides?: any) => (
     <Button
       size="small"
       onClick={readOnly ? undefined : handleButtonClick}
@@ -66,6 +68,7 @@ export const SelectProductButton: React.FC<
         color: palette.text.primary,
         fontWeight: 400,
         backgroundColor: palette.background.default,
+        ...styleOverrides,
       }}
     >
       {`${parseFloat(product?.price?.fiatValue).toFixed(2)} ${
@@ -74,10 +77,11 @@ export const SelectProductButton: React.FC<
       <CaretDown size="18px" style={{ margin: "auto", paddingLeft: 5 }} />
     </Button>
   );
-
+  const rootStyles = widgetTheme?.components?.SelectProductCard?.styleOverrides?.root;
+  const actionButtonStyleOverrides = widgetTheme?.components?.SelectProductCard?.styleOverrides?.actionButton;
   return (
     <>
-      <SelectProductCard>
+      <SelectProductCard sx={rootStyles}>
         <CardContent
           formType={formType}
           compact={compact}
@@ -94,7 +98,7 @@ export const SelectProductButton: React.FC<
                 </Avatar>
               )
             }
-            action={product && renderActionButton()}
+            action={product && renderActionButton(actionButtonStyleOverrides)}
             title={selectedBrand?.brandName || "Select product"}
             subheader={
               product
@@ -106,7 +110,7 @@ export const SelectProductButton: React.FC<
         </CardContent>
         {product && product?.productType === "topup" && product?.notes && (
           <Accordion
-            sx={{ border: "none", margin: "none" }}
+            sx={{ border: "none", margin: "none", ...rootStyles }}
             expanded={openDetails}
             onChange={() => setOpenDetails(!openDetails)}
           >

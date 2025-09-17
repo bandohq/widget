@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import type { CardProps } from "@mui/material";
+import type { CardProps, SxProps, Theme } from "@mui/material";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { countryFlag } from "../PhoneInput/countryFlag.jsx";
@@ -27,6 +27,7 @@ import { useCountryContext } from "../../stores/CountriesProvider/CountriesProvi
 import { ReferenceType } from "../../providers/CatalogProvider/types.js";
 import { getReferenceTitleByKey } from "../../utils/getReferenceTitleByKey.js";
 import { useTranslation } from "react-i18next";
+import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
 
 interface ReferenceInputProps extends FormTypeProps, CardProps {
   disabled?: boolean;
@@ -45,6 +46,7 @@ export const Input: React.FC<ReferenceInputProps> = ({
 }) => {
   const ref = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
+  const {theme } = useWidgetConfig();
   const { onChange, onBlur, value } = useFieldController({
     name: isRequired ? "requiredFields" : "reference",
   });
@@ -129,13 +131,13 @@ export const Input: React.FC<ReferenceInputProps> = ({
   }, [currentValue]);
 
   const title = referenceType.name;
-
+  const rootInputStyles = theme?.components?.MuiInput?.styleOverrides?.root;
   return (
     <>
-      <InputCard {...props} className={error ? "error" : ""}>
-        <CardTitle>
-          {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
-        </CardTitle>
+      <CardTitle sx={{ padding: "0", margin: "0" }}>
+        {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
+      </CardTitle>
+      <InputCard {...props} sx={rootInputStyles as SxProps<Theme>} className={error ? "error" : ""}>
         <FormContainer>
           <FormControl fullWidth>
             {referenceType.regex === phoneRegex ? (

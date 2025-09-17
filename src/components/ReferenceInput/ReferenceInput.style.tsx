@@ -41,7 +41,7 @@ export const FormContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const FormControl = styled(MuiFormControl)(() => ({
-  height: 40,
+  height: "auto",
 }));
 
 export const StyledInput = styled(InputBase)(({ theme }) => ({
@@ -51,7 +51,6 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
   lineHeight: 1.5,
   [`.${inputBaseClasses.input}`]: {
     height: 24,
-    padding: theme.spacing(0, 0, 0, 2),
   },
   '& input[type="number"]::-webkit-outer-spin-button, & input[type="number"]::-webkit-inner-spin-button':
     {
