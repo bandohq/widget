@@ -17,7 +17,7 @@ import {
 import { useProduct } from '../../stores/ProductProvider/ProductProvider.js';
 import { useEffect } from "react";
 import { useAccount, useWalletMenu } from "@lifi/wallet-management";
-import { Alert, Avatar, Skeleton, Collapse } from "@mui/material";
+import { Alert, Avatar, Skeleton, Collapse, SxProps, Theme } from "@mui/material";
 import { CaretDown } from "@phosphor-icons/react";
 import { useQuotes } from "../../providers/QuotesProvider/QuotesProvider.js";
 import { WidgetEvent, InsufficientBalance } from "../../types/events.js";
@@ -49,7 +49,7 @@ export const SelectTokenButtonForProducts: React.FC<
   const { isWorld } = useWorld();
   const { chain } = useChain(isWorld ? 480 : account?.chainId);
   const { token } = useToken(chain, tokenAddress);
-
+  const { theme } = useWidgetConfig();
   useEffect(() => {
     if (product?.sku && product?.price?.fiatCurrency && token?.symbol) {
       fetchQuote(product.sku, product.price.fiatCurrency, token.address);
@@ -104,9 +104,12 @@ export const SelectTokenButtonForProducts: React.FC<
     renderWarning();
   }, [quote?.totalAmount, isPurchasePossible, account?.chainId, tokenAddress]);
 
+  const rootInputStyles = theme?.components?.MuiInput?.styleOverrides?.root;
   return (
     <>
+      <CardTitle sx={{ padding: "0", margin: "5px" }}>{cardTitle}</CardTitle>
       <SelectTokenCard
+        sx={rootInputStyles as SxProps<Theme>}
         component="button"
         onClick={
           (account?.isConnected || isWorld) && product
@@ -115,7 +118,6 @@ export const SelectTokenButtonForProducts: React.FC<
         }
       >
         <CardContent formType={formType} compact={compact}>
-          <CardTitle>{cardTitle}</CardTitle>
           {!token && !product && !quote ? (
             <SelectTokenCardHeader
               avatar={<AvatarBadgedSkeleton />}

@@ -110,7 +110,14 @@ export type WidgetThemeComponents = Pick<
   | "MuiIconButton"
   | "MuiInput"
   | "MuiTabs"
->;
+> & {
+  SelectProductCard?: Components<Theme> & {
+    styleOverrides?: {
+      root?: CSSProperties;
+      actionButton?: CSSProperties;
+    };
+  };
+};
 
 export type WidgetTheme = {
   palette?: Pick<

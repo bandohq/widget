@@ -18,17 +18,11 @@ export const DetailSection: React.FC<DetailSectionProps> = ({
 
   return (
     <div style={{ marginBottom: "15px" }}>
-      <Typography variant="subtitle1" style={{ color: palette.grey[400] }}>
-        Details
-      </Typography>
       <Input
         formType="from"
         referenceType={referenceType}
         style={{ marginBottom: "15px" }}
       />
-      <Typography variant="subtitle2" style={{ color: palette.grey[400] }}>
-        {t("info.detailMessage", { productType })}
-      </Typography>
       {requiredFields.map((item, index) => (
         <Input
           key={index}
