@@ -132,11 +132,10 @@ export const Input: React.FC<ReferenceInputProps> = ({
 
   return (
     <>
+      <CardTitle>
+        {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
+      </CardTitle>
       <InputCard {...props} className={error ? "error" : ""}>
-        <CardTitle>
-          {t("form.common.your", { field: t(getReferenceTitleByKey(title)) })}
-        </CardTitle>
-
         <FormContainer>
           <FormControl fullWidth>
             {referenceType.regex === phoneRegex ? (
