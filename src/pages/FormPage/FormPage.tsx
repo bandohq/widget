@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { PageContainer } from "../../components/PageContainer";
-import { FullPageContainer } from "../../components/PageContainer";
 import { SelectChainAndToken } from "../../components/SelectChainAndToken";
 import { useHeader } from "../../hooks/useHeader";
 import { useWidgetConfig } from "../../providers/WidgetProvider/WidgetProvider";
