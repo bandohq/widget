@@ -114,8 +114,8 @@ export const SelectTokenButtonForProducts: React.FC<
             : handleConnect
         }
       >
-        <CardTitle>{cardTitle}</CardTitle>
         <CardContent formType={formType} compact={compact}>
+          <CardTitle>{cardTitle}</CardTitle>
           {!token && !product && !quote ? (
             <SelectTokenCardHeader
               avatar={<AvatarBadgedSkeleton />}
