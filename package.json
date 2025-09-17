@@ -1,6 +1,6 @@
 {
   "name": "@bandohq/widget",
-  "version": "0.1.57",
+  "version": "0.1.58",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "dist/index.js",
