@@ -59,7 +59,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({
     if (groupedCatalogResponse?.products) {
       const normalized = groupedCatalogResponse.products.map((p) => ({
         ...p,
-        brands: (p.brands ?? []).slice().sort((a, b) => a.order - b.order),
+        brands: (p.brands ?? []).slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
       }));
       setRawProducts(normalized);
     }
